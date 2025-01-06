@@ -1,4 +1,4 @@
--- KohlsLite location has been moved, as the old loadstring was clunky and the old repo was messy
+-- KohlsLite has been moved to this repo, as the old repo was messy and the old loadstring was clunky
 
 --[[
  ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
