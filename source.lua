@@ -1,3 +1,5 @@
+-- KohlsLite location has been moved, as the old loadstring was clunky and the old repo was messy
+
 --[[
  ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
 |\  \|\  \ |\   __  \|\  \|\  \|\  \     |\   ____\|\  \     |\  \|\___   ___\\  ___ \     
@@ -11,7 +13,7 @@
                                                                                            vX1.025 ]]
 
 --[[
-View the source here: https://kohlslite.pages.dev/source.txt
+View the source here: https://kohlslite.pages.dev/source.lua
 
 KohlsLite is a free, open-source script for the Roblox game created by agspureiam, Kohls Admin House (KAH).
 This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub).
