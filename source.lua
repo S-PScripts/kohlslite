@@ -1785,7 +1785,17 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 end
         end
 
-        if string.sub(msg, 1, #prefix + 2)  == prefix..'wl' then
+	if string.sub(msg, 1, #prefix + 7) == prefix..'editvis' then
+		local args =  string.split(msg, " ")
+		editVis(args[2], args[3])
+	end
+
+	if string.sub(msg, 1, #prefix + 3) == prefix..'vis' then
+			Remind("WARNING: THIS FEATURE HAS NOT BEEN TESTED.")
+			partVisualiser()
+	end
+		
+        if string.sub(msg, 1, #prefix + 2) == prefix..'wl' then
 	 local args = string.split(msg, " ")
          local dasplayer = args[2]
          PLAYERCHECK(dasplayer)
@@ -8627,11 +8637,12 @@ end
 end)
 
 -- PLAYER CHECK
-function PLAYERCHECK(plr)
+function PLAYERCHECK(plr, rt)
   for i, v in pairs(game.Players:GetPlayers()) do
       if string.sub(v.Name:lower(), 1, #plr) == plr:lower() then
           player = v.Name
           cplr = v
+	  if rt then return cplr end
           Remind("[KL User Search]: Found "..player) -- i have no idea how i never capitalised this
       end
   end
@@ -13138,6 +13149,47 @@ function partVisualiser()
                 end
             end
         end)
+end
+
+function editVis(variable, value)
+ 	if not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) and not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then
+            Remind("You need Person 299 Admin commands for this!")
+            return
+        end
+
+        if variable == "orbiter" then
+	    rt = true
+            local TargetPlayer = PLAYERCHECK(value, rt)
+            if TargetPlayer then
+                VisBindable:Fire("Edit", "Orbiter", TargetPlayer)
+            else
+                if value == "none" then
+                    VisBindable:Fire("Edit", "Orbiter", game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+                end
+            end
+		
+        elseif variable == "axis" then
+            if value == "x" or value == "y" or value == "z" then
+                VisBindable:Fire("Edit", "Axis", value)
+            end
+		
+        elseif variable == "speed" then
+            VisBindable:Fire("Edit", "Speed", tonumber(value) * .01)
+		
+        elseif variable == "radius" then
+            VisBindable:Fire("Edit", "Radius", tonumber(value))
+		
+        elseif variable == "waves" then
+            if value == "on" or value == "off" then
+                VisBindable:Fire("Edit", "Waves", value)
+            end
+		
+        elseif variable == "mode" then
+            VisBindable:Fire("Edit", "Mode", tonumber(value))
+		
+        elseif variable == "amt" then
+            VisBindable:Fire("Edit", "Amount", tonumber(value))
+        end
 end
 
 -- WELCOME/LEAVE MSG
