@@ -29,22 +29,22 @@ KohlsLite is a bit like a mixture of all the scripts that already exist in KAH s
   -- > CMD (v1) [by quiving]
   -- > CMD Y [by quiving]
   -- > CMD v3 (Pi) [by quiving]
-  -- > Shortcut v1
-  -- > Shortcut v2
-  -- > Shortcut v3
+  -- > Shortcut v1 [by SnowClan_8342/yeemi]
+  -- > Shortcut v2 [by SnowClan_8342/yeemi]
+  -- > Shortcut v3 [by Tech]
   -- > Shortcut v3 VAR [don't have the source] [by Tech]
   -- > ii's Stupid Admin [by iiDk]
   -- > PR Script old [by Atprog]
-  -- > KohlsNoob
-  -- > KohlsCool
-  -- > Noobsploit
+  -- > KohlsNoob [by gamingkhoaito#1014 and haroldjd2017ipad#4295]
+  -- > KohlsCool [by sergioesquina/kohlscool]
+  -- > Noobsploit [by NoobSploit]
   -- > Jotunnheim [by Jotunn]
   -- > Shazam [by Tokio]
   -- > Route [by Dizzy]
   -- > SimpleKAH [by lnfiniteCoder]
   -- > XKah [by lnfiniteCoder]
   -- > Solinium [by Knocks]
-  -- > Infinite Yield
+  -- > Infinite Yield [by EdgeIY]
   -- > Proton Admin [by Digitality]
   -- > Many scripts from the KAH script archive by Damix [View it here: S-PScripts/kah-fork]
 
