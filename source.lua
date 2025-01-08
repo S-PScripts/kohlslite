@@ -12805,7 +12805,7 @@ end
 -- Because im gay skid
 -- jajaja
 function partDrawer()
- 	if not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(LocalPlayer.UserId, 35748) and not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(LocalPlayer.UserId, 37127) then
+ 	if not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) and not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then
             Remind("You need Person 299 Admin commands for this!")
             return
         end
@@ -12829,7 +12829,7 @@ kahinstance = workspace.Terrain:FindFirstChild("_Game"):FindFirstChild("Folder")
 local VisBindable = Instance.new("BindableEvent")
 
 function partVisualiser()
- 	if not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(LocalPlayer.UserId, 35748) and not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(LocalPlayer.UserId, 37127) then
+ 	if not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) and not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then
             Remind("You need Person 299 Admin commands for this!")
             return
         end
@@ -12931,17 +12931,17 @@ function partVisualiser()
                 local argIS = {...}
                 if argIS[1] == "Orbiter" then
                     orbiter = argIS[2]
-                elseif argies[1] == "Speed" then
+                elseif argIS[1] == "Speed" then
                     speed = argIS[2]
-                elseif argies[1] == "Axis" then
+                elseif argIS[1] == "Axis" then
                     axis = argIS[2]
                 elseif argIS[1] == "Radius" then
                     vishub.VisRadius = argIS[2]
-                elseif argies[1] == "Waves" then
+                elseif argIS[1] == "Waves" then
                     waves = argIS[2] == "on"
-                elseif argies[1] == "Mode" then
+                elseif argIS[1] == "Mode" then
                     vishub.VisMode = argIS[2]
-                elseif argies[1] == "Amount" then
+                elseif argIS[1] == "Amount" then
                     vishub.VisAmt = argIS[2]
                 end
             end
@@ -13032,9 +13032,11 @@ function partVisualiser()
         end)
 
  	conn = game:GetService("RunService").Heartbeat:Connect(function(dt)
-            if typeof(vishub.VisOrbiter) ~= "CFrame" and vishub.VisOrbiter ~= game.Players.LocalPlayer and (not vishub.VisOrbiter or vishub.VisOrbiter.Character == nil or not vishub.VisOrbiter.Character:FindFirstChild("HumanoidRootPart")) then
-                vishub.VisOrbiter = game.Players.LocalPlayer
-            end
+            if typeof(vishub.VisOrbiter) ~= "CFrame" and vishub.VisOrbiter ~= game.Players.LocalPlayer and
+        	(not vishub.VisOrbiter or vishub.VisOrbiter.Character == nil or not vishub.VisOrbiter.Character:FindFirstChild("HumanoidRootPart")) then
+    			vishub.VisOrbiter = game.Players.LocalPlayer
+	    end
+
 		
             local pbl = currentSong and currentSong.PlaybackLoudness * 2 or 0
             
@@ -13043,32 +13045,42 @@ function partVisualiser()
                     if spin >= 360 then
                         spin = 0
                     end
-                    local iter = math.rad(spin+(_*(360/#vis:GetChildren())))
+					
+                    local iter = math.rad(spin + (_ * (360 / #vis:GetChildren())))
+					
                     local z = vishub.VisRadius + pbl/ (1 ~= 100 and (100 - 1) or .01)
                     local g = pbl / (35 ~= 100 and (100-35) or .01)
-                    local p = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.X or vishub.VisOrbiter.Character.HumanoidRootPart.CFrame.X,typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.Y or vishub.VisOrbiter.Character.HumanoidRootPart.CFrame.Y,typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.Z or vishub.VisOrbiter.Character.HumanoidRootPart.CFrame.Z) * CFrame.Angles(axis == "x" and iter or 0, axis == "y" and iter or 0, axis == "z" and iter or 0) * CFrame.new(0,0,z)
-                    local AddVector = Vector3.new(0,0,0)
+                    local p = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.X 
+				or vishub.VisOrbiter.Character.HumanoidRootPart.CFrame.X,typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.Y 
+				or vishub.VisOrbiter.Character.HumanoidRootPart.CFrame.Y,typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.Z 
+				or vishub.VisOrbiter.Character.HumanoidRootPart.CFrame.Z) * CFrame.Angles(axis == "x" and iter or 0, axis == "y" and iter or 0, axis == "z" and iter or 0) * CFrame.new(0,0,z)
+                    
+		    local AddVector = Vector3.new(0,0,0)
     
                     if waves then     
                         AddVector = VectorFromSettings(math.sin((((dt*0)+(_/#vis:GetChildren())*(math.pi*2)))), axis)
                     end
     
-                    v.CFrame = p+AddVector
-                    rotpart.CFrame = CFrame.new(v.Position, typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p + Vector3.new(0,g,0) or vishub.VisOrbiter.Character.HumanoidRootPart.Position + Vector3.new(0,g,0))
+                    v.CFrame = p + AddVector
+					
+                    rotpart.CFrame = CFrame.new(v.Position, typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p + Vector3.new(0,g,0) 
+				or vishub.VisOrbiter.Character.HumanoidRootPart.Position + Vector3.new(0,g,0))
+					
                     v.Rotation = rotpart.Rotation 
                     spin = spin + speed
                 end 
             end
 
             if vishub.VisMode == 1 then
-
                 for _,v in pairs(vis:GetChildren()) do
                     local ro = math.rad(a / 2 * _ + (_ * (360 / #vis:GetChildren())))
+					
                     local vector = math.sin((a/#vis:GetChildren()/4 * _),0)
                     local uh = math.sin(woah+(_+_*(0/#vis:GetChildren()))*(math.pi), 0)
-                    local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p or vishub.VisOrbiter.Character:WaitForChild("Torso").Position) * CFrame.Angles(0, ro/4, 0) * CFrame.new((pbl/ (1 ~= 100 and (100 - 1) or .01))+vishub.VisRadius, 0, (_+(_/#vis:GetChildren()/2)))
+                    local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p 
+			or vishub.VisOrbiter.Character:WaitForChild("Torso").Position) * CFrame.Angles(0, ro/4, 0) * CFrame.new((pbl/ (1 ~= 100 and (100 - 1) or .01)) + vishub.VisRadius, 0, (_+(_/#vis:GetChildren()/2)))
 
-                    v.CFrame = F+Vector3.new(0,0,0)
+                    v.CFrame = F + Vector3.new(0,0,0)
 
                     a = a + speed / 2.5
                     woah = woah + speed/#vis:GetChildren()/8
@@ -13079,28 +13091,30 @@ function partVisualiser()
             if vishub.VisMode == 2 then
                 for _,v in pairs(vis:GetChildren()) do
                     local ro = math.rad(a / 2 * _ + (_ * (360 / #vis:GetChildren())))
+					
                     local vector = math.sin((a/#vis:GetChildren()/4 * _),0)
                     local uh = math.sin(woah+(_+_*(0/#vis:GetChildren()))*(math.pi), 0)
-                    local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p or vishub.VisOrbiter.Character:WaitForChild("Torso").Position) * CFrame.Angles(0, ro/4, 0) * CFrame.new((pbl/ (1 ~= 100 and (100 - 1) or .01))+vishub.VisRadius, (_+(_/#vis:GetChildren()/2))/1.5, (_+(_/#vis:GetChildren()/2)))
+                    local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p 
+			or vishub.VisOrbiter.Character:WaitForChild("Torso").Position) * CFrame.Angles(0, ro/4, 0) * CFrame.new((pbl/ (1 ~= 100 and (100 - 1) or .01)) + vishub.VisRadius, (_+(_/#vis:GetChildren()/2))/1.5, (_+(_/#vis:GetChildren()/2)))
 
-                    v.CFrame = F+Vector3.new(0,0,0)
+                    v.CFrame = F + Vector3.new(0,0,0)
 
                     a = a + speed / 2.5
                     woah = woah + speed/#vis:GetChildren()/8
                     wave = wave + 1
-
-
                 end
             end
 
             if vishub.VisMode == 3 then
                 for _,v in pairs(vis:GetChildren()) do
                     local ro = math.rad(a / 2 * _ + (_ * (360 / #vis:GetChildren())))
+					
                     local vector = math.sin((a/#vis:GetChildren()/4 * _),0)
                     local uh = math.sin(woah+(_+_*(0/#vis:GetChildren()))*(math.pi), 0)
-                    local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p or vishub.VisOrbiter.Character:WaitForChild("Torso").Position) * CFrame.Angles(uh*5, uh*5+ro, 0) * CFrame.new(uh*5+(pbl/ (1 ~= 100 and (100 - 1) or .01))+vishub.VisRadius, 0, 0)
+                    local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p 
+			or vishub.VisOrbiter.Character:WaitForChild("Torso").Position) * CFrame.Angles(uh*5, uh*5+ro, 0) * CFrame.new(uh*5+(pbl/ (1 ~= 100 and (100 - 1) or .01)) + vishub.VisRadius, 0, 0)
                     
-                    v.CFrame = F+Vector3.new(0,0,0)
+                    v.CFrame = F + Vector3.new(0,0,0)
 
                     a = a + speed /2.5
                     woah = woah + speed/#vis:GetChildren()/8
@@ -13110,20 +13124,20 @@ function partVisualiser()
 
             if vishub.VisMode == 4 then
                 for _,v in pairs(vis:GetChildren()) do
-                    local ro = math.rad(a/2 + (_*(360/#vis:GetChildren())))
+                    local ro = math.rad(a / 2 + (_ * (360 / #vis:GetChildren())))
+					
                     local uh = math.sin(woah+(_+_*(0/#vis:GetChildren()))*(math.pi), 0)
-                    local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p or vishub.VisOrbiter.Character:WaitForChild("Torso").Position)*CFrame.Angles(0, ro, 0)*CFrame.new(0, 0, uh*5+(pbl/ (1 ~= 100 and (100 - 1) or .01))+vishub.VisRadius)
+                    local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p 
+			or vishub.VisOrbiter.Character:WaitForChild("Torso").Position) * CFrame.Angles(0, ro, 0) * CFrame.new(0, 0, uh*5+(pbl/ (1 ~= 100 and (100 - 1) or .01)) + vishub.VisRadius)
                     
 
-                    v.CFrame = F+Vector3.new(0,vector,0)
+                    v.CFrame = F + Vector3.new(0,vector,0)
 
                     woah = woah + speed/#vis:GetChildren()/8
                     a = a + speed/2.5
                 end
             end
         end)
-
-	-- place holder
 end
 
 -- WELCOME/LEAVE MSG
