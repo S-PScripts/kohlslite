@@ -1437,43 +1437,17 @@ print(prefix..'strengthen')
 
 print(prefix..'unstrengthen')
 
-
+print("\n")
 print("--- ANTI INFORMATION ---")
 print("For antis relating to the player, do (antiname) me/others/all")
 print("To turn off the antis, do un(antiname) me/others/all")
 print("If it's to the game itself, just do (antiname).")
 print("\n")
 
-print("--- INFORMATION ---")
-print("KohlsLite, since 2023. Created by ScriptingProgrammer/ts2021")
-print("For help, please contact me on Discord at ts2021")
-print("The version you are using is v"..getgenv().klversion..". This build was created on 6th January 2024")
-print("Better than SCV1 and SCV2 - approved by Tech!")
-print("\n")
-
-print("--- CREDITS ---")
-print([[
-  -- > CMD (v1)
-  -- > CMD Y
-  -- > CMD v3
-  -- > Shortcut v1
-  -- > Shortcut v2
-  -- > Shortcut v3
-  -- > Shortcut v3 VAR [i do not have the source!]
-  -- > PR Script
-  -- > ii s Stupid Admin
-  -- > KohlsNoob
-  -- > KohlsCool (maybe?)
-  -- > Noobsploit
-  -- > Jotunnheim
-  -- > Shazam
-  -- > Route
-  -- > SimpleKAH
-  -- > XKah
-  -- > Scripts from S-PScripts/kah-fork]])
-print("\n")
-
 print("--- ADDITIONAL INFO ---")
 print("1a. This script has some stuff missing and some stuff broken but it's not really finished. There's many stuff I'm still adding.")
 print("1b. If you want a good script and have some money/robux, get Shortcut v3 VAR by dming t.ech")
 print("2a. /n/n/n no longer works. Sorry!")
+
+print("\n")
+print("VIEW THE SOURCE HERE: kohlslite.pages.dev")
