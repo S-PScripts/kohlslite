@@ -12800,6 +12800,332 @@ function PCrash() -- buggy
         PtSH()
 end
 
+-- SKIDNATION...
+-- This visualiser is by Quiving.
+-- Because im gay skid
+-- jajaja
+function partDrawer()
+ 	if not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(LocalPlayer.UserId, 35748) and not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(LocalPlayer.UserId, 37127) then
+            Remind("You need Person 299 Admin commands for this!")
+            return
+        end
+	-- place holder
+end
+
+local vishub = {
+	VisAmount = 20,
+	VisMode = 0,
+	VisColour = Color3.new(255,255,255),
+	VisRadius = 20,
+	VisOrbiter = game.Players.LocalPlayer
+}
+
+local Connections = {
+    Building = {},
+    Drawing = {},
+}
+
+kahinstance = workspace.Terrain:FindFirstChild("_Game"):FindFirstChild("Folder")
+local VisBindable = Instance.new("BindableEvent")
+
+function partVisualiser()
+ 	if not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(LocalPlayer.UserId, 35748) and not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(LocalPlayer.UserId, 37127) then
+            Remind("You need Person 299 Admin commands for this!")
+            return
+        end
+
+        local vis = Instance.new("Folder", workspace)
+        local currentSong = kahinstance:FindFirstChild("Sound") or nil
+        local orbiter = game.Players.LocalPlayer
+
+	local paintBucket = nil
+
+        local kahcon = nil
+
+        task.spawn(function()
+            while vis.Parent == workspace do
+                task.wait(.5)
+                if not paintBucket or (paintBucket.Parent ~= game.Players.LocalPlayer.Character and paintBucket.Parent ~= game.Players.LocalPlayer.Backpack) then
+                    Chat('gear me 18474459')
+                    paintBucket = game.Players.LocalPlayer.Backpack:WaitForChild("PaintBucket")
+                    paintBucket:FindFirstChildOfClass("LocalScript").Disabled = true
+                    task.wait()
+                    paintBucket.Parent = game.Players.LocalPlayer.Character 
+                end
+            end
+        end)
+
+ 	kahcon = kahinstance.ChildAdded:Connect(function(child)
+            if child:IsA("Sound") and child.Name == "Sound" and child.SoundId ~= "" and child.SoundId ~= nil then
+                currentSong = child
+            end
+		
+            if child:IsA("Part") and child.Size == Vector3.new(4,1.2,2) then
+                task.wait()
+                child.Parent = vis
+                child.CanCollide = false
+                child.CanTouch = false
+                child.Massless = true
+                --sethiddenproperty(child, "NetworkIsSleeping", false)
+
+                task.spawn(function()
+                    child.Velocity = Vector3.new(54,34,0)
+                end)
+            end
+        end)
+
+        for i = 1, vishub.VisAmount do
+            task.wait()
+            Chat('part/4/1.2/2')
+        end
+
+	repeat task.wait() until #vis:GetChildren() >= vishub.VisAmount
+
+        local oldPos = {}
+        local angle = 0
+        local spin = 0
+        local radius = vishub.VisRadius
+        local speed = 0.01
+        local axis = "y"
+        local Mode = vishub.VisMode
+        local rotpart = Instance.new("Part")
+        local waves = false
+
+        Connections["netKeepvis"] = game.Players.PlayerAdded:Connect(function(player)
+		Chat("setgrav ".. player.Name .." 10000000000000000")
+		Chat("punish ".. player.Name)
+		Chat("unpunish ".. player.Name)
+         --[[   local char = player.Character or player.CharacterAdded:Wait()
+            local nm = player:GetAttribute("fixName")
+            if not nm then
+                repeat task.wait() until player:GetAttribute("fixName")
+                nm = player:GetAttribute("fixName")
+            end
+
+            Chat("setgrav " .. nm .. " 10000000000000000")
+	    Chat("punish " .. nm)
+	    Chat("unpunish " .. nm) ]]
+        end)
+
+ 	local conn = nil
+        local conn0 = nil
+        local conn2 = nil
+
+  	conn2 = VisBindable.Event:Connect(function(Action, ...)
+            if Action == "Stop" then
+                vis.Parent = nil
+                kahcon:Disconnect()
+
+                vis:Destroy()
+                Chat('clr')
+                if Connections["netKeepvis"] then
+                    Connections["netKeepvis"]:Disconnect()
+                    Connections["netKeepvis"] = nil
+                end
+
+                conn:Disconnect()
+                conn2:Disconnect()
+
+                
+            elseif Action == "Edit" then
+                local argIS = {...}
+                if argIS[1] == "Orbiter" then
+                    orbiter = argIS[2]
+                elseif argies[1] == "Speed" then
+                    speed = argIS[2]
+                elseif argies[1] == "Axis" then
+                    axis = argIS[2]
+                elseif argIS[1] == "Radius" then
+                    vishub.VisRadius = argIS[2]
+                elseif argies[1] == "Waves" then
+                    waves = argIS[2] == "on"
+                elseif argies[1] == "Mode" then
+                    vishub.VisMode = argIS[2]
+                elseif argies[1] == "Amount" then
+                    vishub.VisAmt = argIS[2]
+                end
+            end
+        end)
+
+	local function personColour(PB, part, colour)
+    		if not PB then
+        		repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChild("PaintBucket")
+        		PB = game.Players.LocalPlayer.Character:FindFirstChild("PaintBucket")
+    		end
+	
+    		repeat task.wait() until PB:FindFirstChild("Remotes") and PB:FindFirstChild("Remotes"):FindFirstChild("ServerControls")
+    
+		local Arguments = {
+			["Part"] = part,
+			["Color"] = Color3.new(colour.R,colour.G,colour.B)
+		}
+	
+		PB:WaitForChild("Remotes"):WaitForChild("ServerControls"):InvokeServer("PaintPart", Arguments)
+	end
+
+
+ 	task.spawn(function()
+            local lastpbl = 0
+            while vis.Parent == workspace do
+                task.wait(.1)
+			
+                local pbl = currentSong and currentSong.PlaybackLoudness * 2 or 0
+                lastpbl = pbl
+			
+                for _,v in pairs(vis:GetChildren()) do
+                    task.spawn(function()
+                        if pbl == 0 or pbl < 1 then
+                        	task.spawn(
+					personColour, 
+					paintBucket, 
+					v, 
+					Color3.fromRGB(
+							vishub.VisColour.R * 255,
+							vishub.VisColour.G * 255,
+							vishub.VisColour.B * 255
+					)
+				)
+                        else
+                            	task.spawn(
+					personColour, 
+					paintBucket, 
+					v, 
+					Color3.fromRGB(
+							vishub.VisColour.R * 255,
+							(vishub.VisColour.B * 255) - (pbl * 1.05),
+							(vishub.VisColour.G * 255) - (pbl * 1.05)
+					)
+				)
+                        end
+                    end)
+                end
+			
+                if #vis:GetChildren() < vishub.VisAmount then
+                    task.spawn(function()
+                        task.wait(.1)
+                        Chat("part/4/1.2/2")
+                    end)  
+                end
+            end
+        end)
+
+ 	local function VectorFromSettings(angle,str)
+            if str == "x" then
+                return Vector3.new(angle,0,0)
+            elseif str == "y" then
+                return Vector3.new(0,angle,0)
+            elseif str == "z" then
+                return Vector3.new(0,0,angle)
+            end
+        end
+        
+        local woah = 0
+        local wave = 1
+        local a = 1
+
+	game:GetService('RunService').Heartbeat:Connect(function()
+            for _,v in pairs(vis:GetChildren()) do
+                if gethiddenproperty(v, "ReceiveAge") > 0 then
+                    v.Parent = kahinstance
+                end
+            end
+        end)
+
+ 	conn = game:GetService("RunService").Heartbeat:Connect(function(dt)
+            if typeof(vishub.VisOrbiter) ~= "CFrame" and vishub.VisOrbiter ~= game.Players.LocalPlayer and (not vishub.VisOrbiter or vishub.VisOrbiter.Character == nil or not vishub.VisOrbiter.Character:FindFirstChild("HumanoidRootPart")) then
+                vishub.VisOrbiter = game.Players.LocalPlayer
+            end
+		
+            local pbl = currentSong and currentSong.PlaybackLoudness * 2 or 0
+            
+            if vishub.VisMode == 0 then
+                for _,v in pairs(vis:GetChildren()) do
+                    if spin >= 360 then
+                        spin = 0
+                    end
+                    local iter = math.rad(spin+(_*(360/#vis:GetChildren())))
+                    local z = vishub.VisRadius + pbl/ (1 ~= 100 and (100 - 1) or .01)
+                    local g = pbl / (35 ~= 100 and (100-35) or .01)
+                    local p = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.X or vishub.VisOrbiter.Character.HumanoidRootPart.CFrame.X,typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.Y or vishub.VisOrbiter.Character.HumanoidRootPart.CFrame.Y,typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.Z or vishub.VisOrbiter.Character.HumanoidRootPart.CFrame.Z) * CFrame.Angles(axis == "x" and iter or 0, axis == "y" and iter or 0, axis == "z" and iter or 0) * CFrame.new(0,0,z)
+                    local AddVector = Vector3.new(0,0,0)
+    
+                    if waves then     
+                        AddVector = VectorFromSettings(math.sin((((dt*0)+(_/#vis:GetChildren())*(math.pi*2)))), axis)
+                    end
+    
+                    v.CFrame = p+AddVector
+                    rotpart.CFrame = CFrame.new(v.Position, typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p + Vector3.new(0,g,0) or vishub.VisOrbiter.Character.HumanoidRootPart.Position + Vector3.new(0,g,0))
+                    v.Rotation = rotpart.Rotation 
+                    spin = spin + speed
+                end 
+            end
+
+            if vishub.VisMode == 1 then
+
+                for _,v in pairs(vis:GetChildren()) do
+                    local ro = math.rad(a / 2 * _ + (_ * (360 / #vis:GetChildren())))
+                    local vector = math.sin((a/#vis:GetChildren()/4 * _),0)
+                    local uh = math.sin(woah+(_+_*(0/#vis:GetChildren()))*(math.pi), 0)
+                    local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p or vishub.VisOrbiter.Character:WaitForChild("Torso").Position) * CFrame.Angles(0, ro/4, 0) * CFrame.new((pbl/ (1 ~= 100 and (100 - 1) or .01))+vishub.VisRadius, 0, (_+(_/#vis:GetChildren()/2)))
+
+                    v.CFrame = F+Vector3.new(0,0,0)
+
+                    a = a + speed / 2.5
+                    woah = woah + speed/#vis:GetChildren()/8
+                    wave = wave + 1
+                end
+            end
+
+            if vishub.VisMode == 2 then
+                for _,v in pairs(vis:GetChildren()) do
+                    local ro = math.rad(a / 2 * _ + (_ * (360 / #vis:GetChildren())))
+                    local vector = math.sin((a/#vis:GetChildren()/4 * _),0)
+                    local uh = math.sin(woah+(_+_*(0/#vis:GetChildren()))*(math.pi), 0)
+                    local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p or vishub.VisOrbiter.Character:WaitForChild("Torso").Position) * CFrame.Angles(0, ro/4, 0) * CFrame.new((pbl/ (1 ~= 100 and (100 - 1) or .01))+vishub.VisRadius, (_+(_/#vis:GetChildren()/2))/1.5, (_+(_/#vis:GetChildren()/2)))
+
+                    v.CFrame = F+Vector3.new(0,0,0)
+
+                    a = a + speed / 2.5
+                    woah = woah + speed/#vis:GetChildren()/8
+                    wave = wave + 1
+
+
+                end
+            end
+
+            if vishub.VisMode == 3 then
+                for _,v in pairs(vis:GetChildren()) do
+                    local ro = math.rad(a / 2 * _ + (_ * (360 / #vis:GetChildren())))
+                    local vector = math.sin((a/#vis:GetChildren()/4 * _),0)
+                    local uh = math.sin(woah+(_+_*(0/#vis:GetChildren()))*(math.pi), 0)
+                    local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p or vishub.VisOrbiter.Character:WaitForChild("Torso").Position) * CFrame.Angles(uh*5, uh*5+ro, 0) * CFrame.new(uh*5+(pbl/ (1 ~= 100 and (100 - 1) or .01))+vishub.VisRadius, 0, 0)
+                    
+                    v.CFrame = F+Vector3.new(0,0,0)
+
+                    a = a + speed /2.5
+                    woah = woah + speed/#vis:GetChildren()/8
+                    wave = wave + 1
+                end
+            end
+
+            if vishub.VisMode == 4 then
+                for _,v in pairs(vis:GetChildren()) do
+                    local ro = math.rad(a/2 + (_*(360/#vis:GetChildren())))
+                    local uh = math.sin(woah+(_+_*(0/#vis:GetChildren()))*(math.pi), 0)
+                    local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p or vishub.VisOrbiter.Character:WaitForChild("Torso").Position)*CFrame.Angles(0, ro, 0)*CFrame.new(0, 0, uh*5+(pbl/ (1 ~= 100 and (100 - 1) or .01))+vishub.VisRadius)
+                    
+
+                    v.CFrame = F+Vector3.new(0,vector,0)
+
+                    woah = woah + speed/#vis:GetChildren()/8
+                    a = a + speed/2.5
+                end
+            end
+        end)
+
+	-- place holder
+end
+
 -- WELCOME/LEAVE MSG
 function onPlayerAdded(player)
      task.wait(0)
