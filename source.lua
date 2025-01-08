@@ -10,7 +10,7 @@
     \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______|
                                             \|_________|                                   
                                                                                            
-                                                                                           vX1.025 ]]
+                                                                                           vX1.04 ]]
 
 --[[
 View the source here: https://kohlslite.pages.dev/source.lua
@@ -73,7 +73,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.027", -- Why X1? Maybe because all the significant/main updates ae done.
+                Title = "KohlsLite X1.04", -- Why X1? Maybe because all the significant/main updates ae done.
                 Text = msg,
                 Duration = 1 -- I know i could just do "1 or (a designated number)" but I don't really care.
         })
@@ -81,7 +81,7 @@ end;
 
 local function LRemind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.027",
+                Title = "KohlsLite X1.04",
                 Text = msg,
                 Duration = length
         })
@@ -147,7 +147,7 @@ getgenv().kohlsexecuted = true
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.025"
+getgenv().klversion = "X1.04"
 
 -- KohlsLite Start Gui
 getgenv().kohlsgui = false
