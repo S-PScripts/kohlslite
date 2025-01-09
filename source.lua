@@ -1794,6 +1794,15 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			Remind("WARNING: THIS FEATURE HAS NOT BEEN TESTED.")
 			partVisualiser()
 	end
+
+	if string.sub(msg, 1, #prefix + 7) == prefix..'stopvis' then
+		if haspersons then
+			VisBindable:Fire("Stop")
+			Remind("Visualiser has ended.")
+		else
+            		Remind("You need Person 299 Admin commands for this!")
+		end
+	end
 		
         if string.sub(msg, 1, #prefix + 2) == prefix..'wl' then
 	 local args = string.split(msg, " ")
@@ -2942,34 +2951,48 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'volm' then -- rap e
-               local newVolume = tonumber(string.sub(msg:lower(), #prefix + 6))
-               if newVolume ~= nil and game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+        	local newVolume = tonumber(string.sub(msg:lower(), #prefix + 6))
+        	if newVolume ~= nil and game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
                           game:GetService("Workspace").Terrain["_Game"].Folder.Sound.Volume = newVolume
-               end
+        	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'musicid' then
-              if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+        	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
                               print("Current music ID: "..game:GetService("Workspace").Terrain["_Game"].Folder.Sound.SoundId)
                               Remind("Current music ID: "..game:GetService("Workspace").Terrain["_Game"].Folder.Sound.SoundId)
-              end
+        	end
     end
 
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'cmusicid' then
-              if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+		if setclipboard then
+			if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
 				Remind("Copied the music id to your clipboard.")
                                 local url = game:GetService("Workspace").Terrain["_Game"].Folder.Sound.SoundId
                                 local number = url:match("id=(%d+)")
                                 setclipboard(number)
-              end
+        		end
+		else
+			Remind("Sorry, your exploit does not support this command (setclipboard)")
+		end
     end
 
+   if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'alog' then
+		Loops.alog = true
+		Remind("The audiolog will save to your workspace.")
+   end
+	
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'audiolog' then
 		Loops.alog = true
 		Remind("The audiolog will save to your workspace.")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unaudiolog' then
+		Loops.alog = false
+		Remind("Switched off the audiolog.")
+   end
+
+   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'unalog' then
 		Loops.alog = false
 		Remind("Switched off the audiolog.")
    end
@@ -3012,23 +3035,23 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'audiolol' then
-       audiotroll = true
+        audiotroll = true
 	Remind("Listen to the audio now...")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unaudiolol' then
-       audiotroll = false
+        audiotroll = false
 	Remind("Stopped messing up the audio!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antimusic' then
-       mymusiconly = false
-       antimusic = true
+        mymusiconly = false
+        antimusic = true
 	Remind("Anti music is on! Do 'pmu (NO ID AFTER IT!!)' if this command doesn't work well")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unantimusic' then
-       antimusic = false
+        antimusic = false
 	Remind("Turned anti music off!")
     end
 
@@ -3380,10 +3403,18 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 adx, ady, adz = Admin.Regen.Position.X, Admin.Regen.Position.Y, Admin.Regen.Position.Z
                 q = adx .. ady .. adz
                 print(Admin.Regen.Position.X, Admin.Regen.Position.Y, Admin.Regen.Position.Z)
-                setclipboard(q)
+		if setclipboard then
+                	setclipboard(q)
+		else
+			Remind("Your exploit does not support setclipboard - Please keep a note of the regen co-ords in console.")
+		end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'cusername' then
+		if not setclipboard then
+			Remind("Sorry, your exploit does not support this command (setclipboard)")
+			return
+		end
  		local dasplayer = string.sub(msg:lower(), #prefix + 11)
                 PLAYERCHECK(dasplayer)
                 if player ~= nil then
@@ -3983,7 +4014,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'scrash' then -- not a silent crash!
         if haspersons == false then
-Remind([[Sorry, you don't have Person's to perform this command!
+Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
 Commands required: shield]])
         else
 		if skipwarncrash then -- idea from sinx
@@ -4021,7 +4052,7 @@ Commands required: shield]])
 		
    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'rkick' then
         if haspersons == false then
-Remind([[Sorry, you don't have Person's to perform this command!
+Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
 Commands required: rocket]])
         else
                 local dasplayer = string.sub(msg:lower(), #prefix + 7)
@@ -4039,7 +4070,7 @@ Commands required: rocket]])
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unrkick' then
 		if haspersons == false then
-Remind([[Sorry, you don't have Person's to perform this command!
+Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
 Commands required: rocket]])
 return
 		end
@@ -4512,7 +4543,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'space' then -- kohls true anti kill
 		if haspersons == false then
-Remind([[Sorry, you don't have Person's to perform this command!
+Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
 Commands required: rocket]])
 return
 		end
@@ -4608,7 +4639,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'bend' then -- pr/cxodek script
 		if haspersons == false then
-Remind([[Sorry, you don't have Person's to perform this command!
+Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
 Commands required: rocket]])
 return
 		end
@@ -5308,7 +5339,7 @@ return
 
     if string.sub(msg, 1, #prefix + 6) == prefix..'shlong' then
 		if haspersons == false then
-Remind([[Sorry, you don't have Person's to perform this command!
+Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
 Commands required: part]])
 return
 		end
@@ -5362,7 +5393,7 @@ return
 
     if string.sub(msg, 1, #prefix + 5) == prefix..'arena' then
 		if haspersons == false then
-Remind([[Sorry, you don't have Person's to perform this command!
+Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
 Commands required: part]])
 return
 		end
@@ -12840,7 +12871,7 @@ kahinstance = workspace.Terrain:FindFirstChild("_Game"):FindFirstChild("Folder")
 local VisBindable = Instance.new("BindableEvent")
 
 function partVisualiser()
- 	if not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) and not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then
+ 	if not haspersons then
             Remind("You need Person 299 Admin commands for this!")
             return
         end
@@ -13048,7 +13079,6 @@ function partVisualiser()
     			vishub.VisOrbiter = game.Players.LocalPlayer
 	    end
 
-		
             local pbl = currentSong and currentSong.PlaybackLoudness * 2 or 0
             
             if vishub.VisMode == 0 then
@@ -13141,7 +13171,6 @@ function partVisualiser()
                     local F = CFrame.new(typeof(vishub.VisOrbiter) == "CFrame" and vishub.VisOrbiter.p 
 			or vishub.VisOrbiter.Character:WaitForChild("Torso").Position) * CFrame.Angles(0, ro, 0) * CFrame.new(0, 0, uh*5+(pbl/ (1 ~= 100 and (100 - 1) or .01)) + vishub.VisRadius)
                     
-
                     v.CFrame = F + Vector3.new(0,vector,0)
 
                     woah = woah + speed/#vis:GetChildren()/8
@@ -13152,7 +13181,7 @@ function partVisualiser()
 end
 
 function editVis(variable, value)
- 	if not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) and not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then
+ 	if not haspersons then
             Remind("You need Person 299 Admin commands for this!")
             return
         end
