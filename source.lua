@@ -1698,6 +1698,23 @@ Mover.Finished = {Value = false}
 Mover.Moving = false
 Mover.PosSet = false
 
+-- Visualiser
+local vishub = {
+	VisAmount = 20,
+	VisMode = 0,
+	VisColour = Color3.new(255,255,255),
+	VisRadius = 20,
+	VisOrbiter = game.Players.LocalPlayer
+}
+
+local Connections = {
+    Building = {},
+    Drawing = {},
+}
+
+kahinstance = workspace.Terrain:FindFirstChild("_Game"):FindFirstChild("Folder")
+local VisBindable = Instance.new("BindableEvent")
+
 print("- Information -")
 print("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by S_P.")
 Remind("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by S_P.")
@@ -4889,8 +4906,8 @@ return
 	else
 		dontincludeyou = false
 	end
-        IPBOOM(dontincludeyou)
 	Remind("!!! REAL !!!")
+        IPBOOM(dontincludeyou)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'logspam' then
@@ -4914,12 +4931,12 @@ return
 	end
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'persons' then
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'persons' then
 		haspersons = true
 		Remind("Manually set - persons true.")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unpersons' then
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unpersons' then
 		haspersons = false
 		Remind("Manually set - persons false.")
     end
@@ -12853,22 +12870,6 @@ function partDrawer()
         end
 	-- place holder
 end
-
-local vishub = {
-	VisAmount = 20,
-	VisMode = 0,
-	VisColour = Color3.new(255,255,255),
-	VisRadius = 20,
-	VisOrbiter = game.Players.LocalPlayer
-}
-
-local Connections = {
-    Building = {},
-    Drawing = {},
-}
-
-kahinstance = workspace.Terrain:FindFirstChild("_Game"):FindFirstChild("Folder")
-local VisBindable = Instance.new("BindableEvent")
 
 function partVisualiser()
  	if not haspersons then
