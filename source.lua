@@ -10,7 +10,7 @@
     \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______|
                                             \|_________|                                   
                                                                                            
-                                                                                           vX1.04 ]]
+                                                                                           vX1.042 ]]
 
 --[[
 View the source here: https://kohlslite.pages.dev/source.lua
@@ -73,7 +73,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.04", -- Why X1? Maybe because all the significant/main updates ae done.
+                Title = "KohlsLite X1.042", -- Why X1? Maybe because all the significant/main updates ae done.
                 Text = msg,
                 Duration = 1 -- I know i could just do "1 or (a designated number)" but I don't really care.
         })
@@ -81,7 +81,7 @@ end;
 
 local function LRemind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.04",
+                Title = "KohlsLite X1.042",
                 Text = msg,
                 Duration = length
         })
@@ -147,7 +147,7 @@ getgenv().kohlsexecuted = true
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.04"
+getgenv().klversion = "X1.042"
 
 -- KohlsLite Start Gui
 getgenv().kohlsgui = false
@@ -10216,7 +10216,7 @@ connections[#connections + 1] =
             		seen[player] = true 
             		table.insert(variablehostinger, player)
 		else
-			print('removed duplicate')
+			-- print('removed duplicate')
 		end
     	end
 
