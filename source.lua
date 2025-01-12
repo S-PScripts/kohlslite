@@ -2292,7 +2292,8 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 gcplr = cplr
                 gcplrn = player
                 checkforperm()
-                checkforpersons()
+		u = true
+                checkforpersons(u)
          else
                 Remind('Cannot find player with the name: '..dasplayer)
          end
@@ -8731,14 +8732,14 @@ end
 function checkforperm()
         if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 66254), 66254) then
             Remind(gcplrn.." has perm in NBC!")
-            Chat("h \n\n\n\n\n\n \n\n\n\n\n\n " .. gcplrn .. " has perm in NBC! \n\n\n\n\n\n")
+            Chat("h \n\n\n " .. gcplrn .. " has perm in NBC! \n\n\n")
           --  Speak(gcplrn.." has perm in NBC!")
             if not table.find(permusers, gcplrn) then
                     table.insert(permusers, gcplrn)
             end
         elseif string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 64354), 64354) then
             Remind(gcplrn.." has perm in BC!")
-	    Chat("h \n\n\n\n\n\n \n\n\n\n\n\n " .. gcplrn .. " has perm in BC! \n\n\n\n\n\n")
+	    Chat("h \n\n\n " .. gcplrn .. " has perm in BC! \n\n\n")
            -- Speak(gcplrn.." has perm in BC!")
             table.insert(permusers, gcplrn)
             if not table.find(permusers, gcplrn) then
@@ -8746,32 +8747,44 @@ function checkforperm()
             end
         else 
                 Remind(gcplrn..' does not have perm!')
-	        Chat("h \n\n\n\n\n\n \n\n\n\n\n\n " .. gcplrn .. " does not perm! \n\n\n\n\n\n")
+	        Chat("h \n\n\n " .. gcplrn .. " does not perm! \n\n\n")
             --    Speak(gcplrn..' does not have perm!')
         end
 end
 
 -- CHECK FOR PERSONS
-function checkforpersons()
+function checkforpersons(u)
         if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 35748), 35748) then
             Remind(gcplrn.." has persons in NBC!")
-	    Chat("h \n\n\n\n\n\n \n\n\n\n\n\n \n\n\n\n\n\n " .. gcplrn .. " has persons in NBC! \n\n\n\n\n\n")
-           -- Speak(gcplrn.." has persons in NBC!")
+	    if u then
+		Chat("h \n\n\n\n\n " .. gcplrn .. " has persons in NBC! \n\n\n\n\n")
+	    else
+	    	Chat("h \n\n\n " .. gcplrn .. " has persons in NBC! \n\n\n")
+	    end
+            -- Speak(gcplrn.." has persons in NBC!")
             table.insert(personsusers, gcplrn)
             if not table.find(personsusers, gcplrn) then
                     table.insert(personsusers, gcplrn)
             end
         elseif string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 37127), 37127) then
             Remind(gcplrn.." has persons in BC!")
-	    Chat("h \n\n\n\n\n\n \n\n\n\n\n\n \n\n\n\n\n\n " .. gcplrn .. " has persons in BC! \n\n\n\n\n\n")
-           -- Speak(gcplrn.." has persons in BC!")
+	    if u then
+		Chat("h \n\n\n\n\n " .. gcplrn .. " has persons in BC! \n\n\n\n\n")
+	    else
+	    	Chat("h \n\n\n " .. gcplrn .. " has persons in BC! \n\n\n")
+	    end           
+	    -- Speak(gcplrn.." has persons in BC!")
             table.insert(personsusers, gcplrn)
             if not table.find(personsusers, gcplrn) then
                     table.insert(personsusers, gcplrn)
             end
         else 
                 Remind(gcplrn..' does not have persons!')
-		Chat("h \n\n\n\n\n\n \n\n\n\n\n\n \n\n\n\n\n\n " .. gcplrn .. " does not persons! \n\n\n\n\n\n")
+		if u then
+			Chat("h \n\n\n\n\n " .. gcplrn .. " does not persons! \n\n\n\n\n")
+		else
+			Chat("h \n\n\n " .. gcplrn .. " does not persons! \n\n\n")
+		end
              --   Speak(gcplrn..' does not have persons!')
         end
 end
@@ -12116,13 +12129,13 @@ function Playlist(shazam) -- cmd v3
             SkipEvent:Fire()
         end)
 
-        Chat("h \n\n\n\n\n\n \n\n\n\n\n\n Found " .. #returnables .. " songs. \n\n\n\n\n\n")
+        Chat("h \n\n\n\n\n Found " .. #returnables .. " songs. \n\n\n\n\n")
 
         for _,v in pairs(returnables) do
             if musicstop then break end
             local musicskip = false
             Chat("music " .. v.Id)
-            Chat("h \n\n\n\n\n Now playing: " .. v.Title .. " (" .. v.Duration .. "s) \n\n\n\n\n")
+            Chat("h \n\n\n\n\n\n\n Now playing: " .. v.Title .. " (" .. v.Duration .. "s) \n\n\n\n\n\n\n")
             
             local conn
             conn = SkipEvent.Event:Connect(function()
@@ -13230,7 +13243,8 @@ function onPlayerAdded(player)
      if autogpcheck == true then
           gcplr = player
           gcplrn = player.Name
-          checkforpersons()
+	  u = true
+          checkforpersons(u)
           checkforperm()
     end
 
