@@ -87,7 +87,7 @@ end
 
 getgenv().autocrasher = false
 
-getgenv().ignorewronggame = true
+getgenv().ignorewronggame = false
 
 if autocrasher then
 	-- I'll add it, idk when
