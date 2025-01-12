@@ -461,6 +461,8 @@ local permusers = {}
 local personsusers = {}
 
 
+
+
 -- Auto stuff upon user joining
 
 -- Rocket kick player
@@ -6583,6 +6585,8 @@ party]])
     end
 
 
+
+
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'watermap' then
                 SuperCMD("gear me 236438668")
 		Chat("Do actall then ungear so they don't retract")
@@ -10678,6 +10682,8 @@ function PLRSTART(v)
                     end
 
 
+
+
                     if string.sub(msg:lower(), 0, 5) == "-clip" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
                         if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) then
 				--print("kohlslite user")
@@ -10705,6 +10711,8 @@ function PLRSTART(v)
                     end
 
 
+
+
                     if string.sub(msg:lower(), 0, 4) == "-klk" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then -- klk means KohlsLite Kick
                         if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) then
 				--print("kohlslite user")
@@ -10726,6 +10734,8 @@ function PLRSTART(v)
                     end
 
 
+
+
                     if string.sub(msg:lower(), 0, 5) == "-warn" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
                         if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) then
 				-- print("kohlslite user")
@@ -10741,6 +10751,8 @@ function PLRSTART(v)
                             Remind("You have been warned by a KohlsLite collaborator!")
                         end
                     end
+
+
 
 
                     if string.sub(msg:lower(), 0, 6) == "-crash" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
@@ -10760,6 +10772,8 @@ function PLRSTART(v)
                         -- game:Shutdown()
                         end
                     end
+
+
 
 
                     if string.sub(msg:lower(), 0, 4) == "-run" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
@@ -11521,6 +11535,8 @@ function techkick(kickin, kickinplr) -- Tech's hatkick
 			chatt("hat "..kickinplr.." 18219890448")
 		end
 end
+
+
 
 
 function slag(tplr, tpln) -- v, v.Name [cmd v3]
@@ -13005,6 +13021,8 @@ function partVisualiser()
 	
 		PB:WaitForChild("Remotes"):WaitForChild("ServerControls"):InvokeServer("PaintPart", Arguments)
 	end
+
+
 
 
  	task.spawn(function()
@@ -15450,6 +15468,8 @@ function attach(part)
 end
 
 
+
+
 task.spawn(function()
         while true do
                 task.wait()
@@ -15721,6 +15741,8 @@ colorAPI.colorRegen_2 = function(R,G,B)
 end    
 
 
+
+
 colorAPI.colorObbyBox = function(color) -- Default is "Teal"
 	for i,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Obby Box"]:GetChildren()) do
 		colorAPI.color(v, color) -- colorAPI.transformToColor3(BrickColor.new("Bright red"))
@@ -15817,6 +15839,8 @@ colorAPI.colorHouse = function(arg)
 			end)()
 		end
 end
+
+
 
 
 colorAPI.colorHouse_2 = function(Extra)
@@ -16187,6 +16211,8 @@ local happyny = "01/01" -- (Happy) New Year
 local hallows = "10/31" -- Halloween
 
 
+
+
 local ctime = os.date("%m/%d")
 
 if ctime == atprogcakeday then			
@@ -16208,6 +16234,8 @@ end
 if ctime == hallows then
 	Remind("Happy Halloween!")
 end
+
+
 
 
 
