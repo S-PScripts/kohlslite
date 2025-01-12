@@ -10,7 +10,7 @@
     \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______|
                                             \|_________|                                   
                                                                                            
-                                                                                           vX1.042 ]]
+                                                                                           vX1.045 ]]
 
 --[[
 View the source here: https://kohlslite.pages.dev/source.lua
@@ -71,19 +71,11 @@ PS: I know my script is inconsistent when using Game with and without GetService
 getgenv().scriptname = "KohlsLite"
 
 -- Notifications
-local function Remind(msg)
+local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.042", -- Why X1? Maybe because all the significant/main updates ae done.
+                Title = "KohlsLite X1.045", -- Why X1? Maybe because all the significant/main updates are done.
                 Text = msg,
-                Duration = 1 -- I know i could just do "1 or (a designated number)" but I don't really care.
-        })
-end;
-
-local function LRemind(msg, length)
-        game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.042",
-                Text = msg,
-                Duration = length
+                Duration = length or 1
         })
 end;
 
@@ -147,7 +139,7 @@ getgenv().kohlsexecuted = true
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.042"
+getgenv().klversion = "X1.045"
 
 -- KohlsLite Start Gui
 getgenv().kohlsgui = false
@@ -2321,7 +2313,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         end
 
        if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'adminjoy' then
-                LRemind("You: 'I use adminjoy trash!' Anyways, ask ME to add the colourful seizure stuff, don't use THAT!", 3)
+                Remind("You: 'I use adminjoy trash!' Anyways, ask ME to add the colourful seizure stuff, don't use THAT!", 3)
        end
 
        if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timeout' then
