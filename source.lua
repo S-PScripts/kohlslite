@@ -1601,7 +1601,7 @@ local keybindz_unsafe = false
 -- Auto things when people join
 
 -- Automatically check for player's gamepasses
-local autogpcheck = true
+local autogpcheck = false
 
 -- Auto gear ban
 local autogb = false
@@ -9406,7 +9406,8 @@ connections[#connections + 1] =
 
 connections[#connections + 1] =
     lplr.CharacterAdded:Connect(function()
-        tor = lplr.Character:WaitForChild("Torso")
+	
+        tor = game:GetService("Players").LocalPlayer.Character:WaitForChild("Torso")
         oldvel = tor.Velocity
 
         tor.ChildAdded:Connect(function(v)
@@ -12898,7 +12899,8 @@ function partVisualiser()
                 task.wait(.5)
                 if not paintBucket or (paintBucket.Parent ~= game.Players.LocalPlayer.Character and paintBucket.Parent ~= game.Players.LocalPlayer.Backpack) then
                     Chat('gear me 18474459')
-                    paintBucket = game.Players.LocalPlayer.Backpack:WaitForChild("PaintBucket")
+		    repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("PaintBucket")
+		    paintBucket = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
                     paintBucket:FindFirstChildOfClass("LocalScript").Disabled = true
                     task.wait()
                     paintBucket.Parent = game.Players.LocalPlayer.Character 
