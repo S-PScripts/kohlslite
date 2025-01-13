@@ -16080,7 +16080,7 @@ Stats.rank = rankcheck(Stats.username)
 print("Your rank is: " .. Stats.rank)
 
 -- knocks' and atprog's funny thing ...
-loadstring(game:HttpGet("https://raw.githubusercontent.com/blueskykah/soggy/main/for%20atpoop"))()
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/blueskykah/soggy/main/for%20atpoop"))()
 
 -- Atprog billboard gui --
 local function createBillboardGui(text, color)
