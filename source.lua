@@ -7926,13 +7926,37 @@ end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'autoff' then
-        autos.autoff = true
-        Remind("Auto ff is on!")
+	local args = string.split(msg, " ")
+        if args[2] == "me" then
+                autos.autoff = true
+                Remind("Auto ff is on for you!")
+        elseif args[2] == "others" then
+		autos.autoffa = true
+                Remind("Auto ff is on for others!")
+        elseif args[2] == "all" then
+                autos.autoff = true
+		autos.autoffa = true
+                Remind("Auto ff is on for everyone!")
+        else
+                Remind("Invalid argument: Must be me, others, or all")
+        end       
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unautoff' then
-        autos.autoff = false
-        Remind("Auto ff is off!")
+	local args = string.split(msg, " ")
+        if args[2] == "me" then
+                autos.autoff = false
+                Remind("Auto ff is off for you!")
+        elseif args[2] == "others" then
+		autos.autoffa = false
+                Remind("Auto ff is off for others!")
+        elseif args[2] == "all" then
+                autos.autoff = false
+		autos.autoffa = false
+                Remind("Auto ff is off for everyone!")
+        else
+                Remind("Invalid argument: Must be me, others, or all")
+        end  
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'autogod' then
@@ -9052,7 +9076,7 @@ autos = {
 	autoff = false,
 	autoffa = false,
 	autogod = false,
-	autogoda = false,
+	-- autogoda = false,
 	tempautoff = false,
 	tempautogod = false
 }
@@ -9519,6 +9543,12 @@ connections[#connections + 1] =
                                                 Chat("unff "..v.Name)
                                         else end
                                 end
+				
+                                if autos.autoffa == true then
+					if v.Character and not v.Character:FindFirstChild("ForceField") then
+                                                Chat("ff "..v.Name)
+                                        else end
+				end
 
                                  if checkperm2 == true then
                                          if v.Character and v.Character:FindFirstChild("ForceField") then
