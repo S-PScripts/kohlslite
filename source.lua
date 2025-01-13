@@ -72,7 +72,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.0481", -- Why X1? Maybe because all the significant/main updates are done.
+                Title = "KohlsLite X1.0482", -- Why X1? Maybe because all the significant/main updates are done.
                 Text = msg,
                 Duration = length or 1
         })
@@ -12888,7 +12888,7 @@ function partVisualiser()
 
         local vis = Instance.new("Folder", workspace)
         local currentSong = kahinstance:FindFirstChild("Sound") or nil
-        local orbiter = game.Players.LocalPlayer
+        local vishub.VisOrbiter = game.Players.LocalPlayer
 
 	local paintBucket = nil
 
@@ -12985,7 +12985,7 @@ function partVisualiser()
             elseif Action == "Edit" then
                 local argIS = {...}
                 if argIS[1] == "Orbiter" then
-                    orbiter = argIS[2]
+                    vishub.VisOrbiter = argIS[2]
                 elseif argIS[1] == "Speed" then
                     speed = argIS[2]
                 elseif argIS[1] == "Axis" then
@@ -13229,7 +13229,7 @@ function editVis(variable, value)
         elseif variable == "mode" then
             VisBindable:Fire("Edit", "Mode", tonumber(value))
 		
-        elseif variable == "amt" then
+        elseif variable == "amount" or variable == "amt" then
             VisBindable:Fire("Edit", "Amount", tonumber(value))
         end
 end
