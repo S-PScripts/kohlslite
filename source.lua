@@ -9050,7 +9050,9 @@ antis = {
 
 autos = {
 	autoff = false,
+	autoffa = false,
 	autogod = false,
+	autogoda = false,
 	tempautoff = false,
 	tempautogod = false
 }
@@ -9188,7 +9190,7 @@ connections[#connections + 1] =
             end
         end
 
-        if antis.antiff == true then
+        if antis.antiglow == true then
             local torso = lp.Character:WaitForChild("Torso", 1)
             for i, v in pairs(torso:GetChildren()) do
                 if v:IsA("PointLight") then
