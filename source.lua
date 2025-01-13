@@ -10149,11 +10149,11 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat(prefix .. "regen")
 
 								if crash_an then
-									Chat("h \n\n\n\n\n "..v.Name.." tried using a tool 9jn doesn't like. \n\n\n\n\n")
+									Chat("h \n\n\n\n\n "..v.Name.." tried using the ray gun... 9jn doesn't like that! \n\n\n\n\n")
 								end
 
-								Remind(v.Name.." used a tool 9jn doesn't like!")
-								print(v.Name.." used a tool 9jn doesn't like!")
+								Remind(v.Name.." used a tool 9jn doesn't like (ray gun)!")
+								print(v.Name.." used a tool 9jn doesn't like (ray gun)!")
 							end
 						end
 					end
@@ -10167,11 +10167,11 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat(prefix .. "regen")
 
 								if crash_an then
-									Chat("h \n\n\n\n\n "..v.Name.." tried using a tool 9jn doesn't like. \n\n\n\n\n")
+									Chat("h \n\n\n\n\n "..v.Name.." tried using the ray gun... 9jn doesn't like that! \n\n\n\n\n")
 								end
 
-								Remind(v.Name.." used a tool 9jn doesn't like!")
-								print(v.Name.." used a tool 9jn doesn't like!")
+								RRemind(v.Name.." used a tool 9jn doesn't like (ray gun)!")
+								print(v.Name.." used a tool 9jn doesn't like (ray gun)!")
 							end
 						end
 					end
@@ -10184,11 +10184,11 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					Chat(prefix .. "regen")
 
 					if crash_an then
-						Chat("h \n\n\n\n\n A tool 9jn doesn't like was found on workspace. \n\n\n\n\n")
+						Chat("h \n\n\n\n\n A ray gun was found on the workspace... 9jn doesn't like that \n\n\n\n\n")
 					end
 
-					Remind("A tool 9jn doesn't like was found on the workspace!")
-					print("A tool 9jn doesn't like was found on the workspace!")
+					Remind("A tool 9jn doesn't like (ray gun) was found on the workspace!")
+					print("A tool 9jn doesn't like (ray gun) was found on the workspace!")
 				end
 		end
 
@@ -15969,7 +15969,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
 
         if v.Name == "9jn" or v.Name == "9gn" then
                         antiraygun = true
-			Remind("Anti ray gun enabled (9jn found in server.")
+			Remind("Anti ray gun enabled (9jn found in server).")
         end
 
         if table.find(crash_on_sight, v.Name) then
