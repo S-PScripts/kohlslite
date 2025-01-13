@@ -72,7 +72,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.0482", -- Why X1? Maybe because all the significant/main updates are done.
+                Title = "KohlsLite X1.0485", -- Why X1? Maybe because all the significant/main updates are done.
                 Text = msg,
                 Duration = length or 1
         })
@@ -1706,11 +1706,22 @@ local Connections = {
 kahinstance = workspace.Terrain:FindFirstChild("_Game"):FindFirstChild("Folder")
 local VisBindable = Instance.new("BindableEvent")
 
+print([[
+___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
+|\  \|\  \ |\   __  \|\  \|\  \|\  \     |\   ____\|\  \     |\  \|\___   ___\\  ___ \     
+\ \  \/  /|\ \  \|\  \ \  \\\  \ \  \    \ \  \___|\ \  \    \ \  \|___ \  \_\ \   __/|    
+ \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
+  \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
+   \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| 
+                                            \|_________|                           
+]])
+
 print("- Information -")
 print("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by S_P.")
 Remind("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by S_P.")
-print("Say .kcmds to list some of the commands. DM me at ts2021 for help.")
-Remind("Say .kcmds to list some of the commands. DM me at ts2021 for help.")
+print("Say .kcmds and .kcmd2 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
+Remind("Say .kcmds and .kcmd2 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
 
 -- Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
 
@@ -1735,6 +1746,7 @@ else
         haspersons = false -- used!
         print("You do not have Person299's Admin!")
 end
+print("\n")
 
 game.Players.LocalPlayer.Chatted:Connect(function(msg)
         task.wait(0)
@@ -16019,17 +16031,6 @@ end
 -- These run last to prevent bugs
 startupScripts()
 
-print([[
-___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
-|\  \|\  \ |\   __  \|\  \|\  \|\  \     |\   ____\|\  \     |\  \|\___   ___\\  ___ \     
-\ \  \/  /|\ \  \|\  \ \  \\\  \ \  \    \ \  \___|\ \  \    \ \  \|___ \  \_\ \   __/|    
- \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
-  \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
-   \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| 
-                                            \|_________|                           
-]])
-
 Stats.loadedtime = string.format("%.2f", os.clock() - Stats.starttime)
 
 print("\n")
@@ -16080,6 +16081,7 @@ Stats.username = game.Players.LocalPlayer.Name
 Stats.rank = rankcheck(Stats.username)
 
 print("Your rank is: " .. Stats.rank)
+print("\n")
 
 -- knocks' and atprog's funny thing ...
 --loadstring(game:HttpGet("https://raw.githubusercontent.com/blueskykah/soggy/main/for%20atpoop"))()
