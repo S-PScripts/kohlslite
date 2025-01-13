@@ -8,7 +8,7 @@
     \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______|
                                             \|_________|                                   
                                                                                            
-                                                                                           vX1.045 ]]
+                                                                                           vX1.048 ]]
 
 --[[
 View the source here: https://kohlslite.pages.dev/source.lua
@@ -72,7 +72,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.045", -- Why X1? Maybe because all the significant/main updates are done.
+                Title = "KohlsLite X1.048", -- Why X1? Maybe because all the significant/main updates are done.
                 Text = msg,
                 Duration = length or 1
         })
@@ -12898,12 +12898,14 @@ function partVisualiser()
             while vis.Parent == workspace do
                 task.wait(.5)
                 if not paintBucket or (paintBucket.Parent ~= game.Players.LocalPlayer.Character and paintBucket.Parent ~= game.Players.LocalPlayer.Backpack) then
-                    Chat('gear me 18474459')
-		    repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("PaintBucket")
-		    paintBucket = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
-                    paintBucket:FindFirstChildOfClass("LocalScript").Disabled = true
-                    task.wait()
-                    paintBucket.Parent = game.Players.LocalPlayer.Character 
+		    if game.Players.LocalPlayer.Character then -- qui ahh forgot
+                    	Chat('gear me 18474459')
+		    	repeat task.wait() until ame.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
+		   	paintBucket = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
+                    	paintBucket:FindFirstChildOfClass("LocalScript").Disabled = true
+                    	task.wait()
+                    	paintBucket.Parent = game.Players.LocalPlayer.Character 
+		   end
                 end
             end
         end)
