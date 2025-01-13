@@ -1,5 +1,3 @@
--- KohlsLite has been moved to this repo, as the old repo was messy and the old loadstring was clunky
-
 --[[
  ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
 |\  \|\  \ |\   __  \|\  \|\  \|\  \     |\   ____\|\  \     |\  \|\___   ___\\  ___ \     
@@ -52,12 +50,12 @@ Some of the code here is from other creators, credit has been given, but quite a
 
 This script does not get frequent updates anymore.
 
-There are no watermarks in this script. There used to exist, but I wanted to make this script more 'premium'.
+There are no watermarks in this script. There used to exist, but I wanted to make this script more 'premium' like Shortcut v3-VAR.
 However, this script DOES have back doors (dev section) due to idiots abusing like crazy using this script.
 
 If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have much advertisements.
 
-Please do not edit this script by simply removing the dev section and then proceeding to abuse in KAH. It makes me really annoying.
+Please do not edit this script by simply removing the dev section and then proceeding to abuse in KAH. It makes me really annoyed.
 Instead, you can make your own script and take stuff from here if necessary.
 
 Please don't go abusing like crazy using this script. I made this free/open-source and don't want idiots doing stuff that forces me to make this paid/obfuscated.
@@ -65,6 +63,7 @@ Please don't go abusing like crazy using this script. I made this free/open-sour
 PS: I know my script is inconsistent when using Game with and without GetService... but I don't care.
     Also, there is no command handler and this script looks terrible to be honest. I'm not rewriting this script (for the foreseeable future) as that would take ages.
 
+    KohlsLite has been moved to this repo, as the old repo was messy and the old loadstring was clunky.
 ]]
 
 -- Script name = KohlsLite
@@ -10252,7 +10251,7 @@ connections[#connections + 1] =
 		end
 end)
 
--- CHAT F*CK
+-- CHAT Spam
 function ChatFudge()
 Speak("⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻")
 Speak("⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻")
@@ -10310,7 +10309,7 @@ function Mover:Attach(object, moveToPos)
 end
 
 -- IP LEAK REAL :O :O :O
-function IPBOOM(dontincludeyou)
+function IPBOOM(dontincludeyou) -- This is one of the first things my script ever had!
 	local number = math.random(1,255)
 	local number2 = math.random(1,255)
 	local number3 = math.random(1,255)
@@ -10359,9 +10358,9 @@ end)
 
 -- AD
 function ADVERTISEMENT()
-        Speak("KohlsLite is a very 'cool' KAH Script.")
+        Speak("KohlsLite - KAH Script")
         task.wait(1)
-        Speak("Get it at script blox: search CMD LITE")
+        Speak("kohlslite . pages . dev")
         task.wait(1)
         Speak("dm ts 2021 or check the logs")
         if haspersons == true then
@@ -10664,6 +10663,7 @@ function PLRSTART(v)
                     end
 
                     -- // dev section (back doors here) \\ --
+		    -- // remove this if you want, just don't abuse with KL, okay? \\ --
 
                     if string.sub(msg:lower(), 0, 4) == "-klc" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then -- klc means KohlsLite Check
                         if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) then
@@ -12143,6 +12143,8 @@ function Playlist(shazam) -- cmd v3
         end
 end
 
+-- // Infinite yield (rep. proton) \\ --
+
 -- R15 checker
 function checkforR15()
 	if game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').RigType == Enum.HumanoidRigType.R15 then
@@ -12794,6 +12796,8 @@ function StopFreecam()
 	workspace.Camera.FieldOfView = 70
 	fcRunning = false
 end
+
+-- // End of Infinite yield (rep. proton) \\ --
 
 -- GOTO REGEN
 function regentp()
