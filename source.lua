@@ -10182,7 +10182,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		for i, tool in crashToolsLP do
 				for i, v in game.Players:GetPlayers() do
 					if v.Name == game.Players.LocalPlayer.Name then
-						if v.Backpack:FindFirstChild(tool) then
+						if v.Backpack and v.Backpack:FindFirstChild(tool) then
 							if antikick2 then
 								tool:Destroy()
 							end
