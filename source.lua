@@ -414,7 +414,7 @@ local atprogperms = {
 local newplrslocked = {}
 
 -- if new players under 21 days join they get blacklisted
-local newplrautoslock = true 
+local newplrautoslock = false 
 
 -- Control what is considered as a new account
 local newlen = 21
@@ -467,7 +467,7 @@ crash_on_sight = {
 	"UnknownHasComeBack",
 	"OhMyAlt000",
 	"Roblox_girlsfree",
-	"aliihsan12345isafurry", -- DID LIL BRO COPY S_PISAFURRY ???!!!
+	"aliihsan12345isafurry", 
     	"IIIdev",
     	"ihateyou"
 }
