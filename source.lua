@@ -12888,7 +12888,7 @@ function partVisualiser()
 
         local vis = Instance.new("Folder", workspace)
         local currentSong = kahinstance:FindFirstChild("Sound") or nil
-        local vishub.VisOrbiter = game.Players.LocalPlayer
+        vishub.VisOrbiter = game.Players.LocalPlayer
 
 	local paintBucket = nil
 
