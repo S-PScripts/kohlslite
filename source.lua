@@ -9453,8 +9453,12 @@ if game.PlaceId == 112420803 then
 local lplr = game:GetService("Players").LocalPlayer
 local char = lplr.Character
 
-local tor --= char:WaitForChild("Torso")
-local oldvel --= tor.Velocity
+if lplr.Character:FindFirstChild("Torso") then
+	--
+else
+	local tor = char:WaitForChild("Torso")
+	local oldvel = tor.Velocity
+end
 
 connections[#connections + 1] =
     tor.Changed:Connect(function()
