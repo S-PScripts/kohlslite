@@ -1703,6 +1703,13 @@ local Connections = {
     Drawing = {},
 }
 
+drawState = false
+local brushSize = 1
+
+local partColourer = Instance.new("Part")
+partColourer.Color = Color3.new(1,1,1)
+local selectedColour = partColourer.Color
+
 kahinstance = workspace.Terrain:FindFirstChild("_Game"):FindFirstChild("Folder")
 local VisBindable = Instance.new("BindableEvent")
 
@@ -1771,7 +1778,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		   Remind("Executed Infinite Yield (IY).")
         end
 		
-        if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'cmdpi' then -- well, you need that visualiser, do you?
+        if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'cmdpi' then
 		if IsOnMobile then
 			Remind("CMD PI/V3 does not work on mobile executors.")
 		else
@@ -1806,12 +1813,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         end
 
 	if string.sub(msg, 1, #prefix + 7) == prefix..'editvis' then
-		local args =  string.split(msg, " ")
+		local args = string.split(msg, " ")
 		editVis(args[2], args[3])
 	end
 
 	if string.sub(msg, 1, #prefix + 3) == prefix..'vis' then
-			Remind("WARNING: THIS FEATURE HAS NOT BEEN TESTED.")
+			Remind("Booting the visualiser...")
 			partVisualiser()
 	end
 
@@ -1823,7 +1830,28 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
             		Remind("You need Person 299 Admin commands for this!")
 		end
 	end
-		
+
+	if string.sub(msg, 1, #prefix + 4) == prefix..'draw' then
+			Remind("EXPERIMENTAL.")
+			partDraw()
+	end
+
+	if string.sub(msg, 1, #prefix + 9) == prefix..'brushsize' then
+		local args =  string.split(msg, " ")
+		brushSize = tonumber(args[2])
+		Remind("Brush size changed.")
+	end
+
+   	if string.sub(msg, 1, #prefix + 6) == prefix.."brushc" then
+		local args = string.split(msg, " ")
+           	local Red = tonumber(args[2])
+		local Green = tonumber(args[3])
+		local Blue = tonumber(args[4])
+		partColourer.Color = Color3.new(Red,Green,Blue)
+		selectedColour = partColourer.Color		  
+		Remind("Brush colour changed.")
+      	end
+
         if string.sub(msg, 1, #prefix + 2) == prefix..'wl' then
 	 local args = string.split(msg, " ")
          local dasplayer = args[2]
@@ -2327,6 +2355,10 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 Remind("You: 'I use adminjoy trash!' Anyways, ask ME to add the colourful seizure stuff, don't use THAT!", 3)
        end
 
+       if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'selfkick' then
+                game.Players.LocalPlayer:Kick("Exitted the server.")
+       end
+
        if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timeout' then
                 Remind("Go use ii's stupid admin for that.")
        end		
@@ -2740,8 +2772,10 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'themelist' then
                 Remind("Check your console by running /console!")
-		for key, theme in pairs(themecode) do -- doesn't work properly :( tried using ipairs but errors (did i seriously say ipairs? yeah im stupid but anyways i'll fix this in uh... i forgor)
-    			print(key .. " - " .. theme.name .. " - " .. theme.code)
+		local keys = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"} -- I know this looks stupid :sob:
+		for _, key in ipairs(keys) do
+    			local theme = themecode[key]
+    			print("Theme " .. key .. ": " .. theme.name .. " - Code: " .. theme.code)
 		end
     end
 
@@ -12968,7 +13002,7 @@ function partVisualiser()
                 currentSong = child
             end
 		
-            if child:IsA("Part") and child.Size == Vector3.new(4,1.2,2) then
+            if child:IsA("Part") and child.Size == Vector3.new(4,1.2,2) then -- I checked my old repo and it seems I made 'VisSize'. I'm not going to add it this time as it seems unuseful
                 task.wait()
                 child.Parent = vis
                 child.CanCollide = false
@@ -13269,13 +13303,6 @@ function editVis(variable, value)
             VisBindable:Fire("Edit", "Amount", tonumber(value))
         end
 end
-
-drawState = false
-local brushSize = 1
-
-local partColourer = Instance.new("Part")
-partColourer.Color = Color3.new(1,1,1)
-local selectedColour = partColourer.Color
 
 function partDraw()
   	if not haspersons then
