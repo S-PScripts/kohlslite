@@ -12916,12 +12916,21 @@ end
 -- This visualiser is by Quiving.
 -- Because im gay skid
 -- jajaja
-function partDrawer()
- 	if not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) and not game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then
-            Remind("You need Person 299 Admin commands for this!")
-            return
-        end
-	-- place holder
+
+local function personColour(PB, part, colour)
+    		if not PB then
+        		repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChild("PaintBucket")
+        		PB = game.Players.LocalPlayer.Character:FindFirstChild("PaintBucket")
+    		end
+	
+    		repeat task.wait() until PB:FindFirstChild("Remotes") and PB:FindFirstChild("Remotes"):FindFirstChild("ServerControls")
+    
+		local Arguments = {
+			["Part"] = part,
+			["Color"] = Color3.new(colour.R,colour.G,colour.B)
+		}
+	
+		PB:WaitForChild("Remotes"):WaitForChild("ServerControls"):InvokeServer("PaintPart", Arguments)
 end
 
 function partVisualiser()
@@ -13045,23 +13054,6 @@ function partVisualiser()
                 end
             end
         end)
-
-	local function personColour(PB, part, colour)
-    		if not PB then
-        		repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChild("PaintBucket")
-        		PB = game.Players.LocalPlayer.Character:FindFirstChild("PaintBucket")
-    		end
-	
-    		repeat task.wait() until PB:FindFirstChild("Remotes") and PB:FindFirstChild("Remotes"):FindFirstChild("ServerControls")
-    
-		local Arguments = {
-			["Part"] = part,
-			["Color"] = Color3.new(colour.R,colour.G,colour.B)
-		}
-	
-		PB:WaitForChild("Remotes"):WaitForChild("ServerControls"):InvokeServer("PaintPart", Arguments)
-	end
-
 
  	task.spawn(function()
             local lastpbl = 0
@@ -13276,6 +13268,183 @@ function editVis(variable, value)
         elseif variable == "amount" or variable == "amt" then
             VisBindable:Fire("Edit", "Amount", tonumber(value))
         end
+end
+
+drawState = false
+local brushSize = 1
+
+local partColourer = Instance.new("Part")
+partColourer.Color = Color3.new(1,1,1)
+local selectedColour = partColourer.Color
+
+function partDraw()
+  	if not haspersons then
+            Remind("You need Person 299 Admin commands for this!")
+            return
+        end
+	
+        drawState = not drawState
+
+        if not drawState then
+            for _,connection in pairs(Connections.Drawing) do
+                if typeof(connection) == "RBXScriptConnection" then
+                    connection:Disconnect()
+                end
+            end
+            return 
+        end
+
+        local mouseDown = false
+        local debounce = false
+        local currentPosition = nil
+        local lastMousePos = nil
+        local currentPart = nil
+        local mouseTarget = nil
+        local paintBucket = nil
+
+	mymouse = game.Players.LocalPlayer:GetMouse()
+        mymouse.TargetFilter = kahinstance
+
+        Connections.Drawing.InstancesAdded = {}
+
+        local sizeL
+        local oriL
+        local positionL
+        local colourL
+        local nextPart = false
+
+	local function roundNumber(num, numDecimalPlaces)
+		return tonumber(string.format("%." .. (numDecimalPlaces or 0) .. "f", num))
+	end
+
+        Connections.Drawing["InstanceAdded"] = kahinstance.ChildAdded:Connect(function(Child)
+            local size = sizeL
+	    local position = posiitionL
+	    local colour = colourL
+	    local ori = oriL
+            nextPart = true
+            if Child:IsA("Part") and Child.Name == "Part" and (roundNumber(Child.Size.X, 3) == size.X) and (roundNumber(Child.Size.Y, 3) == size.Y) and (roundNumber(Child.Size.Z, 3) == size.Z) then
+                
+                ----sethiddenproperty(Child, "NetworkOwnershipRule", Enum.NetworkOwnership.Manual)
+
+                local s = Instance.new("ForceField", Child)
+                s.Visible = false
+            
+                task.spawn(personColour, PB, Child, colour)
+
+                --sethiddenproperty(Child, "NetworkIsSleeping", false)
+                
+                Child.CanCollide = false
+                Child.CanQuery = false
+                Child.CanTouch = false
+                Child.Massless = true
+    
+                local partStay  
+                partStay = game:GetService('RunService').Heartbeat:Connect(function()
+                    Child.Velocity = Vector3.new(54,34,1)
+                    Child.AssemblyLinearVelocity = Vector3.new(54,34,1)
+                    Child.AssemblyAngularVelocity = Vector3.new(54,34,1)
+                    Child:ApplyImpulse(Vector3.new(54,34,1))
+                    Child.CFrame = position
+                    Child.Orientation = ori
+                end)
+
+                local B
+                B = game:GetService('RunService').Heartbeat:Connect(function()
+                    if Child.Parent ~= kahinstance then
+                        partStay:Disconnect()
+                        B:Disconnect()
+                    end
+                end)
+            end
+        end)
+
+        local function draw(positionG, sizeG, oriG, colourG)
+            nextPart = false
+            sizeL = sizeG
+            oriL = oriG
+            colourL = colourG
+            positionL = positionG
+            task.spawn(Chat, "part/" .. sizeG.X .. "/" .. sizeG.Y .. "/" .. sizeG.Z)
+            repeat task.wait() until nextPart
+        end
+
+        task.spawn(function()
+            while drawState do
+                task.wait(.5)
+                --print("Draw state is:", drawState)
+                if not paintBucket or (paintBucket.Parent ~= game.Players.LocalPlayer.Character and paintBucket.Parent ~= game.Players.LocalPlayer.Backpack) then
+                    Chat('gear me 18474459')
+                    repeat task.wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
+		    paintBucket = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
+                    paintBucket:FindFirstChildOfClass("LocalScript").Disabled = true
+                    task.wait()
+                    paintBucket.Parent = game.Players.LocalPlayer.Character 
+                end
+            end
+        end)
+
+        Connections.Drawing["netKeep"] = game.Players.PlayerAdded:Connect(function(player)
+		Chat("setgrav ".. player.Name .." 10000000000000000")
+		Chat("punish ".. player.Name)
+		Chat("unpunish ".. player.Name)
+            --[[ local char = player.Character or player.CharacterAdded:Wait()
+            local nm = player:GetAttribute("fixName")
+            if not nm then
+                repeat sleep() until player:GetAttribute("fixName")
+                nm = player:GetAttribute("fixName")
+            end ]]
+
+            for _,v in pairs(kahinstance:GetChildren()) do
+                if v.Name == "Part" and v:IsA("Part") then
+                    v.Anchored = false
+                    task.delay(1.5, function()
+                        --v.Anchored = true
+                    end)
+                end
+            end
+        end)
+        
+        Connections.Drawing["mouseMove"] = mymouse.Move:Connect(function()
+            --[[if lastMousePos then
+                if (math.abs(UIS:GetMouseLocation().X - lastMousePos.X) < brushSize * 4) and (math.abs(UIS:GetMouseLocation().Y - lastMousePos.Y) < brushSize * 4) then
+                    return
+                end
+            end]]
+
+            lastMousePos = game:GetService("UserInputService"):GetMouseLocation()
+
+            if debounce then return end
+            
+            if not drawState then
+                Connections.Drawing["mouseMove"]:Disconnect()
+                return
+            end
+
+            if mouseDown then
+                debounce = true
+                draw(mymouse.Hit, Vector3.new(brushSize, brushSize, brushSize), Vector3.new(0,0,0), selectedColour)
+                task.wait(.005)
+                debounce = false
+            end
+        end)
+
+        Connections.Drawing["buttonDown"] = mymouse.Button1Down:Connect(function()
+            if not drawState then
+                Connections.Drawing["buttonDown"]:Disconnect()
+                return
+            end
+            mouseDown = true
+            draw(mymouse.Hit, Vector3.new(brushSize, brushSize, brushSize), Vector3.new(0,0,0), selectedColour)
+        end)
+
+        Connections.Drawing["buttonUp"] = mymouse.Button1Up:Connect(function()
+            if not drawState then
+                Connections.Drawing["buttonUp"]:Disconnect()
+                return
+            end
+            mouseDown = false
+        end)
 end
 
 -- WELCOME/LEAVE MSG
@@ -14002,15 +14171,15 @@ function arena(plr1, plr2)
 			Chat("tp "..plr2.." me")
     end
 
-    local Connections = {}
-    Connections.arena = workspace.Terrain["_Game"].Folder.ChildAdded:Connect(function(part)
+    local woahwoahwoah = {}
+    woahwoahwoah.arena = workspace.Terrain["_Game"].Folder.ChildAdded:Connect(function(part)
     	 if part.Size == Vector3.new(10,2.5,10) or part.Size == Vector3.new(1,5,1) or part.Size == Vector3.new(1, 1, 9) then
         	local localIndex = partIndex
         	partIndex = partIndex + 1
 			
         	if partIndex > 25 then 
 			tpplrs() 
-			Connections.arena:Disconnect() 
+			woahwoahwoah.arena:Disconnect() 
 		end
 			
         	task.spawn(function()
