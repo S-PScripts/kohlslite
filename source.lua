@@ -9449,7 +9449,7 @@ connections[#connections + 1] =
 
 -- Credits to trollfacenan (bumanoid)!
 
-if game.PlaceId == 112420803 then
+--[[if game.PlaceId == 112420803 then
 local lplr = game:GetService("Players").LocalPlayer
 local char = lplr.Character
 
@@ -9508,7 +9508,7 @@ connections[#connections + 1] =
     end)
 else
 	print("Anti-fling disabled (BC) due to minor differences compared to NBC")
-end
+end ]]
 
 -- Anti mesh
 connections[#connections + 1] =
