@@ -14626,10 +14626,10 @@ Loops.alog = false
 Loops.platform = false
 Loops.dncycle = false
 
-Connections = {}
-Connections.rapidfiregun = nil
-Connections.airstrike = nil
-Connections.cannoning = nil
+conny = {}
+conny.rapidfiregun = nil
+conny.airstrike = nil
+conny.cannoning = nil
 
 musiclog = {}
 
@@ -15176,7 +15176,7 @@ function lagify(plr, pln)
     end
 
 function RFGUN(bullets)
-		Connections.rapidfiregun = game:GetService("UserInputService").InputBegan:Connect(function(inputa,gp)
+		conny.rapidfiregun = game:GetService("UserInputService").InputBegan:Connect(function(inputa,gp)
 			if gp then return end
 			if inputa.UserInputType == Enum.UserInputType.MouseButton1 then
 		
@@ -15204,7 +15204,7 @@ function RFGUN(bullets)
 end
 
 function ASTRIKE()
-		Connections.airstrike = game:GetService("UserInputService").InputBegan:Connect(function(inputa,gp)
+		conny.airstrike = game:GetService("UserInputService").InputBegan:Connect(function(inputa,gp)
 			if gp then return end
 			if inputa.UserInputType == Enum.UserInputType.MouseButton1 then
 		
@@ -15246,7 +15246,7 @@ function rcannon(mode)
         Chat("invis me")
    	game.Players.LocalPlayer.Character.Humanoid.HipHeight = 8
 
-        Connections.cannoning = game:GetService("UserInputService").InputBegan:Connect(function(inputa,gp)
+        conny.cannoning = game:GetService("UserInputService").InputBegan:Connect(function(inputa,gp)
    	        if gp then return end
     		if inputa.UserInputType == Enum.UserInputType.MouseButton1 then
         		
