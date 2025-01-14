@@ -8,7 +8,7 @@
     \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______|
                                             \|_________|                                   
                                                                                            
-                                                                                           vX1.048 ]]
+                                                                                           vX1.049 ]]
 
 --[[
 View the source here: https://kohlslite.pages.dev/source.lua
@@ -72,7 +72,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.0485", -- Why X1? Maybe because all the significant/main updates are done.
+                Title = "KohlsLite X1.049", -- Why X1? Maybe because all the significant/main updates are done.
                 Text = msg,
                 Duration = length or 1
         })
@@ -138,7 +138,7 @@ getgenv().kohlsexecuted = true
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.045"
+getgenv().klversion = "X1.049"
 
 -- KohlsLite Start Gui
 getgenv().kohlsgui = false
@@ -7893,7 +7893,7 @@ end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantichat' then
         antichat = false
-        antis.antimessage = false
+        sage = false
 	Remind("No longer spamming h messages with emojis to lag and remove chat for people")
     end
 
@@ -9087,7 +9087,7 @@ antis = {
     antihealthchange = false,
     antijail = false,
     antikill = false,
-    antimessage = false,
+    antimessage = true,
     antiname = false,
     antichar = false,
     antiparticles = false,
