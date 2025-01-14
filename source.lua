@@ -9454,7 +9454,7 @@ local lplr = game:GetService("Players").LocalPlayer
 local char = lplr.Character
 
 local tor --= char:WaitForChild("Torso")
-local oldvel = tor.Velocity
+local oldvel --= tor.Velocity
 
 connections[#connections + 1] =
     tor.Changed:Connect(function()
