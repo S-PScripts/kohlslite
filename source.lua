@@ -9452,7 +9452,8 @@ connections[#connections + 1] =
 if game.PlaceId == 112420803 then
 local lplr = game:GetService("Players").LocalPlayer
 local char = lplr.Character
-local tor = char:WaitForChild("Torso")
+
+local tor --= char:WaitForChild("Torso")
 local oldvel = tor.Velocity
 
 connections[#connections + 1] =
