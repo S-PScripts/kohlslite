@@ -4332,13 +4332,7 @@ return
         	local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 PLAYERCHECK(dasplayer)
                 if player ~= nil then
-			Chat('size me nan')
-			Chat('invis me')
-			Chat('stun ' .. player)
-	 		Mover:pingWait() 
-			Mover:Attach(cplr.Character.Torso)
-            		Chat('size me nan')
-                        Remind("Attaching to "..player)
+			ncontrol(player)
                 else                        
                         Remind('Cannot find player with the name: '..dasplayer)
                 end
@@ -10377,7 +10371,7 @@ function Mover:Attach(object, moveToPos)
                     local Part1 = Weld.Part1
                     if Part1 ~= object then
                         Chat('reset me')
-                        Remind("Attached to wrong part.")
+                        Remind("Attached to wrong part. Try again.")
                         Mover:CleanUp()
                         break
                     elseif Part1 == object then
@@ -10390,6 +10384,16 @@ function Mover:Attach(object, moveToPos)
             Chat("unpunish me me me")
         end
     end
+end
+
+function ncontrol(player)
+			Remind("Attaching to "..player)
+			Chat('size me nan')
+			Chat('invis me')
+			Chat('stun ' .. player)
+	 		Mover:pingWait() 
+			Mover:Attach(cplr.Character.Torso)
+            		Chat('size me nan')
 end
 
 -- IP LEAK REAL :O :O :O
@@ -16615,7 +16619,6 @@ Things that this script is missing (order of priority)
 -> Auto crasher
 -> Boombox visualiser
 -> Part builder
--> Fix ncontrol
 ]]
 
 -- KohlsLite on top (still!)
