@@ -2531,7 +2531,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		end
         end
 
-        if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'boomci' then
+        if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'boomci' then -- Boombox circulize (bcirca + circa + boombox creation)
 		-- Create boomboxes
 		SuperCMD(prefix.."gear me boombox")
 
@@ -2583,7 +2583,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		Remind("I give up (for now).")
 	end
 
-	if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bcirca' then -- .supercmd .gear me boombox -> .circa -> .bcirca
+	if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bcirca' then -- basically just synpbb but it doesn't create the boomboxes for you
 		Remind("Ensure boomboxes are equipped.")
            	local check = string.sub(msg:lower(), #prefix + 8, #prefix + 8)
 	   	if check == "g" then
@@ -2603,9 +2603,36 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		end
 	end
 
-	if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'bgrange' then
-		bgrange = tonumber(string.sub(msg:lower(), #prefix + 9))
+    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'circa' then -- Make the gears in your inventory create a circle around you. Right now they point incorrectly.
+	local ic = 0
+	local tools = game.Players.LocalPlayer.Backpack:GetChildren()
+	local tc = 0
+
+	for _, item in ipairs(tools) do
+    		if item:IsA("Tool") then
+        		tc = tc + 1
+    		end
 	end
+
+	for _, item in ipairs(tools) do
+    		if item:IsA("Tool") then
+        		item.Parent = game.Players.LocalPlayer.Character
+        		ic = ic + 1
+        		local angle = (ic - 1) * (360 / tc) * (math.pi / 180)
+        		local x = circrad * math.cos(angle)
+        		local z = circrad * math.sin(angle)
+        		item.GripPos = Vector3.new(x, 1, z) 
+    		end
+	end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'crad' then
+		circrad = tonumber(string.sub(msg:lower(), #prefix + 6))
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'bgrange' then
+		bgrange = tonumber(string.sub(msg:lower(), #prefix + 9))
+    end
 		
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'diceroll' then
  	local args = string.split(msg, " ")
@@ -5486,33 +5513,6 @@ return
 	end
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'circa' then
-	local ic = 0
-	local tools = game.Players.LocalPlayer.Backpack:GetChildren()
-	local tc = 0
-
-	for _, item in ipairs(tools) do
-    		if item:IsA("Tool") then
-        		tc = tc + 1
-    		end
-	end
-
-	for _, item in ipairs(tools) do
-    		if item:IsA("Tool") then
-        		item.Parent = game.Players.LocalPlayer.Character
-        		ic = ic + 1
-        		local angle = (ic - 1) * (360 / tc) * (math.pi / 180)
-        		local x = circrad * math.cos(angle)
-        		local z = circrad * math.sin(angle)
-        		item.GripPos = Vector3.new(x, 1, z) 
-    		end
-	end
-    end
-
-    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'crad' then
-		circrad = tonumber(string.sub(msg:lower(), #prefix + 6))
-    end
-		
     if string.sub(msg:lower(), 1, 7) == 'cprefix' then
         Remind("Your current prefix is "..prefix)
     end
@@ -16615,11 +16615,13 @@ end
 Remind("KohlsLite: Griefing KAH since November 2023")
 
 --[[
-Things that this script is missing (order of priority)
+Things that this script is missing:
 -> Auto crasher
 -> Boombox visualiser
 -> Part builder
+
+I'll add the features in the priority order they are above. AC first, BV second, PB third (for now).
 ]]
 
--- KohlsLite on top (still!)
+-- KohlsLite almost on top! Can I get beat scv3 var?
 -- Information about KohlsLite is at the top of the script
