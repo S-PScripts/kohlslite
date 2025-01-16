@@ -4359,7 +4359,7 @@ return
         	local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 PLAYERCHECK(dasplayer)
                 if player ~= nil then
-			ncontrol(player)
+			ncontrol(player, cplr)
                 else                        
                         Remind('Cannot find player with the name: '..dasplayer)
                 end
@@ -10386,7 +10386,7 @@ function Mover:Attach(object, moveToPos)
     end
 end
 
-function ncontrol(player)
+function ncontrol(player, cplr)
 			Remind("Attaching to "..player)
 			Chat('size me nan')
 			Chat('invis me')
