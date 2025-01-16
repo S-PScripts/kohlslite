@@ -451,7 +451,6 @@ local permusers = {}
  -- Users that use persons will be placed here
 local personsusers = {}
 
-
 -- Auto stuff upon user joining
 
 -- Rocket kick player
@@ -1559,18 +1558,19 @@ local ogcframes = {
                 ["Part51"] = {-92.0770035, 0.900000036, 7.47600031, 1, 0, 0, 0, -1, 0, 0, 0, -1}
 }
 
+-- There's quite an excessive amount of local variables here, I'll probably change them all to be a list.
 -- Auto blacklisting for stuff
 
 -- People keep gearing everyone so here's a quick fix
-local autoblvgc = true
+local autoblvgc = false
 
 -- Skip anti crash warning
 local skipwarncrash = true
 
 -- Anti logs
 local antimlog = false -- for music
-local antiglog = false -- for gears
-local anticlog = false -- for chars
+local antiglog = false -- for gears [unused]
+local anticlog = false -- for chars [used]
 
 -- Admin stuff relating to users
 local padbanned = {} 
@@ -1633,6 +1633,11 @@ local perm = false
 local perm2 = false
 local loopgrab = false
 local loopgrab2 = false
+
+-- Regen find
+local regenfind = false
+local regenfind2 = false
+local failsafe3 = false
 
 -- Antis
 local anticrash = true
@@ -5398,6 +5403,13 @@ return
     if string.sub(msg, 1, #prefix + 8) == prefix..'announce' then
         annsecret = string.sub(msg, #prefix + 10)
         Announce()
+    end
+
+   if string.sub(msg, 1, #prefix + 9) == prefix..'uannounce' then
+	local args = string.split(msg, " ")
+        local sus = args[2]       
+	whatsapp = table.concat(args, " ", 3)
+	UAnnounce()
     end
 
     if string.sub(msg, 1, #prefix + 9) == prefix..'cannounce' then -- inspired by scv3-var
@@ -10609,7 +10621,7 @@ function PLRSTART(v)
                     if string.sub(msg:lower(), 0, 2) == "/w" and v.Name ~= game.Players.LocalPlayer.Name then
                         if PingCsystem then
                             print(v.Name .. " is using whispering commands.")
-                            Chat("h \n\n\n\n\n " .. v.Name .. " is using whispering commands. \n\n\n\n\n")
+                            Chat("h \n\n\n\n\n " .. v.Name .. " is using whispering commands. I know everything... \n\n\n\n\n")
                         end
                     end
 
@@ -10661,7 +10673,7 @@ function PLRSTART(v)
                     if string.sub(msg:lower(), 0, 4) == ".fly" and v.Name ~= game.Players.LocalPlayer.Name then
                         if noobdetect then
                             print(v.Name .. " is a noob. / Said '.fly' ")
-                            Chat("h \n\n\n\n\n " .. v.Name .. ", it is fly me, not .fly!! \n\n\n\n\n")
+                            Chat("h \n\n\n\n\n " .. v.Name .. ", it is fly me, not .fly. \n\n\n\n\n")
                         end
                     end
 
@@ -10669,7 +10681,7 @@ function PLRSTART(v)
 			if not string.sub(msg:lower(), 0, 7) == ";fly me" then
                         	if noobdetect then
                             		print(v.Name .. " is a noob. / Said ';fly' ")
-                            		Chat("h \n\n\n\n\n " .. v.Name .. ", it is fly me, not ;fly!! \n\n\n\n\n")
+                            		Chat("h \n\n\n\n\n " .. v.Name .. ", it is fly me, not ;fly. \n\n\n\n\n")
                         	end
 			end
                     end
@@ -10677,7 +10689,7 @@ function PLRSTART(v)
                     if string.sub(msg:lower(), 0, 4) == "/fly" and v.Name ~= game.Players.LocalPlayer.Name then
                         if noobdetect then
                             print(v.Name .. " is a noob. / Said '/fly' ")
-                            Chat("h \n\n\n\n\n " .. v.Name .. ", it is fly me, not /fly!! \n\n\n\n\n")
+                            Chat("h \n\n\n\n\n " .. v.Name .. ", it is fly me, not /fly. \n\n\n\n\n")
                         end
                     end
 
@@ -10732,21 +10744,28 @@ function PLRSTART(v)
                     if (string.sub(msg:lower(), 0, 6) == ";bring" or string.sub(msg:lower(), 0, 6) == ":bring" or string.sub(msg:lower(), 0, 5) == "bring" or string.sub(msg:lower(), 0, 6) == ".bring") and v.Name ~= game.Players.LocalPlayer.Name then
                         if noobdetect then
                             print(v.Name .. " is a noob. / Said 'bring' ")
-                            Chat("h \n\n\n\n\n " .. v.Name .. ", it is tp (player) me, not bring (player)!! \n\n\n\n\n")
+                            Chat("h \n\n\n\n\n " .. v.Name .. ", it is tp (player) me, not bring (player). \n\n\n\n\n")
                         end
                     end
 
                     if (string.sub(msg:lower(), 0, 5) == ";goto" or string.sub(msg:lower(), 0, 5) == ":goto" or string.sub(msg:lower(), 0, 4) == "goto" or string.sub(msg:lower(), 0, 5) == ".goto") and v.Name ~= game.Players.LocalPlayer.Name then
                         if noobdetect then
                             print(v.Name .. " is a noob. / Said 'goto' ")
-                            Chat("h \n\n\n\n\n " .. v.Name .. ", it is tp me (player), not goto (player)!! \n\n\n\n\n")
+                            Chat("h \n\n\n\n\n " .. v.Name .. ", it is tp me (player), not goto (player). \n\n\n\n\n")
                         end
                     end
 
                     if (string.sub(msg:lower(), 0, 6) == ";sword" or string.sub(msg:lower(), 0, 6) == ".sword") and v.Name ~= game.Players.LocalPlayer.Name then
                         if noobdetect then
                             print(v.Name .. " is a noob. / Said ';sword'")
-                            Chat("h \n\n\n\n\n " .. v.Name .. ", it is sword me, not ;sword or .sword!! \n\n\n\n\n")
+                            Chat("h \n\n\n\n\n " .. v.Name .. ", it is sword me, not ;sword or .sword. \n\n\n\n\n")
+                        end
+                    end
+
+	            if (string.sub(msg:lower(), 0, 8) == "unfreeze" or string.sub(msg:lower(), 0, 9) == ":unfreeze") and v.Name ~= game.Players.LocalPlayer.Name then
+                        if noobdetect then
+                            print(v.Name .. " is a noob. / Said 'unfreeze me'")
+                            Chat("h \n\n\n\n\n " .. v.Name .. ", it is thaw me, not unfreeze me. \n\n\n\n\n")
                         end
                     end
 
@@ -11439,12 +11458,12 @@ function findregen()
                 root.CFrame = CFrame.new(-7.165, root.Position.Y + 2500 , 94.743)
         until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regenfind == false or failsafe3
 	if failsafe3 then
-		--
-	else
-       		root.Anchored = false
+		root.Anchored = false
      		root.CFrame = workspace.Terrain._Game.Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
       		regenfind = false
       		Chat("respawn me");Remind("Found the regen (skydived)")
+	else
+       		--
 	end
 end
 
@@ -11458,13 +11477,13 @@ function findregen2()
                 root.CFrame = CFrame.new(math.random(-30593, -23388), math.random(-30593, -10455), math.random(-30593, -10455))
         until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regenfind2 == false or failsafe3
 	if failsafe3 then
-		--
-	else
 		PlayerService.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
         	root.Anchored = false
         	root.CFrame = workspace.Terrain._Game.Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
         	regenfind2 = false
 		Chat("respawn me");Remind("Found the regen (KL)")
+	else
+		--
 	end
 end
 
@@ -11524,12 +11543,16 @@ end
 
 -- ANNOUNCEMENTS
 function Announce()
-      Chat("h \n\n\n\n\n "..annsecret.. " \n\n\n\n\n")
+	Chat("h \n\n\n\n\n "..annsecret.. " \n\n\n\n\n")
+end
+
+function UAnnounce()
+	Chat("h \n\n\n\n\n "..sus..": "..whatsapp.. " \n\n\n\n\n")
 end
 
 -- we do a bit of trolling
 function AnnounceWM()
-      Chat("h \n\n\n\n\n "..sus..": "..whatsapp.. " \n\n\n\n\n")
+	Chat("h \n\n\n\n\n "..sus..": "..whatsapp.. " \n\n\n\n\n")
 end
 
 -- cmd v3 code 
@@ -11930,12 +11953,12 @@ function GetPing()
 	Speak("Ping is " .. RSP .. "ms.")
 end
 
---- broken lool
+-- broken lol
 function FRespawn()
 	game.Players.LocalPlayer.Character:Destroy()
 end
 
-function MRespawn()
+function MRespawn() -- broken lol
 			local Player = game.Players.LocalPlayer
 			local PlayerService = game:GetService("Players")
                         local char = game.Players.LocalPlayer.Character
@@ -16432,35 +16455,35 @@ if script_is_off then
 	game.Players.LocalPlayer:Kick("[KohlsLite]: Major update in process! Script will be back up soon (I hope).") 
 end
 
-local atprogcakeday = "08/23" -- atprog's birthday
-local spcakeday = "04/28" -- mine
-local christmas = "12/25" -- Christmas
-local happyny = "01/01" -- (Happy) New Year
-local hallows = "10/31" -- Halloween
-
+specialdays = {
+ 	atprogcakeday = "08/23", -- atprog's birthday
+ 	spcakeday = "04/28", -- mine
+ 	christmas = "12/25", -- Christmas
+ 	happyny = "01/01", -- (Happy) New Year
+ 	hallows = "10/31" -- Halloween
+}
 
 local ctime = os.date("%m/%d")
 
-if ctime == atprogcakeday then			
+if ctime == specialdays.atprogcakeday then			
 	Remind("It's atprog's birthday! If you see him, do .cakeday!")
 end
 
-if ctime == spcakeday then
+if ctime == specialdays.spcakeday then
 	Remind("It's my birthday! If you see me, do .cakeday!")
 end
 
-if ctime == christmas then
+if ctime == specialdays.christmas then
 	if math.random(1,10) == 1 then Remind("Merry rizzmas!") else Remind("Merry Christmas!") end
 end
 
-if ctime == happyny then
-	Remind("Happy New Year!!!")
+if ctime == specialdays.happyny then
+	Remind("Happy New Year!")
 end
 
-if ctime == hallows then
+if ctime == specialdays.hallows then
 	Remind("Happy Halloween!")
 end
-
 
 
 if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 883283806) then
@@ -16623,5 +16646,4 @@ Things that this script is missing:
 I'll add the features in the priority order they are above. AC first, BV second, PB third (for now).
 ]]
 
--- KohlsLite almost on top! Can I get beat scv3 var?
 -- Information about KohlsLite is at the top of the script
