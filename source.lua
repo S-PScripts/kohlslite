@@ -86,35 +86,7 @@ end
 
 getgenv().ignorewronggame = false
 
-if getgenv().autocrasher then
-	if getgenv().playertoken then
-		--
-	else
-		if setclipboard then
-			Remind("You must have your player token to use the autocrasher. You can get your player token by running the code that has been set to your clipboard.", 5)
-			setclipboard(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true"))
-		else
-			Remind("You must have your player token to use the autocrasher. You can get your player token by running the code printed in /console.", 5)
-			print("COPY THE CONTENTS IN THIS WEBSITE: kohlslite.pages.dev/Assets/PLAYERTOKEN.lua")
-		end
-	end
-end
-
-if autocrasher then
-	return 
-end
-
--- Loader
-if not game:IsLoaded() then
-    local notLoaded = Instance.new("Message")
-    notLoaded.Parent = game:GetService("CoreGui")
-    notLoaded.Text = "KohlsLite is waiting for the game to load..."
-    game.Loaded:Wait()
-    notLoaded:Destroy()
-end
-
 -- Place checker
-
 if getgenv().ignorewronggame then 
 	--
 else
@@ -135,6 +107,33 @@ else
 		})
 		return
 	end
+end
+
+-- Loader
+if not game:IsLoaded() then
+    local notLoaded = Instance.new("Message")
+    notLoaded.Parent = game:GetService("CoreGui")
+    notLoaded.Text = "KohlsLite is waiting for the game to load..."
+    game.Loaded:Wait()
+    notLoaded:Destroy()
+end
+
+if getgenv().autocrasher then
+	if getgenv().playertoken then
+		--
+	else
+		if setclipboard then
+			Remind("You must have your player token to use the autocrasher. You can get your player token by running the code that has been set to your clipboard.", 5)
+			setclipboard(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true"))
+		else
+			Remind("You must have your player token to use the autocrasher. You can get your player token by running the code printed in /console.", 5)
+			print("COPY THE CONTENTS IN THIS WEBSITE: kohlslite.pages.dev/Assets/PLAYERTOKEN.lua")
+		end
+	end
+end
+
+if autocrasher then
+	return 
 end
 
 --loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
