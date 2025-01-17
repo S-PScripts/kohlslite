@@ -1644,7 +1644,7 @@ local loopgrab2 = false
 -- Regen find
 local regenfind = false
 local regenfind2 = false
-local failsafe3 = false
+local regfind = false
 
 -- Antis
 local anticrash = true
@@ -3886,8 +3886,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'findregen' then -- i know it sucks but perm exists lol
 	if not string.sub(msg:lower(), 1, #prefix + 10) == prefix..'findregen2' then
-		failsafe3 = false
-        	regenfind = true
+		regfind = false
 		task.wait(0)
 		findregen()
 		Remind("Finding the regen (skydived)")
@@ -3896,36 +3895,32 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'nofindregen' then
 	if not string.sub(msg:lower(), 1, #prefix + 12) == prefix..'nofindregen2' then
-		failsafe3 = true
-        	regenfind = false
+		regfind = true
 		Remind("Stopped the regen (skydived)")
 	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unfindregen' then
 	if not string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unfindregen2' then
-		failsafe3 = true
-        	regenfind = false
+		regfind = true
 		Remind("Stopped the regen (skydived)")
 	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'findregen2' then -- i know it sucks but perm exists lol
-        failsafe3 = false
-	regenfind2 = true
+        regfind = false
 	task.wait(0)
 	findregen2()
 	Remind("Finding the regen (KL/CMD-Y)")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'nofindregen2' then
-	failsafe3 = true
-        regenfind2 = false
+	regfind = true
 	Remind("Stopped the regen (KL/CMD-Y)")
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unfindregen2' then
-	failsafe3 = true
+	regfind = true
         regenfind2 = false
 	Remind("Stopped the regen (KL/CMD-Y)")
     end
@@ -11484,7 +11479,7 @@ task.spawn(function()
                         if table.find(carcar, v.Name) then
                                 Chat("gear ".. v.Name .." 253519495")
                         end
-                      end
+                end
       end
 end)
 
@@ -11495,11 +11490,10 @@ function findregen()
         repeat
         	wait(.15)
                 root.CFrame = CFrame.new(-7.165, root.Position.Y + 2500 , 94.743)
-        until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regenfind == false or failsafe3
-	if failsafe3 then
+        until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regfind
+	if regfind then
 		root.Anchored = false
      		root.CFrame = workspace.Terrain._Game.Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
-      		regenfind = false
       		Chat("respawn me");Remind("Found the regen (skydived)")
 	else
        		--
@@ -11507,19 +11501,16 @@ function findregen()
 end
 
 function findregen2()
-	local Player = game.Players.LocalPlayer
-	local PlayerService = game:GetService("Players")
         local root = game.Players.LocalPlayer.Character.HumanoidRootPart
         root.Anchored = true
         repeat
                 task.wait(.15)
                 root.CFrame = CFrame.new(math.random(-30593, -23388), math.random(-30593, -10455), math.random(-30593, -10455))
-        until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regenfind2 == false or failsafe3
-	if failsafe3 then
-		PlayerService.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+        until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regfind
+	if regfind then
+		game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
         	root.Anchored = false
         	root.CFrame = workspace.Terrain._Game.Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
-        	regenfind2 = false
 		Chat("respawn me");Remind("Found the regen (KL)")
 	else
 		--
@@ -11529,12 +11520,9 @@ end
 -- leaked regen
 function leakedcords()
 
-	local Player = game.Players.LocalPlayer
-	local PlayerService = game:GetService("Players")
-
 	local function clientloadpos(thecord) -- cmdy
-		PlayerService.LocalPlayer.Character.Parent = workspace
-		PlayerService.LocalPlayer.Character.HumanoidRootPart.CFrame = thecord
+		game.Players.LocalPlayer.Character.Parent = workspace
+		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = thecord
 	end
 
 	clientloadpos(CFrame.new(Vector3.new(1000000, 1000000, 1000000)));task.wait(.5)
