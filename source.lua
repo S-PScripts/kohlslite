@@ -1737,17 +1737,18 @@ Remind("Say .kcmds and .kcmd2 to see all the commands. Credits: .credits . DM me
 
 -- Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
 
-print("\n")
-print("- Perm check -")
-if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 66254) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 64354) then
+-- print("\n")
+-- print("- Perm check -")
+--[[ if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 66254) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 64354) then
         perm = false 
         hasperm = true -- used
         print("A perm pad was not given - you have the Perm Admin gamepass!")
-else
+else ]]
         perm = true
         hasperm = false -- used
-        print("A perm pad was given - you don't have the Perm Admin gamepass!")
-end
+        print("A perm pad was given - perm is broken (again) right now")
+        -- print("A perm pad was given - you don't have the Perm Admin gamepass!")
+-- end
 
 print("\n")
 print("- Persons check -")
