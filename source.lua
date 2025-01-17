@@ -1742,34 +1742,61 @@ Remind("Thank you for using KohlsLite. The version you are using is v"..getgenv(
 print("Say .kcmds and .kcmd2 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
 Remind("Say .kcmds and .kcmd2 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
 
--- Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
+if not game:GetService("GamePassService") then 
+	hasperm = false
+	haspersons = false
+	perm = true
 
---[[ print("\n")
-print("- Perm check -")
-if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 66254) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 64354) then
-        perm = false 
-        hasperm = true -- used
-        print("A perm pad was not given - you have the Perm Admin gamepass!")
+	print("\n")
+	print("- Perm check -")
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 66254) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 64354) then		
+		print("You've been given an admin pad even though you have the Perm Admin Gamepass.")
+		print("Roblox has broke GamePassService: https://devforum.roblox.com/t/gamepassservice-has-simply-ceased-to-exist/")
+		print("Because of this, the Perm and Person299 gamepasses will not function.")
+	else		
+		print("You've been given an admin pad as you don't have the Perm Admin Gamepass. HOWEVER, DO NOT BUY PERM!")
+		print("Roblox has broke GamePassService: https://devforum.roblox.com/t/gamepassservice-has-simply-ceased-to-exist/")
+		print("Because of this, the Perm and Person299 gamepasses will not function.")
+	end
+
+	print("\n")
+	print("- Persons check -")
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then		
+		print("You have Person299's Admin, but you will not have access to any KohlsLite commands that use P299.")
+		print("Roblox has broke GamePassService: https://devforum.roblox.com/t/gamepassservice-has-simply-ceased-to-exist/")
+		print("Because of this, the Perm and Person299 gamepasses will not function.")
+	else
+		print("You do not have Person299's Admin, so you won't have access to KohlsLite commands that use P299. HOWEVER, DO NOT BUY PERSONS!")
+		print("Roblox has broke GamePassService: https://devforum.roblox.com/t/gamepassservice-has-simply-ceased-to-exist/")
+		print("Because of this, the Perm and Person299 gamepasses will not function.")
+	end
+	
+	print("\n")
 else
-        print("A perm pad was given - you don't have the Perm Admin gamepass!")
+	
+	print("\n")
+	print("- Perm check -")
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 66254) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 64354) then
+        	perm = false 
+        	hasperm = true -- used
+        	print("A perm pad was not given as you have the Perm Admin gamepass!")
+	else
+        	print("A perm pad was given as you don't have the Perm Admin gamepass!")
+	end
+
+	print("\n")
+	print("- Persons check -")
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then
+	        haspersons = true -- used!
+	        print("You have Person299's Admin! You have access to every KohlsLite command that use P299!")
+	else
+	        haspersons = false -- used!
+	        print("You have Person299's Admin, so you will not have access to any KohlsLite commands that use P299.")
+	end
+	print("\n") 
 end
 
-print("\n")
-print("- Persons check -")
-if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then
-        haspersons = true -- used!
-        print("You have Person299's Admin! You have access to more features!")
-else
-        haspersons = false -- used!
-        print("You do not have Person299's Admin!")
-end
-print("\n") ]]
-
-perm = true
-hasperm = false 
-haspersons = false 
-print("A perm pad was given - perm and persons are broken (again) right now")
-print("Commands utilising Person299's Admin are unavailable since persons and perm are currently broken (again).")
+Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
 
 game.Players.LocalPlayer.Chatted:Connect(function(msg)
         task.wait(0)
