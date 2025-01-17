@@ -84,12 +84,20 @@ if getgenv().kohlsexecuted then
         Remind("You've already executed KohlsLite!") 
 end
 
-getgenv().autocrasher = false
-
 getgenv().ignorewronggame = false
 
-if autocrasher then
-	-- I'll add it, idk when
+if getgenv().autocrasher then
+	if getgenv().playertoken then
+		--
+	else
+		if setclipboard then
+			Remind("You must have your player token to use the autocrasher. You can get your player token by running the code that has been set to your clipboard.", 5)
+			setclipboard(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true"))
+		else
+			Remind("You must have your player token to use the autocrasher. You can get your player token by running the code printed in /console.", 5)
+			print("COPY THE CONTENTS IN THIS WEBSITE: kohlslite.pages.dev/Assets/PLAYERTOKEN.lua")
+		end
+	end
 end
 
 if autocrasher then
@@ -8781,15 +8789,15 @@ function bypassattemptcheck(plr)
 end
 
 function CMDPrint()
-	GExecute("https://raw.githubusercontent.com/S-PScripts/kohlslite/refs/heads/main/Assets/CMD LIST A.lua")
+	GExecute("https://kohlslite.pages.dev/Assets/CMD%20LIST%20A.lua")
 end
 
 function CMDPrint2()
-	GExecute("https://raw.githubusercontent.com/S-PScripts/kohlslite/refs/heads/main/Assets/CMD LIST B.lua")
+	GExecute("https://kohlslite.pages.dev/Assets/CMD%20LIST%20B.lua")
 end
 
 function KohlsLiteCredits()
-	GExecute("https://raw.githubusercontent.com/S-PScripts/kohlslite/refs/heads/main/Assets/CREDITS.lua")
+	GExecute("https://kohlslite.pages.dev/Assets/CREDITS.lua")
 end
 
 -- CHECK FOR PERM
