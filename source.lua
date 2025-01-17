@@ -11504,7 +11504,7 @@ function findregen2()
         local root = game.Players.LocalPlayer.Character.HumanoidRootPart
         root.Anchored = true
         repeat
-                task.wait(.15)
+                fwait()
                 root.CFrame = CFrame.new(math.random(-30593, -23388), math.random(-30593, -10455), math.random(-30593, -10455))
         until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regfind
 	if regfind then
