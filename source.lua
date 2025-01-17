@@ -148,7 +148,7 @@ getgenv().deprefix = "."
 getgenv().klversion = "X1.049"
 
 -- KohlsLite Start Gui
-getgenv().kohlsgui = false
+kohlsgui = false
 
 -- Chat function
 local function Chat(msg)
@@ -9081,6 +9081,7 @@ task.spawn(function()
         end
 end)
 
+-- I will be rewriting the anti system
 antis = {
     antiblind = false,
     antivoid = false,
@@ -9115,6 +9116,12 @@ antis = {
     antiswag = false,
     antimesh = true,
     antifling = false
+}
+
+local antisall = {
+}
+
+local antisplayers = {
 }
 
 autos = {
@@ -14679,7 +14686,7 @@ if writefile and readfile then
 		writefile(KL_FOLDER,file_text)
 
 		repeat task.wait() until isfile("KohlsLite/Welcome.txt")
-		getgenv().kohlsgui = true
+		kohlsgui = true
 
 	end
 else
@@ -16625,15 +16632,15 @@ function createKohlsUi(textTable)
 	coroutine.wrap(NNQOKB_fake_script)()
 end
 
-if getgenv().kohlsgui then
+if kohlsgui then
 	createKohlsUi(
                 {
                     "Thanks for using KohlsLite!",
-                    "This script was created by TS2021 (ScriptingProgrammer).",
+                    "This script was created by TS2021/S-PScripts/ScriptingProgrammer.",
 		    " ",
-		    "To see the command list:",
-		    "1. Chat .kcmds",
-		    "2. Chat /console",
+		    "To see all the commands KohlsLite has, do the following:",
+		    "1. Chat .kcmds or .kcmd2 (commands split into 2 pages)",
+		    "2. Chat /console and you're done",
 		    " ",
 		    "Have fun using my script!"
 	 	}
@@ -16647,8 +16654,9 @@ Things that this script is missing:
 -> Auto crasher
 -> Boombox visualiser
 -> Part builder
-
-I'll add the features in the priority order they are above. AC first, BV second, PB third (for now).
+-> Rewrite the anti system
+-> Make the playercheck function not terrible
+I'll add the features in the priority order they are above. 
 ]]
 
 -- Information about KohlsLite is at the top of the script
