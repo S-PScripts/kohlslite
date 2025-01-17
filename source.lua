@@ -6517,7 +6517,12 @@ party]])
 		Remind("Remove the fake baseplate by doing nofakebp.")
     end
 
-     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'nofakebp' then
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unfakebp' then
+                game:GetService("Workspace").Terrain["_Game"]["PhantomStorage"]:Destroy()
+		Remind("Removed the fake baseplate!")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'nofakebp' then
                 game:GetService("Workspace").Terrain["_Game"]["PhantomStorage"]:Destroy()
 		Remind("Removed the fake baseplate!")
     end
@@ -6720,12 +6725,12 @@ end
 	Remind("Anti gearban is now disabled.")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'antiattach2' then
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antiiv' then
         antiattach2 = true
 	Remind("Anti ivory is now enabled.")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'unantiattach2' then
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unantiv' then
         antiattach2 = false
 	Remind("Anti ivory is now disabled.")
     end
@@ -6734,22 +6739,11 @@ end
 		antiperi = true
 		Remind("Anti periastron is now enabled.")
     end
-
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antiiv' then
-		antiperi = true
-		Remind("Anti periastron is now enabled.")
-    end
 		
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantiperi' then
 		antiperi = false
 		Remind("Anti periastron is now disabled.")
-    end
-
-    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unantiiv' then
-		antiperi = false
-		Remind("Anti periastron is now disabled.")
-    end
-		
+    end	
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'antiattach' then
 	if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'antiattach2' then else
