@@ -9859,8 +9859,16 @@ local crashToolsLP =
 
 -- Function for the antis
 -- Might add isB functionality
+debounce_antis = false
 game:GetService("RunService").RenderStepped:Connect(function()
-        task.wait(0)
+        	task.wait(0)
+
+		if debounce_antis then 
+			task.wait(0.1)
+			debounce_antis = false
+		else 
+			--
+		end
 
 		for i, v in game.Players:GetPlayers() do
 				if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
@@ -9874,7 +9882,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 							if crash_an then
 								Chat("h \n\n\n\n\n "..v.Name.." tried using a tool with anti-gear enabled. \n\n\n\n\n")
 							end
-						
+							debounce_antis = true
 							Remind("Anti-gear triggered by "..v.Name)
 							print("Anti-gear triggered by "..v.Name)
 						end
@@ -9892,7 +9900,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 							if crash_an then
 								Chat("h \n\n\n\n\n "..v.Name.." tried using a tool with anti-gear enabled. \n\n\n\n\n")
 							end
-						
+							debounce_antis = true
 							Remind("Anti-gear triggered by "..v.Name)
 							print("Anti-gear triggered by "..v.Name)
 						end
@@ -9913,7 +9921,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n Someone tried using a crash tool with anti-crash enabled. \n\n\n\n\n")
 								end
-							
+								debounce_antis = true
 								Remind("Anti-crash triggered by "..v.Name)
 								print("Anti-crash triggered by "..v.Name)
 	
@@ -9930,7 +9938,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a crash tool with anti-crash enabled. \n\n\n\n\n")
 								end
-							
+								debounce_antis = true
 								Remind("Anti-crash triggered by "..v.Name)
 								print("Anti-crash triggered by "..v.Name)
 	
@@ -9953,7 +9961,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n Someone tried using a crash tool with anti-crash enabled. \n\n\n\n\n")
 								end
-							
+								debounce_antis = true
 								Remind("Anti-crash triggered by "..v.Name)
 								print("Anti-crash triggered by "..v.Name)
 	
@@ -9970,7 +9978,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a crash tool with anti-crash enabled. \n\n\n\n\n")
 								end
-							
+								debounce_antis = true
 								Remind("Anti-crash triggered by "..v.Name)
 								print("Anti-crash triggered by "..v.Name)
 							
@@ -10011,7 +10019,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a attaching tool with anti-attach2 enabled. \n\n\n\n\n")
 								end
-
+								debounce_antis = true
 								Remind("Anti-attach2 triggered by "..v.Name)
 								print("Anti-attach2 triggered by "..v.Name)
 							end
@@ -10029,7 +10037,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a attaching tool with anti-attach2 enabled. \n\n\n\n\n")
 								end
-
+								debounce_antis = true
 								Remind("Anti-attach2 triggered by "..v.Name)
 								print("Anti-attach2 triggered by "..v.Name)
 							end
@@ -10065,7 +10073,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a periastron with anti-periastron enabled. \n\n\n\n\n")
 								end
-
+								debounce_antis = true
 								Remind("Anti-periastron triggered by "..v.Name)
 								print("Anti-periastron triggered by "..v.Name)
 							end
@@ -10083,7 +10091,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a periastron with anti-periastron enabled. \n\n\n\n\n")
 								end
-
+								debounce_antis = true
 								Remind("Anti-periastron triggered by "..v.Name)
 								print("Anti-periastron triggered by "..v.Name)
 							end
@@ -10119,7 +10127,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a gearban tool with anti-gearban enabled. \n\n\n\n\n")
 								end
-
+								debounce_antis = true
 								Remind("Anti-gearban triggered by "..v.Name)
 								print("Anti-gearban triggered by "..v.Name)
 							end
@@ -10137,7 +10145,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a gearban tool with anti-gearban enabled. \n\n\n\n\n")
 								end
-
+								debounce_antis = true
 								Remind("Anti-gearban triggered by "..v.Name)
 								print("Anti-gearban triggered by "..v.Name)
 							end
@@ -10173,7 +10181,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a paint tool with anti-paint enabled. \n\n\n\n\n")
 								end
-
+								debounce_antis = true
 								Remind("Anti-paint triggered by "..v.Name)
 								print("Anti-paint triggered by "..v.Name)
 							end
@@ -10191,7 +10199,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a paint tool with anti-paint enabled. \n\n\n\n\n")
 								end
-
+								debounce_antis = true
 								Remind("Anti-paint triggered by "..v.Name)
 								print("Anti-paint triggered by "..v.Name)
 							end
@@ -10227,7 +10235,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a blacklisted tool. \n\n\n\n\n")
 								end
-
+								debounce_antis = true
 								Remind("Blacklisted tool found on "..v.Name)
 								print("Blacklisted tool found on "..v.Name)
 							end
@@ -10245,7 +10253,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a blacklisted tool. \n\n\n\n\n")
 								end
-
+								debounce_antis = true
 								Remind("Blacklisted tool found on "..v.Name)
 								print("Blacklisted tool found on "..v.Name)
 							end
@@ -10281,7 +10289,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using the ray gun... 9jn doesn't like that! \n\n\n\n\n")
 								end
-
+								debounce_antis = true
 								Remind(v.Name.." used a tool 9jn doesn't like (ray gun)!")
 								print(v.Name.." used a tool 9jn doesn't like (ray gun)!")
 							end
@@ -10299,8 +10307,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using the ray gun... 9jn doesn't like that! \n\n\n\n\n")
 								end
-
-								RRemind(v.Name.." used a tool 9jn doesn't like (ray gun)!")
+								debounce_antis = true
+								Remind(v.Name.." used a tool 9jn doesn't like (ray gun)!")
 								print(v.Name.." used a tool 9jn doesn't like (ray gun)!")
 							end
 						end
