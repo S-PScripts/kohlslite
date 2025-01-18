@@ -1781,6 +1781,8 @@ else
         	hasperm = true -- used
         	print("A perm pad was not given as you have the Perm Admin gamepass!")
 	else
+		perm = true 
+		hasperm = false
         	print("A perm pad was given as you don't have the Perm Admin gamepass!")
 	end
 
