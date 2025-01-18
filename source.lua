@@ -3885,7 +3885,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'findregen' then -- i know it sucks but perm exists lol
-	if not string.sub(msg:lower(), 1, #prefix + 10) == prefix..'findregen2' then
+	if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'findregen2' then else
 		regfind = true
 		task.wait(0)
 		findregen()
@@ -3894,14 +3894,14 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'nofindregen' then
-	if not string.sub(msg:lower(), 1, #prefix + 12) == prefix..'nofindregen2' then
+	if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'nofindregen2' then else
 		regfind = false
 		Remind("Stopped the regen (skydived)")
 	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unfindregen' then
-	if not string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unfindregen2' then
+	if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unfindregen2' then else
 		regfind = false
 		Remind("Stopped the regen (skydived)")
 	end
