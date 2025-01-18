@@ -3524,14 +3524,15 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'saveregen' then
-                Remind("Keep your regen co-ords safe!")
+                Remind("If you need to rejoin, and the regen will be unloaded if you do, just paste the code")
                 adx, ady, adz = Admin.Regen.Position.X, Admin.Regen.Position.Y, Admin.Regen.Position.Z
+		buddy = "game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(".. adx ..",".. ady ..",".. adz ..")"
                 q = adx .. ady .. adz
-                print(Admin.Regen.Position.X, Admin.Regen.Position.Y, Admin.Regen.Position.Z)
+                print("game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(".. adx ..",".. ady ..",".. adz ..")")
 		if setclipboard then
-                	setclipboard(q)
+                	setclipboard(buddy)
 		else
-			Remind("Your exploit does not support setclipboard - Please keep a note of the regen co-ords in console.")
+			Remind("Your exploit does not support setclipboard - Please keep a note of the code in console.")
 		end
     end
 
