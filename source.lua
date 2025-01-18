@@ -3886,7 +3886,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'findregen' then -- i know it sucks but perm exists lol
 	if not string.sub(msg:lower(), 1, #prefix + 10) == prefix..'findregen2' then
-		regfind = false
+		regfind = true
 		task.wait(0)
 		findregen()
 		Remind("Finding the regen (skydived)")
@@ -3895,33 +3895,32 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'nofindregen' then
 	if not string.sub(msg:lower(), 1, #prefix + 12) == prefix..'nofindregen2' then
-		regfind = true
+		regfind = false
 		Remind("Stopped the regen (skydived)")
 	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unfindregen' then
 	if not string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unfindregen2' then
-		regfind = true
+		regfind = false
 		Remind("Stopped the regen (skydived)")
 	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'findregen2' then -- i know it sucks but perm exists lol
-        regfind = false
+        regfind = true
 	task.wait(0)
 	findregen2()
 	Remind("Finding the regen (KL/CMD-Y)")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'nofindregen2' then
-	regfind = true
+	regfind = false
 	Remind("Stopped the regen (KL/CMD-Y)")
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unfindregen2' then
-	regfind = true
-        regenfind2 = false
+	regfind = false
 	Remind("Stopped the regen (KL/CMD-Y)")
     end
 
@@ -7943,7 +7942,27 @@ end
                   end
     end
 
+   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'pmkick' then -- haha i found it
+        acplr = string.sub(msg:lower(), #prefix + 8)
+           PLAYERCHECK(acplr)
+                   if player ~= nil and not table.find(nokick, player) then
+			acplr = player
+                           antichatplr = true
+                elseif table.find(nokick, player) then
+                        Remind("Sorry, this player cannot be kicked!")
+                else                           
+                        Remind("Player doesn't exist!")
+                  end
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unmkick' then
+        antichatplr = false
+        Chat("reset "..acplr)
+	Remind("No longer kicking "..acplr)
+    end
+
+
+  if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unpmkick' then
         antichatplr = false
         Chat("reset "..acplr)
 	Remind("No longer kicking "..acplr)
@@ -11490,14 +11509,11 @@ function findregen()
         repeat
         	wait(.15)
                 root.CFrame = CFrame.new(-7.165, root.Position.Y + 2500 , 94.743)
-        until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regfind
-	if regfind then
-		root.Anchored = false
-     		root.CFrame = workspace.Terrain._Game.Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
-      		Chat("respawn me");Remind("Found the regen (skydived)")
-	else
-       		--
-	end
+        until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regfind == false
+	root.Anchored = false
+     	root.CFrame = workspace.Terrain._Game.Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
+      	Chat("respawn me");Remind("Found the regen (skydived)")
+
 end
 
 function findregen2()
@@ -11506,15 +11522,12 @@ function findregen2()
         repeat
                 fwait()
                 root.CFrame = CFrame.new(math.random(-30593, -23388), math.random(-30593, -10455), math.random(-30593, -10455))
-        until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regfind
-	if regfind then
-		game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
-        	root.Anchored = false
-        	root.CFrame = workspace.Terrain._Game.Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
-		Chat("respawn me");Remind("Found the regen (KL)")
-	else
-		--
-	end
+        until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regfind == false
+	game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+        root.Anchored = false
+        root.CFrame = workspace.Terrain._Game.Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
+	Chat("respawn me");Remind("Found the regen (KL)")
+
 end
 
 -- leaked regen
