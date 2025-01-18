@@ -1742,7 +1742,7 @@ Remind("Thank you for using KohlsLite. The version you are using is v"..getgenv(
 print("Say .kcmds and .kcmd2 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
 Remind("Say .kcmds and .kcmd2 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
 
-if not game:GetService("GamePassService") then 
+--if not game:GetService("GamePassService") then 
 	hasperm = false
 	haspersons = false
 	perm = true
@@ -1772,7 +1772,7 @@ if not game:GetService("GamePassService") then
 	end
 	
 	print("\n")
-else
+--[[else
 	
 	print("\n")
 	print("- Perm check -")
@@ -1796,7 +1796,7 @@ else
 	        print("You have Person299's Admin, so you will not have access to any KohlsLite commands that use P299.")
 	end
 	print("\n") 
-end
+end ]]
 
 Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
 
