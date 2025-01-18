@@ -6614,14 +6614,14 @@ party]])
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'perm' then
-	if not string.sub(msg:lower(), 1, #prefix + 5) == prefix..'perm2' then
+	if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'perm2' then else
         	perm = true
 		Remind("You now have a perm pad!")
 	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'unperm' then
-	if not string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unperm2' then
+	if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unperm2' then else
         	perm = false
 		Remind("You no longer have a perm pad!")
 	end
