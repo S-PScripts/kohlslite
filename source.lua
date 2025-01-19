@@ -8,7 +8,7 @@
     \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______|
                                             \|_________|                                   
                                                                                            
-                                                                                           vX1.049 ]]
+                                                                                           vX1.050 ]]
 
 --[[
 View the source here: https://kohlslite.pages.dev/source.lua
@@ -72,7 +72,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.049", -- Why X1? Maybe because all the significant/main updates are done.
+                Title = "KohlsLite X1.050", -- Why X1? Maybe because all the significant/main updates are done.
                 Text = msg,
                 Duration = length or 1
         })
@@ -145,7 +145,7 @@ getgenv().kohlsexecuted = true
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.049"
+getgenv().klversion = "X1.050"
 
 -- KohlsLite Start Gui
 kohlsgui = false
@@ -8175,7 +8175,7 @@ end
 	elseif ado == 0 then
 		Remind("All obby jumps missing")
 	else
-		notif(tostring(10-ado).." obby jumps missing")
+		Remind(tostring(10-ado).." obby jumps missing")
 	end
 	
     end
