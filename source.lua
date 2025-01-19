@@ -4237,16 +4237,16 @@ return
 		Chat("unpunish me")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'meshkick' then  -- mesh kick haha
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'omeshkick' then  -- mesh kick haha
 		dzjecraft = false
-		local dasplayer = string.sub(msg:lower(), #prefix + 10)
+		local dasplayer = string.sub(msg:lower(), #prefix + 11)
                 PLAYERCHECK(dasplayer)
 	
                 if player ~= nil and not table.find(nokick, player) then
 			kickin = cplr
 			kickinplr = player
                         Remind("Kicking "..player)
-			hatkick(kickin, kickinplr)
+			hatkickold(kickin, kickinplr)
                 elseif table.find(nokick, player) then
                         return Remind("Sorry, this player cannot be kicked!")
                 else                        
@@ -4255,21 +4255,21 @@ return
 	
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unmeshkick' then 
+    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unomeshkick' then 
 	dzjecraft = true
 	Remind("Ended mesh-kick")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'hatkick' then  -- hat kick haha
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'ohatkick' then  -- hat kick haha
 		dzjecraft = false
-		local dasplayer = string.sub(msg:lower(), #prefix + 9)
+		local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 PLAYERCHECK(dasplayer)
 	
                 if player ~= nil and not table.find(nokick, player) then
 			kickin = cplr
 			kickinplr = player
                         Remind("Kicking "..player)
-			hatkick(kickin, kickinplr)
+			hatkickold(kickin, kickinplr)
                 elseif table.find(nokick, player) then
                         return Remind("Sorry, this player cannot be kicked!")
                 else                        
@@ -4278,13 +4278,13 @@ return
 	
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unhatkick' then 
+    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unohatkick' then 
 	dzjecraft = true
 	Remind("Ended hat-kick")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'techkick' then  -- tech kick
-		local dasplayer = string.sub(msg:lower(), #prefix + 10)
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'hatkick' then  -- tech kick
+		local dasplayer = string.sub(msg:lower(), #prefix + 9)
                 PLAYERCHECK(dasplayer)
 	
                 if player ~= nil and not table.find(nokick, player) then
@@ -4298,6 +4298,22 @@ return
                         return Remind('Cannot find player with the name: '..dasplayer)
                 end
 	
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'meshkick' then  -- mesh kick haha
+		local dasplayer = string.sub(msg:lower(), #prefix + 10)
+                PLAYERCHECK(dasplayer)
+	
+                if player ~= nil and not table.find(nokick, player) then
+			kickin = cplr
+			kickinplr = player
+                        Remind("Kicking "..player)
+			techkick(kickin, kickinplr)
+                elseif table.find(nokick, player) then
+                        return Remind("Sorry, this player cannot be kicked!")
+                else                        
+                        return Remind('Cannot find player with the name: '..dasplayer)
+                end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antimesh' then 
@@ -11639,7 +11655,7 @@ function dkick(dk, dkicked)
 end
 
 -- hat (mesh) kick
-function hatkick(kickin, kickinplr) -- v, V.Name
+function hatkickold(kickin, kickinplr) -- v, V.Name
 		Chat("respawn "..kickinplr)
 		task.wait(.25)
  		Chat("tp me  "..kickinplr)
@@ -11669,9 +11685,13 @@ function techkick(kickin, kickinplr) -- Tech's hatkick
 		Chat("skydive "..kickinplr.." "..kickinplr.." "..kickinplr.."                                                                                                                                    discord")
 		Chat("skydive "..kickinplr.." "..kickinplr.." "..kickinplr.."                                                                                                                                    discord")
 		Chat("skydive "..kickinplr.." "..kickinplr.." "..kickinplr.."                                                                                                                                    discord")
-		Chat("size "..kickinplr.." 9.9")
-		Chat("size "..kickinplr.." 9.9")
-		chatt("spin                                                                                                                                                                      "..kickinplr.." discord")
+		Chat("size "..kickinplr.. " 4")
+		--Chat("size "..kickinplr.." 9.9")
+		--Chat("size "..kickinplr.." 9.9")
+		for i = 1, 6 do Chat("unseizure 																	"..kickinplr.. " discord") end
+		Chat("name ".. kickinplr .. " I got hatkicked because I'm a noob")
+		
+		--Chat("spin                                                                                                                                                                      "..kickinplr.." discord")
 		task.wait(0.15)
 		Chat("setgrav "..kickinplr.." -251.2")
 
@@ -13612,7 +13632,7 @@ function onPlayerAdded(player)
 			end
 			print(player.Name.." joined the server. They are being hat kicked as they were on the hatkick_on_sight list.")
 			Remind(player.Name.." joined the server. They are being hat kicked as they were on the hatkick_on_sight list.")
-			hatkick(player, player.Name)
+			techkick(player, player.Name)
 			check_con = true
 		end
 
@@ -16320,7 +16340,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
 		Chat("h \n\n\n\n\n Hat kicking "..v.Name.." as they are blacklisted. \n\n\n\n\n")
 		print(v.Name.." found in the server. They are being hat kicked as they were on the hatkick_on_sight list.")
 		Remind(v.Name.." found in the server. They are being hat kicked as they were on the hatkick_on_sight list.")
-		hatkick(player, v.Name)
+		techkick(v, v.Name)
 	end
 
         if table.find(furry_on_sight, v.Name) then
@@ -16473,9 +16493,9 @@ local mentalhospital = {
 	"UnknownHasComeBack",
 	"OhMyAlt000",
 	"Roblox_girlsfree",
-	"aliihsan12345isafurry", -- DID LIL BRO COPY S_PISAFURRY ???!!!
+	"aliihsan12345isafurry",
     	"IIIdev",
-    	"ihateyou"
+    	"ihateyou" -- Yeah, I hate you allihsan/unknown
 }
 
 if table.find(unexecuteables, game.Players.LocalPlayer.Name) then
@@ -16493,7 +16513,7 @@ if table.find(mentalhospital, game.Players.LocalPlayer.Name) then
 			setclipboard("dm ts2021	on discord")
 		end
                 pcall(function() -- thanks tech
-		        game.Players.LocalPlayer:Kick("[KohlsLite]: imagine skidding, claiming my script as yours, then blacklisting me from it. contact me (ts2021) so i can berate you more") 
+		        game.Players.LocalPlayer:Kick("[KohlsLite]: Imagine skidding, claiming my script as yours, then blacklisting me from it. Contact me (ts2021) so I can berate you more.") 
                 end)
                 task.wait(2.5); while true do end
 end
