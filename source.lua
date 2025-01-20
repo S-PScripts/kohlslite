@@ -11705,6 +11705,29 @@ function techkick(kickin, kickinplr) -- Tech's hatkick
 		end
 end
 
+function techkick2(kickin, kickinplr) -- Tech's kick 2
+	        hatspammingz = true
+		Chat("respawn "..kickinplr)
+		Chat("setgrav "..kickinplr.." -8e8")	
+		task.wait(0)
+		Regen()
+		task.wait(0.89)
+ 		chatt("unpunish "..kickinplr)
+		task.wait()
+        	Chat("invis "..kickinplr); Chat("refresh "..kickinplr)
+        	Chat("invis "..kickinplr); Chat("kill "..kickinplr)
+        	Chat("invis "..kickinplr); Chat("trip "..kickinplr)
+        	Chat("invis "..kickinplr); Chat("speed "..kickinplr.." 00000000000000000000000000000000000000000000")
+        	Chat("setgrav "..kickinplr.." -1000000000000000000000000000000000000000000000000000000000000000000000000000000000000")
+		task.wait(.1)
+       	 	Chat("speed "..kickinplr.." 00000000000000000000000000000000000000000000")
+        	Chat("invis "..kickinplr.." "..kickinplr..""..kickinplr); Chat("unpunish "..kickinplr.." "..kickinplr.." "..kickinplr)
+		task.wait(.2)
+        	Chat("invis "..kickinplr)
+		task.wait(.2)
+		Chat("reset "..kickinplr)
+end
+
 
 function slag(tplr, tpln) -- v, v.Name [cmd v3]
             local stop = false
