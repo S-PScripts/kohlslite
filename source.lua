@@ -11697,11 +11697,11 @@ function techkick(kickin, kickinplr) -- Tech's hatkick
 		end)
 
 		for i = 1, 103 do
-			chatt("hat "..kickinplr.." 18219890448")
+			Chat("hat "..kickinplr.." 18219890448")
 		end
 
 		while hatspammingz do task.wait()
-			chatt("hat "..kickinplr.." 18219890448")
+			Chat("hat "..kickinplr.." 18219890448")
 		end
 end
 
@@ -11712,7 +11712,7 @@ function techkick2(kickin, kickinplr) -- Tech's kick 2
 		task.wait(0)
 		Regen()
 		task.wait(0.89)
- 		chatt("unpunish "..kickinplr)
+ 		Chat("unpunish "..kickinplr)
 		task.wait()
         	Chat("invis "..kickinplr); Chat("refresh "..kickinplr)
         	Chat("invis "..kickinplr); Chat("kill "..kickinplr)
