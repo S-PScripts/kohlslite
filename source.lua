@@ -21,10 +21,10 @@ You can also use it for KAH BC but barely anyone plays it. This script isn't rec
 
 KohlsLite is currently the longest/largest Kohls Admin House script freely available. SCV3-VAR and Kozy.Docx are longer than KL but they are paid and not public respectively.
 
-This script was built from the ground up. KohlsLite is not a fork of any other scripts. (Such as Shortcut v2 src1 being an extension to Shortcut v1) 
+This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g: Shortcut v2 src1 being an extension to Shortcut v1).
 
 KohlsLite is a bit like a mixture of all the scripts that already exist in KAH such as:
-  -- > CMD (v1) [by quiving]
+  -- > CMD (v1) [by quiving - the same person that made the Solara executor]
   -- > CMD Y [by quiving]
   -- > CMD v3 (Pi) [by quiving]
   -- > Shortcut v1 [by SnowClan_8342/yeemi]
@@ -72,7 +72,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.050", -- Why X1? Maybe because all the significant/main updates are done.
+                Title = "KohlsLite X1.050", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -132,9 +132,9 @@ if getgenv().autocrasher then
 	end
 end
 
-if autocrasher then
-	return 
-end
+--if autocrasher then
+--	return 
+--end
 
 --loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 
