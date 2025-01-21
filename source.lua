@@ -1677,7 +1677,7 @@ local welcomemsg = true
 local crash_an = false
 
 -- slock/bl/wl/gearwl/padban etc...
-local blwl_an = true -- To be added. please wait
+local blwl_an = true
 
 -- shh
 thesecretvariable = true
@@ -4652,7 +4652,7 @@ return
 		Remind("That feeling when knee surgery is today...")
     end
 
-   if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'technoreaperx' then
+   if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'technoreaperx' then -- joke
 		Chat("char all 1702851506")
 		task.wait(1)
 		Speak("GROOMER DETECTED, TERMINATING SERVER")
@@ -4739,7 +4739,7 @@ return
                  end
     end
 
-   if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'smack' then -- pr
+   if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'smack' then -- pr/ii
                 local person = string.sub(msg:lower(), #prefix + 7)
                 Chat("music 5886215922")
                 Chat("speed "..person.." 0")
@@ -4753,7 +4753,7 @@ return
                 Chat("music nan")
     end
 
-   if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'dumb' then -- pr
+   if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'dumb' then -- pr/ii
                 local dum = string.sub(msg:lower(), #prefix + 6)
                 PLAYERCHECK(dum)        
                 if player ~= nil then
@@ -5827,7 +5827,7 @@ return
                  if player ~= nil then
                         xplayer = player
                         xplr = cplr
-                        Gearban()
+                        Gearban(xplayer, xplr)
                  else
                         Remind('Cannot find player with the name: '..dasplayer)
                  end
@@ -13908,7 +13908,7 @@ function FastPads()
 end
 
 -- GEARBAN
-function Gearban()
+function Gearban(xplayer, xplr)
         Chat("gear me 82357101")
         Chat("unff all")
         Chat("speed " ..xplayer.. " 0")
@@ -16372,7 +16372,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
 		Remind(v.Name.." found in the server. They were gearbanned since they were on the gb_on_sight list.")
                 xplr = player
                 xplayer = v.Name
-                Gearban()
+                Gearban(xplr, xplayer)
         end
 
         task.wait(0)
