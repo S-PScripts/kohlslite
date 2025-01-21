@@ -12,6 +12,7 @@
 
 --[[
 View the source here: https://kohlslite.pages.dev/source.lua
+Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
 
 KohlsLite is a free, open-source script for the Roblox game created by agspureiam, Kohls Admin House (KAH).
 This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub).
@@ -48,8 +49,6 @@ KohlsLite is a bit like a mixture of all the scripts that already exist in KAH s
 
 Some of the code here is from other creators, credit has been given, but quite a lot is my own and also some commands can't be changed code-wise that much.
 
-This script does not get frequent updates anymore.
-
 There are no watermarks in this script. There used to exist, but I wanted to make this script more 'premium' like Shortcut v3-VAR.
 However, this script DOES have back doors (dev section) due to idiots abusing like crazy using this script.
 
@@ -60,10 +59,12 @@ Instead, you can make your own script and take stuff from here if necessary.
 
 Please don't go abusing like crazy using this script. I made this free/open-source and don't want idiots doing stuff that forces me to make this paid/obfuscated.
 
-PS: I know my script is inconsistent when using Game with and without GetService... but I don't care.
-    Also, there is no command handler and this script looks terrible to be honest. I'm not rewriting this script (for the foreseeable future) as that would take ages.
+Other stuff:
+-> There is no command handler and this script looks terrible to be honest. I'm not making a full rewrite of this script as that would take ages.
+   I tried to do so but got bored and gave up.
+-> I know my script is inconsistent when using Game with and without GetService... but I don't care.
+-> KohlsLite has been moved to this repo from my old repo "scripts (renamed to kohlslite-work-old)". This is because the old repo was messy and the old loadstring was clunky.
 
-    KohlsLite has been moved to this repo, as the old repo was messy and the old loadstring was clunky.
 ]]
 
 -- Script name = KohlsLite
@@ -6909,11 +6910,11 @@ end
                 antis.antiaddon = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantiaddon = true
+                antisall.antiaddon = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antiaddon = true
-                ALLantiaddon = true
+                antisall.antiaddon = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -6926,11 +6927,11 @@ end
                 antis.antiaddon = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantiaddon = false
+                antisall.antiaddon = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antiaddon = false
-                ALLantiaddon = false
+                antisall.antiaddon = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -6943,11 +6944,11 @@ end
                 antis.anticlone = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLanticlone = true
+                antisall.anticlone = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.anticlone = true
-                ALLanticlone = true
+                antisall.anticlone = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -6960,11 +6961,11 @@ end
                 antis.anticlone = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLanticlone = false
+                antisall.anticlone = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.anticlone = false
-                ALLanticlone = false
+                antisall.anticlone = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -6977,11 +6978,11 @@ end
                 antis.antidog = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantidog = true
+                antisall.antidog = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antidog = true
-                ALLantidog = true
+                antisall.antidog = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -6994,11 +6995,11 @@ end
                 antis.antidog = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantidog = false
+                antisall.antidog = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antidog = false
-                ALLantidog = false
+                antisall.antidog = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7011,11 +7012,11 @@ end
                 antis.antifire = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantifire = true
+                antisall.antifire = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antifire = true
-                ALLantifire = true
+                antisall.antifire = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7028,11 +7029,11 @@ end
                 antis.antifire = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantifire = false
+                antisall.antifire = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antifire = false
-                ALLantifire = false
+                antisall.antifire = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7045,11 +7046,11 @@ end
                 antis.antifreeze = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantifreeze = true
+                antisall.antifreeze = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antifreeze = true
-                ALLantifreeze = true
+                antisall.antifreeze = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7062,11 +7063,11 @@ end
                 antis.antifreeze = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantifreeze = false
+                antisall.antifreeze = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antifreeze = false
-                ALLantifreeze = false
+                antisall.antifreeze = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7079,11 +7080,11 @@ end
                 antis.antiff = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantiff = true
+                antisall.antiff = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antiff = true
-                ALLantiff = true
+                antisall.antiff = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7096,11 +7097,11 @@ end
                 antis.antiff = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantiff = false
+                antisall.antiff = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antiff = false
-                ALLantiff = false
+                antisall.antiff = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7113,11 +7114,11 @@ end
                 antis.antiglow = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantiglow = true
+                antisall.antiglow = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antiglow = true
-                ALLantiglow = true
+                antisall.antiglow = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7130,11 +7131,11 @@ end
                 antis.antiglow = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantiglow = false
+                antisall.antiglow = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antiglow = false
-                ALLantiglow = false
+                antisall.antiglow = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7147,11 +7148,11 @@ end
                 antis.antihealthchange = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantihealthc = true
+                antisall.antihealthchange = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antihealthchange = true
-                ALLantihealthc = true
+                antisall.antihealthc = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7164,11 +7165,11 @@ end
                 antis.antihealthchange = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantihealthc = false
+                antisall.antihealthchange = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antihealthchange = false
-                ALLantihealthc = false
+                antisall.antihealthc = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7181,11 +7182,11 @@ end
                 antis.antijail = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantijail = true
+                antisall.antijail = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antijail = true
-                ALLantijail = true
+                antisall.antijail = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7198,11 +7199,11 @@ end
                 antis.antijail = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantijail = false
+                antisall.antijail = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antijail = false
-                ALLantijail = false
+                antisall.antijail = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7215,11 +7216,11 @@ end
                 antis.antijump = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantijump = true
+                antisall.antijump = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antijump = true
-                ALLantijump = true
+                antisall.aantijump = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7232,11 +7233,11 @@ end
                 antis.antijump = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantijump = false
+                antisall.antijump = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antijump = false
-                ALLantijump = false
+        	antisall.antijump = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7250,11 +7251,11 @@ end
                 	antis.antikill = true
                 	Remind("Turned this anti on for you!")
         	elseif args[2] == "others" then
-                	ALLantikill = true
+                	antisall.antikill = true
                 	Remind("Turned this anti on for others!")
         	elseif args[2] == "all" then
                		antis.antikill = true
-                	ALLantikill = true
+                	antisall.antikill = true
                 	Remind("Turned this anti on for everyone!")
         	else
 		  	kia = args[2]
@@ -7282,11 +7283,11 @@ end
                 	antis.antikill = false
                 	Remind("Turned this anti off for you!")
         	elseif args[2] == "others" then
-                	ALLantikill = false
+                	antisall.antikill = false
                 	Remind("Turned this anti off for others!")
         	elseif args[2] == "all" then
                		antis.antikill = false
-                	ALLantikill = false
+                	antisall.antikill = false
                 	Remind("Turned this anti off for everyone!")
         	else
 		  	kia = args[2]
@@ -7313,11 +7314,11 @@ end
                 antis.antifly = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantifly = true
+                antisall.antifly = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antifly = true
-                ALLantifly = true
+                antisall.antifly = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7330,11 +7331,11 @@ end
                 antis.antifly = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantifly = false
+                antisall.antifly = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antifly = false
-                ALLantifly = false
+                antisall.antifly = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7357,11 +7358,11 @@ end
                 antis.antichar = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantichar = true
+                antisall.antichar = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antichar = true
-                ALLantichar = true
+                antisall.antichar = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7374,11 +7375,11 @@ end
                 antis.antichar = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantichar = false
+        	antisall.antichar = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antichar = false
-                ALLantichar = false
+                antisall.antichar = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7451,11 +7452,11 @@ end
                 antis.antiname = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantiname = true
+        	antisall.antiname = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antiname = true
-                ALLantiname = true
+                antisall.antiname = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7468,11 +7469,11 @@ end
                 antis.antiname = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantiname = false
+                antisall.antiname = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antiname = false
-                ALLantiname = false
+                antisall.antiname = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7485,11 +7486,11 @@ end
                 antis.antiparticles = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantiparticles = true
+                antisall.antiparticles = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antiparticles = true
-                ALLantiparticles = true
+                antisall.antiparticles = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7502,11 +7503,11 @@ end
                 antis.antiparticles = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantiparticles = false
+                antisall.antiparticles = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antiparticles = false
-                ALLantiparticles = false
+                antisall.antiparticles = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7520,11 +7521,11 @@ end
                 	antis.antipunish = true
                 	Remind("Turned this anti on for you!")
         	elseif args[2] == "others" then
-                	ALLantipunish = true
+                	antisall.antipunish = true
                 	Remind("Turned this anti on for others!")
         	elseif args[2] == "all" then
                		antis.antipunish = true
-                	ALLantipunish = true
+                	antisall.antipunish = true
                 	Remind("Turned this anti on for everyone!")
         	else
 		  	kia = args[2]
@@ -7552,11 +7553,11 @@ end
                 	antis.antipunish = false
                 	Remind("Turned this anti off for you!")
         	elseif args[2] == "others" then
-                	ALLantipunish = false
+                	antisall.antipunish = false
                 	Remind("Turned this anti off for others!")
         	elseif args[2] == "all" then
                		antis.antipunish = false
-                	ALLantipunish = false
+                	antisall.antipunish = false
                 	Remind("Turned this anti off for everyone!")
         	else
 		  	kia = args[2]
@@ -7583,11 +7584,11 @@ end
                 antis.antirocket = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantirocket = true
+                antisall.antirocket = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antirocket = true
-                ALLantirocket = true
+                antisall.antirocket = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7600,11 +7601,11 @@ end
                 antis.antirocket = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantirocket = false
+                antisall.antirocket = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antirocket = false
-                ALLantirocket = false
+                antisall.antirocket = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7633,11 +7634,11 @@ end
                 antis.antisit = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantisit = true
+                antisall.antisit = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antisit = true
-                ALLantisit = true
+                antisall.antisit = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7650,11 +7651,11 @@ end
                 antis.antisit = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantisit = false
+                antisall.antisit = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antisit = false
-                ALLantisit = false
+                antisall.antisit = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7667,11 +7668,11 @@ end
                 antis.antiseizure = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantiseizure = true
+                antisall.antiseizure = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antiseizure = true
-                ALLantiseizure = true
+                antisall.antiseizure = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7684,11 +7685,11 @@ end
                 antis.antiseizure = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantiseizure = false
+        	antisall.antiseizure = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antiseizure = false
-                ALLantiseizure = false
+                antisall.antiseizure = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7701,11 +7702,11 @@ end
                 antis.antismoke = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantismoke = true
+                antisall.antismoke = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antismoke = true
-                ALLantismoke = true
+                antisall.antismoke = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7718,11 +7719,11 @@ end
                 antis.antismoke = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantismoke = false
+                antisall.antismoke = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antismoke = false
-                ALLantismoke = false
+                antisall.antismoke = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7735,11 +7736,11 @@ end
                 antis.antisparkles = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantisparkles = true
+                antisall.antisparkles = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
-                 antis.antisparkles = true
-                ALLantisparkles = true
+                antis.antisparkles = true
+                antisall.antisparkles = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7752,11 +7753,11 @@ end
                 antis.antisparkles = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantisparkles = false
+                antisall.antisparkles = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antisparkles = false
-                ALLantisparkles = false
+                antisall.antisparkles = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7769,11 +7770,11 @@ end
                 antis.antispeed = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantispeed = true
+                antisall.antispeed = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antispeed = true
-                ALLantispeed = true
+                antisall.antispeed = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7786,11 +7787,11 @@ end
                 antis.antispeed = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantispeed = false
+                antisall.antispeed = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antispeed = false
-                ALLantispeed = false
+                antisall.antispeed = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7803,11 +7804,11 @@ end
                 antis.antispin = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantispin = true
+                antisall.antispin = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antispin = true
-                ALLantispin = true
+                antisall.antispin = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7820,11 +7821,11 @@ end
                 antis.antispin = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantispin = false
+                antisall.antispin = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antispin = false
-                ALLantispin = false
+                antisall.antispin = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7837,11 +7838,11 @@ end
                 antis.antistun = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantistun = true
+                antisall.antistun = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antistun = true
-                ALLantistun = true
+                antisall.antistun = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7854,11 +7855,11 @@ end
                 antis.antistun = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantistun = false
+                antisall.antistun = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antistun = false
-                ALLantistun = false
+                antisall.antistun = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7871,11 +7872,11 @@ end
                 antis.antisetgrav = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantisetgrav = true
+                antisall.antisetgrav = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antisetgrav = true
-                ALLantisetgrav = true
+                antisall.antisetgrav = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7888,11 +7889,11 @@ end
                 antis.antisetgrav = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantisetgrav = false
+                antisall.antisetgrav = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antisetgrav = false
-                ALLantisetgrav = false
+                antisall.antisetgrav = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7905,11 +7906,11 @@ end
                 antis.antiswag = true
                 Remind("Turned this anti on for you!")
         elseif args[2] == "others" then
-                ALLantiswag = true
+                antisall.antiswag = true
                 Remind("Turned this anti on for others!")
         elseif args[2] == "all" then
                 antis.antiswag = true
-                ALLantiswag = true
+                antisall.antiswag = true
                 Remind("Turned this anti on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -7922,11 +7923,11 @@ end
                 antis.antiswag = false
                 Remind("Turned this anti off for you!")
         elseif args[2] == "others" then
-                ALLantiswag = false
+                antisall.antiswag = false
                 Remind("Turned this anti off for others!")
         elseif args[2] == "all" then
                 antis.antiswag = false
-                ALLantiswag = false
+                antisall.antiswag = false
                 Remind("Turned this anti off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -9175,10 +9176,78 @@ antis = {
     antifling = false
 }
 
-local antisall = {
+-- Prepartion
+local antisall = { -- This is everyone except you
+    antiblind = false,
+    antivoid = false,
+    antiskydive = false,
+    antigrayscale = false,
+    antiaddon = false,
+    anticlone = false,
+    antidog = false,
+    antifire = false,
+    antifreeze = false,
+    antifly = false,
+    antinoclip = false,
+    antiff = false,
+    antiglow = false,
+    antihealthchange = false,
+    antijail = false,
+    antikill = false,
+    antimessage = true,
+    antiname = false,
+    antichar = false,
+    antiparticles = false,
+    antipunish = false,
+    antirocket = false,
+    antisit = false,
+    antiseizure = false,
+    antismoke = false,
+    antisparkles = false,
+    antispeed = false,
+    antispin = false,
+    antistun = false,
+    antisetgrav = false,
+    antiswag = false,
+    antimesh = true,
+    antifling = false
 }
 
-local antisplayers = {
+-- Prepartion
+local antisplayers = { -- Antis for specific players
+    antiblind = {},
+    antivoid = {},
+    antiskydive = {},
+    antigrayscale = {},
+    antiaddon = {},
+    anticlone = {},
+    antidog = {},
+    antifire = {},
+    antifreeze = {},
+    antifly = {},
+    antinoclip = {},
+    antiff = {},
+    antiglow = {},
+    antihealthchange = {},
+    antijail = {},
+    antikill = {},
+    antimessage = {},
+    antiname = {},
+    antichar = {},
+    antiparticles = {},
+    antipunish = {},
+    antirocket = {},
+    antisit = {},
+    antiseizure = {},
+    antismoke = {},
+    antisparkles = {},
+    antispeed = {},
+    antispin = {},
+    antistun = {},
+    antisetgrav = {},
+    antiswag = {},
+    antimesh = {},
+    antifling = {}
 }
 
 autos = {
@@ -9214,7 +9283,7 @@ connections[#connections + 1] =
 
 	if autocharme == true then 
                 if autocharid ~= game.Players.LocalPlayer.CharacterAppearanceId then
-                                                      Chat('char me '..autocharid)
+                        Chat('char me '..autocharid)
                 else end
         end
 
@@ -9522,6 +9591,7 @@ connections[#connections + 1] =
         end
     end)
 
+-- I removed this since it would break the script if you died whilst executing
 -- Credits to trollfacenan (bumanoid)!
 
 --[[if game.PlaceId == 112420803 then
@@ -9611,19 +9681,19 @@ connections[#connections + 1] =
                                         else end
                                 end
 
-                                if ALLantiaddon == true then
+                                if antisall.antiaddon == true then
                                             if v.Character and v.Character:FindFirstChild("Addon") then
                                                     Chat("reset "..v.Name)
                                            end
                                 end
 
-                                if ALLanticlone == true then
+                                if antisall.anticlone == true then
                                             if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild(v.Name) then
                                                 Chat("unclone "..v.Name)
                                         else end
                                 end
 
-                                if ALLantidog == true then
+                                if antisall.antidog == true then
                                              for i,x in pairs(v.Character:GetDescendants()) do
                                                 if x:IsA("Seat") then
                                                         Chat("undog "..v.Name)
@@ -9631,7 +9701,7 @@ connections[#connections + 1] =
                                         end
                                 end
 
-                                if ALLantifire == true then
+                                if antisall.antifire == true then
                                             if v.Character and v.Character:FindFirstChild("Torso") then
                                                 if v.Character.Torso:FindFirstChild("Fire") then
                                                             Chat("unfire "..v.Name)
@@ -9639,20 +9709,20 @@ connections[#connections + 1] =
                                         else end
                                 end
 
-                                if ALLantifreeze == true then
+                                if antisall.antifreeze == true then
                                              if v.Character and v.Character:FindFirstChild("ice") then
                                                         Chat("thaw "..v.Name)
                                         else end
                                 end
 
-                                if ALLantifly == true or gjdelock == true then
+                                if antisall.antifly == true or gjdelock == true then
                                             if not v.Character:FindFirstChild("Seizure") and v.Character.Humanoid:GetState().Name == "PlatformStanding" then
                                                 Chat("unfly "..v.Name)
                                                         Chat("clip "..v.Name)
                                         else end
                                 end
 
-                                if ALLantiff == true then
+                                if antisall.antiff == true then
                                          if v.Character and v.Character:FindFirstChild("ForceField") then
                                                 Chat("unff "..v.Name)
                                         else end
@@ -9675,7 +9745,7 @@ connections[#connections + 1] =
                                             end
                                  end
 
-                                if ALLantiglow == true then
+                                if antisall.antiglow == true then
                                         local torso = v.Character:WaitForChild("Torso", 1)
                                         for i,x in pairs(torso:GetChildren()) do
                                                 if x:IsA("PointLight") then
@@ -9685,25 +9755,25 @@ connections[#connections + 1] =
                                             end
                                 end
 
-                                if ALLantihealthc == true then
+                                if antisall.antihealthc == true then
                                            if v.Character.Humanoid.Health ~= 100 then
                                                 Chat("health "..v.Name.." 100")
                                         else end
                                         end
 
-                                if ALLantijail == true then
+                                if antisall.antijail == true then
                                             if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild(v.Name .. "'s jail") then
                                                         Chat("unjail "..v.Name)
                                         else end
                                         end
 
-                                if ALLantijump == true then
+                                if antisall.antijump == true then
                                             if v.Character.Humanoid.JumpPower ~= 50 then
                                                 Chat("normaljump "..v.Name)
                                           else end
                                 end
 
-                                if ALLantikill == true or table.find(antikill, v.Name) then
+                                if antisall.antikill == true or table.find(antikill, v.Name) then
                                            if v.Character.Humanoid.Health == 0 then
                                                     Chat("reset "..v.Name)
                                           else end
@@ -9715,19 +9785,19 @@ connections[#connections + 1] =
                                         end
                                 end
 
-                                if ALLantichar == true then
+                                if antisall.antichar == true then
                                            if v.UserId ~= v.CharacterAppearanceId then
                                                       Chat("unchar "..v.Name)
                                         else end
                                 end
 
-                                if ALLantiname == true then
+                                if antisall.antiname == true then
                                            if v and v.Character:FindFirstChildOfClass("Model") then
                                                 Chat("reset "..v.Name)
                                            else end
                                 end
 
-                                if ALLantiparticles == true then
+                                if antisall.antiparticles == true then
                                         local torso = v.Character:WaitForChild("Torso", 1)
                                         for i,x in pairs(torso:GetChildren()) do
                                                 if x:IsA("ParticleEmitter") then
@@ -9737,32 +9807,32 @@ connections[#connections + 1] =
                                             end
                                 end
 
-                                if ALLantipunish == true or table.find(antipunish, v.Name) then
+                                if antisall.antipunish == true or table.find(antipunish, v.Name) then
                                             if game.Lighting:FindFirstChild(v.Name) then
                                                         Chat("unpunish "..v.Name)
                                           else end
                                 end
 
-                                if ALLantirocket == true then
+                                if antisall.antirocket == true then
                                            if v.Character and v.Character:FindFirstChild("Rocket") then
                                                 Chat("reload "..v.Name)
                                           else end
                                 end
 
-                                if ALLantisit == true then
+                                if antisall.antisit == true then
                                             local humanoid = v.Character:WaitForChild("Humanoid", 1)
                                             if humanoid and humanoid.Sit then
                                                         Chat("unsit "..v.Name)
                                         else end
                                 end
 
-                                if ALLantiseizure == true then
+                                if antisall.antiseizure == true then
                                                 if v.Character and v.Character:FindFirstChild("Seizure") then
                                                 Chat("unseizure "..v.Name)
                                           else end
                                 end
 
-                                if ALLantismoke == true then
+                                if antisall.antismoke == true then
                                              if v.Character and v.Character:FindFirstChild("Torso") then
                                                         if v.Character.Torso:FindFirstChild("Smoke") then
                                                             Chat("unsmoke "..v.Name)
@@ -9770,7 +9840,7 @@ connections[#connections + 1] =
                                           else end
                                 end
 
-                                if ALLantisparkles == true then
+                                if antisall.antisparkles == true then
                                         local torso = v.Character:WaitForChild("Torso", 1)
                                         for i,x in pairs(torso:GetChildren()) do
                                                 if x:IsA("Sparkles") then
@@ -9780,13 +9850,13 @@ connections[#connections + 1] =
                                             end
                                 end
 
-                                if ALLantispeed == true then
+                                if antisall.antispeed == true then
                                             if v.Character.Humanoid.WalkSpeed ~= 16 then
                                                 Chat("speed "..v.Name.." 16")
                                          else end
                                 end
 
-                                if ALLantispin == true then
+                                if antisall.antispin == true then
                                         if v.Character and v.Character:FindFirstChild("Torso") then
                                                 if v.Character.Torso:FindFirstChild("SPINNER") then
                                                             Chat("unspin "..v.Name)
@@ -9800,14 +9870,14 @@ connections[#connections + 1] =
                                             end
                                 end
 
-                                if ALLantistun == true then
+                                if antisall.antistun == true then
                                             local humanoid = v.Character:WaitForChild("Humanoid", 1)
                                             if humanoid and humanoid.PlatformStand then
                                                 Chat("unstun "..v.Name)
                                             end
                                 end
 
-                                if ALLantisetgrav == true then
+                                if antisall.antisetgrav == true then
                                         if v.Character and v.Character:FindFirstChild("Torso") then
                                                 if v.Character.Torso:FindFirstChildOfClass("BodyForce") then
                                                         Chat("respawn "..v.Name)
@@ -9815,7 +9885,7 @@ connections[#connections + 1] =
                                                 end
                                 end
 
-                                if ALLantiswag == true then
+                                if antisall.antiswag == true then
                                         if v.Character and v.Character:FindFirstChild("EpicCape") then
                                                 Chat("normal "..v.Name)
                                         end
@@ -16667,7 +16737,7 @@ function createKohlsUi(textTable)
 
 	-- Scripts:
 
-	local function NNQOKB_fake_script() -- Frame_2.LocalScript 
+	local function beginthegui() -- Frame_2.LocalScript 
 		local script = Instance.new('LocalScript', Frame_2)
 
 		function addLabel(txt)
@@ -16708,7 +16778,7 @@ function createKohlsUi(textTable)
 			addLabelWCheck(text)
 		end
 	end
-	coroutine.wrap(NNQOKB_fake_script)()
+	coroutine.wrap(beginthegui)()
 end
 
 if kohlsgui then
@@ -16730,11 +16800,12 @@ Remind("KohlsLite: Griefing KAH since November 2023")
 
 --[[
 Things that this script is missing:
--> Auto crasher
--> Boombox visualiser
--> Part builder
--> Rewrite the anti system
--> Make the playercheck function not terrible
+1. Auto crasher
+2. Rewrite the anti system (On it - ags)
+3. Boombox visualiser (nuhuh)
+4. Part builder
+
+-> I probably won't rewrite the playercheck thing since it works fine I guess. I know it sucks but it would take so dang long to change
 I'll add the features in the priority order they are above. 
 ]]
 
