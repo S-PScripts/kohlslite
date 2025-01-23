@@ -13,6 +13,7 @@
 --[[
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
+Debugged with: https://glot.io/new/lua
 
 KohlsLite is a free, open-source script for the Roblox game created by agspureiam, Kohls Admin House (KAH).
 This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub).
@@ -1772,28 +1773,28 @@ Remind("Say .kcmds and .kcmd2 to see all the commands. Credits: .credits . DM me
 	print("\n")
 end ]]
 	
-	print("\n")
-	print("- Perm check -")
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 66254) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 64354) then
+print("\n")
+print("- Perm check -")
+if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 66254) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 64354) then
         	perm = false 
         	hasperm = true -- used
         	print("A perm pad was not given as you have the Perm Admin gamepass!")
-	else
+else
 		perm = true 
 		hasperm = false
         	print("A perm pad was given as you don't have the Perm Admin gamepass!")
-	end
+end
 
-	print("\n")
-	print("- Persons check -")
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then
-	        haspersons = true -- used!
-	        print("You have Person299's Admin! You have access to every KohlsLite command that use P299!")
-	else
-	        haspersons = false -- used!
-	        print("You have Person299's Admin, so you will not have access to any KohlsLite commands that use P299.")
-	end
-	print("\n") 
+print("\n")
+print("- Persons check -")
+if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then
+	haspersons = true -- used!
+	print("You have Person299's Admin! You have access to every KohlsLite command that use P299!")
+else
+	haspersons = false -- used!
+	print("You have Person299's Admin, so you will not have access to any KohlsLite commands that use P299.")
+end
+print("\n") 
 
 
 Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
