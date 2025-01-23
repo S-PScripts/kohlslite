@@ -9158,7 +9158,7 @@ antis = {
     antihealthchange = false,
     antijail = false,
     antikill = false,
-    antimessage = true,
+    antimessage = false,
     antiname = false,
     antichar = false,
     antiparticles = false,
@@ -9594,17 +9594,17 @@ connections[#connections + 1] =
 
 -- I removed this since it would break the script if you died whilst executing
 -- Credits to trollfacenan (bumanoid)!
-
---[[if game.PlaceId == 112420803 then
+--[[
+if game.PlaceId == 112420803 then
 local lplr = game:GetService("Players").LocalPlayer
 local char = lplr.Character
 
-if lplr.Character:FindFirstChild("Torso") then
-	--
-else
-	local tor = char:WaitForChild("Torso")
-	local oldvel = tor.Velocity
+if lplr.Character:FindFirstChild("Torso") == nil then
+	repeat task.wait() until lplr.Character:FindFirstChild("Torso")
 end
+
+local tor = lplr.Character:FindFirstChild("Torso")
+local oldvel = tor.Velocity
 
 connections[#connections + 1] =
     tor.Changed:Connect(function()
@@ -9654,8 +9654,8 @@ connections[#connections + 1] =
     end)
 else
 	print("Anti-fling disabled (BC) due to minor differences compared to NBC")
-end ]]
-
+end
+]]
 -- Anti mesh
 connections[#connections + 1] =
     game:GetService("RunService").RenderStepped:Connect(function()
