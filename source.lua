@@ -23,6 +23,8 @@ You can also use it for KAH BC but barely anyone plays it. This script isn't rec
 
 KohlsLite is currently the longest/largest Kohls Admin House script freely available. SCV3-VAR and Kozy.Docx are longer than KL but they are paid and not public respectively.
 
+This script is not updated much due to school and other interests, but I'll still add more stuff to come.
+
 This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g: Shortcut v2 src1 being an extension to Shortcut v1).
 
 KohlsLite is a bit like a mixture of all the scripts that already exist in KAH such as:
@@ -50,7 +52,7 @@ KohlsLite is a bit like a mixture of all the scripts that already exist in KAH s
 
 Some of the code here is from other creators, credit has been given, but quite a lot is my own and also some commands can't be changed code-wise that much.
 
-There are no watermarks in this script. There used to exist, but I wanted to make this script more 'premium' like Shortcut v3-VAR.
+There are no watermarks in this script. I included watermarks in my script when I first created it, but I wanted to make this script more 'premium' like Shortcut v3-VAR.
 However, this script DOES have back doors (dev section) due to idiots abusing like crazy using this script.
 
 If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have much advertisements.
