@@ -260,7 +260,7 @@ local pwl = {
     "IceStuds",
     "idonthacklol101ns",
     "Ih0temyIife",
-    "ihatedionte"
+    "ihatedionte",
     "ikbx",
     "kevin3050ti",
     "kohlslitedev",
@@ -318,7 +318,7 @@ local nokick = {
     "IceStuds",
     "idonthacklol101ns",
     "Ih0temyIife",
-    "ihatedionte"
+    "ihatedionte",
     "ikbx",
     "kevin3050ti",
     "kohlslitedev",
@@ -379,7 +379,7 @@ local pgwl = {
     "IceStuds",
     "idonthacklol101ns",
     "Ih0temyIife",
-    "ihatedionte"
+    "ihatedionte",
     "ikbx",
     "kevin3050ti",
     "kohlslitedev",
@@ -5602,11 +5602,17 @@ return
     end
 
     if string.sub(msg:lower(), 1, 6) == 'sneban' then
-        Speak("I'm gonna say the s word. You are a filthy snekkur ngl")
+        Speak("I'm gonna say the s word...")
+	task.wait(1) --# LIGMA #--
+	Speak("You are a filthy snekkur ngl")
     end
 
-    if string.sub(msg:lower(), 1, 6) == 'cmp' then
+    if string.sub(msg:lower(), 1, 3) == 'cmp' then
 	Speak("collect my pages...")
+    end
+
+    if string.sub(msg:lower(), 1, 3) == 'twk' then
+	Speak("THOSE WHO NOSE...")
     end
 
    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'pmap' then
