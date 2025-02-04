@@ -232,7 +232,9 @@ local blacklist = {
 local whitelist = {}
 
 -- Perm Whitelist
- -- yeah i know i should use user ids instead just wait for that update that will come out in 2030 --
+-- I know I should use user IDS instead but I would have to go through all these usernames and since I'm lazy, I don't have the time to do that.
+-- Not to mention recoding the whitelist code
+-- So if you change your username... SUCKS TO BE YOU!!!!
 local pwl = {
     "3akakauuky",
     "3cxos",
@@ -5064,6 +5066,10 @@ return
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'logtrap' then -- scv1
         LogTrap()
 	Remind("Don't do 'logs'...")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'decimate' then
+        for i = 1, 5 do Speak("Shortcut v3-VAR is the bestest script in the whole world") end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'logmode' then
@@ -14267,7 +14273,7 @@ function TAttach()
 	Chat("unpunish me");Chat("invis me")
 end
 
-function DumbGuy()
+function DumbGuy() -- PORTALLLLLLL
         Chat("speed "..dummy.." 0")
         Chat("music 131453190")
         wait(0.2)
@@ -14363,12 +14369,12 @@ function dncycle() -- 9jn said so, inspired by simplekah and kohlsnoob too
         local dntime = 7
         local decdn = 0
         while Loops.dncycle do
-		if Loops.dncycle == false then break end
+		if Loops.dncycle == false then break end -- ew
                 task.wait(0.1)
                 for i = 1,24 do
-			if Loops.dncycle == false then break end
+			if Loops.dncycle == false then break end -- ew
                 	for i = 1,59 do
-				if Loops.dncycle == false then break end
+				if Loops.dncycle == false then break end -- ew
                             task.wait(0.1)
                             decdn = decdn + 1
                             Chat("time " .. dntime .. ":".. decdn)
@@ -16698,7 +16704,7 @@ else
 	Remind("Support my script by buying my gamepass! Just do .purchase.")
 end
 
--- From Shortcut v2 --
+-- This UI is from Shortcut v2 --
 
 function createKohlsUi(textTable)
 	local kohlsUI = Instance.new("ScreenGui")
