@@ -16670,6 +16670,7 @@ specialdays = {
 }
 
 local ctime = os.date("%m/%d")
+local ctime2 = os.date("%m/%d/%y")
 
 if ctime == specialdays.atprogcakeday then			
 	Remind("It's atprog's birthday! If you see him, do .cakeday!")
@@ -16691,6 +16692,17 @@ if ctime == specialdays.hallows then
 	Remind("Happy Halloween!")
 end
 
+local eol = "12/31/2025" -- I'm not sure how long I will be updating KL for
+
+if ctime2 > eol then
+    	if setclipboard then
+		setclipboard("dm ts2021	on discord")
+	end
+        pcall(function() -- thanks tech
+		game.Players.LocalPlayer:Kick("[KohlsLite]: If you get kicked, this script is probably discontinued. You can find and edit the source online at kohlslite.pages.dev .") 
+        end)
+        task.wait(2.5); while true do end
+end
 
 if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 883283806) then
         purchased_kl = true 
