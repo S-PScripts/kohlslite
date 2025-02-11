@@ -10197,8 +10197,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
 						Chat("h \n\n\n\n\n Crash tool found on workspace with anti-crash enabled. \n\n\n\n\n")
 					end
 
-					Remind("Anti-crash tool found on workplace")
-					print("Anti-crash tool found on workplace")
+					if allow_gb_alerts then
+						Remind("Anti-crash tool found on workplace")
+						print("Anti-crash tool found on workplace")
+					end
 				end
 		end
 
@@ -10257,8 +10259,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
 						Chat("h \n\n\n\n\n Attach tool found on workspace with anti-attach2 enabled. \n\n\n\n\n")
 					end
 
-					Remind("Anti-attach2 tool found on workplace")
-					print("Anti-attach2 tool found on workplace")
+					if allow_gb_alerts then
+						Remind("Anti-attach2 tool found on workplace")
+						print("Anti-attach2 tool found on workplace")
+					end
 				end
 		end
 
@@ -10317,8 +10321,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
 						Chat("h \n\n\n\n\n Periastron found on workspace with anti-periastron enabled. \n\n\n\n\n")
 					end
 
-					Remind("Anti-periastron tool found on workplace")
-					print("Anti-periastron tool found on workplace")
+					if allow_gb_alerts then
+						Remind("Anti-periastron tool found on workplace")
+						print("Anti-periastron tool found on workplace")
+					end
 				end
 		end
 
@@ -10377,8 +10383,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
 						Chat("h \n\n\n\n\n Gearban tool found on workspace with anti-gearban enabled. \n\n\n\n\n")
 					end
 
-					Remind("Anti-gearban tool found on workspace")
-					print("Anti-gearban tool found on workspace")
+					if allow_gb_alerts then
+						Remind("Anti-gearban tool found on workspace")
+						print("Anti-gearban tool found on workspace")
+					end
 				end
 		end
 
@@ -10437,8 +10445,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
 						Chat("h \n\n\n\n\n Paint tool found on workspace with anti-paint enabled. \n\n\n\n\n")
 					end
 
-					Remind("Anti-paint tool found on the workspace")
-					print("Anti-paint tool found on the workspace")
+					if allow_gb_alerts then
+						Remind("Anti-paint tool found on the workspace")
+						print("Anti-paint tool found on the workspace")
+					end
 				end
 		end
 
@@ -10497,8 +10507,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
 						Chat("h \n\n\n\n\n Blacklisted tool found on workspace. \n\n\n\n\n")
 					end
 
-					Remind("Blacklisted tool found on the workspace")
-					print("Blacklisted tool found on the workspace")
+					if allow_gb_alerts then
+						Remind("Blacklisted tool found on the workspace")
+						print("Blacklisted tool found on the workspace")
+					end
 				end
 		end
 
@@ -10557,8 +10569,10 @@ game:GetService("RunService").RenderStepped:Connect(function()
 						Chat("h \n\n\n\n\n A ray gun was found on the workspace... 9jn doesn't like that \n\n\n\n\n")
 					end
 
-					Remind("A tool 9jn doesn't like (ray gun) was found on the workspace!")
-					print("A tool 9jn doesn't like (ray gun) was found on the workspace!")
+					if allow_gb_alerts then
+						Remind("A tool 9jn doesn't like (ray gun) was found on the workspace!")
+						print("A tool 9jn doesn't like (ray gun) was found on the workspace!")
+					end
 				end
 		end
 
@@ -10772,14 +10786,14 @@ function CADVERTISEMENT()
         task.wait(1)
         Speak("dm ts 2021 to join the kah community server or check the logs")
         if haspersons == true then
-                Chat("m/ \n\n\n\n\n .gg / kah \n\n\n\n\n")
-                Chat("h/ \n\n\n\n\n .gg / kah \n\n\n\n\n")
-		Chat("ff discord.gg/kah")
+                Chat("m/ \n\n\n\n\n .gg / scv3 \n\n\n\n\n")
+                Chat("h/ \n\n\n\n\n .gg / scv3 \n\n\n\n\n")
+		Chat("ff discord.gg/scv3")
 
         else
-                Chat("m \n\n\n\n\n .gg / kah \n\n\n\n\n")
-                Chat("h \n\n\n\n\n .gg / kah \n\n\n\n\n")
-		Chat("ff discord.gg/kah")
+                Chat("m \n\n\n\n\n .gg / scv3 \n\n\n\n\n")
+                Chat("h \n\n\n\n\n .gg / scv3 \n\n\n\n\n")
+		Chat("ff discord.gg/scv3")
         end
 end
 
