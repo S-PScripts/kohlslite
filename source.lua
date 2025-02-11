@@ -5356,6 +5356,26 @@ return
 	Remind("Non-perm players can now get admin again.")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'noregen' then
+        SRegen = true
+	Remind("Non-perm players can no longer get admin.")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unnoregen' then
+        SRegen = false
+	Remind("Non-perm players can now get admin again.")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antiregen' then
+        SRegen = true
+	Remind("Non-perm players can no longer get admin.")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unantiregen' then
+        SRegen = false
+	Remind("Non-perm players can now get admin again.")
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'autogpc' then
         autogpcheck = true
 	Remind("Now checking players for perm and persons upon joining.")
@@ -5416,18 +5436,26 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'biglogs' then
-	    danum = tonumber(string.sub(msg:lower(), #prefix + 9))
-	    if danum == "" then
+	if IsOnMobile then
+		Remind("You're on mobile! It would be so big that you wouldn't be able to close the GUI!")
+	else
+	    	danum = tonumber(string.sub(msg:lower(), #prefix + 9))
+	    	if danum == "" then
             		game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScrollGui").TextButton.Frame.Size = UDim2.new(0,1000,0,1000)
-	    else
+	    	else
 			game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScrollGui").TextButton.Frame.Size = UDim2.new(0,danum,0,danum)
-	    end
-	    Remind("If you did this on mobile... you're dumb.")
+	    	end
+		Remind("If you did this on mobile somehow... you're dumb.")
+	end    
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'regen' then
         Regen()
 	Remind("Reset the admin pads.")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'rregen' then
+        Regen()
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'house' then
@@ -9988,6 +10016,7 @@ local crashToolsLP =
 -- Function for the antis
 -- Might add isB functionality
 debounce_antis = false
+i_care = true -- so you don't get a lot of those anti messages and stuff
 game:GetService("RunService").RenderStepped:Connect(function()
         	task.wait(0)
 
@@ -10005,14 +10034,17 @@ game:GetService("RunService").RenderStepped:Connect(function()
 							Chat("ungear " .. v.Name)
 							Chat("punish " .. v.Name)
 							Chat("clr")
-							Chat(prefix.."regen")
+							Regen()
 
 							if crash_an then
 								Chat("h \n\n\n\n\n "..v.Name.." tried using a tool with anti-gear enabled. \n\n\n\n\n")
 							end
 							debounce_antis = true
-							Remind("Anti-gear triggered by "..v.Name)
-							print("Anti-gear triggered by "..v.Name)
+
+							if i_care then -- i gotta take a spit i'll finish adding this later... I hope
+								Remind("Anti-gear triggered by "..v.Name)
+								print("Anti-gear triggered by "..v.Name)
+							end
 						end
 					end
 				end
@@ -10023,7 +10055,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 							Chat("ungear " .. v.Name)
 							Chat("punish " .. v.Name)
 							Chat("clr")
-							Chat(prefix.."regen")
+							Regen()
 
 							if crash_an then
 								Chat("h \n\n\n\n\n "..v.Name.." tried using a tool with anti-gear enabled. \n\n\n\n\n")
@@ -10044,7 +10076,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear others")
 								Chat("punish others")
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n Someone tried using a crash tool with anti-crash enabled. \n\n\n\n\n")
@@ -10061,7 +10093,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a crash tool with anti-crash enabled. \n\n\n\n\n")
@@ -10084,7 +10116,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear others")
 								Chat("punish others")
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n Someone tried using a crash tool with anti-crash enabled. \n\n\n\n\n")
@@ -10101,7 +10133,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a crash tool with anti-crash enabled. \n\n\n\n\n")
@@ -10123,7 +10155,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					Chat("ungear others")
 					Chat("punish others")
 					Chat("clr")
-					Chat(prefix .. "regen")
+					Regen()
 
 					if crash_an then
 						Chat("h \n\n\n\n\n Crash tool found on workspace with anticrash enabled. \n\n\n\n\n")
@@ -10142,7 +10174,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a attaching tool with anti-attach2 enabled. \n\n\n\n\n")
@@ -10160,7 +10192,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a attaching tool with anti-attach2 enabled. \n\n\n\n\n")
@@ -10177,7 +10209,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					Chat("ungear others")
 					Chat("punish others")
 					Chat("clr")
-					Chat(prefix .. "regen")
+					Regen()
 
 					if crash_an then
 						Chat("h \n\n\n\n\n Attach tool found on workspace with anti-attach2 enabled. \n\n\n\n\n")
@@ -10196,7 +10228,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a periastron with anti-periastron enabled. \n\n\n\n\n")
@@ -10214,7 +10246,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a periastron with anti-periastron enabled. \n\n\n\n\n")
@@ -10231,7 +10263,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					Chat("ungear others")
 					Chat("punish others")
 					Chat("clr")
-					Chat(prefix .. "regen")
+					Regen()
 
 					if crash_an then
 						Chat("h \n\n\n\n\n Periastron found on workspace with anti-periastron enabled. \n\n\n\n\n")
@@ -10250,7 +10282,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a gearban tool with anti-gearban enabled. \n\n\n\n\n")
@@ -10268,7 +10300,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a gearban tool with anti-gearban enabled. \n\n\n\n\n")
@@ -10285,7 +10317,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					Chat("ungear others")
 					Chat("punish others")
 					Chat("clr")
-					Chat(prefix .. "regen")
+					Regen()
 
 					if crash_an then
 						Chat("h \n\n\n\n\n Gearban tool found on workspace with anti-gearban enabled. \n\n\n\n\n")
@@ -10304,7 +10336,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a paint tool with anti-paint enabled. \n\n\n\n\n")
@@ -10322,7 +10354,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a paint tool with anti-paint enabled. \n\n\n\n\n")
@@ -10339,7 +10371,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					Chat("ungear others")
 					Chat("punish others")
 					Chat("clr")
-					Chat(prefix .. "regen")
+					Regen()
 
 					if crash_an then
 						Chat("h \n\n\n\n\n Paint tool found on workspace with anti-paint enabled. \n\n\n\n\n")
@@ -10358,7 +10390,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a blacklisted tool. \n\n\n\n\n")
@@ -10376,7 +10408,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using a blacklisted tool. \n\n\n\n\n")
@@ -10393,7 +10425,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					Chat("ungear others")
 					Chat("punish others")
 					Chat("clr")
-					Chat(prefix .. "regen")
+					Regen()
 
 					if crash_an then
 						Chat("h \n\n\n\n\n Blacklisted tool found on workspace. \n\n\n\n\n")
@@ -10412,7 +10444,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using the ray gun... 9jn doesn't like that! \n\n\n\n\n")
@@ -10430,7 +10462,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
-								Chat(prefix .. "regen")
+								Regen()
 
 								if crash_an then
 									Chat("h \n\n\n\n\n "..v.Name.." tried using the ray gun... 9jn doesn't like that! \n\n\n\n\n")
@@ -10447,7 +10479,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					Chat("ungear others")
 					Chat("punish others")
 					Chat("clr")
-					Chat(prefix .. "regen")
+					Regen()
 
 					if crash_an then
 						Chat("h \n\n\n\n\n A ray gun was found on the workspace... 9jn doesn't like that \n\n\n\n\n")
