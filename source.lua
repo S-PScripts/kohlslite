@@ -73,7 +73,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.050", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite ♥️ X1.050", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -16851,6 +16851,7 @@ specialdays = {
  	christmas = "12/25", -- Christmas
  	happyny = "01/01", -- (Happy) New Year
  	hallows = "10/31" -- Halloween
+	valentines = "14/02" -- Valentine's Day
 }
 
 local ctime = os.date("%m/%d")
@@ -16874,6 +16875,10 @@ end
 
 if ctime == specialdays.hallows then
 	Remind("Happy Halloween!")
+end
+
+if ctime == specialdays.valentines then
+	Remind("Happy Valentine's Day!")
 end
 
 local eol = "12/31/2025" -- I'm not sure how long I will be updating KL for
