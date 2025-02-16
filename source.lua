@@ -16850,7 +16850,7 @@ specialdays = {
  	spcakeday = "04/28", -- mine
  	christmas = "12/25", -- Christmas
  	happyny = "01/01", -- (Happy) New Year
- 	hallows = "10/31" -- Halloween
+ 	hallows = "10/31", -- Halloween
 	valentines = "14/02" -- Valentine's Day
 }
 
