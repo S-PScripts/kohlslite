@@ -123,6 +123,217 @@ else
 	end
 end
 
+-- Edited knock's autocrasher
+-- Original can be found here: https://github.com/blueskykah/Solinium/blob/main/Solinium%20Autocrasher
+-- This should be in your autoexecute!!!!!!!!!!!!!!!!!!
+
+function acperm()
+	task.spawn(function()
+    		while true do
+        		task.wait(0)
+        		if perm2 == true then
+            			if not game:GetService("Workspace").Terrain["_Game"].Admin.Pads:FindFirstChild(game.Players.LocalPlayer.Name .. "'s admin") then
+					gotapad = false
+                  			if game:GetService("Workspace").Terrain["_Game"].Admin.Pads:FindFirstChild("Touch to get admin") then
+                      				local pad = game:GetService("Workspace").Terrain["_Game"].Admin.Pads:FindFirstChild("Touch to get admin"):FindFirstChild("Head")
+                      				local padCFrame = game:GetService("Workspace").Terrain["_Game"].Admin.Pads:FindFirstChild("Touch to get admin"):FindFirstChild("Head").CFrame
+                      				task.wait(0.125)
+                      				pad.CanCollide = false
+                      				repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                      				pad.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                      				task.wait(0.125)
+                      				pad.CFrame = padCFrame
+                      				pad.CanCollide = true
+						gotapad = true
+                  			else
+                        			Regen()
+                  			end
+           		 	end
+        		end
+  		end
+	end)
+end
+
+function shopac() -- Autocrasher serverhop
+    if not ratelimited then
+        local NBC =
+            	game:GetService("HttpService"):JSONDecode(
+            		game:HttpGet("https://games.roblox.com/v1/games/112420803/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true")
+        	)
+		
+        local BC =
+            	game:GetService("HttpService"):JSONDecode(
+            		game:HttpGet("https://games.roblox.com/v1/games/115670532/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true")
+        	)
+
+        if NBC["errors"] and getgenv().actype == "All" or getgenv().actype == "NBC" then
+            print("Failed to server hop. Retrying in 5 seconds...")
+            task.spawn(function()
+                ratelimited = true
+                task.wait(5)
+                ratelimited = false
+            end)
+            return
+        end
+
+        if BC["errors"] and getgenv().actype == "All" or getgenv().actype == "BC" then
+            print("Failed to server hop. Retrying in 5 seconds...")
+            task.spawn(function()
+                ratelimited = true
+                task.wait(5)
+                ratelimited = false
+            end)
+            return
+        end
+		
+        print("Checking for servers...")
+        local NBC_data = NBC.data
+        local BC_data = BC.data
+
+        local servers_found = {}
+
+	if getgenv().actype == "All" or getgenv().actype == "NBC" then
+        	for i, v in pairs(NBC_data) do
+            		if type(v) == "table" and v.id ~= game.JobId and tonumber(v.playing) < tonumber(v.maxPlayers) and not table.find(v.playerTokens, getgenv().playertoken) then
+                		table.insert(servers_found, {["Version"] = "NBC", ["Job"] = v.id})
+            		end
+        	end
+	end
+
+	if getgenv().actype == "All" or getgenv().actype == "BC" then
+        	for i, v in pairs(BC_data) do
+           		if type(v) == "table" and v.id ~= game.JobId and tonumber(v.playing) < tonumber(v.maxPlayers) and not table.find(v.playerTokens, getgenv().playertoken) then
+               	 		table.insert(servers_found, {["Version"] = "BC", ["Job"] = v.id})
+            		end
+        	end
+	end
+		
+        if #servers_found > 0 then
+            local servertohop = servers_found[math.random(1, #servers_found)]
+            if servertohop["Version"] == "NBC" then
+                game:GetService("TeleportService"):TeleportToPlaceInstance(112420803, servertohop["Job"])
+            elseif servertohop["Version"] == "BC" then
+                game:GetService("TeleportService"):TeleportToPlaceInstance(115670532, servertohop["Job"])
+	    else end
+        else
+            print("No servers available...")
+        end
+    end
+end
+
+--[[
+To be added to the loadstring.
+getgenv().autocrasher = false -- Turn this on and it will autocrash KAH's servers.
+getgenv().playertoken = ' ' -- You must get this. Go to  kohlslite.pages.dev/Assets/PLAYERTOKEN.lua for instructions.
+getgenv().acgames = "All" -- What KAH games you want to crash ("All" for NBC and BC, "NBC" for NBC only, "BC" for BC only).
+getgenv().whitelistedppl = {"ScriptingProgrammer"} -- It will not crash servers that have whitelisted players.
+getgenv().perm = false -- If you don't have the perm gamepass, turn this on and it will give you a pad.
+getgenv().acmode = "Dog" -- How you want to crash the server (Dog, Freeze, Shield).
+]]
+
+if getgenv().autocrasher then
+	if getgenv().playertoken then
+		if getgenv().acgames then
+			if getgenv().acgames == "All" or getgenv().acgames == "NBC" or getgenv().acgames == "BC" then 
+				--
+			elseif getgenv().acgames == "NP" then
+				getgenv().acgames = "All"
+				print("NP is unsupported. Crashing NBC and BC as default.")
+			else
+				getgenv().acgames = "All"
+				print("Autocrash games invalid, crashing NBC and BC as default.")
+			end
+		else
+			getgenv().acgames = "All"
+			print("Autocrash games not set, crashing NBC and BC as default.")
+		end
+
+		repeat task.wait() until game:IsLoaded()
+
+		ac_continue = true
+		if getgenv().whitelistedppl then
+			for i, v in pairs(game.Players:GetPlayers()) do
+        			if table.find(getgenv().whitelistedppl, v.Name) then
+            				print("Whitelisted player found: " .. v.Name)
+					ac_continue = false
+					break
+				end
+			end
+			
+            		repeat task.wait()
+                		shopac()
+            		until false
+		end
+
+		if ac_continue then
+			if getgenv().perm then
+				perm2 = true
+				acperm()
+			else 
+				gotapad = true
+			end
+
+			repeat task.wait() until gotapad == true
+			
+			if getgenv().acmode then
+				if getgenv().acmode == "Dog" then
+      					for i = 1,100 do
+          					Chat("clone all all all                                discord")
+          					Chat("dog all all all                                  discord")
+      					end
+				elseif getgenv().acmode == "Freeze" then
+      					for i = 1,100 do
+          					Chat("clone all all all                                discord")
+          					Chat("freeze all all all                                  discord")
+      					end
+				elseif getgenv().acmode == "Shield" then
+				      	for i = 1,100 do
+          					Chat("shield/all/all/all")
+          					Chat("rocket/all/all/all")
+          					Chat("clone all all all			discord")
+      					end
+				else
+					print("Invalid auto crash mode used, using Dog as default.")
+					for i = 1,100 do
+          					Chat("clone all all all                                discord")
+          					Chat("dog all all all                                  discord")
+      					end
+				end
+			else
+					print("Auto crash mode unconfigured, using Dog as default.")
+					for i = 1,100 do
+          					Chat("clone all all all                                discord")
+          					Chat("dog all all all                                  discord")
+      					end
+			end
+				
+			print("Server crashed. JobId: "..game.JobId)
+
+			task.wait(2)
+
+			repeat task.wait()
+                		shopac()
+            		until false
+		end
+
+    else
+	getgenv().autocrasher = false
+	if setclipboard then
+			Remind("You must have your player token to use the autocrasher. Check what has been printed in /console.", 2)
+			print("COPY THE CODE IN THIS WEBSITE: kohlslite.pages.dev/Assets/PLAYERTOKEN.lua")
+			print("It has also been copied to your clipboard.")
+			print("Once you have copied the code, join an empty server and run the code. Next, open a text editor like Notepad and find a string that looks like this: '5568CCBED82CD30E127119030810CE98'.")
+			print("Once you have found the string, copy it and input it into the playertoken variable.")
+			setclipboard(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true"))
+	else
+			Remind("You must have your player token to use the autocrasher. Check what has been printed in /console.", 2)
+			print("COPY THE CODE IN THIS WEBSITE: kohlslite.pages.dev/Assets/PLAYERTOKEN.lua")
+			print("Once you have copied the code, join an empty server and run the code. Next, open a text editor like Notepad and find a string that looks like this: '5568CCBED82CD30E127119030810CE98'.")
+			print("Once you have found the string, copy it and input it into the playertoken variable.")		
+	end
+   end
+end
+
 -- Loader
 if not game:IsLoaded() then
     local notLoaded = Instance.new("Message")
@@ -133,25 +344,8 @@ if not game:IsLoaded() then
 end
 
 if getgenv().autocrasher then
-	if getgenv().playertoken then
-		--
-	else
-		if setclipboard then
-			Remind("You must have your player token to use the autocrasher. You can get your player token by running the code printed in /console.", 5)
-			print("COPY THE CONTENTS IN THIS WEBSITE: kohlslite.pages.dev/Assets/PLAYERTOKEN.lua")
-			print("It has also been copied to your clipboard.")
-			print("Once you have copied the code, join an empty server and run the code. Next, open a text editor like Notepad and find a string.")
-			setclipboard(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true"))
-		else
-			Remind("You must have your player token to use the autocrasher. You can get your player token by running the code printed in /console.", 5)
-			print("COPY THE CONTENTS IN THIS WEBSITE: kohlslite.pages.dev/Assets/PLAYERTOKEN.lua")
-		end
-	end
+	return 
 end
-
---if autocrasher then
---	return 
---end
 
 --loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 
@@ -529,9 +723,9 @@ gb_on_sight = {}
 
 -- Variables for moving
 local movestatus = false
- Kohls = workspace.Terrain:WaitForChild("_Game")
- Admin = Kohls:WaitForChild("Admin")
- Pads = Admin:WaitForChild("Pads"):GetChildren()
+Kohls = workspace.Terrain:WaitForChild("_Game")
+Admin = Kohls:WaitForChild("Admin")
+Pads = Admin:WaitForChild("Pads"):GetChildren()
 
 -- These are all of the music ids I've saved
 -- YOU SHOULD DO song instead of gmusic FOR BETTER ONES THESE ARE ONLY ONES I GOT FROM VIDEOS AND THEY SUCK
@@ -17075,7 +17269,7 @@ Remind("KohlsLite: Griefing KAH since 2024")
 
 --[[
 Things that this script is missing:
-1. Auto crasher
+1. Auto crasher - added,  untested
 2. Rewrite the anti system (so it works for individual players)
 3. Boombox visualiser
 4. Part builder
