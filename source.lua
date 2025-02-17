@@ -1,5 +1,5 @@
 --[[
-This script may get discontinued. Here's why:
+Here's some facts:
 - Kohls Admin House is a dead inactive game. It only really gets like 10 players at max.
 - Even Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing, even 1,000 sometimes.
 - This is partially because it doesn't get boring fast unlike KAH. KAH is just you trying some admin commands, nothing else.
@@ -7,7 +7,7 @@ This script may get discontinued. Here's why:
 - You can just use Solinium for a part builder/auto-crasher.
 - This script also already has the most antis so I won't add antis for individual players/rewrite the anti system.
 
-Credits to Dawninja for giving me sense because to be honest, I kind of needed to know
+Credits to Dawninja for giving me sense because, to be honest, I kind of needed to know
 TS2021 17/2/25
 ]]
 
