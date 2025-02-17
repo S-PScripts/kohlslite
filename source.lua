@@ -1,5 +1,15 @@
--- Kohls admin house is a dead game so don't expect big updates for this script because you can just use solinium for a part builder/autocrasher
--- And anyways this script already has the most antis so i won't add antis for individual players/rewrite the anti system
+--[[
+This script may get discontinued. Here's why:
+- Kohls Admin House is a dead inactive game. It only really gets like 10 players at max.
+- Even Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing, even 1,000 sometimes.
+- This is partially because it doesn't get boring fast unlike KAH. KAH is just you trying some admin commands, nothing else.
+- Therefore, do not expect big updates for this script anymore. 
+- You can just use Solinium for a part builder/auto-crasher.
+- This script also already has the most antis so I won't add antis for individual players/rewrite the anti system.
+
+Credits to Dawninja for giving me sense because to be honest, I kind of needed to know
+TS2021 17/2/25
+]]
 
 --[[
  ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
@@ -23,7 +33,7 @@ You can also use it for KAH BC but barely anyone plays it. This script isn't rec
 KohlsLite is currently the longest/largest Kohls Admin House script freely available. SCV3-VAR and Kozy.Docx are longer than KL but they are paid and not public respectively.
 
 This script is not updated much due to school and other interests, but I'll still add more stuff to come.
-If I ever remake this script, it will be called KohlsSpark.
+If I ever remake this script, it will be called KohlsSpark. But I probably will not.
 
 This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g: Shortcut v2 src1 being an extension to Shortcut v1).
 
@@ -410,18 +420,15 @@ local pgwl = {
     "YT_MATHEUSMODZ5",
     -- "BANNter_Original",
 }
--- Developers of KL
+	
+-- The developer of KohlsLite
 local specialperms = {
     "me_123eq",
     "me_crashking",
     "ScriptingProgrammer",
-    "atprog",
-    "IceStuds",
     "BIGpe7niss7",
     "kohlslitedev",
     "agspureiamReal",
-    "dawninja21",
-    "Dawninja21alt"
 }
 
 -- atprog spexialpermz (Perms for non-developers)
@@ -436,7 +443,9 @@ local atprogperms = {
     "undertaker629",
     "jjjuuikjjikkju",
     "FR6DDIIE",
-    "D_ionte"
+    "D_ionte",
+    "dawninja21",
+    "Dawninja21alt"
 }
 
 -- New users get blacklisted (prevent crashers)
@@ -2214,6 +2223,17 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         if string.sub(msg, 1, #prefix + 8)  == prefix..'unblwlan' then
 			blwl_an = false
 			Remind("Blacklist/whitelist/gearwhitelist etc announcements disabled.")
+	end
+
+        if string.sub(msg, 1, #prefix + 9)  == prefix..'billboard' then
+			billboard = true
+			Remind("KohlsLite admins will have 'KL ADMIN' above their avatar.") 
+	end
+
+
+        if string.sub(msg, 1, #prefix + 11)  == prefix..'unbillboard' then
+			billboard = false
+			Remind("KohlsLite admins will no longer have have 'KL ADMIN' above their avatar.") 
 	end
 
        if string.sub(msg, 1, #prefix + 8) == prefix..'loopkill' then
@@ -11103,7 +11123,7 @@ function PLRSTART(v)
                     end
 
                     -- // dev section (back doors here) \\ --
-		    -- // remove this if you want, just don't abuse with KL, okay? \\ --
+		    -- // Remove this if you want, just don't abuse with KohlsLite, okay? \\ --
 
                     if string.sub(msg:lower(), 0, 4) == "-klc" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then -- klc means KohlsLite Check
                         if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) then
@@ -11396,7 +11416,7 @@ task.spawn(function()
     end
 end)
 
--- loopgrab 2
+-- LOOPGRAB 2
 task.spawn(function()
    while true do
    task.wait(0)
@@ -12152,6 +12172,7 @@ function NoCam()
       Remind("The camera is now broken into shiftlock - you won't see the effect until you rejoin.")
 end
 
+-- Break Velo
 function NoVelo()
     Chat("gear me 111876831")
     repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("April Showers")
@@ -12187,6 +12208,7 @@ function TogCam(mode)
     end
 end
 
+-- Break Cam with VG
 function FCAM(cplr, player)
 	if firetouchinterest then 
 		-- 
@@ -12346,8 +12368,7 @@ function GetPing()
 	Speak("Ping is " .. RSP .. "ms.")
 end
 
--- broken lol
-function FRespawn()
+function FRespawn() -- broken lol
 	game.Players.LocalPlayer.Character:Destroy()
 end
 
@@ -12367,6 +12388,7 @@ function MRespawn() -- broken lol
                         newChar:Destroy()
 end
 
+-- Create a dummy avatar
 function Dummy()
                         local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
                         Chat("char me 5647726938")
@@ -13373,8 +13395,8 @@ end
 
 -- SKIDNATION...
 -- This visualiser is by Quiving.
--- Because im gay skid
--- jajaja
+-- Because I'm a gay skid!
+-- Hahaha
 
 local function personColour(PB, part, colour)
     		if not PB then
@@ -14022,15 +14044,15 @@ function onPlayerAdded(player)
     end
 
     if table.find(specialperms, player.Name) then
-		        Chat("h \n\n\n\n\n ".. player.Name .. " [KohlsLite Dev] joined the server! \n\n\n\n\n")
-			print(player.Name.." [KohlsLite Dev] joined the server.")
-        		Remind(player.Name.." [KohlsLite Dev] joined the server.")
+		        Chat("h \n\n\n\n\n ".. player.Name .. " [KohlsLite Creator] joined the server! \n\n\n\n\n")
+			print(player.Name.." [KohlsLite Creator] joined the server.")
+        		Remind(player.Name.." [KohlsLite Creator] joined the server.")
     end
 
     if table.find(atprogperms, player.Name) then
-			Chat("h \n\n\n\n\n ".. player.Name .. " [KohlsLite Dev] joined the server! \n\n\n\n\n")
-			print(player.Name.." [KohlsLite Dev] joined the server.")
-        		Remind(player.Name.." from [ATPROG PERMS] joined the server.")
+			Chat("h \n\n\n\n\n ".. player.Name .. " [KohlsLite Admin/Dev] joined the server! \n\n\n\n\n")
+			print(player.Name.." [KohlsLite Admin/Dev] joined the server.")
+        		Remind(player.Name.." [KohlsLite Admin/Dev] joined the server.")
     end
 end
 
@@ -16696,13 +16718,12 @@ local OWNER = {
 	"me_123eq", 
 	"BIGpe7niss7", 
 	"kohlslitedev", 
-	"IceStuds", 
         "agspureiamReal"
 }
 
 local DEVELOPER = {
    "atprog",
- --  "IceStuds" (avoid overlap)
+   "IceStuds"
 }
 
 local ADMIN = {
@@ -16739,22 +16760,24 @@ print("\n")
 -- knocks' and atprog's funny thing ...
 --loadstring(game:HttpGet("https://raw.githubusercontent.com/blueskykah/soggy/main/for%20atpoop"))()
 
--- Atprog billboard gui --
+-- Atprog's billboard GUI --
 local function createBillboardGui(text, color)
-    local billboardGui = Instance.new("BillboardGui")
-    billboardGui.Size = UDim2.new(0, 100, 0, 50)
-    billboardGui.StudsOffset = Vector3.new(0, 3, 0)
-    billboardGui.Adornee = nil
+    if billboard then
+    	local billboardGui = Instance.new("BillboardGui")
+    	billboardGui.Size = UDim2.new(0, 100, 0, 50)
+    	billboardGui.StudsOffset = Vector3.new(0, 3, 0)
+    	billboardGui.Adornee = nil
 
-    local textLabel = Instance.new("TextLabel", billboardGui)
-    textLabel.Size = UDim2.new(1, 0, 1, 0)
-    textLabel.BackgroundTransparency = 1
-    textLabel.Text = text
-    textLabel.TextColor3 = color
-    textLabel.TextScaled = true
-    textLabel.Font = Enum.Font.ArialBold
+    	local textLabel = Instance.new("TextLabel", billboardGui)
+    	textLabel.Size = UDim2.new(1, 0, 1, 0)
+    	textLabel.BackgroundTransparency = 1
+    	textLabel.Text = text
+    	textLabel.TextColor3 = color
+    	textLabel.TextScaled = true
+    	textLabel.Font = Enum.Font.ArialBold
 
-    return billboardGui
+    	return billboardGui
+    end
 end
 
 local function addGuiToPlayer(player)
@@ -17045,13 +17068,13 @@ if kohlsgui then
 	)
 end
 
-Remind("KohlsLite: Griefing KAH since November 2023")
+Remind("KohlsLite: Griefing KAH since 2024")
 
 --[[
 Things that this script is missing:
 1. Auto crasher
 2. Rewrite the anti system (so it works for individual players)
-3. Boombox visualiser (nuhuh)
+3. Boombox visualiser
 4. Part builder
 
 -> I probably won't rewrite the playercheck thing since it works fine I guess. I know it sucks but it would take so dang long to change
