@@ -1,3 +1,6 @@
+-- Kohls admin house is a dead game so don't expect big updates for this script because you can just use solinium for a part builder/autocrasher
+-- And anyways this script already has the most antis so i won't add antis for individual players/rewrite the anti system
+
 --[[
  ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
 |\  \|\  \ |\   __  \|\  \|\  \|\  \     |\   ____\|\  \     |\  \|\___   ___\\  ___ \ 
@@ -17047,7 +17050,7 @@ Remind("KohlsLite: Griefing KAH since November 2023")
 --[[
 Things that this script is missing:
 1. Auto crasher
-2. Rewrite the anti system (On it - ags)
+2. Rewrite the anti system (so it works for individual players)
 3. Boombox visualiser (nuhuh)
 4. Part builder
 
