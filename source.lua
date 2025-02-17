@@ -137,7 +137,10 @@ if getgenv().autocrasher then
 		--
 	else
 		if setclipboard then
-			Remind("You must have your player token to use the autocrasher. You can get your player token by running the code that has been set to your clipboard.", 5)
+			Remind("You must have your player token to use the autocrasher. You can get your player token by running the code printed in /console.", 5)
+			print("COPY THE CONTENTS IN THIS WEBSITE: kohlslite.pages.dev/Assets/PLAYERTOKEN.lua")
+			print("It has also been copied to your clipboard.")
+			print("Once you have copied the code, join an empty server and run the code. Next, open a text editor like Notepad and find a string.")
 			setclipboard(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true"))
 		else
 			Remind("You must have your player token to use the autocrasher. You can get your player token by running the code printed in /console.", 5)
