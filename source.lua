@@ -18,7 +18,7 @@ TS2021 17/2/25
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.055
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.07
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -86,7 +86,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite FREE DEKRYPTIONITE", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.07", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -356,7 +356,7 @@ getgenv().kohlsexecuted = true
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.055"
+getgenv().klversion = "X1.07"
 
 -- KohlsLite Start Gui
 kohlsgui = false
