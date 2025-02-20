@@ -93,9 +93,9 @@ end
 local prefix 
 
 if getgenv().theprefix then
-   prefix = getgenv().theprefix
+   	prefix = getgenv().theprefix
 else
-	  prefix = getgenv().deprefix
+	prefix = getgenv().deprefix
 end
 
 -- Defaults (you can change these)
@@ -110,15 +110,15 @@ Stats.starttime = os.clock()
 
 -- Start up scripts
 local function startupScripts()
-     if not getgenv().autoruncmds then
+     	if not getgenv().autoruncmds then
         	for i = 1, #defaults do
-             Chat(defaults[i]) 
-         end
-     else
+             		Chat(defaults[i]) 
+         	end
+	else
         	for i = 1, #getgenv().autoruncmds do
-             Chat(getgenv().autoruncmds[i])
-         end
-     end
+             		Chat(getgenv().autoruncmds[i])
+         	end
+     	end
 end
 
 print("PrisonX executed! Version: "..getgenv().klversion)
