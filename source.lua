@@ -735,7 +735,7 @@ Pads = Admin:WaitForChild("Pads"):GetChildren()
 local musicplay
 
 local musictable = {
-    ["1"] = {id = "9048375035", name = "All dropping 8 beats"},
+    ["1"] = {id = "9048375035", name = "All Dropping 8 Bit Beats"},
     ["2"] = {id = "1839029458", name = "Exotico Speedo"},
     ["3"] = {id = "35930009", name = "Monster Mash"},
     ["4"] = {id = "11808880515", name = "naomi_d - Demons"},
@@ -753,7 +753,7 @@ local musictable = {
     ["16"] = {id = "1838097718", name = "Royal Dedication"},
     ["17"] = {id = "9038845849", name = "Synths Infusion A"},
     ["18"] = {id = "1843622301", name = "Mumbai Moon"},
-    ["19"] = {id = "14145620056", name = "The Final Phonk"},
+    ["19"] = {id = "14145620056", name = "Phonk Vol. 2 - The Final Phonk"},
     ["20"] = {id = "13530437708", name = "0to8,1xmxxd - in ohio"},
     ["21"] = {id = "14145627857", name = "Catch My Drift"},
     ["22"] = {id = "14145624031", name = "Phonk Vol. 1 - Step Up Or Step Back"},
@@ -857,6 +857,21 @@ local musictable = {
     ["120"] = {id = "1843468325", name = "Shake it"},
     ["121"] = {id = "1846575559", name = "Diamonds"},
     ["122"] = {id = "1845756489", name = "Town Talk"},
+    ["123"] = {id = "1840684529", name = "Cool Vibes"},
+    ["124"] = {id = "9069333086", name = "SCP 096 Panic New"}, -- 1/130 roulette rgmusic
+    ["125"] = {id = "1839857296", name = "Convenience Store"},
+    ["126"] = {id = "9046862941", name = "Sunset Chill (Bed Version)"},
+    ["127"] = {id = "1840684208", name = "Playground Of The Stars (A)"},
+    ["128"] = {id = "1845341094", name = "Chill Jazz"},
+    ["129"] = {id = "1840434670", name = "Funky (A)"},
+    ["130"] = {id = "1842241530", name = "Lazy Sunday"},
+    ["131"] = {id = "7023635858", name = "Bensley - Vex"},
+    ["132"] = {id = "1841476350", name = "Happy-Go-Lively"}, 
+    ["133"] = {id = "9046865270", name = "Glowing Light (Bed Version)"},
+    ["134"] = {id = "75793628822368", name = "Mirage Portal"},
+    ["135"] = {id = "9046476113", name = "Cyber Space"},
+    ["136"] = {id = "1843404009", name = "Happy Song"},
+    ["137"] = {id = "1845149698", name = "Seek & Destroy"},
 }
 
 -- Saved gears
