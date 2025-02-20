@@ -837,16 +837,19 @@ local musictable = {
     ["100"] = {id = "5410086218", name = "Noisestorm - Crab Rave"},
     ["101"] = {id = "14366981664", name = "SAKU - GTA (Nightcore)"}, --,
     ["102"] = {id = "15689445424", name = "Din1c - Dionic 2"},
--- temporary... still
-['103'] = {id = "18397084935", name = "unnamed"},
-['104'] = {id ="18114359997",name = "unnamed 2"},
-['105'] ={id ="17799365494",name = "unnamed 3"},
-['106'] ={id ="17781457962",name = "unnamed 4"},
-['107'] ={id ="17756502975",name = "unnamed 5"},
-['108'] ={id ="16627025168",name = "unnamed 6"},
-['109'] ={id ="15668961532",name = "unnamed 7"},
-['110'] ={id ="15617357327",name = "unnamed 8"},
-['111'] ={id ="15610176211",name = "unnamed 9"}
+    ["103"] = {id = "118526865506181", name = "Thoughts"},
+    ["104"] = {id = "88207840016030", name = "Clear Sky"},
+    ["105"] = {id = "93447794929597", name = "Sweetness"},
+    ["106"] = {id = "84617304309283", name = "A Limitless Future"},
+    ["107"] = {id = "79314929106323", name = "HOTAKFUNK"},
+    ["108"] = {id = "125632594705040", name = "HOTAKFUNK (Super Slowed)"},
+    ["109"] = {id = "86716268313709", name = "DEKUD"},
+    ["110"] = {id = "124760595693133", name = "DEKUD (Slowed)"},
+    ["111"] = {id = "118431878657160", name = "Calamity Fortune but it's dani feat. LeaF"},
+    ["112"] = {id = "101037027238004", name = "Silly Shuffle (Fatal Funerals OST)"},
+    ["113"] = {id = "84280769809030", name = "DOWN TO THE FIVE (Feat. RevengeSpirits)"},
+    ["114"] = {id = "131632419873488", name = "Unwavering Hope"},
+    ["115"] = {id = "87863734163876", name = "WahRA - KKJIJO"},
 }
 
 -- Saved gears
