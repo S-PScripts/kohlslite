@@ -146,7 +146,7 @@ function acperm()
                       				pad.CanCollide = true
 						gotapad = true
                   			else
-                        			Regen()
+                        			fireclickdetector(game:GetService("Workspace").Terrain["_Game"].Admin.Regen.ClickDetector, 0)
                   			end
            		 	end
         		end
