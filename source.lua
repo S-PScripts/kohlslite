@@ -764,7 +764,7 @@ local musictable = {
     ["27"] = {id = "5410084188", name = "WRLD - Hang Up"},
     ["28"] = {id = "7612400047", name = "SEGAAA"},
     ["29"] = {id = "16190783444", name = "Dubidubidu (Techno Remix)"},
-    ["30"] = {id = "16190782786", name = "Lil Kuudere X sukoyomi"},
+    ["30"] = {id = "16190782786", name = "Lil Kuudere X sukoyomi - Alone"},
     ["31"] = {id = "15689455422", name = "kirkiimad - i love (slow+reverb version)"},
     ["32"] = {id = "1841668624", name = "Have a Lazy Day a"},
     ["33"] = {id = "1848350335", name = "Desert Sands"},
@@ -850,6 +850,13 @@ local musictable = {
     ["113"] = {id = "84280769809030", name = "DOWN TO THE FIVE (Feat. RevengeSpirits)"},
     ["114"] = {id = "131632419873488", name = "Unwavering Hope"},
     ["115"] = {id = "87863734163876", name = "WahRA - KKJIJO"},
+    ["116"] = {id = "16190782181", name = "HR - EEYUH!"},
+    ["117"] = {id = "9046863253", name = "Poolside"},
+    ["118"] = {id = "1837871067", name = "When U Coming Back - NoVocals"},
+    ["119"] = {id = "1846458016", name = "No More"}, -- yep... that song
+    ["120"] = {id = "1843468325", name = "Shake it"},
+    ["121"] = {id = "1846575559", name = "Diamonds"},
+    ["122"] = {id = "1845756489", name = "Town Talk"},
 }
 
 -- Saved gears
