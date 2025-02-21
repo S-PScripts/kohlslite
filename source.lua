@@ -1,17 +1,4 @@
 --[[
-Here's some facts:
-- Kohls Admin House is a dead inactive game. It only really gets like 10 players at max.
-- Even Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing, even 1,000 sometimes.
-- This is partially because it doesn't get boring fast unlike KAH. KAH is just you trying some admin commands, nothing else.
-- Therefore, do not expect big updates for this script anymore. 
-- You can just use Solinium for a part builder.
-- This script also already has the most antis so I won't add antis for individual players/rewrite the anti system.
-
-Credits to Dawninja for giving me sense because, to be honest, I kind of needed to know
-TS2021 17/2/25
-]]
-
---[[
  ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
 |\  \|\  \ |\   __  \|\  \|\  \|\  \     |\   ____\|\  \     |\  \|\___   ___\\  ___ \ 
 \ \  \/  /|\ \  \|\  \ \  \\\  \ \  \    \ \  \___|\ \  \    \ \  \|___ \  \_\ \   __/|    
@@ -78,6 +65,19 @@ Other stuff:
 -> I know my script is inconsistent when using Game with and without GetService... but I don't care.
 -> KohlsLite has been moved to this repo from my old repo "scripts (renamed to kohlslite-work-old)". This is because the old repo was messy and the old loadstring was clunky.
 
+]]
+
+--[[
+Before you view the source, here's some things you might like to know:
+- Kohls Admin House is a dead inactive game. It only really gets like 10 players at max.
+- Even Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing, even 1,000 sometimes.
+- This is partially because it doesn't get boring fast unlike KAH. KAH is just you trying some admin commands, nothing else.
+- Therefore, do not expect big updates for this script anymore. 
+- You can just use Solinium for a part builder.
+- This script also already has the most antis so I won't add antis for individual players/rewrite the anti system.
+
+Credits to Dawninja for giving me sense because, to be honest, I kind of needed to know
+TS2021 17/2/25
 ]]
 
 -- Script name = KohlsLite
