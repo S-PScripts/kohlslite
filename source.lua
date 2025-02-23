@@ -3434,6 +3434,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
              newPlaybackSpeed = tonumber(string.sub(msg:lower(), #prefix + 10))
              local Sound = game:GetService("Workspace").Terrain["_Game"].Folder.Sound
              Sound.PlaybackSpeed = newPlaybackSpeed
+ 	     for _, sound in ipairs(workspace:GetDescendants()) do
+                if sound:IsA("Sound") and sound.Playing then
+                    sound.PlaybackSpeed = newPlaybackSpeed
+                end
+            end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'audiolol' then
