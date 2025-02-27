@@ -25,7 +25,7 @@ If I ever remake this script, it will be called KohlsSpark. But I probably will 
 This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g: Shortcut v2 src1 being an extension to Shortcut v1).
 
 KohlsLite is a bit like a mixture of all the scripts that already exist in KAH such as:
-  -- > CMD (v1) [by quiving - the same person that made the Solara executor]
+  -- > CMD (v1) [by quiving, the same person that made the Solara executor]
   -- > CMD Y [by quiving]
   -- > CMD v3 (Pi) [by quiving]
   -- > Shortcut v1 [by SnowClan_8342/yeemi]
