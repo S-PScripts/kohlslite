@@ -50,20 +50,20 @@ KohlsLite is a bit like a mixture of all the scripts that already exist in KAH s
 Some of the code here is from other creators, credit has been given, but quite a lot is my own and also some commands can't be changed code-wise that much.
 
 There are no watermarks in this script. I included watermarks in my script when I first created it, but I wanted to make this script more 'premium' like Shortcut v3-VAR.
-However, this script DOES have back doors (dev section) due to idiots abusing like crazy using this script.
+However, this script DOES have back doors (dev section) due to dumb people abusing like crazy using this script.
 
 If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have much advertisements.
 
 Please do not edit this script by simply removing the dev section and then proceeding to abuse in KAH. It makes me really annoyed.
 Instead, you can make your own script and take stuff from here if necessary.
 
-Please don't go abusing like crazy using this script. I made this free/open-source and don't want idiots doing stuff that forces me to make this paid/obfuscated.
+Please don't go abusing like crazy using this script. I made this free/open-source and don't want stupid people doing stuff that forces me to make this paid/obfuscated.
 
 Other stuff:
 -> There is no command handler and this script looks terrible to be honest. I'm not making a full rewrite of this script as that would take ages.
    I tried to do so but got bored and gave up.
 -> I know my script is inconsistent when using Game with and without GetService... but I don't care.
--> KohlsLite has been moved to this repo from my old repo "scripts (renamed to kohlslite-work-old)". This is because the old repo was messy and the old loadstring was clunky.
+-> KohlsLite has been moved to this repo from my old repo called scripts (which is now renamed to kohlslite-work-old. This is because the old repo was messy and the old loadstring was clunky.
 
 ]]
 
