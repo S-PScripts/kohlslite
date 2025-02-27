@@ -8499,33 +8499,39 @@ end
 
         pcall(function()
                 if not game:GetService("Workspace").Terrain["_Game"].Admin:FindFirstChild("Regen") then
-                    Remind("Regen was not found.")
+			print("Regen was not found.")
+                    	Remind("Regen was not found.")
                 end
 		
                if not game:GetService("Workspace").Terrain["_Game"].Workspace:FindFirstChild("Baseplate") then
-                    Remind("Baseplate was not found.")
+			print("Baseplate was not found.")
+                    	Remind("Baseplate was not found.")
                 end
         end)
 
         pcall(function()
                 if not game:GetService("Workspace").Terrain._Game.Workspace["Basic House"]:FindFirstChild("SmoothBlockModel112") then
-                    Remind("House floor missing.")
+			print("House floor missing.")
+                    	Remind("House floor missing.")
                 end
         end)
 
         pcall(function()
                 if game:GetService("Workspace").Terrain["_Game"].Workspace.Baseplate.CFrame.Y > 1.5 then
-                    Remind("Baseplate at wrong place")
+			print("Baseplate at wrong place.")
+                	Remind("Baseplate at wrong place.")
                 end
 		
 		if game:GetService("Workspace").Terrain._Game.Workspace["Basic House"].SmoothBlockModel112.CFrame.Y > 15 then
-		    Remind("House floor at wrong place.")
+			print("House floor at wrong place.")
+		    	Remind("House floor at wrong place.")
 		end
         end)
 
         pcall(function()
                 if game:GetService("Workspace").Terrain["_Game"].Workspace.Baseplate.CFrame.Y < 0 then
-                    Remind("Baseplate at wrong place.")
+			print("Baseplate at wrong place.")
+                    	Remind("Baseplate at wrong place.")
                 end
         end)
 
@@ -8539,20 +8545,26 @@ end
 	end
 	
 	if padsCount == 9 then
-		Remind("All admin pads found")
+		print("All admin pads found.")
+		Remind("All admin pads found.")
 	elseif padsCount == 0 then
-		Remind("All admin pads missing")
+		print("All admin pads missing.")
+		Remind("All admin pads missing.")
 	else
-		Remind(tostring(9-padsCount).." admin pads missing")
+		print(tostring(9-padsCount).." admin pads missing.")
+		Remind(tostring(9-padsCount).." admin pads missing.")
 	end
 	
 	local ado = #workspace.Terrain._Game.Workspace.Obby:GetChildren()
 	if ado == 10 then
-		Remind("All obby jumps found")
+		print("All obby jumps found.")
+		Remind("All obby jumps found.")
 	elseif ado == 0 then
-		Remind("All obby jumps missing")
+		print("All obby jumps missing.")
+		Remind("All obby jumps missing.")
 	else
-		Remind(tostring(10-ado).." obby jumps missing")
+		print(tostring(10-ado).." obby jumps missing.")
+		Remind(tostring(10-ado).." obby jumps missing.")
 	end
 	
     end
