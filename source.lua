@@ -2151,7 +2151,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		Remind("Brush size changed.")
 	end
 
-   	if string.sub(msg, 1, #prefix + 6) == prefix.."brushc" then
+   	if string.sub(msg, 1, #prefix + 6) == prefix..'brushc' then
 		local args = string.split(msg, " ")
            	local Red = tonumber(args[2])
 		local Green = tonumber(args[3])
@@ -2692,7 +2692,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
        end
 
        if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'serverlock' then
-		Chat(prefix.."slock")
+		slockenabled = true
        end
 
        if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unserverlock' then
@@ -10398,7 +10398,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								end
 			
 								if autoblvgc then
-									Chat(prefix.."slock")
+									slockenabled = true
 								end
 							
 							elseif anticrash then
@@ -10444,7 +10444,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								end
 			
 								if autoblvgc then
-									Chat(prefix.."slock")
+									slockenabled = true
 								end
 							
 							elseif anticrash then
@@ -11835,7 +11835,7 @@ task.spawn(function()
 
                                 	if math.abs(music.TimePosition - denumba) > 0.5 then
                                         	if denumba < music.TimePosition - 1 or denumba > music.TimePosition + 1 then
-                                                	print(music.TimePosition) ; print(denumba)
+                                                	-- print(music.TimePosition) ; print(denumba)
                                                         music.TimePosition = denumba ; Remind("Fixed the time position!")
                                            	end
                                 	end
@@ -14220,7 +14220,7 @@ function onPlayerAdded(player)
 		end
 
     		if table.find(furry_on_sight, player.Name) then
-                	Chat(prefix.."char "..player.Name.." furry")
+                	char "..player.Name.." furry")
 			-- check_con = true
     		end
 
@@ -14490,7 +14490,7 @@ end
 
 -- Paint map
 function PaintMap(colourhere,mode)
-	Chat(prefix.."gear me painter")
+	gear me painter")
     	repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
     	local paint = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
    	paint.Parent = game.Players.LocalPlayer.Character
@@ -14521,7 +14521,7 @@ function PaintMap(colourhere,mode)
 end
 
 function PaintMap_2(r,g,b)
-	Chat(prefix.."gear me painter")
+	gear me painter")
     	repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
     	local paint = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
    	paint.Parent = game.Players.LocalPlayer.Character
