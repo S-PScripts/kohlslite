@@ -171,7 +171,7 @@ function shopac() -- Autocrasher serverhop
             		game:HttpGet("https://games.roblox.com/v1/games/115670532/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true")
         	)
 
-        if NBC["errors"] and getgenv().actype == "All" or getgenv().actype == "NBC" then
+        if NBC["errors"] and (getgenv().actype == "All" or getgenv().actype == "NBC") then
             print("Failed to server hop. Retrying in 5 seconds...")
             task.spawn(function()
                 ratelimited = true
@@ -181,7 +181,7 @@ function shopac() -- Autocrasher serverhop
             return
         end
 
-        if BC["errors"] and getgenv().actype == "All" or getgenv().actype == "BC" then
+        if BC["errors"] and (getgenv().actype == "All" or getgenv().actype == "BC") then
             print("Failed to server hop. Retrying in 5 seconds...")
             task.spawn(function()
                 ratelimited = true
@@ -225,17 +225,6 @@ function shopac() -- Autocrasher serverhop
         end
     end
 end
-
---[[
-To be added to the loadstring.
-getgenv().autocrasher = false -- Turn this on and it will autocrash KAH's servers.
-getgenv().playertoken = ' ' -- You must get this. Go to kohlslite.pages.dev/Assets/PLAYERTOKEN.lua for instructions.
-getgenv().acgames = "All" -- What KAH games you want to crash ("All" for NBC and BC, "NBC" for NBC only, "BC" for BC only).
-getgenv().whitelistedppl = {"ScriptingProgrammer"} -- It will not crash servers that have whitelisted players.
-getgenv().perm = false -- If you don't have the perm gamepass, turn this on and it will give you a pad.
-getgenv().acmode = "Dog" -- How you want to crash the server (Dog, Freeze, Shield).
-getgenv().customcmds = {"h \n\n\n\n\n crashed by roblox \n\n\n\n\n"} -- Custom messages that run before the crash
-]]
 
 if getgenv().autocrasher then
 	if getgenv().playertoken then
