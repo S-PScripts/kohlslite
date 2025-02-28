@@ -99,7 +99,11 @@ if getgenv().kohlsexecuted then
         Remind("You've already executed KohlsLite!") 
 end
 
-getgenv().ignorewronggame = false
+if getgenv().ignorewronggame then
+	--
+else
+	getgenv().ignorewronggame = false
+end
 
 -- Place checker
 if getgenv().ignorewronggame then 
@@ -367,7 +371,11 @@ getgenv().deprefix = "."
 getgenv().klversion = "X1.07"
 
 -- KohlsLite Start Gui
-kohlsgui = false
+if getgenv().kohlsgui then
+	--
+else
+	getgenv().kohlsgui = false
+end
 
 -- Chat function
 local function Chat(msg)
@@ -15336,7 +15344,7 @@ if writefile and readfile then
 		writefile(KL_FOLDER,file_text)
 
 		repeat task.wait() until isfile("KohlsLite/Welcome.txt")
-		kohlsgui = true
+		getgenv().kohlsgui = true
 
 	end
 else
@@ -17300,7 +17308,7 @@ function createKohlsUi(textTable)
 	coroutine.wrap(beginthegui)()
 end
 
-if kohlsgui then
+if getgenv().kohlsgui then
 	createKohlsUi(
                 {
                     "Thanks for using KohlsLite!",
