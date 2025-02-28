@@ -9443,7 +9443,10 @@ task.spawn(function()
         if gjdelock == true then
            if game.Lighting.FogEnd ~= 500 then
               Chat("fogend 500")
-              Chat("fogcolor 0 0 0") -- i don't know what 0 0 0 is as color3 so it's added to this category
+           end
+
+           if game.Lighting.FogColor ~= Color3.new(0,0,0) then
+              Chat("fogcolor 0 0 0") 
            end
         end
 
