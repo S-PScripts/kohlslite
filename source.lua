@@ -262,13 +262,21 @@ if getgenv().autocrasher then
 
 		if ac_continue then
 			if getgenv().perm then
+				regen_missing = false
 				perm2 = true
 				acperm()
+				if game:GetService("Workspace").Terrain["_Game"].Admin.Regen then else regen_missing = true end
 			else 
 				gotapad = true
 			end
 
-			repeat task.wait() until gotapad == true
+			repeat task.wait() until gotapad == true or regen_missing == true
+
+			if regen_missing then
+				repeat task.wait()
+                			shopac()
+            			until false
+			end
 
 			if getgenv().customcmds then
         			for i = 1, #getgenv().customcmds do
