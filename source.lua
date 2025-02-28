@@ -230,6 +230,7 @@ getgenv().acgames = "All" -- What KAH games you want to crash ("All" for NBC and
 getgenv().whitelistedppl = {"ScriptingProgrammer"} -- It will not crash servers that have whitelisted players.
 getgenv().perm = false -- If you don't have the perm gamepass, turn this on and it will give you a pad.
 getgenv().acmode = "Dog" -- How you want to crash the server (Dog, Freeze, Shield).
+getgenv().customcmds = {"h \n\n\n\n\n crashed by roblox \n\n\n\n\n"} -- Custom messages that run before the crash
 ]]
 
 if getgenv().autocrasher then
@@ -275,6 +276,12 @@ if getgenv().autocrasher then
 			end
 
 			repeat task.wait() until gotapad == true
+
+			if getgenv().customcmds then
+        			for i = 1, #getgenv().customcmds do
+                        		Chat(getgenv().customcmds[i])
+            			end
+			end
 			
 			if getgenv().acmode then
 				if getgenv().acmode == "Dog" then
