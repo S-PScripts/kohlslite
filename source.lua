@@ -14236,7 +14236,7 @@ function onPlayerAdded(player)
 		end
 
     		if table.find(furry_on_sight, player.Name) then
-                	char "..player.Name.." furry")
+                	Chat("char "..player.Name.." furry")
 			-- check_con = true
     		end
 
@@ -14506,7 +14506,7 @@ end
 
 -- Paint map
 function PaintMap(colourhere,mode)
-	gear me painter")
+	Chat(prefix.."gear me painter")
     	repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
     	local paint = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
    	paint.Parent = game.Players.LocalPlayer.Character
@@ -14537,7 +14537,7 @@ function PaintMap(colourhere,mode)
 end
 
 function PaintMap_2(r,g,b)
-	gear me painter")
+	Chat(prefix.."gear me painter")
     	repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
     	local paint = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
    	paint.Parent = game.Players.LocalPlayer.Character
