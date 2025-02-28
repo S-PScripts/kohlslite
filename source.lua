@@ -17317,7 +17317,7 @@ Things that this script is missing:
 4. Part builder
 
 -> I probably won't rewrite the playercheck thing since it works fine I guess. I know it sucks but it would take so dang long to change
-I'll add the features in the priority order they are above. 
+I probably won't add the features above as I don't play KAH that much anymore.
 ]]
 
 -- Information about KohlsLite is at the top of the script
