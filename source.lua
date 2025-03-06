@@ -10347,8 +10347,8 @@ local crashToolsLP =
 
 -- Function for the antis
 -- Might add isB functionality
-debounce_antis = false
 da_on = true -- debounce toggle
+debounce_antis = false -- used in debounce toggle
 allow_gb_alerts = true -- so you don't get a lot of those anti messages and stuff
 game:GetService("RunService").RenderStepped:Connect(function()
         	task.wait(0)
@@ -10878,7 +10878,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					Regen()
 
 					if crash_an then
-						Chat("h \n\n\n\n\n A ray gun was found on the workspace... 9jn doesn't like that \n\n\n\n\n")
+						Chat("h \n\n\n\n\n A ray gun was found on the workspace... 9jn doesn't like that! \n\n\n\n\n")
 					end
 
 					if allow_gb_alerts then
@@ -10962,11 +10962,12 @@ end)
 
 -- CHAT Spam
 function ChatFudge()
-Speak("⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻")
-Speak("⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻")
-Speak("⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻")
+	Speak("⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻")
+	Speak("⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻")
+	Speak("⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻")
 end
 
+-- Mover stuff
 function Mover:CleanUp()
     Mover.Attached.Value = false
     Mover.PosSet = false
@@ -11027,7 +11028,7 @@ function ncontrol(player, cplr)
             		Chat('size me nan')
 end
 
--- IP LEAK REAL :O :O :O
+-- IP LEAK REAL :O :O :O (Very old command)
 function IPBOOM(dontincludeyou) -- This is one of the first things my script ever had!
 	local number = math.random(1,255)
 	local number2 = math.random(1,255)
@@ -11044,18 +11045,18 @@ function IPBOOM(dontincludeyou) -- This is one of the first things my script eve
 	Chat('h \n\n\n\n\n Whoops, that was the wrong thing! \n\n\n\n\n')
 	task.wait(4)
 
-	local coems = {}
+	local doomed = {}
 	for i, v in ipairs(game.Players:GetPlayers()) do
 		if v.Name == game.Players.LocalPlayer.Name and dontincludeyou then
 			--print("Not me!")
 		else
-        		table.insert(coems, v.Name)
+        		table.insert(doomed, v.Name)
 		end
 	end
 
 	local randomPlayer = "Placeholder"
-	choosenum = math.random(1, #coems)
-	randomPlayer = coems[choosenum]
+	choosenum = math.random(1, #doomed)
+	randomPlayer = doomed[choosenum]
 
 	Chat('h \n\n\n\n\n Hopefully '..randomPlayer..' forgives me... \n\n\n\n\n')
 	if randomPlayer == game.Players.LocalPlayer.Name then
@@ -11063,8 +11064,8 @@ function IPBOOM(dontincludeyou) -- This is one of the first things my script eve
    		Chat("h \n\n\n\n\n Wait a second... that's me! \n\n\n\n\n")
 	end
 
-	for i in pairs(coems) do
-    		table.remove(coems, i)
+	for i in pairs(doomed) do
+    		table.remove(doomed, i)
 	end
 end
 
@@ -11223,7 +11224,7 @@ game.Players.LocalPlayer:GetMouse().KeyDown:connect(function(key)
 	end
 end)
 
--- some antis and admin system
+-- some antis and admin system (this is really old)
 function PLRSTART(v)
     v.Chatted:Connect(function(msg)
             task.wait(0)
@@ -12080,6 +12081,7 @@ function LogTrap()
       end
 end
 
+-- Click Teleport
 function InitTool()
                 Remind("Gave you the click-tp tool!")
                 mouse = game.Players.LocalPlayer:GetMouse()
@@ -12145,7 +12147,7 @@ end
 -- leaked regen
 function leakedcords()
 
-	local function clientloadpos(thecord) -- cmdy
+	local function clientloadpos(thecord) -- cmd-y
 		game.Players.LocalPlayer.Character.Parent = workspace
 		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = thecord
 	end
@@ -12316,7 +12318,7 @@ function techkick2(kickin, kickinplr) -- Tech's kick 2
 		Chat("reset "..kickinplr)
 end
 
-
+-- Skate lag
 function slag(tplr, tpln) -- v, v.Name [cmd v3]
             local stop = false
 
