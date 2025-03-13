@@ -1,3 +1,5 @@
+-- This is like some template
+
 --[[
  ________  ________  ___  ________  ________  ________      ___    ___ 
 |\   __  \|\   __  \|\  \|\   ____\|\   __  \|\   ___  \   |\  \  /  /|
@@ -77,7 +79,7 @@ getgenv().plxexec = true
 getgenv().deprefix = "." 
 
 -- The version of PrisonX
-getgenv().klversion = "a1.0"
+getgenv().plxversion = "a1.0"
 
 -- Chat function
 local function Chat(msg)
@@ -121,7 +123,7 @@ local function startupScripts()
      	end
 end
 
-print("PrisonX executed! Version: "..getgenv().klversion)
+print("PrisonX executed! Version: "..getgenv().plxversion)
 
 game.Players.LocalPlayer.Chatted:Connect(function(msg)
 end)
