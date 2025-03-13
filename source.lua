@@ -1,4 +1,4 @@
--- really crappy script tbh
+-- Just get Shortcut v3 - VAR, it's free now.
 
 --[[
  ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
@@ -20,7 +20,7 @@ You can play KAH (NBC version) here: https://www.roblox.com/games/112420803/Kohl
 You can also use it for KAH BC but barely anyone plays it. This script isn't recommended for KAH NP (it's not owned by agspureiam, there's a lot of things different).
 
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
-SCV3-VAR has more stuff than KohlsLite but is not open-source and you need to ask the owner (Tech, t.ech) to be able to use the script.
+SCV3-VAR has more stuff than KohlsLite but is not open-source and you need to ask the owner (Tech - his discord is .globe) to be able to use the script.
 
 This script is not updated much due to school and other interests, but I'll still add more stuff to come.
 If I ever remake this script, it will be called KohlsSpark. But I probably will not.
