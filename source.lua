@@ -1850,8 +1850,11 @@ local ogcframes = {
 -- There's quite an excessive amount of local variables here, I'll probably change them all to be a list.
 -- Auto blacklisting for stuff
 
--- People keep gearing everyone so here's a quick fix
+-- Blacklist users who try to crash. If emranticrash is turned on, it will serverlock.
 local autoblvgc = false
+
+-- Like normal anticrash but it punishes and ungears everyone.
+local emranticrash = false
 
 -- Skip anti crash warning
 local skipwarncrash = true
@@ -1871,19 +1874,14 @@ Workspace_Folder = Game_Folder.Workspace
 Admin_Folder = Game_Folder.Admin
 
 -- Keybinds
+local keybinds = { 
+	housekeybind = "h", -- Teleport to the house
+	rekeybind = "r", -- Reset/respawn
+	flykeybind = "f", -- Fly (KAH Fly)
+	crashkey = "e" -- Dog crash the server
+}
 
--- Teleport to house
-local housekeybind = "h"
-
--- Reset
-local rekeybind = "r" 
-
--- Fly (KAH)
-local flykeybind = "f"
-
--- Dog crash
-local crashkey = "e"  
-
+-- Enable/disables the keybinds
 local keybindz = true
 local keybindz_unsafe = false
 
@@ -1937,8 +1935,6 @@ local antiattach2 = false
 local antiperi = true
 local noblt = false
 
-local emranticrash = false
-
 -- Antis (workspace)
 local antiflash = false
 local antidisco = false
@@ -1950,7 +1946,7 @@ local antiattach = false
 local gjdelock = false
 
 -- Pings relating to others users
-local PingLogs = false -- it's caps lol
+local PingLogs = false -- it's in capitals, don't ask me why I made it like that
 local PingCsystem = true
 local AntiLogs = false
 
@@ -1958,13 +1954,13 @@ local AntiLogs = false
 local noobdetect = true
 local welcomemsg = true
 
--- anti announcer (antigear/anticrash/antipaint/antigb/antiattach2/antiperi/antiraygun...)
+-- Anti announcer (antigear/anticrash/antipaint/antigearban/antiattach2/antiperi/antiraygun...)
 local crash_an = false
 
--- slock/bl/wl/gearwl/padban etc...
+-- Serverlock/blacklist/whitelist/gearwhitelist/padban etc...
 local blwl_an = true
 
--- shh
+-- unused
 thesecretvariable = true
 
 -- loga
@@ -1997,6 +1993,7 @@ local Connections = {
     Drawing = {},
 }
 
+-- Drawing
 drawState = false
 local brushSize = 1
 
@@ -6091,13 +6088,13 @@ return
                 	keyb = args[2]
 			kmart = args[3]
 			if keyb == "house" then
-				housekeybind =args[3]
+				keybinds.housekeybind =args[3]
 			elseif keyb == "reset" then
-				rekeybind = args[3]
+				keybinds.rekeybind = args[3]
 			elseif keyb == "fly" then
-				flykeybind = args[3]
+				keybinds.flykeybind = args[3]
 			elseif keyb == "crash" then
-				crashkey = args[3]
+				keybinds.crashkey = args[3]
 			else
 				Remind("Argument 2 invalid [must be house/reset/fly/crash]")
 			end
@@ -11206,21 +11203,21 @@ end
 game.Players.LocalPlayer:GetMouse().KeyDown:connect(function(key)
         task.wait(0)
 	if keybindz then
-        	if key:lower() == housekeybind then
+        	if key:lower() == keybinds.housekeybind then
                 	House()
         	end
 			
-        	if key:lower() == rekeybind then
+        	if key:lower() == keybinds.rekeybind then
                 	Chat("reset me")
         	end        
 
-		if key:lower() == flykeybind then
+		if key:lower() == keybinds.flykeybind then
                 	Chat(prefix.."ufly")
         	end   
 	end
 		
 	if keybindz_unsafe then
-		if key:lower() == crashkey then
+		if key:lower() == keybinds.crashkey then
                 	DCrash()
         	end
 	end
