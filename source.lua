@@ -1,4 +1,19 @@
--- Just get Shortcut v3 - VAR, it's free now.
+--[[
+Before you view the source, here are some things you might want to know:
+- This script is dead since no one plays Kohls Admin House anymore.
+- The people who do play KAH play the NP/"Legacy" version by Tech. You can play the NP version here: https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy
+- Interesting fact: The account the NP version is on, BoasGameTest, was agspureiam's alt until it got password guessed.
+- This script is not supported for the NP version.
+
+- Kohls Admin House is a dead inactive game. It only really gets like 10 players at max.
+- Even Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing - even 1,000 sometimes.
+- This is partially because it doesn't get boring fast unlike KAH. KAH is just you trying some admin commands, nothing else.
+- Therefore, do not expect big updates for this script anymore. 
+- You can just use Solinium for a part builder.
+- This script also already has the most antis so I won't add antis for individual players/rewrite the anti system.
+
+TS2021 16/03/2025
+]]
 
 --[[
  ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
@@ -7,23 +22,22 @@
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.074
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.08
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
 Debugged with: https://glot.io/new/lua
 
 KohlsLite is a free, open-source script for the Roblox game created by agspureiam, Kohls Admin House (KAH).
-This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub).
+This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub). If there any bugs in this script, please DM me.
 
 You can play KAH (NBC version) here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
-You can also use it for KAH BC but barely anyone plays it. This script isn't recommended for KAH NP (it's not owned by agspureiam, there's a lot of things different).
+You can also use it for KAH BC but barely anyone plays it. This script isn't recommended for KAH NP - it's not owned by agspureiam and there's a lot of things different.
 
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
-SCV3-VAR has more stuff than KohlsLite but is not open-source and you need to ask the owner (Tech - his discord is .globe) to be able to use the script.
+Shortcut v3-VAR has more stuff than KohlsLite but is not open-source and you need to ask the owner (Tech - his discord is .globe) to be able to use the script.
 
-This script is not updated much due to school and other interests, but I'll still add more stuff to come.
-If I ever remake this script, it will be called KohlsSpark. But I probably will not.
+This script rarely gets updated due to school, other interests and the fact that Kohls Admin House is an inactive game. This script also has most of the features that I want to have.
 
 This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g: Shortcut v2 src1 being an extension to Shortcut v1).
 
@@ -36,7 +50,7 @@ KohlsLite is a bit like a mixture of all the scripts that already exist in KAH s
   -- > Shortcut v3 [by Tech]
   -- > Shortcut v3 VAR [don't have the source] [by Tech]
   -- > ii's Stupid Admin [by iiDk]
-  -- > PR Script old [by Atprog]
+  -- > Old PR Script [by Atprog]
   -- > KohlsNoob [by gamingkhoaito#1014 and haroldjd2017ipad#4295]
   -- > KohlsCool [by sergioesquina/kohlscool]
   -- > Noobsploit [by NoobSploit]
@@ -53,34 +67,20 @@ KohlsLite is a bit like a mixture of all the scripts that already exist in KAH s
 Some of the code here is from other creators, credit has been given, but quite a lot is my own and also some commands can't be changed code-wise that much.
 
 There are no watermarks in this script. I included watermarks in my script when I first created it, but I wanted to make this script more 'premium' like Shortcut v3-VAR.
-However, this script DOES have back doors (dev section) due to dumb people abusing like crazy using this script.
+However, this script DOES have backdoors (dev section) due to dumb people abusing like crazy using this script.
 
 If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have much advertisements.
 
-Please do not edit this script by simply removing the dev section and then proceeding to abuse in KAH. It makes me really annoyed.
+Please do not edit this script by simply removing the dev section and then proceeding to abuse in KAH. It makes me, and anyone playing the game, really annoyed.
 Instead, you can make your own script and take stuff from here if necessary.
 
 Please don't go abusing like crazy using this script. I made this free/open-source and don't want stupid people doing stuff that forces me to make this paid/obfuscated.
 
 Other stuff:
--> There is no command handler and this script looks terrible to be honest. I'm not making a full rewrite of this script as that would take ages.
-   I tried to do so but got bored and gave up.
+-> There is no command handler and this script looks terrible to be honest. I'm not making a full rewrite of this script as that would take ages. I did try to remake this script a while ago but I got bored and gave up.
 -> I know my script is inconsistent when using Game with and without GetService... but I don't care.
--> KohlsLite has been moved to this repo from my old repo called scripts (which is now renamed to kohlslite-work-old. This is because the old repo was messy and the old loadstring was clunky.
+-> KohlsLite has been moved to this repo from my old repo called scripts (which is now renamed to kohlslite-work-old). This is because the old repo was messy and the old loadstring was clunky.
 
-]]
-
---[[
-Before you view the source, here's some things you might like to know:
-- Kohls Admin House is a dead inactive game. It only really gets like 10 players at max.
-- Even Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing, even 1,000 sometimes.
-- This is partially because it doesn't get boring fast unlike KAH. KAH is just you trying some admin commands, nothing else.
-- Therefore, do not expect big updates for this script anymore. 
-- You can just use Solinium for a part builder.
-- This script also already has the most antis so I won't add antis for individual players/rewrite the anti system.
-
-Credits to Dawninja for giving me sense because, to be honest, I kind of needed to know
-TS2021 17/2/25
 ]]
 
 -- Script name = KohlsLite
@@ -89,7 +89,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.074", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.08", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -367,7 +367,7 @@ getgenv().kohlsexecuted = true
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.074"
+getgenv().klversion = "X1.08"
 
 -- KohlsLite Start Gui
 if getgenv().kohlsgui then
@@ -455,7 +455,7 @@ local whitelist = {}
 
 -- Perm Whitelist
 -- I know I should use user IDS instead but I would have to go through all these usernames and since I'm lazy, I don't have the time to do that.
--- Not to mention recoding the whitelist code
+-- Not to mention recording the whitelist code
 -- So if you change your username... SUCKS TO BE YOU!!!!
 local pwl = {
     "3akakauuky",
@@ -4692,6 +4692,7 @@ return
          		if player ~= nil then
                   		caketarsuccess = player
 				Chat("h \n\n\n\n\n Happy birthday, ".. caketarsuccess .."! \n\n\n\n\n")
+				Speak("Happy birthday, "..caketarsuccess.."!")
          		else
                 		Remind('Cannot find player with the name: '..caketar)
          		end
@@ -4728,7 +4729,7 @@ return
                 Remind("You should be attached to the player!")
     end
 
-		-- broken command, idk why :P
+	-- this command might be broken, I don't know why :P
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'ncontrol' then -- really funny ngl (cmdpi)
         	local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 PLAYERCHECK(dasplayer)
@@ -8590,10 +8591,12 @@ end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'bdoor' then
 	backdoor_enabled = true
+	Remind("Enabled backdoor.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unbdoor' then
 	backdoor_enabled = false
+	Remind("Disabled backdoor.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'discord' then
@@ -11388,7 +11391,7 @@ function PLRSTART(v)
                         end
                     end
 
-                    -- // dev section (back doors here) \\ --
+                    -- // dev section (backdoors here) \\ --
 		    -- // Remove this if you want, just don't abuse with KohlsLite, okay? \\ --
 
                     if string.sub(msg:lower(), 0, 4) == "-klc" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then -- klc means KohlsLite Check
@@ -17140,7 +17143,7 @@ end
 
 specialdays = {
  	atprogcakeday = "08/23", -- atprog's birthday
- 	spcakeday = "04/28", -- mine
+ 	spcakeday = "04/28", -- my birthday
  	christmas = "12/25", -- Christmas
  	happyny = "01/01", -- (Happy) New Year
  	hallows = "10/31", -- Halloween
@@ -17159,7 +17162,8 @@ if ctime == specialdays.spcakeday then
 end
 
 if ctime == specialdays.christmas then
-	if math.random(1,10) == 1 then Remind("Merry rizzmas!") else Remind("Merry Christmas!") end
+	-- if math.random(1,10) == 1 then Remind("Merry rizzmas!") else Remind("Merry Christmas!") end
+	Remind("Merry Christmas!")
 end
 
 if ctime == specialdays.happyny then
@@ -17335,7 +17339,7 @@ if getgenv().kohlsgui then
 	)
 end
 
-Remind("KohlsLite: Griefing KAH since 2024")
+Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
 
 --[[
 Things that this script is missing:
@@ -17345,7 +17349,7 @@ Things that this script is missing:
 4. Part builder
 
 -> I probably won't rewrite the playercheck thing since it works fine I guess. I know it sucks but it would take so dang long to change
-I probably won't add the features above as I don't play KAH that much anymore.
+I probably won't add the features above as I don't play KAH that much anymore (and it's an inactive game too).
 ]]
 
 -- Information about KohlsLite is at the top of the script
