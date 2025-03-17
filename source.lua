@@ -295,7 +295,7 @@ if getgenv().autocrasher then
 				elseif getgenv().acmode == "Freeze" then
       					for i = 1,100 do
           					Chat("clone all all all                                discord")
-          					Chat("freeze all all all                                  discord")
+          					Chat("freeze all all all                               discord")
       					end
 				elseif getgenv().acmode == "Shield" then
 				      	for i = 1,100 do
@@ -9617,7 +9617,7 @@ local antisall = { -- This is everyone except you
     antifling = false
 }
 
--- Prepartion
+-- This is NOT implemented due to lack of interest, you'll have to do that yourself.
 local antisplayers = { -- Antis for specific players
     antiblind = {},
     antivoid = {},
