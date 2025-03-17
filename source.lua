@@ -8491,12 +8491,12 @@ end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'bdoor' then
 	backdoor_enabled = true
-	Remind("Enabled backdoor.")
+	Remind("Enabled backdoors.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unbdoor' then
 	backdoor_enabled = false
-	Remind("Disabled backdoor.")
+	Remind("Disabled backdoors.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'discord' then
@@ -8506,6 +8506,16 @@ end
 		else
 			Remind("Check console for my username on Discord.")
 			print("ts2021 (discord)")
+		end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'source' then
+		if setclipboard then
+			Remind("Clipboard set to the link to the source of this script.")
+			setclipboard("kohlslite.pages.dev/source.lua")
+		else
+			Remind("Check console for the link to the source of this script.")
+			print("kohlslite.pages.dev/source.lua")
 		end
     end
 
