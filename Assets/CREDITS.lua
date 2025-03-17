@@ -1,7 +1,7 @@
 print("--- INFORMATION ---")
-print("KohlsLite, since 2023. Created by ScriptingProgrammer/ts2021")
+print("KohlsLite, since 2024. Created by ScriptingProgrammer/ts2021")
 print("For help, please contact me on Discord at ts2021")
-print("The version you are using is v"..getgenv().klversion..". This build was created on 8th January 2024")
+print("The version you are using is v"..getgenv().klversion..". This build was created on 17th March 2025")
 print("Better than SCV1 and SCV2 - approved by Tech!")
 print("\n")
 
@@ -30,4 +30,4 @@ print([[
  -- > Many scripts from the KAH script archive by Damix - View it here: S-PScripts/kah-fork ]])
 print("\n")
 
-print("VIEW THE SOURCE HERE: kohlslite.pages.dev/source.lua")
+print("For more information, view the source here: kohlslite.pages.dev/source.lua (run source command to copy to clipboard)")
