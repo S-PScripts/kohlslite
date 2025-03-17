@@ -79,6 +79,7 @@ Please don't go abusing like crazy using this script. I made this free/open-sour
 Other stuff:
 -> There is no command handler and this script looks terrible to be honest. I'm not making a full rewrite of this script as that would take ages. I did try to remake this script a while ago but I got bored and gave up.
 -> I know my script is inconsistent when using Game with and without GetService... but I don't care.
+-> I know my script is really crappy looking in terms of the source - mainly how I didn't utilise this sort of structure "variable_name = {onething = {}, twothing = {}}". Maybe I will fix it sometime.
 -> KohlsLite has been moved to this repo from my old repo called scripts (which is now renamed to kohlslite-work-old). This is because the old repo was messy and the old loadstring was clunky.
 
 ]]
@@ -450,187 +451,86 @@ local blacklist = {
     "grudgingDinosaur1"
 }
 
--- Users not affected by serverlock
-local whitelist = {}
-
--- Perm Whitelist
+-- Whitelist/gear whitelists
 -- I know I should use user IDS instead but I would have to go through all these usernames and since I'm lazy, I don't have the time to do that.
 -- Not to mention recording the whitelist code
 -- So if you change your username... SUCKS TO BE YOU!!!!
+
+-- Users not affected by serverlock
+local whitelist = {}
+
+-- Perm Whitelist - only removable by editing the source code
 local pwl = {
-    "3akakauuky",
-    "3cxos",
-    "4g8h",
-    "agspureiamReal",
-    "Altsarecooleh",
-    "Anka_707587",
-    "apiapiccode_3",
-    "atprog",
-    "BIGpe7niss7",
-    "Boran78855",
-    "clydekash",
-    "D_ionte",
-    "darkmadeboy",
-    "dawninja21",
-    "Dawninja21alt",
-    "decryptionites",
-    "Dekryptionite",
-    "Di33le2",
-    "DionteIsCute",
-    "E4_DQ",
-    "Eggkid7",
-    "fats_mx",
-    "grimAuxiliatrix",
-    "IceStuds",
-    "idonthacklol101ns",
-    "Ih0temyIife",
-    "ihatedionte",
-    "ikbx",
-    "kevin3050ti",
-    "kohlslitedev",
     "me_123eq",
-    "me_capybara",
-    "Me_ChurchOfSat4n",
     "me_crashking",
-    "Milderous",
-    "na1nsook",
-    "nowhudhejeir",
-    "Palamode",
-    "Redstoneboy2008",
-    "ripcxo",
     "ScriptingProgrammer",
-    "siga5167",
-    "SZCVAK",
-    "t_echl",
-    "t_echr",
-    "TheRealestOnHere",
+    "BIGpe7niss7",
+    "kohlslitedev",
+    "agspureiamReal",
+    "atprog",
+    "IceStuds",
+    "Dekryptionite",
+    "minecraftgamer2012YT",
+    "clydekash",
+    "ripcxo",
+    "grimAuxiliatrix",
     "undertaker629",
-    "vgcrash",
-    "whatveidone",
-    "witnessfox22",
-    "wrydioda4",
-    "xTheChurchBells",
-    "YT_MATHEUSMODZ5",
-    -- "BANNter_Original",
+    "jjjuuikjjikkju",
+    "FR6DDIIE",
+    "D_ionte",
+    "dawninja21",
+    "Dawninja21alt"
 }
 
--- Players you cannot kick
+-- Players you cannot kick... unless you're editing this source code (don't skid)
 local nokick = {
-    "3akakauuky",
-    "3cxos",
-    "4g8h",
-    "agspureiamReal",
-    "Altsarecooleh",
-    "Anka_707587",
-    "apiapiccode_3",
-    "atprog",
-    "BIGpe7niss7",
-    "Boran78855",
-    "clydekash",
-    "D_ionte",
-    "darkmadeboy",
-    "dawninja21",
-    "Dawninja21alt",
-    "decryptionites",
-    "Dekryptionite",
-    "Di33le2",
-    "DionteIsCute",
-    "E4_DQ",
-    "Eggkid7",
-    "fats_mx",
-    "grimAuxiliatrix",
-    "IceStuds",
-    "idonthacklol101ns",
-    "Ih0temyIife",
-    "ihatedionte",
-    "ikbx",
-    "kevin3050ti",
-    "kohlslitedev",
     "me_123eq",
-    "me_capybara",
-    "Me_ChurchOfSat4n",
     "me_crashking",
-    "Milderous",
-    "na1nsook",
-    "nowhudhejeir",
-    "Palamode",
-    "Redstoneboy2008",
-    "ripcxo",
     "ScriptingProgrammer",
-    "siga5167",
-    "SZCVAK",
-    "t_echl",
-    "t_echr",
-    "TheRealestOnHere",
+    "BIGpe7niss7",
+    "kohlslitedev",
+    "agspureiamReal",
+    "atprog",
+    "IceStuds",
+    "Dekryptionite",
+    "minecraftgamer2012YT",
+    "clydekash",
+    "ripcxo",
+    "grimAuxiliatrix",
     "undertaker629",
-    "vgcrash",
-    "whatveidone",
-    "witnessfox22",
-    "wrydioda4",
-    "xTheChurchBells",
-    "YT_MATHEUSMODZ5",
-    -- "BANNter_Original",
+    "jjjuuikjjikkju",
+    "FR6DDIIE",
+    "D_ionte",
+    "dawninja21",
+    "Dawninja21alt"
 }
 
 -- Users that can use blacklisted gears (or gears when antigear is on)
-local GWhitelisted = {}
+local GWhitelisted = {
 
--- Perm Gear Whitelist
+}
+
+-- Perm Gear Whitelist - only removable by editing the source code
 local pgwl = {
-    "3akakauuky",
-    "3cxos",
-    "4g8h",
-    "agspureiamReal",
-    "Altsarecooleh",
-    "Anka_707587",
-    "apiapiccode_3",
-    "atprog",
-    "BIGpe7niss7",
-    "Boran78855",
-    "clydekash",
-    "D_ionte",
-    "darkmadeboy",
-    "dawninja21",
-    "Dawninja21alt",
-    "decryptionites",
-    "Dekryptionite",
-    "Di33le2",
-    "DionteIsCute",
-    "E4_DQ",
-    "Eggkid7",
-    "fats_mx",
-    "grimAuxiliatrix",
-    "IceStuds",
-    "idonthacklol101ns",
-    "Ih0temyIife",
-    "ihatedionte",
-    "ikbx",
-    "kevin3050ti",
-    "kohlslitedev",
     "me_123eq",
-    "me_capybara",
-    "Me_ChurchOfSat4n",
     "me_crashking",
-    "Milderous",
-    "na1nsook",
-    "nowhudhejeir",
-    "Palamode",
-    "Redstoneboy2008",
-    "ripcxo",
     "ScriptingProgrammer",
-    "siga5167",
-    "SZCVAK",
-    "t_echl",
-    "t_echr",
-    "TheRealestOnHere",
+    "BIGpe7niss7",
+    "kohlslitedev",
+    "agspureiamReal",
+    "atprog",
+    "IceStuds",
+    "Dekryptionite",
+    "minecraftgamer2012YT",
+    "clydekash",
+    "ripcxo",
+    "grimAuxiliatrix",
     "undertaker629",
-    "vgcrash",
-    "whatveidone",
-    "witnessfox22",
-    "wrydioda4",
-    "xTheChurchBells",
-    "YT_MATHEUSMODZ5",
-    -- "BANNter_Original",
+    "jjjuuikjjikkju",
+    "FR6DDIIE",
+    "D_ionte",
+    "dawninja21",
+    "Dawninja21alt"
 }
 	
 -- The developer of KohlsLite
@@ -671,7 +571,7 @@ local newlen = 21
 
 -- Serverlock
 local slockenabled = false
-local superchargeslock = false -- insane slock
+local superchargeslock = false -- insane slock (Tech Serverlock)
 
 -- Auto char
 local autocharid = "nll"
