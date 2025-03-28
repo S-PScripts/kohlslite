@@ -1869,7 +1869,7 @@ local blwl_an = true
 thesecretvariable = true
 
 -- loga
-local umwhatdasigma = game:HttpGet("https://pastebin.com/raw/d7eTDKbJ") -- oofkohls
+--local umwhatdasigma = game:HttpGet("https://pastebin.com/raw/d7eTDKbJ") -- oofkohls
 local logmode = "default"
 
 -- local permpassid = 66254 or 64354 -> NBC, BC
