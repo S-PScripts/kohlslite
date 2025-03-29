@@ -15,7 +15,7 @@ Before you view the source, here are some things you might want to know:
 - This script also already has the most antis so I won't add antis for individual players/rewrite the anti system.
 
 TS2021 20/03/2025
-Update 26/03/2025: NP version was taken down, it'll be back soon though..
+Update 26/03/2025: NP version was taken down, it'll be back soon though...
 ]]
 
 --[[
@@ -2060,8 +2060,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		end
 	end
 
+	if string.sub(msg, 1, #prefix + 5) == prefix..'unvis' then
+		Chat(prefix..'stopvis')
+	end
+		
 	if string.sub(msg, 1, #prefix + 4) == prefix..'draw' then
-			Remind("EXPERIMENTAL.")
+			Remind("EXPERIMENTAL. Booting up the drawer...") -- SHIZZ I forgot about this somehow 
 			partDraw()
 	end
 
