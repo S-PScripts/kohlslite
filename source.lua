@@ -5816,8 +5816,12 @@ return
 	Remind("Created by Tech (Tech-187)")
 
 	getgenv().scapproved = {
-		"Fluxus", -- provided you don't use the RAT one (non silent caliber)
-		"Delta" -- i agree with these, codex and arceus x (and probably vega x too) suck
+		"Fluxus",
+		"Delta",
+		"SirHurt 5.4.1",
+		"SirHurt",
+		"Krnl",
+		"KRNL_LOADED"
 	}
 
 	local function check(d, e)
