@@ -388,8 +388,14 @@ local function Chat(msg)
 end
 
 -- Speak function
+legacyChat = (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService) -- From Infinite Yield
+
 local function Speak(msg)
-    game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+    if not legacyChat then
+	game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
+    else 
+    	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+    end
 end
 
 -- Prefix checker
