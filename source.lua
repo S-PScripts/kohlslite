@@ -1,5 +1,5 @@
 --[[
-This script is discontinued.
+This script is discontinued (basically).
 
 Before you view the source, here are some things you might want to know:
 - This script is dead since no one plays Kohls Admin House anymore.
@@ -4386,7 +4386,7 @@ Commands required: shield]])
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
 			Title = "KohlsLite Manager",
-			Text = "Are you sure about this? This is unreliable",
+			Text = "Are you sure about this? This is unreliable.",
 			Duration = math.huge,
 			Callback = response,
 			Button1 = "Yes",
@@ -4439,6 +4439,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'seedkick' then -- could be better in a seedkick() function i guess
+		if 0 == 0 then return Remind("NO LONGER WORKS") end
 		Remind("This kick was found by Digitality.") 
 		local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 PLAYERCHECK(dasplayer)
@@ -4471,6 +4472,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'omeshkick' then  -- mesh kick haha
+		if 0 == 0 then return Remind("NO LONGER WORKS") end
 		dzjecraft = false
 		local dasplayer = string.sub(msg:lower(), #prefix + 11)
                 PLAYERCHECK(dasplayer)
@@ -4490,10 +4492,11 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unomeshkick' then 
 	dzjecraft = true
-	Remind("Ended mesh-kick")
+	Remind("Ended mesh-kick.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'ohatkick' then  -- hat kick haha
+		if 0 == 0 then return Remind("NO LONGER WORKS") end
 		dzjecraft = false
 		local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 PLAYERCHECK(dasplayer)
@@ -4517,6 +4520,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'hatkick' then  -- tech kick
+		if 0 == 0 then return Remind("NO LONGER WORKS") end
 		local dasplayer = string.sub(msg:lower(), #prefix + 9)
                 PLAYERCHECK(dasplayer)
 	
@@ -4534,6 +4538,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'meshkick' then  -- mesh kick haha
+		if 0 == 0 then return Remind("NO LONGER WORKS") end
 		local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 PLAYERCHECK(dasplayer)
 	
@@ -8240,7 +8245,7 @@ end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantichat' then
         antichat = false
-        sage = false
+        antis.antimessage = false
 	Remind("No longer spamming h messages with emojis to lag and remove chat for people")
     end
 
@@ -9458,21 +9463,7 @@ task.spawn(function()
   end
 end)
 
--- anti chat/msg-crash
-task.spawn(function()
-        while true do
-        task.wait(0.1)
-                if antichat == true then
-                                Chat("m 😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭")
-                end
-
-                if antichatplr == true then
-                                Chat("pm "..acplr.." 😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭")
-                end
-        end
-end)
-
--- I will be rewriting the anti system
+-- I will be rewriting the anti system... or not.
 antis = {
     antiblind = false,
     antivoid = false,
@@ -9923,6 +9914,21 @@ connections[#connections + 1] =
             end
         end
     end)
+
+-- anti chat/msg-crash
+connections[#connections + 1] =
+    game:GetService("RunService").RenderStepped:Connect(function()
+	while true do
+        	task.wait(0.1)
+               	if antichat == true then
+                        Chat("m 😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭")
+                end
+
+                if antichatplr == true then
+                        Chat("pm "..acplr.." 😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭")
+                end
+        end
+end)
 
 -- I removed this since it would break the script if you died whilst executing
 -- Credits to trollfacenan (bumanoid)!
