@@ -25,7 +25,7 @@ Update 26/03/2025: NP version was taken down, it'll be back soon though...
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.08
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.1
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -95,7 +95,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.08", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.1", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -373,7 +373,7 @@ getgenv().kohlsexecuted = true
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.08"
+getgenv().klversion = "X1.1"
 
 -- KohlsLite Start Gui
 if getgenv().kohlsgui then
@@ -435,7 +435,6 @@ local editedstuff = {
 	editedjumpis = 50,
 	editedjump = true
 }
-
 
 -- Number settings
 local ex_settings = {
@@ -599,6 +598,9 @@ mainbar_stuff = {
 
 	-- More advanced serverlock (Tech's)
 	superchargeslock = false, 
+
+	-- Gojo domain (part of deiv command)
+	gjdelock = false,
 	
 	-- if new players under (newlen) days join they get blacklisted
 	newplrautoslock = false,
@@ -1780,10 +1782,7 @@ local ogcframes = {
                 ["Part51"] = {-92.0770035, 0.900000036, 7.47600031, 1, 0, 0, 0, -1, 0, 0, 0, -1}
 }
 
--- There's quite an excessive amount of local variables here, I'll probably change them all to be a list.
--- Auto blacklisting for stuff
-
-
+-- Settings related to crash
 local crash_settings = {
 	-- Blacklist users who try to crash. If emranticrash is turned on, it will serverlock.
 	autoblvgc = false, 
@@ -1833,7 +1832,7 @@ local click_stuff = {
 }
 
 -- Admin related
-admin_stuff = {
+local admin_stuff = {
 	-- Grab a pad forever!
 	perm = false,
 	perm2 = false,
@@ -1853,7 +1852,7 @@ local FAdmins = {}
 local regfind = false
 
 -- Antis (gears)
-gear_antis = {
+local gear_antis = {
 	-- Stop users from crashing with gears
 	anticrash = true,
 
@@ -1880,7 +1879,7 @@ gear_antis = {
 }
 
 -- Antis (workspace and other stuff)
-ws_antis = {
+local ws_antis = {
 	-- No 'flash'
 	antiflash = false,
 	
@@ -1926,9 +1925,6 @@ ws_antis = {
 	-- Stop users saying attach commands
 	antiattach = false
 }
-
--- Gojo server lock
-local gjdelock = false
 
 -- Auto stuff, things announced, pings
 local player_relate = {
@@ -2008,6 +2004,7 @@ kahinstance = workspace.Terrain:FindFirstChild("_Game"):FindFirstChild("Folder")
 local VisBindable = Instance.new("BindableEvent")
 
 print([[
+
 ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
 |\  \|\  \ |\   __  \|\  \|\  \|\  \     |\   ____\|\  \     |\  \|\___   ___\\  ___ \     
 \ \  \/  /|\ \  \|\  \ \  \\\  \ \  \    \ \  \___|\ \  \    \ \  \|___ \  \_\ \   __/|    
@@ -2163,7 +2160,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	end
 		
 	if string.sub(msg, 1, #prefix + 4) == prefix..'draw' then
-			Remind("EXPERIMENTAL. Booting up the drawer...") -- SHIZZ I forgot about this somehow 
+			Remind("EXPERIMENTAL. Booting up the drawer...") -- SHIZZ I forgot about this somehow AGAIN
 			partDraw()
 	end
 
@@ -3289,7 +3286,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'deiv' then -- ported from simplekah
-			gjdelock = false
+			mainbar_stuff.gjdelock = false
                         Chat("h \n\n\n\n\n Domain Expansion: Infinity Void \n\n\n\n\n")
                         local deivfogend = 2000
                         local deivfog1 = 255
@@ -3306,12 +3303,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                             Chat("fogend " .. deivfogend)
                             Chat("fogcolor " .. deivfog1 .. " " .. deivfog2 .. " " .. deivfog3)
                             Chat("time " .. time)
-			    if gjdelock == "stop" then
+			    if mainbar_stuff.gjdelock == "stop" then
 					return 
 			    end
                         end
-			if gjdelock ~= "stop" then
-                        	gjdelock = true
+			if mainbar_stuff.gjdelock ~= "stop" then
+                        	mainbar_stuff.gjdelock = true
                         	Chat("h \n\n\n\n\n You have entered my domain so please wait until I decide to close it... \n\n\n\n\n")
 			end
     end
@@ -3319,7 +3316,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'undeiv' then  -- ported from simplekah
                         Chat("fix")
                         Chat("reload all")
-                        gjdelock = "stop"
+                        mainbar_stuff.gjdelock = "stop"
 			Remind("Turned off DEIV.")
     end
 
@@ -9515,7 +9512,7 @@ task.spawn(function()
                  end
         end
 
-        if gjdelock == true then
+        if mainbar_stuff.gjdelock == true then
            if game.Lighting.FogEnd ~= 500 then
               Chat("fogend 500")
            end
@@ -9543,7 +9540,7 @@ task.spawn(function()
                 end
         end
 
-        if gjdelock == true then
+        if mainbar_stuff.gjdelock == true then
                 if game.Lighting.ClockTime ~= 6 then
                         Chat("time 6")
                 end
@@ -10182,7 +10179,7 @@ connections[#connections + 1] =
                                         else end
                                 end
 
-                                if antisall.antifly == true or gjdelock == true then
+                                if antisall.antifly == true or mainbar_stuff.gjdelock == true then
                                             if not v.Character:FindFirstChild("Seizure") and v.Character.Humanoid:GetState().Name == "PlatformStanding" then
                                                 Chat("unfly "..v.Name)
                                                         Chat("clip "..v.Name)
@@ -10331,7 +10328,7 @@ connections[#connections + 1] =
                                                 end
                                 end
 
-                                if gjdelock == true then
+                                if mainbar_stuff.gjdelock == true then
                                             if not v.Character.Humanoid.WalkSpeed == 0 then
                                                         Chat("speed "..v.Name.." 0")
                                             end
