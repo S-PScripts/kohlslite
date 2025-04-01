@@ -1,5 +1,16 @@
--- KohlsLite
--- Created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub)
+--[[
+___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
+|\  \|\  \ |\   __  \|\  \|\  \|\  \     |\   ____\|\  \     |\  \|\___   ___\\  ___ \ 
+\ \  \/  /|\ \  \|\  \ \  \\\  \ \  \    \ \  \___|\ \  \    \ \  \|___ \  \_\ \   __/|    
+ \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
+  \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
+   \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| 
+
+A script for agspureiam's game Kohls Admin House
+Created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub)
+View the source here: https://kohlslite.pages.dev/source.lua
+]]
 
 -- Prefix
 getgenv().theprefix = "."
@@ -21,3 +32,5 @@ getgenv().customcmds = {"h \n\n\n\n\n crashed by roblox \n\n\n\n\n"} -- Custom m
 
 -- Loadstring
 loadstring(game:HttpGet("https://kohlslite.pages.dev/source.lua"))()
+
+-- More settings can be found in the script's source itself.
