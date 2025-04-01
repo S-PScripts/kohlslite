@@ -1761,14 +1761,20 @@ local ogcframes = {
 -- There's quite an excessive amount of local variables here, I'll probably change them all to be a list.
 -- Auto blacklisting for stuff
 
--- Blacklist users who try to crash. If emranticrash is turned on, it will serverlock.
-local autoblvgc = false
 
--- Like normal anticrash but it punishes and ungears everyone.
-local emranticrash = false
+local crash_settings = {
+	-- Blacklist users who try to crash. If emranticrash is turned on, it will serverlock.
+	autoblvgc = false, 
 
--- Skip anti crash warning
-local skipwarncrash = true
+	-- Like normal anticrash but it punishes and ungears everyone.
+	emranticrash = false,
+	
+	-- Skip anti crash warning
+	skipwarncrash = true,
+
+	-- The type of crash you want to default to
+	crash_type = "dog"
+}
 
 -- Anti logs
 local antimlog = false -- for music
@@ -2661,12 +2667,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
        if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'autoblvgc' then
                 Remind("Auto blacklisting users using the VG!")
-                autoblvgc = true
+                crash_settings.autoblvgc = true
        end
 
        if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unautoblvgc' then
                 Remind("No longer auto blacklisting users using the VG!")
-                autoblvgc = false
+                crash_settings.autoblvgc = false
        end
 
         if string.sub(msg, 1, #prefix + 7)  == prefix..'npslist' then
@@ -4207,7 +4213,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'vgcrash' then
-	if skipwarncrash then -- idea from sinx
+	if crash_settings.skipwarncrash then -- idea from sinx
 		VGCrash()
 		Remind("VG Crashed the server. (VG IS TEMPORARY BTW)")
 	else
@@ -4230,7 +4236,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'cocrash' then
-	if skipwarncrash then -- idea from sinx
+	if crash_settings.skipwarncrash then -- idea from sinx
 		CoCrash()
 		Remind("VG Crashed (2) the server. (VG IS TEMPORARY BTW)")
 	else
@@ -4253,7 +4259,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'emcrash' then
-	if skipwarncrash then -- idea from sinx
+	if crash_settings.skipwarncrash then -- idea from sinx
 		EmCrash()
 		Remind("Emerald Crashed the server.")
 	else
@@ -4276,7 +4282,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'pcrash' then
-	if skipwarncrash then -- idea from sinx
+	if crash_settings.skipwarncrash then -- idea from sinx
 		PCrash()
 		Remind("Orinthian Crashed the server.")
 	else
@@ -4299,7 +4305,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fcrash' then
-	if skipwarncrash then -- idea from sinx
+	if crash_settings.skipwarncrash then -- idea from sinx
 		FCrash()
 		Remind("Freeeze Crashed the server.")
 	else
@@ -4321,8 +4327,38 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	end
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'crash' then
+	local args = string.split(msg, " ")
+	if #args == 2 then 
+		crash_settings.crash_type = args[2]
+	end
+
+	if crash_settings.crash_type == "" then
+		return Remind("You must set the crash type to use this command.")
+	end
+
+	if crash_settings.skipwarncrash then -- idea from sinx
+		checkCrashType()
+	else
+		local response = Instance.new("BindableFunction")
+		function response.OnInvoke(answer)
+			if answer == "Yes" then
+		    		checkCrashType()
+			end
+		end
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "KohlsLite Manager",
+			Text = "Are you sure about this?",
+			Duration = math.huge,
+			Callback = response,
+			Button1 = "Yes",
+			Button2 = "No"
+		})
+	end
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'dcrash' then
-	if skipwarncrash then -- idea from sinx
+	if crash_settings.skipwarncrash then -- idea from sinx
 		DCrash()
 		Remind("Dog Crashed the server.")
 	else
@@ -4349,7 +4385,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
 Commands required: shield]])
         else
-		if skipwarncrash then -- idea from sinx
+		if crash_settings.skipwarncrash then -- idea from sinx
 			SCrash()
 			Remind("Shield Crashed the server.")
 		else
@@ -4373,7 +4409,7 @@ Commands required: shield]])
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'kcrash' then -- From tech-187!
-	if skipwarncrash then
+	if crash_settings.skipwarncrash then
 		KCrash()
 		Remind("Attempting to crash the server.")
 	else
@@ -4396,12 +4432,12 @@ Commands required: shield]])
     end
 
    if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'swc' then
-			skipwarncrash = true
+			crash_settings.skipwarncrash = true
 			Remind("Warning for crashing disabled.")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'unswc' then
-			skipwarncrash = false
+			crash_settings.skipwarncrash = false
 			Remind("A warning will now appear whenever you want to crash.")
    end
 		
@@ -5395,7 +5431,7 @@ return
 		Chat("fogend 0")
 		Chat("paint all black")
             	task.wait(1.5)
-		skipwarncrash = true
+		crash_settings.skipwarncrash = true
             	DCrash()        
     end
 
@@ -5412,7 +5448,7 @@ return
 		Chat("colorshifttop 200 0 400")
 		Chat("respawn all")
 		task.wait(1.5)
-		skipwarncrash = true
+		crash_settings.skipwarncrash = true
 		DCrash()
     end
   
@@ -5423,7 +5459,7 @@ return
 		Chat("h \n\n\n\n\n all praise dionte \n\n\n\n\n")
 		Chat("name all Dionte is our hero!")
 		task.wait(1.5)
-		skipwarncrash = true
+		crash_settings.skipwarncrash = true
 		DCrash()
     end
   
@@ -5434,7 +5470,7 @@ return
 		Chat("h \n\n\n\n\n all praise fred \n\n\n\n\n")
 		Chat("name all Fred is our hero!") 
 		task.wait(1.5)
-		skipwarncrash = true
+		crash_settings.skipwarncrash = true
 		DCrash()
     end
 
@@ -5451,7 +5487,7 @@ return
 			
         	Chat("char all " .. mehcrashchariz)
 		task.wait(1.5)
-		skipwarncrash = true
+		crash_settings.skipwarncrash = true
 		DCrash()
     end
 
@@ -7004,12 +7040,12 @@ end
     end
 
    if string.sub(msg:lower(), 1, #prefix + 14) == prefix..'emranticrash' then
-        emranticrash = true
+        crash_settings.emranticrash = true
 	Remind("EMR Anti crash is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 16) == prefix..'unemranticrash' then
-        emranticrash = false
+        crash_settings.emranticrash = false
 	Remind("EMR Anti crash is now disabled.")
     end
 
@@ -10345,7 +10381,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				for i, v in game.Players:GetPlayers() do
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
-							if emranticrash then
+							if crash_settings.emranticrash then
 								Chat("ungear others")
 								Chat("punish others")
 								Chat("clr")
@@ -10361,7 +10397,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 									print("Anti-crash triggered by "..v.Name)
 								end
 			
-								if autoblvgc then
+								if crash_settings.autoblvgc then
 									slockenabled = true
 								end
 							
@@ -10381,7 +10417,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 									print("Anti-crash triggered by "..v.Name)
 								end
 	
-								if autoblvgc then
+								if crash_settings.autoblvgc then
 									table.insert(blacklist, v.Name)
 								end
 							
@@ -10391,7 +10427,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
-							if emranticrash then
+							if crash_settings.emranticrash then
 								Chat("ungear others")
 								Chat("punish others")
 								Chat("clr")
@@ -10407,7 +10443,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 									print("Anti-crash triggered by "..v.Name)
 								end
 			
-								if autoblvgc then
+								if crash_settings.autoblvgc then
 									slockenabled = true
 								end
 							
@@ -10427,7 +10463,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 									print("Anti-crash triggered by "..v.Name)
 								end
 			
-								if autoblvgc then
+								if crash_settings.autoblvgc then
 									table.insert(blacklist, v.Name)
 								end
 							
@@ -11881,6 +11917,21 @@ end
 
 function GravFix()
       workspace.Gravity = 196.2
+end
+
+-- CHECK THE CRASH TYPE
+function checkCrashType()
+	if crash_settings.crash_type == "freeze" then
+		FCrash()
+	elseif crash_settings.crash_type == "shield" then
+		SCrash()
+	elseif crash_settings.crash_type == "emr" then
+		KCrash()
+	elseif crash_settings.crash_type == "dog" then
+		DCrash()
+	else
+		DCrash()
+	end
 end
 
 -- FREEZE CRASH
@@ -14196,7 +14247,7 @@ function onPlayerAdded(player)
 			end
         		print(player.Name.." joined the server. Server was automatically crashed as they are blacklisted.")
 			Remind(player.Name.." joined the server. Server was automatically crashed as they are blacklisted.")
-       		 	DCrash();skipwarncrash = true
+       		 	checkcrashtype();crash_settings.skipwarncrash = true
 			check_con = true
    		end
 
@@ -16856,7 +16907,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
                 Chat("h \n\n\n\n\n Server automatically crashed due to blacklisted user ("..v.Name..") being in the server. \n\n\n\n\n")
         	print(v.Name.." found in the server. Server was automatically crashed as they are blacklisted.")
 		Remind(v.Name.." found in the server. Server was automatically crashed as they are blacklisted.")               
-		DCrash(); skipwarncrash = true
+		checkcrashtype(); crash_settings.skipwarncrash = true
         end
 
         if table.find(rkick_on_sight, v.Name) then
@@ -17288,5 +17339,4 @@ Things that this script is missing:
 -> I probably won't add the features above as I don't play KAH that much anymore (and it's an inactive game too).
 ]]
 
--- KohlsLite has been discontinued 20/3/25
 -- Information about KohlsLite can be found at the top of this page
