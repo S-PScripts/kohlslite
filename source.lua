@@ -1881,6 +1881,30 @@ ws_antis = {
 	-- No 'fogend'
 	antifogend = false,
 
+	-- No 'fogstart'
+	antifogstart = false,
+
+	-- No 'fogcolor'
+	antifogcolor = false,
+
+	-- No 'ambient'
+	antiambient = false,
+
+	-- No 'time'
+	antitime = false,
+
+	-- No light from the ivory
+	antiilight = false,
+
+	-- No Bite Plant
+	antiplant = false,
+
+	-- No Eggs
+	antiegg = false,
+
+	-- No tripmine
+	antitripmine = true,
+	
 	-- Spams h messages for everyone lagging them
 	antichat = false,
 	
@@ -5211,82 +5235,82 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'antiilight' then
-        antiilight = true
+        ws_antis.antiilight = true
 	Remind("Enabled this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unantiilight' then
-        antiilight = false
+        ws_antis.antiilight = false
 	Remind("Disable this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'antifogstart' then
-        antifogstart = true
+        ws_antis.antifogstart = true
 	Remind("Enabled this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 14) == prefix..'unantifogstart' then
-        antifogstart = false
+        ws_antis.antifogstart = false
 	Remind("Disable this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antifogc' then
-        antifogcolor = true
+        ws_antis.antifogcolor = true
 	Remind("Enabled this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantifogc' then
-        antifogcolor = false
+        ws_antis.antifogcolor = false
 	Remind("Disable this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antitime' then
-        antitime = true
+        ws_antis.antitime = true
 	Remind("Enabled this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantitime' then
-        antitime = false
+        ws_antis.antitime = false
 	Remind("Disable this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antiamb' then
-        antiambient = true
+        ws_antis.antiambient = true
 	Remind("Enabled this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unantiamb' then
-        antiambient = false
+        ws_antis.antiambient = false
 	Remind("Disable this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antitrip' then
-        antitripmine = true
+        ws_antis.antitripmine = true
 	Remind("Enabled this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantitrip' then
-        antitripmine = false
+        ws_antis.antitripmine = false
 	Remind("Disable this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antiegg' then
-        antiegg = true
+        ws_antis.antiegg = true
 	Remind("Enabled this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unantiegg' then
-        antiegg = false
+        ws_antis.antiegg = false
 	Remind("Disable this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antiplant' then
-	antiplant = true
+	ws_antis.antiplant = true
 	Remind("Disable this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unantiplant' then
-	antiplant = false
+	ws_antis.antiplant = false
 	Remind("Disable this anti!")
     end
 
@@ -9441,7 +9465,7 @@ task.spawn(function()
            end
         end
 
-        if antiilight == true then
+        if ws_antis.antiilight == true then
                  if game.Workspace:FindFirstChild("StarShard") then
                           game.Workspace.StarShard:Destroy()
                 end
@@ -9462,19 +9486,19 @@ task.spawn(function()
            end
         end
 
-        if antifogcolor == true then
+        if ws_antis.antifogcolor == true then
                 if game.Lighting.FogColor ~= Color3.new(0.75294125080109,0.75294125080109,0.75294125080109) then
                         Chat("fogcolor 192 192 192")        
                 end
         end
 
-        if antifogstart == true then
+        if ws_antis.antifogstart == true then
            if game.Lighting.FogStart ~= 0 then
                 Chat("fogstart 0")           
            end
         end
 
-        if antitime == true then
+        if ws_antis.antitime == true then
                 if game.Lighting.ClockTime ~= 14 then
                         Chat("time 14")
                 end
@@ -9486,28 +9510,28 @@ task.spawn(function()
                 end
         end
 
-        if antitripmine == true then
+        if ws_antis.antitripmine == true then
            if workspace:FindFirstChild("SubspaceTripmine") then
               workspace:FindFirstChild("SubspaceTripmine"):Destroy()
               Chat("clr")
            end
         end
 
-        if antiegg == true then
+        if ws_antis.antiegg == true then
            if workspace:FindFirstChild("EggBomb") then
               workspace:FindFirstChild("EggBomb"):Destroy()
               Chat("clr")
            end
         end
 
-        if antiplant == true then
+        if ws_antis.antiplant == true then
            if workspace:FindFirstChild("BitePlant") then
               workspace:FindFirstChild("BitePlant"):Destroy()
               Chat("clr")
            end
         end
 
-        if antiambient == true then
+        if ws_antis.antiambient == true then
                 if game.Lighting.Ambient ~= Color3.new(0,0,0) then
                         Chat("ambient 0 0 0")
                 end
