@@ -1,5 +1,5 @@
 --[[
-This script is discontinued (basically).
+This script is kinda dead.
 
 Before you view the source, here are some things you might want to know:
 - This script is dead since no one plays Kohls Admin House anymore.
@@ -40,7 +40,7 @@ You can also use it for KAH BC but barely anyone plays it. This script isn't rec
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
 Shortcut v3-VAR has more stuff than KohlsLite but is not open-source and you need to ask the owner (Tech - his discord is .globe) to be able to use the script.
 
-This script has been discontinued due to the fact that Kohls Admin House is an inactive game. This script also has most of the features that I want to have.
+This script has been discontinued for the most part due to the fact that Kohls Admin House is an inactive game. This script also has most of the features that I want to have.
 
 This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g: Shortcut v2 src1 being an extension to Shortcut v1).
 
@@ -4638,7 +4638,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unohatkick' then 
 	dzjecraft = true
-	Remind("Ended hat-kick")
+	Remind("Ended hat-kick.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'hatkick' then  -- tech kick
@@ -4923,7 +4923,7 @@ return
 		Chat("dog "..ufo)
 		Chat("rainbowify "..ufo)
 		Chat("spin "..ufo)
-                Remind("The player should now be a ufo!")
+                Remind("The player should now be a UFO!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'rat' then -- scv1
@@ -5016,15 +5016,15 @@ return
    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'knee' then
 	        local kneesurgery = string.sub(msg:lower(), #prefix + 6)
 		Chat("paint "..kneesurgery.. " blue")
-		Chat("gear "..kneesurgery.." guns")
+		Chat(prefix.."gear "..kneesurgery.." guns")
 		Chat("h \n\n\n\n\n That feeling when knee surgery is today... \n\n\n\n\n")
 		Remind("That feeling when knee surgery is today...")
     end
 
    if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'technoreaperx' then -- joke
-		Chat("char all 1702851506")
+		Chat("char all 1702851506") -- could've used gchar...
 		task.wait(1)
-		Speak("GROOMER DETECTED, TERMINATING SERVER")
+		Speak("GROOMER DETECTED, TERMINATING SERVER.")
 		task.wait(1)
 		Chat(prefix.."ecrash")
     end
@@ -5192,7 +5192,7 @@ return
 		for i = 1, 5 do
 			chat("explode "..yeetusmcgleetus)
 		end
-		Remind("Your victim has been to who knows where")
+		Remind("Your victim has been to who knows where.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'creeper' then -- kohlsnoob
@@ -5508,7 +5508,7 @@ return
 		Remind("Client btools given.")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'ecrash' then
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'ecrash' then -- This command is DYNAMIC
  		local args = string.split(msg, " ")
 		if #args == 2 then
 			custardmessage = args[2]
@@ -12021,6 +12021,14 @@ function checkCrashType()
 		KCrash()
 	elseif crash_settings.crash_type == "dog" then
 		DCrash()
+	elseif crash_settings.crash_type == "ex" then
+		Chat(prefix..'ecrash')
+	elseif crash_settings.crash_type == "nerd" then
+		Chat(prefix..'jcrash')
+	elseif crash_settings.crash_type == "dionte" then
+		Chat(prefix..'dicrash')
+	elseif crash_settings.crash_type == "fred" then
+		Chat(prefix..'fredcrash')
 	else
 		DCrash()
 	end
@@ -17236,7 +17244,8 @@ specialdays = {
  	christmas = "12/25", -- Christmas
  	happyny = "01/01", -- (Happy) New Year
  	hallows = "10/31", -- Halloween
-	valentines = "14/02" -- Valentine's Day
+	valentines = "14/02", -- Valentine's Day
+	foolsday = "04/01" -- April Fools Day
 }
 
 local ctime = os.date("%m/%d")
@@ -17265,6 +17274,10 @@ end
 
 if ctime == specialdays.valentines then
 	Remind("Happy Valentine's Day!")
+end
+
+if ctime == specialdays.foolsday then
+	Remind("April Fools Day! uwu")
 end
 
 -- End of Life script. Removed as I'll just add a discontinued banner that shows when you boot this script
@@ -17430,7 +17443,7 @@ if getgenv().kohlsgui then
 end
 
 Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
-Remind("UNDERGOING UPDATES BEHIND THE SCENES, THERE MAY BE BUGS!!! - 1stApril2025", 5)
+Remind("HUGE UPDATES - BUGS MAY EXIST 1/4/25", 5)
 
 --[[
 Things that this script is missing:
