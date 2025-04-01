@@ -3569,12 +3569,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antiabuse' then
-        Remind("WIP")
+        Remind("Contact me if you want this command - it would just be turning on all the antis, but I'm too lazy to add it.")
 
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unantiabuse' then
-        Remind("WIP")
+        Remind("Contact me if you want this command - it would just be turning off all the antis, but I'm too lazy to add it.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'cmdbar' then
