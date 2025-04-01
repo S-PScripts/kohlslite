@@ -1843,21 +1843,50 @@ local regenfind = false
 local regenfind2 = false
 local regfind = false
 
--- Antis
-local anticrash = true
-local antigear = false
-local antigb = true
-local antipaint = false
-local antiattach2 = false
-local antiperi = true
-local noblt = false
+-- Antis (gears)
+gear_antis = {
+	-- Stop users from crashing with gears
+	anticrash = true,
 
--- Antis (workspace)
-local antiflash = false
-local antidisco = false
-local antifogend = false
-local antichat = false
-local antiattach = false
+	-- Stop users from using gears
+	antigear = false,
+
+	-- Stop users from using the gearban gear, Portable Justice
+	antigb = true,
+
+	-- Stop users from using the Paint Bucket
+	antipaint = false,
+
+	-- Stop users from using the Ivory Periastron, the attach gear
+	antiattach2 = false,
+
+	-- Stop users from using ANY periastron, including the Ivory
+	antiperi = true,
+
+	-- Stop users from using the ray gun gears
+	antiraygun = true,
+	
+	-- Stop users from using blacklisted tools that aren't part of the antis above
+	noblt = false
+}
+
+-- Antis (workspace and other stuff)
+ws_antis = {
+	-- No 'flash'
+	antiflash = false,
+	
+	-- No 'disco'
+	antidisco = false,
+	
+	-- No 'fogend'
+	antifogend = false,
+
+	-- Spams h messages for everyone lagging them
+	antichat = false,
+	
+	-- Stop users saying attach commands
+	antiattach = false
+}
 
 -- Gojo server lock
 local gjdelock = false
@@ -5152,32 +5181,32 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antidisco' then
-        antidisco = true
+        ws_antis.antidisco = true
 	Remind("Enabled this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unantidisco' then
-        antidisco = false
+        ws_antis.antidisco = false
 	Remind("Disable this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antiflash' then
-        antiflash = true
+        ws_antis.antiflash = true
 	Remind("Enabled this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unantiflash' then
-        antiflash = false
+        ws_antis.antiflash = false
 	Remind("Disable this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'antifogend' then
-        antifogend = true
+        ws_antis.antifogend = true
 	Remind("Enabled this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unantifogend' then
-        antifogend = false
+        ws_antis.antifogend = false
 	Remind("Disable this anti!")
     end
 
@@ -7030,12 +7059,12 @@ end
      end
 
    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'anticrash' then
-        anticrash = true
+        gear_antis.anticrash = true
 	Remind("Anti crash is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unanticrash' then
-        anticrash = false
+        gear_antis.anticrash = false
 	Remind("Anti crash is now disabled.")
     end
 
@@ -7060,22 +7089,22 @@ end
     end	   
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antipaint' then
-        antipaint = true
+        gear_antis.antipaint = true
 	Remind("Anti paint is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unantipaint' then
-        antipaint = false
+        gear_antis.antipaint = false
 	Remind("Anti paint is now disabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antigear' then
-        antigear = true
+        gear_antis.antigear = true
 	Remind("Anti gear is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantigear' then
-        antigear = false
+        gear_antis.antigear = false
 	Remind("Anti gear is now disabled.")
     end
 
@@ -7100,45 +7129,45 @@ end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antigb' then
-        antigb = true
+        gear_antis.antigb = true
 	Remind("Anti gearban is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unantigb' then
-        antigb = false
+        gear_antis.antigb = false
 	Remind("Anti gearban is now disabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antiiv' then
-        antiattach2 = true
+        gear_antis.antiattach2 = true
 	Remind("Anti ivory is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unantiv' then
-        antiattach2 = false
+        gear_antis.antiattach2 = false
 	Remind("Anti ivory is now disabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antiperi' then
-		antiperi = true
+		gear_antis.antiperi = true
 		Remind("Anti periastron is now enabled.")
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantiperi' then
-		antiperi = false
+		gear_antis.antiperi = false
 		Remind("Anti periastron is now disabled.")
     end	
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'antiattach' then
 	if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'antiattach2' then else
-        	antiattach = true
+        	ws_antis.antiattach = true
 		Remind("Anti attach is now enabled.")
 	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unantiattach' then
 	if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'unantiattach2' then else
-        	antiattach = false
+        	ws_antis.antiattach = false
 		Remind("Anti attach is now disabled.")
 	end
     end
@@ -7154,22 +7183,22 @@ end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'noblt' then
-        noblt = true
+        gear_antis.noblt = true
 	Remind("Players can no longer use some tools since they are annoying.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unnoblt' then
-        noblt = false
+        gear_antis.noblt = false
 	Remind("Players can now use the annoying tools.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antiray' then
-        antiraygun = true
+        gear_antis.antiraygun = true
 	Remind("Players can no longer use the ray gun.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unantiray' then
-        antiraygun = false
+        gear_antis.antiraygun = false
 	Remind("Players can now use the ray gun.")
     end
 
@@ -8274,13 +8303,13 @@ end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antichat' then
-        antichat = true
+        ws_antis.antichat = true
         antis.antimessage = true -- stop you from crashing :)
 	Remind("Spamming h messages with emojis to lag and remove chat for people")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantichat' then
-        antichat = false
+        ws_antis.antichat = false
         antis.antimessage = false
 	Remind("No longer spamming h messages with emojis to lag and remove chat for people")
     end
@@ -9391,13 +9420,13 @@ task.spawn(function()
         task.wait()
         for i,v in pairs(game:GetService("Workspace").Terrain["_Game"].Folder:GetChildren()) do
             if v:IsA('Script') then
-                  if antidisco == true then    
+                  if ws_antis.antidisco == true then    
                           if v.Name == "Disco" then
                               v:Destroy() -- :)
                               Chat("fix")
                           end
                   end
-                  if antiflash == true then    
+                  if ws_antis.antiflash == true then    
                           if v.Name == "Flash" then
                               v:Destroy() -- :)
                               Chat("fix")
@@ -9406,7 +9435,7 @@ task.spawn(function()
             end
         end
 
-        if antifogend == true then
+        if ws_antis.antifogend == true then
            if game.Lighting.FogEnd ~= 100000 then
               Chat("fogend 100000")
            end
@@ -9956,7 +9985,7 @@ connections[#connections + 1] =
     game:GetService("RunService").RenderStepped:Connect(function()
 	while true do
         	task.wait(0.1)
-               	if antichat == true then
+               	if ws_antis.antichat == true then
                         Chat("m 😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭💀💀💀💀💀💀💀💀💀😀😃😄😁😆😅😂🤣😭")
                 end
 
@@ -10336,7 +10365,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		for i, v in game.Players:GetPlayers() do
 				if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 					if v.Backpack:FindFirstChildOfClass("Tool") then
-						if antigear then
+						if gear_antis.antigear then
 							Chat("ungear " .. v.Name)
 							Chat("punish " .. v.Name)
 							Chat("clr")
@@ -10357,7 +10386,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
 				if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 					if v.Character and v.Character:FindFirstChildOfClass("Tool") then
-						if antigear then
+						if gear_antis.antigear then
 							Chat("ungear " .. v.Name)
 							Chat("punish " .. v.Name)
 							Chat("clr")
@@ -10401,7 +10430,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 									slockenabled = true
 								end
 							
-							elseif anticrash then
+							elseif gear_antis.anticrash then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10447,7 +10476,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 									slockenabled = true
 								end
 							
-							elseif anticrash then
+							elseif gear_antis.anticrash then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10472,7 +10501,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					end
 				end
 
-				if workspace:FindFirstChild(tool) then
+				if workspace:FindFirstChild(tool) then -- I CODED THIS WRONG (MY ARSE FORGOT TO CHECK IF THE ANTI IS ON FOR THE WORKSPACE CHECK LOL)
 					Chat("ungear others")
 					Chat("punish others")
 					Chat("clr")
@@ -10493,7 +10522,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				for i, v in game.Players:GetPlayers() do
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
-							if antiattach2 then
+							if gear_antis.antiattach2 then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10514,7 +10543,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
-							if antiattach2 then
+							if gear_antis.antiattach2 then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10555,7 +10584,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				for i, v in game.Players:GetPlayers() do
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
-							if antiperi then
+							if gear_antis.antiperi then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10576,7 +10605,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
-							if antiperi then
+							if gear_antis.antiperi then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10617,7 +10646,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				for i, v in game.Players:GetPlayers() do
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
-							if antigb then
+							if gear_antis.antigb then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10638,7 +10667,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
-							if antigb then
+							if gear_antis.antigb then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10679,7 +10708,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				for i, v in game.Players:GetPlayers() do
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
-							if antipaint then
+							if gear_antis.antipaint then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10700,7 +10729,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
-							if antipaint then
+							if gear_antis.antipaint then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10741,7 +10770,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				for i, v in game.Players:GetPlayers() do
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
-							if noblt then
+							if gear_antis.noblt then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10762,7 +10791,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
-							if noblt then
+							if gear_antis.noblt then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10803,7 +10832,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				for i, v in game.Players:GetPlayers() do
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
-							if antiraygun then
+							if gear_antis.antiraygun then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -10824,7 +10853,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
-							if antiraygun then
+							if gear_antis.antiraygun then
 								Chat("ungear " .. v.Name)
 								Chat("punish " .. v.Name)
 								Chat("clr")
@@ -17327,6 +17356,7 @@ if getgenv().kohlsgui then
 end
 
 Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
+Remind("UNDERGOING UPDATES BEHIND THE SCENES, THERE MAY BE BUGS!!! - 1stApril2025", 5)
 
 --[[
 Things that this script is missing:
