@@ -6442,91 +6442,25 @@ return
         		return
     		end
 
-    		local act = args[2]
-    		local getnumber = args[3]
+    		local act = args[2]:lower()
+    		local getnumber = tonumber(args[3])
 
-		if act == "clone" or act == "cloneai" then
-				Clone(getnumber)
-				Remind("Action: Clone")
-
-		elseif act == "table" or act == "raig" then
-		                Table(getnumber)
-				Remind("Action: Table")
-
-		elseif act == "potion" or act == "dance" or act == "danceball" or act == "discoball" then
-				Potion(getnumber)
-				Remind("Action: Potion")
-
-		elseif act == "tripmine" or act == "trip" or act == "minetrip" then
-				TripMine(getnumber)
-				Remind("Action: Tripmine")
-
-		elseif act == "spike" or act == "spikespam" then
-                		Spike(getnumber)
-		 		Remind("Action: Spike")
-
-		elseif act == "cannon" then
-		                Cannon(getnumber)
-				Remind("Action: Cannon")
-
-		elseif act == "zombie" or act == "spawnzombies" then
-				Zombie(getnumber)
-				Remind("Action: Zombie")
-
-		elseif act == "alpaca" or act == "llama" then
-				Alpaca(getnumber)
-				Remind("Action: Alpaca")
-
-		elseif act == "piano" or act == "mozart" then
-		                Piano(getnumber)
-				Remind("Action: Piano")
-
-		elseif act == "bdrop" or act == "bassdrop" then
-		                Bassdrop(getnumber)
-				Remind("Action: Bassdrop")
-
-		elseif act == "cstory" or act == "coolstory" or act == "coolstoryman" then
-		                Coolstory(getnumber)
-				Remind("Action: Coolstory")
-
-		elseif act == "banana" or act == "bananapeel" then
-		                Banana(getnumber)
-				Remind("Action: Banana")
-
-		elseif act == "tguitar" or act == "tankguitar" or act == "guitar" then
-				TankGuitar(getnumber)
-				Remind("Action: Tank Guitar")
-
-		elseif act == "sfriend" or act == "skelefriend" or act == "skele" then
-				SkeleFriend(getnumber)
-				Remind("Action: Skele Friend")
-
-		elseif act == "spray" or act == "nozzle" then
-				Spray(getnumber)
-				Remind("Action: Spray")
-
-		elseif act == "party" then
-				Party(getnumber)
-				Remind("Action: Party")
-
-		else
-				Remind("Invalid action!")
-		end
+		centreAPI:Acton(act, getnumber)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'listacton' then -- yeah this is a lazy solution but I can't be bothered to re-code it
 		print([[clone/cloneai, 
 table/raig, 
-potion/dance/danceball/discoball, 
+potion/dance/danceball/discoball/disco, 
 tripmine/trip/minetrip, 
 spike/spikespam, 
 cannon, 
-zombie/spawnzombies,
+zombie/zombiespawn,
 alpaca/llama, 
 piano/mozart,
 bdrop/bassdrop, 
-cstory/coolstory/coolstoryman, 
-banana/bananapeel,
+cstory/coolstory/cstoryman/coolstoryman, 
+banana/bananapeel/peel,
 tguitar/tankguitar/guitar,
 sfriend/skelefriend/skele, 
 spray/nozzle, 
@@ -16071,280 +16005,104 @@ function rcannon(mode)
    	end)
 end
 
--- Rewriting this command later
 centreAPI = {}
 
-function centreAPI:Clone(getnum, ID)
-	local IDS = {
-		clone = nil,
-		table = nil,
-		potion = nil,
-		tripmine = nil,
-		spike = nil,
-		cannon = nil,
-		zombie = nil,
-		alpaca = nil,
-		piano = nil,
-		bassdrop = nil,
-		coolstory =  nil,
-		banana = nil,
-		tankguitar = nil,
-		skelefriend = nil,
-		spray = nil,
-		party = nil
+function centreAPI:Acton(action, getnum)
+	local gearIDS = {
+    		clone = 72644644,
+    		cloneai = 72644644,
+
+    		table = 110789105,
+    		raig = 110789105,
+
+    		potion = 27858062,
+    		dance = 27858062,
+    		danceball = 27858062,
+    		disco = 27858062,
+    		discoball = 27858062,
+
+    		tripmine = 11999247,
+    		trip = 11999247,
+    		minetrip = 11999247,
+    
+		cannon = 42201538,
+
+    		spike = 59848474,
+    		spikespam = 59848474,
+
+    		zombie = 26421972,
+    		zombiespawn = 26421972,
+
+    		alpaca = 292969139,
+    		llama = 292969139,
+
+    		piano = 113299590,
+    		mozart = 113299590,
+
+    		bassdrop = 152233094,
+    		bdrop = 152233094,
+
+    		coolstory = 119101643,
+    		cstory = 119101643,
+    		cstoryman = 119101643,
+    		coolstoryman = 119101643,
+
+    		banana = 29100449,
+    		bananapeel = 29100449,
+    		peel = 29100449,
+
+    		tankguitar = 47871615,
+    		tguitar = 47871615,
+		guitar = 47871615,
+
+    		skelefriend = 63253701,
+    		skele = 63253701,
+   		sfriend = 63253701,
+
+    		spray = 273795078,
+    		nozzle = 273795078,
+
+    		party = 151777652
 	}
-end
 
-function centreAPI:Clone(getnum)
-	 Chat("ungear me");task.wait(0.5)
-         local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
-         for i = 1, tonumber(getnum) do
-                    Chat('gear me 72644644');task.wait(0.01)
-         end
-         local oldchild = #workspace:GetChildren()
-         repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-         local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-         for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            v:Activate()
-         end
-         repeat task.wait() until (#workspace:GetChildren() - oldchild) >= tonumber(getnum) 
-         Chat("ungear me")
-         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
-end
+    	local gearID = gearIDS[action]
+    	if not gearID then
+        	Remind("Invalid action. Please provide a valid action.")
+        	return
+    	end
 
-function centreAPI:Table(getnum)
 	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 110789105");task.wait(0.01)
-        end
-  --      local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
+        local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+   	for i = 1, getnum do
+        	Chat('gear me ' .. gearID)
+        	task.wait(0.01)
+    	end
+        local oldchild = #workspace:GetChildren()
+        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= getnum
         local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
         for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
+        	v.Parent = game.Players.LocalPlayer.Character
+		v:Activate()
         end
-end
 
-function centreAPI:Potion(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 27858062");task.wait(0.01)
-        end
-      --  local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end
+	if gearID == "clone" or gearID == "cloneai" then
+        	repeat task.wait() until (#workspace:GetChildren() - oldchild) >= getnum
+        	Chat("ungear me")
+       	 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+	end
 
-function centreAPI:TripMine(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 11999247");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end
-
-function centreAPI:Cannon(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 42201538");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end
-
-function centreAPI:Spike(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 59848474");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-        end
-	task.wait(0.1)
-	for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
-    		if v:IsA("Tool") then
-        		v.ClientInput:FireServer(Enum.KeyCode.E)
-        		task.wait()
-        		v:Activate()
-       			task.wait()
-        		game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(0,math.rad(360/tonumber(getnum)),0)
-    		end
+	if gearID == "spike" then
+		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
+    			if v:IsA("Tool") then
+        			v.ClientInput:FireServer(Enum.KeyCode.E)
+        			task.wait()
+        			v:Activate()
+       				task.wait()
+        			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.Angles(0,math.rad(360/tonumber(getnum)),0)
+    			end
+		end
 	end
 end
-
-function centreAPI:Zombie(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 26421972");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end
-
-function centreAPI:Alpaca(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 292969139");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end
-
-function centreAPI:Piano(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 113299590");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end
-
-function centreAPI:Bassdrop(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 152233094");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end
-
-function centreAPI:Coolstory(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 119101643");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end
-
-function centreAPI:Banana(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 29100449");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end
-
-function centreAPI:TankGuitar(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 47871615");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end
-
-function centreAPI:SkeleFriend(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 63253701");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end
-
-function centreAPI:Spray(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 273795078");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end 
-
-function centreAPI:Party(getnum)
-	Chat("ungear me");task.wait(0.5)
-        for i = 1, tonumber(getnum) do
-                Chat("gear me 151777652");task.wait(0.01)
-        end
-     --   local oldchild = #workspace:GetChildren()
-        repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= tonumber(getnum) 
-        local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-        for _, v in ipairs(Backpack:GetChildren()) do
-                            v.Parent = game.Players.LocalPlayer.Character
-                            task.wait(0.01)
-                            v:Activate()
-        end
-end 
 
 --// ATTACHING STUFF \\ --
 local Player = game.Players.LocalPlayer
