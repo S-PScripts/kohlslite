@@ -1815,7 +1815,7 @@ local crash_settings = {
 -- Anti logs
 local antimlog = false -- for music
 local antiglog = false -- for gears [unused]
-local anticlog = false -- for chars [used]
+local anticlog = false -- for chars [unused]
 
 -- Admin stuff relating to users
 local padbanned = {} 
