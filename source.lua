@@ -12175,12 +12175,12 @@ task.spawn(function()
         while true do
                 task.wait()
                 for i, v in ipairs(game.Players:GetPlayers()) do
-                        if table.find(byecam, v.Name) then
+                        if table.find(rand_players.byecam, v.Name) then
                                 if v and not v.Character:FindFirstChildOfClass("Model") then
                                          Chat("name ".. v.Name .." [i got named]") -- pointless now but i'm not removing it
                                 end
                         end
-                        if table.find(carcar, v.Name) then
+                        if table.find(rand_players.carcar, v.Name) then
                                 Chat("gear ".. v.Name .." 253519495")
                         end
                 end
@@ -14426,8 +14426,8 @@ function onPlayerLeaving(player)
                 table.remove(carcar, table.find(carcar, player))
     end
 
-    if table.find(byecam, player.Name) then
-                table.remove(byecam, table.find(byecam, player))
+    if table.find(rand_players.byecam, player.Name) then
+                table.remove(rand_players.byecam, table.find(rand_players.byecam, player))
     end
 
     if acplr == player.Name then
