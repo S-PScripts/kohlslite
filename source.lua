@@ -12145,10 +12145,19 @@ task.spawn(function()
    end
 end)
 
+quotes = {
+	"why are you reading this",
+	"i love exploiting in a dead game... it's called KAH",
+	"use shortcut v3",
+	"no logs for you pal",
+	"s_p is really gay",
+	"kohlslite is a trash script - ts2021, 2025"
+}
+
 -- LOG SPAM
 function LogSpam()
-      for i = 1,100 do
-          Chat("reset KOHLSLITE ON BOTTOM - ts2021, 2024")
+      for i = 1, 100 do
+          game.Players:Chat("reset "..quotes[math.random(1, #Quotes)])
       end
 end
 
