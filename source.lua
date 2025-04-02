@@ -4579,6 +4579,10 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	end
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'kick' then
+	Remind("You need to specify the kick you want to use.")
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'dcrash' then
 	if crash_settings.skipwarncrash then -- idea from sinx
 		DCrash()
