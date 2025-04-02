@@ -5169,6 +5169,34 @@ return
 		Chat(prefix.."ecrash")
     end
 
+   if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'goon' then -- joke
+		Remind("GOONER?")
+		freaky = math.random(1,11)
+		if freaky == 1 then
+			Chat(prefix.."gchar me KonekoKittenWasTaken")
+		elseif freaky == 2 then
+			Chat(prefix.."gchar me PGHLego1945")
+		elseif freaky == 3 then
+			Chat(prefix.."gchar me notive")
+		elseif freaky == 4 then
+			Chat(prefix.."gchar me RealKoofy")
+		elseif freaky == 5 then
+			Chat(prefix.."gchar me TheRibsRibs")
+		elseif freaky == 6 then
+			Chat(prefix.."gchar me PotemerForReal")
+		elseif freaky == 7 then
+			Chat(prefix.."gchar me Nathorix")
+		elseif freaky == 8 then
+			Chat(prefix.."gchar me MilkdedX")
+		elseif freaky == 9 then
+			Chat(prefix.."gchar me maddybIox")
+		elseif freaky == 10 then
+			Chat(prefix.."gchar me MisterObvious")
+		else
+			Chat(prefix.."gchar me kamguyzaa")
+		end
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'headfloat' then -- yeah im adding scv1 cmds lol
 	        local hf = string.sub(msg:lower(), #prefix + 11)
 		Chat("size "..hf.." 0.5")
