@@ -12146,18 +12146,26 @@ task.spawn(function()
 end)
 
 quotes = {
-	"why are you reading this",
+	"why are you reading this bruh",
 	"i love exploiting in a dead game... it's called KAH",
-	"use shortcut v3",
+	"i have nothing else to do",
+	"all this log spam is typed manually, i'm really fast at typing vro",
+	"use shortcut v3-var",
 	"no logs for you pal",
 	"s_p is really gay",
+	"i haven't touched grass for 5 years",
+	"uwu owo - kisses you",
+	"this script is really big, just like my clock",
+	"this script was created by the people in my basement",
+	"i have never made a typo in my lfie",
+	"one year and counting... forever?",
 	"kohlslite is a trash script - ts2021, 2025"
 }
 
 -- LOG SPAM
 function LogSpam()
       for i = 1, 100 do
-          game.Players:Chat("reset "..quotes[math.random(1, #Quotes)])
+          game.Players:Chat("reset "..quotes[math.random(1, #quotes)])
       end
 end
 
