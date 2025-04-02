@@ -202,19 +202,3 @@ print(prefix..'autogb')
 print(prefix..'qpunish')
 print(prefix..'spunish')
 print(prefix..'gpunish')
-
-
-print("\n")
-print("--- ANTI INFORMATION ---")
-print("For antis relating to the player, do (antiname) me/others/all")
-print("To turn off the antis, do un(antiname) me/others/all")
-print("If it's to the game itself, just do (antiname).")
-print("\n")
-
-print("--- ADDITIONAL INFO ---")
-print("1a. This script has some stuff missing and some stuff broken but it's not really finished. There's many stuff I'm still adding.")
-print("1b. If you want a good script and have some money/robux, get Shortcut v3 VAR by dming t.ech")
-print("2a. /n/n/n no longer works. Sorry!")
-
-print("\n")
-print("VIEW THE SOURCE HERE: kohlslite.pages.dev/source.lua")
