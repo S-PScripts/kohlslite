@@ -1884,7 +1884,7 @@ local gear_antis = {
 	antiperi = true,
 
 	-- Stop users from using the ray gun gears
-	antiraygun = true,
+	antiraygun = false,
 	
 	-- Stop users from using blacklisted tools that aren't part of the antis above
 	noblt = false
