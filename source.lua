@@ -415,7 +415,7 @@ else
 end
 
 -- Defaults (you can change these)
-local defaults = {".antirocket me", ".tnok", ".antikill me"} --".antimsg me"
+local defaults = {".tnok", ".antikill me"} --".antimsg me"
 
 -- Misc variables (ignore these they are for bug fixes)
 local backend_stuff = {
@@ -14422,7 +14422,7 @@ function onPlayerLeaving(player)
                 table.remove(carcar, table.find(carcar, player))
     end
 
-    if table.find(carcar, player.Name) then
+    if table.find(rand_players.carcar, player.Name) then
                 table.remove(carcar, table.find(carcar, player))
     end
 
