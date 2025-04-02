@@ -10229,7 +10229,7 @@ connections[#connections + 1] =
                                           else end
                                 end
 
-                                if table.find(loopkill, v.Name) then
+                                if table.find(rand_players.loopkill, v.Name) then
                                         if v.Character.Humanoid.Health ~= 0 then
                                                     Chat("kill "..v.Name)
                                         end
