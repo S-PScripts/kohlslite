@@ -430,11 +430,11 @@ local backend_stuff = {
 local editedstuff = {
 	-- Perm spoofer (speed)
 	editedspeedis = 16,
-	editedspeed = true,
+	editedspeed = false,
 
 	-- Perm spoofer (jumppower) 
 	editedjumpis = 50,
-	editedjump = true
+	editedjump = false
 }
 
 -- Number settings
@@ -16902,7 +16902,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
 end
 
 -- These run last to prevent bugs
-startupScripts()
+-- startupScripts()
 
 Stats.loadedtime = string.format("%.2f", os.clock() - Stats.starttime)
 
