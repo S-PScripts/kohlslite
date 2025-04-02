@@ -25,7 +25,7 @@ Update 26/03/2025: NP version was taken down, it'll be back soon though...
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.1
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.11
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -95,7 +95,7 @@ getgenv().scriptname = "KohlsLite"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.1", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.11", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -373,7 +373,7 @@ getgenv().kohlsexecuted = true
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.1"
+getgenv().klversion = "X1.11"
 
 -- KohlsLite Start Gui
 if getgenv().kohlsgui then
@@ -610,7 +610,10 @@ mainbar_stuff = {
 	watermark_kl = false,
 
 	-- The backdoor
-	backdoor_enabled = true
+	backdoor_enabled = true,
+
+	-- The tag above KL Admins
+	billboard = true
 }
 
 -- Auto stuff
@@ -624,60 +627,69 @@ local auto_stuff = {
 	autorejoin = false
 }
 
--- Loopkill
-local loopkill = {}
+-- Random lists of players
+local rand_players = {
+	-- Players loopkilled
+	loopkill = {},
+	
+	-- Spam name users
+	byecam = {},
 
--- Name spam
-local byecam = {}
+	-- Car lag
+	carcar = {}
+}
 
--- Car lag
-local carcar = {}
-
--- Anti kill list, I didn't make it for any other antis so cry!
+-- Anti kill list, I didn't make it for any other antis so cry (if you're so desperate, contact me)
 local antikill = {}
 local antipunish = {}
 
+-- People to get automatically charred to the ID set
+local autochar = {}
+
 -- Gamepass saving 
-
 -- Users that use perm will be placed here
-local permusers = {}
-
- -- Users that use persons will be placed here
-local personsusers = {}
-
--- Auto stuff upon user joining
-
--- Rocket kick player
-rkick_on_sight = {} 
-
--- Crash server
-crash_on_sight = {
-	"jhjssikeksms",
-	"aliihsan12345",
-	"aliihsan12345Bloxy",
-	"Unknown35864",
-	"UnknownHasComeBack",
-	"OhMyAlt000",
-	"Roblox_girlsfree",
-	"aliihsan12345isafurry", 
-    	"IIIdev",
-    	"ihateyou"
+local gamepasses = { 
+	-- Users that use perm will be placed here
+	permusers = {},
+	
+	-- Users that use persons will be placed here
+	personsusers = {}
 }
 
--- Message kick
-mkick_on_sight = {} 
+-- Do something to player upon them joining/do something to player in server upon booting the script
+local list_on_sight = {
+	-- Rocket kick the player
+    	rkick_on_sight = {},
 
--- Hat kick
-hatkick_on_sight = {}
+	-- Crash the server
+    	crash_on_sight = {
+        	"jhjssikeksms",
+        	"aliihsan12345",
+       	 	"aliihsan12345Bloxy",
+        	"Unknown35864",
+    		"UnknownHasComeBack",
+        	"OhMyAlt000",
+        	"Roblox_girlsfree",
+        	"aliihsan12345isafurry", 
+        	"IIIdev",
+        	"ihateyou"
+    	},
+	
+	-- Message kick the player
+    	mkick_on_sight = {},
 
--- Slow user
-suser_on_sight = {}
+	-- Hat kick the player
+    	hatkick_on_sight = {},
 
--- Furry user (9jn)
-furry_on_sight = {}
+	-- Car spam the player
+    	suser_on_sight = {},
 
--- Gearban user
-gb_on_sight = {}
+	-- Char the player furry
+    	furry_on_sight = {},
+
+	-- Gearban the player
+    	gb_on_sight = {}
+}
 
 -- Variables for moving
 local movestatus = false
@@ -2467,13 +2479,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	end
 
         if string.sub(msg, 1, #prefix + 9)  == prefix..'billboard' then
-			billboard = true
+			mainbar_stuff.billboard = true
 			Remind("KohlsLite admins will have 'KL ADMIN' above their avatar.") 
 	end
 
-
         if string.sub(msg, 1, #prefix + 11)  == prefix..'unbillboard' then
-			billboard = false
+			mainbar_stuff.billboard = false
 			Remind("KohlsLite admins will no longer have have 'KL ADMIN' above their avatar.") 
 	end
 
@@ -2481,12 +2492,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          local dasplayer = string.sub(msg:lower(), #prefix + 10)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
-                if not table.find(loopkill, player) then
+                if not table.find(rand_players.loopkill, player) then
 			if player_relate.blwl_an then
                         	Chat("h \n\n\n\n\n "..player.." is being loopkilled. \n\n\n\n\n")
 			end
                         Remind("Loopkilling "..player)
-                        table.insert(loopkill, player)
+                        table.insert(rand_players.loopkill, player)
                 else
                         Remind(player.." is already being loopkilled!")
                 end
@@ -2499,12 +2510,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          local dasplayer = string.sub(msg:lower(), #prefix + 12)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
-                if table.find(loopkill, player) then
+                if table.find(rand_players.loopkill, player) then
 			if player_relate.blwl_an then
                         	Chat("h \n\n\n\n\n "..player.." is no longer being loopkilled! \n\n\n\n\n")
 			end
                         Remind("Stopped loopkilling "..player)
-                        table.remove(loopkill, table.find(loopkill, player))
+                        table.remove(rand_players.loopkill, table.find(rand_players.loopkill, player))
                 else
                         Remind(player.." was never loopkilled!")
                 end
@@ -2517,12 +2528,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          local dasplayer = string.sub(msg:lower(), #prefix + 7)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
-                if not table.find(byecam, player) then
+                if not table.find(rand_players.byecam, player) then
 			if player_relate.blwl_an then
                         	Chat("h \n\n\n\n\n "..player.."'s camera is getting spam named! \n\n\n\n\n")
 			end
                         Remind("Spam naming "..player)
-                        table.insert(byecam, player)
+                        table.insert(rand_players.byecam, player)
                 else
                         Remind(player.." is already being spam named!")
                 end
@@ -2535,12 +2546,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          local dasplayer = string.sub(msg:lower(), #prefix + 9)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
-                if table.find(byecam, player) then
+                if table.find(rand_players.byecam, player) then
 			if player_relate.blwl_an then
                         	Chat("h \n\n\n\n\n "..player.."'s camera is no longer being spam named! \n\n\n\n\n")
 			end
                         Remind("Stopped spam naming "..player)
-                        table.remove(byecam, table.find(byecam, player))
+                        table.remove(rand_players.byecam, table.find(rand_players.byecam, player))
                 else
                         Remind(player.." was never spam named!")
                 end
@@ -2553,12 +2564,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          local dasplayer = string.sub(msg:lower(), #prefix + 8)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
-                if not table.find(carcar, player) then
+                if not table.find(rand_players.carcar, player) then
 			if player_relate.blwl_an then
                         	Chat("h \n\n\n\n\n "..player.." loves cars! Yummy! \n\n\n\n\n")
 			end
                         Remind("Spam car-ing "..player)
-                        table.insert(carcar, player)
+                        table.insert(rand_players.carcar, player)
                 else
                         Remind(player.." is already being spam carred!")
                 end
@@ -2571,12 +2582,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          local dasplayer = string.sub(msg:lower(), #prefix + 10)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
-                if table.find(carcar, player) then
+                if table.find(rand_players.carcar, player) then
 			if player_relate.blwl_an then
-                        	Chat("h \n\n\n\n\n "..player.."'s hates cars! Noooooo \n\n\n\n\n")
+                        	Chat("h \n\n\n\n\n "..player.." hates cars! Rude! \n\n\n\n\n")
 			end
                         Remind("Stopped spam car-ing "..player)
-                        table.remove(carcar, table.find(carcar, player))
+                        table.remove(rand_players.carcar, table.find(rand_players.carcar, player))
                 else
                         Remind(player.." was never spam carred!")
                 end
@@ -2678,15 +2689,15 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
         if string.sub(msg, 1, #prefix + 9)  == prefix..'permusers' then
            Remind("Check your console by running /console!")
-           for i = 1, #permusers do
-                  print(permusers[i])
+           for i = 1, #gamepasses.permusers do
+                  print(gamepasses.permusers[i])
            end
         end
 
         if string.sub(msg, 1, #prefix + 12)  == prefix..'personsusers' then
            Remind("Check your console by running /console!")
-           for i = 1, #personsusers do
-                  print(personsusers[i])
+           for i = 1, #gamepasses.personsusers do
+                  print(gamepasses.personsusers[i])
            end
         end
 
@@ -8436,44 +8447,76 @@ end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'autochar' then
   	local args = string.split(msg, " ")
-        if args[2] == "me" then
-                auto_stuff.autocharme = true
-		oname = args[3]
-		auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
-                Remind("Auto char is on for you!")
-        elseif args[2] == "others" then
-                auto_stuff.autocharall = true
-		oname = args[3]
-		auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
-                Remind("Auto char is on for others!")
-        elseif args[2] == "all" then
-                auto_stuff.autocharme = true
-                auto_stuff.autocharall = true
-		oname = args[3]
-		auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
-                Remind("Auto char is on for everyone!")
-        else
-                Remind("Invalid argument: Must be me, others, or all")
+	if #args == 3 then
+        	if args[2] == "me" then
+                	auto_stuff.autocharme = true
+			oname = args[3]
+			auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
+                	Remind("Auto char is on for you!")
+        	elseif args[2] == "others" then
+                	auto_stuff.autocharall = true
+			oname = args[3]
+			auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
+                	Remind("Auto char is on for others!")
+        	elseif args[2] == "all" then
+                	auto_stuff.autocharme = true
+                	auto_stuff.autocharall = true
+			oname = args[3]
+			auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
+                	Remind("Auto char is on for everyone!")
+		else
+			kia = args[2]
+           	  	PLAYERCHECK(kia)
+			oname = args[3]
+			auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
+	         	if player ~= nil then
+				if not table.find(autochar, player) then
+					Remind(player.." is on the list now!")
+					table.insert(autochar, player)
+				else
+					Remind(player.." is already in the table!")
+				end
+                 	else                           
+                        	Remind('Cannot find player with the name: '..dasplayer)
+			end
+                end
+	else
+                Remind("Invalid amount of arguments. (it should be 3)")
         end       
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unautochar' then
   	local args = string.split(msg, " ")
-        if args[2] == "me" then
-                auto_stuff.autocharme = false
-                Remind("Auto char is off for you!")
-		Chat("unchar me")
-        elseif args[2] == "others" then
-                auto_stuff.autocharall = false
-                Remind("Auto char is off for others!")
-		Chat("unchar others")
-        elseif args[2] == "all" then
-                auto_stuff.autocharme = false
-                auto_stuff.autocharall = false
-                Remind("Auto char is off for everyone!")
-		Chat("unchar all")
-        else
-                Remind("Invalid argument: Must be me, others, or all")
+	if #args == 3 then
+        	if args[2] == "me" then
+                	auto_stuff.autocharme = false
+                	Remind("Auto char is off for you!")
+			Chat("unchar me")
+        	elseif args[2] == "others" then
+                	auto_stuff.autocharall = false
+                	Remind("Auto char is off for others!")
+			Chat("unchar others")
+        	elseif args[2] == "all" then
+                	auto_stuff.autocharme = false
+                	auto_stuff.autocharall = false
+                	Remind("Auto char is off for everyone!")
+			Chat("unchar all")
+        	else
+		  	kia = args[2]
+           	  	PLAYERCHECK(kia)
+	         	if player ~= nil then
+				if table.find(autochar, player) then
+					Remind(player.." is no longer in the table!")
+					table.remove(antikill, table.find(autochar, player))
+				else
+					Remind(player.." was never in the list!")
+				end
+                 	else                           
+                        	Remind('Cannot find player with the name: '..dasplayer)
+			end
+		end
+	else
+		Remind("Invalid amount of arguments. (it should be 3)")
         end       
     end
 
@@ -9257,16 +9300,16 @@ function checkforperm()
             Remind(gcplrn.." has perm in NBC!")
             Chat("h \n\n\n " .. gcplrn .. " has perm in NBC! \n\n\n")
           --  Speak(gcplrn.." has perm in NBC!")
-            if not table.find(permusers, gcplrn) then
-                    table.insert(permusers, gcplrn)
+            if not table.find(gamepasses.permusers, gcplrn) then
+                    table.insert(gamepasses.permusers, gcplrn)
             end
         elseif string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 64354), 64354) then
             Remind(gcplrn.." has perm in BC!")
 	    Chat("h \n\n\n " .. gcplrn .. " has perm in BC! \n\n\n")
            -- Speak(gcplrn.." has perm in BC!")
-            table.insert(permusers, gcplrn)
-            if not table.find(permusers, gcplrn) then
-                    table.insert(permusers, gcplrn)
+            table.insert(gamepasses.permusers, gcplrn)
+            if not table.find(gamepasses.permusers, gcplrn) then
+                    table.insert(gamepasses.permusers, gcplrn)
             end
         else 
                 Remind(gcplrn..' does not have perm!')
@@ -9285,9 +9328,9 @@ function checkforpersons(u)
 	    	Chat("h \n\n\n " .. gcplrn .. " has persons in NBC! \n\n\n")
 	    end
             -- Speak(gcplrn.." has persons in NBC!")
-            table.insert(personsusers, gcplrn)
-            if not table.find(personsusers, gcplrn) then
-                    table.insert(personsusers, gcplrn)
+            table.insert(gamepasses.personsusers, gcplrn)
+            if not table.find(gamepasses.personsusers, gcplrn) then
+                    table.insert(gamepasses.personsusers, gcplrn)
             end
         elseif string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 37127), 37127) then
             Remind(gcplrn.." has persons in BC!")
@@ -9297,9 +9340,9 @@ function checkforpersons(u)
 	    	Chat("h \n\n\n " .. gcplrn .. " has persons in BC! \n\n\n")
 	    end           
 	    -- Speak(gcplrn.." has persons in BC!")
-            table.insert(personsusers, gcplrn)
-            if not table.find(personsusers, gcplrn) then
-                    table.insert(personsusers, gcplrn)
+            table.insert(gamepasses.personsusers, gcplrn)
+            if not table.find(gamepasses.personsusers, gcplrn) then
+                    table.insert(gamepasses.personsusers, gcplrn)
             end
         else 
                 Remind(gcplrn..' does not have persons!')
@@ -10073,7 +10116,7 @@ connections[#connections + 1] =
                 for i, v in ipairs(game.Players:GetPlayers()) do
                         if v.Name ~= game.Players.LocalPlayer.Name then
 
-         		        if auto_stuff.autocharall == true then 
+         		        if auto_stuff.autocharall == true or table.find(autochar, v.Name) then 
                                         if auto_stuff.autocharid ~= v.CharacterAppearanceId then
                                                       Chat('char '..v.Name..' '..auto_stuff.autocharid)
                                         else end
@@ -10134,10 +10177,10 @@ connections[#connections + 1] =
 
                                  if checkperm2 == true then
                                          if v.Character and v.Character:FindFirstChild("ForceField") then
-                                                if not table.find(permusers, v.Name) then
+                                                if not table.find(gamepasses.permusers, v.Name) then
                                                         print(v.Name.." has perm.")
 							Remind(v.Name.." has perm.")
-                                                        table.insert(permusers, v.Name)
+                                                        table.insert(gamepasses.permusers, v.Name)
                                                         Chat("unff "..v.Name)
                                                 end
                                             end
@@ -14233,7 +14276,7 @@ function onPlayerAdded(player)
     if not table.find(specialperms, player.Name) and not table.find(atprogperms, player.Name) then
 		check_con = false
 
-  		if table.find(rkick_on_sight, player.Name) then
+  		if table.find(list_on_sight.rkick_on_sight, player.Name) then
                 	if player_relate.welcomemsg == true then 
 				Chat("h \n\n\n\n\n Rocket kicking "..player.Name.." as they are blacklisted. \n\n\n\n\n")
 			end
@@ -14243,7 +14286,7 @@ function onPlayerAdded(player)
 			check_con = true
 		end
 
-    		if table.find(suser_on_sight, player.Name) then
+    		if table.find(list_on_sight.suser_on_sight, player.Name) then
                 	if player_relate.welcomemsg == true then
 				Chat("h \n\n\n\n\n Lagging "..player.Name.." with cars as they are blacklisted. \n\n\n\n\n")
 			end
@@ -14255,7 +14298,7 @@ function onPlayerAdded(player)
 			check_con = true
    	 	end
 
-    		if table.find(mkick_on_sight, player.Name) then
+    		if table.find(list_on_sight.mkick_on_sight, player.Name) then
                		if player_relate.welcomemsg == true then
 				Chat("h \n\n\n\n\n Message kicking "..player.Name.." as they are blacklisted. \n\n\n\n\n")
 			end
@@ -14266,7 +14309,7 @@ function onPlayerAdded(player)
 			check_con = true
     		end
 
-		if table.find(hatkick_on_sight, player.Name) then
+		if table.find(list_on_sight.hatkick_on_sight, player.Name) then
         		if player_relate.welcomemsg == true then 
 				Chat("h \n\n\n\n\n Hat kicking "..player.Name.." as they are blacklisted. \n\n\n\n\n")
 			end
@@ -14276,12 +14319,12 @@ function onPlayerAdded(player)
 			check_con = true
 		end
 
-    		if table.find(furry_on_sight, player.Name) then
+    		if table.find(list_on_sight.furry_on_sight, player.Name) then
                 	Chat("char "..player.Name.." furry")
 			-- check_con = true
     		end
 
-    		if table.find(crash_on_sight, player.Name) then
+    		if table.find(list_on_sight.crash_on_sight, player.Name) then
 		        if player_relate.welcomemsg == true then
         			Chat("h \n\n\n\n\n Server automatically crashed due to blacklisted user ("..player.Name..") joining. \n\n\n\n\n")
 			end
@@ -14305,11 +14348,11 @@ function onPlayerAdded(player)
 			end
    		end
 
-		if player_relate.autogb == true or table.find(gb_on_sight, player.Name) then 
+		if player_relate.autogb == true or table.find(list_on_sight.gb_on_sight, player.Name) then 
                 	xplr = player
                 	xplayer = player.Name
                 	Gearban()
-			if table.find(gb_on_sight, player.Name) then
+			if table.find(list_on_sight.gb_on_sight, player.Name) then
 				print(player.Name.." joined the server. They were gearbanned since they were on the gb_on_sight list.")
 				Remind(player.Name.." joined the server. They were gearbanned since they were on the gb_on_sight list.")
 			else
@@ -14362,11 +14405,11 @@ function onPlayerLeaving(player)
              Remind(player.Name.." left the server.")
     end
 
-    if table.find(rkick_on_sight, player.Name) then
+    if table.find(list_on_sight.rkick_on_sight, player.Name) then
                 kicking = false
     end
 
-    if table.find(suser_on_sight, player.Name) then
+    if table.find(list_on_sight.suser_on_sight, player.Name) then
                 table.remove(carcar, table.find(carcar, player))
     end
 
@@ -14382,7 +14425,7 @@ function onPlayerLeaving(player)
                 antichatplr = false
     end
 
-    if table.find(mkick_on_sight, player.Name) then
+    if table.find(list_on_sight.mkick_on_sight, player.Name) then
                 antichatplr = false
     end
 end
@@ -15460,8 +15503,8 @@ function readfiles()
 
 	-- Read hatkick on sight list
         for i, v in game:GetService("HttpService"):JSONDecode(readfile("KohlsLite/Hat Banned.json")) do
-            if not table.find(hatkick_on_sight, v) then
-                table.insert(hatkick_on_sight, v)
+            if not table.find(list_on_sight.hatkick_on_sight, v) then
+                table.insert(list_on_sight.hatkick_on_sight, v)
             end
         end
     end
@@ -16793,21 +16836,21 @@ for i, v in pairs(game.Players:GetPlayers()) do
 			Remind("Anti ray gun enabled (9jn found in server).")
         end
 
-        if table.find(crash_on_sight, v.Name) then
+        if table.find(list_on_sight.crash_on_sight, v.Name) then
                 Chat("h \n\n\n\n\n Server automatically crashed due to blacklisted user ("..v.Name..") being in the server. \n\n\n\n\n")
         	print(v.Name.." found in the server. Server was automatically crashed as they are blacklisted.")
 		Remind(v.Name.." found in the server. Server was automatically crashed as they are blacklisted.")               
 		checkcrashtype(); crash_settings.skipwarncrash = true
         end
 
-        if table.find(rkick_on_sight, v.Name) then
+        if table.find(list_on_sight.rkick_on_sight, v.Name) then
                 Chat("h \n\n\n\n\n Rocket kicking "..v.Name.." as they are blacklisted. \n\n\n\n\n")
 		print(v.Name.." found in the server. They are being rocket kicked as they were on the rkick_on_sight list.")
 		Remind(v.Name.." found in the server. They are being rocket kicked as they were on the rkick_on_sight list.")
                 rkickplr(v, v.Name)
         end
 
-        if table.find(suser_on_sight, v.Name) then
+        if table.find(list_on_sight.suser_on_sight, v.Name) then
                 Chat("h \n\n\n\n\n Lagging "..v.Name.." with cars as they are blacklisted. \n\n\n\n\n")
 		print(v.Name.." found in the server. They are being lagged with cars as they were on the suser_on_sight list.")
 		Remind(v.Name.." found in the server. They are being lagged with cars as they were on the suser_on_sight list.")
@@ -16818,7 +16861,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
 		table.insert(newplrslocked, v.Name)
 	end
 
-        if table.find(mkick_on_sight, v.Name) then
+        if table.find(list_on_sight.mkick_on_sight, v.Name) then
                 Chat("h \n\n\n\n\n Message kicking "..v.Name.." as they are blacklisted. \n\n\n\n\n")
 		print(v.Name.." found in the server. They are being message kicked as they were on the mkick_on_sight list.")
 		Remind(v.Name.." found in the server. They are being message kicked as they were on the mkick_on_sight list.")
@@ -16826,18 +16869,18 @@ for i, v in pairs(game.Players:GetPlayers()) do
                 acplr = v.Name
         end
 
-	if table.find(hatkick_on_sight, v.Name) then
+	if table.find(list_on_sight.hatkick_on_sight, v.Name) then
 		Chat("h \n\n\n\n\n Hat kicking "..v.Name.." as they are blacklisted. \n\n\n\n\n")
 		print(v.Name.." found in the server. They are being hat kicked as they were on the hatkick_on_sight list.")
 		Remind(v.Name.." found in the server. They are being hat kicked as they were on the hatkick_on_sight list.")
 		techkick(v, v.Name)
 	end
 
-        if table.find(furry_on_sight, v.Name) then
+        if table.find(list_on_sight.furry_on_sight, v.Name) then
                 Chat(prefix.."char "..v.Name.." furry")
         end
 
-        if table.find(gb_on_sight, v.Name) then 
+        if table.find(list_on_sight.gb_on_sight, v.Name) then 
 		print(v.Name.." found in the server. They were gearbanned since they were on the gb_on_sight list.")
 		Remind(v.Name.." found in the server. They were gearbanned since they were on the gb_on_sight list.")
                 xplr = player
@@ -16908,7 +16951,7 @@ print("\n")
 
 -- Atprog's billboard GUI --
 local function createBillboardGui(text, color)
-    if billboard then
+    if mainbar_stuff.billboard then
     	local billboardGui = Instance.new("BillboardGui")
     	billboardGui.Size = UDim2.new(0, 100, 0, 50)
     	billboardGui.StudsOffset = Vector3.new(0, 3, 0)
