@@ -8456,7 +8456,7 @@ end
         	if args[2] == "me" then
                 	auto_stuff.autocharme = true
 			oname = args[3]
-			auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
+			auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname) -- needs to be pcalled
                 	Remind("Auto char is on for you!")
         	elseif args[2] == "others" then
                 	auto_stuff.autocharall = true
