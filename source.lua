@@ -8492,7 +8492,7 @@ end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unautochar' then
   	local args = string.split(msg, " ")
-	if #args == 3 then
+	if #args == 2 then
         	if args[2] == "me" then
                 	auto_stuff.autocharme = false
                 	Remind("Auto char is off for you!")
