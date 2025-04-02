@@ -303,3 +303,16 @@ print(prefix..'weaken')
 print(prefix..'unweaken')
 print(prefix..'strengthen')
 print(prefix..'unstrengthen')
+
+print("\n")
+print("--- ANTI INFORMATION ---")
+print("For antis relating to the player, do (antiname) me/others/all")
+print("To turn off the antis, do un(antiname) me/others/all")
+print("If it's to the game itself, just do (antiname).")
+print("\n")
+
+print("--- ADDITIONAL INFO ---")
+print("1a. If you want a good script and have some money/robux, get Shortcut v3 VAR by dming t.ech")
+
+print("\n")
+print("VIEW THE SOURCE HERE: kohlslite.pages.dev/source.lua")
