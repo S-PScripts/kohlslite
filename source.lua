@@ -14940,7 +14940,7 @@ function dncycle() -- 9jn said so, inspired by simplekah and kohlsnoob too
                 for i = 1,24 do
 			if Loops.dncycle == false then break end -- ew
                 	for i = 1,59 do
-				if Loops.dncycle == false then break end -- ew
+			    if Loops.dncycle == false then break end -- ew
                             task.wait(0.1)
                             decdn = decdn + 1
                             Chat("time " .. dntime .. ":".. decdn)
@@ -17281,7 +17281,7 @@ if getgenv().kohlsgui then
 end
 
 Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
-Remind("HUGE UPDATES - BUGS MAY EXIST 1/4/25", 5)
+Remind("HUGE UPDATES - BUGS MAY EXIST 2/4/25", 5)
 
 --[[
 Things that this script is missing:
@@ -17289,6 +17289,7 @@ Things that this script is missing:
 2. Rewrite the anti system (so it works for individual players)
 3. Boombox visualiser
 4. Part builder
+5. Custom commands (file system would take a while to make :P)
 
 -> I probably won't rewrite the playercheck thing since it works fine I guess. I know it sucks but it would take so dang long to change.
 -> I probably won't add the features above as I don't play KAH that much anymore (and it's an inactive game too).
