@@ -2030,8 +2030,8 @@ ___  __    ________  ___  ___  ___       ________  ___       ___  _________  ___
 print("- Information -")
 print("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by S_P.")
 Remind("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by S_P.")
-print("Say .kcmds and .kcmd2 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
-Remind("Say .kcmds and .kcmd2 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
+print("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
+Remind("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
 
 --[[ if not game:GetService("GamePassService") then 
 	hasperm = false
@@ -2104,6 +2104,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
            Remind("Check your console by running /console!")
         end
 
+	if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'kcmd3' then
+           CMDPrint3()
+           Remind("Check your console by running /console!")
+        end
+		
         if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'credits' then
            KohlsLiteCredits()
            Remind("Check your console by running /console!")
@@ -9288,6 +9293,10 @@ end
 
 function CMDPrint2()
 	GExecute("https://kohlslite.pages.dev/Assets/CMD%20LIST%20B.lua")
+end
+
+function CMDPrint3()
+	GExecute("https://kohlslite.pages.dev/Assets/CMD%20LIST%20C.lua")
 end
 
 function KohlsLiteCredits()
