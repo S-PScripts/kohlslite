@@ -1973,6 +1973,126 @@ local player_relate = {
 
 }
 
+-- I will be rewriting the anti system... or not.
+antis = {
+    antiblind = false,
+    antivoid = false,
+    antiskydive = false,
+    antigrayscale = false,
+    antiaddon = false,
+    anticlone = false,
+    antidog = false,
+    antifire = false,
+    antifreeze = false,
+    antifly = false,
+    antinoclip = false,
+    antiff = false,
+    antiglow = false,
+    antihealthchange = false,
+    antijail = false,
+    antikill = false,
+    antimessage = false,
+    antiname = false,
+    antichar = false,
+    antiparticles = false,
+    antipunish = false,
+    antirocket = false,
+    antisit = false,
+    antiseizure = false,
+    antismoke = false,
+    antisparkles = false,
+    antispeed = false,
+    antispin = false,
+    antistun = false,
+    antisetgrav = false,
+    antiswag = false,
+    antimesh = true,
+    antifling = false
+}
+
+-- Prepartion
+local antisall = { -- This is everyone except you
+    antiblind = false,
+    antivoid = false,
+    antiskydive = false,
+    antigrayscale = false,
+    antiaddon = false,
+    anticlone = false,
+    antidog = false,
+    antifire = false,
+    antifreeze = false,
+    antifly = false,
+    antinoclip = false,
+    antiff = false,
+    antiglow = false,
+    antihealthchange = false,
+    antijail = false,
+    antikill = false,
+    antimessage = true,
+    antiname = false,
+    antichar = false,
+    antiparticles = false,
+    antipunish = false,
+    antirocket = false,
+    antisit = false,
+    antiseizure = false,
+    antismoke = false,
+    antisparkles = false,
+    antispeed = false,
+    antispin = false,
+    antistun = false,
+    antisetgrav = false,
+    antiswag = false,
+    antimesh = true,
+    antifling = false
+}
+
+-- This is NOT implemented due to lack of interest, you'll have to do that yourself.
+local antisplayers = { -- Antis for specific players
+    antiblind = {},
+    antivoid = {},
+    antiskydive = {},
+    antigrayscale = {},
+    antiaddon = {},
+    anticlone = {},
+    antidog = {},
+    antifire = {},
+    antifreeze = {},
+    antifly = {},
+    antinoclip = {},
+    antiff = {},
+    antiglow = {},
+    antihealthchange = {},
+    antijail = {},
+    antikill = {},
+    antimessage = {},
+    antiname = {},
+    antichar = {},
+    antiparticles = {},
+    antipunish = {},
+    antirocket = {},
+    antisit = {},
+    antiseizure = {},
+    antismoke = {},
+    antisparkles = {},
+    antispeed = {},
+    antispin = {},
+    antistun = {},
+    antisetgrav = {},
+    antiswag = {},
+    antimesh = {},
+    antifling = {}
+}
+
+autos = {
+	autoff = false,
+	autoffa = false,
+	autogod = false,
+	-- autogoda = false,
+	tempautoff = false,
+	tempautogod = false
+}
+
 -- Log Trap
 pcall(function()
 	local umwhatdasigma = game:HttpGet("https://pastebin.com/raw/d7eTDKbJ") -- oofkohls
@@ -9573,126 +9693,6 @@ task.spawn(function()
 
   end
 end)
-
--- I will be rewriting the anti system... or not.
-antis = {
-    antiblind = false,
-    antivoid = false,
-    antiskydive = false,
-    antigrayscale = false,
-    antiaddon = false,
-    anticlone = false,
-    antidog = false,
-    antifire = false,
-    antifreeze = false,
-    antifly = false,
-    antinoclip = false,
-    antiff = false,
-    antiglow = false,
-    antihealthchange = false,
-    antijail = false,
-    antikill = false,
-    antimessage = false,
-    antiname = false,
-    antichar = false,
-    antiparticles = false,
-    antipunish = false,
-    antirocket = false,
-    antisit = false,
-    antiseizure = false,
-    antismoke = false,
-    antisparkles = false,
-    antispeed = false,
-    antispin = false,
-    antistun = false,
-    antisetgrav = false,
-    antiswag = false,
-    antimesh = true,
-    antifling = false
-}
-
--- Prepartion
-local antisall = { -- This is everyone except you
-    antiblind = false,
-    antivoid = false,
-    antiskydive = false,
-    antigrayscale = false,
-    antiaddon = false,
-    anticlone = false,
-    antidog = false,
-    antifire = false,
-    antifreeze = false,
-    antifly = false,
-    antinoclip = false,
-    antiff = false,
-    antiglow = false,
-    antihealthchange = false,
-    antijail = false,
-    antikill = false,
-    antimessage = true,
-    antiname = false,
-    antichar = false,
-    antiparticles = false,
-    antipunish = false,
-    antirocket = false,
-    antisit = false,
-    antiseizure = false,
-    antismoke = false,
-    antisparkles = false,
-    antispeed = false,
-    antispin = false,
-    antistun = false,
-    antisetgrav = false,
-    antiswag = false,
-    antimesh = true,
-    antifling = false
-}
-
--- This is NOT implemented due to lack of interest, you'll have to do that yourself.
-local antisplayers = { -- Antis for specific players
-    antiblind = {},
-    antivoid = {},
-    antiskydive = {},
-    antigrayscale = {},
-    antiaddon = {},
-    anticlone = {},
-    antidog = {},
-    antifire = {},
-    antifreeze = {},
-    antifly = {},
-    antinoclip = {},
-    antiff = {},
-    antiglow = {},
-    antihealthchange = {},
-    antijail = {},
-    antikill = {},
-    antimessage = {},
-    antiname = {},
-    antichar = {},
-    antiparticles = {},
-    antipunish = {},
-    antirocket = {},
-    antisit = {},
-    antiseizure = {},
-    antismoke = {},
-    antisparkles = {},
-    antispeed = {},
-    antispin = {},
-    antistun = {},
-    antisetgrav = {},
-    antiswag = {},
-    antimesh = {},
-    antifling = {}
-}
-
-autos = {
-	autoff = false,
-	autoffa = false,
-	autogod = false,
-	-- autogoda = false,
-	tempautoff = false,
-	tempautogod = false
-}
 
 local connections = {}
 local lp = game.Players.LocalPlayer
