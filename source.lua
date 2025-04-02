@@ -1857,7 +1857,10 @@ local admin_stuff = {
 	loopgrab2 = false,
 
 	-- Everyone in the server uses your admin to run commands!
-	alladmin = false 
+	alladmin = false,
+
+	-- Resets the admin pads every time someone gets a pad
+	SRegen = false
 }
 
 -- All admin but for individual users
@@ -5817,32 +5820,32 @@ return
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'sregen' then
-        SRegen = true
+        admin_stuff.SRegen = true
 	Remind("Non-perm players can no longer get admin.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unsregen' then
-        SRegen = false
+        admin_stuff.SRegen = false
 	Remind("Non-perm players can now get admin again.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'noregen' then
-        SRegen = true
+        admin_stuff.SRegen = true
 	Remind("Non-perm players can no longer get admin.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unnoregen' then
-        SRegen = false
+        admin_stuff.SRegen = false
 	Remind("Non-perm players can now get admin again.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antiregen' then
-        SRegen = true
+        admin_stuff.SRegen = true
 	Remind("Non-perm players can no longer get admin.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unantiregen' then
-        SRegen = false
+        admin_stuff.SRegen = false
 	Remind("Non-perm players can now get admin again.")
     end
 
@@ -14546,7 +14549,7 @@ end
 task.spawn(function()
      while true do
            task.wait(0)
-           if SRegen == true then
+           if admin_stuff.SRegen == true then
                 for i,v in pairs(game.Players:GetChildren()) do
                                 for i,pad in pairs(game:GetService("Workspace").Terrain["_Game"].Admin.Pads:GetDescendants()) do
                                         if pad.Name == v.Name.."'s admin" then
