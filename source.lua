@@ -422,10 +422,11 @@ local backend_stuff = {
 	bending = false, -- ignore
 	ratelj = false, -- ignore
 	eincrash = false, -- ignore
-	notifiedRespectFiltering = false
+	notifiedRespectFiltering = false,
+	regfind = false
 }
 
--- Perm spoofer (speed)
+-- Spoofers
 local editedstuff = {
 	-- Perm spoofer (speed)
 	editedspeedis = 16,
@@ -450,9 +451,6 @@ local ex_settings = {
 	-- Spam command wait
 	spamwait = 0.01
 }
-
--- Auto rejoin
-local autorejoin = false
 
 -- Stats when loading
 local Stats = {}
@@ -615,9 +613,16 @@ mainbar_stuff = {
 	backdoor_enabled = true
 }
 
--- Auto char
-local autocharid = "nll"
-local autochar = false
+-- Auto stuff
+local auto_stuff = {
+	-- Automatically char yourself/others to the ID set
+	autocharme = false,
+	autocharall = false,
+	autocharid = "nil",
+
+	-- Auto rejoin if kicked
+	autorejoin = false
+}
 
 -- Loopkill
 local loopkill = {}
@@ -684,9 +689,7 @@ Pads = Admin:WaitForChild("Pads"):GetChildren()
 -- YOU SHOULD DO song instead of gmusic FOR BETTER ONES THESE ARE ONLY ONES I GOT FROM VIDEOS AND THEY SUCK
 -- Thanks to Dizzy for this idea of writing my musiclist
 -- It being gmusic1 instead of gmusic 1 is intentional!
-
 local musicplay
-
 local musictable = {
     ["1"] = {id = "9048375035", name = "All Dropping 8 Bit Beats"},
     ["2"] = {id = "1839029458", name = "Exotico Speedo"},
@@ -1847,9 +1850,6 @@ local admin_stuff = {
 
 -- All admin but for individual users
 local FAdmins = {}
-
--- Regen find (DO NOT TOUCH THIS)
-local regfind = false
 
 -- Antis (gears)
 local gear_antis = {
@@ -4188,7 +4188,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'findregen' then -- i know it sucks but perm exists lol
 	if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'findregen2' then else
-		regfind = true
+		backend_stuff.regfind = true
 		task.wait(0)
 		findregen()
 		Remind("Finding the regen (skydived)")
@@ -4197,32 +4197,32 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'nofindregen' then
 	if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'nofindregen2' then else
-		regfind = false
+		backend_stuff.regfind = false
 		Remind("Stopped the regen (skydived)")
 	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unfindregen' then
 	if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unfindregen2' then else
-		regfind = false
+		backend_stuff.regfind = false
 		Remind("Stopped the regen (skydived)")
 	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'findregen2' then -- i know it sucks but perm exists lol
-        regfind = true
+        backend_stuff.regfind = true
 	task.wait(0)
 	findregen2()
 	Remind("Finding the regen (KL/CMD-Y)")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'nofindregen2' then
-	regfind = false
+	backend_stuff.regfind = false
 	Remind("Stopped the regen (KL/CMD-Y)")
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unfindregen2' then
-	regfind = false
+	backend_stuff.regfind = false
 	Remind("Stopped the regen (KL/CMD-Y)")
     end
 
@@ -6692,12 +6692,12 @@ party]])
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'autorj' then
-	autorejoin = true
+	auto_stuff.autorejoin = true
         Remind("You will now auto rejoin this server if you get disconnected.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unautorj' then
-	autorejoin = false
+	auto_stuff.autorejoin = false
         Remind("You will no longer auto rejoin this server if you get disconnected.")
     end
 
@@ -8503,20 +8503,20 @@ end
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'autochar' then
   	local args = string.split(msg, " ")
         if args[2] == "me" then
-                autocharme = true
+                auto_stuff.autocharme = true
 		oname = args[3]
-		autocharid = game.Players:GetUserIdFromNameAsync(oname)
+		auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
                 Remind("Auto char is on for you!")
         elseif args[2] == "others" then
-                autocharall = true
+                auto_stuff.autocharall = true
 		oname = args[3]
-		autocharid = game.Players:GetUserIdFromNameAsync(oname)
+		auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
                 Remind("Auto char is on for others!")
         elseif args[2] == "all" then
-                autocharme = true
-                autocharall = true
+                auto_stuff.autocharme = true
+                auto_stuff.autocharall = true
 		oname = args[3]
-		autocharid = game.Players:GetUserIdFromNameAsync(oname)
+		auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
                 Remind("Auto char is on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -8526,16 +8526,16 @@ end
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unautochar' then
   	local args = string.split(msg, " ")
         if args[2] == "me" then
-                autocharme = false
+                auto_stuff.autocharme = false
                 Remind("Auto char is off for you!")
 		Chat("unchar me")
         elseif args[2] == "others" then
-                autocharall = false
+                auto_stuff.autocharall = false
                 Remind("Auto char is off for others!")
 		Chat("unchar others")
         elseif args[2] == "all" then
-                autocharme = false
-                autocharall = false
+                auto_stuff.autocharme = false
+                auto_stuff.autocharall = false
                 Remind("Auto char is off for everyone!")
 		Chat("unchar all")
         else
@@ -9730,9 +9730,9 @@ connections[#connections + 1] =
             end
         end
 
-	if autocharme == true then 
-                if autocharid ~= game.Players.LocalPlayer.CharacterAppearanceId then
-                        Chat('char me '..autocharid)
+	if auto_stuff.autocharme == true then 
+                if auto_stuff.autocharid ~= game.Players.LocalPlayer.CharacterAppearanceId then
+                        Chat('char me '..auto_stuff.autocharid)
                 else end
         end
 
@@ -10139,9 +10139,9 @@ connections[#connections + 1] =
                 for i, v in ipairs(game.Players:GetPlayers()) do
                         if v.Name ~= game.Players.LocalPlayer.Name then
 
-         		        if autocharall == true then 
-                                        if autocharid ~= v.CharacterAppearanceId then
-                                                      Chat('char '..v.Name..' '..autocharid)
+         		        if auto_stuff.autocharall == true then 
+                                        if auto_stuff.autocharid ~= v.CharacterAppearanceId then
+                                                      Chat('char '..v.Name..' '..auto_stuff.autocharid)
                                         else end
                                 end
 
@@ -11133,7 +11133,7 @@ end
 
 GuiService = game:GetService("GuiService")
 GuiService.ErrorMessageChanged:Connect(function()
-	if autorejoin == true then
+	if auto_stuff.autorejoin == true then
 		REJOIN()
 	end
 end)
@@ -12208,7 +12208,7 @@ function findregen()
         repeat
         	wait(.15)
                 root.CFrame = CFrame.new(-7.165, root.Position.Y + 2500 , 94.743)
-        until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regfind == false
+        until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or backend_stuff.regfind == false
 	root.Anchored = false
      	root.CFrame = workspace.Terrain._Game.Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
       	Chat("respawn me");Remind("Found the regen (skydived)")
@@ -12221,7 +12221,7 @@ function findregen2()
         repeat
                 fwait()
                 root.CFrame = CFrame.new(math.random(-30593, -23388), math.random(-30593, -10455), math.random(-30593, -10455))
-        until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or regfind == false
+        until workspace.Terrain._Game.Admin:FindFirstChild("Regen") or backend_stuff.regfind == false
 	game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
         root.Anchored = false
         root.CFrame = workspace.Terrain._Game.Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
