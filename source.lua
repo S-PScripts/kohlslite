@@ -3825,7 +3825,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'saveregen' then
-                Remind("If you need to rejoin, and the regen will be unloaded if you do, just paste the code")
+                Remind("If you need to rejoin, and the regen will be unloaded if you do, just paste the code.")
                 adx, ady, adz = Admin.Regen.Position.X, Admin.Regen.Position.Y, Admin.Regen.Position.Z
 		buddy = "game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(".. adx ..",".. ady ..",".. adz ..")"
                 q = adx .. ady .. adz
@@ -6514,7 +6514,7 @@ return
 		end
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'listacton' then -- yeah this is a lazy solution but cant be bothered to recode it
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'listacton' then -- yeah this is a lazy solution but I can't be bothered to re-code it
 		print([[clone/cloneai, 
 table/raig, 
 potion/dance/danceball/discoball, 
@@ -16071,7 +16071,31 @@ function rcannon(mode)
    	end)
 end
 
-function Clone(getnum)
+-- Rewriting this command later
+centreAPI = {}
+
+function centreAPI:Clone(getnum, ID)
+	local IDS = {
+		clone = nil,
+		table = nil,
+		potion = nil,
+		tripmine = nil,
+		spike = nil,
+		cannon = nil,
+		zombie = nil,
+		alpaca = nil,
+		piano = nil,
+		bassdrop = nil,
+		coolstory =  nil,
+		banana = nil,
+		tankguitar = nil,
+		skelefriend = nil,
+		spray = nil,
+		party = nil
+	}
+end
+
+function centreAPI:Clone(getnum)
 	 Chat("ungear me");task.wait(0.5)
          local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
          for i = 1, tonumber(getnum) do
@@ -16089,7 +16113,7 @@ function Clone(getnum)
          game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
 end
 
-function Table(getnum)
+function centreAPI:Table(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 110789105");task.wait(0.01)
@@ -16104,7 +16128,7 @@ function Table(getnum)
         end
 end
 
-function Potion(getnum)
+function centreAPI:Potion(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 27858062");task.wait(0.01)
@@ -16119,7 +16143,7 @@ function Potion(getnum)
         end
 end
 
-function TripMine(getnum)
+function centreAPI:TripMine(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 11999247");task.wait(0.01)
@@ -16134,7 +16158,7 @@ function TripMine(getnum)
         end
 end
 
-function Cannon(getnum)
+function centreAPI:Cannon(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 42201538");task.wait(0.01)
@@ -16149,7 +16173,7 @@ function Cannon(getnum)
         end
 end
 
-function Spike(getnum)
+function centreAPI:Spike(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 59848474");task.wait(0.01)
@@ -16172,7 +16196,7 @@ function Spike(getnum)
 	end
 end
 
-function Zombie(getnum)
+function centreAPI:Zombie(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 26421972");task.wait(0.01)
@@ -16187,7 +16211,7 @@ function Zombie(getnum)
         end
 end
 
-function Alpaca(getnum)
+function centreAPI:Alpaca(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 292969139");task.wait(0.01)
@@ -16202,7 +16226,7 @@ function Alpaca(getnum)
         end
 end
 
-function Piano(getnum)
+function centreAPI:Piano(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 113299590");task.wait(0.01)
@@ -16217,7 +16241,7 @@ function Piano(getnum)
         end
 end
 
-function Bassdrop(getnum)
+function centreAPI:Bassdrop(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 152233094");task.wait(0.01)
@@ -16232,7 +16256,7 @@ function Bassdrop(getnum)
         end
 end
 
-function Coolstory(getnum)
+function centreAPI:Coolstory(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 119101643");task.wait(0.01)
@@ -16247,7 +16271,7 @@ function Coolstory(getnum)
         end
 end
 
-function Banana(getnum)
+function centreAPI:Banana(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 29100449");task.wait(0.01)
@@ -16262,7 +16286,7 @@ function Banana(getnum)
         end
 end
 
-function TankGuitar(getnum)
+function centreAPI:TankGuitar(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 47871615");task.wait(0.01)
@@ -16277,7 +16301,7 @@ function TankGuitar(getnum)
         end
 end
 
-function SkeleFriend(getnum)
+function centreAPI:SkeleFriend(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 63253701");task.wait(0.01)
@@ -16292,7 +16316,7 @@ function SkeleFriend(getnum)
         end
 end
 
-function Spray(getnum)
+function centreAPI:Spray(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 273795078");task.wait(0.01)
@@ -16307,7 +16331,7 @@ function Spray(getnum)
         end
 end 
 
-function Party(getnum)
+function centreAPI:Party(getnum)
 	Chat("ungear me");task.wait(0.5)
         for i = 1, tonumber(getnum) do
                 Chat("gear me 151777652");task.wait(0.01)
