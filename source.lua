@@ -624,7 +624,10 @@ local auto_stuff = {
 	autocharid = "nil",
 
 	-- Auto rejoin if kicked
-	autorejoin = false
+	autorejoin = false,
+
+	-- Auto afk
+	autoafk = false,
 }
 
 -- Random lists of players
@@ -2850,31 +2853,48 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
        end
 
        if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'serverlock' then
-		mainbar_stuff.slockenabled = true
+		Chat(prefix.."slock")
        end
 
        if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unserverlock' then
 	       Chat(prefix.."unslock")
        end
 
-       if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unslock' then
-        mainbar_stuff.slockenabled = false
-	if player_relate.blwl_an then
-        	Chat("h \n\n\n\n\n Server is unlocked! \n\n\n\n\n")
+	if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'tslock' then -- watered down timeout command
+		local naughty_clock = tonumber(string.sub(msg:lower(), #prefix + 8))
+		if player_relate.blwl_an then
+        		Chat("h \n\n\n\n\n This is a NAUGHTY server so I need to put you all in TIME-OUT... \n\n\n\n\n");Regen()
+		end
+        	mainbar_stuff.slockenabled = true
+			
+		task.delay(naughty_clock, function()
+			mainbar_stuff.slockenabled = false
+		end)
 	end
-        Chat('unblind all')
-        Chat('unpunish all')
-	Remind("Turned off the serverlock!")
+
+	if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'untslock' then
+		mainbar_stuff.slockenabled = false
+		Chat("h \n\n\n\n\n I hope you all learnt your lesson... \n\n\n\n\n")
+	end
+		
+       if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unslock' then
+		mainbar_stuff.slockenabled = false
+		if player_relate.blwl_an then
+        		Chat("h \n\n\n\n\n Server is unlocked! \n\n\n\n\n")
+		end
+       	 	Chat('unblind all')
+        	Chat('unpunish all')
+		Remind("Turned off the serverlock!")
        end
 
        if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'scslock' then
 			mainbar_stuff.superchargeslock = true
-			Remind("SUPER LOCK ENABLED")
+			Remind("SUPER LOCK ENABLED!")
        end
 
        if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unscslock' then
 			mainbar_stuff.superchargeslock = false
-			Remind("SUPER LOCK DISABLED")
+			Remind("SUPER LOCK DISABLED!")
        end
 		
        if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'newplrslock' then
@@ -5895,6 +5915,11 @@ return
 	Remind("No longer checking players for perm and persons upon joining.")
     end
 
+    if string.sub(msg, 1, #prefix + 4)  == prefix..'pban' then
+		local dasplayer = string.sub(msg:lower(), #prefix + 6)
+		Chat(prefix.."padban "..dasplayer)
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'padban' then
          local dasplayer = string.sub(msg:lower(), #prefix + 8)
          PLAYERCHECK(dasplayer)
@@ -5919,6 +5944,11 @@ return
          else
                 Remind('Cannot find player with the name: '..dasplayer)
          end
+    end
+
+    if string.sub(msg, 1, #prefix + 6)  == prefix..'unpban' then
+		local dasplayer = string.sub(msg:lower(), #prefix + 8)
+		Chat(prefix.."unpadban "..dasplayer)
     end
 
     if string.sub(msg, 1, #prefix + 8) == prefix..'padreinf' then
@@ -6251,12 +6281,12 @@ return
    end
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'autoafk' then
-        autoafk = true
+        auto_stuff.autoafk = true
 	Remind("Auto afk is now enabled.")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unautoafk' then
-        autoafk = false
+        auto_stuff.autoafk = false
 	Remind("Auto afk is now disabled.")
    end
 
@@ -6292,6 +6322,12 @@ return
 	Remind("All admin enabled.")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unalladmin' then
+	admin_stuff.alladmin = false
+        Chat("h \n\n\n\n\n Free admin is off. \n\n\n\n\n")
+	Remind("All admin disabled.")
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'keybind' then
 	keybinds.keybindz = true
 	Remind("Key binds enabled.")
@@ -6318,7 +6354,7 @@ return
                 	keyb = args[2]
 			kmart = args[3]
 			if keyb == "house" then
-				keybinds.housekeybind =args[3]
+				keybinds.housekeybind = args[3]
 			elseif keyb == "reset" then
 				keybinds.rekeybind = args[3]
 			elseif keyb == "fly" then
@@ -6332,12 +6368,6 @@ return
 		else
 			Remind("Invalid amount of arguments (must be 3)")
 		end
-    end
-
-    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unalladmin' then
-	admin_stuff.alladmin = false
-        Chat("h \n\n\n\n\n Free admin is off. \n\n\n\n\n")
-	Remind("All admin disabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'nok' then
@@ -6385,7 +6415,7 @@ return
                 	local trolled = string.sub(msg:lower(), #prefix + 9)
                         Chat("punish " .. trolled)
                         Regen()
-			Remind("Quick punished the player")
+			Remind("Quick punished the player.")
     end   
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'spunish' then -- ii's admin
@@ -14527,7 +14557,7 @@ local UserInputService = game:GetService("UserInputService")
 
 UserInputService.WindowFocusReleased:Connect(function()
         task.wait(0)
-            if autoafk == true then
+            if auto_stuff.autoafk == true then
                     Chat("name me ["..game.Players.LocalPlayer.Name.."]: AFK")
                     Chat("ff me")
                     Chat("god me")
@@ -14542,7 +14572,7 @@ end)
 
 UserInputService.WindowFocused:Connect(function()
         task.wait(0)
-            if autoafk == true then
+            if auto_stuff.autoafk == true then
                 Chat("reset me")
 		autos.tempautoff = false
 		autos.tempautogod = false
