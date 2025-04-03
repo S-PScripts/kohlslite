@@ -3126,10 +3126,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'crad' then
 		ex_settings.circrad = tonumber(string.sub(msg:lower(), #prefix + 6))
+		Remind("Circulise range set.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'bgrange' then
 		ex_settings.bgrange = tonumber(string.sub(msg:lower(), #prefix + 9))
+		Remind("Boombox range set.")
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'diceroll' then
@@ -4597,6 +4599,16 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			Button2 = "No"
 		})
 	end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'close' then
+		local args = string.split(msg, " ")
+		if #args == 2 then 
+			crash_settings.crash_type = args[2]
+			Chat(prefix.."crash"..crash_settings.crash_type)
+		else
+			Chat(prefix.."crash")
+		end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'kick' then
@@ -6738,7 +6750,7 @@ party]])
                  local dasplayer = string.sub(msg:lower(), #prefix + 7)
 		 PLAYERCHECK(dasplayer)
                  if player ~= nil then
-			if  table.find(nokick, player) then
+			if table.find(nokick, player) then
                         	Remind("Sorry, this player cannot be kicked!") return
 			end          
 			dk = cplr
@@ -6790,6 +6802,7 @@ party]])
                                                         v:Destroy()
                                 end
                 end
+		Remind("Removed paint UI.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'sspawn' then -- save spawn
@@ -7231,7 +7244,6 @@ party]])
 		Remind("Ungeared yourself... and everyone.")
     end
 
-
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'watermap' then
                 SuperCMD("gear me 236438668")
 		Chat("Do actall then ungear so they don't retract")
@@ -7319,7 +7331,7 @@ end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unallowgb' then
 		allow_gb_alerts = false
-		Remind("You'll no longer alerts when someone triggers an anti.")
+		Remind("You'll no longer receive alerts when someone triggers an anti.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'dbantis' then
