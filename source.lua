@@ -5761,6 +5761,10 @@ return
         Remind("Wait around 10 seconds for the effect to be permanent.")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'sphammer' then
+        SpHammer()
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'hammer' then
         SpHammer()
     end
@@ -5959,7 +5963,7 @@ return
 	Remind("Reset the admin pads.")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'rregen' then
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'rregen' then -- regen without the remind message
         Regen()
     end
 
@@ -5974,7 +5978,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, 3)  == ',re' then
-        Chat("reset me"); Remind("Reset you.")
+        Chat("reset me"); Remind("Your character has been reset.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'hhouse' then
@@ -6015,6 +6019,11 @@ return
 
     if string.sub(msg, 1, #prefix + 7) == prefix..'execute' then
         Execute(string.sub(msg, #prefix + 9))
+	Remind("Executed the text!")
+    end
+
+    if string.sub(msg, 1, #prefix + 3) == prefix..'lua' then
+        Execute(string.sub(msg, #prefix + 5))
 	Remind("Executed the text!")
     end
 
@@ -15461,19 +15470,21 @@ function SpHammer()
         end)
 end
 
-Loops = {}
-Loops.rainbowmap = false
-Loops.rbase = false
-Loops.rfog = false
-Loops.pp = false
-Loops.alog = false
-Loops.platform = false
-Loops.dncycle = false
+Loops = {
+	rainbowmap = false,
+	rbase = false,
+	rfog = false,
+	pp = false,
+	alog = false,
+	platform = false,
+	dncycle = false
+}
 
-conny = {}
-conny.rapidfiregun = nil
-conny.airstrike = nil
-conny.cannoning = nil
+conny = {
+	rapidfiregun = nil,
+	airstrike = nil,
+	cannoning = nil
+}
 
 musiclog = {}
 
@@ -15483,14 +15494,20 @@ if writefile and readfile then
 		print("KohlsLite folder found.")
 	else
 		makefolder("KohlsLite")
-		print("\n\n\n\n\n")
+		print("\n\n\n")
 		print("Created the KohlsLite folder! You can find the folder in your workspace.")
+		
 		repeat task.wait() until isfolder("KohlsLite")
 		local file_welcome = "KohlsLite/Welcome.txt"
 		local file_text = "Thank you for using KohlsLite! If you need help, please DM me at ts2021." --
 		writefile(KL_FOLDER,file_text)
-
 		repeat task.wait() until isfile("KohlsLite/Welcome.txt")
+
+		local file_welcome = "KohlsLite/JSON List Help.txt"
+		local file_text = "" --
+		writefile(KL_FOLDER,file_text)
+		repeat task.wait() until isfile("KohlsLite/JSON List Help.txt")
+	
 		getgenv().kohlsgui = true
 
 	end
