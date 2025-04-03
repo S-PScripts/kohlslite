@@ -8836,6 +8836,9 @@ end
 	elseif padsCount == 0 then
 		print("All admin pads missing.")
 		Remind("All admin pads missing.")
+	elseif padsCount == 1 then
+		print("1 admin pad missing.")
+		Remind("1 admin pad missing.")
 	else
 		print(tostring(9-padsCount).." admin pads missing.")
 		Remind(tostring(9-padsCount).." admin pads missing.")
@@ -8848,6 +8851,9 @@ end
 	elseif ado == 0 then
 		print("All obby jumps missing.")
 		Remind("All obby jumps missing.")
+	elseif ado == 1 then
+		print("1 obby jump missing.")
+		Remind("1 obby jump missing.")
 	else
 		print(tostring(10-ado).." obby jumps missing.")
 		Remind(tostring(10-ado).." obby jumps missing.")
@@ -9495,7 +9501,7 @@ end
 
 end)
 
--- PLAYER CHECK
+-- PLAYER CHECK (I hate this thing so much)
 function PLAYERCHECK(plr, rt)
   for i, v in pairs(game.Players:GetPlayers()) do
       if string.sub(v.Name:lower(), 1, #plr) == plr:lower() then
