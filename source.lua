@@ -53,7 +53,7 @@ KohlsLite is a bit like a mixture of all the scripts that already exist in KAH s
   -- > Shortcut v3 [by Tech]
   -- > Shortcut v3 VAR [don't have the source] [by Tech]
   -- > ii's Stupid Admin [by iiDk]
-  -- > Old PR Script [by Atprog]
+  -- > Old PR Script [by atprog]
   -- > KohlsNoob [by gamingkhoaito#1014 and haroldjd2017ipad#4295]
   -- > KohlsCool [by sergioesquina/kohlscool]
   -- > Noobsploit [by NoobSploit]
@@ -7878,7 +7878,7 @@ end
            	  	PLAYERCHECK(kia)
 	         	if player ~= nil then
 				if table.find(antikill, player) then
-					Remind(player.." is no longer in the table!")
+					Remind(player.." is no longer in the list!")
 					table.remove(antikill, table.find(antikill, player))
 				else
 					Remind(player.." was never in the list!")
@@ -8148,7 +8148,7 @@ end
            	  	PLAYERCHECK(kia)
 	         	if player ~= nil then
 				if table.find(antipunish, player) then
-					Remind(player.." is no longer in the table!")
+					Remind(player.." is no longer in the list!")
 					table.remove(antipunish, table.find(antipunish, player))
 				else
 					Remind(player.." was never in the list!")
@@ -8660,32 +8660,65 @@ end
   	local args = string.split(msg, " ")
 	if #args == 3 then
         	if args[2] == "me" then
-                	auto_stuff.autocharme = true
 			oname = args[3]
-			auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname) -- needs to be pcalled
-                	Remind("Auto char is on for you!")
+			auto_stuff.autocharid = nil
+			pcall(function()
+				auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname) -- needs to be called
+			end)
+			
+			if auto_stuff.autocharid ~= nil then
+				auto_stuff.autocharme = true
+                		Remind("Auto char is on for you!")
+			else
+				Remind("Could not reach user provided.")
+			end
+			
         	elseif args[2] == "others" then
-                	auto_stuff.autocharall = true
 			oname = args[3]
-			auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
-                	Remind("Auto char is on for others!")
+			auto_stuff.autocharid = nil
+			pcall(function()
+				auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
+			end)
+			
+			if auto_stuff.autocharid ~= nil then
+				auto_stuff.autocharall = true
+                		Remind("Auto char is on for others!")
+			else
+				Remind("Could not reach user provided.")
+			end
+			
         	elseif args[2] == "all" then
-                	auto_stuff.autocharme = true
-                	auto_stuff.autocharall = true
 			oname = args[3]
-			auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
-                	Remind("Auto char is on for everyone!")
+			auto_stuff.autocharid = nil
+			pcall(function()
+				auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
+			end)
+			
+			if auto_stuff.autocharid ~= nil then
+				auto_stuff.autocharall = true
+				auto_stuff.autocharme = true
+                		Remind("Auto char is on for everyone!")
+			else
+				Remind("Could not reach user provided.")
+			end
 		else
 			kia = args[2]
            	  	PLAYERCHECK(kia)
 			oname = args[3]
-			auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
-	         	if player ~= nil then
+			auto_stuff.autocharid = nil
+			
+			pcall(function()
+				auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
+			end)	         
+
+			if auto_stuff.autocharid ~= nil then Remind("Could not reach user provided.") return end
+			
+			if player ~= nil then
 				if not table.find(autochar, player) then
 					Remind(player.." is on the list now!")
 					table.insert(autochar, player)
 				else
-					Remind(player.." is already in the table!")
+					Remind(player.." is already in the list!")
 				end
                  	else                           
                         	Remind('Cannot find player with the name: '..dasplayer)
@@ -8717,8 +8750,8 @@ end
            	  	PLAYERCHECK(kia)
 	         	if player ~= nil then
 				if table.find(autochar, player) then
-					Remind(player.." is no longer in the table!")
-					table.remove(antikill, table.find(autochar, player))
+					Remind(player.." is no longer in the list!")
+					table.remove(autochar, table.find(autochar, player))
 				else
 					Remind(player.." was never in the list!")
 				end
@@ -12226,19 +12259,19 @@ end)
 
 quotes = {
 	"why are you reading this bruh",
-	"i love exploiting in a dead game... it's called KAH",
+	"i love exploiting in dead games",
 	"i have nothing else to do",
-	"all this log spam is typed manually, i'm really fast at typing vro",
+	"all this log spam is typed manually vro",
 	"use shortcut v3-var",
 	"no logs for you pal",
 	"s_p is really gay",
 	"i haven't touched grass for 5 years",
 	"uwu owo - kisses you",
-	"this script is really big, just like my clock",
-	"this script was created by the people in my basement",
-	"i have never made a typo in my lfie",
+	"kohlslite is as big as my clock",
+	"im not a skid vro",
+	"i haev never maed a typo",
 	"one year and counting... forever?",
-	"kohlslite is a trash script - ts2021, 2025"
+	"kl is a trash script - ts2021, 2025"
 }
 
 -- LOG SPAM
@@ -17013,7 +17046,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
 end
 
 -- These run last to prevent bugs
--- startupScripts()
+startupScripts()
 
 Stats.loadedtime = string.format("%.2f", os.clock() - Stats.starttime)
 
