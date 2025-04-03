@@ -6216,6 +6216,12 @@ return
 	Speak("THOSE WHO NOSE...")
     end
 
+    if string.sub(msg:lower(), 1, 5) == 'steve' then
+	Speak("I...");task.wait(1)
+	Speak("AM...");task.wait(1)
+	Speak("STEEEEEEEEEEEVVVVVVVVVVVVVVEEEEEEEEEEEEEEEEEEEEEE!!!")
+    end
+
    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'pmap' then
 		local colourhere = string.sub(msg, #prefix + 6)
 		PaintMap(colourhere,"norm")
