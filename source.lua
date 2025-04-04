@@ -700,12 +700,12 @@ Kohls = workspace.Terrain:WaitForChild("_Game")
 Admin = Kohls:WaitForChild("Admin")
 Pads = Admin:WaitForChild("Pads"):GetChildren()
 
--- These are all of the music ids I've saved
+-- These are all of the music ids I've saved in a musiclist.
 -- YOU SHOULD DO song instead of gmusic FOR BETTER ONES THESE ARE ONLY ONES I GOT FROM VIDEOS AND THEY SUCK
 -- Thanks to Dizzy for this idea of writing my musiclist
 -- It being gmusic1 instead of gmusic 1 is intentional!
 local musicplay
-local musictable = {
+local musictable = { 
     ["1"] = {id = "9048375035", name = "All Dropping 8 Bit Beats"},
     ["2"] = {id = "1839029458", name = "Exotico Speedo"},
     ["3"] = {id = "35930009", name = "Monster Mash"},
