@@ -8951,6 +8951,20 @@ end
 	Remind("Started dancing!")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'hug' then -- tech
+	local hug = Instance.new("Animation")
+    	hug.AnimationId = "rbxassetid://27432686"
+    	local hug_ani = game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid'):LoadAnimation(hug)
+    	hug_ani:Play(.1, 1, 1)
+    	hug_ani:AdjustSpeed(1)
+    	task.wait(0.8)
+    	local Humanoid = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Humanoid") or game.Players.LocalPlayer.Character:FindFirstChildOfClass("AnimationController")
+    	local ActiveTracks = Humanoid:GetPlayingAnimationTracks()
+    	for _, v in pairs(ActiveTracks) do
+        	v:AdjustSpeed(0)
+    	end
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'undance' then
 	danceTrack:Stop()
 	danceTrack:Destroy()   
