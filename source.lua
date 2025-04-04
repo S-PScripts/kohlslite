@@ -2391,6 +2391,13 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		Chat(prefix.."unwl "..dasplayer)
 	end
 
+        if string.sub(msg, 1, #prefix + 6)  == prefix..'listwl' then
+           Remind("Check your console by running /console!")
+           for i = 1, #whitelist do
+                  print(whitelist[i])
+           end
+        end
+
 	if string.sub(msg, 1, #prefix + 2) == prefix..'bl' then
 	 local args = string.split(msg, " ")
          local dasplayer = args[2]
@@ -2430,6 +2437,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		local dasplayer = string.sub(msg:lower(), #prefix + 11)
 		Chat(prefix.."bl "..dasplayer)
 	end
+
+	if string.sub(msg, 1, #prefix + 3)  == prefix..'ban' then
+		local dasplayer = string.sub(msg:lower(), #prefix + 5)
+		Chat(prefix.."bl "..dasplayer)
+	end
 		
         if string.sub(msg, 1, #prefix + 4) == prefix..'unbl' then
  	 local args = string.split(msg, " ")
@@ -2466,14 +2478,19 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		local dasplayer = string.sub(msg:lower(), #prefix + 13)
 		Chat(prefix.."unbl "..dasplayer)
         end
-		
-        if string.sub(msg, 1, #prefix + 6)  == prefix..'listwl' then
-           Remind("Check your console by running /console!")
-           for i = 1, #whitelist do
-                  print(whitelist[i])
-           end
+
+        if string.sub(msg, 1, #prefix + 5)  == prefix..'unban' then
+		local dasplayer = string.sub(msg:lower(), #prefix + 7)
+		Chat(prefix.."unbl "..dasplayer)
         end
 
+	if string.sub(msg, 1, #prefix + 6)  == prefix..'listbl' then
+           Remind("Check your console by running /console!")
+           for i = 1, #blacklist do
+                  print(blacklist[i])
+           end
+        end
+		
         if string.sub(msg, 1, #prefix + 8)  == prefix..'antimlog' then
                 antimlog = true
 		Remind("Players won't be finding out the music ids in this script now!")
@@ -2810,13 +2827,6 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 Remind('Cannot find player with the name: '..dasplayer)
          end
        end
-
-        if string.sub(msg, 1, #prefix + 6)  == prefix..'listbl' then
-           Remind("Check your console by running /console!")
-           for i = 1, #blacklist do
-                  print(blacklist[i])
-           end
-        end
 
         if string.sub(msg, 1, #prefix + 9)  == prefix..'permusers' then
            Remind("Check your console by running /console!")
@@ -4611,6 +4621,16 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		end
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'shutdown' then
+		local args = string.split(msg, " ")
+		if #args == 2 then 
+			crash_settings.crash_type = args[2]
+			Chat(prefix.."crash"..crash_settings.crash_type)
+		else
+			Chat(prefix.."crash")
+		end
+    end
+		
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'kick' then
 	Remind("You need to specify the kick you want to use.")
     end
