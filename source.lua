@@ -10357,7 +10357,7 @@ connections[#connections + 1] =
                                 end
 
                                 if antisall.antihealthc == true then
-                                           if v.Character.Humanoid.Health ~= 100 then
+                                           if v.Character.Humanoid and v.Character.Humanoid.Health ~= 100 then
                                                 Chat("health "..v.Name.." 100")
                                         else end
                                         end
@@ -10369,19 +10369,19 @@ connections[#connections + 1] =
                                         end
 
                                 if antisall.antijump == true then
-                                            if v.Character.Humanoid.JumpPower ~= 50 then
+                                            if v.Character.Humanoid and v.Character.Humanoid.JumpPower ~= 50 then
                                                 Chat("normaljump "..v.Name)
                                           else end
                                 end
 
                                 if antisall.antikill == true or table.find(antikill, v.Name) then
-                                           if v.Character.Humanoid.Health == 0 then
+                                           if v.Character.Humanoid and v.Character.Humanoid.Health == 0 then
                                                     Chat("reset "..v.Name)
                                           else end
                                 end
 
                                 if table.find(rand_players.loopkill, v.Name) then
-                                        if v.Character.Humanoid.Health ~= 0 then
+                                        if v.Character.Humanoid and v.Character.Humanoid.Health ~= 0 then
                                                     Chat("kill "..v.Name)
                                         end
                                 end
