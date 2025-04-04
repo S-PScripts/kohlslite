@@ -44,7 +44,7 @@ if game.PlaceId ~= 155615604 then
         local response = Instance.new("BindableFunction")
         function response.OnInvoke(answer)
             if answer == "Yes" then
-                game:GetService("TeleportService"):Teleport(112420803, game:GetService("Players").LocalPlayer) -- nbc join only.
+                game:GetService("TeleportService"):Teleport(155615604, game:GetService("Players").LocalPlayer) -- nbc join only.
             end
         end
         game:GetService("StarterGui"):SetCore("SendNotification",
