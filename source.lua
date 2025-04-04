@@ -5328,7 +5328,7 @@ return
                 if player ~= nil then
                         dummy = player
                         idum = cplr
-                        DumbGuy()
+                        DumbGuy(dummy, idum)
                 else
                         Remind('Cannot find player with the name: '..dum)
                 end
@@ -6499,7 +6499,7 @@ return
                  if player ~= nil then
                         laserman = player
                         laman = cplr
-                        Laser()
+                        Laser(laserman, laman)
                  else
                         Remind('Cannot find player with the name: '..dasplayer)
                  end
@@ -6640,7 +6640,7 @@ return
                  	if target ~= nil then
                         	welder = player
 				wld = cplr
-                        	HFreeze()
+                        	HFreeze(welder, wld)
                  	else
                                Remind('Cannot find player with the name: '..dasplayer)
                 	 end
@@ -6655,7 +6655,7 @@ return
                  	if target ~= nil then
                         	welder = player
 				wld = cplr
-                        	TAttach()
+                        	TAttach(welder, wld)
                  	else
                                Remind('Cannot find player with the name: '..dasplayer)
                 	 end
@@ -14944,7 +14944,7 @@ function NewW(welder, wld) -- player,cplr
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
 end
 
-function HFreeze()
+function HFreeze(welder, wld)
 	local originalcf = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
     	Chat("gear me 130113146")
 	Chat("speed "..welder.." 0")
@@ -14967,7 +14967,7 @@ function HFreeze()
 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = originalcf
 end
 
-function TAttach()
+function TAttach(welder, wld)
 	Chat("speed "..welder.." 0")
 	Chat("setgrav "..welder.." 3500")
 	Chat("freeze "..welder)
@@ -14980,7 +14980,7 @@ function TAttach()
 	Chat("unpunish me");Chat("invis me")
 end
 
-function DumbGuy() -- PORTALLLLLLL
+function DumbGuy(dummy, idum) -- PORTALLLLLLL
         Chat("speed "..dummy.." 0")
         Chat("music 131453190")
         wait(0.2)
@@ -15001,7 +15001,7 @@ function DumbGuy() -- PORTALLLLLLL
         Chat("speed "..dummy.." 16")
 end
 
-function Laser()
+function Laser(laserman, lman)
 	    if firetouchinterest then
 		--
 	    else
