@@ -2167,11 +2167,11 @@ Remind("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .cred
 	print("- Perm check -")
 	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 66254) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 64354) then		
 		print("You've been given an admin pad even though you have the Perm Admin Gamepass.")
-		print("Roblox has broke GamePassService: https://devforum.roblox.com/t/gamepassservice-has-simply-ceased-to-exist/")
+		print("Roblox has broke GamePassService.")
 		print("Because of this, the Perm and Person299 gamepasses will not function.")
 	else		
 		print("You've been given an admin pad as you don't have the Perm Admin Gamepass. HOWEVER, DO NOT BUY PERM!")
-		print("Roblox has broke GamePassService: https://devforum.roblox.com/t/gamepassservice-has-simply-ceased-to-exist/")
+		print("Roblox has broke GamePassService.")
 		print("Because of this, the Perm and Person299 gamepasses will not function.")
 	end
 
@@ -2179,11 +2179,11 @@ Remind("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .cred
 	print("- Persons check -")
 	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then		
 		print("You have Person299's Admin, but you will not have access to any KohlsLite commands that use P299.")
-		print("Roblox has broke GamePassService: https://devforum.roblox.com/t/gamepassservice-has-simply-ceased-to-exist/")
+		print("Roblox has broke GamePassService.")
 		print("Because of this, the Perm and Person299 gamepasses will not function.")
 	else
 		print("You do not have Person299's Admin, so you won't have access to KohlsLite commands that use P299. HOWEVER, DO NOT BUY PERSONS!")
-		print("Roblox has broke GamePassService: https://devforum.roblox.com/t/gamepassservice-has-simply-ceased-to-exist/")
+		print("Roblox has broke GamePassService.")
 		print("Because of this, the Perm and Person299 gamepasses will not function.")
 	end
 	
