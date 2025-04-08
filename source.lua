@@ -24,7 +24,7 @@ TS2021 20/03/2025
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.11
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.115
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -69,11 +69,9 @@ KohlsLite is a bit like a mixture of all the scripts that already exist in KAH s
 Some of the code here is from other creators, credit has been given, but quite a lot is my own and also some commands can't be changed code-wise that much.
 
 There are no watermarks in this script. I included watermarks in my script when I first created it, but I wanted to make this script more 'premium' like Shortcut v3-VAR.
+However, KohlsLite has backdoors (dev section) due to dumb people abusing like crazy using this script. 
 
-KohlsLite used to have backdoors (dev section) due to dumb people abusing like crazy using this script. 
-However, since I have discontinued KohlsLite, I have decided to disable all of them.
-
-If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have much advertisements.
+If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have many advertisements.
 
 Please do not edit this script by simply removing the dev section and then proceeding to abuse in KAH. It makes me, and anyone playing the game, really annoyed.
 Instead, you can make your own script and take stuff from here if necessary.
@@ -91,14 +89,20 @@ Other stuff:
 -- Script name = KohlsLite
 getgenv().scriptname = "KohlsLite"
 
+-- The prefix you are using for KohlsLite. This can be of any length.
+getgenv().deprefix = "." 
+
+-- The version of KohlsLite
+getgenv().klversion = "X1.115"
+
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.11", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
-end;
+end; -- this semi-colon is useless, but I don't want to remove it xd
 
 -- Check if KohlsLite is already executed
 if getgenv().kohlsexecuted then 
@@ -106,7 +110,7 @@ if getgenv().kohlsexecuted then
         Remind("You've already executed KohlsLite!") 
 end
 
-if getgenv().ignorewronggame then
+if getgenv().ignorewronggame then -- if you execute in NP for some reason
 	--
 else
 	getgenv().ignorewronggame = false
@@ -116,7 +120,7 @@ end
 if getgenv().ignorewronggame then 
 	--
 else
-	if game.PlaceId ~= 112420803 and game.PlaceId ~= 115670532  then 
+	if game.PlaceId ~= 112420803 and game.PlaceId ~= 115670532 then 
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
@@ -367,12 +371,6 @@ end
 
 -- Don't touch this!
 getgenv().kohlsexecuted = true
-
--- The prefix you are using for KohlsLite. This can be of any length.
-getgenv().deprefix = "." 
-
--- The version of KohlsLite
-getgenv().klversion = "X1.11"
 
 -- KohlsLite Start Gui
 if getgenv().kohlsgui then
