@@ -6036,6 +6036,11 @@ return
 	end    
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'rlogs' then
+	game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScrollGui").TextButton.Frame.Size = UDim2.new(0,100,0,100)
+  	Remind("Don't be a moron again!")
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'regen' then
         Regen()
 	Remind("Reset the admin pads.")
