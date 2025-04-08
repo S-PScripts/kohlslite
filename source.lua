@@ -1,8 +1,8 @@
 --[[
-This script is kinda dead.
+This script is sort of discontinued.
 
 Before you view the source, here are some things you might want to know:
-- This script is dead since no one plays Kohls Admin House anymore.
+- This script is dead since barely anyone plays Kohls Admin House anymore.
 - The people who do play KAH play the NP/"Legacy" version by Tech. You can play the NP version here: https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy
 - Interesting fact: The account the NP version is on, BoasGameTest, was agspureiam's alt until it got password guessed.
 - This script is not supported for the NP version.
@@ -15,7 +15,6 @@ Before you view the source, here are some things you might want to know:
 - This script also already has the most antis so I won't add antis for individual players/rewrite the anti system.
 
 TS2021 20/03/2025
-Update 26/03/2025: NP version was taken down, it'll be back soon though...
 ]]
 
 --[[
