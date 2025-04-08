@@ -4431,6 +4431,15 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		Remind("Equipped all items in your inventory!")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'usetools' then
+                local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
+                for _, v in ipairs(Backpack:GetChildren()) do
+                            v.Parent = game.Players.LocalPlayer.Character
+                             v:Activate()
+                end
+		Remind("Activated all items in your inventory!")
+    end
+		
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'actall' then
                 local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
                 for _, v in ipairs(Backpack:GetChildren()) do
@@ -4657,6 +4666,14 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	end
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'dogcrash' then
+	Chat(prefix.."dcrash")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'silcrash' then
+	Remind("Which type? [dcrash/fcrash/scrash]")
+    end
+		
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'scrash' then -- not a silent crash!
         if haspersons == false then
 Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
@@ -4984,8 +5001,8 @@ return
                         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*CFrame.new(0,-40,0)
                 end
                 task.wait(0.25)
-                  Chat("invisible "..theblock); task.wait()
-                    Chat("freeze "..theblock);task.wait()
+                Chat("invis "..theblock); task.wait()
+                Chat("freeze "..theblock);task.wait()
                 Chat("size "..theblock.." 10");task.wait()
                 Chat("clone "..theblock);task.wait()
                 Chat("respawn "..theblock)
@@ -6899,6 +6916,12 @@ party]])
         SERVERHOP()
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'migrate' then
+        Remind("Serverhopping... please wait!")
+        Remind("[WARN]: THIS MAY REJOIN YOU TO THE SAME SERVER.")
+        SERVERHOP()
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'serverhop' then
         Remind("Serverhopping... please wait!")
         Remind("[WARN]: THIS MAY REJOIN YOU TO THE SAME SERVER.")
@@ -7262,6 +7285,11 @@ party]])
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'gotosky' then
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,1000,0)
 		Remind("Skydived you!")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'sungr' then
+                Chat("ungear me																				all	all")
+		Remind("Ungeared yourself... and everyone.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'ungearme' then
