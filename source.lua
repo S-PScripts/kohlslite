@@ -8857,6 +8857,18 @@ party]])
 	while true do end
     end
 
+    --[[ if string.sub(msg, 1, #prefix + 2) == prefix..'bta' then
+	local args = string.split(msg, " ")
+        local tool = args[2]
+		
+	if not table.find(miscTools, tool) then		
+                table.insert(miscTools, tool)
+                       
+        else
+                Remind(tool.." is already a blacklisted tool!")
+        end
+    end]]
+
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'reserver' then -- kohlsnoob and betterpersons (tech)
 	Remind("Checking...")
 
