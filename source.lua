@@ -329,9 +329,9 @@ if getgenv().autocrasher then
 				
 			print("Server crashed. JobId: "..game.JobId)
 
-			task.wait(2)
+			task.wait(3)
 
-			repeat task.wait()
+			repeat task.wait(1.5)
                 		shopac()
             		until false
 		end
