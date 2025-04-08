@@ -7230,6 +7230,10 @@ party]])
 		Remind("Breaking everyone's velocity...")
      end
 
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'padgrab' then
+		Chat(prefix.."allpads")
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'loopgrab' then
     	if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'loopgrab2' then else
         	admin_stuff.loopgrab = true
@@ -7285,7 +7289,7 @@ party]])
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'allpads' then
                 AllPads()
-		Remind("Got all the pads available.")
+		Remind("Got all the pads available. To continuously grab all the pads, do loopgrab.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'checkbp' then
@@ -7316,9 +7320,9 @@ party]])
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'watermap' then
                 SuperCMD("gear me 236438668")
-		Chat("Do actall then ungear so they don't retract")
+		Chat("Do actall then ungear so they don't retract.")
     end
-
+-- what in the spam
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'nowater' then
                 removewater()
     end
@@ -7337,7 +7341,7 @@ party]])
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'clearwater' then
                 removewater()
-end
+    end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixpaint' then
 	Remind("Fixing paint...")
@@ -7413,6 +7417,11 @@ end
 		da_on = false
 		Remind("Debounce (stop dupe triggers) for antis disabled.")
     end
+
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'dbwait' then
+	da_wait = tonumber(string.sub(msg:lower(), #prefix + 8))
+	Remind("Debounce wait set.")
+   end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antigb' then
         gear_antis.antigb = true
@@ -10605,13 +10614,14 @@ local crashToolsLP =
 -- Function for the antis
 -- Might add isB functionality
 da_on = true -- debounce toggle
+da_wait = 0.1 -- debounce wait
 debounce_antis = false -- used in debounce toggle
 allow_gb_alerts = true -- so you don't get a lot of those anti messages and stuff
 game:GetService("RunService").RenderStepped:Connect(function()
         	task.wait(0)
 
 		if debounce_antis and da_on then 
-			task.wait(0.1)
+			task.wait(da_wait)
 			debounce_antis = false
 		else 
 			--
