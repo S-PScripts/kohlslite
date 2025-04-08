@@ -3651,13 +3651,18 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	Remind("Turned anti music off!")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'mymusiconly' then
+	Chat(prefix.."pmu")
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'pmu' then
 	if not string.sub(msg:lower(), 1, #prefix + 4) == prefix..'pmu2' then
+		local args = string.split(msg, " ")
         	musicoff = false
         	mymusiconly = true
         	gottenmode = 2
-        	mymusiconlyid = tonumber(string.sub(msg:lower(), #prefix + 5))
-        	Remind("Perm music is on")
+        	mymusiconlyid = tonumber(args[2])
+        	Remind("Perm music is on.")
 	end
     end
 
@@ -3669,8 +3674,19 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                                 musicoff = false
                                 mymusiconly = true
                                 mymusiconlyid = number
-                                Remind("Perm music is on (set to current id)")
+                                Remind("Perm music is on (set to current id).")
         end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'unpmu' then
+        mymusiconly = false
+        musicoff = true
+        Chat("stopmusic")
+        Remind("Perm music is off.")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'unmymusiconly' then
+	Chat(prefix.."unpmu")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'bring' then
@@ -3732,6 +3748,9 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         local specialid = table.concat(args, " ", 3)
         local charpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
         local circus = game.Players:GetUserIdFromNameAsync(specialid)
+	if #args ~= 3 then
+		return Remind("Invalid amount of arguments given (must be 3).")
+	end
         Chat("char " .. target .. " " .. circus);task.wait(0.5)
         if target == "me" then -- it tps you back to your old position if you state that you're the person to have the char done
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = charpos
@@ -4399,13 +4418,6 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'leakedreg' then -- i know it sucks but perm exists lol
         leakedcords()
 	Remind("Checking leaked coords for the regen!")
-    end
-
-    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'unpmu' then
-        mymusiconly = false
-        musicoff = true
-        Chat("stopmusic")
-        Remind("Perm music is off")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'offmusic' then
