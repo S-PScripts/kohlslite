@@ -6128,6 +6128,11 @@ return
 	Remind("Executed the text!")
     end
 
+    if string.sub(msg, 1, #prefix + 3) == prefix..'run' then
+        Execute(string.sub(msg, #prefix + 5))
+	Remind("Executed the text!")
+    end
+
     if string.sub(msg, 1, #prefix + 8) == prefix..'announce' then
         annsecret = string.sub(msg, #prefix + 10)
         Announce()
@@ -6213,15 +6218,15 @@ Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command
 Commands required: part]])
 return
 		end
-		local args = string.split(msg, " ")
-		if #args == 3 then
+		--local args = string.split(msg, " ")
+		--if #args == 3 then
 				local plr1 = args[2]
 				local plr2 = args[2]
 				arena(plr1, plr2)
-				Remind("Building the arena")
-		else
-				Remind("Please give 3 arguments - arena (plr1) (plr2).")
-		end
+				Remind("Building the arena.")
+		--else
+		--		Remind("Please give 3 arguments - arena (plr1) (plr2).")
+		--end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'prefix' then
@@ -14765,7 +14770,7 @@ end
 -- SPAM
 task.spawn(function()
         while true do
-                task.wait(0)
+                task.wait(0) -- req
                 if spam == true and spamon == true then
                             Chat(spamtext)
                             task.wait(spamwait)
@@ -15314,7 +15319,7 @@ function arena(plr1, plr2)
         	partIndex = partIndex + 1
 			
         	if partIndex > 25 then 
-			tpplrs() 
+			if plr1 ~= nil and plr2 ~= nil then tpplrs() end
 			woahwoahwoah.arena:Disconnect() 
 		end
 			
