@@ -9617,11 +9617,22 @@ end)
 -- PLAYER CHECK (I hate this thing so much)
 function PLAYERCHECK(plr, rt)
   for i, v in pairs(game.Players:GetPlayers()) do
+      local u_found = false
       if string.sub(v.Name:lower(), 1, #plr) == plr:lower() then
           player = v.Name
           cplr = v
+	  u_found = true
 	  if rt then return cplr end
-          Remind("[KL User Search]: Found "..player) -- i have no idea how i never capitalised this
+          Remind("[KL User Search]: Found "..player)
+      end
+
+      if u_found then break end
+
+      if string.sub(v.DisplayName:lower(), 1, #plr) == plr:lower() then
+          player = v.Name
+          cplr = v
+	  if rt then return cplr end
+          Remind("[KL User Search]: Found "..player)
       end
   end
 end
