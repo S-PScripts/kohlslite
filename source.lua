@@ -20,7 +20,7 @@ You can play KAH (NBC version) here: https://www.roblox.com/games/112420803/Kohl
 You can also use it for KAH BC but barely anyone plays it. This script isn't recommended for KAH NP - it's not owned by agspureiam and there's a lot of things different.
 
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
-Shortcut v3-VAR has more stuff than KohlsLite but is not open-source and you need to ask the owner (Tech - his discord is .globe) to be able to use the script.
+Shortcut v3-VAR has more stuff than KohlsLite but is not open-source and you need to ask the owner (Tech - his discord username is igotthemoveslikejagger) to be able to use the script.
 
 This script has been discontinued for the most part due to the fact that Kohls Admin House is an inactive game. This script also has most of the features that I want to have.
 
