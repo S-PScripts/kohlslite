@@ -1,21 +1,4 @@
---[[
-This script is sort of discontinued.
-
-Before you view the source, here are some things you might want to know:
-- This script is dead since barely anyone plays Kohls Admin House anymore.
-- The people who do play KAH play the NP/"Legacy" version by Tech. You can play the NP version here: https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy
-- Interesting fact: The account the NP version is on, BoasGameTest, was agspureiam's alt until it got password guessed.
-- This script is not supported for the NP version.
-
-- Kohls Admin House is a dead inactive game. It only really gets like 10 players at max.
-- Even Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing - even 1,000 sometimes.
-- This is partially because it doesn't get boring fast unlike KAH. KAH is just you trying some admin commands, nothing else.
-- Therefore, I've decided to discontinue this script.
-- You can just use Solinium for a part builder.
-- This script also already has the most antis so I won't add antis for individual players/rewrite the anti system.
-
-TS2021 20/03/2025
-]]
+-- Read all the information below before viewing the source.
 
 --[[
  ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
@@ -84,6 +67,23 @@ Other stuff:
 -> I know my script is really crappy looking in terms of the source - mainly how I didn't utilise this sort of structure "variable_name = {onething = {}, twothing = {}}". Maybe I will fix it sometime.
 -> KohlsLite has been moved to this repo from my old repo called scripts (which is now renamed to kohlslite-work-old). This is because the old repo was messy and the old loadstring was clunky.
 
+]]
+
+--[[
+Before you continue viewing the source, here are some things you might want to know:
+- This script has been mostly discontinued since barely anyone plays Kohls Admin House anymore.
+- The people who do play KAH play the NP/"Legacy" version by Tech. You can play the NP version here: https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy
+- Interesting fact: The account the NP version is on, BoasGameTest, was agspureiam's alt until it got password guessed.
+- This script is not supported for the NP version.
+
+- Kohls Admin House is a dead inactive game. It only really gets like 10 players at max.
+- Even Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing - even 1,000 sometimes.
+- This is partially because it doesn't get boring fast unlike KAH. KAH is just you trying some admin commands, nothing else.
+- Therefore, I've decided to discontinue this script for the most part.
+- You can just use Solinium for a part builder.
+- This script also already has the most antis so I won't add antis for individual players/rewrite the anti system.
+
+TS2021 09/04/2025
 ]]
 
 -- Script name = KohlsLite
