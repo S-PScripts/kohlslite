@@ -14406,7 +14406,7 @@ function partDraw()
         drawState = not drawState
 	print(drawState)
 
-        if not drawState then
+        if drawState == false then
             for _,connection in pairs(Connections.Drawing) do
                 if typeof(connection) == "RBXScriptConnection" then
                     connection:Disconnect()
@@ -14415,7 +14415,9 @@ function partDraw()
             return 
         end
 
-	if not drawState then break end
+	if drawState == false then 
+		return
+	end
 
         local mouseDown = false
         local debounce = false
