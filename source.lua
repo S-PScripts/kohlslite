@@ -3353,7 +3353,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		end
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'themelist' then
+    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'listthemes' then
                 Remind("Check your console by running /console!")
 		local keys = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"} -- I know this looks stupid :sob:
 		for _, key in ipairs(keys) do
