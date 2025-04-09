@@ -14404,6 +14404,7 @@ function partDraw()
         end
 	
         drawState = not drawState
+	print(drawState)
 
         if not drawState then
             for _,connection in pairs(Connections.Drawing) do
@@ -14413,6 +14414,8 @@ function partDraw()
             end
             return 
         end
+
+	if not drawState then break end
 
         local mouseDown = false
         local debounce = false
@@ -14439,7 +14442,7 @@ function partDraw()
 
         Connections.Drawing["InstanceAdded"] = kahinstance.ChildAdded:Connect(function(Child)
             local size = sizeL
-	    local position = posiitionL
+	    local position = positionL
 	    local colour = colourL
 	    local ori = oriL
             nextPart = true
