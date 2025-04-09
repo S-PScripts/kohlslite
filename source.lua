@@ -2299,7 +2299,16 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	end
 		
 	if string.sub(msg, 1, #prefix + 4) == prefix..'draw' then
-			Remind("EXPERIMENTAL. Booting up the drawer...") -- SHIZZ I forgot about this somehow AGAIN
+			if drawState then
+				Remind("Booting up the drawer...")
+			else
+				Remind("Closing the drawer...")
+			end
+			partDraw()
+	end
+
+	if string.sub(msg, 1, #prefix + 6) == prefix..'undraw' then
+			Remind("Closing the drawer...")
 			partDraw()
 	end
 
