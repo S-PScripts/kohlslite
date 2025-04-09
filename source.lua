@@ -15752,9 +15752,16 @@ else
 	print("writefile or/and readfile permissions missing.")
 end
 
+function filesallexist()
+	if isfile("KohlsLite/Blacklisted.json") and isfile("KohlsLite/Whitelisted.json") and isfile("KohlsLite/Gear Whitelisted.json") 
+		and isfile("KohlsLite/Hat Banned.json") and isfile("KohlsLite/Blacklisted Tools.json") then
+			return true
+	end
+end
+
 if writefile and readfile then
 	if isfolder(KL_FOLDER) then
-		if isfile("KohlsLite/Blacklisted.json") and isfile("KohlsLite/Whitelisted.json") and isfile("KohlsLite/Gear Whitelisted.json") and isfile("KohlsLite/Hat Banned.json") then
+		if filesallexist() then
 			print("All KohlsLite list files were found.")
 		else
 			if not isfile("KohlsLite/Blacklisted.json") then
@@ -15777,11 +15784,18 @@ if writefile and readfile then
 				print("Hat banned list missing - created!")
 			end
 
+			if not isfile("KohlsLite/Blacklisted Tools.json") then 
+ 				writefile("KohlsLite/Blacklisted Tools.json", game:GetService("HttpService"):JSONEncode({}))
+				print("Blacklisted tools list missing - created!")
+			end
+
+
     			repeat task.wait() until 
 			isfile("KohlsLite/Blacklisted.json") and 
 			isfile("KohlsLite/Whitelisted.json") and 
 			isfile("KohlsLite/Gear Whitelisted.json") and 
-			isfile("KohlsLite/Hat Banned.json")
+			isfile("KohlsLite/Hat Banned.json") and
+			isfile("KohlsLite/Blacklisted Tools.json")
 
 			print("Created KohlsLite file lists!")
 		end
@@ -15820,6 +15834,13 @@ function readfiles()
         for i, v in game:GetService("HttpService"):JSONDecode(readfile("KohlsLite/Hat Banned.json")) do
             if not table.find(list_on_sight.hatkick_on_sight, v) then
                 table.insert(list_on_sight.hatkick_on_sight, v)
+            end
+        end
+
+	-- Read blacklisted tool list
+        for i, v in game:GetService("HttpService"):JSONDecode(readfile("KohlsLite/Blacklisted Tools.json")) do
+            if not table.find(miscTools, v) then
+                table.insert(miscTools, v)
             end
         end
     end
