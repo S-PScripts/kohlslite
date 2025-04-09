@@ -139,10 +139,9 @@ else
 	end
 end
 
--- Edited knock's autocrasher
--- Original can be found here: https://github.com/blueskykah/Solinium/blob/main/Solinium%20Autocrasher
--- This should be in your autoexecute!!!!!!!!!!!!!!!!!!
-
+-- This is an edited version of Knocks' autocrasher
+-- You can find the original here: https://github.com/blueskykah/Solinium/blob/main/Solinium%20Autocrasher
+-- This needs to be in your autoexecute!
 function acperm()
 	task.spawn(function()
     		while true do
@@ -8857,7 +8856,7 @@ party]])
 	while true do end
     end
 
-    --[[ if string.sub(msg, 1, #prefix + 2) == prefix..'bta' then
+    if string.sub(msg, 1, #prefix + 6) == prefix..'toolbl' then
 	local args = string.split(msg, " ")
         local tool = args[2]
 		
@@ -8867,7 +8866,18 @@ party]])
         else
                 Remind(tool.." is already a blacklisted tool!")
         end
-    end]]
+    end
+
+    if string.sub(msg, 1, #prefix + 8) == prefix..'untoolbl' then
+	local args = string.split(msg, " ")
+        local tool = args[2]
+		
+	if table.find(miscTools, tool) then		
+                table.remove(miscTools, tool)         
+        else
+                Remind(tool.." was never a blacklisted tool!")
+        end
+    end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'reserver' then -- kohlsnoob and betterpersons (tech)
 	Remind("Checking...")
@@ -10681,6 +10691,24 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				end
 		end
 
+		for i, tool in ipairs(workspace:GetDescendants()) do
+    			if tool:IsA("Tool") and gear_antis.antigear then
+					Chat("ungear others")
+					Chat("punish others")
+					Chat("clr")
+					Regen()
+
+					if player_relate.crash_an then
+						Chat("h \n\n\n\n\n Tool found on workspace with anti-gear on. \n\n\n\n\n")
+					end
+
+					if allow_gb_alerts then
+						Remind("Tool found on workspace with anti-gear on.")
+						print("Tool found on workspace with anti-gear on.")
+					end
+			end
+		end
+
 		for i, tool in crashTools do
 				for i, v in game.Players:GetPlayers() do
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
@@ -10787,8 +10815,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					end
 
 					if allow_gb_alerts then
-						Remind("Anti-crash tool found on workplace")
-						print("Anti-crash tool found on workplace")
+						Remind("Anti-crash tool found on workspace")
+						print("Anti-crash tool found on workspace")
 					end
 				end
 		end
@@ -10849,8 +10877,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					end
 
 					if allow_gb_alerts then
-						Remind("Anti-attach2 tool found on workplace")
-						print("Anti-attach2 tool found on workplace")
+						Remind("Anti-attach2 tool found on workspace")
+						print("Anti-attach2 tool found on workspace")
 					end
 				end
 		end
@@ -10911,8 +10939,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					end
 
 					if allow_gb_alerts then
-						Remind("Anti-periastron tool found on workplace")
-						print("Anti-periastron tool found on workplace")
+						Remind("Anti-periastron tool found on workspace")
+						print("Anti-periastron tool found on workspace")
 					end
 				end
 		end
