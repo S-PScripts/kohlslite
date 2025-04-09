@@ -2339,7 +2339,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		
 		if not table.find(whitelist, player) then		
 			if player_relate.blwl_an then
-				if watermark_kl then
+				if mainbar_stuff.watermark_kl then
                         		Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been whitelisted! \n\n\n\n\n")
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been whitelisted! \n\n\n\n\n")
@@ -2375,7 +2375,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          if player ~= nil then
                 if table.find(whitelist, player) then	
 			if player_relate.blwl_an then
-				if watermark_kl then
+				if mainbar_stuff.watermark_kl then
 					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been unwhitelisted. \n\n\n\n\n")
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been unwhitelisted. \n\n\n\n\n")
@@ -2416,7 +2416,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 if not table.find(blacklist, player) then
 		--	print("adding...")
 			if player_relate.blwl_an then
-				if watermark_kl then
+				if mainbar_stuff.watermark_kl then
 					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been blacklisted. \n\n\n\n\n");Regen()
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been blacklisted. \n\n\n\n\n");Regen()
@@ -2455,7 +2455,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          if player ~= nil then
                 if table.find(blacklist, player) or table.find(newplrslocked, player) then
 			if player_relate.blwl_an then
-				if watermark_kl then
+				if mainbar_stuff.watermark_kl then
 					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been unblacklisted! \n\n\n\n\n")
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been unblacklisted! \n\n\n\n\n")
@@ -2512,7 +2512,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          if player ~= nil then
                 if not table.find(FAdmins, player) then
 			if player_relate.blwl_an then
-                        	Chat("h \n\n\n\n\n "..player.." has been given admin! \n\n\n\n\n")
+				if mainbar_stuff.watermark_kl then
+					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been given admin! \n\n\n\n\n")
+				else
+                        		Chat("h \n\n\n\n\n "..player.." has been given admin! \n\n\n\n\n")
+				end
 			end
                         Remind("Admined "..player)
                         table.insert(FAdmins, player)
@@ -2530,7 +2534,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          if player ~= nil then
                 if table.find(FAdmins, player) then
 			if player_relate.blwl_an then
-                        	Chat("h \n\n\n\n\n "..player.." has been removed from admin. \n\n\n\n\n")
+				if mainbar_stuff.watermark_kl then
+					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been removed from admin. \n\n\n\n\n")
+				else
+                        		Chat("h \n\n\n\n\n "..player.." has been removed from admin. \n\n\n\n\n")
+				end
 			end
                         Remind("Unadmined "..player)
                         table.remove(FAdmins, table.find(FAdmins, player))
@@ -2559,7 +2567,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 				
                 if not table.find(GWhitelisted, player) then
 			if player_relate.blwl_an then
-                        	Chat("h \n\n\n\n\n "..player.." has been whitelisted from anti-gears! \n\n\n\n\n")
+				if mainbar_stuff.watermark_kl then
+					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been whitelisted from anti-gears! \n\n\n\n\n")
+				else
+                        		Chat("h \n\n\n\n\n "..player.." has been whitelisted from anti-gears! \n\n\n\n\n")
+				end
 			end
                         Remind("Gear whitelisted "..player)
                         table.insert(GWhitelisted, player)
@@ -2577,7 +2589,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          if player ~= nil then
                 if table.find(GWhitelisted, player) then
 			if player_relate.blwl_an then
-                        	Chat("h \n\n\n\n\n "..player.." has been unwhitelisted from anti-gears. \n\n\n\n\n")
+				if mainbar_stuff.watermark_kl then
+					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been unwhitelisted from anti-gears. \n\n\n\n\n")
+				else
+                        		Chat("h \n\n\n\n\n "..player.." has been unwhitelisted from anti-gears. \n\n\n\n\n")
+				end
 			end
                         Remind("Un gear whitelisted "..player)
                         table.remove(GWhitelisted, table.find(GWhitelisted, player))
@@ -2861,8 +2877,13 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		
        if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'slock' then
 	if player_relate.blwl_an then
-        	Chat("h \n\n\n\n\n Server is locked! \n\n\n\n\n");Regen()
+		if mainbar_stuff.watermark_kl then
+			Chat("h \n\n\n\n\n [KohlsLite]: Server has been locked! \n\n\n\n\n")
+		else
+                        Chat("h \n\n\n\n\n Server has been locked! \n\n\n\n\n")
+		end
 	end
+	Regen()
         mainbar_stuff.slockenabled = true
 	Remind("Turned on the serverlock!")
        end
@@ -2895,7 +2916,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
        if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unslock' then
 		mainbar_stuff.slockenabled = false
 		if player_relate.blwl_an then
-        		Chat("h \n\n\n\n\n Server is unlocked! \n\n\n\n\n")
+			if mainbar_stuff.watermark_kl then
+				Chat("h \n\n\n\n\n [KohlsLite]: Server has been unlocked! \n\n\n\n\n")
+			else
+                        	Chat("h \n\n\n\n\n Server has been unlocked! \n\n\n\n\n")
+			end		
 		end
        	 	Chat('unblind all')
         	Chat('unpunish all')
@@ -3201,7 +3226,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'gmusic' then
         musicplay = string.sub(msg, #prefix + 7)
         if player_relate.musicsay == true then
-           Chat("h \n\n\n\n\n Playing music: ".. musictable[musicplay].name ..". \n\n\n\n\n")
+		if mainbar_stuff.watermark_kl then
+			Chat("h \n\n\n\n\n [KohlsLite]: Playing music: ".. musictable[musicplay].name ..". \n\n\n\n\n")
+		else
+                        Chat("h \n\n\n\n\n Playing music: ".. musictable[musicplay].name ..". \n\n\n\n\n")
+		end
         end
         if antimlog then
             Chat("music 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" .. musictable[musicplay].id)
@@ -3218,7 +3247,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         local randomindex = math.random(1, length)
         local rizz = tostring(randomindex)
          if player_relate.musicsay == true then
-                    Chat("h \n\n\n\n\n Playing music: " .. musictable[rizz].name .. ". \n\n\n\n\n")
+		if mainbar_stuff.watermark_kl then
+			Chat("h \n\n\n\n\n [KohlsLite]: Playing music: " .. musictable[rizz].name .. ". \n\n\n\n\n")
+		else
+                	Chat("h \n\n\n\n\n Playing music: " .. musictable[rizz].name .. ". \n\n\n\n\n")
+		end
          end
          if antimlog then
                     Chat("music 000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" .. musictable[rizz].id)
@@ -3245,7 +3278,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
             local mast = tostring(musicplay)
 
             if player_relate.musicsay == true then
-                Chat("h \n\n\n\n\n Playing music: " .. musictable[mast].name .. ". \n\n\n\n\n")
+		if mainbar_stuff.watermark_kl then
+			Chat("h \n\n\n\n\n [KohlsLite]: Playing music: " .. musictable[mast].name .. ". \n\n\n\n\n")
+		else
+                	Chat("h \n\n\n\n\n Playing music: " .. musictable[rizz].name .. ". \n\n\n\n\n")
+		end
             end
 
             if antimlog then
@@ -3272,8 +3309,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
             local mast = tostring(musicplay)
 
-            if player_relate.musicsay == true then
-                Chat("h \n\n\n\n\n Playing music: " .. musictable[mast].name .. ". \n\n\n\n\n")
+             if player_relate.musicsay == true then
+		if mainbar_stuff.watermark_kl then
+			Chat("h \n\n\n\n\n [KohlsLite]: Playing music: " .. musictable[mast].name .. ". \n\n\n\n\n")
+		else
+                	Chat("h \n\n\n\n\n Playing music: " .. musictable[rizz].name .. ". \n\n\n\n\n")
+		end
             end
 
             if antimlog then
@@ -5991,7 +6032,11 @@ return
          PLAYERCHECK(dasplayer)
          if player ~= nil then
 		if player_relate.blwl_an then
-                	Chat("h \n\n\n\n\n "..player.." has been padbanned. \n\n\n\n\n")
+                	if mainbar_stuff.watermark_kl then
+               			Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been padbanned. \n\n\n\n\n")
+			else
+				Chat("h \n\n\n\n\n "..player.." has been padbanned. \n\n\n\n\n")
+			end
 		end
                 table.insert(padbanned, player)
          else
@@ -6004,7 +6049,11 @@ return
          PLAYERCHECK(dasplayer)
          if player ~= nil then
 		if player_relate.blwl_an then
-               		Chat("h \n\n\n\n\n "..player.." has been unpadbanned! \n\n\n\n\n")
+			if mainbar_stuff.watermark_kl then
+               			Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been unpadbanned! \n\n\n\n\n")
+			else
+				Chat("h \n\n\n\n\n "..player.." has been unpadbanned! \n\n\n\n\n")
+			end
 		end
                 table.remove(padbanned, table.find(padbanned, player))
          else
@@ -6019,7 +6068,11 @@ return
 
     if string.sub(msg, 1, #prefix + 8) == prefix..'padreinf' then
 	if player_relate.blwl_an then
-        	Chat("h \n\n\n\n\n Pad reinforcements are on. \n\n\n\n\n")
+		if mainbar_stuff.watermark_kl then
+			Chat("h \n\n\n\n\n [KohlsLite]: Pad reinforcements are on. \n\n\n\n\n")
+		else
+                	Chat("h \n\n\n\n\n Pad reinforcements are on. \n\n\n\n\n")
+		end
 	end
         padreinforcements = true
 	Remind("Pad reinforcements are on.")
@@ -6027,7 +6080,11 @@ return
 
     if string.sub(msg, 1, #prefix + 10) == prefix..'unpadreinf' then
 	if player_relate.blwl_an then
-        	Chat("h \n\n\n\n\n Pad reinforcements are off! \n\n\n\n\n")
+		if mainbar_stuff.watermark_kl then
+			Chat("h \n\n\n\n\n [KohlsLite]: Pad reinforcements are off! \n\n\n\n\n")
+		else
+                	Chat("h \n\n\n\n\n Pad reinforcements are off! \n\n\n\n\n")
+		end
 	end
         padreinforcements = false
 	Remind("Pad reinforcements are off.")
@@ -6387,12 +6444,12 @@ return
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antilag' then
         antilag = true
-	Remind("Anti Lag is now enabled.")
+	Remind("Anti lag is now enabled.")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unantilag' then
         antilag = false
-	Remind("Anti Lag is now disabled.")
+	Remind("Anti lag is now disabled.")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'capfps' then
@@ -6409,6 +6466,12 @@ return
 	else
 		return Remind("Sorry, your exploit does not support fps changing (setfpscap)")
 	end
+   end
+
+   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fpscap' then
+	local args = string.split(msg, " ")
+        sfc = tonumber(args[2])
+	Chat(prefix.."capfps"..sfc)
    end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'alladmin' then
@@ -14702,7 +14765,7 @@ function onPlayerAdded(player)
 			elseif admin_stuff.alladmin then
 	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". This server has free admin! \n\n\n\n\n")
 			else
-	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". \n\n\n\n\n")
+	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". This server is protected by KohlsLite. \n\n\n\n\n")
 			end
 		end
 	
