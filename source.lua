@@ -6284,7 +6284,20 @@ return
 		Remind("Painted the map!")
    end
 
-  if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'messpaint' then
+
+   if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'colormap' then
+		local colourhere = string.sub(msg, #prefix + 10)
+		PaintMap(colourhere,"norm")
+		Remind("Painted the map!")
+   end
+
+   if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'colourmap' then
+		local colourhere = string.sub(msg, #prefix + 11)
+		PaintMap(colourhere,"norm")
+		Remind("Painted the map!")
+   end
+
+   if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'messpaint' then
 		PaintMap(colourhere,"random")
 		Remind("Ruined the map's paint!")
    end
