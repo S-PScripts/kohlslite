@@ -5298,7 +5298,12 @@ return
 
    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'goon' then -- joke
 		Remind("GOONER?")
-		freaky = math.random(1,11)
+		local args = string.split(msg, " ")
+		if #args == 2 then
+			freaky = tonumber(args[2])
+		else
+			freaky = math.random(1,11)
+		end
 		if freaky == 1 then
 			Chat(prefix.."gchar me KonekoKittenWasTaken")
 		elseif freaky == 2 then
