@@ -2328,6 +2328,14 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		Remind("Brush colour changed.")
       	end
 
+	if string.sub(msg, 1, #prefix + 5) == prefix..'build' then
+			Remind("Sorry, this command is not in KohlsLite. Please use CMD v3 for it.")
+	end
+
+	if string.sub(msg, 1, #prefix + 6) == prefix..'aichat' then
+			Remind("Sorry, this command is not in KohlsLite. Please use CMD v3 for it.")
+	end
+
         if string.sub(msg, 1, #prefix + 2) == prefix..'wl' then
 	 local args = string.split(msg, " ")
          local dasplayer = args[2]
