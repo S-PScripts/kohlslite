@@ -144,6 +144,8 @@ else
 	end
 end
 
+clipboard_available = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set) -- From Infinite Yield
+
 -- This is an edited version of Knocks' autocrasher
 -- You can find the original here: https://github.com/blueskykah/Solinium/blob/main/Solinium%20Autocrasher
 -- This needs to be in your autoexecute (could use queue_on_teleport maybe but ¯_(ツ)_/¯)
@@ -342,13 +344,13 @@ if getgenv().autocrasher then
 
     else
 	getgenv().autocrasher = false
-	if setclipboard then
+	if clipboard_available then
 			Remind("You must have your player token to use the autocrasher. Check what has been printed in /console.", 2)
 			print("COPY THE CODE IN THIS WEBSITE: kohlslite.pages.dev/Assets/PLAYERTOKEN.lua")
 			print("It has also been copied to your clipboard.")
 			print("Once you have copied the code, join an empty server and run the code. Next, open a text editor like Notepad and find a string that looks like this: '5568CCBED82CD30E127119030810CE98'.")
 			print("Once you have found the string, copy it and input it into the playertoken variable.")
-			setclipboard(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true"))
+			clipboard_available(game:HttpGet("https://games.roblox.com/v1/games/"..game.PlaceId.."/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true"))
 	else
 			Remind("You must have your player token to use the autocrasher. Check what has been printed in /console.", 2)
 			print("COPY THE CODE IN THIS WEBSITE: kohlslite.pages.dev/Assets/PLAYERTOKEN.lua")
@@ -3651,12 +3653,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'cmusicid' then
-		if setclipboard then
+		if clipboard_available then
 			if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
 				Remind("Copied the music id to your clipboard.")
                                 local url = game:GetService("Workspace").Terrain["_Game"].Folder.Sound.SoundId
                                 local number = url:match("id=(%d+)")
-                                setclipboard(number)
+                                clipboard_available(number)
         		end
 		else
 			Remind("Sorry, your exploit does not support this command (setclipboard)")
@@ -3938,10 +3940,13 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'fixbp' then
-	if not workspace.Terrain._Game.Workspace:FindFirstChild("Baseplate") then
-		Remind("NOT LOADED!")
-		return
-	end
+	pcall(function()
+		if not workspace.Terrain._Game.Workspace:FindFirstChild("Baseplate") then
+			Remind("NOT LOADED!")
+			return
+		end
+	end)
+
 	if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fixbp2' then
 	else
                 if movestatus == true then 
@@ -3957,6 +3962,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'movebp' then
+		pcall(function()
+			if not workspace.Terrain._Game.Workspace:FindFirstChild("Baseplate") then
+				Remind("NOT LOADED!")
+				return
+			end
+		end)
                 if movestatus == true then 
                         return 
                 end
@@ -4070,10 +4081,13 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixregen' then
-	if not workspace.Terrain._Game.Admin:FindFirstChild("Regen") then
-		Remind("NOT LOADED!")
-		return
-	end
+	pcall(function()
+		if not workspace.Terrain._Game.Admin:FindFirstChild("Regen") then
+			Remind("NOT LOADED!")
+			return
+		end
+	end)
+
 	if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'fixregen2' then
         else
                 if movestatus == true then
@@ -4097,6 +4111,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'moveregen' then
+		pcall(function()
+			if not workspace.Terrain._Game.Admin:FindFirstChild("Regen") then
+				Remind("NOT LOADED!") 
+				return
+			end
+		end)
                 if movestatus == true then 
                         return 
                 end
@@ -4114,15 +4134,15 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		buddy = "game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(".. adx ..",".. ady ..",".. adz ..")"
                 q = adx .. ady .. adz
                 print("game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(".. adx ..",".. ady ..",".. adz ..")")
-		if setclipboard then
-                	setclipboard(buddy)
+		if clipboard_available then
+                	clipboard_available(buddy)
 		else
 			Remind("Your exploit does not support setclipboard - Please keep a note of the code in console.")
 		end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'cusername' then
-		if not setclipboard then
+		if not clipboard_available then
 			Remind("Sorry, your exploit does not support this command (setclipboard)")
 			return
 		end
@@ -4130,7 +4150,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 PLAYERCHECK(dasplayer)
                 if player ~= nil then
         		su = player
-			setclipboard(su)
+			clipboard_available(su)
 			Remind("Successfully copied the player's username to clipboard.")
                 else                        
                         Remind('Cannot find player with the name: '..dasplayer)
@@ -9118,9 +9138,9 @@ party]])
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'discord' then
-		if setclipboard then
+		if clipboard_available then
 			Remind("Clipboard set to my username on Discord.")
-			setclipboard("ts2021 (discord)")
+			clipboard_available("ts2021 (discord)")
 		else
 			Remind("Check console for my username on Discord.")
 			print("ts2021 (discord)")
@@ -9128,9 +9148,9 @@ party]])
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'source' then
-		if setclipboard then
+		if clipboard_available then
 			Remind("Clipboard set to the link to the source of this script.")
-			setclipboard("kohlslite.pages.dev/source.lua")
+			clipboard_available("kohlslite.pages.dev/source.lua")
 		else
 			Remind("Check console for the link to the source of this script.")
 			print("kohlslite.pages.dev/source.lua")
@@ -11872,8 +11892,8 @@ function PLRSTART(v)
                         if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				--print("kohlslite user")
 			else
-				if setclipboard then
-                            		setclipboard("https://discord.gg/kah")
+				if clipboard_available then
+                            		clipboard_available("https://discord.gg/kah")
 				else
 					print("https://discord.gg/kah")
 					Speak("My executor is terrible!")
@@ -11885,8 +11905,8 @@ function PLRSTART(v)
                         if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
 				--print("kohlslite user")
 			else
-				if setclipboard then
-                            		setclipboard("https://discord.gg/kah")
+				if clipboard_available then
+                            		clipboard_available("https://discord.gg/kah")
 				else
 					print("https://discord.gg/kah")
 					Speak("My executor is terrible!")
@@ -17504,8 +17524,8 @@ local mentalhospital = {
 }
 
 if table.find(unexecuteables, game.Players.LocalPlayer.Name) then
-		if setclipboard then
-			setclipboard("dm ts2021	on discord")
+		if clipboard_available then
+			clipboard_available("dm ts2021	on discord")
 		end
                 pcall(function() -- thanks tech
 		        game.Players.LocalPlayer:Kick("[KohlsLite]: You have been blacklisted from KohlsLite. Contact ts2021 to contest this.") 
@@ -17514,8 +17534,8 @@ if table.find(unexecuteables, game.Players.LocalPlayer.Name) then
 end
 
 if table.find(mentalhospital, game.Players.LocalPlayer.Name) then
-		if setclipboard then
-			setclipboard("dm ts2021	on discord")
+		if clipboard_available then
+			clipboard_available("dm ts2021	on discord")
 		end
                 pcall(function() -- thanks tech
 		        game.Players.LocalPlayer:Kick("[KohlsLite]: Imagine skidding, claiming my script as yours, then blacklisting me from it. Contact me (ts2021) so I can berate you more.") 
@@ -17525,8 +17545,8 @@ end
 
 script_is_off = false
 if script_is_off then
-	if setclipboard then
-			setclipboard("dm ts2021	on discord")
+	if clipboard_available then
+			clipboard_available("dm ts2021	on discord")
 	end
 	game.Players.LocalPlayer:Kick("[KohlsLite]: Major update in process! Script will be back up soon (I hope).") 
 end
@@ -17577,8 +17597,8 @@ end
 --[[ local eol = "12/31/2025" -- I'm not sure how long I will be updating KL for
 
 if ctime2 > eol then
-    	if setclipboard then
-		setclipboard("dm ts2021	on discord")
+    	if clipboard_available then
+		clipboard_available("dm ts2021	on discord")
 	end
         pcall(function() -- thanks tech
 		game.Players.LocalPlayer:Kick("[KohlsLite]: If you get kicked, this script is probably discontinued. You can find and edit the source online at kohlslite.pages.dev .") 
