@@ -146,7 +146,7 @@ end
 
 -- This is an edited version of Knocks' autocrasher
 -- You can find the original here: https://github.com/blueskykah/Solinium/blob/main/Solinium%20Autocrasher
--- This needs to be in your autoexecute!
+-- This needs to be in your autoexecute (could use queue_on_teleport maybe but ¯_(ツ)_/¯)
 function acperm()
 	task.spawn(function()
     		while true do
@@ -609,7 +609,10 @@ mainbar_stuff = {
 	backdoor_enabled = true,
 
 	-- The tag above KL Admins
-	billboard = true
+	billboard = true,
+
+	-- Execute KohlsLite when serverhopping
+	KeepKL = true
 }
 
 -- Auto stuff
@@ -689,6 +692,18 @@ local list_on_sight = {
 	-- Gearban the player
     	gb_on_sight = {}
 }
+
+-- From Infinite Yield
+queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
+
+local TeleportCheck = false
+game.Players.LocalPlayer.OnTeleport:Connect(function(State)
+	if KeepKL and (not TeleportCheck) and queueteleport then
+		TeleportCheck = true
+		queueteleport("loadstring(game:HttpGet('kohlslite.pages.dev/source.lua'))()")
+	end
+end)
 
 -- Variables for moving
 local movestatus = false
@@ -2667,6 +2682,16 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         if string.sub(msg, 1, #prefix + 11)  == prefix..'unbillboard' then
 			mainbar_stuff.billboard = false
 			Remind("KohlsLite admins will no longer have have 'KL ADMIN' above their avatar.") 
+	end
+
+        if string.sub(msg, 1, #prefix + 6)  == prefix..'keepkl' then
+			mainbar_stuff.KeepKL = true
+			Remind("KohlsLite will re-execute when you serverhop!") 
+	end
+
+        if string.sub(msg, 1, #prefix + 8)  == prefix..'unkeepkl' then
+			mainbar_stuff.KeepKL = false
+			Remind("KohlsLite will no longer re-execute when you serverhop.") 
 	end
 
        if string.sub(msg, 1, #prefix + 8) == prefix..'loopkill' then
