@@ -104,6 +104,11 @@ local function Remind(msg, length)
         })
 end; -- this semi-colon is useless, but I don't want to remove it xd
 
+-- Chat function
+local function Chat(msg)
+      game.Players:Chat(msg)
+end
+
 -- Check if KohlsLite is already executed
 if getgenv().kohlsexecuted then 
         return 
@@ -376,11 +381,6 @@ if getgenv().kohlsgui then
 	--
 else
 	getgenv().kohlsgui = false
-end
-
--- Chat function
-local function Chat(msg)
-      game.Players:Chat(msg)
 end
 
 -- From Infinite Yield
