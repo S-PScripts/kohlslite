@@ -2342,7 +2342,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	end
 
 	if string.sub(msg, 1, #prefix + 5) == prefix..'unvis' then
-		Chat(prefix..'stopvis')
+		Chat(prefix.."stopvis")
 	end
 		
 	if string.sub(msg, 1, #prefix + 4) == prefix..'draw' then
@@ -6523,7 +6523,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'prefix' then
         prefix = string.sub(msg:lower(), #prefix + 8)
-	Remind("Changed the prefix!")
+	Remind("Changed KohlsLite's prefix to ".. prefix .. "!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'goodexec' then
@@ -6548,9 +6548,9 @@ return
 	end;
 
 	if check(identifyexecutor(), scapproved) then
-		Remind("Your executor is SC Approved!")
+		Remind("Your executor is Shortcut Approved!")
 	else
-		Remind("Your executor is NOT SC Approved.")
+		Remind("Your executor is NOT Shortcut Approved.")
 	end
     end
 
@@ -9459,7 +9459,7 @@ return
 		RunService = game:GetService("RunService")
 
 		if not checkforR15(game.Players.LocalPlayer) then
-			Chat(prefix..'uncarpet')
+			Chat(prefix.."uncarpet")
 			task.wait()
 			carpetAnim = Instance.new("Animation")
 			carpetAnim.AnimationId = "rbxassetid://282574440"
@@ -9684,9 +9684,9 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'tswim' then
 	if swimming then
-		Chat(prefix..'unswim')
+		Chat(prefix.."unswim")
 	else
-		Chat(prefix..'swim')
+		Chat(prefix.."swim")
 	end
     end
 
@@ -11881,16 +11881,20 @@ game.Players.LocalPlayer:GetMouse().KeyDown:connect(function(key)
 end)
 
 local thorns_commands = {
-	kill = true,
 	blind = true,
-	jail = true,
-	punish = true,
-	setgrav = true,
+	bonfire = true,
 	explode = true,
+	fire = true,
 	fling = true,
-	skydive = true,
 	freeze = true,
-	size = true
+	jail = true,
+	kill = true,
+	punish = true,
+	seizure = true,
+	setgrav = true,
+	size = true,
+	skydive = true,
+	stun = true,
 }
 
 -- some antis and admin system (this is really old)
@@ -11900,7 +11904,7 @@ function PLRSTART(v)
             task.spawn(function()
                     task.wait(0)
 
-			-- Thorns
+			-- Thorns (for the user they did it upon, just turn the antis on)
 			local args = string.split(msg, " ")
 			local base_cmd = args[1]:gsub("^:", "") -- You can use a colon to run commands, so this detects it.
 
@@ -12639,13 +12643,13 @@ function checkCrashType()
 	elseif crash_settings.crash_type == "dog" then
 		DCrash()
 	elseif crash_settings.crash_type == "ex" then
-		Chat(prefix..'ecrash')
+		Chat(prefix.."ecrash")
 	elseif crash_settings.crash_type == "nerd" then
-		Chat(prefix..'jcrash')
+		Chat(prefix.."crash")
 	elseif crash_settings.crash_type == "dionte" then
-		Chat(prefix..'dicrash')
+		Chat(prefix.."dicrash")
 	elseif crash_settings.crash_type == "fred" then
-		Chat(prefix..'fredcrash')
+		Chat(prefix.."fredcrash")
 	else
 		DCrash()
 	end
@@ -13990,7 +13994,7 @@ function fling()
 			child.CustomPhysicalProperties = PhysicalProperties.new(math.huge, 0.3, 0.5)
 		end
 	end
-	Chat(prefix..'float')
+	Chat(prefix.."float")
 	wait(.1)
 	local bambam = Instance.new("BodyAngularVelocity")
 	bambam.Name = randomString()
@@ -14008,7 +14012,7 @@ function fling()
 	end
 	flinging = true
 	local function flingDiedF()
-		Chat(prefix..'unfling')
+		Chat(prefix.."unfling")
 	end
 	flingDied = game.Players.LocalPlayer.Character:FindFirstChildOfClass('Humanoid').Died:Connect(flingDiedF)
 	repeat
@@ -14020,7 +14024,7 @@ function fling()
 end
 
 function unfling()
-	Chat(prefix..'unfloat')
+	Chat(prefix.."unfloat")
 	if flingDied then
 		flingDied:Disconnect()
 	end
