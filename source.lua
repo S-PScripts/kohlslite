@@ -2336,6 +2336,10 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			Remind("Sorry, this command is not in KohlsLite. Please use CMD v3 for it.")
 	end
 
+	if string.sub(msg, 1, #prefix + 6) == prefix..'thorns' then
+			Remind("Sorry, this command is not in KohlsLite. Please use KTAK for it.")
+	end
+
         if string.sub(msg, 1, #prefix + 2) == prefix..'wl' then
 	 local args = string.split(msg, " ")
          local dasplayer = args[2]
@@ -3189,15 +3193,18 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		local max = tonumber(args[3])
 		local diroll = math.random(min, max)
 		Remind("Dice roll: ".. diroll)
+		Speak("Dice roll: ".. diroll)
 	else
 		diroll = math.random(1, 6) -- USE DEFAULT
 		Remind("Dice roll: ".. diroll)
+		Speak("Dice roll: ".. diroll)
 	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'coinflip' then
 	if math.random(1, 2) == 1 then cflip = "Heads" else cflip =  "Tails" end
 	Remind("Coin flip: "..cflip)
+	Speak("Coin flip: "..cflip)
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'lgmusic' then
@@ -3333,15 +3340,15 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg, 1, #prefix + 9)  == prefix..'musiclist' then
-         Remind("Check your console by running /console!")
-             local length = 0
-             for _ in pairs(musictable) do
-                length = length + 1
-             end
-         for i = 1, length do
-                 q = tostring(i)
-                  print("gmusic"..i.." - "..musictable[q].id.." - "..musictable[q].name)
-         end
+        Remind("Check your console by running /console!")
+        local length = 0
+        for _ in pairs(musictable) do
+        	length = length + 1
+        end
+        for i = 1, length do
+        	q = tostring(i)
+                print("gmusic"..i.." - "..musictable[q].id.." - "..musictable[q].name)
+        end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'theme' then		
@@ -3363,10 +3370,18 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'listthemes' then
                 Remind("Check your console by running /console!")
-		local keys = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"} -- I know this looks stupid :sob:
-		for _, key in ipairs(keys) do
-    			local theme = themecode[key]
-    			print("Theme " .. key .. ": " .. theme.name .. " - Code: " .. theme.code)
+		local sn = {}
+
+		for tname, _ in pairs(themecode) do
+    			table.insert(sn, tname)
+		end
+
+		table.sort(sn, function(a, b)
+    			return tonumber(a) < tonumber(b)
+		end)
+
+		for _, tname in ipairs(sn) do
+			print("Theme " .. tname .. ": " .. themecode[tname].name .. " \n   Code: " .. themecode[tname].code)
 		end
     end
 
