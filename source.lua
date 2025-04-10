@@ -556,6 +556,33 @@ local pgwl = {
     "dawninja21",
     "Dawninja21alt"
 }
+
+-- People that are thorn whitelisted
+local exempt_from_thorns = {
+}
+
+-- Perm thorn whitelist
+local peft = {
+    "me_123eq",
+    "me_crashking",
+    "ScriptingProgrammer",
+    "BIGpe7niss7",
+    "kohlslitedev",
+    "agspureiamReal",
+    "atprog",
+    "IceStuds",
+    "Dekryptionite",
+    "minecraftgamer2012YT",
+    "clydekash",
+    "ripcxo",
+    "grimAuxiliatrix",
+    "undertaker629",
+    "jjjuuikjjikkju",
+    "FR6DDIIE",
+    "D_ionte",
+    "dawninja21",
+    "Dawninja21alt"
+}
 	
 -- The developer of KohlsLite
 local specialperms = {
@@ -1987,6 +2014,9 @@ local player_relate = {
 	-- Announces to everyone that a person is using /c system
 	PingCsystem = true,
 
+	-- Thorns (let's say someone does "kill (...)". The user who said it gets killed)
+	thorns = false,
+	
 	-- Announces the music for gmusic and song
 	musicsay = true
 
@@ -2354,9 +2384,141 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	end
 
 	if string.sub(msg, 1, #prefix + 6) == prefix..'thorns' then
-			Remind("Sorry, this command is not in KohlsLite. Please use KTAK for it.")
+			player_relate.thorns = true
+			Remind("Thorns have been enabled.")
 	end
 
+	if string.sub(msg, 1, #prefix + 8) == prefix..'unthorns' then
+			player_relate.thorns = false
+			Remind("Thorns have been disabled.")
+	end
+
+	if string.sub(msg, 1, #prefix + 6) == prefix..'athorn' then
+		local args = string.split(msg, " ")
+		local thorn_to_add = args[2]
+		local thorn_status = args[3]
+		if #args ~= 3 then
+			return Remind("You must set the status of the thorn (true/false).")
+		end
+		if thorns_commands[thorn_to_add] == nil then
+        		thorns_commands[thorn_to_add] = thorn_status
+        		Remind("Thorn '" .. thorn_to_add .. "' added with status: " .. tostring(thorn_status))
+        		print("Thorn '" .. thorn_to_add .. "' added with status: " .. tostring(thorn_status))
+    		else
+        		Remind("Thorn '" .. thorn_name .. "' already exists.")
+    		end
+	end
+
+	if string.sub(msg, 1, #prefix + 6) == prefix..'rthorn' then
+		local args = string.split(msg, " ")
+		local thorn_to_remove = args[2]
+		if #args ~= 2 then
+			return Remind("Invalid amount of arguments (must be 2).")
+		end
+    		if thorns_commands[thorn_to_remove] ~= nil then
+        		thorns_commands[thorn_to_remove] = nil
+        		Remind("Thorn '" .. thorn_to_remove .. "' removed.")
+			print("Thorn '" .. thorn_to_remove .. "' removed.")
+    		else
+        		Remind("Thorn '" .. thorn_to_remove .. "' does not exist.")
+			print("Thorn '" .. thorn_to_remove .. "' removed.")
+    		end
+	end
+		
+	if string.sub(msg, 1, #prefix + 8) == prefix..'ajthorns' then
+		local args = string.split(msg, " ")
+		local thorn_to_change = args[2]
+		local thorn_status = args[3]
+
+		if #args == 3 then
+			if thorns_commands[thorn_to_change] ~= nil then
+				if thorn_status == "true" or thorn_status == "on" then
+					thorns_commands[thorn_to_change] = true
+				elseif thorn_status == "false" then
+					thorns_commands[thorn_to_change] = false
+				else
+					Remind("Invalid status! Use 'true' or 'false'.")
+					return
+				end
+				Remind("Thorn '" .. thorn_to_change .. "' set to '" .. tostring(thorns_commands[thorn_to_change]) .. "'.")
+			else
+				Remind("Thorn '" .. thorn_to_change .. "' does not exist.")
+			end
+		elseif #args == 2 then
+			if thorns_commands[thorn_to_change] ~= nil then
+				thorns_commands[thorn_to_change] = not thorns_commands[thorn_to_change]
+				Remind("Thorn '" .. thorn_to_change .. "' flipped to '" .. tostring(thorns_commands[thorn_to_change]) .. "'.")
+			else
+				Remind("Thorn '" .. thorn_to_change .. "' does not exist.")
+			end
+
+		else
+			Remind("Invalid amount of arguments (must be 2 or 3).")
+		end
+	end
+
+        if string.sub(msg, 1, #prefix + 7)  == prefix..'thornwl' then
+         local dasplayer = string.sub(msg:lower(), #prefix + 9)
+         PLAYERCHECK(dasplayer)
+         if player ~= nil then
+		if player == game.Players.LocalPlayer.Name then 
+			return Remind("You cannot thorn-whitelist yourself.")
+		end
+				
+                if not table.find(exempt_from_thorns, player) then
+			if player_relate.blwl_an then
+				if mainbar_stuff.watermark_kl then
+					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been whitelisted from thorns. \n\n\n\n\n")
+				else
+                        		Chat("h \n\n\n\n\n "..player.." has been whitelisted from thorns! \n\n\n\n\n")
+				end
+			end
+                        Remind("Thorn whitelisted "..player)
+                        table.insert(exempt_from_thorns, player)
+                else
+                        Remind(player.." is already thorn whitelisted!")        
+                end
+         else
+                Remind('Cannot find player with the name: '..dasplayer)
+         end
+       end
+
+        if string.sub(msg, 1, #prefix + 9)  == prefix..'unthornwl' then
+         local dasplayer = string.sub(msg:lower(), #prefix + 11)
+         PLAYERCHECK(dasplayer)
+         if player ~= nil then
+                if table.find(exempt_from_thorns, player) then
+			if player_relate.blwl_an then
+				if mainbar_stuff.watermark_kl then
+					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been unwhitelisted from thorns. \n\n\n\n\n")
+				else
+                        		Chat("h \n\n\n\n\n "..player.." has been unwhitelisted from thorns. \n\n\n\n\n")
+				end
+			end
+                        Remind("Un thorn whitelisted "..player)
+                        table.remove(exempt_from_thorns, table.find(exempt_from_thorns, player))
+                else
+                        Remind(player.." was never thorn whitelisted!")
+                end
+         else
+                Remind('Cannot find player with the name: '..dasplayer)
+         end
+       end
+
+	if string.sub(msg, 1, #prefix + 10)  == prefix..'listthorns' then
+		Remind("Check your console by running /console!")
+		local keys = {}
+		for command in pairs(thorns_commands) do
+    			table.insert(keys, command)
+		end
+
+		table.sort(keys)
+
+		for _, command in ipairs(keys) do
+    			print(command, thorns_commands[command])
+		end
+	end
+		
         if string.sub(msg, 1, #prefix + 2) == prefix..'wl' then
 	 local args = string.split(msg, " ")
          local dasplayer = args[2]
@@ -6827,12 +6989,14 @@ return
                  	else
                                Remind('Cannot find player with the name: '..dasplayer)
                 	 end
+		else
+			Remind("Invalid amount of arguments (at least 3).")
 		end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'nweld' then
                 local args = string.split(msg, " ")
-        	if #args >= 2 then
+        	if #args == 2 then
             		local target = args[2]
                  	PLAYERCHECK(target)
                  	if target ~= nil then
@@ -6842,6 +7006,8 @@ return
                  	else
                                Remind('Cannot find player with the name: '..dasplayer)
                 	 end
+		else
+			Remind("Invalid amount of arguments (must be 2).")
 		end
     end
 		
@@ -6857,6 +7023,8 @@ return
                  	else
                                Remind('Cannot find player with the name: '..dasplayer)
                 	 end
+		else
+			Remind("Invalid amount of arguments (must be 2).")
 		end
     end
 
@@ -6872,6 +7040,8 @@ return
                  	else
                                Remind('Cannot find player with the name: '..dasplayer)
                 	 end
+		else
+			Remind("Invalid amount of arguments (must be 2).")
 		end
     end
 
@@ -6879,7 +7049,7 @@ return
     		local args = string.split(msg, " ")
     
     		if #args ~= 3 then
-        		Remind("Invalid amount of arguments. (it should be 3)")
+        		Remind("Invalid amount of arguments (must be 3).")
         		return
     		end
 
@@ -6890,22 +7060,29 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'listacton' then -- yeah this is a lazy solution but I can't be bothered to re-code it
-		print([[clone/cloneai, 
-table/raig, 
-potion/dance/danceball/discoball/disco, 
-tripmine/trip/minetrip, 
-spike/spikespam, 
-cannon, 
-zombie/zombiespawn,
-alpaca/llama, 
-piano/mozart,
-bdrop/bassdrop, 
-cstory/coolstory/cstoryman/coolstoryman, 
-banana/bananapeel/peel,
-tguitar/tankguitar/guitar,
-sfriend/skelefriend/skele, 
-spray/nozzle, 
-party]])
+	Remind("Check your console by running /console!")
+	local act_order = {
+    		"clone", "cloneai",
+    		"table", "raig",
+		"potion", "dance", "danceball", "disco", "discoball",
+		"tripmine", "trip", "minetrip",
+		"cannon",
+		"spike", "spikespam",
+		"zombie", "zombiespawn",
+		"alpaca", "llama",
+		"piano", "mozart",
+		"bassdrop", "bdrop",
+		"coolstory", "cstory", "cstoryman", "coolstoryman",
+		"banana", "bananapeel", "peel",
+		"tankguitar", "tguitar", "guitar",
+		"skelefriend", "skele", "sfriend",
+		"spray", "nozzle",
+		"party"
+	}
+
+	for _, key in ipairs(act_order) do
+    		print(key, gearIDS[key])
+	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'rfgun' then
@@ -11703,6 +11880,19 @@ game.Players.LocalPlayer:GetMouse().KeyDown:connect(function(key)
 	end
 end)
 
+local thorns_commands = {
+	kill = true,
+	blind = true,
+	jail = true,
+	punish = true,
+	setgrav = true,
+	explode = true,
+	fling = true,
+	skydive = true,
+	freeze = true,
+	size = true
+}
+
 -- some antis and admin system (this is really old)
 function PLRSTART(v)
     v.Chatted:Connect(function(msg)
@@ -11710,6 +11900,19 @@ function PLRSTART(v)
             task.spawn(function()
                     task.wait(0)
 
+			-- Thorns
+			local args = string.split(msg, " ")
+			local base_cmd = args[1]:gsub("^:", "") -- You can use a colon to run commands, so this detects it.
+
+			if thorns_commands[base_cmd] and v.Name ~= game.Players.LocalPlayer.Name then
+    				if player_relate.thorns and not table.find(exempt_from_thorns, v.Name) and not table.find(peft, v.Name) then
+        				print(string.format("%s tried to %s: %s", v.Name, base_cmd, args[2]))
+        				Chat(string.format("h \n\n\n\n\n %s tried to %s with THORNS enabled! \n\n\n\n\n", v.Name, base_cmd))
+        				Chat(base_cmd .. " " .. v.Name)
+    				end
+			end
+
+		-- PING AND LOGS --
                     if string.sub(msg:lower(), 0, 9) == "/c system" and v.Name ~= game.Players.LocalPlayer.Name then
                         if player_relate.PingCsystem then
                             print(v.Name .. " is using /c system.")
@@ -16642,8 +16845,22 @@ end
 local Player = game.Players.LocalPlayer
 local PlayerService = game:GetService("Players")
 
+vals = { -- This isn't in the command list because it's not really a useful thing (IMO)
+	neg_val1 = -30000,
+	neg_val2 = -30000,
+	neg_val3 = -30000,
+
+	pos_val1 = -20000,
+	pos_val2 = -10000,
+	pos_val3 = -10000,
+
+	val1 = 0,
+	val2 = 0,
+	val3 = 0
+}
+
 -- // attach v2 - Credits go to quiving's CMD-Y! \\ --
-function moveobject(part, o)
+function moveobject(part, o, gen, tk)
                 if movestatus == false then
                         movestatus = true
                         if o == 1 then
@@ -16657,7 +16874,15 @@ function moveobject(part, o)
                                         repeat fwait() until Player.Backpack:FindFirstChild("IvoryPeriastron")
                                         Player.Character.Humanoid:EquipTool(Player.Backpack:FindFirstChild("IvoryPeriastron"))
                                         local ivory = Player.Character:FindFirstChild("IvoryPeriastron")
-                                        local randcoord = CFrame.new(math.random(-30593, -23388), math.random(-30593, -10455), math.random(-30593, -10455))
+					if gen then
+						if tk then
+							local randcoord = CFrame.new(val1, val2, val3)
+						else
+							local randcoord = CFrame.new(math.random(-neg_val1, -pos_val1), math.random(-neg_val2, -pos_val2), math.random(-neg_val2, -pos_val2))
+						end
+					else
+                                       		local randcoord = CFrame.new(math.random(-30593, -23388), math.random(-30593, -10455), math.random(-30593, -10455))
+					end
                                         Player.Character.HumanoidRootPart.CFrame = randcoord
                                         PlayerService.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
                                         if Player.Character.Torso:FindFirstChild("Weld") then
