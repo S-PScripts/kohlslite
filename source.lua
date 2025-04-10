@@ -2197,8 +2197,8 @@ ___  __    ________  ___  ___  ___       ________  ___       ___  _________  ___
 ]])
 
 print("- Information -")
-print("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by S_P.")
-Remind("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by S_P.")
+print("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by ScriptingProgrammer.")
+Remind("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by ScriptingProgrammer.")
 print("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
 Remind("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
 
@@ -11911,7 +11911,9 @@ function PLRSTART(v)
 			if thorns_commands[base_cmd] and v.Name ~= game.Players.LocalPlayer.Name then
     				if player_relate.thorns and not table.find(exempt_from_thorns, v.Name) and not table.find(peft, v.Name) then
         				print(string.format("%s tried to %s: %s", v.Name, base_cmd, args[2]))
-        				Chat(string.format("h \n\n\n\n\n %s tried to %s with THORNS enabled! \n\n\n\n\n", v.Name, base_cmd))
+					if player_relate.blwl_an then
+        					Chat(string.format("h \n\n\n\n\n %s tried to %s with THORNS enabled! \n\n\n\n\n", v.Name, base_cmd))
+					end
         				Chat(base_cmd .. " " .. v.Name)
     				end
 			end
@@ -11934,7 +11936,7 @@ function PLRSTART(v)
                     if (string.sub(msg:lower(), 0, 4) == "logs" or string.sub(msg:lower(), 0, 5) == ":logs") and v.Name ~= game.Players.LocalPlayer.Name then
                         if player_relate.PingLogs then
                             print(v.Name .. " is using logs.")
-                            Chat("h \n\n\n\n\n " .. v.Name .. " is using logs. \n\n\n\n\n")
+                            Chat("h \n\n\n\n\n " .. v.Name .. " is using logs. What are they trying to see? \n\n\n\n\n")
                         end
                         if player_relate.AntiLogs then
 			    	if player_relate.logmode == "default" then
