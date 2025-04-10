@@ -15127,7 +15127,7 @@ local UserInputService = game:GetService("UserInputService")
 UserInputService.WindowFocusReleased:Connect(function()
         task.wait(0)
             if auto_stuff.autoafk == true then
-                    Chat("name me ["..game.Players.LocalPlayer.Name.."]: AFK")
+                    Chat("name me ["..game.Players.LocalPlayer.Name.."]: AFK") -- CMD v3 actually has a custom AFK message
                     Chat("ff me")
                     Chat("god me")
 		    if autos.autoff == false then
