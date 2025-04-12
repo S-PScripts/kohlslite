@@ -886,7 +886,23 @@ local musictable = {
     ["138"] = {id = "89204425381132", name = "Someone You Loved"},
     ["139"] = {id = "76463442516219", name = "Death Bed - the apple of the anchicent china"},
     ["140"] = {id = "118939739460633", name = "Candyland"},
-    ["141"] = {id = "137233554633338", name = "useless"}
+    ["141"] = {id = "137233554633338", name = "useless"},
+    ["142"] = {id = "132973772452511", name = "Moscow"},
+    ["143"] = {id = "71934965392436", name = "MESMERIZER / メズマライザー (Clown Remix)"},
+    ["144"] = {id = "91502403840022", name = "APT"},
+    ["145"] = {id = "139197326967352", name = "Squabble Up"},
+    ["146"] = {id = "75420537442787", name = "Chill times"},
+    ["147"] = {id = "17422113153", name = "luvbackpack x sukoyomi - control"},
+    ["148"] = {id = "76578817848504", name = "☣JUMPSTYLE☣IST☣DER☣EINZIGE☣WAHRE☣LEBENSSINN☣"},
+    ["149"] = {id = "121336636707861", name = "Sunburst"},
+    ["150"] = {id = "99445078556609", name = "Hope"},
+    ["151"] = {id = "86271123924168", name = "MONTAGEM Uh Uh Ha Ha"},
+    ["152"] = {id = "79451196298919", name = "Infectious"},
+    ["153"] = {id = "106317184644394", name = "FEMININO DO VAPO FUNK"},
+    ["154"] = {id = "83471372738525", name = "It's Been So Long"},
+    ["155"] = {id = "105832154444494", name = "Funk do Goofy"},
+    ["156"] = {id = "110733765539890", name = "Five Nights at Freddy's"},
+    ["157"] = {id = "104541292443133", name = "VERTIGO FUNK"}
 }
 
 -- Saved gears
