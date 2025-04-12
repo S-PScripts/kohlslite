@@ -16907,13 +16907,15 @@ function moveobject(part, o, gen, tk)
 					if gen then
 						if tk then
 							local randcoord = CFrame.new(val1, val2, val3)
+							Player.Character.HumanoidRootPart.CFrame = randcoord
 						else
 							local randcoord = CFrame.new(math.random(-neg_val1, -pos_val1), math.random(-neg_val2, -pos_val2), math.random(-neg_val2, -pos_val2))
+							Player.Character.HumanoidRootPart.CFrame = randcoord
 						end
 					else
                                        		local randcoord = CFrame.new(math.random(-30593, -23388), math.random(-30593, -10455), math.random(-30593, -10455))
+						Player.Character.HumanoidRootPart.CFrame = randcoord
 					end
-                                        Player.Character.HumanoidRootPart.CFrame = randcoord
                                         PlayerService.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
                                         if Player.Character.Torso:FindFirstChild("Weld") then
                                                 Player.Character.Torso:FindFirstChild("Weld"):Destroy()
