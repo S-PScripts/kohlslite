@@ -883,6 +883,7 @@ local musictable = {
     ["135"] = {id = "9046476113", name = "Cyber Space"},
     ["136"] = {id = "1843404009", name = "Happy Song"},
     ["137"] = {id = "1845149698", name = "Seek & Destroy"},
+    ["138"] = {id = "89204425381132", name = "Someone You Loved"}
 }
 
 -- Saved gears
