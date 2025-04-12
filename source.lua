@@ -885,7 +885,8 @@ local musictable = {
     ["137"] = {id = "1845149698", name = "Seek & Destroy"},
     ["138"] = {id = "89204425381132", name = "Someone You Loved"},
     ["139"] = {id = "76463442516219", name = "Death Bed - the apple of the anchicent china"},
-    ["140"] = {id = "118939739460633", name = "Candyland"}
+    ["140"] = {id = "118939739460633", name = "Candyland"},
+    ["141"] = {id = "137233554633338", name = "useless"}
 }
 
 -- Saved gears
@@ -6051,7 +6052,7 @@ return
         	Chat("fix")
         	player_relate.musicsay = false
             	Chat("h \n\n\n\n\n "..custardmessage.." \n\n\n\n\n")
-		Chat(prefix.."gmusic87")
+		Chat(prefix.."gmusic139")
            	Chat("fogcolor 0 0 0")
 		Chat("time 0")
 		Chat("fogend 0")
