@@ -15386,13 +15386,17 @@ function FixPaint()
 		
 	end)
 
-	if game.Workspace.Terrain["_Game"].Workspace["Baseplate"] then
-		colorAPI.color(game.Workspace.Terrain["_Game"].Workspace["Baseplate"], colorAPI.transformToColor3(BrickColor.new("Bright green")))
-	end
+	pcall(function()
+		if game.Workspace.Terrain["_Game"].Workspace["Baseplate"] then
+			colorAPI.color(game.Workspace.Terrain["_Game"].Workspace["Baseplate"], colorAPI.transformToColor3(BrickColor.new("Bright green")))
+		end
+	end)
 
-	if game:GetService("Workspace").Terrain["_Game"].Admin.Regen then
-		colorAPI.color(game:GetService("Workspace").Terrain["_Game"].Admin.Regen, colorAPI.transformToColor3(BrickColor.new("Bright violet")))
-	end
+	pcall(function()
+		if game:GetService("Workspace").Terrain["_Game"].Admin.Regen then
+			colorAPI.color(game:GetService("Workspace").Terrain["_Game"].Admin.Regen, colorAPI.transformToColor3(BrickColor.new("Bright violet")))
+		end
+	end)
 
 	task.wait(1)
 	Chat("ungear me")
