@@ -561,6 +561,10 @@ local pgwl = {
 local exempt_from_thorns = {
 }
 
+-- Thorn Anti Temp (DO NOT EDIT THIS)
+local thorn_ig_anti = {
+}
+
 -- Perm thorn whitelist
 local peft = {
     "me_123eq",
@@ -10732,7 +10736,7 @@ connections[#connections + 1] =
     game:GetService("RunService").RenderStepped:Connect(function()
 		task.wait()
                 for i, v in ipairs(game.Players:GetPlayers()) do
-                        if v.Name ~= game.Players.LocalPlayer.Name then
+                        if v.Name ~= game.Players.LocalPlayer.Name and not table.find(thorn_ig_anti, v.Name) then
 
          		        if auto_stuff.autocharall == true or table.find(autochar, v.Name) then 
                                         if auto_stuff.autocharid ~= v.CharacterAppearanceId then
@@ -11930,11 +11934,18 @@ function PLRSTART(v)
 
 			if thorns_commands[base_cmd] and v.Name ~= game.Players.LocalPlayer.Name then
     				if player_relate.thorns and not table.find(exempt_from_thorns, v.Name) and not table.find(peft, v.Name) then
+					if not table.find(thorn_ig_anti, v.Name) then
+						table.insert(thorn_ig_anti, v.Name)
+					end
         				print(string.format("%s tried to %s: %s", v.Name, base_cmd, args[2]))
 					if player_relate.blwl_an then
         					Chat(string.format("h \n\n\n\n\n %s tried to %s with THORNS enabled! \n\n\n\n\n", v.Name, base_cmd))
 					end
         				Chat(base_cmd .. " " .. v.Name)
+			
+					task.delay(0.1, function()
+						table.remove(thorn_ig_anti, table.find(thorn_ig_anti, player))
+					end)
     				end
 			end
 
