@@ -5099,7 +5099,7 @@ return
 	
 		Chat("speed "..kickinplr.." 0")
 		for i = 1, 100 do -- Added missing lines for archival purposes
-			game.Players:Chat("gear me 1645056094")
+			Chat("gear me 1645056094")
 		end
 		task.wait()
 		game.Players.LocalPlayer.Character:PivotTo(kickin.Character:GetPivot())
@@ -6080,10 +6080,36 @@ return
 		Chat("time 0")
 		Chat("fogend 0")
 		Chat("paint all black")
-            	task.wait(1.5)
+            	task.wait(0.5)
 		crash_settings.skipwarncrash = true
             	DCrash()        
     end
+
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'icrash' then 
+Chat("h \n\n\n\n\n "..[[
+		
+               /                Your device ran into a problem and needs to restart.
+/             /                 We're just collecting some error info, and then we'll restart for you.
+             /
+             |                  ...% complete
+             |
+             |
+             |                  For more information about this issue and possible fixes, visit
+             |                  https://help.roblox.com/
+             \
+\             \                 If you call a support person, give them this info:
+               \                Stop code: COOKED_BY_KOHLSLITE
+            ]].. " \n\n\n\n\n")
+        	Chat("fix")
+        	player_relate.musicsay = false
+		Chat(prefix.."gmusic139")
+           	Chat("time 14")
+		Chat("fogcolor 55 120 191")
+		Chat("fogend 0")
+            	task.wait(0.5)
+		crash_settings.skipwarncrash = true
+            	DCrash()    
+end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'jcrash' then
         	Chat("h/lol get crashed nerd")
@@ -12832,7 +12858,7 @@ quotes = {
 -- LOG SPAM
 function LogSpam()
       for i = 1, 100 do
-          game.Players:Chat("reset "..quotes[math.random(1, #quotes)])
+          Chat("reset "..quotes[math.random(1, #quotes)])
       end
 end
 
