@@ -5082,8 +5082,8 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'seedkick' then -- could be better in a seedkick() function i guess
-		if 0 == 0 then return Remind("NO LONGER WORKS") end
-		Remind("This kick was found by Digitality.") 
+		if 0 == 0 then return Remind("NO LONGER WORKS") end -- This kick could still work but it was terrible to begin with
+		Remind("This kick was found by Digitality.")
 		local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 PLAYERCHECK(dasplayer)
 	
@@ -5098,6 +5098,9 @@ return
                 end
 	
 		Chat("speed "..kickinplr.." 0")
+		for i = 1, 100 do -- Added missing lines for archival purposes
+			game.Players:Chat("gear me 1645056094")
+		end
 		task.wait()
 		game.Players.LocalPlayer.Character:PivotTo(kickin.Character:GetPivot())
 		task.wait(.3)
@@ -5181,7 +5184,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'meshkick' then  -- mesh kick haha
-		if 0 == 0 then return Remind("NO LONGER WORKS") end -- best code ever (wth is this)
+		if 0 == 0 then return Remind("NO LONGER WORKS") end -- best code ever (what the heck is this)
 		local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 PLAYERCHECK(dasplayer)
 	
@@ -15219,8 +15222,8 @@ mouse.Button1Down:Connect(function()
                         end)
                 end
                 if plr ~= nil then
-                    if click_for_something then
-                            Chat(click_command .. " " ..plr.Name)
+                    if click_stuff.click_for_something then
+                            Chat(click_stuff.click_command .. " " ..plr.Name)
                     end
                 end
         end)
@@ -15228,6 +15231,12 @@ end)
 
 -- REGEN
 function Regen()
+	pcall(function()
+		if not workspace.Terrain._Game.Admin:FindFirstChild("Regen") then
+			return
+		end
+	end)
+
         if fireclickdetector then
                 fireclickdetector(game:GetService("Workspace").Terrain["_Game"].Admin.Regen.ClickDetector, 0)
         else 	
@@ -15235,7 +15244,7 @@ function Regen()
 	end
 end
 
--- regen auto
+-- Automatically regenerate the pad if someone steps on it. It's a pad ban for everyone.
 task.spawn(function()
      while true do
            task.wait(0)
