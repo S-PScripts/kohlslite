@@ -6951,7 +6951,29 @@ return
                 end
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'untoolban' then
+                local plrg = string.sub(msg:lower(), #prefix + 11)
+                if plrg == "" or plrg == "me" then
+                        game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+			Remind("Ungearbanned yourself.")
+                else 
+                        Ungearban(plrg)
+                end
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'gearban' then
+                 local dasplayer = string.sub(msg:lower(), #prefix + 9)
+                 PLAYERCHECK(dasplayer)
+                 if player ~= nil then
+                        xplayer = player
+                        xplr = cplr
+                        Gearban(xplayer, xplr)
+                 else
+                        Remind('Cannot find player with the name: '..dasplayer)
+                 end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'toolban' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 9)
                  PLAYERCHECK(dasplayer)
                  if player ~= nil then
