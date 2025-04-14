@@ -7,7 +7,7 @@
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.16
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.165
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -103,12 +103,12 @@ getgenv().scriptname = "KohlsLite"
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.16"
+getgenv().klversion = "X1.165"
 
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.16", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.165", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -5652,7 +5652,7 @@ return
 	Remind("The word is ".. wordle_stuff.wordle_word); print("Wordle word is ".. wordle_stuff.wordle_word)
    end
 
-   if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'goon' then -- joke
+   if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'goon' then -- joke... should I make this command work for anyone?
 		Remind("GOONER?")
 		local args = string.split(msg, " ")
 		if #args == 2 then
@@ -6743,7 +6743,6 @@ return
 		Remind("Painted the map!")
    end
 
-
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'colormap' then
 		local colourhere = string.sub(msg, #prefix + 10)
 		PaintMap(colourhere,"norm")
@@ -6822,12 +6821,18 @@ return
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'autoafk' then
         auto_stuff.autoafk = true
-	Remind("Auto afk is now enabled.")
+	Remind("Auto AFK is now enabled.")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unautoafk' then
         auto_stuff.autoafk = false
-	Remind("Auto afk is now disabled.")
+	Remind("Auto AFK is now disabled.")
+   end
+
+   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'afkmsg' then
+	local args = string.split(msg, " ")
+        auto_stuff.AFKMessage = table.concat(args, " ", 2)
+	Remind("AFK message set!")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antilag' then
