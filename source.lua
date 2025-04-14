@@ -86,6 +86,16 @@ Before you continue viewing the source, here are some things you might want to k
 TS2021 09/04/2025
 ]]
 
+-- GO TO LINE 450 FOR SETTINGS --
+
+--[[
+ ____  _____ _____ _   _ ____  
+/ ___|| ____|_   _| | | |  _ \ 
+\___ \|  _|   | | | | | | |_) |
+ ___) | |___  | | | |_| |  __/ 
+|____/|_____| |_|  \___/|_|    
+]]
+
 -- Script name = KohlsLite
 getgenv().scriptname = "KohlsLite"
 
@@ -146,9 +156,18 @@ end
 
 clipboard_available = setclipboard or toclipboard or set_clipboard or (Clipboard and Clipboard.set) -- From Infinite Yield
 
+--[[
+    _   _   _ _____ ___   ____ ____      _    ____  _   _ _____ ____  
+   / \ | | | |_   _/ _ \ / ___|  _ \    / \  / ___|| | | | ____|  _ \ 
+  / _ \| | | | | || | | | |   | |_) |  / _ \ \___ \| |_| |  _| | |_) |
+ / ___ \ |_| | | || |_| | |___|  _ <  / ___ \ ___) |  _  | |___|  _ < 
+/_/   \_\___/  |_| \___/ \____|_| \_\/_/   \_\____/|_| |_|_____|_| \_\
+
 -- This is an edited version of Knocks' autocrasher
 -- You can find the original here: https://github.com/blueskykah/Solinium/blob/main/Solinium%20Autocrasher
--- This needs to be in your autoexecute (could use queue_on_teleport maybe but ¯_(ツ)_/¯)
+-- This needs to be in your autoexecute (could use queue_on_teleport maybe but ¯\_(ツ)_/¯)
+]]
+
 function acperm()
 	task.spawn(function()
     		while true do
@@ -360,6 +379,14 @@ if getgenv().autocrasher then
    end
 end
 
+--[[
+ ____  _____ _____ _   _ ____  
+/ ___|| ____|_   _| | | |  _ \ 
+\___ \|  _|   | | | | | | |_) |
+ ___) | |___  | | | |_| |  __/ 
+|____/|_____| |_|  \___/|_|    
+]]
+
 -- Loader
 if not game:IsLoaded() then
     local notLoaded = Instance.new("Message")
@@ -403,7 +430,7 @@ local function Speak(msg)
     end
 end
 
--- Prefix checker
+-- Prefix checker (Do not edit!)
 local prefix 
 
 if getgenv().theprefix then
@@ -415,7 +442,7 @@ end
 -- Defaults (you can change these)
 local defaults = {".tnok", ".antikill me"} --".antimsg me"
 
--- Misc variables (ignore these they are for bug fixes)
+-- Misc variables (Do not edit these! They are for bug fixes... but they don't even work...).
 local backend_stuff = {
 	bending = false, -- ignore
 	ratelj = false, -- ignore
@@ -424,37 +451,11 @@ local backend_stuff = {
 	regfind = false
 }
 
--- Spoofers
-local editedstuff = {
-	-- Perm spoofer (speed)
-	editedspeedis = 16,
-	editedspeed = false,
-
-	-- Perm spoofer (jumppower) 
-	editedjumpis = 50,
-	editedjump = false
-}
-
--- Number settings
-local ex_settings = {
-	-- Boombox range
-	bgrange = 128,
-
-	-- Circlise range
-	circrad = 10,
-
-	-- Times the super command should run
-	amon = 100,
-
-	-- Spam command wait
-	spamwait = 0.01
-}
-
--- Stats when loading
+-- Stats when loading (Stats code at end)
 local Stats = {}
 Stats.starttime = os.clock()
 
--- Start up scripts
+-- Start up scripts (Do not edit!)
 local function startupScripts()
         if not getgenv().autoruncmds then
         	for i = 1, #defaults do
@@ -466,6 +467,32 @@ local function startupScripts()
             	end
         end
 end
+
+-- Log Trap
+pcall(function()
+	local umwhatdasigma = game:HttpGet("https://pastebin.com/raw/d7eTDKbJ") -- oofkohls
+end)
+		
+-- local permpassid = 66254 or 64354 -> NBC, BC
+-- local personpassid = 35748 or 37127 --> NBC, BC
+
+-- Mover 
+local Mover = {}
+
+Mover.Attached = {Value = false}
+Mover.Finished = {Value = false}
+
+Mover.Moving = false
+Mover.PosSet = false
+
+--[[
+ _   _ ____  _____ ____    _     ___ ____ _____ ____  
+| | | / ___|| ____|  _ \  | |   |_ _/ ___|_   _/ ___| There are some more in the Settings section
+| | | \___ \|  _| | |_) | | |    | |\___ \ | | \___ \ 
+| |_| |___) | |___|  _ <  | |___ | | ___) || |  ___) |
+ \___/|____/|_____|_| \_\ |_____|___|____/ |_| |____/ 
+
+]]
 
 -- Serverlocked users
 local blacklist = {
@@ -618,6 +645,15 @@ local atprogperms = {
 -- New users get blacklisted (prevent crashers)
 local newplrslocked = {}
 
+--[[
+ ____  _____ _____ _____ ___ _   _  ____ ____  
+/ ___|| ____|_   _|_   _|_ _| \ | |/ ___/ ___| 
+\___ \|  _|   | |   | |  | ||  \| | |  _\___ \ 
+ ___) | |___  | |   | |  | || |\  | |_| |___) |
+|____/|_____| |_|   |_| |___|_| \_|\____|____/ 
+
+]]
+
 -- Server-centred stuff
 mainbar_stuff = {
 	-- Normal serverlock
@@ -691,6 +727,32 @@ local gamepasses = {
 	personsusers = {}
 }
 
+-- Spoofers
+local editedstuff = {
+	-- Perm spoofer (speed)
+	editedspeedis = 16,
+	editedspeed = false,
+
+	-- Perm spoofer (jumppower) 
+	editedjumpis = 50,
+	editedjump = false
+}
+
+-- Number settings
+local ex_settings = {
+	-- Boombox range
+	bgrange = 128,
+
+	-- Circlise range
+	circrad = 10,
+
+	-- Times the super command should run
+	amon = 100,
+
+	-- Spam command wait
+	spamwait = 0.01
+}
+
 -- Do something to player upon them joining/do something to player in server upon booting the script
 local list_on_sight = {
 	-- Rocket kick the player
@@ -726,23 +788,348 @@ local list_on_sight = {
     	gb_on_sight = {}
 }
 
--- From Infinite Yield
-queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
-httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
+-- Anti logs
+local antimlog = false -- for music
+local antiglog = false -- for gears [unused]
+local anticlog = false -- for chars [unused]
 
-local TeleportCheck = false
-game.Players.LocalPlayer.OnTeleport:Connect(function(State)
-	if KeepKL and (not TeleportCheck) and queueteleport then
-		TeleportCheck = true
-		queueteleport("loadstring(game:HttpGet('kohlslite.pages.dev/source.lua'))()")
-	end
-end)
+-- Users that can't use the admin pads
+local padbanned = {} 
+
+-- Keybinds
+local keybinds = { 
+	housekeybind = "h", -- Teleport to the house
+	rekeybind = "r", -- Reset/respawn
+	flykeybind = "f", -- Fly (KAH Fly)
+	crashkey = "e", -- Crash the server
+	
+	keybindz = true, -- Enable the keybinds
+	keybindz_unsafe = false -- Enable crash keybind, risky!
+}
+
+-- Clicking (bizzare recode, I'm probably the first one to make a dynamic click)
+local click_stuff = {
+	-- Click and it'll run the command below
+	click_for_something = false,
+
+	-- The command that should be run on the thing clicked in question
+	click_command = "explode"
+}
+
+-- Admin related
+local admin_stuff = {
+	-- Grab a pad forever!
+	perm = false,
+	perm2 = false,
+
+	-- Grab all the pads forever!
+	loopgrab = false,
+	loopgrab2 = false,
+
+	-- Everyone in the server uses your admin to run commands!
+	alladmin = false,
+
+	-- Resets the admin pads every time someone gets a pad
+	SRegen = false,
+
+	-- Pad reinforcements (only 1 pad can be collected per player)
+	padreinforcements = false 
+}
+
+-- All admin but for individual users
+local FAdmins = {}
+
+-- Antis (gears)
+local gear_antis = {
+	-- Stop users from crashing with gears
+	anticrash = true,
+
+	-- Stop users from using gears
+	antigear = false,
+
+	-- Stop users from using the gearban gear, Portable Justice
+	antigb = true,
+
+	-- Stop users from using the Paint Bucket
+	antipaint = false,
+
+	-- Stop users from using the Ivory Periastron, the attach gear
+	antiattach2 = false,
+
+	-- Stop users from using ANY periastron, including the Ivory
+	antiperi = true,
+
+	-- Stop users from using the ray gun gears
+	antiraygun = false,
+	
+	-- Stop users from using blacklisted tools that aren't part of the antis above
+	noblt = false
+}
+
+-- Antis (workspace and other stuff)
+local ws_antis = {
+	-- No 'flash'
+	antiflash = false,
+	
+	-- No 'disco'
+	antidisco = false,
+	
+	-- No 'fogend'
+	antifogend = false,
+
+	-- No 'fogstart'
+	antifogstart = false,
+
+	-- No 'fogcolor'
+	antifogcolor = false,
+
+	-- No 'ambient'
+	antiambient = false,
+
+	-- No 'outdoorambient'
+	antioutamb = false,
+
+	-- No 'brightness'
+	antibrightness = false,
+	
+	-- No 'time'
+	antitime = false,
+
+	-- No light from the ivory
+	antiilight = false,
+
+	-- No Bite Plant
+	antiplant = false,
+
+	-- No Eggs
+	antiegg = false,
+
+	-- No tripmine
+	antitripmine = true,
+	
+	-- Spams h messages for everyone lagging them
+	antichat = false,
+	
+	-- Stop users saying attach commands
+	antiattach = false
+}
+
+-- Auto stuff, things announced, pings
+local player_relate = {
+	-- Automatically check for player's gamepasses
+	autogpcheck = false,
+
+	-- Auto gearban players when they join
+	autogb = false,
+
+	-- NOOB Detector - they aren't getting away with 'poop' player...
+	noobdetect = true,
+
+	-- Welcome/leave message when player joins/leaves
+	welcomemsg = true, -- No, I'm not going to be fancy and call it 'greetings'
+
+	-- Announces to everyone when gear antis are triggered (not when it is turned on and off)
+	crash_an = false,
+
+	-- Annnounces to everyone when a player is blacklisted, whitelisted etc.
+	blwl_an = true,
+
+	-- Announces to everyone that a person is using LOGS
+	PingLogs = false,
+
+	-- Stops users from checking logs if they say it
+	AntiLogs = false,
+	logmode = "default", -- How it should stop the user from seeing logs - "crack" uses the oofkohls gibberish
+
+	-- Announces to everyone that a person is using /c system
+	PingCsystem = true,
+
+	-- Thorns (let's say someone does "kill (...)". The user who said it gets killed)
+	thorns = false,
+	
+	-- Announces the music for gmusic and song
+	musicsay = true
+
+}
+
+-- Visualiser
+local vishub = {
+	VisAmount = 20, -- Amount of parts
+	VisMode = 0, -- There are a few modes!
+	VisColour = Color3.new(255,255,255), -- The base colour of the visualiser parts
+	VisRadius = 20, -- The radius of the visualiser
+	VisOrbiter = game.Players.LocalPlayer -- Who it should orbit around
+}
+
+local Connections = {
+    Building = {}, -- If it ever comes out...
+    Drawing = {},
+}
+
+-- Drawing
+drawState = false
+local brushSize = 1 -- (part/x/x/x)
+
+local partColourer = Instance.new("Part")
+partColourer.Color = Color3.new(1,1,1)
+local selectedColour = partColourer.Color
+
+kahinstance = workspace.Terrain:FindFirstChild("_Game"):FindFirstChild("Folder")
+local VisBindable = Instance.new("BindableEvent")
+
+-- I will be rewriting the anti system... or not.
+antis = {
+    antiblind = false,
+    antivoid = false,
+    antiskydive = false,
+    antigrayscale = false,
+    antiaddon = false,
+    anticlone = false,
+    antidog = false,
+    antifire = false,
+    antifreeze = false,
+    antifly = false,
+    antinoclip = false,
+    antiff = false,
+    antiglow = false,
+    antihealthchange = false,
+    antijail = false,
+    antikill = false,
+    antimessage = false,
+    antiname = false,
+    antichar = false,
+    antiparticles = false,
+    antipunish = false,
+    antirocket = false,
+    antisit = false,
+    antiseizure = false,
+    antismoke = false,
+    antisparkles = false,
+    antispeed = false,
+    antispin = false,
+    antistun = false,
+    antisetgrav = false,
+    antiswag = false,
+    antimesh = true,
+    antifling = false
+}
+
+-- Prepartion
+local antisall = { -- This is everyone except you
+    antiblind = false,
+    antivoid = false,
+    antiskydive = false,
+    antigrayscale = false,
+    antiaddon = false,
+    anticlone = false,
+    antidog = false,
+    antifire = false,
+    antifreeze = false,
+    antifly = false,
+    antinoclip = false,
+    antiff = false,
+    antiglow = false,
+    antihealthchange = false,
+    antijail = false,
+    antikill = false,
+    antimessage = true,
+    antiname = false,
+    antichar = false,
+    antiparticles = false,
+    antipunish = false,
+    antirocket = false,
+    antisit = false,
+    antiseizure = false,
+    antismoke = false,
+    antisparkles = false,
+    antispeed = false,
+    antispin = false,
+    antistun = false,
+    antisetgrav = false,
+    antiswag = false,
+    antimesh = true,
+    antifling = false
+}
+
+-- This is NOT implemented due to lack of interest, you'll have to do that yourself.
+local antisplayers = { -- Antis for specific players
+    antiblind = {},
+    antivoid = {},
+    antiskydive = {},
+    antigrayscale = {},
+    antiaddon = {},
+    anticlone = {},
+    antidog = {},
+    antifire = {},
+    antifreeze = {},
+    antifly = {},
+    antinoclip = {},
+    antiff = {},
+    antiglow = {},
+    antihealthchange = {},
+    antijail = {},
+    antikill = {},
+    antimessage = {},
+    antiname = {},
+    antichar = {},
+    antiparticles = {},
+    antipunish = {},
+    antirocket = {},
+    antisit = {},
+    antiseizure = {},
+    antismoke = {},
+    antisparkles = {},
+    antispeed = {},
+    antispin = {},
+    antistun = {},
+    antisetgrav = {},
+    antiswag = {},
+    antimesh = {},
+    antifling = {}
+}
+
+autos = {
+	autoff = false,
+	autoffa = false,
+	autogod = false,
+	-- autogoda = false,
+	tempautoff = false,
+	tempautogod = false
+}
+
+-- Settings related to crash
+local crash_settings = {
+	-- Blacklist users who try to crash. If emranticrash is turned on, it will serverlock.
+	autoblvgc = false, 
+
+	-- Like normal anticrash but it punishes and ungears everyone.
+	emranticrash = false,
+	
+	-- Skip anti crash warning
+	skipwarncrash = true,
+
+	-- The type of crash you want to default to
+	crash_type = "dog"
+}
+
+--[[
+ _     ___ ____ _____ ____  
+| |   |_ _/ ___|_   _/ ___| There is no way to add/remove songs and chars in the actual script.
+| |    | |\___ \ | | \___ \ You will need to edit the source.
+| |___ | | ___) || |  ___) |
+|_____|___|____/ |_| |____/ 
+]]
 
 -- Variables for moving
 local movestatus = false
 Kohls = workspace.Terrain:WaitForChild("_Game")
 Admin = Kohls:WaitForChild("Admin")
 Pads = Admin:WaitForChild("Pads"):GetChildren()
+
+-- Variables for moving [old]
+Game_Folder = game:GetService("Workspace").Terrain["_Game"]
+Workspace_Folder = Game_Folder.Workspace 
+Admin_Folder = Game_Folder.Admin
 
 -- These are all of the music ids I've saved in a musiclist.
 -- YOU SHOULD DO song instead of gmusic FOR BETTER ONES THESE ARE ONLY ONES I GOT FROM VIDEOS AND THEY SUCK
@@ -1864,350 +2251,6 @@ local ogcframes = {
                 ["Part51"] = {-92.0770035, 0.900000036, 7.47600031, 1, 0, 0, 0, -1, 0, 0, 0, -1}
 }
 
--- Settings related to crash
-local crash_settings = {
-	-- Blacklist users who try to crash. If emranticrash is turned on, it will serverlock.
-	autoblvgc = false, 
-
-	-- Like normal anticrash but it punishes and ungears everyone.
-	emranticrash = false,
-	
-	-- Skip anti crash warning
-	skipwarncrash = true,
-
-	-- The type of crash you want to default to
-	crash_type = "dog"
-}
-
--- Anti logs
-local antimlog = false -- for music
-local antiglog = false -- for gears [unused]
-local anticlog = false -- for chars [unused]
-
--- Admin stuff relating to users
-local padbanned = {} 
-local padreinforcements = false 
-
--- Variables for moving [old]
-Game_Folder = game:GetService("Workspace").Terrain["_Game"]
-Workspace_Folder = Game_Folder.Workspace 
-Admin_Folder = Game_Folder.Admin
-
--- Keybinds
-local keybinds = { 
-	housekeybind = "h", -- Teleport to the house
-	rekeybind = "r", -- Reset/respawn
-	flykeybind = "f", -- Fly (KAH Fly)
-	crashkey = "e", -- Crash the server
-	
-	keybindz = true, -- Enable the keybinds
-	keybindz_unsafe = false -- Enable crash keybind, risky!
-}
-
--- Clicking (bizzare recode, I'm probably the first one to make a dynamic click)
-local click_stuff = {
-	-- Click and it'll run the command below
-	click_for_something = false,
-
-	-- The command that should be run on the thing clicked in question
-	click_command = "explode"
-}
-
--- Admin related
-local admin_stuff = {
-	-- Grab a pad forever!
-	perm = false,
-	perm2 = false,
-
-	-- Grab all the pads forever!
-	loopgrab = false,
-	loopgrab2 = false,
-
-	-- Everyone in the server uses your admin to run commands!
-	alladmin = false,
-
-	-- Resets the admin pads every time someone gets a pad
-	SRegen = false
-}
-
--- All admin but for individual users
-local FAdmins = {}
-
--- Antis (gears)
-local gear_antis = {
-	-- Stop users from crashing with gears
-	anticrash = true,
-
-	-- Stop users from using gears
-	antigear = false,
-
-	-- Stop users from using the gearban gear, Portable Justice
-	antigb = true,
-
-	-- Stop users from using the Paint Bucket
-	antipaint = false,
-
-	-- Stop users from using the Ivory Periastron, the attach gear
-	antiattach2 = false,
-
-	-- Stop users from using ANY periastron, including the Ivory
-	antiperi = true,
-
-	-- Stop users from using the ray gun gears
-	antiraygun = false,
-	
-	-- Stop users from using blacklisted tools that aren't part of the antis above
-	noblt = false
-}
-
--- Antis (workspace and other stuff)
-local ws_antis = {
-	-- No 'flash'
-	antiflash = false,
-	
-	-- No 'disco'
-	antidisco = false,
-	
-	-- No 'fogend'
-	antifogend = false,
-
-	-- No 'fogstart'
-	antifogstart = false,
-
-	-- No 'fogcolor'
-	antifogcolor = false,
-
-	-- No 'ambient'
-	antiambient = false,
-
-	-- No 'outdoorambient'
-	antioutamb = false,
-
-	-- No 'brightness'
-	antibrightness = false,
-	
-	-- No 'time'
-	antitime = false,
-
-	-- No light from the ivory
-	antiilight = false,
-
-	-- No Bite Plant
-	antiplant = false,
-
-	-- No Eggs
-	antiegg = false,
-
-	-- No tripmine
-	antitripmine = true,
-	
-	-- Spams h messages for everyone lagging them
-	antichat = false,
-	
-	-- Stop users saying attach commands
-	antiattach = false
-}
-
--- Auto stuff, things announced, pings
-local player_relate = {
-	-- Automatically check for player's gamepasses
-	autogpcheck = false,
-
-	-- Auto gearban players when they join
-	autogb = false,
-
-	-- NOOB Detector - they aren't getting away with 'poop' player...
-	noobdetect = true,
-
-	-- Welcome/leave message when player joins/leaves
-	welcomemsg = true, -- No, I'm not going to be fancy and call it 'greetings'
-
-	-- Announces to everyone when gear antis are triggered (not when it is turned on and off)
-	crash_an = false,
-
-	-- Annnounces to everyone when a player is blacklisted, whitelisted etc.
-	blwl_an = true,
-
-	-- Announces to everyone that a person is using LOGS
-	PingLogs = false,
-
-	-- Stops users from checking logs if they say it
-	AntiLogs = false,
-	logmode = "default", -- How it should stop the user from seeing logs - "crack" uses the oofkohls gibberish
-
-	-- Announces to everyone that a person is using /c system
-	PingCsystem = true,
-
-	-- Thorns (let's say someone does "kill (...)". The user who said it gets killed)
-	thorns = false,
-	
-	-- Announces the music for gmusic and song
-	musicsay = true
-
-}
-
--- I will be rewriting the anti system... or not.
-antis = {
-    antiblind = false,
-    antivoid = false,
-    antiskydive = false,
-    antigrayscale = false,
-    antiaddon = false,
-    anticlone = false,
-    antidog = false,
-    antifire = false,
-    antifreeze = false,
-    antifly = false,
-    antinoclip = false,
-    antiff = false,
-    antiglow = false,
-    antihealthchange = false,
-    antijail = false,
-    antikill = false,
-    antimessage = false,
-    antiname = false,
-    antichar = false,
-    antiparticles = false,
-    antipunish = false,
-    antirocket = false,
-    antisit = false,
-    antiseizure = false,
-    antismoke = false,
-    antisparkles = false,
-    antispeed = false,
-    antispin = false,
-    antistun = false,
-    antisetgrav = false,
-    antiswag = false,
-    antimesh = true,
-    antifling = false
-}
-
--- Prepartion
-local antisall = { -- This is everyone except you
-    antiblind = false,
-    antivoid = false,
-    antiskydive = false,
-    antigrayscale = false,
-    antiaddon = false,
-    anticlone = false,
-    antidog = false,
-    antifire = false,
-    antifreeze = false,
-    antifly = false,
-    antinoclip = false,
-    antiff = false,
-    antiglow = false,
-    antihealthchange = false,
-    antijail = false,
-    antikill = false,
-    antimessage = true,
-    antiname = false,
-    antichar = false,
-    antiparticles = false,
-    antipunish = false,
-    antirocket = false,
-    antisit = false,
-    antiseizure = false,
-    antismoke = false,
-    antisparkles = false,
-    antispeed = false,
-    antispin = false,
-    antistun = false,
-    antisetgrav = false,
-    antiswag = false,
-    antimesh = true,
-    antifling = false
-}
-
--- This is NOT implemented due to lack of interest, you'll have to do that yourself.
-local antisplayers = { -- Antis for specific players
-    antiblind = {},
-    antivoid = {},
-    antiskydive = {},
-    antigrayscale = {},
-    antiaddon = {},
-    anticlone = {},
-    antidog = {},
-    antifire = {},
-    antifreeze = {},
-    antifly = {},
-    antinoclip = {},
-    antiff = {},
-    antiglow = {},
-    antihealthchange = {},
-    antijail = {},
-    antikill = {},
-    antimessage = {},
-    antiname = {},
-    antichar = {},
-    antiparticles = {},
-    antipunish = {},
-    antirocket = {},
-    antisit = {},
-    antiseizure = {},
-    antismoke = {},
-    antisparkles = {},
-    antispeed = {},
-    antispin = {},
-    antistun = {},
-    antisetgrav = {},
-    antiswag = {},
-    antimesh = {},
-    antifling = {}
-}
-
-autos = {
-	autoff = false,
-	autoffa = false,
-	autogod = false,
-	-- autogoda = false,
-	tempautoff = false,
-	tempautogod = false
-}
-
--- Log Trap
-pcall(function()
-	local umwhatdasigma = game:HttpGet("https://pastebin.com/raw/d7eTDKbJ") -- oofkohls
-end)
-		
--- local permpassid = 66254 or 64354 -> NBC, BC
--- local personpassid = 35748 or 37127 --> NBC, BC
-
--- Mover 
-local Mover = {}
-
-Mover.Attached = {Value = false}
-Mover.Finished = {Value = false}
-
-Mover.Moving = false
-Mover.PosSet = false
-
--- Visualiser
-local vishub = {
-	VisAmount = 20,
-	VisMode = 0,
-	VisColour = Color3.new(255,255,255),
-	VisRadius = 20,
-	VisOrbiter = game.Players.LocalPlayer
-}
-
-local Connections = {
-    Building = {},
-    Drawing = {},
-}
-
--- Drawing
-drawState = false
-local brushSize = 1
-
-local partColourer = Instance.new("Part")
-partColourer.Color = Color3.new(1,1,1)
-local selectedColour = partColourer.Color
-
-kahinstance = workspace.Terrain:FindFirstChild("_Game"):FindFirstChild("Folder")
-local VisBindable = Instance.new("BindableEvent")
-
 print([[
 
 ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
@@ -2283,6 +2326,14 @@ print("\n")
 
 
 Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
+
+--[[
+  ____ ___  __  __ __  __    _    _   _ ____    _     ___ ____ _____ 
+ / ___/ _ \|  \/  |  \/  |  / \  | \ | |  _ \  | |   |_ _/ ___|_   _|
+| |  | | | | |\/| | |\/| | / _ \ |  \| | | | | | |    | |\___ \ | |  
+| |__| |_| | |  | | |  | |/ ___ \| |\  | |_| | | |___ | | ___) || |  
+ \____\___/|_|  |_|_|  |_/_/   \_\_| \_|____/  |_____|___|____/ |_|  
+]]
 
 game.Players.LocalPlayer.Chatted:Connect(function(msg)
         task.wait(0)
@@ -6377,7 +6428,7 @@ end
                 	Chat("h \n\n\n\n\n Pad reinforcements are on. \n\n\n\n\n")
 		end
 	end
-        padreinforcements = true
+        admin_stuff.padreinforcements = true
 	Remind("Pad reinforcements are on.")
     end
 
@@ -6389,7 +6440,7 @@ end
                 	Chat("h \n\n\n\n\n Pad reinforcements are off! \n\n\n\n\n")
 		end
 	end
-        padreinforcements = false
+        admin_stuff.padreinforcements = false
 	Remind("Pad reinforcements are off.")
     end
 
@@ -10022,6 +10073,14 @@ return
 
 end)
 
+--[[
+  ____ ___  ____  _____ 
+ / ___/ _ \|  _ \| ____|
+| |  | | | | | | |  _|  
+| |__| |_| | |_| | |___ 
+ \____\___/|____/|_____|
+]]
+
 -- PLAYER CHECK (I hate this thing so much)
 function PLAYERCHECK(plr, rt)
   for i, v in pairs(game.Players:GetPlayers()) do
@@ -12605,10 +12664,10 @@ task.spawn(function()
                         end
                 end
 
-                if padreinforcements == true then
+                if admin_stuff.padreinforcements == true then
                         for i,v in pairs(game.Players:GetChildren()) do
                                 local times = 0
-                                for i,pad in pairs(game:GetService("Workspace").Terrain["_Game"].Admin.Pads:GetDescendants()) do
+                                for i, pad in pairs(game:GetService("Workspace").Terrain["_Game"].Admin.Pads:GetDescendants()) do
                                         if pad.Name == v.Name.."'s admin" then
                                                 times = times + 1
                                         end
@@ -12623,6 +12682,22 @@ task.spawn(function()
                         end
                 end
         end
+end)
+
+-- Automatically regenerate the pad if someone steps on it. It's a pad ban for everyone.
+task.spawn(function()
+     while true do
+           task.wait(0)
+           if admin_stuff.SRegen == true then
+                for i,v in pairs(game.Players:GetChildren()) do
+                                for i,pad in pairs(game:GetService("Workspace").Terrain["_Game"].Admin.Pads:GetDescendants()) do
+                                        if pad.Name == v.Name.."'s admin" then
+                                               Regen()
+                                        end
+                                end
+                end
+           end
+     end
 end)
 
 -- ALL PADS
@@ -15353,22 +15428,6 @@ function Regen()
 		-- Remind("Sorry, your exploit does not support regenerating the admin pads (fireclickdetector)")
 	end
 end
-
--- Automatically regenerate the pad if someone steps on it. It's a pad ban for everyone.
-task.spawn(function()
-     while true do
-           task.wait(0)
-           if admin_stuff.SRegen == true then
-                for i,v in pairs(game.Players:GetChildren()) do
-                                for i,pad in pairs(game:GetService("Workspace").Terrain["_Game"].Admin.Pads:GetDescendants()) do
-                                        if pad.Name == v.Name.."'s admin" then
-                                               Regen()
-                                        end
-                                end
-                end
-           end
-     end
-end)
 
 -- FAST PADS (don't know why you'd need this)
 function FastPads()
@@ -18143,6 +18202,19 @@ if getgenv().kohlsgui then
 end
 
 Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
+
+-- From Infinite Yield
+queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
+
+local TeleportCheck = false
+game.Players.LocalPlayer.OnTeleport:Connect(function(State)
+	if mainbar_stuff.KeepKL and (not TeleportCheck) and queueteleport then
+		TeleportCheck = true
+		queueteleport("loadstring(game:HttpGet('kohlslite.pages.dev/source.lua'))()")
+	end
+end)
+
 --Remind("HUGE UPDATES - BUGS MAY EXIST 2/4/25", 5)
 
 --[[
