@@ -7,7 +7,7 @@
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.15
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.16
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -103,12 +103,12 @@ getgenv().scriptname = "KohlsLite"
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.15"
+getgenv().klversion = "X1.16"
 
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.15", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.16", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -2490,7 +2490,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		local thorn_to_add = args[2]
 		local thorn_status = args[3]
 		if #args ~= 3 then
-			return Remind("You must set the status of the thorn (true/false).")
+			return Remind("Invalid amount of arguments (must be 3 [2nd = thorn to add, 3rd = thorn status (true/false)]).")
 		end
 		if thorns_commands[thorn_to_add] == nil then
         		thorns_commands[thorn_to_add] = thorn_status
@@ -2505,7 +2505,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		local args = string.split(msg, " ")
 		local thorn_to_remove = args[2]
 		if #args ~= 2 then
-			return Remind("Invalid amount of arguments (must be 2).")
+			return Remind("Invalid amount of arguments (must be 2 [2nd = thorn to remove]).")
 		end
     		if thorns_commands[thorn_to_remove] ~= nil then
         		thorns_commands[thorn_to_remove] = nil
@@ -2526,7 +2526,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			if thorns_commands[thorn_to_change] ~= nil then
 				if thorn_status == "true" or thorn_status == "on" then
 					thorns_commands[thorn_to_change] = true
-				elseif thorn_status == "false" then
+				elseif thorn_status == "false" or thorn_status == "off" then
 					thorns_commands[thorn_to_change] = false
 				else
 					Remind("Invalid status! Use 'true' or 'false'.")
@@ -2545,7 +2545,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			end
 
 		else
-			Remind("Invalid amount of arguments (must be 2 or 3).")
+			Remind("Invalid amount of arguments (must be 2 [2nd = thorn name] or 3 [2nd = thorn name, 3rd = on/off]).")
 		end
 	end
 
@@ -4115,7 +4115,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         local charpos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
         local circus = game.Players:GetUserIdFromNameAsync(specialid)
 	if #args ~= 3 then
-		return Remind("Invalid amount of arguments given (must be 3).")
+		return Remind("Invalid amount of arguments given (must be 3 [2nd = player to char, 3rd = char name]).")
 	end
         Chat("char " .. target .. " " .. circus);task.wait(0.5)
         if target == "me" then -- it tps you back to your old position if you state that you're the person to have the char done
@@ -6621,7 +6621,7 @@ return
 				Remind('Cannot find player with the name: '..dasplayer)
 			end		
 		else
-			Remind("Invalid amount of arguments. (it should be 3)")
+			Remind("Invalid amount of arguments (must be 3 [2nd = player, 3rd = pp size]).")
 		end
     end
 
@@ -6641,7 +6641,7 @@ return
 				Remind('Cannot find player with the name: '..dasplayer)
 			end		
 		else
-			Remind("Invalid amount of arguments. (it should be 2)")
+			Remind("Invalid amount of arguments (must be 2 [2nd = player name]).")
 		end
     end
 
@@ -6909,9 +6909,8 @@ return
 			else
 				Remind("Argument 2 invalid [must be house/reset/fly/crash]")
 			end
-				
 		else
-			Remind("Invalid amount of arguments (must be 3)")
+			Remind("Invalid amount of arguments (must be 3 [2nd = keybind name, 3rd = new keybind])")
 		end
     end
 
@@ -7068,19 +7067,19 @@ return
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'rnuke' then
 		local args = string.split(msg, " ")
         	if #args == 3 then
-                	range = tonumber(args[2])
-			amount = tonumber(args[3])
+                	local range = tonumber(args[2])
+			local amount = tonumber(args[3])
 			RNuke(amount, range)
 		else
-			Remind("Invalid amount of arguments. (it should be 3)")
+			Remind("Invalid amount of arguments (must be 3 [range, amount]).")
 		end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'dnuke' then
  		local args = string.split(msg, " ")
         	if #args == 3 then
-            		local amount = tonumber(args[2])
-			local range = tonumber(args[3])
+            		local range = tonumber(args[2])
+			local amount = tonumber(args[3])
 			local user = nil
 			RoNuke(amount, range, user)
 		elseif #args == 2 then
@@ -7092,10 +7091,10 @@ return
 				user = cplr
 				RoNuke(amount, range, user)
 			else
-				Remind("Player doesn't exist!")
+				Remind('Cannot find player with the name: '..tar)
 			end
 		else
-			Remind("Invalid amount of arguments. (it should be 2 or 3)")
+			Remind("Invalid amount of arguments (must be 2 [player] or 3 [range, amount]).")
 		end
     end
 
@@ -7116,15 +7115,96 @@ return
                                Remind('Cannot find player with the name: '..dasplayer)
                         end
 		else
-			Remind("Invalid amount of arguments. (it should be 1 or 2)")
+			Remind("Invalid amount of arguments (must be 1 or 2).")
 		end
+    end
+		
+    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'play' then
+	local args = string.split(msg, " ")
+        if #args == 3 then
+		if args[2] == "guitar" then
+			local Note = args[3]
+	    		pcall(function()
+        			local Tool = GetGuitar()
+    				Tool.Handle:FindFirstChild(Note):Play()
+        		end)
+	    		wait(2/15)
+		elseif args[2] == "bongos" then
+			soundTableBongo = {
+				["b"] = "LeftBongoLowSound",
+				["h"] = "LeftBongoHighSound",
+				["m"] = "RightBongoLowSound",
+				["j"] = "RightBongoHighSound"
+			}
+
+			local str = args[3]
+			for i = 1, string.len(str) do
+	    			pcall(function()
+	    				PlayBongo(soundTableBongo[str:sub(i,I)])
+				end)
+				wait(2/15)
+			end
+		elseif args[2] == "drum" then
+			soundTableBongo = {
+				["a"] = "HiHat",
+				["b"] = "Snare",
+				["c"] = "Tom2",
+				["d"] = "Tom3",
+				["e"] = "Crash",
+				["f"] = "Tom1",
+				["g"] = "Kick",
+				["h"] = "Ride"
+			}
+
+			local str = args[3]
+			for i = 1, string.len(str) do
+	    			pcall(function()
+	    				PlayDrum(soundTableBongo[str:sub(i,I)])
+				end)
+				wait(2/15)
+			end
+		else
+			Remind("Invalid instrument chosen. Run hplay for more details.")
+		end
+	else
+		Remind("Invalid amount of arguments (must be 3). Run hplay for more details.")
+        end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'hplay' then
+		Remind("Check your console by running /console!")
+		print("play [instrument] [notes, no spaces]")
+		print("Guitar: Note")
+		print([[Bongos:
+				["b"] = "LeftBongoLowSound",
+				["h"] = "LeftBongoHighSound",
+				["m"] = "RightBongoLowSound",
+				["j"] = "RightBongoHighSound"]])
+		print([[Drums:
+				["a"] = "HiHat",
+				["b"] = "Snare",
+				["c"] = "Tom2",
+				["d"] = "Tom3",
+				["e"] = "Crash",
+				["f"] = "Tom1",
+				["g"] = "Kick",
+				["h"] = "Ride"]])
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'rcannon' then
 		rcannon("def")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'railcannon' then
+		rcannon("def")
+    end
+
+
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'wrcannon' then
+		rcannon("wide")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'widercannon' then
 		rcannon("wide")
     end
 
@@ -7137,7 +7217,15 @@ return
 		ASTRIKE()
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unastrike' then
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'airstrike' then
+		ASTRIKE()
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unastrike' then
+		Connections.airstrike:Disconnect()
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unairstrike' then
 		Connections.airstrike:Disconnect()
     end
 
@@ -7146,7 +7234,16 @@ return
 		skf = true
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'skatecraze' then
+		SKCRAZE()
+		skf = true
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unskcraze' then
+		skf = false
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unskatecraze' then
 		skf = false
     end
 
@@ -7164,7 +7261,7 @@ return
                                Remind('Cannot find player with the name: '..dasplayer)
                 	 end
 		else
-			Remind("Invalid amount of arguments (at least 3).")
+			Remind("Invalid amount of arguments (at least 3 [2nd = player, 3rd = weld place]).")
 		end
     end
 
@@ -7181,7 +7278,7 @@ return
                                Remind('Cannot find player with the name: '..dasplayer)
                 	 end
 		else
-			Remind("Invalid amount of arguments (must be 2).")
+			Remind("Invalid amount of arguments (must be 2 [2nd = player]).")
 		end
     end
 		
@@ -7198,7 +7295,7 @@ return
                                Remind('Cannot find player with the name: '..dasplayer)
                 	 end
 		else
-			Remind("Invalid amount of arguments (must be 2).")
+			Remind("Invalid amount of arguments (must be 2 [2nd = player]).")
 		end
     end
 
@@ -7215,7 +7312,7 @@ return
                                Remind('Cannot find player with the name: '..dasplayer)
                 	 end
 		else
-			Remind("Invalid amount of arguments (must be 2).")
+			Remind("Invalid amount of arguments (must be 2 [2nd = player]).")
 		end
     end
 
@@ -7223,7 +7320,7 @@ return
     		local args = string.split(msg, " ")
     
     		if #args ~= 3 then
-        		Remind("Invalid amount of arguments (must be 3).")
+        		Remind("Invalid amount of arguments (must be 3 [2nd = action, 3rd = amount]).")
         		return
     		end
 
@@ -7264,7 +7361,17 @@ return
 	RFGUN(bullets)
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'rapidfiregun' then
+	bullets = tonumber(string.sub(msg:lower(), #prefix + 14))
+	RFGUN(bullets)
+    end
+
+
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unrfgun' then
+	Connections.rapidfiregun:Disconnect()
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 14) == prefix..'unrapidfiregun' then
 	Connections.rapidfiregun:Disconnect()
     end
 
@@ -9315,7 +9422,7 @@ return
 			end
                 end
 	else
-                Remind("Invalid amount of arguments. (it should be 3)")
+                Remind("Invalid amount of arguments (must be 3 [2nd = me/others/all/player, 3rd = char name]).")
         end       
     end
 
@@ -16749,6 +16856,55 @@ function RNuke(amount, range)
         			end)
    		 	end
 	     end
+end
+
+-- Get instruments - From ii's Stupid Admin!
+function GetGuitar()
+    if game.Players.LocalPlayer.Backpack:FindFirstChild("GuitarSword") then
+        local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("GuitarSword")
+        tool.Parent = game.Players.LocalPlayer.Character
+        return tool
+    elseif game.Players.LocalPlayer.Character:FindFirstChild("GuitarSword") then
+        return game.Players.LocalPlayer.Character:FindFirstChild("GuitarSword")
+    else
+        game.Players:Chat("gear me 60357982")
+        repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("GuitarSword")
+        local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("GuitarSword")
+        tool.Parent = game.Players.LocalPlayer.Character
+        return tool
+    end
+end
+
+function GetDrum()
+    if game.Players.LocalPlayer.Backpack:FindFirstChild("DrumKit") then
+        local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("DrumKit")
+        tool.Parent = game.Players.LocalPlayer.Character
+        return tool
+    elseif game.Players.LocalPlayer.Character:FindFirstChild("DrumKit") then
+        return game.Players.LocalPlayer.Character:FindFirstChild("DrumKit")
+    else
+        game.Players:Chat("gear me 33866728")
+        repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("DrumKit")
+        local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("DrumKit")
+        tool.Parent = game.Players.LocalPlayer.Character
+        return tool
+    end
+end
+
+function GetBongo()
+    if game.Players.LocalPlayer.Backpack:FindFirstChild("BongoDrums") then
+        local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("BongoDrums")
+        tool.Parent = game.Players.LocalPlayer.Character
+        return tool
+    elseif game.Players.LocalPlayer.Character:FindFirstChild("BongoDrums") then
+        return game.Players.LocalPlayer.Character:FindFirstChild("BongoDrums")
+    else
+        game.Players:Chat("gear me 57902997")
+        repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("BongoDrums")
+        local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("BongoDrums")
+        tool.Parent = game.Players.LocalPlayer.Character
+        return tool
+    end
 end
 
 function SKCRAZE() -- cmd v3
