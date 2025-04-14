@@ -7,7 +7,7 @@
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.135
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.15
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -103,12 +103,12 @@ getgenv().scriptname = "KohlsLite"
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.135"
+getgenv().klversion = "X1.15"
 
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.15", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -1014,8 +1014,8 @@ antis = {
     antifling = false
 }
 
--- Prepartion
-local antisall = { -- This is everyone except you
+-- This is everyone except you
+local antisall = {
     antiblind = false,
     antivoid = false,
     antiskydive = false,
@@ -1051,7 +1051,7 @@ local antisall = { -- This is everyone except you
     antifling = false
 }
 
--- This is NOT implemented due to lack of interest, you'll have to do that yourself.
+-- This is NOT implemented due to lack of interest; you'll have to do that yourself.
 local antisplayers = { -- Antis for specific players
     antiblind = {},
     antivoid = {},
@@ -1915,7 +1915,7 @@ local themecode = {
     ["23"] = {name = "blue sky", code = "ambient 0 0 256,colorshifttop 0 0 256,fogcolor 0 0 256,fogend 50"}
 }
 
--- Parts
+-- Parts (DO NOT EDIT THIS)
 local ogcframes = {
                 ["SmoothBlockModel178"] = {-13.0650005, 45.4300003, 57.2430038, 1, 0, 0, 0, 1, 0, 0, 0, 1},
                 ["SmoothBlockModel176"] = {-15.0650005, 37.6300011, 51.2430038, 0, 0, -1, 0, 1, 0, 1, 0, 0},
@@ -2323,7 +2323,6 @@ else
 	print("You have Person299's Admin, so you will not have access to any KohlsLite commands that use P299.")
 end
 print("\n") 
-
 
 Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
 
