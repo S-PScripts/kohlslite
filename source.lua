@@ -4813,6 +4813,14 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	Remind("Checking leaked coords for the regen!")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'clearconsole' then
+	for i = 1, 500 do print("") end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'clrconsole' then
+	for i = 1, 500 do print("") end
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'offmusic' then
         music_related.musicoff = true
         Chat("stopmusic")
@@ -6218,7 +6226,7 @@ return
             	DCrash()        
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'icrash' then 
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bcrash' then 
 Chat("h \n\n\n\n\n "..[[
 		
                /                Your device ran into a problem and needs to restart.
@@ -6235,14 +6243,25 @@ Chat("h \n\n\n\n\n "..[[
             ]].. " \n\n\n\n\n")
         	Chat("fix")
         	player_relate.musicsay = false
-		Chat(prefix.."gmusic139")
+		if blue_crash == false then
+		else
+			Chat(prefix.."gmusic139")
+		end
            	Chat("time 14")
 		Chat("fogcolor 55 120 191")
 		Chat("fogend 0")
             	task.wait(0.5)
-		crash_settings.skipwarncrash = true
-            	DCrash()    
-end
+		if blue_crash == false then
+		else
+			crash_settings.skipwarncrash = true
+            		DCrash()    
+		end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'bscreen' then 
+		blue_crash = false
+		Chat(prefix.."bcrash")
+    end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'jcrash' then
         	Chat("h/lol get crashed nerd")
