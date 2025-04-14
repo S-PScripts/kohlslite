@@ -696,6 +696,7 @@ local auto_stuff = {
 
 	-- Auto afk
 	autoafk = false,
+	AFKMessage = "[AFK]"  -- Auto afk name message
 }
 
 -- Random lists of players
@@ -2691,7 +2692,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          local dasplayer = args[2]
          PLAYERCHECK(dasplayer)
          if player ~= nil then
-		print(player)
+		-- print(player)
 		if player == game.Players.LocalPlayer.Name then 
 			return Remind("You cannot blacklist yourself.")
 		end
@@ -10249,6 +10250,7 @@ function PLAYERCHECK(plr, rt)
       local u_found = false
       if string.sub(v.Name:lower(), 1, #plr) == plr:lower() then
           player = v.Name
+	  playerd = v.DisplayName
           cplr = v
 	  u_found = true
 	  if rt then return cplr end
@@ -15331,7 +15333,7 @@ function onPlayerAdded(player)
 
   		if table.find(list_on_sight.rkick_on_sight, player.Name) then
                 	if player_relate.welcomemsg == true then 
-				Chat("h \n\n\n\n\n Rocket kicking "..player.Name.." as they are blacklisted. \n\n\n\n\n")
+				Chat("h \n\n\n\n\n Rocket kicking "..player.DisplayName.." as they are blacklisted. \n\n\n\n\n")
 			end
 			print(player.Name.." joined the server. They are being rocket kicked as they were on the rkick_on_sight list.")
 			Remind(player.Name.." joined the server. They are being rocket kicked as they were on the rkick_on_sight list.")
@@ -15341,7 +15343,7 @@ function onPlayerAdded(player)
 
     		if table.find(list_on_sight.suser_on_sight, player.Name) then
                 	if player_relate.welcomemsg == true then
-				Chat("h \n\n\n\n\n Lagging "..player.Name.." with cars as they are blacklisted. \n\n\n\n\n")
+				Chat("h \n\n\n\n\n Lagging "..player.DisplayName.." with cars as they are blacklisted. \n\n\n\n\n")
 			end
 			print(player.Name.." joined the server. They are being lagged with cars as they were on the suser_on_sight list.")
 			Remind(player.Name.." joined the server. They are being lagged with cars as they were on the suser_on_sight list.")
@@ -15353,7 +15355,7 @@ function onPlayerAdded(player)
 
     		if table.find(list_on_sight.mkick_on_sight, player.Name) then
                		if player_relate.welcomemsg == true then
-				Chat("h \n\n\n\n\n Message kicking "..player.Name.." as they are blacklisted. \n\n\n\n\n")
+				Chat("h \n\n\n\n\n Message kicking "..player.DisplayName.." as they are blacklisted. \n\n\n\n\n")
 			end
 			print(player.Name.." joined the server. They are being message kicked as they were on the mkick_on_sight list.")
 			Remind(player.Name.." joined the server. They are being message kicked as they were on the mkick_on_sight list.")
@@ -15364,7 +15366,7 @@ function onPlayerAdded(player)
 
 		if table.find(list_on_sight.hatkick_on_sight, player.Name) then
         		if player_relate.welcomemsg == true then 
-				Chat("h \n\n\n\n\n Hat kicking "..player.Name.." as they are blacklisted. \n\n\n\n\n")
+				Chat("h \n\n\n\n\n Hat kicking "..player.DisplayName.." as they are blacklisted. \n\n\n\n\n")
 			end
 			print(player.Name.." joined the server. They are being hat kicked as they were on the hatkick_on_sight list.")
 			Remind(player.Name.." joined the server. They are being hat kicked as they were on the hatkick_on_sight list.")
@@ -15379,7 +15381,7 @@ function onPlayerAdded(player)
 
     		if table.find(list_on_sight.crash_on_sight, player.Name) then
 		        if player_relate.welcomemsg == true then
-        			Chat("h \n\n\n\n\n Server automatically crashed due to blacklisted user ("..player.Name..") joining. \n\n\n\n\n")
+        			Chat("h \n\n\n\n\n Server automatically crashed due to blacklisted user ("..player.DisplayName..") joining. \n\n\n\n\n")
 			end
         		print(player.Name.." joined the server. Server was automatically crashed as they are blacklisted.")
 			Remind(player.Name.." joined the server. Server was automatically crashed as they are blacklisted.")
@@ -15390,7 +15392,7 @@ function onPlayerAdded(player)
     		if player.AccountAge < mainbar_stuff.newlen == true and mainbar_stuff.newplrautoslock == true then
 			if not table.find(whitelist, player.Name) and not table.find(pwl, player.Name) then
 				if player_relate.welcomemsg == true then
-         				Chat("h \n\n\n\n\n Automatically banned "..player.Name.." for being on an account under the account age limit. \n\n\n\n\n")
+         				Chat("h \n\n\n\n\n Automatically banned "..player.DisplayName.." for being on an account under the account age limit. \n\n\n\n\n")
 				end
          			print(player.Name.." joined the server. They were auto-banned for being under the account age limit.")
 				Remind(player.Name.." joined the server. They were auto-banned for being under the account age limit.")
@@ -15421,15 +15423,15 @@ function onPlayerAdded(player)
 
 		if player_relate.welcomemsg == true then
         		if table.find(whitelist, player.Name) then
-         			Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". You are whitelisted from serverlocks! \n\n\n\n\n")
+         			Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You are whitelisted from serverlocks! \n\n\n\n\n")
 			elseif table.find(GWhitelisted, player.Name) then
-				Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". You are whitelisted to use any gear! \n\n\n\n\n")
+				Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You are whitelisted to use any gear! \n\n\n\n\n")
 			elseif table.find(FAdmins, player.Name) then
-	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". You have been given free admin! \n\n\n\n\n")
+	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You have been given free admin! \n\n\n\n\n")
 			elseif admin_stuff.alladmin then
-	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". This server has free admin! \n\n\n\n\n")
+	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". This server has free admin! \n\n\n\n\n")
 			else
-	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.Name .. ". This server is protected by KohlsLite. \n\n\n\n\n")
+	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". This server is protected by KohlsLite. \n\n\n\n\n")
 			end
 		end
 	
@@ -15453,7 +15455,7 @@ end
 function onPlayerLeaving(player)
     task.wait(0)
     if player_relate.welcomemsg == true then
-             Chat("h \n\n\n\n\n Goodbye, " .. player.Name .. ". \n\n\n\n\n")
+             Chat("h \n\n\n\n\n Goodbye, " .. player.DisplayName .. ". \n\n\n\n\n")
              print(player.Name.." left the server.")
              Remind(player.Name.." left the server.")
     end
@@ -15508,10 +15510,12 @@ end)
 -- AUTOAFK
 local UserInputService = game:GetService("UserInputService")
 
+isAFK = false
 UserInputService.WindowFocusReleased:Connect(function()
         task.wait(0)
             if auto_stuff.autoafk == true then
-                    Chat("name me ["..game.Players.LocalPlayer.Name.."]: AFK") -- CMD v3 actually has a custom AFK message
+		    isAFK = true
+                    Chat("name me " .. auto_stuff.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName)
                     Chat("ff me")
                     Chat("god me")
 		    if autos.autoff == false then
@@ -15526,12 +15530,25 @@ end)
 UserInputService.WindowFocused:Connect(function()
         task.wait(0)
             if auto_stuff.autoafk == true then
+		isAFK = false
                 Chat("reset me")
 		autos.tempautoff = false
 		autos.tempautogod = false
                 Chat("unff me")
                 Chat("ungod me")
             end
+end)
+
+-- Auto name (used for the AFK)
+task.spawn(function()
+	while true do
+                task.wait()
+                if isAFK == true then
+			if (workspace:FindFirstChild(game.Players.LocalPlayer.Name) and not workspace:FindFirstChild(LocalPlayer.Name):FindFirstChildOfClass("Model") or workspace:FindFirstChild(LocalPlayer.Name):FindFirstChildOfClass("Model").Name ~= auto_stuff.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName) then
+				Chat("name me " .. AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName)
+			end
+		end
+      	end
 end)
 
 -- Anti-AFK
