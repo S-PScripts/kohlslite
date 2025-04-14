@@ -5553,6 +5553,21 @@ return
 		Chat(prefix.."ecrash")
     end
 
+   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'wordle' then
+	Speak("I'm guessing of a 5-letter word, can you guess what it is with 6 guesses?")
+
+	wordle_stuff.wordle_game = true
+			
+	local length = 0
+			
+	for _ in pairs(wordsTable) do
+    		length = length + 1
+	end
+			
+	wordle_stuff.wordle_word = wordsTable[math.random(1, length)]
+	Remind("The word is ".. wordle_stuff.wordle_word); print("Wordle word is ".. wordle_stuff.wordle_word)
+   end
+
    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'goon' then -- joke
 		Remind("GOONER?")
 		local args = string.split(msg, " ")
@@ -6480,14 +6495,14 @@ end
 
     if string.sub(msg, 1, #prefix + 8) == prefix..'announce' then
         annsecret = string.sub(msg, #prefix + 10)
-        Announce()
+        Announce(annsecret)
     end
 
-   if string.sub(msg, 1, #prefix + 9) == prefix..'uannounce' then
+   if string.sub(msg, 1, #prefix + 9) == prefix..'uannounce' then -- like cannounce but anything as the user
 	local args = string.split(msg, " ")
         local sus = args[2]       
 	whatsapp = table.concat(args, " ", 3)
-	UAnnounce()
+	UAnnounce(whatsapp)
     end
 
     if string.sub(msg, 1, #prefix + 9) == prefix..'cannounce' then -- inspired by scv3-var
@@ -11950,12 +11965,81 @@ local thorns_commands = {
 	stun = true,
 }
 
--- some antis and admin system (this is really old)
+wordle_stuff = {
+	wordle_word = " ",
+	wordle_game = false,
+}
+
+local HttpService = game:GetService("HttpService")
+
+local success, wordle_game_words = pcall(function()
+    return HttpService:GetAsync("https://gist.githubusercontent.com/slushman/34e60d6bc479ac8fc698df8c226e4264/raw/cf702f098856c72a81d79f69b11f0a8c333e7d2f/wordle-list")
+end)
+
+if success then
+	wordsTable = HttpService:JSONDecode(wordle_game_words)
+else
+	print("Failed to fetch the Wordle word list.")
+end
+
+function check_letters(correctWord, guess)
+	local feedback = {}
+	local freq = {}
+    
+	for i = 1, #correctWord do
+        	local char = correctWord:sub(i, I)
+        	freq[char] = (freq[char] or 0) + 1
+    	end
+    
+    	for i = 1, #guess do
+        	local guessChar = guess:sub(i, I)
+        	local correctChar = correctWord:sub(i, I)
+        
+        	if guessChar == correctChar then
+            		feedback[i] = "🟩"  -- Green
+            		freq[correctChar] = freq[correctChar] - 1
+        	end
+    	end
+    
+    	for i = 1, #guess do
+        	if not feedback[i] then
+            		local guessChar = guess:sub(i, I)
+           		if freq[guessChar] and freq[guessChar] > 0 then
+                		feedback[i] = "🟨"  -- Yellow
+                		freq[guessChar] = freq[guessChar] - 1
+            		else
+                		feedback[i] = "⬛"  -- Grey
+            		end
+        	end
+    	end
+    
+    	return feedback
+end
+
+
+-- Thorns, noob detector, all admin
 function PLRSTART(v)
     v.Chatted:Connect(function(msg)
             task.wait(0)
             task.spawn(function()
                     task.wait(0)
+            		local guess = string.sub(msg:lower(), 1, 5)
+            
+            		if wordsTable[guess] and wordle_stuff.wordle_game then
+                		local feedback = check_letters(wordle_stuff.wordle_word, guess)
+                		local feedbackString = table.concat(feedback, " ")
+                
+                		Speak("Wordle Feedback: ".. feedbackString)
+
+				if wordle_stuff.wordle_word_guesses == 6 and guess ~= wordle_stuff.wordle_word then
+					Speak("Game over! The word was ".. wordle_stuff.wordle_word)
+				end
+	
+                		if guess == wordle_stuff.wordle_word then
+                    			Speak(v.Name .. " guessed the word!")
+                    			wordle_stuff.wordle_game = false
+                		end
+            		end	
 
 			-- Thorns (for the user they did it upon, just turn the antis on)
 			local args = string.split(msg, " ")
@@ -12984,16 +13068,16 @@ function GExecute(myscript)
 end
 
 -- ANNOUNCEMENTS
-function Announce()
+function Announce(annsecret)
 	Chat("h \n\n\n\n\n "..annsecret.. " \n\n\n\n\n")
 end
 
-function UAnnounce()
+function UAnnounce(whatsapp)
 	Chat("h \n\n\n\n\n "..sus..": "..whatsapp.. " \n\n\n\n\n")
 end
 
 -- we do a bit of trolling
-function AnnounceWM()
+function AnnounceWM(whatsapp)
 	Chat("h \n\n\n\n\n "..sus..": "..whatsapp.. " \n\n\n\n\n")
 end
 
@@ -18059,7 +18143,7 @@ if getgenv().kohlsgui then
 end
 
 Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
-Remind("HUGE UPDATES - BUGS MAY EXIST 2/4/25", 5)
+--Remind("HUGE UPDATES - BUGS MAY EXIST 2/4/25", 5)
 
 --[[
 Things that this script is missing:
@@ -18069,7 +18153,6 @@ Things that this script is missing:
 4. Part builder
 5. Custom commands (file system would take a while to make :P)
 
--> I probably won't rewrite the playercheck thing since it works fine I guess. I know it sucks but it would take so dang long to change.
 -> I probably won't add the features above as I don't play KAH that much anymore (and it's an inactive game too).
 ]]
 
