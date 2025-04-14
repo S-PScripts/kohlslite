@@ -952,6 +952,24 @@ local player_relate = {
 
 }
 
+-- Music related stuff
+local music_related = {
+	-- Lock the music to the set ID
+	mymusiconly = false,
+
+	-- The music ID for my music only
+	mymusiconlyid = 0,
+
+	-- Make the music go all over the place
+	audiotroll = false,
+
+	-- Temporarily turn off mymusiconly
+	musicoff = true,
+
+	-- Stop music from playing
+	antimusic = false
+}
+
 -- Visualiser
 local vishub = {
 	VisAmount = 20, -- Amount of parts
@@ -3964,61 +3982,76 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'audiolol' then
-        audiotroll = true
+        music_related.audiotroll = true
 	Remind("Listen to the audio now...")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unaudiolol' then
-        audiotroll = false
+        music_related.audiotroll = false
 	Remind("Stopped messing up the audio!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antimusic' then
-        mymusiconly = false
-        antimusic = true
+        music_related.mymusiconly = false
+        music_related.antimusic = true
 	Remind("Anti music is on! Do 'pmu (NO ID AFTER IT!!)' if this command doesn't work well")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unantimusic' then
-        antimusic = false
+        music_related.antimusic = false
 	Remind("Turned anti music off!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'mymusiconly' then
-	Chat(prefix.."pmu")
+	local args = string.split(msg, " ")
+	Chat(prefix.."pmu"..args[2])
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 9 ) == prefix..'musiclock' then
+	local args = string.split(msg, " ")
+	Chat(prefix.."pmu"..args[2])
     end
 
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'pmu' then
-	if not string.sub(msg:lower(), 1, #prefix + 4) == prefix..'pmu2' then
+	if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'pmu2' then
+	else
 		local args = string.split(msg, " ")
-        	musicoff = false
-        	mymusiconly = true
-        	gottenmode = 2
-        	mymusiconlyid = tonumber(args[2])
-        	Remind("Perm music is on.")
+		if #args == 2 then
+        		music_related.musicoff = false
+        		music_related.mymusiconly = true
+        		gottenmode = 2
+        		music_related.mymusiconlyid = tonumber(args[2])
+        		Remind("Perm music is on.")
+		else
+			Remind("Music disabled (anti music alt). Do unpmu to turn it off.")
+		end
 	end
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'2pmu' then
+    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'pmu2' then
         if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
                                 local url = game:GetService("Workspace").Terrain["_Game"].Folder.Sound.SoundId
                                 local number = url:match("id=(%d+)")
                                 gottenmode = 1
-                                musicoff = false
-                                mymusiconly = true
-                                mymusiconlyid = number
+                                music_related.musicoff = false
+                                music_related.mymusiconly = true
+                                music_related.mymusiconlyid = number
                                 Remind("Perm music is on (set to current id).")
         end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'unpmu' then
-        mymusiconly = false
-        musicoff = true
+        music_related.mymusiconly = false
+        music_related.musicoff = true
         Chat("stopmusic")
         Remind("Perm music is off.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'unmymusiconly' then
+	Chat(prefix.."unpmu")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unmusiclock' then
 	Chat(prefix.."unpmu")
     end
 
@@ -4394,8 +4427,8 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'fixpads' then    
-	if not string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixpads2' then
-
+	if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixpads2' then
+	else
                 if movestatus == true then 
                         return 
                 end        
@@ -4772,13 +4805,13 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'offmusic' then
-        musicoff = true
+        music_related.musicoff = true
         Chat("stopmusic")
 	Remind("Perm music is now paused.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'onmusic' then
-        musicoff = false
+        music_related.musicoff = false
 	Remind("Perm music is no longer paused.")
     end
 
@@ -6093,7 +6126,8 @@ return
    end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'spamw' then
-	if not string.sub(msg:lower(), 1, #prefix + 8) == prefix..'spamwait' then
+	if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'spamwait' then
+	else
         	ex_settings.spamwait = tonumber(string.sub(msg:lower(), #prefix + 7))
         	Remind("Spam wait has been modified!")
 	end
@@ -12210,7 +12244,8 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 4) == ";fly" and v.Name ~= game.Players.LocalPlayer.Name then
-			if not string.sub(msg:lower(), 0, 7) == ";fly me" then
+			if string.sub(msg:lower(), 0, 7) == ";fly me" then
+			else
                         	if player_relate.noobdetect then
                             		print(v.Name .. " is a noob. / Said ';fly' ")
                             		Chat("h \n\n\n\n\n " .. v.Name .. ", it is fly me, not ;fly. \n\n\n\n\n")
@@ -12743,7 +12778,7 @@ task.spawn(function()
  while true do
     task.wait(0)
 
-    if antimusic == true then
+    if music_related.antimusic == true then
                   for i,v in pairs(workspace:GetDescendants()) do
                         if v:IsA("Sound") then 
                                 if v.Playing then 
@@ -12753,14 +12788,14 @@ task.spawn(function()
                   end
     end
 
-    if audiotroll == true then
+    if music_related.audiotroll == true then
                         if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
                                 game:GetService("Workspace").Terrain["_Game"].Folder.Sound.TimePosition = math.random(0,game:GetService("Workspace").Terrain["_Game"].Folder.Sound.TimeLength*100)/100
                         end
     end
 
-    if mymusiconly == true then -- ii's admin since mine had a small bug and was also messy
-        	local soundlock = tonumber(mymusiconlyid)
+    if music_related.mymusiconly == true then -- ii's admin since mine had a small bug and was also messy
+        	local soundlock = tonumber(music_related.mymusiconlyid)
             	local origsound = soundlock
             	soundlock = "http://www.roblox.com/asset/?id="..tostring(soundlock)
            	local lastUpdateTime = tick()
@@ -12768,7 +12803,7 @@ task.spawn(function()
 
         	if gottenmode == 1 then
                     	denumba = tonumber(music.TimePosition)
-                	print(music.TimePosition)
+                	--print(music.TimePosition)
         	else 
                 	denumba = 0
         	end
@@ -12781,7 +12816,7 @@ task.spawn(function()
 
                         denumba = denumba + elapsedTime 
 
-                	if workspace.Terrain["_Game"].Folder:FindFirstChild("Sound") and musicoff == false then
+                	if workspace.Terrain["_Game"].Folder:FindFirstChild("Sound") and music_related.musicoff == false then
                             	local music = workspace.Terrain["_Game"].Folder:FindFirstChild("Sound")
                             	if music.IsLoaded and music.SoundId == soundlock then
                                 -- print(music.TimePosition);print(denumba)
@@ -12798,7 +12833,7 @@ task.spawn(function()
                             	end
 
                             	if music.SoundId ~= soundlock then
-                                	if musicoff == false then
+                                	if music_related.musicoff == false then
                                         	if antimlog then
                                                 	Chat("music 00000000000000000000000000000"..tostring(origsound))
                                         	else
@@ -12807,11 +12842,11 @@ task.spawn(function()
                                 	end                    
                             	end
 
-                            	if music.Playing == false and musicoff == false then
+                            	if music.Playing == false and music_related.musicoff == false then
                                         music:Play() 
                             	end
                 	else
-                        	if musicoff == false then
+                        	if music_related.musicoff == false then
                                 	if antimlog then
                                         	Chat("music 00000000000000000000000000000"..tostring(origsound))
                                     	else
@@ -12819,7 +12854,7 @@ task.spawn(function()
                                 	end
                             	end
                 	end
-                until not mymusiconly
+                until not music_related.mymusiconly
         end
   end
 
