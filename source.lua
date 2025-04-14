@@ -3186,8 +3186,16 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		Chat(prefix.."slock")
        end
 
+       if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'lockdown' then
+		Chat(prefix.."slock")
+       end
+
        if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unserverlock' then
 	       Chat(prefix.."unslock")
+       end
+
+       if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unlockdown' then
+		Chat(prefix.."slock")
        end
 
 	if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'tslock' then -- watered down timeout command
@@ -6052,6 +6060,21 @@ return
        Remind("Logs have been spammed!")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'spamlogs' then
+       LogSpam()
+       Remind("Logs have been spammed!")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'clearlogs' then
+       LogSpam()
+       Remind("Logs have been spammed!")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'clrlogs' then
+       LogSpam()
+       Remind("Logs have been spammed!")
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'logtrap' then -- scv1
         LogTrap()
 	Remind("Don't do 'logs'...")
@@ -6139,6 +6162,11 @@ return
         Remind("Spam wait has been modified!")
     end
 
+   if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'swait' then
+        ex_settings.spamwait = tonumber(string.sub(msg:lower(), #prefix + 7))
+        Remind("Spam wait has been modified!")
+    end
+
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'spamoff' then
         spamon = false
 	Remind("Spamming has been paused.")
@@ -6163,6 +6191,11 @@ return
                                 Chat("gear me 73089190")
                 end
 		Remind("Client btools given.")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'clientbtools' then
+		local cbt = string.sub(msg:lower(), #prefix + 14)
+		Chat(prefix.."cbtools "..cbt)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'ecrash' then -- This command is DYNAMIC
@@ -7059,6 +7092,16 @@ return
                  end
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'delchar' then
+		local dasplayer = string.sub(msg:lower(), #prefix + 9)
+		Chat(prefix.."laser "..dasplayer)
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'deletechar' then
+		local dasplayer = string.sub(msg:lower(), #prefix + 12)
+		Chat(prefix.."laser "..dasplayer)
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'surround' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 10)
                  PLAYERCHECK(dasplayer)
@@ -7068,6 +7111,11 @@ return
                  else
                         Remind('Cannot find player with the name: '..dasplayer)
                  end
+    end
+
+   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'planes' then
+                 local dasplayer = string.sub(msg:lower(), #prefix + 8)
+                 Chat(prefix.."surround ".. dasplayer)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'rnuke' then
@@ -7240,7 +7288,17 @@ return
 		skf = true
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'skfrenzy' then
+		SKCRAZE()
+		skf = true
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'skatecraze' then
+		SKCRAZE()
+		skf = true
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'skatefrenzy' then
 		SKCRAZE()
 		skf = true
     end
@@ -7249,7 +7307,15 @@ return
 		skf = false
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unskfrenzy' then
+		skf = false
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unskatecraze' then
+		skf = false
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'unskatefrenzy' then
 		skf = false
     end
 
@@ -7398,6 +7464,11 @@ return
                  end
     end
 
+   if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'bomb' then
+                 local dasplayer = string.sub(msg:lower(), #prefix + 6)
+                 Chat(prefix.."nuke ".. dasplayer)
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'age' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 5)
                  PLAYERCHECK(dasplayer)
@@ -7462,10 +7533,15 @@ return
 		 PLAYERCHECK(dasplayer)
                  if player ~= nil then
                         slag(cplr, player)
-			Remind("Skate lagging the player")
+			Remind("Skate lagging the player!")
                  else
                         Remind('Cannot find player with the name: '..dasplayer)
                  end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'skatelag' then
+                local dasplayer = string.sub(msg:lower(), #prefix + 10)
+		Chat(prefix.."slag "..dasplayer)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'nslag' then -- buggy!
@@ -7473,17 +7549,22 @@ return
 		 PLAYERCHECK(dasplayer)
                  if player ~= nil then
                         lagify(cplr,player)
-			Remind("Skate lagging the player (2)")
+			Remind("Skate lagging the player (2)!")
                  else
                         Remind('Cannot find player with the name: '..dasplayer)
                  end
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'nskatelag' then
+                local dasplayer = string.sub(msg:lower(), #prefix + 11)
+		Chat(prefix.."nslag "..dasplayer)
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'rpaintui' then
                 for i,v in ipairs(game.Players.LocalPlayer.PlayerGui:GetChildren()) do
-                                if v.Name == "SelectionBox" or v.Name == "LineHandleAdornment" or v.Name == "PaletteGui" then
-                                                        v:Destroy()
-                                end
+                	if v.Name == "SelectionBox" or v.Name == "LineHandleAdornment" or v.Name == "PaletteGui" then
+                        	v:Destroy()
+                        end
                 end
 		Remind("Removed paint UI.")
     end
@@ -7552,6 +7633,12 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'shop' then
+        Remind("Serverhopping... please wait!")
+        Remind("[WARN]: THIS MAY REJOIN YOU TO THE SAME SERVER.")
+        SERVERHOP()
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'hop' then
         Remind("Serverhopping... please wait!")
         Remind("[WARN]: THIS MAY REJOIN YOU TO THE SAME SERVER.")
         SERVERHOP()
