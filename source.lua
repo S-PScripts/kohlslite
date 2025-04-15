@@ -2415,7 +2415,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
         if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'tricky' then -- CREDITS TO TECH
                 Remind("This might not work if it's already been executed. Sorry! Created by Tech")
-		Remind("Turn this off by typing music")
+		Remind("Turn this off by typing stopmusic.")
                 if haspersons == true then
                         GExecute("https://raw.githubusercontent.com/Tech-187/Music-lyrics-on-time/main/Tricky%20lyrics.lua")
                 else
@@ -2425,7 +2425,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
         if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'ilove' then -- CREDITS TO TECH
                 Remind("This might not work if it's already been executed. Sorry! Created by Tech")
-		Remind("Turn this off by typing music")
+		Remind("Turn this off by typing stopmusic.")
                 if haspersons == true then
                         GExecute("https://raw.githubusercontent.com/Tech-187/Music-lyrics-on-time/main/I%20loveee.lua")
                 else
