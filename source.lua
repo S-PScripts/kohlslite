@@ -1312,7 +1312,25 @@ local musictable = {
     ["154"] = {id = "83471372738525", name = "It's Been So Long"},
     ["155"] = {id = "105832154444494", name = "Funk do Goofy"},
     ["156"] = {id = "110733765539890", name = "Five Nights at Freddy's"},
-    ["157"] = {id = "104541292443133", name = "VERTIGO FUNK"}
+    ["157"] = {id = "104541292443133", name = "VERTIGO FUNK"},
+    ["158"] = {id= " 112352230031323", name = "D Nugget"},
+    ["159"] = {id = "77227669080312", name = "Crr"},
+    ["160"] = {id = "87391570748260", name = "IM NOT TRYNA FALL OFF."},
+    ["161"] = {id = "140365951038149", name = "Rainy Day"},
+    ["162"] = {id = "106324144693450", name = "Burned Her To Ashes"},
+    ["163"] = {id = "139565322292449", name = "yahamez"},
+    ["164"] = {id = "79583063289850", name = "Song That Might Play When You Fight Sans"},
+    ["165"] = {id = "73409072734658", name = "ALPHATERRAIN"},
+    ["166"] = {id = "125990983408664", name = "Green Hill Zone"},
+    ["167"] = {id = "124249063943651", name = "Die in a Fire"},
+    ["168"] = {id = "97872482274072", name = "I Got No Time"},
+    ["169"] = {id = "90323407842935", name = "RALLY FUNK"},
+    ["170"] = {id = "84733736048142", name = "Liberto Funk"},
+    ["171"] = {id = "128646043452659", name = "Sonic 2: Chemical Plant"},
+    ["172"] = {id = "81521752432101", name = "holy"},
+    ["173"] = {id = "123150365153422", name = "'LUCID DREAMS' ~ Melodic Guitare Type Beat 2024"},
+    ["174"] = {id = "111851390281777", name = "SIGMA (Slowed)"},
+    ["175"] = {id = "87459334689630", name = "Chill Boy"},
 }
 
 -- Saved gears
