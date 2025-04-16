@@ -1330,7 +1330,7 @@ local musictable = {
     ["172"] = {id = "81521752432101", name = "holy"},
     ["173"] = {id = "123150365153422", name = "'LUCID DREAMS' ~ Melodic Guitare Type Beat 2024"},
     ["174"] = {id = "111851390281777", name = "SIGMA (Slowed)"},
-    ["175"] = {id = "87459334689630", name = "Chill Boy"},
+    ["175"] = {id = "72773974824127", name = "Rizzlers and Moggers 2"},
 }
 
 -- Saved gears
