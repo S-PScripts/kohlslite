@@ -10649,7 +10649,7 @@ task.spawn(function()
         	end
 	else
         	if ws_antis.antidisco == true or ws_antis.antiflash == true then
-			if workspace.LightEdit then
+			if workspace:FindFirstChild("LightEdit") then
 				Chat("fix")
 			end
 		end
