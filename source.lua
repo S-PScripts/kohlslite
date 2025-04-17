@@ -16022,7 +16022,6 @@ function pp(puser, len)
 	paint:WaitForChild("Remotes").ServerControls:InvokeServer("PaintPart",{["Part"]=part,["Color"]=puser.Character.Head.Color})
 	part.CanCollide = false
 
-	Loops.penis = true
 	repeat 
 		rwait()
 		part.CFrame = puser.Character.Torso.CFrame * CFrame.new(0,-1,len*-0.5)
