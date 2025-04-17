@@ -4095,8 +4095,8 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'song' then -- bit buggy if you stop the music but keep the playlist open
              local args = string.split(msg, " ")
-             if #args == 2 then
-                local shazam = args[2]
+             if #args >= 2 then
+                local shazam = table.concat(args, " ", 2)
                 Playlist(shazam)
 		Remind("Playlist starting.")
          end
