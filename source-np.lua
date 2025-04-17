@@ -151,6 +151,35 @@ addcommand({
 	end
 })
 
+-- Antis --
+addcommand({
+	name = "antikill", 
+	aliases = {"antik"},
+	description = "turn on/off anti kill for a player",
+	funct = function()
+		local plrg = args[2]
+		if not getPlayer(plrg) then
+			Remind("Invalid player!")
+			return
+		end
+		local plr = getPlayer(plrg)
+	end
+})
+
+addcommand({
+	name = "antipunish", 
+	aliases = {"antip"},
+	description = "turn on/off anti punish for a player",
+	funct = function()
+		local plrg = args[2]
+		if not getPlayer(plrg) then
+			Remind("Invalid player!")
+			return
+		end
+		local plr = getPlayer(plrg)
+	end
+})
+
 -- Credits --
 addcredit("ScriptingProgrammer (Roblox) / ts2021x (Discord)/ S-PScripts (GitHub)",
 	"created KohlsLite and KohlsLite NP"
