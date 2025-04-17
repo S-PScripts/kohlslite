@@ -4051,6 +4051,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         		music_related.mymusiconlyid = tonumber(args[2])
         		Remind("Perm music is on.")
 		else
+			music_related.mymusiconlyid = 0
 			Remind("Music disabled (anti music alt). Do unpmu to turn it off.")
 		end
 	end
