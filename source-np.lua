@@ -126,9 +126,9 @@ addcommand({
 	aliases = {"commands"},
 	description = "print out the commands for KohlsLite NP",
 	funct = function()
-		Remind("Check your console for the list of commands [/console]")
+		Remind("Check your console for the list of commands [/console].")
 		print("Commands:")
-		print("\n\")
+		print("")
 		for i, v in pairs(commands) do
 			dupe = v.. " - ".. descriptions[v]
 			print(dupe)
@@ -139,11 +139,12 @@ addcommand({
 -- Information --
 addcommand({
 	name = "help", 
-	aliases = {},
-	description = "print out information about KohlsECO",
+	aliases = {"info"},
+	description = "print out information about KohlsLite NP",
 	funct = function()
+		Remind("Check your console for the list of commands [/console].")
 		print("Information:")
-		print("\n\n\n")
+		print("")
 		print("You are using KohlsLite NP by ScriptingProgrammer/ts2021/S-PScripts. This script has been maintained since 2025.")
 		print("For help, please contact me on Discord at ts2021.")
 		print("The version you are using is "..admin.klnp_version..".")
