@@ -4285,12 +4285,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'movebp' then
-		pcall(function()
+		--[[pcall(function()
 			if not workspace.Terrain._Game.Workspace:FindFirstChild("Baseplate") then
 				Remind("NOT LOADED!")
 				return
 			end
-		end)
+		end)]]
                 if movestatus == true then 
                         return 
                 end
