@@ -7,7 +7,7 @@
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.17
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.1715
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -103,12 +103,12 @@ getgenv().scriptname = "KohlsLite"
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.171"
+getgenv().klversion = "X1.17w"
 
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.171", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.17w", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -13789,11 +13789,11 @@ end
 -- temp NOK
 function TNOK(mode) -- vitalux cmd
 	pcall(function()
-		if not game:GetService("Workspace").Terrain._Game.Workspace.Obby:GetChildren() then
-			return 
-		end
-
 		if kah_np == false then
+			if not game:GetService("Workspace").Terrain._Game.Workspace.Obby:GetChildren() then
+				return 
+			end
+
         		for i, v in pairs(game:GetService("Workspace").Terrain._Game.Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
                 		if mode == "true" then
                         		v.CanTouch = false
