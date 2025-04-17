@@ -10630,22 +10630,30 @@ end)
 task.spawn(function()
     while true do
         task.wait()
-        for i,v in pairs(game:GetService("Workspace").Terrain["_Game"].Folder:GetChildren()) do
-            if v:IsA('Script') then
-                  if ws_antis.antidisco == true then    
-                          if v.Name == "Disco" then
-                              v:Destroy() -- :)
-                              Chat("fix")
-                          end
-                  end
-                  if ws_antis.antiflash == true then    
-                          if v.Name == "Flash" then
-                              v:Destroy() -- :)
-                              Chat("fix")
-                          end
-                  end
-            end
-        end
+	if kah_np == false then
+        	for i,v in pairs(game:GetService("Workspace").Terrain["_Game"].Folder:GetChildren()) do
+            		if v:IsA('Script') then
+                  		if ws_antis.antidisco == true then    
+                          		if v.Name == "Disco" then
+                              			v:Destroy() -- :)
+                              			Chat("undisco")
+                         		end
+                  		end
+                  		if ws_antis.antiflash == true then    
+                          		if v.Name == "Flash" then
+                              			v:Destroy() -- :)
+                              		Chat("fix")
+                          		end
+                  		end
+            		end
+        	end
+	else
+        	if ws_antis.antidisco or ws_antis.antiflash then
+			if workspace.LightEdit then
+				Chat("fix")
+			end
+		end
+	end
 
         if ws_antis.antifogend == true then
            if game.Lighting.FogEnd ~= 100000 then
