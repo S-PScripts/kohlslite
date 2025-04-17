@@ -4167,8 +4167,8 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
 	local player = Players.LocalPlayer
 
-	local function createGUI()
-    		local screenGui = Instance.new("ScreenGui")
+	function createGUI()
+    		screenGui = Instance.new("ScreenGui")
     		screenGui.Name = "CommandBarGui"
     		screenGui.Parent = player:WaitForChild("PlayerGui")
 
@@ -4208,7 +4208,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'uncmdbar' then
-    	local existingGui = player:FindFirstChild("PlayerGui"):FindFirstChild("CommandBarGui")
+    	existingGui = player:FindFirstChild("PlayerGui"):FindFirstChild("CommandBarGui")
     	if existingGui then
         	existingGui:Destroy()
         	Remind("Command bar removed!")
@@ -15647,7 +15647,8 @@ end)
 -- REGEN
 function Regen()
 	pcall(function()
-		if not workspace.Terrain._Game.Admin:FindFirstChild("Regen") then
+		if game:GetService("Workspace").Terrain["_Game"].Admin.Regen then
+		else 
 			return
 		end
 	end)
