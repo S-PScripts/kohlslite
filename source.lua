@@ -103,12 +103,12 @@ getgenv().scriptname = "KohlsLite"
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.17w"
+getgenv().klversion = "X1.17u"
 
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.17w", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.17u", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -4062,7 +4062,8 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'pmu2' then
-        if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+	if kah_np == false then
+        	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
                                 local url = game:GetService("Workspace").Terrain["_Game"].Folder.Sound.SoundId
                                 local number = url:match("id=(%d+)")
                                 gottenmode = 1
@@ -4070,7 +4071,18 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                                 music_related.mymusiconly = true
                                 music_related.mymusiconlyid = number
                                 Remind("Perm music is on (set to current id).")
-        end
+        	end
+	else
+        	if game:GetService("Workspace").Sound:FindFirstChild("Sound") then
+                                local url = game:GetService("Workspace").Sound.SoundId
+                                local number = url:match("id=(%d+)")
+                                gottenmode = 1
+                                music_related.musicoff = false
+                                music_related.mymusiconly = true
+                                music_related.mymusiconlyid = number
+                                Remind("Perm music is on (set to current id).")
+        	end
+	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'unpmu' then
@@ -12963,8 +12975,12 @@ task.spawn(function()
             	local origsound = soundlock
             	soundlock = "http://www.roblox.com/asset/?id="..tostring(soundlock)
            	local lastUpdateTime = tick()
-        	local music = workspace.Terrain["_Game"].Folder:FindFirstChild("Sound")
 
+		if kah_np == false then
+        		music = workspace.Terrain["_Game"].Folder:FindFirstChild("Sound")
+		else
+			music = game:GetService("Workspace").Sound:FindFirstChild("Sound")
+		end
         	if gottenmode == 1 then
                     	denumba = tonumber(music.TimePosition)
                 	--print(music.TimePosition)
@@ -12980,9 +12996,19 @@ task.spawn(function()
 
                         denumba = denumba + elapsedTime 
 
-                	if workspace.Terrain["_Game"].Folder:FindFirstChild("Sound") and music_related.musicoff == false then
-                            	local music = workspace.Terrain["_Game"].Folder:FindFirstChild("Sound")
-                            	if music.IsLoaded and music.SoundId == soundlock then
+			if kah_np == false then
+        			music = workspace.Terrain["_Game"].Folder:FindFirstChild("Sound")
+			else
+				music = game:GetService("Workspace").Sound:FindFirstChild("Sound")
+			end
+				
+                	if music and music_related.musicoff == false then
+				if kah_np == false then
+        				music = workspace.Terrain["_Game"].Folder:FindFirstChild("Sound")
+				else
+					music = game:GetService("Workspace").Sound:FindFirstChild("Sound")
+				end                            	
+				if music.IsLoaded and music.SoundId == soundlock then
                                 -- print(music.TimePosition);print(denumba)
                                 	if denumba > music.TimeLength then 
                                             	denumba = 0 
