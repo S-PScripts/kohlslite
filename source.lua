@@ -103,12 +103,12 @@ getgenv().scriptname = "KohlsLite"
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.17z"
+getgenv().klversion = "X1.17p"
 
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.17z", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.17p", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -12980,7 +12980,7 @@ task.spawn(function()
 		if kah_np == false then
         		music = workspace.Terrain["_Game"].Folder:FindFirstChild("Sound")
 		else
-			music = game:GetService("Workspace").Sound
+			music = game:GetService("Workspace"):FindFirstChild("Sound")
 		end
         	if gottenmode == 1 then
                     	denumba = tonumber(music.TimePosition)
@@ -13000,14 +13000,14 @@ task.spawn(function()
 			if kah_np == false then
         			music = workspace.Terrain["_Game"].Folder:FindFirstChild("Sound")
 			else
-				music = game:GetService("Workspace").Sound
+				music = game:GetService("Workspace"):FindFirstChild("Sound")
 			end
 				
                 	if music and music_related.musicoff == false then
 				if kah_np == false then
         				music = workspace.Terrain["_Game"].Folder:FindFirstChild("Sound")
 				else
-					music = game:GetService("Workspace").Sound
+					music = game:GetService("Workspace"):FindFirstChild("Sound")
 				end                            	
 				if music.IsLoaded and music.SoundId == soundlock then
                                 -- print(music.TimePosition);print(denumba)
