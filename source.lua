@@ -14,7 +14,7 @@ Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/sou
 Debugged with: https://glot.io/new/lua
 
 KohlsLite is a free, open-source script for the Roblox game created by agspureiam, Kohls Admin House (KAH).
-This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub). If there any bugs in this script, please DM me.
+This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub). If there are any bugs in this script, please DM me.
 
 You can play KAH (NBC version) here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
 You can also use it for KAH BC but barely anyone plays it. This script isn't recommended for KAH NP - it's not owned by agspureiam and there's a lot of things different.
@@ -135,7 +135,7 @@ end
 if getgenv().ignorewronggame then 
 	--
 else
-	if game.PlaceId ~= 112420803 and game.PlaceId ~= 115670532 then 
+	if game.PlaceId ~= 112420803 and game.PlaceId ~= 115670532 and game.PlaceID ~= 14747334292 then
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
