@@ -5684,7 +5684,7 @@ return
 			freaky = tonumber(args[2])
 		elseif #args == 3 then
 			users = args[2]
-			freaky = tonumber(args[2])
+			freaky = tonumber(args[3])
 		else
 			freaky = math.random(1,12)
 		end
