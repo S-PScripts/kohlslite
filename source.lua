@@ -7,7 +7,7 @@
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.165
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.17
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -103,12 +103,12 @@ getgenv().scriptname = "KohlsLite"
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.165"
+getgenv().klversion = "X1.17"
 
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.165", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.17", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -468,6 +468,8 @@ local function startupScripts()
             	end
         end
 end
+
+kah_np = (game.PlaceId == 14747334292)
 
 -- Log Trap
 pcall(function()
@@ -13791,13 +13793,23 @@ function TNOK(mode) -- vitalux cmd
 			return 
 		end
 
-        	for i, v in pairs(game:GetService("Workspace").Terrain._Game.Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
-                	if mode == "true" then
-                        	v.CanTouch = false
-                	else
-                        	v.CanTouch = true
-                	end
-        	end
+		if kah_np == false then
+        		for i, v in pairs(game:GetService("Workspace").Terrain._Game.Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
+                		if mode == "true" then
+                        		v.CanTouch = false
+                		else
+                        		v.CanTouch = true
+                		end
+        		end
+		else
+        		for i, v in pairs(game:GetService("Workspace").Tabby.Jumps:GetChildren()) do -- also removes obby walls collision 
+                		if mode == "true" then
+                        		v.CanTouch = false
+                		else
+                        		v.CanTouch = true
+                		end
+        		end	
+		end
 	end)
 end
 
