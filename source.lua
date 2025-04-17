@@ -455,6 +455,8 @@ local backend_stuff = {
 	i_like_my_9jn_drippy_bruh = true
 }
 
+kah_np = (game.PlaceId == 14747334292) -- This checks if the game is KAH NP and fixes sh*t accordingly
+
 -- Stats when loading (Stats code at end)
 local Stats = {}
 Stats.starttime = os.clock()
@@ -471,8 +473,6 @@ local function startupScripts()
             	end
         end
 end
-
-kah_np = (game.PlaceId == 14747334292)
 
 -- Log Trap
 pcall(function()
@@ -4626,12 +4626,21 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Obby"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 2)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Obby"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -4643,12 +4652,21 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Obby"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 1)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+			for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Obby"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+			for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
