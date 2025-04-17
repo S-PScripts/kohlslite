@@ -103,12 +103,12 @@ getgenv().scriptname = "KohlsLite"
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.17"
+getgenv().klversion = "X1.171"
 
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.17", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.171", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -13802,7 +13802,7 @@ function TNOK(mode) -- vitalux cmd
                 		end
         		end
 		else
-        		for i, v in pairs(game:GetService("Workspace").Tabby.Jumps:GetChildren()) do -- also removes obby walls collision 
+        		for i, v in pairs(game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()) do -- also removes obby walls collision 
                 		if mode == "true" then
                         		v.CanTouch = false
                 		else
