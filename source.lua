@@ -13790,14 +13790,15 @@ function TNOK(mode) -- vitalux cmd
 		if not game:GetService("Workspace").Terrain._Game.Workspace.Obby:GetChildren() then
 			return 
 		end
+
+        	for i, v in pairs(game:GetService("Workspace").Terrain._Game.Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
+                	if mode == "true" then
+                        	v.CanTouch = false
+                	else
+                        	v.CanTouch = true
+                	end
+        	end
 	end)
-        for i, v in pairs(game:GetService("Workspace").Terrain._Game.Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
-                if mode == "true" then
-                        v.CanTouch = false
-                else
-                        v.CanTouch = true
-                end
-        end
 end
 
 -- PING
@@ -15548,7 +15549,7 @@ game.Players.PlayerRemoving:Connect(onPlayerLeaving)
 
 -- SUPER COMMAND
 function SuperCMD(supermessage)
-        for i = 1,amon do
+        for i = 1,ex_settings.amon do
                  Chat(supermessage)
                  task.wait()
         end
