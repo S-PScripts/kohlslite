@@ -1148,7 +1148,7 @@ local crash_settings = {
 -- Variables for moving
 local movestatus = false
 Kohls = workspace.Terrain:WaitForChild("_Game")
-Map = Kohls:WaitForChild("Workspace")
+--Map = Kohls:WaitForChild("Workspace")
 Admin = Kohls:WaitForChild("Admin")
 Pads = Admin:WaitForChild("Pads"):GetChildren()
 
@@ -4359,6 +4359,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 end        
                 DisCol()
 		if kah_np == false then
+			local Map = Kohls:WaitForChild("Workspace")
                 	if Map:FindFirstChild("Spawn1") then
                         	moveobject(Map:FindFirstChild("Spawn1"), 2)
                         	repeat fwait() until movestatus == false
@@ -4406,6 +4407,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 end        
                 DisCol()
 		if kah_np == false then
+			local Map = Kohls:WaitForChild("Workspace")
                 	if Map:FindFirstChild("Spawn1") then
                         	moveobject(Map:FindFirstChild("Spawn1"), 1)
                         	repeat fwait() until movestatus == false
