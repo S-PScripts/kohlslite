@@ -1,4 +1,5 @@
 -- Read all the information below before viewing the source.
+-- KOHLSLITE IS BEING MADE FOR NP SOON...
 
 --[[
  ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
@@ -15,6 +16,8 @@ Debugged with: https://glot.io/new/lua
 
 KohlsLite is a free, open-source script for the Roblox game created by agspureiam, Kohls Admin House (KAH).
 This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub). If there are any bugs in this script, please DM me.
+
+This will be one of the only KAH scripts that will work soon due to Roblox's chat update (30th APRIL 2025).
 
 You can play KAH (NBC version) here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
 You can also use it for KAH BC but barely anyone plays it. This script isn't recommended for KAH NP - it's not owned by agspureiam and there's a lot of things different.
