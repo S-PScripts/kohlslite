@@ -13787,9 +13787,9 @@ end
 -- temp NOK
 function TNOK(mode) -- vitalux cmd
 	pcall(function()
-		if game:GetService("Workspace").Terrain._Game.Workspace.Obby then
-		else
-		return end
+		if not game:GetService("Workspace").Terrain._Game.Workspace.Obby:GetChildren() then
+			return 
+		end
 	end)
         for i, v in pairs(game:GetService("Workspace").Terrain._Game.Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
                 if mode == "true" then
