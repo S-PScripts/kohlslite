@@ -124,10 +124,11 @@ end
 addcommand({
 	name = "cmds", -- not sure why in scv2 new it doesn't use the system that was created!
 	aliases = {"commands"},
-	description = "print out the commands for KohlsECO",
+	description = "print out the commands for KohlsLite NP",
 	funct = function()
+		Remind("Check your console for the list of commands [/console]")
 		print("Commands:")
-		print("\n\n\n")
+		print("\n\")
 		for i, v in pairs(commands) do
 			dupe = v.. " - ".. descriptions[v]
 			print(dupe)
