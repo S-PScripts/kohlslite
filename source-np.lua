@@ -9,7 +9,7 @@ getgenv().klnp_prefix = "."
 getgenv().klnp_version = "v0.00 Alpha"
 
 -- Variables for Chatted --
-local admin = {klnp_prefix = klnp_prefix, klnp_version = klnp_version}
+local admin = {klprefix = klnp_prefix, kl_version = klnp_version}
 local commands = {}
 local descriptions = {}
 
@@ -92,12 +92,12 @@ function addcommand(information)
 			if 0.5 > tick() - debounce then return else debounce = tick() end
 				msg = msg:lower()
 				args = msg:split(" ")
-				if args[1] == admin.klnp_prefix .. cmdName then
+				if args[1] == admin.klprefix .. cmdName then
 					cmdFunction()
 				end
 
 				for _, alias in ipairs(cmdAlias) do
-					if args[1] == admin.klnp_prefix .. alias then
+					if args[1] == admin.klprefix .. alias then
 					cmdFunction()
 					break
 				end
@@ -147,9 +147,14 @@ addcommand({
 		print("")
 		print("You are using KohlsLite NP by ScriptingProgrammer/ts2021/S-PScripts. This script has been maintained since 2025.")
 		print("For help, please contact me on Discord at ts2021.")
-		print("The version you are using is "..admin.klnp_version..".")
+		print("The version you are using is "..admin.klversion..".")
 	end
 })
+
+local antis = {
+    ["antikill"] = {},
+    ["antipunish"] = {}
+}
 
 -- Antis --
 addcommand({
@@ -157,12 +162,15 @@ addcommand({
 	aliases = {"antik"},
 	description = "turn on/off anti kill for a player",
 	funct = function()
-		local plrg = args[2]
-		if not getPlayer(plrg) then
-			Remind("Invalid player!")
-			return
+		if args[2] then
+			local plrg = args[2]
+			if not getPlayer(plrg) then
+				Remind("Invalid player!")
+				return
+			end
+			local plr = getPlayer(plrg)
+		else
 		end
-		local plr = getPlayer(plrg)
 	end
 })
 
