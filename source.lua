@@ -1147,9 +1147,11 @@ Admin = Kohls:WaitForChild("Admin")
 Pads = Admin:WaitForChild("Pads"):GetChildren()
 
 -- Variables for moving [old]
+--[[
 Game_Folder = game:GetService("Workspace").Terrain["_Game"]
 Workspace_Folder = Game_Folder.Workspace 
 Admin_Folder = Game_Folder.Admin
+]]
 
 -- These are all of the music ids I've saved in a musiclist.
 -- YOU SHOULD DO song instead of gmusic FOR BETTER ONES THESE ARE ONLY ONES I GOT FROM VIDEOS AND THEY SUCK
