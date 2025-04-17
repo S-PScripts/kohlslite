@@ -106,12 +106,12 @@ getgenv().scriptname = "KohlsLite"
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.17p"
+getgenv().klversion = "X1.18"
 
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.17p", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X1.18", -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -1148,6 +1148,7 @@ local crash_settings = {
 -- Variables for moving
 local movestatus = false
 Kohls = workspace.Terrain:WaitForChild("_Game")
+Map = Kohls:WaitForChild("Workspace")
 Admin = Kohls:WaitForChild("Admin")
 Pads = Admin:WaitForChild("Pads"):GetChildren()
 
@@ -4271,7 +4272,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                moveobject(game.Workspace.Terrain["_Game"].Workspace["Baseplate"], 2)
+                if kah_np == false then
+                	moveobject(game.Workspace.Terrain["_Game"].Workspace["Baseplate"], 2)
+		else
+			moveobject(game:GetService("Workspace").Tabby.Admin_House.Baseplate, 2)
+		end
                 repeat fwait() until movestatus == false
                 GravFix()
                 Chat("respawn me")
@@ -4290,7 +4295,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                moveobject(game.Workspace.Terrain["_Game"].Workspace["Baseplate"], 1)
+		if kah_np == false then
+                	moveobject(game.Workspace.Terrain["_Game"].Workspace["Baseplate"], 1)
+		else
+			moveobject(game:GetService("Workspace").Tabby.Admin_House.Baseplate, 1)
+		end
                 repeat fwait() until movestatus == false
                 GravFix()
                 Chat("respawn me")
@@ -4349,23 +4358,43 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end        
                 DisCol()
-                if Map:FindFirstChild("Spawn1") then
-                        moveobject(Map:FindFirstChild("Spawn1"), 2)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
-                task.wait(1)
-                if Map:FindFirstChild("Spawn2") then
-                        moveobject(Map:FindFirstChild("Spawn2"), 2)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
-                task.wait(1)
-                if Map:FindFirstChild("Spawn3") then
-                        moveobject(Map:FindFirstChild("Spawn3"), 2)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	if Map:FindFirstChild("Spawn1") then
+                        	moveobject(Map:FindFirstChild("Spawn1"), 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+                	task.wait(1)
+                	if Map:FindFirstChild("Spawn2") then
+                        	moveobject(Map:FindFirstChild("Spawn2"), 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+                	task.wait(1)
+                	if Map:FindFirstChild("Spawn3") then
+                        	moveobject(Map:FindFirstChild("Spawn3"), 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	if game:GetService("Workspace").Tabby.Admin_House.Spawn1 then
+                        	moveobject(game:GetService("Workspace").Tabby.Admin_House.Spawn1, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+                	task.wait(1)
+                	if game:GetService("Workspace").Tabby.Admin_House.Spawn2 then
+                        	moveobject(game:GetService("Workspace").Tabby.Admin_House.Spawn2, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+                	task.wait(1)
+                	if game:GetService("Workspace").Tabby.Admin_House.Spawn3 then
+                        	moveobject(game:GetService("Workspace").Tabby.Admin_House.Spawn3, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -4376,23 +4405,43 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end        
                 DisCol()
-                if Map:FindFirstChild("Spawn1") then
-                        moveobject(Map:FindFirstChild("Spawn1"), 1)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
-                task.wait(1)
-                if Map:FindFirstChild("Spawn2") then
-                        moveobject(Map:FindFirstChild("Spawn2"), 1)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
-                task.wait(1)
-                if Map:FindFirstChild("Spawn3") then
-                        moveobject(Map:FindFirstChild("Spawn3"), 1)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	if Map:FindFirstChild("Spawn1") then
+                        	moveobject(Map:FindFirstChild("Spawn1"), 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+                	task.wait(1)
+                	if Map:FindFirstChild("Spawn2") then
+                        	moveobject(Map:FindFirstChild("Spawn2"), 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+                	task.wait(1)
+                	if Map:FindFirstChild("Spawn3") then
+                        	moveobject(Map:FindFirstChild("Spawn3"), 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	if game:GetService("Workspace").Tabby.Admin_House.Spawn1 then
+                        	moveobject(game:GetService("Workspace").Tabby.Admin_House.Spawn1, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+                	task.wait(1)
+                	if game:GetService("Workspace").Tabby.Admin_House.Spawn2 then
+                        	moveobject(game:GetService("Workspace").Tabby.Admin_House.Spawn2, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+                	task.wait(1)
+                	if game:GetService("Workspace").Tabby.Admin_House.Spawn3 then
+                        	moveobject(game:GetService("Workspace").Tabby.Admin_House.Spawn3, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -4580,21 +4629,40 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                for _,v in pairs(workspace.Terrain._Game.Workspace["Obby Box"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 2)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
-                for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Obby"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 2)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Obby"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
+		if kah_np == false then
+                	for _,v in pairs(workspace.Terrain._Game.Workspace["Obby Box"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Snow:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
+
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'moveobby' then
@@ -4603,18 +4671,36 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                for _,v in pairs(workspace.Terrain._Game.Workspace["Obby Box"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 1)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
-                for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Obby"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 1)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Obby"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
+		if kah_np == false then
+                	for _,v in pairs(workspace.Terrain._Game.Workspace["Obby Box"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Snow:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -4678,12 +4764,21 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                for _,v in pairs(workspace.Terrain._Game.Workspace["Obby Box"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 2)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	for _,v in pairs(workspace.Terrain._Game.Workspace["Obby Box"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Snow:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -4695,12 +4790,21 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                for _,v in pairs(workspace.Terrain._Game.Workspace["Obby Box"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 1)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	for _,v in pairs(workspace.Terrain._Game.Workspace["Obby Box"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Snow:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -4711,12 +4815,21 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Admin Dividers"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 2)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Admin Dividers"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+			for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Grids:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -4727,12 +4840,21 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Admin Dividers"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 1)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Admin Dividers"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+			for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Grids:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -4743,12 +4865,21 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Basic House"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 2)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Basic House"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.House:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -4759,12 +4890,21 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Basic House"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 1)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Basic House"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.House:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -4775,12 +4915,21 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Building Bricks"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 2)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Building Bricks"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Build_Stuff:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 2)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -4791,12 +4940,21 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                         return 
                 end
                 DisCol()
-                for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Building Bricks"]:GetChildren()) do
-                        if allclear() == false then break end
-                        moveobject(v, 1)
-                        repeat fwait() until movestatus == false
-                        Chat("respawn me")
-                end
+		if kah_np == false then
+                	for _,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Building Bricks"]:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		else
+                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Build_Stuff:GetChildren()) do
+                        	if allclear() == false then break end
+                        	moveobject(v, 1)
+                        	repeat fwait() until movestatus == false
+                        	Chat("respawn me")
+                	end
+		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
