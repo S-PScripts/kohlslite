@@ -4170,7 +4170,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
 	local player = Players.LocalPlayer
 
-	function createGUI()
+	local function createGUI()
     		screenGui = Instance.new("ScreenGui")
     		screenGui.Name = "CommandBarGui"
     		screenGui.Parent = player:WaitForChild("PlayerGui")
@@ -4211,7 +4211,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'uncmdbar' then
-    	existingGui = player:FindFirstChild("PlayerGui"):FindFirstChild("CommandBarGui")
+    	existingGui = game.Players.LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("CommandBarGui")
     	if existingGui then
         	existingGui:Destroy()
         	Remind("Command bar removed!")
