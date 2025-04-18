@@ -2314,60 +2314,72 @@ print("Thank you for using KohlsLite. The version you are using is v"..getgenv()
 Remind("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by ScriptingProgrammer.")
 print("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
 Remind("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
-
---[[ if not game:GetService("GamePassService") then 
-	hasperm = false
-	haspersons = false
-	perm = true
-
-	print("\n")
-	print("- Perm check -")
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 66254) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 64354) then		
-		print("You've been given an admin pad even though you have the Perm Admin Gamepass.")
-		print("Roblox has broke GamePassService.")
-		print("Because of this, the Perm and Person299 gamepasses will not function.")
-	else		
-		print("You've been given an admin pad as you don't have the Perm Admin Gamepass. HOWEVER, DO NOT BUY PERM!")
-		print("Roblox has broke GamePassService.")
-		print("Because of this, the Perm and Person299 gamepasses will not function.")
+	
+-- Check user for Perm and Persons
+function checkPerm()	
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 66254) then
+		return true, "NBC"
 	end
 
-	print("\n")
-	print("- Persons check -")
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then		
-		print("You have Person299's Admin, but you will not have access to any KohlsLite commands that use P299.")
-		print("Roblox has broke GamePassService.")
-		print("Because of this, the Perm and Person299 gamepasses will not function.")
-	else
-		print("You do not have Person299's Admin, so you won't have access to KohlsLite commands that use P299. HOWEVER, DO NOT BUY PERSONS!")
-		print("Roblox has broke GamePassService.")
-		print("Because of this, the Perm and Person299 gamepasses will not function.")
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 64354) then
+		return true, "BC"
 	end
-	
-	print("\n")
-end ]]
-	
+
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, kahnp) then
+		return true, "NP"
+	end
+
+	return false, "N/A"
+end
+
+function checkPersons()	
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) then
+		return true, "NBC"
+	end
+
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then
+		return true, "BC"
+	end
+
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, kahnp) then
+		return true, "NP"
+	end
+
+	return false, "-"
+end
+
+hasperm, placetype = checkPerm()
+haspersons, placetype2 = checkPersons()
+
 print("\n")
 print("- Perm check -")
-if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 66254) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 64354) then
-        	perm = false 
-        	hasperm = true -- used
-        	print("A perm pad was not given as you have the Perm Admin gamepass!")
-else
-		perm = true 
+if hasperm then
+	if placetype == "NP" and (game.PlaceId == 112420803 or game.PlaceId == 115670532) then
 		hasperm = false
-        	print("A perm pad was given as you don't have the Perm Admin gamepass!")
+		perm = true
+		print("You have been given a perm pad since the Legacy Perm gamepass does not work for the official Kohls Admin House games (NBC/BC).")
+	else
+        	print("A perm pad was not given as you have the Perm Admin gamepass!")
+	end
+else
+	perm = true 
+        print("A perm pad was given as you don't have the Perm Admin gamepass!")
 end
 
 print("\n")
 print("- Persons check -")
-if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 35748) or game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 37127) then
-	haspersons = true -- used!
-	print("You have Person299's Admin! You have access to every KohlsLite command that use P299!")
+if haspersons then
+	if placetype2 == "NP" and (game.PlaceId == 112420803 or game.PlaceId == 115670532) then
+		haspersons = false
+		print("You will not have access to any KohlsLite commands that use Person299 since the Legacy P299 gamepass does not work for the official Kohls Admin House games (NBC/BC).")
+	else
+        	print("You have Person299's Admin! You have access to every KohlsLite command that use P299!")
+	end
 else
-	haspersons = false -- used!
-	print("You have Person299's Admin, so you will not have access to any KohlsLite commands that use P299.")
+        print("You do not have Person299's Admin, so you will not have access to any KohlsLite commands that use P299.")
 end
+
+
 print("\n") 
 
 Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
@@ -3928,30 +3940,128 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		Remind("Cleaned the server.") 
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'volm' then -- rap e
-        	local newVolume = tonumber(string.sub(msg:lower(), #prefix + 6))
-        	if newVolume ~= nil and game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
-                          game:GetService("Workspace").Terrain["_Game"].Folder.Sound.Volume = newVolume
-        	end
-    end
-
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'musicid' then
-        	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+		if kah_np == false then
+        		if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
                               print("Current music ID: "..game:GetService("Workspace").Terrain["_Game"].Folder.Sound.SoundId)
                               Remind("Current music ID: "..game:GetService("Workspace").Terrain["_Game"].Folder.Sound.SoundId)
-        	end
+        		end
+		else
+        		if game:GetService("Workspace").Sound then
+                              print("Current music ID: "..game:GetService("Workspace").Sound.SoundId)
+                              Remind("Current music ID: "..game:GetService("Workspace").Sound.SoundId)
+        		end
+		end
     end
 
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'cmusicid' then
 		if clipboard_available then
-			if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
-				Remind("Copied the music id to your clipboard.")
-                                local url = game:GetService("Workspace").Terrain["_Game"].Folder.Sound.SoundId
-                                local number = url:match("id=(%d+)")
-                                clipboard_available(number)
-        		end
+			if kah_np == false then
+				if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+					Remind("Copied the music id to your clipboard.")
+                                	local url = game:GetService("Workspace").Terrain["_Game"].Folder.Sound.SoundId
+                                	local number = url:match("id=(%d+)")
+                                	clipboard_available(number)
+				end
+			else
+				if game:GetService("Workspace").Sound then
+					Remind("Copied the music id to your clipboard.")
+                                	local url = game:GetService("Workspace").Sound.SoundId
+                                	local number = url:match("id=(%d+)")
+                                	clipboard_available(number)
+				end
+			end
 		else
 			Remind("Sorry, your exploit does not support this command (setclipboard)")
+		end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'volm' then -- rap e
+        	local newVolume = tonumber(string.sub(msg:lower(), #prefix + 6))
+		if kah_np == false then
+        		if newVolume ~= nil and game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+                        	game:GetService("Workspace").Terrain["_Game"].Folder.Sound.Volume = newVolume
+        		end
+		else
+	        	if newVolume ~= nil and game:GetService("Workspace").Sound then
+                        	game:GetService("Workspace").Sound.SoundId = newVolume
+        		end
+		end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cvol' then
+		if kah_np == false then
+              		if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+                              Remind("Current volume: "..game:GetService("Workspace").Terrain["_Game"].Folder.Sound.Volume)
+              		end        
+		else
+              		if game:GetService("Workspace").Sound then
+                              Remind("Current volume: "..game:GetService("Workspace").Sound.Volume)
+              		end   
+		end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timepos' then
+        	local tplace = tonumber(string.sub(msg:lower(), #prefix + 9))
+		if kah_np == false then
+              		if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+                        	game:GetService("Workspace").Terrain["_Game"].Folder.Sound.TimePosition = tplace 
+              		end
+		else
+              		if game:GetService("Workspace").Sound then
+                        	game:GetService("Workspace").Sound.TimePosition = tplace 
+              		end
+		end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'timeis' then
+		if kah_np == false then
+              		if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+                        	Remind("Current time position: "..game:GetService("Workspace").Terrain["_Game"].Folder.Sound.TimePosition)
+              		end     
+		else
+              		if game:GetService("Workspace").Sound then
+                        	Remind("Current time position: "..game:GetService("Workspace").Sound.TimePosition)
+              		end     
+		end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timedur' then
+		if kah_np == false then
+              		if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+                        	Remind("Time length: "..game:GetService("Workspace").Terrain["_Game"].Folder.Sound.TimeLength)
+              		end        
+		else
+             		if game:GetService("Workspace").Sound then
+                        	Remind("Time length: "..game:GetService("Workspace").Sound.TimeLength)
+              		end     
+		end
+    end
+
+   if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'timeplay' then
+	newPlaybackSpeed = tonumber(string.sub(msg:lower(), #prefix + 10))
+	if kah_np == false then
+        	local Sound = game:GetService("Workspace").Terrain["_Game"].Folder.Sound
+	else
+             	local Sound = game:GetService("Workspace").Sound
+	end
+	Sound.PlaybackSpeed = newPlaybackSpeed
+ 	for _, sound in ipairs(workspace:GetDescendants()) do
+                if sound:IsA("Sound") and sound.Playing then
+                    sound.PlaybackSpeed = newPlaybackSpeed
+                end
+        end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'timeps' then
+		if kah_np == false then
+              		if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+                        	Remind("The playback speed is: "..game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackSpeed)
+              		end   
+		else
+              		if game:GetService("Workspace").Sound then
+                        	Remind("The playback speed is: "..game:GetService("Workspace").Sound.PlaybackSpeed)
+              		end   
 		end
     end
 
@@ -3959,7 +4069,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		Loops.alog = true
 		Remind("The audiolog will save to your workspace.")
    end
-	
+
+   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'unalog' then
+		Loops.alog = false
+		Remind("Switched off the audiolog.")
+   end
+
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'audiolog' then
 		Loops.alog = true
 		Remind("The audiolog will save to your workspace.")
@@ -3969,53 +4084,6 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		Loops.alog = false
 		Remind("Switched off the audiolog.")
    end
-
-   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'unalog' then
-		Loops.alog = false
-		Remind("Switched off the audiolog.")
-   end
-
-    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cvol' then
-              if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
-                              Remind("Current volume: "..game:GetService("Workspace").Terrain["_Game"].Folder.Sound.Volume)
-              end        
-    end
-
-    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timepos' then
-              local tplace = tonumber(string.sub(msg:lower(), #prefix + 9))
-              if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
-                        game:GetService("Workspace").Terrain["_Game"].Folder.Sound.TimePosition = tplace 
-              end        
-    end
-
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'timeis' then
-              if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
-                        Remind("Current time position: "..game:GetService("Workspace").Terrain["_Game"].Folder.Sound.TimePosition)
-              end        
-    end
-
-    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timedur' then
-              if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
-                        Remind("Time length: "..game:GetService("Workspace").Terrain["_Game"].Folder.Sound.TimeLength)
-              end        
-    end
-
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'timeps' then
-              if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
-                        Remind("The playback speed is: "..game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackSpeed)
-              end        
-    end
-
-   if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'timeplay' then
-             newPlaybackSpeed = tonumber(string.sub(msg:lower(), #prefix + 10))
-             local Sound = game:GetService("Workspace").Terrain["_Game"].Folder.Sound
-             Sound.PlaybackSpeed = newPlaybackSpeed
- 	     for _, sound in ipairs(workspace:GetDescendants()) do
-                if sound:IsA("Sound") and sound.Playing then
-                    sound.PlaybackSpeed = newPlaybackSpeed
-                end
-            end
-    end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'audiolol' then
         music_related.audiotroll = true
@@ -5032,11 +5100,11 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'clearconsole' then
-	for i = 1, 500 do print("") end
+	for i = 1, 500 do print(" ") end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'clrconsole' then
-	for i = 1, 500 do print("") end
+	for i = 1, 500 do print(" ") end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'offmusic' then
@@ -5197,29 +5265,6 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	end
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fcrash' then
-	if crash_settings.skipwarncrash then -- idea from sinx
-		FCrash()
-		Remind("Freeeze Crashed the server.")
-	else
-		local response = Instance.new("BindableFunction")
-		function response.OnInvoke(answer)
-			if answer == "Yes" then
-		    		FCrash()
-				Remind("Freeze Crashed the server.")
-			end
-		end
-		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
-			Text = "Are you sure about this?",
-			Duration = math.huge,
-			Callback = response,
-			Button1 = "Yes",
-			Button2 = "No"
-		})
-	end
-    end
-
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'crash' then
 	local args = string.split(msg, " ")
 	if #args == 2 then 
@@ -5275,6 +5320,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'dcrash' then
+	if kah_np == true then return Remind("Dog crashing is not possible on KAH NP.") end
 	if crash_settings.skipwarncrash then -- idea from sinx
 		DCrash()
 		Remind("Dog Crashed the server.")
@@ -5302,10 +5348,35 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'silcrash' then
-	Remind("Which type? [dcrash/fcrash/scrash]")
+	Remind("There are three types. Run dcrash (dog), fcrash (freeze) or scrash (shield/rocket)")
     end
-		
+
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fcrash' then
+	if kah_np == true then return Remind("Freeze crashing is not possible on KAH NP.") end
+	if crash_settings.skipwarncrash then -- idea from sinx
+		FCrash()
+		Remind("Freeeze Crashed the server.")
+	else
+		local response = Instance.new("BindableFunction")
+		function response.OnInvoke(answer)
+			if answer == "Yes" then
+		    		FCrash()
+				Remind("Freeze Crashed the server.")
+			end
+		end
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "KohlsLite Manager",
+			Text = "Are you sure about this?",
+			Duration = math.huge,
+			Callback = response,
+			Button1 = "Yes",
+			Button2 = "No"
+		})
+	end
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'scrash' then -- not a silent crash!
+	if kah_np == true then return Remind("Shield crashing is not possible on KAH NP.") end
         if haspersons == false then
 Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
 Commands required: shield]])
@@ -6413,7 +6484,11 @@ return
                                 Chat("gear me 16969792")                                        
                                 Chat("gear me 73089190")
                 end
-		Remind("Client btools given.")
+		if kah_np == false then
+			Remind("Client btools given.")
+		else
+			Remind("Client btools given. Note: Server-side btools actually exist in KAH Legacy! Just do 'btools (plr)'.")
+		end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'clientbtools' then
@@ -13155,9 +13230,15 @@ task.spawn(function()
     end
 
     if music_related.audiotroll == true then
-                        if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
-                                game:GetService("Workspace").Terrain["_Game"].Folder.Sound.TimePosition = math.random(0,game:GetService("Workspace").Terrain["_Game"].Folder.Sound.TimeLength*100)/100
-                        end
+			if kah_np == false then
+                        	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+                                	game:GetService("Workspace").Terrain["_Game"].Folder.Sound.TimePosition = math.random(0,game:GetService("Workspace").Terrain["_Game"].Folder.Sound.TimeLength*100)/100
+                        	end
+			else
+                        	if game:GetService("Workspace"):FindFirstChild("Sound") then
+                                	game:GetService("Workspace").Sound.TimePosition = math.random(0,game:GetService("Workspace").Sound.TimeLength*100)/100
+                        	end
+			end
     end
 
     if music_related.mymusiconly == true then -- ii's admin since mine had a small bug and was also messy
@@ -16896,8 +16977,13 @@ task.spawn(function()
 	while true do
 		task.wait(0)
 		if Loops.alog then
-			if workspace.Terrain["_Game"].Folder:FindFirstChild("Sound") then
-				musicid = workspace.Terrain["_Game"].Folder:FindFirstChild("Sound").SoundId
+			if kah_np == false then
+				beaner = workspace.Terrain["_Game"].Folder:FindFirstChild("Sound")
+			else
+				beaner = game:GetService("Workspace"):FindFirstChild("Sound")
+			end
+			if beaner then
+				musicid = beaner.SoundId
 				if not table.find(musiclog, musicid) then
 					print("The song being played is "..workspace.Terrain["_Game"].Folder:FindFirstChild("Sound").SoundId)
                                 	nmusicid = musicid:match("id=(%d+)")
@@ -16990,7 +17076,6 @@ function rbase()
 end
 
 function rfog(deranged)
-
 		local RainbowValue = 0
 		Loops.rfog = true
     		repeat task.wait(0.05)
@@ -18718,6 +18803,11 @@ if getgenv().kohlsgui then
 end
 
 Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
+
+if kah_np == true then
+	print("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.")
+	Remind("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.", 3)
+end
 
 -- From Infinite Yield
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
