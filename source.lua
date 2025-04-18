@@ -1116,10 +1116,22 @@ local antisplayers = { -- Antis for specific players
 }
 
 autos = {
+	-- Auto forcefield (plr, all)
 	autoff = false,
 	autoffa = false,
+
+	-- Autogod (plr, all)
 	autogod = false,
-	-- autogoda = false,
+	autogoda = false,
+
+	-- Fogend visualiser
+	fogdance = false,
+
+	-- CRAZY COLOURS
+	ccolours = false,
+	ccolours_id = 10, -- crazy colours fogend
+	
+	-- IGNORE THESE
 	tempautoff = false,
 	tempautogod = false
 }
@@ -2938,25 +2950,25 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         end
 
         if string.sub(msg, 1, #prefix + 6)  == prefix..'fogvis' then -- fonalc funny var
-                fogdance = true
+                autos.fogdance = true
 		Remind("Fog visualiser is now on!")
         end
 
         if string.sub(msg, 1, #prefix + 8)  == prefix..'unfogvis' then -- fonalc funny var
-                fogdance = false
+                autos.fogdance = false
                 task.wait(0.5)
                 Chat("fix")
 		Remind("Fog visualiser is now off!")
         end
 
         if string.sub(msg, 1, #prefix + 4)  == prefix..'ccol' then
-                Chat("fogend 0")
-                ccolours = true
+                autos.ccolours_id = tonumber(string.sub(msg:lower(), #prefix + 6))
+                autos.ccolours = true
 		Remind("Crazy colours!")
         end
 
         if string.sub(msg, 1, #prefix + 6)  == prefix..'unccol' then
-                ccolours = false
+                autos.ccolours = false
                 task.wait(0.5)
                 Chat("fix")
 		Remind("No more crazy colours!")
@@ -9785,13 +9797,37 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'autogod' then
-        autos.autogod = true
-        Remind("Auto god is on!")
+	local args = string.split(msg, " ")
+        if args[2] == "me" then
+                autos.autogod = true
+                Remind("Auto god is on for you!")
+        elseif args[2] == "others" then
+		autos.autogoda = true
+                Remind("Auto god is on for others!")
+        elseif args[2] == "all" then
+                autos.autogod = true
+		autos.autogoda = true
+                Remind("Auto god is on for everyone!")
+        else
+                Remind("Invalid argument: Must be me, others, or all")
+        end    
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unautogod' then
-        autos.autogod = false
-        Remind("Auto god is off!")
+	local args = string.split(msg, " ")
+        if args[2] == "me" then
+                autos.autogod = false
+                Remind("Auto god is off for you!")
+        elseif args[2] == "others" then
+		autos.autogoda = false
+                Remind("Auto god is off for others!")
+        elseif args[2] == "all" then
+                autos.autogod = false
+		autos.autogoda = false
+                Remind("Auto god is off for everyone!")
+        else
+                Remind("Invalid argument: Must be me, others, or all")
+        end  
     end      
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'autochar' then
@@ -11515,7 +11551,19 @@ connections[#connections + 1] =
 					end
 				end
 
-                                 if checkperm2 == true then
+		       		if autos.autogoda == true then
+					if v.Character then
+						if v.Character.Humanoid then
+            						if tostring(v.Character.Humanoid.MaxHealth) ~= "inf" then
+                    						Chat("god "..v.Name)
+                    						v.Character.Humanoid.MaxHealth = math.huge
+                    						v.Character.Humanoid.Health = 9e9           
+							end
+						end
+        				end
+        			end
+		
+                                if checkperm2 == true then
                                          if v.Character then
 						if v.Character:FindFirstChild("ForceField") then
                                                 	if not table.find(gamepasses.permusers, v.Name) then
@@ -13604,16 +13652,23 @@ end
 task.spawn(function()
    while true do
         task.wait(0.1) -- rate limit
-        if fogdance == true then
-                        if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
-                                        pbl = game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackLoudness / 10
+        if autos.fogdance == true then
+			if kah_np == false then
+                        	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+                                	pbl = game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackLoudness / 10
                                         Chat("fogend "..pbl)
-                        end
+                        	end
+			else
+				if game:GetService("Workspace"):FindFirstChild("Sound") then
+					pbl = game:GetService("Workspace"):FindFirstChild("Sound").PlaybackLoudness / 10
+					Chat("fogend "..pbl)
+				end
+			end
         end
 
-        if ccolours == true then
-			if game.Lighting.FogEnd ~= 0 then
-            					Chat("fogend 0")
+        if autos.ccolours == true then
+			if game.Lighting.FogEnd ~= auto.ccolours_id then
+            					Chat("fogend "..auto.ccolours_id)
         		end
                         Chat("fogcolor " ..tostring(math.random(0, 255)) .." " .. tostring(math.random(0, 255)) .. " " .. tostring(math.random(0, 255)))
         end
