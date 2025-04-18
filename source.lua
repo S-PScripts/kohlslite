@@ -10885,15 +10885,23 @@ task.spawn(function()
                         if not game.Lighting:FindFirstChild(v.Name) then
                                 local isB,spe = bypassattemptcheck(v.Name)
                                 if isB then
-                                        Chat('punish '.. spe)
+                                	Chat('punish '.. spe)
                                         Chat('blind '.. spe)
 					Chat('skydive '.. spe)
-                                        Chat("pm "..spe.." Sorry, this server is locked!")
+					if mainbar_stuff.watermark_kl then
+                                        	Chat("pm "..spe.." [KohlsLite]: Sorry, this server is locked!")
+					else
+						Chat("pm "..spe.." Sorry, this server is locked!")
+					end
                                 else
-                                         Chat('punish '..v.Name)
-                                         Chat('blind '..v.Name)   
-                                         Chat('skydive '..v.Name)        
-                                         Chat("pm "..v.Name.." Sorry, this server is locked!")
+                                	Chat('punish '..v.Name)
+                                        Chat('blind '..v.Name)   
+                                        Chat('skydive '..v.Name)        
+					if mainbar_stuff.watermark_kl then
+                                        	Chat("pm "..v.Name.." [KohlsLite]: Sorry, this server is locked!")
+					else
+						Chat("pm "..v.Name.." Sorry, this server is locked!")
+					end
                                 end
                         end
                     elseif table.find(blacklist, v.Name) then
@@ -10903,12 +10911,20 @@ task.spawn(function()
                                         Chat('punish '.. spe)
                                         Chat('blind '.. spe)
 					Chat('skydive '.. spe)
-                                        Chat("pm "..spe.." Sorry, you are blacklisted from this server!")
+					if mainbar_stuff.watermark_kl then
+                                        	Chat("pm "..spe.." [KohlsLite]: Sorry, you are blacklisted from this server!")
+					else
+						Chat("pm "..spe.." Sorry, you are blacklisted from this server!")
+					end
                                 else
-                                         Chat('punish '..v.Name)
-                                         Chat('blind '..v.Name)   
-                                         Chat('skydive '..v.Name)        
-                                         Chat("pm "..v.Name.." Sorry, you are blacklisted from this server!")
+                                        Chat('punish '..v.Name)
+                                        Chat('blind '..v.Name)   
+                                        Chat('skydive '..v.Name)     
+					if mainbar_stuff.watermark_kl then
+                                        	Chat("pm "..v.Name.." [KohlsLite]: Sorry, you are blacklisted from this server!")
+					else
+						Chat("pm "..v.Name.." Sorry, you are blacklisted from this server!")
+					end
                                 end
                         end
                     elseif table.find(newplrslocked, v.Name) and mainbar_stuff.newplrautoslock == true then
@@ -10917,13 +10933,21 @@ task.spawn(function()
                                 if isB then
                                         Chat('punish '.. spe)
                                         Chat('blind '.. spe)
-	                                Chat('skydive '..spe)        
-                                        Chat("pm "..spe.." Sorry, you are blacklisted for having an account under the account age limit!")
+	                                Chat('skydive '..spe)      
+					if mainbar_stuff.watermark_kl then
+                                        	Chat("pm "..spe.." [KohlsLite]: Sorry, you are blacklisted for having an account under the account age limit!")
+					else
+						Chat("pm "..spe.." Sorry, you are blacklisted for having an account under the account age limit!")
+					end
                                 else
                                         Chat('punish '..v.Name)
                                         Chat('blind '..v.Name)
 	                                Chat('skydive '..v.Name)
-                                        Chat("pm "..v.Name.." Sorry, you are blacklisted for having an account under the account age limit!")
+					if mainbar_stuff.watermark_kl then
+                                        	Chat("pm "..v.Name.." [KohlsLite]: Sorry, you are blacklisted for having an account under the account age limit!")
+					else
+						Chat("pm "..v.Name.." Sorry, you are blacklisted for having an account under the account age limit!")
+					end
                                 end
                         end
                     elseif mainbar_stuff.superchargeslock == true then
@@ -12837,21 +12861,33 @@ function PLRSTART(v)
                     if string.sub(msg:lower(), 0, 9) == "/c system" and v.Name ~= game.Players.LocalPlayer.Name then
                         if player_relate.PingCsystem then
                             print(v.Name .. " is using /c system.")
-                            Chat("h \n\n\n\n\n " .. v.Name .. " is using /c system. Sneaky! \n\n\n\n\n")
+			    if mainbar_stuff.watermark_kl then
+                            	Chat("h \n\n\n\n\n [KohlsLite]: " .. v.Name .. " is using /c system. Sneaky! \n\n\n\n\n")
+			    else
+				Chat("h \n\n\n\n\n " .. v.Name .. " is using /c system. Sneaky! \n\n\n\n\n")
+			    end
                         end
                     end
 
                     if string.sub(msg:lower(), 0, 2) == "/w" and v.Name ~= game.Players.LocalPlayer.Name then
                         if player_relate.PingCsystem then
                             print(v.Name .. " is using whispering commands.")
-                            Chat("h \n\n\n\n\n " .. v.Name .. " is using whispering commands. I know everything... \n\n\n\n\n")
+			    if mainbar_stuff.watermark_kl then
+                            	Chat("h \n\n\n\n\n [KohlsLite]: " .. v.Name .. " is using whispering commands. I know everything... \n\n\n\n\n")
+			    else
+                            	Chat("h \n\n\n\n\n " .. v.Name .. " is using whispering commands. I know everything... \n\n\n\n\n")
+			    end
                         end
                     end
 
                     if (string.sub(msg:lower(), 0, 4) == "logs" or string.sub(msg:lower(), 0, 5) == ":logs") and v.Name ~= game.Players.LocalPlayer.Name then
                         if player_relate.PingLogs then
                             print(v.Name .. " is using logs.")
-                            Chat("h \n\n\n\n\n " .. v.Name .. " is using logs. What are they trying to see? \n\n\n\n\n")
+			    if mainbar_stuff.watermark_kl then
+                            	Chat("h \n\n\n\n\n [KohlsLite]: " .. v.Name .. " is using logs. What are they trying to see? \n\n\n\n\n")
+			    else
+                            	Chat("h \n\n\n\n\n " .. v.Name .. " is using logs. What are they trying to see? \n\n\n\n\n")
+			    end
                         end
                         if player_relate.AntiLogs then
 			    	if player_relate.logmode == "default" then
@@ -13186,11 +13222,11 @@ function PLRSTART(v)
 			
                 elseif string.sub(command, 1, 5) == "hint " then
                     local message = string.sub(command, 6)
-                    Chat("h " .. v.Name .. ": " .. message)
+                    Chat("h \n\n\n\n\n " .. v.Name .. ": " .. message .. "\n\n\n\n\n")
 			
                 elseif string.sub(command, 1, 2) == "h " then
                     local message = string.sub(command, 3)
-                    Chat("h " .. v.Name .. ": " .. message)
+                    Chat("h \n\n\n\n\n " .. v.Name .. ": " .. message .. "\n\n\n\n\n")
 			
                 elseif string.sub(command, 1, 4) == "logs" then
                     Chat("pm " .. v.Name .. " I can't make you see logs because it's client-sided. Sorry!")
@@ -13368,7 +13404,11 @@ task.spawn(function()
                                 if pad.Name == player.."'s admin" then
                                         Chat("respawn "..player)
 					if player_relate.blwl_an then
-                                        	Chat("h \n\n\n\n\n Sorry, "..player..", you're banned from using the admin pads! \n\n\n\n\n")
+						if mainbar_stuff.watermark_kl then
+                                        		Chat("h \n\n\n\n\n [KohlsLite]: Sorry, "..player..", you're banned from using the admin pads! \n\n\n\n\n")
+						else
+							Chat("h \n\n\n\n\n Sorry, "..player..", you're banned from using the admin pads! \n\n\n\n\n")
+						end
 					end
                                         Regen()
                                 end
@@ -13386,7 +13426,11 @@ task.spawn(function()
                                 if times >= 2 then
                                         Chat("respawn "..v.Name)
 					if player_relate.blwl_an then
-                                        	Chat("h \n\n\n\n\n The pads have been reset because "..v.Name.." tried to take them all! \n\n\n\n\n")
+						if mainbar_stuff.watermark_kl then
+                                        		Chat("h \n\n\n\n\n [KohlsLite]: The pads have been reset because "..v.Name.." tried to take them all! \n\n\n\n\n")
+						else
+                                        		Chat("h \n\n\n\n\n The pads have been reset because "..v.Name.." tried to take them all! \n\n\n\n\n")
+						end
 					end
                                         Regen()
                                 end
@@ -16012,18 +16056,38 @@ function onPlayerAdded(player)
 
 		if player_relate.welcomemsg == true then
         		if table.find(whitelist, player.Name) then
-         			Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You are whitelisted from serverlocks! \n\n\n\n\n")
+				if mainbar_stuff.watermark_kl then
+         				Chat("h \n\n\n\n\n [KohlsLite]: Welcome to the server, " .. player.DisplayName .. ". You are whitelisted from serverlocks! \n\n\n\n\n")
+				else
+					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You are whitelisted from serverlocks! \n\n\n\n\n")
+				end
 			elseif table.find(GWhitelisted, player.Name) then
-				Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You are whitelisted to use any gear! \n\n\n\n\n")
+				if mainbar_stuff.watermark_kl then
+         				Chat("h \n\n\n\n\n [KohlsLite]: Welcome to the server, " .. player.DisplayName .. ". You are whitelisted to use any gear! \n\n\n\n\n")
+				else
+					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You are whitelisted to use any gear! \n\n\n\n\n")
+				end
 			elseif table.find(FAdmins, player.Name) then
-	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You have been given free admin! \n\n\n\n\n")
+				if mainbar_stuff.watermark_kl then
+         				Chat("h \n\n\n\n\n [KohlsLite]: Welcome to the server, " .. player.DisplayName .. ". You have been given free admin! \n\n\n\n\n")
+				else
+					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You have been given free admin! \n\n\n\n\n")
+				end
 			elseif admin_stuff.alladmin then
-	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". This server has free admin! \n\n\n\n\n")
+				if mainbar_stuff.watermark_kl then
+         				Chat("h \n\n\n\n\n [KohlsLite]: Welcome to the server, " .. player.DisplayName .. ". This server has free admin! \n\n\n\n\n")
+				else
+					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". This server has free admin! \n\n\n\n\n")
+				end
 			else
-	         		Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". This server is protected by KohlsLite. \n\n\n\n\n")
+				if mainbar_stuff.watermark_kl then
+         				Chat("h \n\n\n\n\n [KohlsLite]: Welcome to the server, " .. player.DisplayName .. ". This server is protected by KohlsLite. \n\n\n\n\n")
+				else
+					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". This server is protected by KohlsLite. \n\n\n\n\n")
+				end
 			end
 		end
-	
+
 		print(player.Name.." joined the server.")
         	Remind(player.Name.." joined the server.")
     end
@@ -16044,10 +16108,15 @@ end
 function onPlayerLeaving(player)
     task.wait(0)
     if player_relate.welcomemsg == true then
+	if mainbar_stuff.watermark_kl then
+             Chat("h \n\n\n\n\n [KohlsLite]: Goodbye, " .. player.DisplayName .. ". \n\n\n\n\n")
+	else
              Chat("h \n\n\n\n\n Goodbye, " .. player.DisplayName .. ". \n\n\n\n\n")
-             print(player.Name.." left the server.")
-             Remind(player.Name.." left the server.")
+	end
     end
+
+    print(player.Name.." left the server.")
+    Remind(player.Name.." left the server.")
 
     if table.find(list_on_sight.rkick_on_sight, player.Name) then
                 kicking = false
