@@ -12959,6 +12959,15 @@ connections[#connections + 1] =
 				end
 			end
 		end
+
+		-- kohlsnoob
+		if antis.antifling and ch.Name == "BFRC" and ch:IsDescendantOf(workspace:WaitForChild(game.Players.LocalPlayer.Name)) then
+			workspace:WaitForChild(game.Players.LocalPlayer.Name).Humanoid.Sit = false
+			workspace:WaitForChild(game.Players.LocalPlayer.Name).Torso.AssemblyLinearVelocity = Vector3.new(0,0,0)
+			game:GetService('RunService').Heartbeat:Wait()
+			ch:Destroy()
+			workspace:WaitForChild(game.Players.LocalPlayer.Name).Torso.AssemblyLinearVelocity = Vector3.new(0,0,0)
+		end
 	end)
 
 -- Backpack checker
@@ -18728,70 +18737,6 @@ if getgenv().kohlsgui then
 	 	}
 	)
 end
-
--- Credits to trollfacenan (bumanoid)!
-pcall(function()
-if game.PlaceId == 112420803 then
-local lplr = game:GetService("Players").LocalPlayer
-local char = lplr.Character
-
-if not lplr.Character:FindFirstChild("Torso") then
-	repeat task.wait() until lplr.Character:FindFirstChild("Torso")
-	tor = lplr.Character:FindFirstChild("Torso")
-end
-
-local oldvel = tor.Velocity
-
-connections[#connections + 1] =
-    tor.Changed:Connect(function()
-        if tor.Velocity == Vector3.new(0, 0, 0) then
-            tor.Velocity = oldvel
-        end
-    end)
-
-connections[#connections + 1] =
-    tor.ChildAdded:Connect(function(v)
-        if v:IsA("BodyForce") and antis.antifling then
-            v.Force = Vector3.new(0, 0, 0)
-            char:FindFirstChildOfClass("Humanoid").Sit = false
-            task.wait()
-            char:FindFirstChildOfClass("Humanoid").Sit = false
-            game:GetService("Debris"):AddItem(v, 0)
-            repeat
-                game:GetService("RunService").RenderStepped:Wait()
-            until not v
-        end
-    end)
-
-connections[#connections + 1] =
-    lplr.CharacterAdded:Connect(function()
-	
-        tor = game:GetService("Players").LocalPlayer.Character:WaitForChild("Torso")
-        oldvel = tor.Velocity
-
-        tor.ChildAdded:Connect(function(v)
-                if v:IsA("BodyForce") and antis.antifling then
-                    v.Force = Vector3.new(0, 0, 0)
-                    char:FindFirstChildOfClass("Humanoid").Sit = false
-                    task.wait()
-                    char:FindFirstChildOfClass("Humanoid").Sit = false
-                    game:GetService("Debris"):AddItem(v, 0)
-                    repeat
-                        game:GetService("RunService").RenderStepped:Wait()
-                    until not v
-                end
-        end)
-
-        tor.Changed:Connect(function()
-                if tor.Velocity == Vector3.new(0, 0, 0) then
-                    tor.Velocity = oldvel
-                end
-        end)
-    end)
-else
-	print("Anti-fling disabled (BC) due to minor differences compared to NBC")
-end
-end)
 
 -- Anti mesh
 connections[#connections + 1] =
