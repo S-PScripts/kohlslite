@@ -1036,7 +1036,8 @@ antis = {
     antisetgrav = false,
     antiswag = false,
     antimesh = true,
-    antifling = false
+    antifling = false,
+    antisize = false,
 }
 
 -- This is everyone except you
@@ -1073,7 +1074,8 @@ local antisall = {
     antisetgrav = false,
     antiswag = false,
     antimesh = true,
-    antifling = false
+    antifling = false,
+    antisize = false
 }
 
 -- This is NOT implemented due to lack of interest; you'll have to do that yourself.
@@ -9620,6 +9622,40 @@ return
         end       
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antisize' then
+        local args = string.split(msg, " ")
+        if args[2] == "me" then
+                antis.antisize = true
+                Remind("Turned this anti on for you!")
+        elseif args[2] == "others" then
+                antisall.antisize = true
+                Remind("Turned this anti on for others!")
+        elseif args[2] == "all" then
+                antis.antisize = true
+                antisall.antisize = true
+                Remind("Turned this anti on for everyone!")
+        else
+                Remind("Invalid argument: Must be me, others, or all")
+        end       
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantisize' then
+        local args = string.split(msg, " ")
+        if args[2] == "me" then
+                antis.antisize = false
+                Remind("Turned this anti off for you!")
+        elseif args[2] == "others" then
+                antisall.antisize = false
+                Remind("Turned this anti off for others!")
+        elseif args[2] == "all" then
+                antis.antisize = false
+                antisall.antisize = false
+                Remind("Turned this anti off for everyone!")
+        else
+                Remind("Invalid argument: Must be me, others, or all")
+        end       
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antichat' then
         ws_antis.antichat = true
         antis.antimessage = true -- stop you from crashing :)
@@ -11371,6 +11407,17 @@ connections[#connections + 1] =
 			end
         	end
         end
+
+        if antis.antisize == true then
+		if lp.Character then
+            		if lp.Character:FindFirstChild("Torso") then
+				if lp.Character.Torso.Size.Y ~= 2 then
+                			Chat("unsize me")
+				end
+			end
+        	end
+        end
+
     end)
 
 -- anti chat/msg-crash
@@ -11671,6 +11718,15 @@ connections[#connections + 1] =
                                         end
                                 end
 
+        			if antisall.antisize == true then
+					if v.Character then
+            					if v.Character:FindFirstChild("Torso") then
+							if v.Character.Torso.Size.Y ~= 2 then
+                						Chat("unsize "..v.Name)
+							end
+						end
+        				end
+       			 	end
                         end                
                 end
 end)
