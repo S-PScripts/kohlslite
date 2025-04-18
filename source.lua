@@ -7401,7 +7401,7 @@ return
                  if player ~= nil then
                         xplayer = player
                         xplr = cplr
-                        Gearban(xplayer, xplr)
+                        Gearban(xplayer, xplr, 1)
                  else
                         Remind('Cannot find player with the name: '..dasplayer)
                  end
@@ -7413,7 +7413,19 @@ return
                  if player ~= nil then
                         xplayer = player
                         xplr = cplr
-                        Gearban(xplayer, xplr)
+                        Gearban(xplayer, xplr, 1)
+                 else
+                        Remind('Cannot find player with the name: '..dasplayer)
+                 end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cage' then
+                 local dasplayer = string.sub(msg:lower(), #prefix + 6)
+                 PLAYERCHECK(dasplayer)
+                 if player ~= nil then
+                        xplayer = player
+                        xplr = cplr
+                        Gearban(xplayer, xplr, 2)
                  else
                         Remind('Cannot find player with the name: '..dasplayer)
                  end
@@ -16317,7 +16329,7 @@ function FastPads()
 end
 
 -- GEARBAN
-function Gearban(xplayer, xplr)
+function Gearban(xplayer, xplr, mode)
         Chat("gear me 82357101")
         Chat("unff all")
         Chat("speed " ..xplayer.. " 0")
@@ -16328,7 +16340,13 @@ function Gearban(xplayer, xplr)
         local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("PortableJustice")
         tool.Parent = game.Players.LocalPlayer.Character
         tool.MouseClick:FireServer(cappy)
-        task.wait(1)                         
+        task.wait(1)     
+	if mode == 1 then
+		Chat("reload ".. xplayer)
+		if player_relate.blwl_an then
+			Chat("h \n\n\n\n\n " .. xplayer .. " got gearbanned! WHAT A SHAME. \n\n\n\n\n")
+		end
+	end
         tool:Destroy()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
         Chat("ungear me")
@@ -17089,7 +17107,7 @@ function SpHammer()
 			else
 				table.insert(blacklist, p.Parent.Name)
 			end
-		        Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got banned for touching my hammer >:) \n\n\n\n\n")
+		        if player_relate.blwl_an then Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got banned for touching my hammer >:) \n\n\n\n\n") end
 	        end
 
 	        if mode == "wl" then
@@ -17098,7 +17116,7 @@ function SpHammer()
 			else
 				table.insert(whitelist, p.Parent.Name)
 			end
-		        Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got whitelisted for touching my hammer! Wow! \n\n\n\n\n")
+		        if player_relate.blwl_an then Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got whitelisted for touching my hammer! Wow! \n\n\n\n\n") end
 	        end
 
 	        if mode == "gearwl" or mode == "gwl" then
@@ -17107,7 +17125,7 @@ function SpHammer()
 			else
 				table.insert(GWhitelisted, p.Parent.Name)
 			end
-		        Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got gear-whitelisted for touching my hammer! Wow! \n\n\n\n\n")
+		        if player_relate.blwl_an then Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got gear-whitelisted for touching my hammer! Wow! \n\n\n\n\n") end
 	        end
 
 	        if mode == "pban" then
@@ -17116,7 +17134,7 @@ function SpHammer()
 			else
 				table.insert(padbanned, p.Parent.Name)
 			end
-		        Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got pad-banned for touching my hammer >:) \n\n\n\n\n")
+		        if player_relate.blwl_an then Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got pad-banned for touching my hammer >:) \n\n\n\n\n") end
 	        end
                 
 	        if mode == "furry" or mode == "fur" then
