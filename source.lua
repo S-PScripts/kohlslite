@@ -455,7 +455,11 @@ local backend_stuff = {
 	i_like_my_9jn_drippy_bruh = true
 }
 
-kah_np = (game.PlaceId == 14747334292) -- This checks if the game is KAH NP and fixes sh*t accordingly
+-- Thorn Anti Temp (DO NOT EDIT THIS)
+local thorn_ig_anti = {
+}
+
+kah_np = (game.PlaceId == 14747334292) -- This checks if the game is KAH NP and fixes stuff accordingly
 
 -- Stats when loading (Stats code at end)
 local Stats = {}
@@ -594,10 +598,9 @@ local pgwl = {
 local exempt_from_thorns = {
 }
 
--- Thorn Anti Temp (DO NOT EDIT THIS)
-local thorn_ig_anti = {
+-- People that can use your KohlsLite commands
+local kl_wlst = {
 }
-
 -- Perm thorn whitelist
 local peft = {
     "me_123eq",
@@ -3864,6 +3867,15 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         end   
         Remind("Started the music!")
     end
+
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'resumem' then
+        for i, v in pairs(game:GetService("Workspace").Terrain["_Game"].Folder:GetDescendants()) do
+                if v:IsA("Sound") then
+                    v:Resume()
+                end
+        end   
+        Remind("Resumed the music!")
+    end
 		
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'stops' then
         for i, v in pairs(game:GetDescendants()) do
@@ -3883,6 +3895,15 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         Remind("Started sounds!")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'resumes' then
+        for i, v in pairs(game:GetDescendants()) do
+                if v:IsA("Sound") then
+                    v:Resume()
+                end
+        end   
+        Remind("Resumed sounds!")
+    end
+		
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'deiv' then -- ported from simplekah
 			mainbar_stuff.gjdelock = false
                         Chat("h \n\n\n\n\n Domain Expansion: Infinity Void \n\n\n\n\n")
@@ -13190,7 +13211,11 @@ function PLRSTART(v)
                 end
 
                 if string.sub(command, 1, 1) == prefix then -- so THEY don't use YOU!
-                    command = ""
+                    if table.find(kl_wlst, v.Name) then
+			--
+		    else
+			command = ""
+		    end
                 end
 
                 if string.sub(command, 1, 5) == "music" then
@@ -16968,11 +16993,15 @@ function SpHammer()
 		print("smite - Paints the player black and explodes them")
 		print("fling - Flings the player")
 		print("label - Labels the player a random name from the list")
-		print("furry - Turns them into a rawrrrrrrrrrrrrrrrrrrrrrrrr (furry)")
+		print("furry - Turns them into a furry")
 		print("fem - Turns the player into a maid")
 		print("color - Paints the player a random colour")
-		print("duck - Turns them into a quack quack (duck)")
-
+		print("duck - Turns them into a duck")
+		print("bl - Blacklist the player")
+		print("wl - Whitelist the player")
+		print("gearwl - Gear Whitelist the player")
+		print("pban - Padban the player")
+	
 		print("- Script by iiDk, ported for KohlsLite. -")
 
         end
@@ -17052,6 +17081,42 @@ function SpHammer()
 	        if mode == "label" then
 		        sound = 12222140
 		        Chat("name "..p.Parent.Name.." "..phrases[math.random(1,#phrases)])
+	        end
+
+	        if mode == "bl" or mode == "ban" then
+			if table.find(blacklist, p.Parent.Name) then 
+				--
+			else
+				table.insert(blacklist, p.Parent.Name)
+			end
+		        Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got banned for touching my hammer >:) \n\n\n\n\n")
+	        end
+
+	        if mode == "wl" then
+			if table.find(whitelist, p.Parent.Name) then 
+				--
+			else
+				table.insert(whitelist, p.Parent.Name)
+			end
+		        Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got whitelisted for touching my hammer! Wow! \n\n\n\n\n")
+	        end
+
+	        if mode == "gearwl" or mode == "gwl" then
+			if table.find(GWhitelisted, p.Parent.Name) then 
+				--
+			else
+				table.insert(GWhitelisted, p.Parent.Name)
+			end
+		        Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got gear-whitelisted for touching my hammer! Wow! \n\n\n\n\n")
+	        end
+
+	        if mode == "pban" then
+			if table.find(padbanned, p.Parent.Name) then 
+				--
+			else
+				table.insert(padbanned, p.Parent.Name)
+			end
+		        Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got pad-banned for touching my hammer >:) \n\n\n\n\n")
 	        end
                 
 	        if mode == "furry" or mode == "fur" then
