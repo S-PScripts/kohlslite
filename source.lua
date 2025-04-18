@@ -1931,6 +1931,21 @@ local function replaceArgs2(name, args2)
     return string.gsub(name, "%[args2%]", args2)
 end
 
+
+-- Saved animations
+local animationlist = {
+    armturbine = {"259438880", 100},
+    loophead = {"35154961", 640, true, 0.00703125},
+    laydown = {"282574440", 1},
+    dab = {"248263260", 1},
+    hmmm = {"148840371", 1},
+    scream = {"180611870", 1},
+    headthrow = {"35154961", 1},
+    raisehead = {"121572214", 1},
+    crouch = {"182724289", 1},
+    movingdance = {"429703734", 1},
+}
+
 -- Saved chars
 local charlist = {
     ["furry"] = { charid = "4844006008" }, -- 1
@@ -10177,6 +10192,22 @@ return
 	end
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix.."animation" then
+	local anim_name = msg:sub(#prefix + 11):gsub("^%s+", "")
+        if anim_name ~= "" and animationlist[anim_name] then
+            	PlayAnimation(table.unpack(animationlist[anim_name]))
+        else
+            	Remind("Unknown animation: " .. anim_name)
+        end
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix.."animlist" then
+	Remind("Check your console by running /console!")
+	for aname, aid in pairs(animationlist) do
+    		print("Animation Name:", aname, "Animation ID:", aid[1])
+	end
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'headsit' then
 		local dasplayer = string.sub(msg:lower(), #prefix + 9)
         	PLAYERCHECK(dasplayer)
@@ -12724,6 +12755,35 @@ game.Players.LocalPlayer:GetMouse().KeyDown:connect(function(key)
         	end
 	end
 end)
+
+function PlayAnimation(animationId, speed, loop, wt)
+    	local lp = game:GetService("Players").LocalPlayer
+	if lp then
+		if lp.Character then
+			if lp.Character:FindFirstChild("Humanoid") then
+				local Anim = Instance.new("Animation")
+    				Anim.AnimationId = "rbxassetid://"..animationId
+    				local track = localPlayer.Character.Humanoid:LoadAnimation(Anim)
+
+    				if loop then
+        				while true do
+            					track:Play()
+            					track:AdjustSpeed(speed or 1)
+            					task.wait(wt or 0.01)
+        				end	
+    				else
+        				track:Play()
+        				track:AdjustSpeed(speed or 1)
+				end
+			else
+				Remind("Humanoid is missing, try again.")
+			end
+		else
+			Remind("Character is missing, try again.")
+		end
+	end
+end
+
 
 local thorns_commands = {
 	blind = true,
