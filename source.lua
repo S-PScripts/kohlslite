@@ -2325,7 +2325,7 @@ function checkPerm()
 		return true, "BC"
 	end
 
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, kahnp) then
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 0) then
 		return true, "NP"
 	end
 
@@ -2341,7 +2341,7 @@ function checkPersons()
 		return true, "BC"
 	end
 
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, kahnp) then
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 0) then
 		return true, "NP"
 	end
 
