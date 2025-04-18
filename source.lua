@@ -11334,83 +11334,6 @@ connections[#connections + 1] =
         end
 end)
 
--- I removed this since it would break the script if you died whilst executing
--- Credits to trollfacenan (bumanoid)!
---[[
-if game.PlaceId == 112420803 then
-local lplr = game:GetService("Players").LocalPlayer
-local char = lplr.Character
-
-if lplr.Character:FindFirstChild("Torso") == nil then
-	repeat task.wait() until lplr.Character:FindFirstChild("Torso")
-end
-
-local tor = lplr.Character:FindFirstChild("Torso")
-local oldvel = tor.Velocity
-
-connections[#connections + 1] =
-    tor.Changed:Connect(function()
-        if tor.Velocity == Vector3.new(0, 0, 0) then
-            tor.Velocity = oldvel
-        end
-    end)
-
-connections[#connections + 1] =
-    tor.ChildAdded:Connect(function(v)
-        if v:IsA("BodyForce") and antis.antifling then
-            v.Force = Vector3.new(0, 0, 0)
-            char:FindFirstChildOfClass("Humanoid").Sit = false
-            task.wait()
-            char:FindFirstChildOfClass("Humanoid").Sit = false
-            game:GetService("Debris"):AddItem(v, 0)
-            repeat
-                game:GetService("RunService").RenderStepped:Wait()
-            until not v
-        end
-    end)
-
-connections[#connections + 1] =
-    lplr.CharacterAdded:Connect(function()
-	
-        tor = game:GetService("Players").LocalPlayer.Character:WaitForChild("Torso")
-        oldvel = tor.Velocity
-
-        tor.ChildAdded:Connect(function(v)
-                if v:IsA("BodyForce") and antis.antifling then
-                    v.Force = Vector3.new(0, 0, 0)
-                    char:FindFirstChildOfClass("Humanoid").Sit = false
-                    task.wait()
-                    char:FindFirstChildOfClass("Humanoid").Sit = false
-                    game:GetService("Debris"):AddItem(v, 0)
-                    repeat
-                        game:GetService("RunService").RenderStepped:Wait()
-                    until not v
-                end
-        end)
-
-        tor.Changed:Connect(function()
-                if tor.Velocity == Vector3.new(0, 0, 0) then
-                    tor.Velocity = oldvel
-                end
-        end)
-    end)
-else
-	print("Anti-fling disabled (BC) due to minor differences compared to NBC")
-end
-]]
--- Anti mesh
-connections[#connections + 1] =
-    game:GetService("RunService").RenderStepped:Connect(function()
-	task.wait()
-	if antis.antimesh then
-        	for i, v in pairs(game.Workspace:GetDescendants()) do
-    			if v:IsA("Accessory") and (v.Name == "Accessory (Pointy)" or v.Name == "Accessory (happy)" or v.Name == "Accessory (SUN)" or v.Name == "Accessory (MeshPart)" or v.Name == "") then -- cxo
-        			v:Destroy()
-    			end
-		end
-	end
-end)
-
 -- ANTIS FOR EVERYONE
 connections[#connections + 1] =
     game:GetService("RunService").RenderStepped:Connect(function()
@@ -18805,6 +18728,83 @@ if getgenv().kohlsgui then
 	 	}
 	)
 end
+
+-- Credits to trollfacenan (bumanoid)!
+pcall(function()
+if game.PlaceId == 112420803 then
+local lplr = game:GetService("Players").LocalPlayer
+local char = lplr.Character
+
+if not lplr.Character:FindFirstChild("Torso") then
+	repeat task.wait() until lplr.Character:FindFirstChild("Torso")
+	tor = lplr.Character:FindFirstChild("Torso")
+end
+
+local oldvel = tor.Velocity
+
+connections[#connections + 1] =
+    tor.Changed:Connect(function()
+        if tor.Velocity == Vector3.new(0, 0, 0) then
+            tor.Velocity = oldvel
+        end
+    end)
+
+connections[#connections + 1] =
+    tor.ChildAdded:Connect(function(v)
+        if v:IsA("BodyForce") and antis.antifling then
+            v.Force = Vector3.new(0, 0, 0)
+            char:FindFirstChildOfClass("Humanoid").Sit = false
+            task.wait()
+            char:FindFirstChildOfClass("Humanoid").Sit = false
+            game:GetService("Debris"):AddItem(v, 0)
+            repeat
+                game:GetService("RunService").RenderStepped:Wait()
+            until not v
+        end
+    end)
+
+connections[#connections + 1] =
+    lplr.CharacterAdded:Connect(function()
+	
+        tor = game:GetService("Players").LocalPlayer.Character:WaitForChild("Torso")
+        oldvel = tor.Velocity
+
+        tor.ChildAdded:Connect(function(v)
+                if v:IsA("BodyForce") and antis.antifling then
+                    v.Force = Vector3.new(0, 0, 0)
+                    char:FindFirstChildOfClass("Humanoid").Sit = false
+                    task.wait()
+                    char:FindFirstChildOfClass("Humanoid").Sit = false
+                    game:GetService("Debris"):AddItem(v, 0)
+                    repeat
+                        game:GetService("RunService").RenderStepped:Wait()
+                    until not v
+                end
+        end)
+
+        tor.Changed:Connect(function()
+                if tor.Velocity == Vector3.new(0, 0, 0) then
+                    tor.Velocity = oldvel
+                end
+        end)
+    end)
+else
+	print("Anti-fling disabled (BC) due to minor differences compared to NBC")
+end
+end)
+
+-- Anti mesh
+connections[#connections + 1] =
+    game:GetService("RunService").RenderStepped:Connect(function()
+	task.wait()
+	if antis.antimesh then
+        	for i, v in pairs(game.Workspace:GetDescendants()) do
+    			if v:IsA("Accessory") and (v.Name == "Accessory (Pointy)" or v.Name == "Accessory (happy)" or v.Name == "Accessory (SUN)" or v.Name == "Accessory (MeshPart)" or v.Name == "") then -- cxo
+        			v:Destroy()
+    			end
+		end
+	end
+end)
 
 Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
 
