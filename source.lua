@@ -10995,18 +10995,24 @@ connections[#connections + 1] =
 	task.wait()
 	
   	if autos.autoff == true or autos.tempautoff == true then
-            if not lp.Character:FindFirstChild("ForceField") then
-                Chat("ff me")
-                task.wait(0.1)
-            end
+		if lp.Character then
+            		if not lp.Character:FindFirstChild("ForceField") then
+                		Chat("ff me")
+                		task.wait(0.1)
+            		end
+		end
         end
 
         if autos.autogod == true or autos.tempautogod == true then
-            if tostring(lp.Character.Humanoid.MaxHealth) ~= "inf" then
-                    Chat("god me")
-                    lp.Character.Humanoid.MaxHealth = math.huge
-                    lp.Character.Humanoid.Health = 9e9            
-            end
+		if lp.Character then
+			if lp.Character.Humanoid then
+            			if tostring(lp.Character.Humanoid.MaxHealth) ~= "inf" then
+                    			Chat("god me")
+                    			lp.Character.Humanoid.MaxHealth = math.huge
+                    			lp.Character.Humanoid.Health = 9e9           
+				end
+			end
+        	end
         end
 
 	if auto_stuff.autocharme == true then 
@@ -11024,25 +11030,25 @@ connections[#connections + 1] =
         end
 
         if antis.antivoid == true then
-            if lp.Character --[[ and lp.Character.HumanoidRootPart]] then
-                if lp.Character.HumanoidRootPart.Position.Y < -7 then
-                    lp.Character.HumanoidRootPart.CFrame = 
-					CFrame.new(lp.Character.HumanoidRootPart.Position.X,5,lp.Character.HumanoidRootPart.Position.Z)
-                    lp.Character.HumanoidRootPart.Velocity = 
-					Vector3.new(lp.Character.HumanoidRootPart.Velocity.X,0,lp.Character.HumanoidRootPart.Velocity.Z)
-                end
-            end
+        	if lp.Character then
+			if lp.Character.HumanoidRootPart then
+				if lp.Character.HumanoidRootPart.Position.Y < -7 then
+                    			lp.Character.HumanoidRootPart.CFrame = CFrame.new(lp.Character.HumanoidRootPart.Position.X,5,lp.Character.HumanoidRootPart.Position.Z)
+                    			lp.Character.HumanoidRootPart.Velocity = Vector3.new(lp.Character.HumanoidRootPart.Velocity.X,0,lp.Character.HumanoidRootPart.Velocity.Z)
+                		end
+			end
+            	end
         end
 
         if antis.antiskydive == true then
-            if lp.Character --[[ and lp.Character.HumanoidRootPart]] then
-                if lp.Character.HumanoidRootPart.Position.Y > 256 then
-                    lp.Character.HumanoidRootPart.CFrame =
-                        CFrame.new(lp.Character.HumanoidRootPart.Position.X,5,lp.Character.HumanoidRootPart.Position.Z)
-                    lp.Character.HumanoidRootPart.Velocity =
-                        Vector3.new(lp.Character.HumanoidRootPart.Velocity.X,0,lp.Character.HumanoidRootPart.Velocity.Z)
-                end
-            end
+        	if lp.Character then
+			if lp.Character.HumanoidRootPart then
+               	 		if lp.Character.HumanoidRootPart.Position.Y > 256 then
+                    			lp.Character.HumanoidRootPart.CFrame = CFrame.new(lp.Character.HumanoidRootPart.Position.X,5,lp.Character.HumanoidRootPart.Position.Z)
+                    			lp.Character.HumanoidRootPart.Velocity = Vector3.new(lp.Character.HumanoidRootPart.Velocity.X,0,lp.Character.HumanoidRootPart.Velocity.Z)
+                		end
+			end
+            	end
         end
 
         if antis.antigrayscale == true then
@@ -11052,10 +11058,12 @@ connections[#connections + 1] =
         end
 
         if antis.antiaddon == true then
-            if lp.Character:FindFirstChild("Addon") then
-                lp.Character:FindFirstChild("Addon"):Destroy()
-                Chat("reset me")
-            end
+		if lp.Character then
+            		if lp.Character:FindFirstChild("Addon") then
+                		lp.Character:FindFirstChild("Addon"):Destroy()
+                		Chat("reset me")
+            		end
+		end
         end
 
         if antis.anticlone == true then
@@ -11065,39 +11073,49 @@ connections[#connections + 1] =
         end
 
         if antis.antidog == true then
-            for i, v in pairs(lp.Character:GetDescendants()) do
-                if v:IsA("Seat") then
-                    Chat("undog me")
-                end
-            end
+		if lp.Character then
+            		for i, v in pairs(lp.Character:GetDescendants()) do
+                		if v:IsA("Seat") then
+                    			Chat("undog me")
+                		end
+            		end
+		end
         end
 
         if antis.antifire == true then
-            if lp.Character:FindFirstChild("Torso") then
-                if lp.Character.Torso:FindFirstChild("Fire") then
-                    lp.Character.Torso:FindFirstChild("Fire"):Destroy()
-                    Chat("unfire me")
-                end
-            end
+		if lp.Character then
+            		if lp.Character:FindFirstChild("Torso") then
+                		if lp.Character.Torso:FindFirstChild("Fire") then
+                    			lp.Character.Torso:FindFirstChild("Fire"):Destroy()
+                    			Chat("unfire me")
+                		end
+			end
+        	end
         end
 
         if antis.antifreeze == true then
-            if lp.Character:FindFirstChild("ice") then
-                Chat("thaw me")
-            end
+		if lp.Character then
+            		if lp.Character:FindFirstChild("ice") then
+                		Chat("thaw me")
+            		end
+		end
         end
 
         if antis.antifly == true then
-            if not lp.Character:FindFirstChild("Seizure") and lp.Character.Humanoid:GetState().Name == "PlatformStanding" then
-                Chat("unfly me")
-                Chat("clip me")
-                if lp.Character and lp.Character.Torso then
-                    lp.Character.Torso.Anchored = false
-                end
-                if lp.Character and lp.Character.Humanoid then
-                    lp.Character.Humanoid.PlatformStand = false
-                end
-            end
+		if lp.Character then
+        		if not lp.Character:FindFirstChild("Seizure") and lp.Character.Humanoid:GetState().Name == "PlatformStanding" then
+                		Chat("unfly me")
+                		Chat("clip me")
+	
+                		if lp.Character and lp.Character.Torso then
+                    			lp.Character.Torso.Anchored = false
+                		end
+	
+                		if lp.Character and lp.Character.Humanoid then
+                    			lp.Character.Humanoid.PlatformStand = false
+                		end
+			end
+        	end
         end
 
         if antis.antinoclip == true then
@@ -11114,51 +11132,69 @@ connections[#connections + 1] =
         end
 
         if antis.antiff == true then
-            if lp.Character:FindFirstChild("ForceField") then
-                lp.Character:FindFirstChild("ForceField"):Destroy()
-                Chat("unff me")
-            end
+		if lp.Character then
+            		if lp.Character:FindFirstChild("ForceField") then
+                		lp.Character:FindFirstChild("ForceField"):Destroy()
+                		Chat("unff me")
+			end
+        	end
         end
 
         if antis.antiglow == true then
-            local torso = lp.Character:WaitForChild("Torso", 1)
-            for i, v in pairs(torso:GetChildren()) do
-                if v:IsA("PointLight") then
-                    v:Destroy()
-                    Chat("unglow me")
-                end
-            end
+		if lp.Character then
+        		if lp.Character:FindFirstChild("Torso") then
+                		if lp.Character.Torso:FindFirstChild("PointLight") then
+                    			lp.Character.Torso:FindFirstChild("PointLight"):Destroy()
+                    			Chat("unglow me")
+                		end
+            		end
+		end
         end
 
         if antis.antihealthchange == true then
-            if lp.Character.Humanoid and lp.Character.Humanoid.Health ~= 100 then
-                Chat("health me 100")
-            end
+		if lp.Character then
+            		if lp.Character.Humanoid then
+				if lp.Character.Humanoid.Health ~= 100 then
+               				 Chat("health me 100")
+            			end
+			end
+		end
         end
 
         if antis.antijail == true then
-            if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild(lp.Name .. "'s jail")
-             then
+            if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild(lp.Name .. "'s jail") then
                 Chat("unjail me")
             end
         end
 
         if antis.antijump == true then
-            if lp.Character.Humanoid and lp.Character.Humanoid.JumpPower ~= 50 then
-                lp.Character.Humanoid.JumpPower = 50
-            end
+		if lp.Character then
+            		if lp.Character.Humanoid then
+				if lp.Character.Humanoid.JumpPower ~= 50 then
+                			lp.Character.Humanoid.JumpPower = 50
+				end
+			end
+            	end
         end
 
 	if editedstuff.editedjump == true then
-            if lp.Character.Humanoid and lp.Character.Humanoid.JumpPower ~= editedjumpis then
-                lp.Character.Humanoid.JumpPower = editedjumpis
-            end
+		if lp.Character then
+            		if lp.Character.Humanoid then
+				if lp.Character.Humanoid.JumpPower ~= editedjump.editedjumpis then
+                			lp.Character.Humanoid.JumpPower = editedjump.editedjumpis
+				end
+			end
+            	end
         end
 
         if antis.antikill == true then
-            if lp.Character.Humanoid and lp.Character.Humanoid.Health == 0 then
-                Chat("reset me")
-            end
+		if lp.Character then
+        		if lp.Character.Humanoid then
+				if lp.Character.Humanoid.Health == 0 then
+                			Chat("reset me")
+            			end
+			end
+		end
         end
 
         if antis.antimessage == true then
@@ -11175,9 +11211,11 @@ connections[#connections + 1] =
         end
 
         if antis.antiname == true then
-            if lp and lp.Character:FindFirstChildOfClass("Model") then
-                Chat("unname me")
-            end
+		if lp.Character then
+        		if lp.Character:FindFirstChildOfClass("Model") then
+                		Chat("unname me")
+			end
+        	end
         end
 
         if antis.antichar == true then
@@ -11187,13 +11225,14 @@ connections[#connections + 1] =
         end
 
         if antis.antiparticles == true then
-            local torso = lp.Character:WaitForChild("Torso", 1)
-            for i, v in pairs(torso:GetChildren()) do
-                if v:IsA("ParticleEmitter") then
-                    v:Destroy()
-                    Chat("unparticle me")
-                end
-            end
+		if lp.Character then
+        		if lp.Character:FindFirstChild("Torso") then
+                		if lp.Character.Torso:FindFirstChild("ParticleEmitter") then
+                    			lp.Character.Torso:FindFirstChild("ParticleEmitter"):Destroy()
+                    			Chat("unparticle me")
+                		end
+            		end
+		end
         end
 
         if antis.antipunish == true then
@@ -11203,66 +11242,81 @@ connections[#connections + 1] =
         end
 
         if antis.antirocket == true then
-            for i, v in pairs(lp.Character:GetChildren()) do
-                if v.Name == "Rocket" then
-                    lp.Character.Rocket.CanCollide = false
-                    task.wait(0.5)
-                    v:Destroy()
-                end
-            end
+		if lp.Character then
+            		for i, v in pairs(lp.Character:GetChildren()) do
+                		if v.Name == "Rocket" then
+                    			lp.Character.Rocket.CanCollide = false
+                    			task.wait(0.5)
+                    			v:Destroy()
+                		end
+			end
+        	end
         end
 
         if antis.antisit == true then
-            local player = lp
-            if player.Character then
-                local humanoid = player.Character:WaitForChild("Humanoid", 1)
-                if humanoid and humanoid.Sit then
-                    humanoid.Sit = false
-                    Chat("unsit me")
+            if lp.Character then
+                if lp.Character.Humanoid then
+                	if lp.Character.Humanoid.Sit then
+                    		humanoid.Sit = false
+                    		Chat("unsit me")
+			end
                 end
             end
         end
 
         if antis.antiseizure == true then
-            if lp.Character:FindFirstChild("Seizure") then
-                Chat("unseizure me")
-                lp.Character.Torso.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
-                fwait()
-                lp.Character:FindFirstChild("Seizure"):Destroy()
-                lp.Character.Torso.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
-                lp.Character.Humanoid:ChangeState("GettingUp")
-            end
+		if lp.Character then
+        		if lp.Character:FindFirstChild("Seizure") then
+                		Chat("unseizure me")
+                		lp.Character.Torso.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                		fwait()
+                		lp.Character:FindFirstChild("Seizure"):Destroy()
+                		lp.Character.Torso.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+                		lp.Character.Humanoid:ChangeState("GettingUp")
+            		end
+		end
         end
 
         if antis.antismoke == true then
-            if lp.Character:FindFirstChild("Torso") then
-                if lp.Character.Torso:FindFirstChild("Smoke") then
-                    lp.Character.Torso:FindFirstChild("Smoke"):Destroy()
-                    Chat("unsmoke me")
-                end
-            end
+		if lp.Character then
+        		if lp.Character:FindFirstChild("Torso") then
+                		if lp.Character.Torso:FindFirstChild("Smoke") then
+                    			lp.Character.Torso:FindFirstChild("Smoke"):Destroy()
+                    			Chat("unsmoke me")
+                		end
+            		end
+		end
         end
 
         if antis.antisparkles == true then
-            local torso = lp.Character:WaitForChild("Torso", 1)
-            for i, v in pairs(torso:GetChildren()) do
-                if v:IsA("Sparkles") then
-                    v:Destroy()
-                    Chat("unsparkle me")
-                end
-            end
+		if lp.Character then
+        		if lp.Character:FindFirstChild("Torso") then
+                		if lp.Character.Torso:FindFirstChild("Sparkles") then
+                    			lp.Character.Torso:FindFirstChild("Sparkles"):Destroy()
+                    			Chat("unsparkles me")
+                		end
+            		end
+		end
         end
 
         if antis.antispeed == true then
-            if lp.Character.Humanoid and lp.Character.Humanoid.WalkSpeed ~= 16 then
-                lp.Character.Humanoid.WalkSpeed = 16
-            end
+		if lp.Character then
+            		if lp.Character.Humanoid then
+				if lp.Character.Humanoid.WalkSpeed ~= 16 then
+                			lp.Character.Humanoid.WalkSpeed = 16
+				end
+			end
+        	end
         end
 
 	if editedstuff.editedspeed == true then
-            if lp.Character.Humanoid and lp.Character.Humanoid.WalkSpeed ~= editedstuff.editedspeedis then
-                lp.Character.Humanoid.WalkSpeed = editedstuff.editedspeedis
-            end
+		if lp.Character then
+            		if lp.Character.Humanoid then
+				if lp.Character.Humanoid.WalkSpeed ~= editedstuff.editedspeedis then
+                			lp.Character.Humanoid.WalkSpeed = editedstuff.editedspeedis
+				end
+			end
+        	end
         end
 		
         if antis.antispin == true then
@@ -11275,47 +11329,47 @@ connections[#connections + 1] =
         end
 
         if antis.antistun == true then
-            local player = lp
-            if player.Character then
-                local humanoid = player.Character:WaitForChild("Humanoid", 1)
-                if humanoid and humanoid.PlatformStand then
-                    humanoid.PlatformStand = false
-                    Chat("unstun me")
+            if lp.Character then
+                if lp.Character.Humanoid then
+                	if lp.Character.Humanoid.PlatformStand then
+                    		humanoid.PlatformStand = false
+                    		Chat("unstun me")
+			end
                 end
             end
         end
 
         if antis.antisetgrav == true then
-            if lp.Character:FindFirstChild("Torso") then
-                lproot = lp.Character.HumanoidRootPart
-                for i, v in pairs(lp.Character:GetDescendants()) do
-                    if v:IsA("BodyForce") then
-                        v:Destroy()
-                        v.Force = Vector3.new(0, 0, 0)
-                        lproot.Velocity = Vector3.new(0, 0, 0)
-                        lp.Character.HumanoidRootPart.CFrame =
-                        	CFrame.new(lp.Character.HumanoidRootPart.Position.X,5,lp.Character.HumanoidRootPart.Position.Z)
-                    	lp.Character.HumanoidRootPart.Velocity =
-                        	Vector3.new(lp.Character.HumanoidRootPart.Velocity.X,0,lp.Character.HumanoidRootPart.Velocity.Z)
-                    end
+		if lp.Character then
+            		if lp.Character:FindFirstChild("Torso") then
+               			lproot = lp.Character.HumanoidRootPart
+                		for i, v in pairs(lp.Character:GetDescendants()) do
+                    			if v:IsA("BodyForce") then
+                        			v:Destroy()
+                        			v.Force = Vector3.new(0, 0, 0)
+                        			lproot.Velocity = Vector3.new(0, 0, 0)
+                        			lp.Character.HumanoidRootPart.CFrame = CFrame.new(lp.Character.HumanoidRootPart.Position.X,5,lp.Character.HumanoidRootPart.Position.Z)
+                    				lp.Character.HumanoidRootPart.Velocity = Vector3.new(lp.Character.HumanoidRootPart.Velocity.X,0,lp.Character.HumanoidRootPart.Velocity.Z)
+                    			end
 
-                    if v:IsA("BodyPosition") then
-                        v:Destroy()
-                        lproot.Velocity = Vector3.new(0, 0, 0)
-			lp.Character.HumanoidRootPart.CFrame =
-                        	CFrame.new(lp.Character.HumanoidRootPart.Position.X,5,lp.Character.HumanoidRootPart.Position.Z)
-                    	lp.Character.HumanoidRootPart.Velocity =
-                        	Vector3.new(lp.Character.HumanoidRootPart.Velocity.X,0,lp.Character.HumanoidRootPart.Velocity.Z)
-                    end
-                end
-            end
+                    			if v:IsA("BodyPosition") then
+                        			v:Destroy()
+                        			lproot.Velocity = Vector3.new(0, 0, 0)
+						lp.Character.HumanoidRootPart.CFrame = CFrame.new(lp.Character.HumanoidRootPart.Position.X,5,lp.Character.HumanoidRootPart.Position.Z)
+                    				lp.Character.HumanoidRootPart.Velocity = Vector3.new(lp.Character.HumanoidRootPart.Velocity.X,0,lp.Character.HumanoidRootPart.Velocity.Z)
+                    			end
+               			end
+            		end
+		end
         end
 
         if antis.antiswag == true then
-            if lp.Character:FindFirstChild("EpicCape") then
-                lp.Character:FindFirstChild("EpicCape"):Destroy()
-                Chat("normal me")
-            end
+		if lp.Character then
+            		if lp.Character:FindFirstChild("EpicCape") then
+                		lp.Character:FindFirstChild("EpicCape"):Destroy()
+                		Chat("normal me")
+			end
+        	end
         end
     end)
 
@@ -11344,216 +11398,276 @@ connections[#connections + 1] =
          		        if auto_stuff.autocharall == true or table.find(autochar, v.Name) then 
                                         if auto_stuff.autocharid ~= v.CharacterAppearanceId then
                                                       Chat('char '..v.Name..' '..auto_stuff.autocharid)
-                                        else end
+                                        end
                                 end
 
                                 if antisall.antiaddon == true then
-                                            if v.Character and v.Character:FindFirstChild("Addon") then
+                                	if v.Character then
+						if v.Character:FindFirstChild("Addon") then
                                                     Chat("reset "..v.Name)
-                                           end
+                                           	end
+					end
                                 end
 
                                 if antisall.anticlone == true then
-                                            if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild(v.Name) then
-                                                Chat("unclone "..v.Name)
-                                        else end
+                                	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild(v.Name) then
+                                        	Chat("unclone "..v.Name)
+                                        end
                                 end
 
                                 if antisall.antidog == true then
-                                             for i,x in pairs(v.Character:GetDescendants()) do
-                                                if x:IsA("Seat") then
-                                                        Chat("undog "..v.Name)
-                                                else end
+					if v.Character then
+                                		for i,x in pairs(v.Character:GetDescendants()) do
+                                                	if x:IsA("Seat") then
+                                                        	Chat("undog "..v.Name)
+							end
+                                                end
                                         end
                                 end
 
                                 if antisall.antifire == true then
-                                            if v.Character and v.Character:FindFirstChild("Torso") then
-                                                if v.Character.Torso:FindFirstChild("Fire") then
+                                        if v.Character then
+						if v.Character:FindFirstChild("Torso") then
+                                                	if v.Character.Torso:FindFirstChild("Fire") then
                                                             Chat("unfire "..v.Name)
-                                                else end
-                                        else end
+                                                	end
+						end
+                                	end
                                 end
 
                                 if antisall.antifreeze == true then
-                                             if v.Character and v.Character:FindFirstChild("ice") then
+                                	if v.Character then
+						if v.Character:FindFirstChild("ice") then
                                                         Chat("thaw "..v.Name)
-                                        else end
+                                        	end
+					end
                                 end
 
                                 if antisall.antifly == true or mainbar_stuff.gjdelock == true then
-                                            if not v.Character:FindFirstChild("Seizure") and v.Character.Humanoid:GetState().Name == "PlatformStanding" then
-                                                Chat("unfly "..v.Name)
-                                                        Chat("clip "..v.Name)
-                                        else end
+					if v.Character then
+                                        	if not v.Character:FindFirstChild("Seizure") and v.Character.Humanoid:GetState().Name == "PlatformStanding" then
+                                        		Chat("unfly "..v.Name)
+                                                	Chat("clip "..v.Name)
+						end
+                                	end
                                 end
 
                                 if antisall.antiff == true then
-                                         if v.Character and v.Character:FindFirstChild("ForceField") then
-                                                Chat("unff "..v.Name)
-                                        else end
+                                         if v.Character then
+						if v.Character:FindFirstChild("ForceField") then
+                                                	Chat("unff "..v.Name)
+                                        	end
+					end
                                 end
 				
                                 if autos.autoffa == true then
-					if v.Character and not v.Character:FindFirstChild("ForceField") then
-                                                Chat("ff "..v.Name)
-                                        else end
+					if v.Character then
+						if not v.Character:FindFirstChild("ForceField") then
+                                                	Chat("ff "..v.Name)
+                                        	end
+					end
 				end
 
                                  if checkperm2 == true then
-                                         if v.Character and v.Character:FindFirstChild("ForceField") then
-                                                if not table.find(gamepasses.permusers, v.Name) then
-                                                        print(v.Name.." has perm.")
-							Remind(v.Name.." has perm.")
-                                                        table.insert(gamepasses.permusers, v.Name)
-                                                        Chat("unff "..v.Name)
-                                                end
-                                            end
+                                         if v.Character then
+						if v.Character:FindFirstChild("ForceField") then
+                                                	if not table.find(gamepasses.permusers, v.Name) then
+                                                        	print(v.Name.." has perm.")
+								Remind(v.Name.." has perm.")
+                                                        	table.insert(gamepasses.permusers, v.Name)
+                                                        	Chat("unff "..v.Name)
+                                                	end
+                                            	end
+					end
                                  end
 
                                 if antisall.antiglow == true then
-                                        local torso = v.Character:WaitForChild("Torso", 1)
-                                        for i,x in pairs(torso:GetChildren()) do
-                                                if x:IsA("PointLight") then
-                                                            x:Destroy()
+                                        if v.Character then
+						if v.Character:FindFirstChild("Torso") then
+                                                	if v.Character.Torso:FindFirstChild("PointLight") then
                                                             Chat("unglow "..v.Name)
-                                                       end
-                                            end
+                                                	end
+						end
+                                	end
                                 end
 
                                 if antisall.antihealthc == true then
-                                           if v.Character.Humanoid and v.Character.Humanoid.Health ~= 100 then
-                                                Chat("health "..v.Name.." 100")
-                                        else end
+                                	if v.Character then 
+						if v.Character.Humanoid then
+							if v.Character.Humanoid.Health ~= 100 then
+                                                		Chat("health "..v.Name.." 100")
+							end
+                                        	end
                                         end
+				end
 
                                 if antisall.antijail == true then
-                                            if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild(v.Name .. "'s jail") then
-                                                        Chat("unjail "..v.Name)
-                                        else end
+                                        if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild(v.Name .. "'s jail") then
+                                        	Chat("unjail "..v.Name)
                                         end
+                                end
 
                                 if antisall.antijump == true then
-                                            if v.Character.Humanoid and v.Character.Humanoid.JumpPower ~= 50 then
-                                                Chat("normaljump "..v.Name)
-                                          else end
+                                	if v.Character then
+						if v.Character.Humanoid then
+							if v.Character.Humanoid.JumpPower ~= 50 then
+                                                		Chat("normaljump "..v.Name)
+							end
+                                           	end
+					end
                                 end
 
                                 if antisall.antikill == true or table.find(antikill, v.Name) then
-                                           if v.Character.Humanoid and v.Character.Humanoid.Health == 0 then
-                                                    Chat("reset "..v.Name)
-                                          else end
+                                        if v.Character then
+						if v.Character.Humanoid then
+							if v.Character.Humanoid.Health == 0 then
+                                                    		Chat("reset "..v.Name)
+							end
+						end
+                                        end
                                 end
 
                                 if table.find(rand_players.loopkill, v.Name) then
-                                        if v.Character.Humanoid and v.Character.Humanoid.Health ~= 0 then
-                                                    Chat("kill "..v.Name)
+                                        if v.Character then
+						if v.Character.Humanoid then
+							if v.Character.Humanoid.Health ~= 0 then
+                                                    		Chat("kill "..v.Name)
+							end
+						end
                                         end
                                 end
 
                                 if antisall.antichar == true then
-                                           if v.UserId ~= v.CharacterAppearanceId then
-                                                      Chat("unchar "..v.Name)
-                                        else end
+                                	if v.UserId ~= v.CharacterAppearanceId then
+                                        	Chat("unchar "..v.Name)
+                                        end
                                 end
 
                                 if antisall.antiname == true then
-                                           if v and v.Character:FindFirstChildOfClass("Model") then
-                                                Chat("reset "..v.Name)
-                                           else end
+                                	if v.Character then
+						if v.Character:FindFirstChildOfClass("Model") then
+                                                	Chat("reset "..v.Name)
+                                            	end
+					end
                                 end
 
                                 if antisall.antiparticles == true then
-                                        local torso = v.Character:WaitForChild("Torso", 1)
-                                        for i,x in pairs(torso:GetChildren()) do
-                                                if x:IsA("ParticleEmitter") then
-                                                            x:Destroy()
+                                        if v.Character then
+						if v.Character:FindFirstChild("Torso") then
+                                                	if v.Character.Torso:FindFirstChild("ParticleEmitter") then
                                                             Chat("unparticle "..v.Name)
-                                                       end
-                                            end
+                                                	end
+						end
+                                	end
                                 end
 
                                 if antisall.antipunish == true or table.find(antipunish, v.Name) then
-                                            if game.Lighting:FindFirstChild(v.Name) then
-                                                        Chat("unpunish "..v.Name)
-                                          else end
+                                        if game.Lighting:FindFirstChild(v.Name) then
+                                        	Chat("unpunish "..v.Name)
+                                	end
                                 end
 
                                 if antisall.antirocket == true then
-                                           if v.Character and v.Character:FindFirstChild("Rocket") then
-                                                Chat("reload "..v.Name)
-                                          else end
+                                        if v.Character then
+						if v.Character:FindFirstChild("Rocket") then
+                                                	Chat("reload "..v.Name)
+                                           	end
+					end
                                 end
 
                                 if antisall.antisit == true then
-                                            local humanoid = v.Character:WaitForChild("Humanoid", 1)
-                                            if humanoid and humanoid.Sit then
-                                                        Chat("unsit "..v.Name)
-                                        else end
+					if v.Character then
+						if v.Character.Humanoid then
+                                            		if v.Character.Humanoid.Sit then
+                                                		Chat("unsit "..v.Name)
+							end
+                                        	end
+					end
                                 end
 
                                 if antisall.antiseizure == true then
-                                                if v.Character and v.Character:FindFirstChild("Seizure") then
-                                                Chat("unseizure "..v.Name)
-                                          else end
+                                        if v.Character then
+						if v.Character:FindFirstChild("Seizure") then
+                                                	Chat("unseizure "..v.Name)
+						end
+                                        end
                                 end
 
                                 if antisall.antismoke == true then
-                                             if v.Character and v.Character:FindFirstChild("Torso") then
+                                        if v.Character then 
+						if v.Character:FindFirstChild("Torso") then
                                                         if v.Character.Torso:FindFirstChild("Smoke") then
                                                             Chat("unsmoke "..v.Name)
-                                                  else end
-                                          else end
+                                                	end
+                                        	end
+					end
                                 end
 
                                 if antisall.antisparkles == true then
-                                        local torso = v.Character:WaitForChild("Torso", 1)
-                                        for i,x in pairs(torso:GetChildren()) do
-                                                if x:IsA("Sparkles") then
-                                                            x:Destroy()
-                                                            Chat("unsparkle "..v.Name)
-                                                       end
-                                            end
+                                        if v.Character then
+						if v.Character:FindFirstChild("Torso") then
+                                                	if v.Character.Torso:FindFirstChild("Sparkles") then
+                                                            Chat("unsparkles "..v.Name)
+                                                	end
+						end
+                                	end
                                 end
 
                                 if antisall.antispeed == true then
-                                            if v.Character.Humanoid.WalkSpeed ~= 16 then
-                                                Chat("speed "..v.Name.." 16")
-                                         else end
+                                         if v.Character then
+						if v.Character.Humanoid then
+							if v.Character.Humanoid.WalkSpeed ~= 16 then
+                                                		Chat("speed "..v.Name.." 16")
+                                          		end
+						end
+					end
                                 end
 
                                 if antisall.antispin == true then
-                                        if v.Character and v.Character:FindFirstChild("Torso") then
-                                                if v.Character.Torso:FindFirstChild("SPINNER") then
+                                        if v.Character then
+						if v.Character:FindFirstChild("Torso") then
+                                                	if v.Character.Torso:FindFirstChild("SPINNER") then
                                                             Chat("unspin "..v.Name)
+                                                	end
                                                 end
-                                                end
+					end
                                 end
 
                                 if mainbar_stuff.gjdelock == true then
-                                            if not v.Character.Humanoid.WalkSpeed == 0 then
-                                                        Chat("speed "..v.Name.." 0")
-                                            end
+					if v.Character then
+						if v.Character.Humanoid then
+                                            		if not v.Character.Humanoid.WalkSpeed == 0 then
+                                                        	Chat("speed "..v.Name.." 0")
+                                            		end
+						end
+					end
                                 end
 
                                 if antisall.antistun == true then
-                                            local humanoid = v.Character:WaitForChild("Humanoid", 1)
-                                            if humanoid and humanoid.PlatformStand then
-                                                Chat("unstun "..v.Name)
-                                            end
+					if v.Character then
+						if v.Character.Humanoid then
+                                            		if v.Character.Humanoid.PlatformStand then
+                                                		Chat("unstun "..v.Name)
+							end
+                                        	end
+					end
                                 end
 
                                 if antisall.antisetgrav == true then
-                                        if v.Character and v.Character:FindFirstChild("Torso") then
-                                                if v.Character.Torso:FindFirstChildOfClass("BodyForce") then
-                                                        Chat("respawn "..v.Name)
+                                        if v.Character then
+						if v.Character:FindFirstChild("Torso") then
+                                                	if v.Character.Torso:FindFirstChildOfClass("BodyForce") then
+                                                        	Chat("respawn "..v.Name)
+                                                	end
                                                 end
-                                                end
+					end
                                 end
 
                                 if antisall.antiswag == true then
-                                        if v.Character and v.Character:FindFirstChild("EpicCape") then
-                                                Chat("normal "..v.Name)
+                                        if v.Character then
+						if v.Character:FindFirstChild("EpicCape") then
+                                                	Chat("normal "..v.Name)
+						end
                                         end
                                 end
 
