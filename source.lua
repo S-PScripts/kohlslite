@@ -4252,12 +4252,15 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'cmdbar' then
 	Remind("Created command bar! To remove it, say uncmdbar.")
+
+	keep_cmd_bar = true
 	local Players = game:GetService("Players")
 	local UserInputService = game:GetService("UserInputService")
 
 	local player = Players.LocalPlayer
 
 	local function createGUI()
+		if keep_cmd_bar == false then return end
     		screenGui = Instance.new("ScreenGui")
     		screenGui.Name = "CommandBarGui"
     		screenGui.Parent = player:WaitForChild("PlayerGui")
@@ -4299,6 +4302,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'uncmdbar' then
     	existingGui = game.Players.LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("CommandBarGui")
+	keep_cmd_bar = false
     	if existingGui then
         	existingGui:Destroy()
         	Remind("Command bar removed!")
@@ -4327,20 +4331,19 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'fixbp' then
-	pcall(function()
-		if not workspace.Terrain._Game.Workspace:FindFirstChild("Baseplate") then
-			Remind("NOT LOADED!")
-			return
-		end
-	end)
-
 	if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fixbp2' then
 	else
                 if movestatus == true then 
                         return 
                 end
                 DisCol()
-                if kah_np == false then
+                if kah_np == false then	
+			pcall(function()
+				if not workspace.Terrain._Game.Workspace:FindFirstChild("Baseplate") then
+					Remind("NOT LOADED!")
+					return
+				end
+			end)
                 	moveobject(game.Workspace.Terrain["_Game"].Workspace["Baseplate"], 2)
 		else
 			moveobject(game:GetService("Workspace").Tabby.Admin_House.Baseplate, 2)
@@ -4353,17 +4356,17 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'movebp' then
-		--[[pcall(function()
-			if not workspace.Terrain._Game.Workspace:FindFirstChild("Baseplate") then
-				Remind("NOT LOADED!")
-				return
-			end
-		end)]]
                 if movestatus == true then 
                         return 
                 end
                 DisCol()
 		if kah_np == false then
+			pcall(function()
+				if not workspace.Terrain._Game.Workspace:FindFirstChild("Baseplate") then
+					Remind("NOT LOADED!")
+					return
+				end
+			end)
                 	moveobject(game.Workspace.Terrain["_Game"].Workspace["Baseplate"], 1)
 		else
 			moveobject(game:GetService("Workspace").Tabby.Admin_House.Baseplate, 1)
@@ -10662,6 +10665,7 @@ function PLAYERCHECK(plr, rt)
 
       if string.sub(v.DisplayName:lower(), 1, #plr) == plr:lower() then
           player = v.Name
+	  playerd = v.DisplayName
           cplr = v
 	  if rt then return cplr end
           Remind("[KL User Search]: Found "..player)
