@@ -4041,16 +4041,16 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'timeplay' then
 	newPlaybackSpeed = tonumber(string.sub(msg:lower(), #prefix + 10))
 	if kah_np == false then
-        	local Sound = game:GetService("Workspace").Terrain["_Game"].Folder.Sound
+        	dasound = game:GetService("Workspace").Terrain["_Game"].Folder.Sound
 	else
-             	local Sound = game:GetService("Workspace").Sound
+             	dasound = game:GetService("Workspace").Sound
 	end
-	Sound.PlaybackSpeed = newPlaybackSpeed
- 	for _, sound in ipairs(workspace:GetDescendants()) do
+	dasound.PlaybackSpeed = newPlaybackSpeed
+ 	--[[for _, sound in ipairs(workspace:GetDescendants()) do
                 if sound:IsA("Sound") and sound.Playing then
                     sound.PlaybackSpeed = newPlaybackSpeed
                 end
-        end
+        end]]
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'timeps' then
