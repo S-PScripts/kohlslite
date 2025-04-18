@@ -17358,7 +17358,7 @@ task.spawn(function()
 			if beaner then
 				musicid = beaner.SoundId
 				if not table.find(musiclog, musicid) then
-					print("The song being played is "..workspace.Terrain["_Game"].Folder:FindFirstChild("Sound").SoundId)
+					print("The song being played is "..beaner.SoundId)
                                 	nmusicid = musicid:match("id=(%d+)")
 					table.insert(musiclog, musicid)
 					if writefile and readfile then -- dizzy momento
