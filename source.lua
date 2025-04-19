@@ -4051,7 +4051,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         		end
 		else
 	        	if newVolume ~= nil and game:GetService("Workspace").Sound then
-                        	game:GetService("Workspace").Sound.SoundId = newVolume
+                        	game:GetService("Workspace").Sound.Volume = newVolume
         		end
 		end
     end
