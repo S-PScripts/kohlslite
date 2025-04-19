@@ -746,7 +746,7 @@ local editedstuff = {
 	editedjump = false
 }
 
--- Number settings
+-- Super command, spam, circa settings
 local ex_settings = {
 	-- Boombox range
 	bgrange = 128,
@@ -757,6 +757,18 @@ local ex_settings = {
 	-- Times the super command should run
 	amon = 100,
 
+	-- Super command
+	supermessage = "sword me",
+	
+	-- Spam
+	spam = false,
+
+	-- Spam or not?
+	spamon = false,
+
+	-- What it should spam
+	spamtext = "sword me",
+	
 	-- Spam command wait
 	spamwait = 0.01
 }
@@ -919,7 +931,10 @@ local ws_antis = {
 	antichat = false,
 	
 	-- Stop users saying attach commands
-	antiattach = false
+	antiattach = false,
+
+	-- Stop lag
+	antilag = false
 }
 
 -- Auto stuff, things announced, pings
@@ -4154,6 +4169,16 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	Remind("Turned anti music off!")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antipitch' then
+        music_related.antipitch = true
+	Remind("Anti pitch is enabled.")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unantipitch' then
+        music_related.antipitch = false
+	Remind("Anti pitch is disabled.")
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'mymusiconly' then
 	local args = string.split(msg, " ")
 	Chat(prefix.."pmu"..args[2])
@@ -6466,9 +6491,12 @@ return
     end
 
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'supercmd' then
-        supermessage = string.sub(msg, #prefix + 10)
+	local args = string.split(msg, " ")
+	if #args == 2 then
+        	ex_settings.supermessage = args[2]
+	end
 	Remind("Supercmding your message...")
-        SuperCMD(supermessage)
+        SuperCMD(ex_settings.supermessage)
     end
 
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'supert' then
@@ -6477,15 +6505,18 @@ return
     end
 
    if string.sub(msg, 1, #prefix + 5) == prefix..'spamt' then
-        spamtext = string.sub(msg, #prefix + 7)
-        spam = true
-        spamon = true
+	local args = string.split(msg, " ")
+	if #args == 2 then
+        	ex_settings.spamtext = string.sub(msg, #prefix + 7)
+	end
+        ex_settings.spam = true
+        ex_settings.spamon = true
         Remind("Spamming the requested text!")
     end
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unspamt' then
-        spam = false
-        spamon = false
+        ex_settings.spam = false
+        ex_settings.spamon = false
         Remind("Stopped spamming the requested text!")
     end
 
@@ -6513,12 +6544,12 @@ return
     end
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'spamoff' then
-        spamon = false
+        ex_settings.spamon = false
 	Remind("Spamming has been paused.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'spamon' then
-        spamon = true
+        ex_settings.spamon = true
 	Remind("Spamming has been resumed.")
     end
 
@@ -7229,12 +7260,12 @@ return
    end
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antilag' then
-        antilag = true
+        ws_antis.antilag = true
 	Remind("Anti lag is now enabled.")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unantilag' then
-        antilag = false
+        ws_antis.antilag = false
 	Remind("Anti lag is now disabled.")
    end
 
@@ -7546,13 +7577,13 @@ return
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'play' then
+	Remind("BUGGY: WILL BE FIXED LATER.")
 	local args = string.split(msg, " ")
         if #args == 3 then
 		if args[2] == "guitar" then
 			local Note = args[3]
 	    		pcall(function()
-        			local Tool = GetGuitar()
-    				Tool.Handle:FindFirstChild(Note):Play()
+        			PlayNote(v)
         		end)
 	    		wait(2/15)
 		elseif args[2] == "bongos" then
@@ -7566,7 +7597,7 @@ return
 			local str = args[3]
 			for i = 1, string.len(str) do
 	    			pcall(function()
-	    				PlayBongo(soundTableBongo[str:sub(i,I)])
+	    				PlayBongo(soundTableBongo[str:sub(i,i)])
 				end)
 				wait(2/15)
 			end
@@ -7585,7 +7616,7 @@ return
 			local str = args[3]
 			for i = 1, string.len(str) do
 	    			pcall(function()
-	    				PlayDrum(soundTableBongo[str:sub(i,I)])
+	    				PlayDrum(soundTableBongo[str:sub(i,i)])
 				end)
 				wait(2/15)
 			end
@@ -13298,7 +13329,7 @@ local items = {
 -- Anti lag
 connections[#connections + 1] = 
 	workspace.DescendantAdded:Connect(function(ch)
-		if antilag then
+		if ws_antis.antilag then
 			for i,v in items do
 				if ch:IsA(v) then
 					repeat
@@ -16193,9 +16224,9 @@ end
 task.spawn(function()
         while true do
                 task.wait(0) -- req
-                if spam == true and spamon == true then
-                            Chat(spamtext)
-                            task.wait(spamwait)
+                if ex_settings.spam == true and ex_settings.spamon == true then
+                            Chat(ex_settings.spamtext)
+                            task.wait(ex_settings.spamwait)
                 end
         end
 end)
@@ -17661,6 +17692,21 @@ function GetBongo()
         tool.Parent = game.Players.LocalPlayer.Character
         return tool
     end
+end
+
+function PlayNote(Note)
+    local Tool = GetGuitar()
+    Tool.Handle:FindFirstChild(Note):Play()
+end
+
+function PlayDrum(Sound)
+    local Tool = GetDrum()
+    Tool.Handle:FindFirstChild(Sound):Play()
+end
+
+function PlayBongo(Sound)
+    local Tool = GetBongo()
+    Tool.Handle:FindFirstChild(Sound):Play()
 end
 
 function SKCRAZE() -- cmd v3
