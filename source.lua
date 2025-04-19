@@ -16519,6 +16519,7 @@ function FixPaint()
 
 	task.wait(1)
 	Chat("ungear me")
+	Chat(prefix.."rpaintui")
 end
 
 function Lemon()
