@@ -237,12 +237,12 @@ function shopac() -- Autocrasher serverhop
         local servers_found = {}
 
 	if getgenv().actype == "All" or getgenv().actype == "NBC" then
-		print("checking nbc")
+		--print("checking nbc")
         	for i, v in pairs(NBC_data) do
-			print("check 1" .. type(v) == "table")
-			print("check 2" .. v.id ~= game.JobId)
-			print("check 3" .. tonumber(v.playing) < tonumber(v.maxPlayers))
-			print("check 4" .. not table.find(v.playerTokens, getgenv().playertoken))
+			--print("check 1" .. type(v) == "table")
+			--print("check 2" .. v.id ~= game.JobId)
+			--print("check 3" .. tonumber(v.playing) < tonumber(v.maxPlayers))
+			--print("check 4" .. not table.find(v.playerTokens, getgenv().playertoken))
             		if type(v) == "table" and v.id ~= game.JobId and tonumber(v.playing) < tonumber(v.maxPlayers) and not table.find(v.playerTokens, getgenv().playertoken) then
                 		table.insert(servers_found, {["Version"] = "NBC", ["Job"] = v.id})
             		end
