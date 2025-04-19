@@ -13721,6 +13721,12 @@ task.spawn(function()
                                                         music.TimePosition = denumba ; Remind("Fixed the time position!")
                                            	end
                                 	end
+
+					if game:GetService("Workspace"):FindFirstChild("Sound") then
+                                		if game:GetService("Workspace").Sound.PlaybackSpeed ~= 1 then
+							game:GetService("Workspace").Sound.PlaybackSpeed = 1
+						end
+                        		end
                             	end
 
                             	if music.SoundId ~= soundlock then
