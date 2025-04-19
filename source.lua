@@ -11185,7 +11185,8 @@ local lp = game.Players.LocalPlayer
 connections[#connections + 1] =
     game:GetService("RunService").RenderStepped:Connect(function()
 	task.wait()
-	
+
+	pcall(function()
   	if autos.autoff == true or autos.tempautoff == true then
 		if lp.Character then
             		if not lp.Character:FindFirstChild("ForceField") then
@@ -11574,6 +11575,7 @@ connections[#connections + 1] =
         	end
         end
 
+	end)
     end)
 
 -- anti chat/msg-crash
