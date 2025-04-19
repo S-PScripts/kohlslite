@@ -15538,7 +15538,12 @@ function partVisualiser()
         end
 
         local vis = Instance.new("Folder", workspace)
-        local currentSong = kahinstance:FindFirstChild("Sound") or nil
+	if kah_np == false then
+        	currentSong = kahinstance:FindFirstChild("Sound") or nil
+	else
+		currentSong = game:GetService("Workspace"):FindFirstChild("Sound") or nil
+	end
+
         vishub.VisOrbiter = game.Players.LocalPlayer
 
 	local paintBucket = nil
@@ -15561,6 +15566,7 @@ function partVisualiser()
             end
         end)
 
+	if kah_np == false then
  	kahcon = kahinstance.ChildAdded:Connect(function(child)
             if child:IsA("Sound") and child.Name == "Sound" and child.SoundId ~= "" and child.SoundId ~= nil then
                 currentSong = child
@@ -15579,6 +15585,26 @@ function partVisualiser()
                 end)
             end
         end)
+	else
+ 	kahcon = game:GetService("Workspace").ChildAdded:Connect(function(child)
+            if child:IsA("Sound") and child.Name == "Sound" and child.SoundId ~= "" and child.SoundId ~= nil then
+                currentSong = child
+            end
+		
+            if child:IsA("Part") and child.Size == Vector3.new(4,1.2,2) then -- I checked my old repo and it seems I made 'VisSize'. I'm not going to add it this time as it seems unuseful
+                task.wait()
+                child.Parent = vis
+                child.CanCollide = false
+                child.CanTouch = false
+                child.Massless = true
+                --sethiddenproperty(child, "NetworkIsSleeping", false)
+
+                task.spawn(function()
+                    child.Velocity = Vector3.new(54,34,0)
+                end)
+            end
+        end)
+	end
 
         for i = 1, vishub.VisAmount do
             task.wait()
