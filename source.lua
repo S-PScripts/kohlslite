@@ -7159,27 +7159,23 @@ return
     end
 
    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'pmap' then
-		local colourhere = string.sub(msg, #prefix + 6)
-		PaintMap(colourhere,"norm")
-		Remind("Painted the map!")
+	local colourhere = string.sub(msg, #prefix + 6)
+	checkp(colourhere)
    end
 
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'paintmap' then
-		local colourhere = string.sub(msg, #prefix + 10)
-		PaintMap(colourhere,"norm")
-		Remind("Painted the map!")
+	local colourhere = string.sub(msg, #prefix + 10)
+	checkp(colourhere)
    end
 
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'colormap' then
-		local colourhere = string.sub(msg, #prefix + 10)
-		PaintMap(colourhere,"norm")
-		Remind("Painted the map!")
+	local colourhere = string.sub(msg, #prefix + 10)
+	checkp(colourhere)
    end
 
    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'colourmap' then
-		local colourhere = string.sub(msg, #prefix + 11)
-		PaintMap(colourhere,"norm")
-		Remind("Painted the map!")
+	local colourhere = string.sub(msg, #prefix + 11)
+	checkp(colourhere)
    end
 
    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'messpaint' then
@@ -8461,6 +8457,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixpaint' then
+	if kah_np == true then return Remind("Due to how parts are named in KAH Legacy, fixing the paint is nearly impossible.") end
 	Remind("Fixing paint...")
         FixPaint()
      end
@@ -16400,6 +16397,30 @@ function Gearban(xplayer, xplr, mode)
         tool:Destroy()
         game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
         Chat("ungear me")
+end
+
+-- Check if game NP paint
+function checkp(colourhere)
+	if kah_np == true then
+		local response = Instance.new("BindableFunction")
+		function response.OnInvoke(answer)
+			if answer == "Yes" then
+				PaintMap(colourhere,"norm")
+				Remind("Painted the map!")
+			end
+		end
+		game:GetService("StarterGui"):SetCore("SendNotification", {
+			Title = "KohlsLite Manager",
+			Text = "This cannot be reverted. Are you sure you want to run this?",
+			Duration = math.huge,
+			Callback = response,
+			Button1 = "Yes",
+			Button2 = "No"
+		})
+	else
+		PaintMap(colourhere,"norm")
+		Remind("Painted the map!")
+	end
 end
 
 -- Paint map
