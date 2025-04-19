@@ -17233,15 +17233,11 @@ if writefile and readfile then
 		print("Created the KohlsLite folder! You can find the folder in your workspace.")
 		
 		repeat task.wait() until isfolder("KohlsLite")
-		local file_welcome = "KohlsLite/Welcome.txt"
 		local file_text = "Thank you for using KohlsLite! If you need help, please DM me at ts2021." --
-		writefile(KL_FOLDER,file_text)
-		repeat task.wait() until isfile("KohlsLite/Welcome.txt")
-
-		local file_welcome = "KohlsLite/JSON List Help.txt"
-		local file_text = "" --
-		writefile(KL_FOLDER,file_text)
-		repeat task.wait() until isfile("KohlsLite/JSON List Help.txt")
+		pcall(function()
+			writefile("KohlsLite/Welcome.txt", file_text)
+			repeat task.wait() until isfile("KohlsLite/Welcome.txt")
+		end)
 	
 		getgenv().kohlsgui = true
 
