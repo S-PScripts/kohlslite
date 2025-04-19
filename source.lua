@@ -13722,11 +13722,30 @@ task.spawn(function()
                                            	end
                                 	end
 
-					if game:GetService("Workspace"):FindFirstChild("Sound") then
-                                		if game:GetService("Workspace").Sound.PlaybackSpeed ~= 1 then
-							game:GetService("Workspace").Sound.PlaybackSpeed = 1
+					if kah_np == true then
+						if game:GetService("Workspace"):FindFirstChild("Sound") then
+                                			if game:GetService("Workspace").Sound.PlaybackSpeed ~= 1 then
+								print("pitch used - stopped music and restarted")
+								game:GetService("Workspace").Sound.PlaybackSpeed = 1
+								Chat("stopmusic")
+							end
+                        			end
+					else
+						if workspace.Terrain["_Game"].Folder:FindFirstChild("Sound") then
+                                			if workspace.Terrain["_Game"].Folder:FindFirstChild("Sound").PlaybackSpeed ~= 1 then
+								workspace.Terrain["_Game"].Folder:FindFirstChild("Sound").PlaybackSpeed = 1
+								Chat("stopmusic")
+							end
+                        			end
+					end
+
+					if kah_np == true then
+						if workspace.Sound:FindFirstChild("PitchShiftSoundEffect") then
+							print("spitch used - stopped music and restarted")
+							workspace.Sound.PitchShiftSoundEffect:Destroy()
+							Chat("stopmusic")
 						end
-                        		end
+					end
                             	end
 
                             	if music.SoundId ~= soundlock then
