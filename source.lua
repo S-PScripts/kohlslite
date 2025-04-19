@@ -4727,7 +4727,8 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 ColFix()
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'fixfl' then        
+    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'fixfl' then   
+		if kah_np then return Remind("Unavailable.") end
                 if movestatus == true then 
                         return 
                 end        
@@ -4752,7 +4753,8 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 ColFix()
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'movefl' then        
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'movefl' then   
+		if kah_np then return Remind("Unavailable.") end
                 if movestatus == true then 
                         return 
                 end        
