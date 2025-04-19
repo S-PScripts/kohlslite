@@ -990,7 +990,10 @@ local music_related = {
 	musicoff = true,
 
 	-- Stop music from playing
-	antimusic = false
+	antimusic = false,
+
+	-- Stop pitch from changing
+	antipitch = false
 }
 
 -- Visualiser
@@ -13551,6 +13554,22 @@ task.spawn(function()
                                 end 
                         end
                   end
+    end
+
+    if music_related.antipitch == true then
+			if kah_np == false then
+                        	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+                                	if game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackSpeed ~= 1 then
+						game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackSpeed = 1 
+					end
+                        	end
+			else
+                        	if game:GetService("Workspace"):FindFirstChild("Sound") then
+                                	if game:GetService("Workspace").Sound.PlaybackSpeed ~= 1 then
+						game:GetService("Workspace").Sound.PlaybackSpeed = 1
+					end
+                        	end
+			end
     end
 
     if music_related.audiotroll == true then
