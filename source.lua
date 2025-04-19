@@ -18581,37 +18581,67 @@ end
 
 
 colorAPI.colorObbyBox = function(color) -- Default is "Teal"
-	for i,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Obby Box"]:GetChildren()) do
+	if kah_np == false then
+		parts = game.Workspace.Terrain["_Game"].Workspace["Obby Box"]
+	else
+		parts = game:GetService("Workspace").Tabby.Admin_House.Snow
+	end
+	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color(v, color) -- colorAPI.transformToColor3(BrickColor.new("Bright red"))
 	end
 end
 
 colorAPI.colorObbyBox_2 = function(R,G,B)
-	for i,v in pairs(workspace.Terrain._Game.Workspace["Obby Box"]:GetChildren()) do
+	if kah_np == false then
+		parts = game.Workspace.Terrain["_Game"].Workspace["Obby Box"]
+	else
+		parts = game:GetService("Workspace").Tabby.Admin_House.Snow
+	end
+	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color_2(v,R,G,B)
 	end
 end
 
 colorAPI.colorObbyBricks = function(color)-- Default is "Really red"
-	  for i,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Obby"]:GetChildren()) do
+	if kah_np == false then
+		parts = game.Workspace.Terrain["_Game"].Workspace["Obby"]
+	else
+		parts = game:GetService("Workspace").Tabby.Admin_House.Jumps
+	end
+	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color(v, color)
 	end
 end
 
 colorAPI.colorObbyBricks_2 = function(R,G,B)
-	  for i,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Obby"]:GetChildren()) do
+	if kah_np == false then
+		parts = game.Workspace.Terrain["_Game"].Workspace["Obby"]
+	else
+		parts = game:GetService("Workspace").Tabby.Admin_House.Jumps
+	end
+	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color_2(v, R,G,B)
 	end
 end
 
 colorAPI.colorAdminDivs = function(color)-- Default is "Dark stone grey"
-	for i,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Admin Dividers"]:GetChildren()) do
+	if kah_np == false then
+                parts = game.Workspace.Terrain["_Game"].Workspace["Admin Dividers"]
+	else
+		parts = game:GetService("Workspace").Tabby.Admin_House.Grids
+	end
+	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color(v, color)
 	end
 end
 
 colorAPI.colorAdminDivs_2 = function(R,G,B)
-	for i,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Admin Dividers"]:GetChildren()) do
+	if kah_np == false then
+                parts = game.Workspace.Terrain["_Game"].Workspace["Admin Dividers"]
+	else
+		parts = game:GetService("Workspace").Tabby.Admin_House.Grids
+	end
+	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color_2(v, R,G,B)
 	end
 end
@@ -18639,8 +18669,13 @@ colorAPI.colorHouse = function(arg)
 	  local chiC = arg.chiC
  
 	  -------------------------------------------------------------------- House --------------------------------------------------------------------
- 
-		for i,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Basic House"]:GetChildren()) do
+
+		if kah_np == false then
+			parts = game.Workspace.Terrain["_Game"].Workspace["Basic House"]
+		else
+			parts = game:GetService("Workspace").Tabby.Admin_House.House
+		end
+		for i,v in pairs(parts:GetChildren()) do
 			coroutine.wrap(function()
 					if v.Name == "SmoothBlockModel103" or v.Name == "SmoothBlockModel105" or v.Name == "SmoothBlockModel106" or v.Name == "SmoothBlockModel108" or v.Name == "SmoothBlockModel11" or v.Name == "SmoothBlockModel113" or v.Name == "SmoothBlockModel114" or v.Name == "SmoothBlockModel115" or v.Name == "SmoothBlockModel116" or v.Name == "SmoothBlockModel118" or v.Name == "SmoothBlockModel122" or v.Name == "SmoothBlockModel126" or v.Name == "SmoothBlockModel129" or v.Name == "SmoothBlockModel13" or v.Name == "SmoothBlockModel130" or v.Name == "SmoothBlockModel131" or v.Name == "SmoothBlockModel132" or v.Name == "SmoothBlockModel134" or v.Name == "SmoothBlockModel135" or v.Name == "SmoothBlockModel14" or v.Name == "SmoothBlockModel140" or v.Name == "SmoothBlockModel142" or v.Name == "SmoothBlockModel147" or v.Name == "SmoothBlockModel15" or v.Name == "SmoothBlockModel154" or v.Name == "SmoothBlockModel155" or v.Name == "SmoothBlockModel164" or v.Name == "SmoothBlockModel166" or v.Name == "SmoothBlockModel173" or v.Name == "SmoothBlockModel176" or v.Name == "SmoothBlockModel179" or v.Name == "SmoothBlockModel185" or v.Name == "SmoothBlockModel186" or v.Name == "SmoothBlockModel190" or v.Name == "SmoothBlockModel191" or v.Name == "SmoothBlockModel196" or v.Name == "SmoothBlockModel197" or v.Name == "SmoothBlockModel198" or v.Name == "SmoothBlockModel20" or v.Name == "SmoothBlockModel201" or v.Name == "SmoothBlockModel203" or v.Name == "SmoothBlockModel205" or v.Name == "SmoothBlockModel207" or v.Name == "SmoothBlockModel208" or v.Name == "SmoothBlockModel209" or v.Name == "SmoothBlockModel210" or v.Name == "SmoothBlockModel211" or v.Name == "SmoothBlockModel213" or v.Name == "SmoothBlockModel218" or v.Name == "SmoothBlockModel22" or v.Name == "SmoothBlockModel223" or v.Name == "SmoothBlockModel224" or v.Name == "SmoothBlockModel226" or v.Name == "SmoothBlockModel26" or v.Name == "SmoothBlockModel29" or v.Name == "SmoothBlockModel30" or v.Name == "SmoothBlockModel31" or v.Name == "SmoothBlockModel36" or v.Name == "SmoothBlockModel37" or v.Name == "SmoothBlockModel38" or v.Name == "SmoothBlockModel39" or v.Name == "SmoothBlockModel41" or v.Name == "SmoothBlockModel48" or v.Name == "SmoothBlockModel49" or v.Name == "SmoothBlockModel51" or v.Name == "SmoothBlockModel56" or v.Name == "SmoothBlockModel67" or v.Name == "SmoothBlockModel68" or v.Name == "SmoothBlockModel69" or v.Name == "SmoothBlockModel70" or v.Name == "SmoothBlockModel72" or v.Name == "SmoothBlockModel75" or v.Name == "SmoothBlockModel8" or v.Name == "SmoothBlockModel81" or v.Name == "SmoothBlockModel85" or v.Name == "SmoothBlockModel93" or v.Name == "SmoothBlockModel98" then
 						colorAPI.color(v, wallsC) -- Default is "Brick yellow"
@@ -18683,7 +18718,12 @@ colorAPI.colorHouse_2 = function(Extra)
 		local Walls = Extra.wallsC
 		local Roof = Extra.roofC
 		local ChimneyTopParts = Extra.chiC
-		for i,v in pairs(workspace.Terrain._Game.Workspace["Basic House"]:GetChildren()) do
+		if kah_np == false then
+			parts = game.Workspace.Terrain["_Game"].Workspace["Basic House"]
+		else
+			parts = game:GetService("Workspace").Tabby.Admin_House.House
+		end
+		for i,v in pairs(parts:GetChildren()) do
 			coroutine.resume(coroutine.create(function()
 				if v.Name == "SmoothBlockModel103" or v.Name == "SmoothBlockModel105" or v.Name == "SmoothBlockModel106" or v.Name == "SmoothBlockModel108" or v.Name == "SmoothBlockModel11" or v.Name == "SmoothBlockModel113" or v.Name == "SmoothBlockModel114" or v.Name == "SmoothBlockModel115" or v.Name == "SmoothBlockModel116" or v.Name == "SmoothBlockModel118" or v.Name == "SmoothBlockModel122" or v.Name == "SmoothBlockModel126" or v.Name == "SmoothBlockModel129" or v.Name == "SmoothBlockModel13" or v.Name == "SmoothBlockModel130" or v.Name == "SmoothBlockModel131" or v.Name == "SmoothBlockModel132" or v.Name == "SmoothBlockModel134" or v.Name == "SmoothBlockModel135" or v.Name == "SmoothBlockModel14" or v.Name == "SmoothBlockModel140" or v.Name == "SmoothBlockModel142" or v.Name == "SmoothBlockModel147" or v.Name == "SmoothBlockModel15" or v.Name == "SmoothBlockModel154" or v.Name == "SmoothBlockModel155" or v.Name == "SmoothBlockModel164" or v.Name == "SmoothBlockModel166" or v.Name == "SmoothBlockModel173" or v.Name == "SmoothBlockModel176" or v.Name == "SmoothBlockModel179" or v.Name == "SmoothBlockModel185" or v.Name == "SmoothBlockModel186" or v.Name == "SmoothBlockModel190" or v.Name == "SmoothBlockModel191" or v.Name == "SmoothBlockModel196" or v.Name == "SmoothBlockModel197" or v.Name == "SmoothBlockModel198" or v.Name == "SmoothBlockModel20" or v.Name == "SmoothBlockModel201" or v.Name == "SmoothBlockModel203" or v.Name == "SmoothBlockModel205" or v.Name == "SmoothBlockModel207" or v.Name == "SmoothBlockModel208" or v.Name == "SmoothBlockModel209" or v.Name == "SmoothBlockModel210" or v.Name == "SmoothBlockModel211" or v.Name == "SmoothBlockModel213" or v.Name == "SmoothBlockModel218" or v.Name == "SmoothBlockModel22" or v.Name == "SmoothBlockModel223" or v.Name == "SmoothBlockModel224" or v.Name == "SmoothBlockModel226" or v.Name == "SmoothBlockModel26" or v.Name == "SmoothBlockModel29" or v.Name == "SmoothBlockModel30" or v.Name == "SmoothBlockModel31" or v.Name == "SmoothBlockModel36" or v.Name == "SmoothBlockModel37" or v.Name == "SmoothBlockModel38" or v.Name == "SmoothBlockModel39" or v.Name == "SmoothBlockModel41" or v.Name == "SmoothBlockModel48" or v.Name == "SmoothBlockModel49" or v.Name == "SmoothBlockModel51" or v.Name == "SmoothBlockModel56" or v.Name == "SmoothBlockModel67" or v.Name == "SmoothBlockModel68" or v.Name == "SmoothBlockModel69" or v.Name == "SmoothBlockModel70" or v.Name == "SmoothBlockModel72" or v.Name == "SmoothBlockModel75" or v.Name == "SmoothBlockModel8" or v.Name == "SmoothBlockModel81" or v.Name == "SmoothBlockModel85" or v.Name == "SmoothBlockModel93" or v.Name == "SmoothBlockModel98" then
 					colorAPI.color_2(v,Walls[1], Walls[2], Walls[3])
@@ -18721,8 +18761,14 @@ colorAPI.colorBuildingBricks = function(arg)
 		local TP = arg.TP
  
 		-------------------------------------------------------------------- Building Bricks --------------------------------------------------------------------
- 
-		for i,v in pairs(game.Workspace.Terrain["_Game"].Workspace["Building Bricks"]:GetChildren()) do
+
+		if kah_np == false then
+			parts = game.Workspace.Terrain["_Game"].Workspace["Building Bricks"]
+		else
+			parts = game:GetService("Workspace").Tabby.Admin_House.Build_Stuff
+		end
+
+		for i,v in pairs(parts:GetChildren()) do
 			coroutine.wrap(function()
 				if v.Name == "Part29" or v.Name == "Part31" or v.Name == "Part55" then
 					colorAPI.color(v, DarkStoneGrey) -- Default is "Dark stone grey"
@@ -18773,7 +18819,15 @@ colorAPI.colorBuildingBricks_2 = function(Extra)
 		local RB = Extra.RB
 		local TP = Extra.TP
 		local RR = Extra.RR
-		for i,v in pairs(workspace.Terrain._Game.Workspace["Building Bricks"]:GetChildren()) do
+
+		if kah_np == false then
+			parts = game.Workspace.Terrain["_Game"].Workspace["Building Bricks"]
+		else
+			parts = game:GetService("Workspace").Tabby.Admin_House.Build_Stuff
+		end
+
+
+		for i,v in pairs(parts:GetChildren()) do
 			coroutine.resume(coroutine.create(function()
 				if v.Name == "Part31" or v.Name == "Part29" or v.Name == "Part55" then
 					colorAPI.color_2(v,DarkStoneGrey[1],DarkStoneGrey[2],DarkStoneGrey[3])
