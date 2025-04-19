@@ -210,7 +210,7 @@ function shopac() -- Autocrasher serverhop
             		game:HttpGet("https://games.roblox.com/v1/games/115670532/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true")
         	)
 
-        if NBC["errors"] and (getgenv().actype == "All" or getgenv().actype == "NBC") then
+        if NBC["errors"] and (getgenv().acgames == "All" or getgenv().acgames == "NBC") then
             print("Failed to server hop. Retrying in 5 seconds...")
             task.spawn(function()
                 ratelimited = true
@@ -220,7 +220,7 @@ function shopac() -- Autocrasher serverhop
             return
         end
 
-        if BC["errors"] and (getgenv().actype == "All" or getgenv().actype == "BC") then
+        if BC["errors"] and (getgenv().acgames == "All" or getgenv().acgames == "BC") then
             print("Failed to server hop. Retrying in 5 seconds...")
             task.spawn(function()
                 ratelimited = true
@@ -236,20 +236,20 @@ function shopac() -- Autocrasher serverhop
 
         local servers_found = {}
 
-	if getgenv().actype == "All" or getgenv().actype == "NBC" then
+	if getgenv().acgames == "All" or getgenv().acgames == "NBC" then
 		--print("checking nbc")
         	for i, v in pairs(NBC_data) do
 			--print("check 1" .. type(v) == "table")
 			--print("check 2" .. v.id ~= game.JobId)
 			--print("check 3" .. tonumber(v.playing) < tonumber(v.maxPlayers))
 			--print("check 4" .. not table.find(v.playerTokens, getgenv().playertoken))
-            		if type(v) == "table" and v.id ~= game.JobId and tonumber(v.playing) < tonumber(v.maxPlayers) and not table.find(v.playerTokens, getgenv().playertoken) then
+            		if type(v) == "table" and v.id ~= game.JobId and --[[tonumber(v.playing) < tonumber(v.maxPlayers) and]] not table.find(v.playerTokens, getgenv().playertoken) then
                 		table.insert(servers_found, {["Version"] = "NBC", ["Job"] = v.id})
             		end
         	end
 	end
 
-	if getgenv().actype == "All" or getgenv().actype == "BC" then
+	if getgenv().acgames == "All" or getgenv().acgames == "BC" then
         	for i, v in pairs(BC_data) do
            		if type(v) == "table" and v.id ~= game.JobId and tonumber(v.playing) < tonumber(v.maxPlayers) and not table.find(v.playerTokens, getgenv().playertoken) then
                	 		table.insert(servers_found, {["Version"] = "BC", ["Job"] = v.id})
