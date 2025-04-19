@@ -8171,6 +8171,10 @@ return
          backend_stuff.eincrash = true ; task.wait(0.1) ; UFLY()
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'unufly' then
+         backend_stuff.eincrash = true
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'isc' then
         local Ping1 = game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValueString()
         task.wait(1)
