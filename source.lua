@@ -821,6 +821,7 @@ local keybinds = {
 	housekeybind = "h", -- Teleport to the house
 	rekeybind = "r", -- Reset/respawn
 	flykeybind = "f", -- Fly (KAH Fly)
+	regenkeybind = "p", -- Regenerate the pads
 	crashkey = "e", -- Crash the server
 	
 	keybindz = true, -- Enable the keybinds
@@ -7335,8 +7336,10 @@ return
 				keybinds.flykeybind = args[3]
 			elseif keyb == "crash" then
 				keybinds.crashkey = args[3]
+			elseif keyb == "regen" then
+				keybinds.regenkeybind = args[3]
 			else
-				Remind("Argument 2 invalid [must be house/reset/fly/crash]")
+				Remind("Argument 2 invalid [must be house/reset/fly/regen/crash]")
 			end
 		else
 			Remind("Invalid amount of arguments (must be 3 [2nd = keybind name, 3rd = new keybind])")
@@ -12838,7 +12841,11 @@ game.Players.LocalPlayer:GetMouse().KeyDown:connect(function(key)
 
 		if key:lower() == keybinds.flykeybind then
                 	Chat(prefix.."ufly")
-        	end   
+        	end
+
+		if key:lower() == keybinds.regenkeybind then
+                	Regen()
+        	end
 	end
 		
 	if keybindz_unsafe then
