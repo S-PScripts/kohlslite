@@ -10882,62 +10882,127 @@ end
 
 -- CHECK FOR PERM
 function checkforperm()
+	local they_have_perm = false
         if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 66254), 66254) then
-            Remind(gcplrn.." has perm in NBC!")
-            Chat("h \n\n\n " .. gcplrn .. " has perm in NBC! \n\n\n")
-          --  Speak(gcplrn.." has perm in NBC!")
-            if not table.find(gamepasses.permusers, gcplrn) then
-                    table.insert(gamepasses.permusers, gcplrn)
-            end
-        elseif string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 64354), 64354) then
-            Remind(gcplrn.." has perm in BC!")
-	    Chat("h \n\n\n " .. gcplrn .. " has perm in BC! \n\n\n")
-           -- Speak(gcplrn.." has perm in BC!")
-            table.insert(gamepasses.permusers, gcplrn)
-            if not table.find(gamepasses.permusers, gcplrn) then
-                    table.insert(gamepasses.permusers, gcplrn)
-            end
-        else 
-                Remind(gcplrn..' does not have perm!')
-	        Chat("h \n\n\n " .. gcplrn .. " does not perm! \n\n\n")
-            --    Speak(gcplrn..' does not have perm!')
+            	Remind(gcplrn.." has Perm Admin in NBC!")
+		print(gcplrn .. " has Perm Admin in NBC!")
+		if they_have_perm == false then
+            		Chat("h \n\n\n\n\n " .. gcplrn .. " has Perm Admin in NBC! \n\n\n\n\n")
+			they_have_perm = true
+            		if not table.find(gamepasses.permusers, gcplrn) then
+                    		table.insert(gamepasses.permusers, gcplrn)
+            		end
+		end
+	end
+
+        if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 64354), 64354) then
+            	Remind(gcplrn.." has Perm Admin in BC!")
+		print(gcplrn .. " has Perm Admin in BC!")
+		if they_have_perm == false then
+	    		Chat("h \n\n\n\n\n " .. gcplrn .. " has Perm Admin in BC! \n\n\n\n\n")
+			they_have_perm = true
+			if not table.find(gamepasses.permusers, gcplrn) then
+                		table.insert(gamepasses.permusers, gcplrn)
+            		end
+		end
+	end
+
+        if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 735344035), 735344035) then
+		Remind(gcplrn.." has Perm Admin in Legacy!")
+		print(gcplrn .. " has Perm Admin in Legacy!")
+		if kah_np == false then
+				if they_have_perm == false then
+	    				Chat("h \n\n\n\n\n " .. gcplrn .. " has Perm Admin in Legacy! Too bad it's useless in normal KAH! \n\n\n\n\n")
+				end
+		else
+				if they_have_perm == false then
+					Chat("h \n\n\n\n\n " .. gcplrn .. " has Perm Admin in Legacy! \n\n\n\n\n")
+					they_have_perm = true
+					if not table.find(gamepasses.permusers, gcplrn) then
+                				table.insert(gamepasses.permusers, gcplrn)
+            				end
+				end
+		end
+	end
+
+	if they_have_perm == false then
+                Remind(gcplrn..' does not have Perm Admin!')
+		print(gcplrn .. " does not has Perm Admin!")
+	        Chat("h \n\n\n\n\n " .. gcplrn .. " does not Perm Admin! \n\n\n\n\n")
         end
 end
 
 -- CHECK FOR PERSONS
 function checkforpersons(u)
+	local they_have_persons = false
         if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 35748), 35748) then
-            Remind(gcplrn.." has persons in NBC!")
-	    if u then
-		Chat("h \n\n\n\n\n " .. gcplrn .. " has persons in NBC! \n\n\n\n\n")
-	    else
-	    	Chat("h \n\n\n " .. gcplrn .. " has persons in NBC! \n\n\n")
-	    end
-            -- Speak(gcplrn.." has persons in NBC!")
-            table.insert(gamepasses.personsusers, gcplrn)
-            if not table.find(gamepasses.personsusers, gcplrn) then
-                    table.insert(gamepasses.personsusers, gcplrn)
-            end
-        elseif string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 37127), 37127) then
-            Remind(gcplrn.." has persons in BC!")
-	    if u then
-		Chat("h \n\n\n\n\n " .. gcplrn .. " has persons in BC! \n\n\n\n\n")
-	    else
-	    	Chat("h \n\n\n " .. gcplrn .. " has persons in BC! \n\n\n")
-	    end           
-	    -- Speak(gcplrn.." has persons in BC!")
-            table.insert(gamepasses.personsusers, gcplrn)
-            if not table.find(gamepasses.personsusers, gcplrn) then
-                    table.insert(gamepasses.personsusers, gcplrn)
-            end
-        else 
-                Remind(gcplrn..' does not have persons!')
-		if u then
-			Chat("h \n\n\n\n\n " .. gcplrn .. " does not persons! \n\n\n\n\n")
-		else
-			Chat("h \n\n\n " .. gcplrn .. " does not persons! \n\n\n")
+        	Remind(gcplrn.." has Person299 in NBC!")
+		print(gcplrn .. " has Person299 in NBC!")
+		if they_have_persons == false then
+	    		if u then
+				Chat("h \n\n\n\n\n " .. gcplrn .. " has Person299 in NBC! \n\n\n\n\n")
+	    		else
+	    			Chat("h \n\n\n " .. gcplrn .. " has Person299 in NBC! \n\n\n")
+	    		end
+
+			they_have_persons = true
+            		if not table.find(gamepasses.personsusers, gcplrn) then
+                    		table.insert(gamepasses.personsusers, gcplrn)
+            		end
 		end
-             --   Speak(gcplrn..' does not have persons!')
+	end
+
+        if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 37127), 37127) then
+        	Remind(gcplrn.." has Person299 in BC!")
+		print(gcplrn .. " has Person299 in BC!")
+		if they_have_persons == false then
+	    		if u then
+				Chat("h \n\n\n\n\n " .. gcplrn .. " has Person299 in BC! \n\n\n\n\n")
+	    		else
+	    			Chat("h \n\n\n " .. gcplrn .. " has Person299 in BC! \n\n\n")
+	    		end
+
+			they_have_persons = true
+            		if not table.find(gamepasses.personsusers, gcplrn) then
+                    		table.insert(gamepasses.personsusers, gcplrn)
+            		end
+		end
+	end
+
+        if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 1032786574), 1032786574) then
+		Remind(gcplrn.." has Person299 in Legacy!")
+		print(gcplrn .. " has Person299 in Legacy!")
+		if kah_np == false then
+				if they_have_perm == false then
+					if u then
+	    					Chat("h \n\n\n\n\n " .. gcplrn .. " has Person299 in Legacy! Too bad it's useless in normal KAH! \n\n\n\n\n")
+					else
+						Chat("h \n\n\n " .. gcplrn .. " has Person299 in Legacy! Too bad it's useless in normal KAH! \n\n\n")
+					end
+				end
+		else
+				if they_have_perm == false then
+					if u then
+						Chat("h \n\n\n\n\n " .. gcplrn .. " has Person299 in Legacy! \n\n\n\n\n")
+					else
+						Chat("h \n\n\n " .. gcplrn .. " has Person299 in Legacy! \n\n\n")
+					end
+					they_have_persons = true
+					if not table.find(gamepasses.personsusers, gcplrn) then
+                				table.insert(gamepasses.personsusers, gcplrn)
+            				end
+				end
+		end
+	end
+
+        if they_have_persons == false then 
+                Remind(gcplrn..' does not have Person299!')
+		print(gcplrn .. " does not has Person299!")
+		if u then
+			Chat("h \n\n\n\n\n " .. gcplrn .. " does not Person299! \n\n\n\n\n")
+		else
+			Chat("h \n\n\n " .. gcplrn .. " does not Person299! \n\n\n")
+		end
         end
 end
 
