@@ -106,12 +106,12 @@ getgenv().scriptname = "KohlsLite"
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.19"
+getgenv().klversion = "X1.2"
 
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X1.19", -- Now includes X since main updates are completed, still many to add though.
+                Title = "KohlsLite X"..getgenv().klversion, -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -2431,7 +2431,11 @@ end
 
 print("\n") 
 
-Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
+if kah_np == false then
+	Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
+else
+	Speak("KohlsLite executed! Version: "..getgenv().klversion)
+end
 
 --[[
   ____ ___  __  __ __  __    _    _   _ ____    _     ___ ____ _____ 
