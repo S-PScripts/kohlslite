@@ -290,13 +290,11 @@ if getgenv().autocrasher then
         			if table.find(getgenv().whitelistedppl, v.Name) then
             				print("Whitelisted player found: " .. v.Name)
 					ac_continue = false
-					break
+					repeat task.wait()
+                				shopac()
+            				until false
 				end
 			end
-			
-            		repeat task.wait()
-                		shopac()
-            		until false
 		end
 
 		if ac_continue then
