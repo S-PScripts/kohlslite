@@ -251,7 +251,8 @@ function shopac() -- Autocrasher serverhop
             		end
         	end
 	end
-		
+
+	print(#servers_found)
         if #servers_found > 0 then
             local servertohop = servers_found[math.random(1, #servers_found)]
             if servertohop["Version"] == "NBC" then
