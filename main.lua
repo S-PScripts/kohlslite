@@ -18,10 +18,15 @@ getgenv().theprefix = "."
 -- Autorun commands
 getgenv().autoruncmds = {".antirocket me", ".tnok", ".antikill me"} --".antimsg me"
 
+-- Run these commands when the user joins
+getgenv().run_on_sight = {
+		["ScriptingProgrammer"] = {".lua print('da owner joined so coolz')"}
+	}
+
 -- KL Starter GUI
 getgenv().kohlsgui = false -- Simple GUI with instructions telling you how to use the script.
 
--- Autocrasher related
+-- Autocrasher related (put KL in autoexecute)
 getgenv().autocrasher = false -- Turn this on and it will autocrash KAH's servers.
 getgenv().playertoken = ' ' -- You must get this. Go to  kohlslite.pages.dev/Assets/PLAYERTOKEN.lua for instructions.
 getgenv().acgames = "All" -- What KAH games you want to crash ("All" for NBC and BC, "NBC" for NBC only, "BC" for BC only).
