@@ -2417,6 +2417,7 @@ if hasperm then
         	print("A perm pad was not given as you have the Perm Admin gamepass!")
 	end
 else
+	hasperm = false
 	admin_stuff.perm = true 
         print("A perm pad was given as you don't have the Perm Admin gamepass!")
 end
@@ -2431,6 +2432,7 @@ if haspersons then
         	print("You have Person299's Admin! You have access to every KohlsLite command that use P299!")
 	end
 else
+	haspersons = false
         print("You do not have Person299's Admin, so you will not have access to any KohlsLite commands that use P299.")
 end
 
