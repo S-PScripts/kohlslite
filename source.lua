@@ -990,6 +990,9 @@ local music_related = {
 	-- The music ID for my music only
 	mymusiconlyid = 0,
 
+	-- Pitch (DO NOT EDIT)
+	pitch = 0
+	
 	-- Make the music go all over the place
 	audiotroll = false,
 
@@ -4296,6 +4299,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                                 music_related.musicoff = false
                                 music_related.mymusiconly = true
                                 music_related.mymusiconlyid = number
+				music_related.pitch = 1
                                 Remind("Perm music is on (set to current id).")
         	end
 	else
@@ -4306,6 +4310,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                                 music_related.musicoff = false
                                 music_related.mymusiconly = true
                                 music_related.mymusiconlyid = number
+				music_related.pitch = game:GetService("Workspace").Sound.PlaybackSpeed
                                 Remind("Perm music is on (set to current id).")
         	end
 	end
@@ -13791,9 +13796,9 @@ task.spawn(function()
 
 					if kah_np == true then
 						if game:GetService("Workspace"):FindFirstChild("Sound") then
-                                			if game:GetService("Workspace").Sound.PlaybackSpeed ~= 1 then
+                                			if game:GetService("Workspace").Sound.PlaybackSpeed ~= music_related.pitch then
 								print("pitch used - stopped music and restarted")
-								game:GetService("Workspace").Sound.PlaybackSpeed = 1
+								game:GetService("Workspace").Sound.PlaybackSpeed = music_related.pitch
 								Chat("stopmusic")
 							end
                         			end
