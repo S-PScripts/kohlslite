@@ -2882,6 +2882,73 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                   print(blacklist[i])
            end
         end
+
+	if string.sub(msg, 1, #prefix + 3) == prefix..'kwl' then
+	 local args = string.split(msg, " ")
+         local dasplayer = args[2]
+         PLAYERCHECK(dasplayer)
+         if player ~= nil then
+		-- print(player)
+		if player == game.Players.LocalPlayer.Name then 
+			return Remind("You cannot KL whitelist yourself.")
+		end
+				
+                if not table.find(kl_wlst, player) then
+		--	print("adding...")
+			if player_relate.blwl_an then
+				if mainbar_stuff.watermark_kl then
+					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been whitelisted to use KL commands! \n\n\n\n\n");Regen()
+				else
+                        		Chat("h \n\n\n\n\n "..player.." has been whitelisted to use KL commands! \n\n\n\n\n");Regen()
+				end
+			end
+                        Remind("KohlsLite Whitelisted "..player)
+                        table.insert(kl_wlst, player)
+		--	print("added...") debug msg
+                else
+                        Remind(player.." is already KohlsLite whitelisted!")        
+                end
+         else
+                Remind('Cannot find player with the name: '..dasplayer)
+         end
+       end
+
+	if string.sub(msg, 1, #prefix + 5) == prefix..'unkwl' then
+	 local args = string.split(msg, " ")
+         local dasplayer = args[2]
+         PLAYERCHECK(dasplayer)
+         if player ~= nil then
+		-- print(player)
+		if player == game.Players.LocalPlayer.Name then 
+			return Remind("You cannot un KL whitelist yourself.")
+		end
+				
+                if table.find(kl_wlst, player) then
+		--	print("adding...")
+			if player_relate.blwl_an then
+				if mainbar_stuff.watermark_kl then
+					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been un-whitelisted to use KL commands... \n\n\n\n\n");Regen()
+				else
+                        		Chat("h \n\n\n\n\n "..player.." has been un-whitelisted to use KL commands... \n\n\n\n\n");Regen()
+				end
+			end
+                        Remind("Un-KohlsLite Whitelisted "..player)
+                        table.insert(kl_wlst, player)
+		--	print("added...") debug msg
+                else
+                        Remind(player.." was never KohlsLite whitelisted!")        
+                end
+         else
+                Remind('Cannot find player with the name: '..dasplayer)
+         end
+       end
+
+	if string.sub(msg, 1, #prefix + 7)  == prefix..'listkwl' then
+           Remind("Check your console by running /console!")
+           for i = 1, #kl_wlst do
+                  print(kl_wlst[i])
+           end
+        end
 		
         if string.sub(msg, 1, #prefix + 8)  == prefix..'antimlog' then
                 antimlog = true
