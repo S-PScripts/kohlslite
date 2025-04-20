@@ -991,7 +991,7 @@ local music_related = {
 	mymusiconlyid = 0,
 
 	-- Pitch (DO NOT EDIT)
-	pitch = 0
+	pitch = 0,
 	
 	-- Make the music go all over the place
 	audiotroll = false,
