@@ -3326,6 +3326,10 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		end
 	end
 
+	if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'untrap' then
+			Loops.trap = false
+	end
+
 	if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timeout' then
 		local args = string.split(msg, " ")
         	if #args == 3 then
@@ -3341,6 +3345,10 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		else
 			Remind("Invalid amount of arguments provided (must be 3 [plr, time])")
 		end
+	end
+
+	if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'untimeout' then
+			Loops.trap = false
 	end
 
 	if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unslock' then
@@ -17452,7 +17460,8 @@ Loops = {
 	pp = false,
 	alog = false,
 	platform = false,
-	dncycle = false
+	dncycle = false,
+	trap = false
 }
 
 conny = {
