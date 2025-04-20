@@ -13796,9 +13796,9 @@ task.spawn(function()
 
 					if kah_np == true then
 						if game:GetService("Workspace"):FindFirstChild("Sound") then
-                                			if game:GetService("Workspace").Sound.PlaybackSpeed ~= music_related.pitch then
+                                			if game:GetService("Workspace").Sound.PlaybackSpeed ~= 1 then
 								print("pitch used - fixed")
-								game:GetService("Workspace").Sound.PlaybackSpeed = music_related.pitch
+								game:GetService("Workspace").Sound.PlaybackSpeed = 1
 							end
                         			end
 					else
