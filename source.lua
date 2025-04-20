@@ -3085,7 +3085,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          end
        end
 
-   if string.sub(msg, 1, #prefix + 5) == prefix..'names' then
+   	if string.sub(msg, 1, #prefix + 5) == prefix..'names' then
          local dasplayer = string.sub(msg:lower(), #prefix + 7)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
@@ -3261,10 +3261,6 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
        if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'selfkick' then
                 game.Players.LocalPlayer:Kick("Exitted the server.")
-       end
-
-       if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timeout' then
-                Remind("Go use ii's stupid admin for that.")
        end		
 		
        if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'slock' then
@@ -3312,8 +3308,42 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		mainbar_stuff.slockenabled = false
 		Chat("h \n\n\n\n\n I hope you all learnt your lesson... \n\n\n\n\n")
 	end
-		
-       if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unslock' then
+
+	if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'trap' then
+		local args = string.split(msg, " ")
+        	if #args == 3 then
+               		plr = args[2]
+			time = tonumber(args[3])
+			PLAYERCHECK(plr)
+         		if player ~= nil then
+                		caged = cplr
+				trapped(caged, time)
+         		else
+                		Remind('Cannot find player with the name: '..plr)
+         		end
+		else
+			Remind("Invalid amount of arguments provided (must be 3 [plr, time])")
+		end
+	end
+
+	if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timeout' then
+		local args = string.split(msg, " ")
+        	if #args == 3 then
+               		plr = args[2]
+			time = tonumber(args[3])
+			PLAYERCHECK(plr)
+         		if player ~= nil then
+                		caged = cplr
+				trapped(caged, time)
+         		else
+                		Remind('Cannot find player with the name: '..plr)
+         		end
+		else
+			Remind("Invalid amount of arguments provided (must be 3 [plr, time])")
+		end
+	end
+
+	if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unslock' then
 		mainbar_stuff.slockenabled = false
 		if player_relate.blwl_an then
 			if mainbar_stuff.watermark_kl then
@@ -3325,37 +3355,37 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
        	 	Chat('unblind all')
         	Chat('unpunish all')
 		Remind("Turned off the serverlock!")
-       end
+	end
 
-       if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'scslock' then
+	if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'scslock' then
 			mainbar_stuff.superchargeslock = true
 			Remind("SUPER LOCK ENABLED!")
-       end
+	end
 
-       if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unscslock' then
+	if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unscslock' then
 			mainbar_stuff.superchargeslock = false
 			Remind("SUPER LOCK DISABLED!")
-       end
+	end
 		
-       if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'newplrslock' then
+	if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'newplrslock' then
           mainbar_stuff.newplrautoslock = true
 	  Remind("New player auto slock is now enabled!")
-       end
+	end
 
-       if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'unnewplrslock' then
+	if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'unnewplrslock' then
           mainbar_stuff.newplrautoslock = false
 	  Remind("New player auto slock is now disabled!")
-       end
+	end
 
-       if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'autoblvgc' then
+	if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'autoblvgc' then
                 Remind("Auto blacklisting users using the VG!")
                 crash_settings.autoblvgc = true
-       end
+	end
 
-       if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unautoblvgc' then
+	if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unautoblvgc' then
                 Remind("No longer auto blacklisting users using the VG!")
                 crash_settings.autoblvgc = false
-       end
+	end
 
         if string.sub(msg, 1, #prefix + 7)  == prefix..'npslist' then
            Remind("Check your console by running /console!")
@@ -7491,7 +7521,7 @@ return
                  if player ~= nil then
                         lemonman = player
                         lman = cplr
-                        Lemon()
+                        Lemon(player, cplr)
                  else
                         Remind('Cannot find player with the name: '..dasplayer)
                  end
@@ -7681,7 +7711,6 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'uncannon' then
     	        Connections.cannoning:Disconnect()
-
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'astrike' then
@@ -16684,7 +16713,7 @@ function FixPaint()
 	Chat(prefix.."rpaintui")
 end
 
-function Lemon()
+function Lemon(lemonman, lman)
         Chat("gear me 19703476")
         Chat("unff "..lemonman)
         Chat("speed " ..lemonman.. " 0")
@@ -17889,6 +17918,58 @@ end
 function PlayBongo(Sound)
     local Tool = GetBongo()
     Tool.Handle:FindFirstChild(Sound):Play()
+end
+
+-- Trap command
+function GetCage()
+    if game.Players.LocalPlayer.Backpack:FindFirstChild("PortableJustice") then
+        local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("PortableJustice")
+        tool.Parent = game.Players.LocalPlayer.Character
+        return tool
+    elseif game.Players.LocalPlayer.Character:FindFirstChild("PortableJustice") then
+        return game.Players.LocalPlayer.Character:FindFirstChild("PortableJustice")
+    else
+        Chat("gear me 82357101")
+        repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("PortableJustice")
+        local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("PortableJustice")
+        tool.Parent = game.Players.LocalPlayer.Character
+        return tool
+    end
+end
+
+function CagePlayer(caged, time)
+    local pos = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+    if caged and caged.Character and caged.Character.Head and not caged.Character:FindFirstChild("Part") then
+        local cagedchr = caged.Character
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = caged.Character.Head.CFrame
+        GetCage().MouseClick:FireServer(cagedchr)
+        repeat game:GetService("RunService").RenderStepped:Wait() until caged.Character:FindFirstChild("Part")
+        GetCage():Destroy()
+	game.Players.LocalPlayer.PlayerGui:FindFirstChild("HelpGui"):Destroy()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
+        Chat("removetools me")
+        Chat("pm "..caged.Name.." You are currently trapped for "..time.."s.")
+    end
+end
+
+function trapped(caged, time)
+	Loops.trap = true
+	spawn(function()
+    		wait(time)
+    		Loops.trap = false
+	end)
+	repeat game:GetService("RunService").RenderStepped:Wait()
+    		pcall(function()
+    			pcall(function()
+        			CagePlayer(caged, time)
+    			end)
+    		end)
+	until not Loops.trap
+
+    	Chat("reset "..caged.Name)
+    	task.wait()
+    	Chat("pm "..caged.Name.." You are no longer trapped. Don't be naughty again...")
+    	task.wait()
 end
 
 function SKCRAZE() -- cmd v3
