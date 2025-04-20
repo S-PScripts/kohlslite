@@ -7143,10 +7143,10 @@ Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command
 Commands required: part]])
 return
 		end
-		--local args = string.split(msg, " ")
+		local args = string.split(msg, " ")
 		--if #args == 3 then
 				local plr1 = args[2]
-				local plr2 = args[2]
+				local plr2 = args[3]
 				arena(plr1, plr2)
 				Remind("Building the arena.")
 		--else
