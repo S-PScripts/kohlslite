@@ -13089,10 +13089,12 @@ function PLRSTART(v)
                         end
                     end
 
+		    if kah_np == false then
                     if (string.sub(msg:lower(), 0, 6) == "btools" or string.sub(msg:lower(), 0, 7) == ":btools" or string.sub(msg:lower(), 0, 7) == ";btools") and v.Name ~= game.Players.LocalPlayer.Name then
                         print(v.Name .. " thought btools existed.")
                         Chat("h \n\n\n\n\n " .. v.Name .. ", btools do not exist anymore! \n\n\n\n\n")
                     end
+		    end
 
                     if (string.sub(msg:lower(), 0, 3) == "f3x" or string.sub(msg:lower(), 0, 4) == ":f3x" or string.sub(msg:lower(), 0, 4) == ";f3x") and v.Name ~= game.Players.LocalPlayer.Name then
                         print(v.Name .. " thought f3x existed.")
