@@ -7,7 +7,7 @@ ___  __    ________  ___  ___  ___       ________  ___       ___  _________  ___
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
     \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| 
 
-A script for agspureiam's game Kohls Admin House
+A script for agspureiam's game Kohls Admin House. Supported for KAH NBC, BC and NP (sort of).
 Created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub)
 View the source here: https://kohlslite.pages.dev/source.lua
 ]]
@@ -21,7 +21,7 @@ getgenv().autoruncmds = {".antirocket me", ".tnok", ".antikill me"} --".antimsg 
 -- Run these commands when the user joins
 getgenv().run_on_sight = {
 		["ScriptingProgrammer"] = {".lua print('da owner joined so coolz')"}
-	}
+}
 
 -- KL Starter GUI
 getgenv().kohlsgui = false -- Simple GUI with instructions telling you how to use the script.
