@@ -2425,14 +2425,14 @@ print("- Perm check -")
 if hasperm then
 	if placetype == "NP" and (game.PlaceId == 112420803 or game.PlaceId == 115670532) then
 		hasperm = false
-		admin_stuff.perm = true
+		admin_stuff.perm2 = true
 		print("You have been given a perm pad since the Legacy Perm gamepass does not work for the official Kohls Admin House games (NBC/BC).")
 	else
         	print("A perm pad was not given as you have the Perm Admin gamepass!")
 	end
 else
 	hasperm = false
-	admin_stuff.perm = true 
+	admin_stuff.perm2 = true 
         print("A perm pad was given as you don't have the Perm Admin gamepass!")
 end
 
