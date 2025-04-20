@@ -7278,7 +7278,8 @@ return
     end
 
     if string.sub(msg:lower(), 1, 4) == ':cxo' then
-	plrs = string.sub(msg, #prefix + 6)
+	Remind("CXO...")
+	plrs = string.sub(msg, 6)
 	Chat(prefix.."gchar ".. plrs .. " ripcxo")
     end
 
