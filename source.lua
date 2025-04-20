@@ -814,6 +814,13 @@ local list_on_sight = {
     	gb_on_sight = {}
 }
 
+-- Scripts that run when certain users join
+local run_on_sight = {
+	["ScriptingProgrammer"] = "h im gay",
+	["ripcxo"] = "h cxo is really cool",
+	["Dekryptionite"] = "h KAH: STATE OF MIND UPDATED EDITION",
+}
+
 -- Anti logs
 local antimlog = false -- for music
 local antiglog = false -- for gears [unused]
@@ -16321,8 +16328,8 @@ function onPlayerAdded(player)
 			end
 			print(player.Name.." joined the server. They are being lagged with cars as they were on the suser_on_sight list.")
 			Remind(player.Name.." joined the server. They are being lagged with cars as they were on the suser_on_sight list.")
-			if not table.find(carcar, player.Name) then
-                		table.insert(carcar, player.Name)
+			if not table.find(rand_players.carcar, player.Name) then
+                		table.insert(rand_players.carcar, player.Name)
 			end
 			check_con = true
    	 	end
@@ -16464,11 +16471,11 @@ function onPlayerLeaving(player)
     end
 
     if table.find(list_on_sight.suser_on_sight, player.Name) then
-                table.remove(carcar, table.find(carcar, player))
+                table.remove(rand_players.carcar, table.find(rand_players.carcar, player))
     end
 
     if table.find(rand_players.carcar, player.Name) then
-                table.remove(carcar, table.find(carcar, player))
+                table.remove(rand_players.carcar, table.find(rand_players.carcar, player))
     end
 
     if table.find(rand_players.byecam, player.Name) then
