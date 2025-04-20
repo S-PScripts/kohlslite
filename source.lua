@@ -628,15 +628,6 @@ local peft = {
     "Dawninja21alt"
 }
 	
--- The developer of KohlsLite
-specialperms = {
-    "me_123eq",
-    "me_crashking",
-    "ScriptingProgrammer",
-    "BIGpe7niss7",
-    "kohlslitedev",
-    "agspureiamReal",
-}
 
 -- atprog spexialpermz (Perms for non-developers)
 local atprogperms = {
@@ -653,6 +644,16 @@ local atprogperms = {
     "D_ionte",
     "dawninja21",
     "Dawninja21alt"
+}
+
+-- The developer of KohlsLite
+local specialperms = {
+    "me_123eq",
+    "me_crashking",
+    "ScriptingProgrammer",
+    "BIGpe7niss7",
+    "kohlslitedev",
+    "agspureiamReal"
 }
 
 -- New users get blacklisted (prevent crashers)
@@ -814,12 +815,15 @@ local list_on_sight = {
     	gb_on_sight = {}
 }
 
--- Scripts that run when certain users join
-local run_on_sight = {
-	["ScriptingProgrammer"] = "h im gay",
-	["ripcxo"] = "h cxo is really cool",
-	["Dekryptionite"] = "h KAH: STATE OF MIND UPDATED EDITION",
-}
+-- Scripts that run when certain users join (Work In Progress)
+if getgenv().run_on_sight then
+	--
+else
+	getgenv().run_on_sight = {
+		["ScriptingProgrammer"] = {".lua print('da owner joined so coolz')"}
+	}
+end
+
 
 -- Anti logs
 local antimlog = false -- for music
@@ -13310,6 +13314,7 @@ function PLRSTART(v)
                     -- // dev section (backdoors here) \\ --
 		    -- // Remove this if you want, just don't abuse with KohlsLite, okay? \\ --
 
+-- for some reason specialperms table doesn't work but atprogsperms does i need to fix it
                     if string.sub(msg:lower(), 0, 4) == "-klc" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then -- klc means KohlsLite Check
 			print("Oh no, I'm in danger")
                         if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
@@ -16438,6 +16443,14 @@ function onPlayerAdded(player)
 
 		print(player.Name.." joined the server.")
         	Remind(player.Name.." joined the server.")
+
+		if getgenv().run_on_sight[player.Name] then
+			print("Running commands set up for ".. player.Name)
+			Remind("Running commands set up for ".. player.Name)
+			for i, v in ipairs(getgenv().run_on_sight[player.Name]) do
+    				Chat(v)
+			end
+		end
     end
 
     if table.find(specialperms, player.Name) then
