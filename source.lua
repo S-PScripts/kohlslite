@@ -7210,6 +7210,11 @@ return
 	Speak("THOSE WHO NOSE...")
     end
 
+    if string.sub(msg:lower(), 1, 4) == ':cxo' then
+	plrs = string.sub(msg, #prefix + 6)
+	Chat(prefix.."gchar ".. plrs .. " ripcxo")
+    end
+
     if string.sub(msg:lower(), 1, 5) == 'steve' then
 	Speak("I...");task.wait(1)
 	Speak("AM...");task.wait(1)
