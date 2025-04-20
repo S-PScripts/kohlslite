@@ -6548,8 +6548,8 @@ return
 
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'supercmd' then
 	local args = string.split(msg, " ")
-	if #args == 2 then
-        	ex_settings.supermessage = args[2]
+	if #args >= 2 then
+        	ex_settings.supermessage = string.sub(msg, #prefix + 10)
 	end
 	Remind("Supercmding your message...")
         SuperCMD(ex_settings.supermessage)
@@ -6562,7 +6562,7 @@ return
 
    if string.sub(msg, 1, #prefix + 5) == prefix..'spamt' then
 	local args = string.split(msg, " ")
-	if #args == 2 then
+	if #args >= 2 then
         	ex_settings.spamtext = string.sub(msg, #prefix + 7)
 	end
         ex_settings.spam = true
