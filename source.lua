@@ -19266,7 +19266,9 @@ local function addGuiToPlayer(player)
 
     if text and color then
         player.CharacterAdded:Connect(function(character)
+	    pcall(function()
             local head = character:WaitForChild("Head")
+		end)
             if player ~= game.Players.LocalPlayer then
                 local billboardGui = createBillboardGui(text, color)
                 billboardGui.Adornee = head
