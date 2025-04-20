@@ -2439,10 +2439,36 @@ end
 
 print("\n") 
 
+kdgkslkcxnjkbjbcxn = {
+	"KohlsLite",
+	"KohlsWare",
+	"Shortcut v4",
+	"Solinium v3",
+	"Skidware",
+	"Femware",
+	"Furryware",
+	"Maidware",
+	"ToiletWare",
+	"ts2021's terrible script",
+	"KohlsLight",
+	"DarkKohls BUT LITE",
+	"Shortcake v4",
+	"CMD v4",
+	"HECKERWARE",
+	"some script that sort of works for kah legacy",
+	"JewWare",
+	"i forgor",
+	"BritishWare",
+	"wuiving's cow's script",
+}
+
 if kah_np == false then
 	Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
 else
-	Speak("KohlsLite executed! Version: "..getgenv().klversion)
+	gahijhagskksgajgldjjsdj = math.random(1, #kdgkslkcxnjkbjbcxn)
+	choose = kdgkslkcxnjkbjbcxn[gahijhagskksgajgldjjsdj]
+	Speak(choose .. " executed! Version: "..getgenv().klversion)
+	-- Speak("KohlsLite executed! Version: "..getgenv().klversion)
 end
 
 --[[
