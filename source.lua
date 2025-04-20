@@ -13789,25 +13789,16 @@ task.spawn(function()
 
                                 	if math.abs(music.TimePosition - denumba) > 0.5 then
                                         	if denumba < music.TimePosition - 1 or denumba > music.TimePosition + 1 then
-							if tm == false then else
-							tm = false task.wait(0)
                                                 	-- print(music.TimePosition) ; print(denumba)
                                                         music.TimePosition = denumba ; Remind("Fixed the time position!")
-							task.wait(0.1) tm = true
-							end
                                            	end
                                 	end
 
 					if kah_np == true then
 						if game:GetService("Workspace"):FindFirstChild("Sound") then
                                 			if game:GetService("Workspace").Sound.PlaybackSpeed ~= music_related.pitch then
-								if tm == false then else
-								tm = false task.wait(0)
-								print("pitch used - stopped music and restarted")
+								print("pitch used - fixed")
 								game:GetService("Workspace").Sound.PlaybackSpeed = music_related.pitch
-								Chat("stopmusic")
-								task.wait(0.1) tm = true
-								end
 							end
                         			end
 					else
