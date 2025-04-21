@@ -17212,6 +17212,31 @@ function arena(plr1, plr2)
     task.wait()
 end
 
+function Surround(mode)
+       local fullCircle = 2 * math.pi
+       local radius = 10 
+       local function getXAndZPositions(angle)
+                local x = math.cos(angle) * radius
+                local z = math.sin(angle) * radius
+                return x, z
+        end
+        SuperCMD("gear me 88885539")
+        for i,c in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                if c.Name == "Tactical Airstrike" then
+                        local angle = i * (fullCircle / 50)
+                        local x, z = getXAndZPositions(angle)
+                        c.Parent = game.Players.LocalPlayer.Character
+                        c:WaitForChild("OnMouseClick"):FireServer((workspace[surrer].HumanoidRootPart.CFrame * CFrame.new(x, 0, z)).p)
+                end
+        end
+        if mode == "sur" then
+                task.wait(1)
+        else 
+                task.wait(10)
+        end
+        Chat("ungear me")
+end
+
 function Rail()
         Chat("ff " ..railer)
         Chat("god " ..railer)
@@ -17263,6 +17288,23 @@ function StoneMap()
         task.spawn(function()
             stoneTool2.ServerControl:InvokeServer("KeyPress", {["Key"] = "x", ["Down"] = true})
         end)
+end
+
+function IceMap()
+        Chat('gear me 2758794374')
+        repeat task.wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("2019BloxyAward")
+        local Bloxy = game.Players.LocalPlayer.Backpack:FindFirstChild("2019BloxyAward")
+        task.wait()
+        Bloxy.Parent = game.Players.LocalPlayer.Character
+        task.wait()
+        Remind("This will get most of the parts but not all of them!")
+        for i,v in pairs(game.Workspace:GetDescendants()) do
+		task.wait(0)
+        	if v:IsA("BasePart") then
+           		 firetouchinterest(v,Bloxy.Handle,0)
+           		 firetouchinterest(v,Bloxy.Handle,1)
+       		end
+    	end
 end
 
 function Platform() -- based off pr script
@@ -17943,48 +17985,6 @@ function paintmap(R,G,B)
 		pcall(function()
 			colorAPI.colorPads_2(R,G,B)
 		end)
-end
-
-function IceMap()
-        Chat('gear me 2758794374')
-        repeat task.wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("2019BloxyAward")
-        local Bloxy = game.Players.LocalPlayer.Backpack:FindFirstChild("2019BloxyAward")
-        task.wait()
-        Bloxy.Parent = game.Players.LocalPlayer.Character
-        task.wait()
-        Remind("This will get most of the parts but not all of them!")
-        for i,v in pairs(game.Workspace:GetDescendants()) do
-		task.wait(0)
-        	if v:IsA("BasePart") then
-           		 firetouchinterest(v,Bloxy.Handle,0)
-           		 firetouchinterest(v,Bloxy.Handle,1)
-       		end
-    	end
-end
-
-function Surround(mode)
-       local fullCircle = 2 * math.pi
-       local radius = 10 
-       local function getXAndZPositions(angle)
-                local x = math.cos(angle) * radius
-                local z = math.sin(angle) * radius
-                return x, z
-        end
-        SuperCMD("gear me 88885539")
-        for i,c in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                if c.Name == "Tactical Airstrike" then
-                        local angle = i * (fullCircle / 50)
-                        local x, z = getXAndZPositions(angle)
-                        c.Parent = game.Players.LocalPlayer.Character
-                        c:WaitForChild("OnMouseClick"):FireServer((workspace[surrer].HumanoidRootPart.CFrame * CFrame.new(x, 0, z)).p)
-                end
-        end
-        if mode == "sur" then
-                task.wait(1)
-        else 
-                task.wait(10)
-        end
-        Chat("ungear me")
 end
 
 function JNUKE(dj, jnu)
