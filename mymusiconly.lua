@@ -1,4 +1,4 @@
--- just tweaked for this random admin game lol
+--doesnt work
 
 music_related = {}
 music_related.mymusiconly = true
