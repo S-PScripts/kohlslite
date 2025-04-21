@@ -2467,6 +2467,21 @@ end
  \____\___/|_|  |_|_|  |_/_/   \_\_| \_|____/  |_____|___|____/ |_|  
 ]]
 
+--[[
+this needs to be the new format used
+the script is gonna need quite a big edit due to the crappy coding
+
+game.TextChatService.MessageReceived:Connect(function(tbl)
+        if tbl.TextSource then
+            local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
+            if not player then return end
+
+            print(tbl.Text)
+            print(player)
+        end
+end)
+]]
+
 game.Players.LocalPlayer.Chatted:Connect(function(msg)
         task.wait(0)
 		
