@@ -901,7 +901,13 @@ local gear_antis = {
 	antiraygun = false,
 	
 	-- Stop users from using blacklisted tools that aren't part of the antis above
-	noblt = false
+	noblt = false,
+
+	-- Stop yourself from having gears in your inventory
+	antitoolm = false,
+
+	-- Stops you from getting kicked from crash gears (NOTE: This isn't really useful anymore.")
+	antikick2 = false
 }
 
 -- Antis (workspace and other stuff)
@@ -3951,6 +3957,10 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          end
     end
 
+    if string.sub(msg, 1, #prefix + 8)  == prefix..'kitlist' then
+	Chat(prefix.."gearlist")
+    end
+
    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'char' then
         local args = string.split(msg, " ")
         if #args >= 3 then
@@ -4565,6 +4575,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			end)
                 	moveobject(game.Workspace.Terrain["_Game"].Workspace["Baseplate"], 2)
 		else
+			pcall(function()
+				if not game:GetService("Workspace").Tabby.Admin_House:FirstFindChild("Baseplate") then
+					Remind("NOT LOADED!")
+					return
+				end
+			end)
 			moveobject(game:GetService("Workspace").Tabby.Admin_House.Baseplate, 2)
 		end
                 repeat fwait() until movestatus == false
@@ -4588,6 +4604,12 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			end)
                 	moveobject(game.Workspace.Terrain["_Game"].Workspace["Baseplate"], 1)
 		else
+			pcall(function()
+				if not game:GetService("Workspace").Tabby.Admin_House:FirstFindChild("Baseplate") then
+					Remind("NOT LOADED!")
+					return
+				end
+			end)
 			moveobject(game:GetService("Workspace").Tabby.Admin_House.Baseplate, 1)
 		end
                 repeat fwait() until movestatus == false
@@ -4597,11 +4619,19 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'spawnkill' then
+		if kah_np == false then
                         moveObject(game:GetService("Workspace").Terrain["_Game"].Workspace.Obby.Jump9,CFrame.new(-41.0650024, 1.30000007, -28.601058959961, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+		else
+			 moveObject(game:GetService("Workspace").Tabby.Admin_House.Jumps.Jump9,CFrame.new(-41.0650024, 1.30000007, -28.601058959961, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+		end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'cagespawn' then
+		if kah_np == false then
                     moveObject(game:GetService("Workspace").Terrain["_Game"].Workspace["Basic House"].SmoothBlockModel40,CFrame.new(-10.7921638, 17.3182983, -16.0743637, -0.999961913, -0.0085983118, 0.00151610479, -1.01120179e-08, 0.173648253, 0.98480773, -0.00873095356, 0.984770179, -0.173641637))
+		else
+			Remind("Unavailable.")
+		end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixpads2' then
@@ -4624,11 +4654,15 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'fixregen2' then
-                    moveObject(game:GetService("Workspace").Terrain["_Game"].Admin.Regen,CFrame.new(-7.16500044, 5.42999268, 91.7430038, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+                moveObject(game:GetService("Workspace").Terrain["_Game"].Admin.Regen,CFrame.new(-7.16500044, 5.42999268, 91.7430038, 0, 0, -1, 0, 1, 0, 1, 0, 0))
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fixbp2' then
-                    moveObject(workspace.Terrain["_Game"].Workspace.Baseplate,CFrame.new(-501, 0.100000001, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1))
+		if kah_np == false then
+                    	moveObject(workspace.Terrain["_Game"].Workspace.Baseplate,CFrame.new(-501, 0.100000001, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1))
+		else
+	        	moveObject(game:GetService("Workspace").Tabby.Admin_House.Baseplate,CFrame.new(-501, 0.100000001, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1))
+		end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'fcam' then
@@ -4637,7 +4671,6 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 if player ~= nil then
                         FCAM(cplr, player)
 			Remind("Freezing the person's camera...")
-        
                 else                        
                         Remind('Cannot find player with the name: '..dasplayer)
                 end
@@ -4761,14 +4794,6 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 	end
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'ivmove' then
-			yeahthemover("yes")
-    end
-
-    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'omove' then
-			yeahthemover("no")
-    end
-
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'moveregen' then
 		pcall(function()
 			if not workspace.Terrain._Game.Admin:FindFirstChild("Regen") then
@@ -4785,6 +4810,14 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 GravFix()
                 Chat("respawn me")
                 ColFix()
+    end
+		
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'ivmove' then
+			yeahthemover("yes")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'omove' then
+			yeahthemover("no")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'saveregen' then
@@ -8152,6 +8185,7 @@ return
         GravFix()
         Chat("respawn me")
         ColFix()
+	VFix()
         movestatus = false
 	Remind("Fixed your game!")
     end
@@ -8415,7 +8449,12 @@ return
      end
 
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bpfixv' then
-	local target = workspace.Terrain["_Game"].Workspace.Baseplate
+	VFix()
+	if kah_np == false then
+		local target = workspace.Terrain["_Game"].Workspace.Baseplate
+	else
+		local target = game:GetService("Workspace").Tabby.Admin_House.Baseplate
+	end
 	movepart(target)  
 	repeat task.wait() until mready == true 
 	task.wait(0.5)
@@ -8424,12 +8463,16 @@ return
 	Chat("unskydive me")
 	task.wait(0.75)
 	Chat("respawn me")
-	Remind("If this didn't work, it might be that you didn't fix YOUR own velo yet! Do fixvelo then try again.")
+	--Remind("If this didn't work, it might be that you didn't fix YOUR own velo yet! Do fixvelo then try again.")
      end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'flipbp' then
 	Remind("Flipping...")
-	local target = workspace.Terrain["_Game"].Workspace.Baseplate
+	if kah_np == false then
+		local target = workspace.Terrain["_Game"].Workspace.Baseplate
+	else
+		local target = game:GetService("Workspace").Tabby.Admin_House.Baseplate
+	end
 	movepart(target)  
 	repeat task.wait() until mready == true
 	task.wait(0.5)
@@ -8519,7 +8562,7 @@ return
 
      if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fastpads' then
                 FastPads()	
-		Remind("Getting the pads.")
+		Remind("Teleporting to the pads.")
      end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'loopgrab2' then
@@ -9556,19 +9599,19 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antikick' then
-                antikick2 = true
+                gear_antis.antikick2 = true
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantikick' then
-                antikick2 = false
+        	gear_antis.antikick2 = false
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'antit' then
-                antitoolm = true
+                gear_antis.antitoolm = true
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unantit' then
-                antitoolm = false
+                gear_antis.antitoolm = false
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antisit' then
@@ -11243,7 +11286,7 @@ task.spawn(function()
 					end
                                 end
                         end
-                    elseif mainbar_stuff.superchargeslock == true then
+                    elseif mainbar_stuff.superchargeslock == true then -- tech's
 			if not game.Lighting:FindFirstChild(v.Name) then
 				game.Players:Chat(":blind all")
     				game.Players:Chat("fogcolor 0 0 0")
@@ -12743,7 +12786,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				for i, v in game.Players:GetPlayers() do
 					if v.Name == game.Players.LocalPlayer.Name then
 						if v.Backpack and v.Backpack:FindFirstChild(tool) then
-							if antikick2 then
+							if gear_antis.antikick2 then
 								tool:Destroy()
 							end
 						end
@@ -12751,7 +12794,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
-							if antikick2 then
+							if gear_antis.antikick2 then
 								tool:Destroy()
 							end
 						end
@@ -12760,7 +12803,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		end
 
                 for i, gear in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                            if gear:IsA("Tool") and antitoolm == true then
+                            if gear:IsA("Tool") and gear_antis.antitoolm == true then
                                         gear:Destroy()
                             end
         	end
@@ -13941,14 +13984,20 @@ function Bring()
 end
 
 function VFix()
-    for i,v in pairs(game:GetService("Workspace").Terrain._Game.Workspace:GetDescendants()) do
-        if v:IsA("BasePart") then
-            v.Velocity = Vector3.new(0,0,0)
-	    v.RotVelocity = Vector3.new(0, 0, 0)
-        end
-    end
-    workspace.Terrain._Game.Workspace.Baseplate.Velocity = Vector3.new(0,0,0)
-    workspace.Terrain._Game.Workspace.Baseplate.RotVelocity = Vector3.new(0,0,0) 
+   	for i,v in pairs(game:GetService("Workspace").Terrain._Game.Workspace:GetDescendants()) do
+        	if v:IsA("BasePart") then
+            		v.Velocity = Vector3.new(0,0,0)
+	    		v.RotVelocity = Vector3.new(0, 0, 0)
+        	end
+    	end
+
+	if kah_np == false then
+    		workspace.Terrain._Game.Workspace.Baseplate.Velocity = Vector3.new(0,0,0)
+    		workspace.Terrain._Game.Workspace.Baseplate.RotVelocity = Vector3.new(0,0,0) 
+	else
+		game:GetService("Workspace").Tabby.Admin_House.Baseplate.Velocity = Vector3.new(0,0,0)
+		game:GetService("Workspace").Tabby.Admin_House.Baseplate.RotVelocity = Vector3.new(0,0,0)
+	end
 --game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
 end
 
@@ -16821,7 +16870,6 @@ function FixPaint()
 
 	spawn(function()
 		colorAPI.colorPads(colorAPI.transformToColor3(BrickColor.new("Bright green")))
-		
 	end)
 
 	pcall(function()
@@ -17792,6 +17840,23 @@ function rmap()
 end
 
 function rbase()
+        	if kah_np == false then	
+			pcall(function()
+				if not workspace.Terrain._Game.Workspace:FindFirstChild("Baseplate") then
+					Remind("NOT LOADED!")
+					return
+				end
+			end)
+                	vro = game.Workspace.Terrain["_Game"].Workspace["Baseplate"]
+		else
+			pcall(function()
+				if not game:GetService("Workspace").Tabby.Admin_House:FirstFindChild("Baseplate") then
+					Remind("NOT LOADED!")
+					return
+				end
+			end)
+			vro = game:GetService("Workspace").Tabby.Admin_House.Baseplate
+		end
 
 		local RainbowValue = 0
 		Loops.rbase = true
@@ -17806,7 +17871,7 @@ function rbase()
 
 				if Loops.rbase and t then
 						paint:WaitForChild("Remotes").ServerControls:InvokeServer("PaintPart",{
-                            					["Part"] = game:GetService("Workspace").Terrain["_Game"].Workspace.Baseplate,
+                            					["Part"] = vro,
                            					["Color"] = Color3.fromHSV(RainbowValue,1,1)
                         			})
 				end		
@@ -17861,12 +17926,26 @@ function paintmap(R,G,B)
 					RR = {R,G,B}
 				})
 		end)
-		
-		colorAPI.colorObbyBox_2(R,G,B)
-		colorAPI.colorObbyBricks_2(R,G,B)
-		colorAPI.colorAdminDivs_2(R,G,B)
-	        colorAPI.colorRegen_2(R,G,B)
-		colorAPI.colorPads_2(R,G,B)
+
+		pcall(function()
+			colorAPI.colorObbyBox_2(R,G,B)
+		end)
+
+		pcall(function()
+			colorAPI.colorObbyBricks_2(R,G,B)
+		end)
+
+		pcall(function()
+			colorAPI.colorAdminDivs_2(R,G,B)
+		end)
+
+		pcall(function()
+	        	colorAPI.colorRegen_2(R,G,B)
+		end)
+
+		pcall(function()
+			colorAPI.colorPads_2(R,G,B)
+		end)
 end
 
 function IceMap()
@@ -17994,7 +18073,7 @@ function GetGuitar()
     elseif game.Players.LocalPlayer.Character:FindFirstChild("GuitarSword") then
         return game.Players.LocalPlayer.Character:FindFirstChild("GuitarSword")
     else
-        game.Players:Chat("gear me 60357982")
+        Chat("gear me 60357982")
         repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("GuitarSword")
         local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("GuitarSword")
         tool.Parent = game.Players.LocalPlayer.Character
@@ -18010,7 +18089,7 @@ function GetDrum()
     elseif game.Players.LocalPlayer.Character:FindFirstChild("DrumKit") then
         return game.Players.LocalPlayer.Character:FindFirstChild("DrumKit")
     else
-        game.Players:Chat("gear me 33866728")
+        Chat("gear me 33866728")
         repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("DrumKit")
         local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("DrumKit")
         tool.Parent = game.Players.LocalPlayer.Character
@@ -18026,7 +18105,7 @@ function GetBongo()
     elseif game.Players.LocalPlayer.Character:FindFirstChild("BongoDrums") then
         return game.Players.LocalPlayer.Character:FindFirstChild("BongoDrums")
     else
-        game.Players:Chat("gear me 57902997")
+        Chat("gear me 57902997")
         repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("BongoDrums")
         local tool = game.Players.LocalPlayer.Backpack:FindFirstChild("BongoDrums")
         tool.Parent = game.Players.LocalPlayer.Character
