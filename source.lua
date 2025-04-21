@@ -447,7 +447,7 @@ else
 end
 
 -- Defaults (you can change these)
-local defaults = {".tnok", ".antikill me"} --".antimsg me"
+local defaults = {".tnok", ".antikill me", ".antimsg me"} --".antimsg me"
 
 -- Misc variables (Do not edit these! They are for bug fixes... but they don't even work...).
 local backend_stuff = {
@@ -1098,7 +1098,7 @@ local antisall = {
     antihealthchange = false,
     antijail = false,
     antikill = false,
-    antimessage = true,
+    antimessage = false,
     antiname = false,
     antichar = false,
     antiparticles = false,
@@ -1113,7 +1113,7 @@ local antisall = {
     antistun = false,
     antisetgrav = false,
     antiswag = false,
-    antimesh = true,
+    antimesh = false,
     antifling = false,
     antisize = false
 }
@@ -9320,6 +9320,16 @@ return
         Remind("Turned this anti off for you!")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'antimessage' then
+        antis.antimessage = true
+        Remind("Turned this anti on for you!")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'unantimessage' then
+        antis.antimessage = false
+        Remind("Turned this anti off for you!")
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antitp' then
         antitp = true
         Remind("Turned this anti on for you!")
@@ -16531,7 +16541,7 @@ local UserInputService = game:GetService("UserInputService")
 
 isAFK = false
 UserInputService.WindowFocusReleased:Connect(function()
-        task.wait(0)
+        task.wait(0.1)
             if auto_stuff.autoafk == true then
 		    isAFK = true
                     Chat("name me " .. auto_stuff.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName)
@@ -16547,7 +16557,7 @@ UserInputService.WindowFocusReleased:Connect(function()
 end)
 
 UserInputService.WindowFocused:Connect(function()
-        task.wait(0)
+        task.wait(0.1)
             if auto_stuff.autoafk == true then
 		isAFK = false
                 Chat("reset me")
@@ -16563,7 +16573,7 @@ task.spawn(function()
 	while true do
                 task.wait()
                 if isAFK == true then
-			if (workspace:FindFirstChild(game.Players.LocalPlayer.Name) and not workspace:FindFirstChild(LocalPlayer.Name):FindFirstChildOfClass("Model") or workspace:FindFirstChild(LocalPlayer.Name):FindFirstChildOfClass("Model").Name ~= auto_stuff.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName) then
+			if (workspace:FindFirstChild(game.Players.LocalPlayer.Name) and not workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChildOfClass("Model") or workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChildOfClass("Model").Name ~= auto_stuff.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName) then
 				Chat("name me " .. AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName)
 			end
 		end
