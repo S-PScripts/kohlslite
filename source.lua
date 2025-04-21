@@ -12208,7 +12208,8 @@ local miscTools =
 		{"DaggerofShatteredDimensions", 
 		"SledgeHammer", 
 		"AR", 
-		"Transmorpher"}
+		"Transmorpher",
+		"RemoteExplosiveDetonator"}
 
 local ninejntools = 
 		{"HyperlaserGun",
