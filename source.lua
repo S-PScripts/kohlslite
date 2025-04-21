@@ -12168,6 +12168,18 @@ connections[#connections + 1] =
                 end
 end)
 
+local function gear_antis_punish(plr)
+        local isB,spe = bypassattemptcheck(plr.Name)
+        if isB then
+		Chat("ungear " .. spe)
+		Chat("punish " .. spe)
+        else
+		Chat("ungear ".. plr.Name)
+		Chat("punish ".. plr.Name)
+	end
+	Chat("clr")
+end
+
 -- Antis (tool related)
 local crashTools = 
 	{"OrinthianSwordAndShield", 
@@ -12218,7 +12230,6 @@ local crashToolsLP =
 		"HotPotato"}
 
 -- Function for the antis
--- Might add isB functionality
 debounce_antis = true -- debounce toggle
 da_wait = 0.1 -- debounce wait
 da_on = false -- used in debounce toggle
@@ -12237,9 +12248,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 					if v.Backpack:FindFirstChildOfClass("Tool") then
 						if gear_antis.antigear then
-							Chat("ungear " .. v.Name)
-							Chat("punish " .. v.Name)
-							Chat("clr")
+							gear_antis_punish(v)
 							Regen()
 
 							if player_relate.crash_an then
@@ -12258,9 +12267,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 					if v.Character and v.Character:FindFirstChildOfClass("Tool") then
 						if gear_antis.antigear then
-							Chat("ungear " .. v.Name)
-							Chat("punish " .. v.Name)
-							Chat("clr")
+							gear_antis_punish(v)
 							Regen()
 
 							if player_relate.crash_an then
@@ -12320,9 +12327,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								end
 							
 							elseif gear_antis.anticrash then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12366,9 +12371,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 								end
 							
 							elseif gear_antis.anticrash then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12412,9 +12415,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
 							if gear_antis.antiattach2 then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12433,9 +12434,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
 							if gear_antis.antiattach2 then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12474,9 +12473,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
 							if gear_antis.antiperi then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12495,9 +12492,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
 							if gear_antis.antiperi then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12536,9 +12531,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
 							if gear_antis.antigb then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12557,9 +12550,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
 							if gear_antis.antigb then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12598,9 +12589,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
 							if gear_antis.antipaint then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12619,9 +12608,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
 							if gear_antis.antipaint then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12660,9 +12647,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
 							if gear_antis.noblt then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12681,9 +12666,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
 							if gear_antis.noblt then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12722,9 +12705,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
 							if gear_antis.antiraygun then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12743,9 +12724,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
 							if gear_antis.antiraygun then
-								Chat("ungear " .. v.Name)
-								Chat("punish " .. v.Name)
-								Chat("clr")
+								gear_antis_punish(v)
 								Regen()
 
 								if player_relate.crash_an then
@@ -12804,7 +12783,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
                                         gear:Destroy()
                             end
         	end
-
 end)
 
 -- stop dupe blacklist 
