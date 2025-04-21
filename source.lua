@@ -30,7 +30,7 @@ This script has been discontinued for the most part due to the fact that Kohls A
 This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g: Shortcut v2 src1 being an extension to Shortcut v1).
 
 KohlsLite is a bit like a mixture of all the scripts that already exist in KAH such as:
-  -- > CMD (v1) [by quiving, the same person that made the Solara executor]
+  -- > CMD (v1) [by quiving, the same person who made the Solara executor]
   -- > CMD Y [by quiving]
   -- > CMD v3 (Pi) [by quiving]
   -- > Shortcut v1 [by SnowClan_8342/yeemi]
@@ -52,17 +52,18 @@ KohlsLite is a bit like a mixture of all the scripts that already exist in KAH s
   -- > Proton Admin [by Digitality]
   -- > Many scripts from the KAH script archive by Damix [View it here: S-PScripts/kah-fork]
 
-Some of the code here is from other creators, credit has been given, but quite a lot is my own and also some commands can't be changed code-wise that much.
+Some of the code here is from other creators, credit has been given.
+However, quite a lot is my own, and also some commands can't be changed code-wise that much.
 
 There are no watermarks in this script. I included watermarks in my script when I first created it, but I wanted to make this script more 'premium' like Shortcut v3-VAR.
-However, KohlsLite has backdoors (dev section) due to dumb people abusing like crazy using this script. 
+However, KohlsLite has backdoors (dev section) due to dumb people using my script for bad.
 
 If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have many advertisements.
 
 Please do not edit this script by simply removing the dev section and then proceeding to abuse in KAH. It makes me, and anyone playing the game, really annoyed.
 Instead, you can make your own script and take stuff from here if necessary.
 
-Please don't go abusing like crazy using this script. I made this free/open-source and don't want stupid people doing stuff that forces me to make this paid/obfuscated.
+Please don't use this script for bad. I made this free/open-source and don't want stupid people doing stuff that forces me to make this paid/obfuscated.
 
 Other stuff:
 -> There is no command handler and this script looks terrible to be honest. I'm not making a full rewrite of this script as that would take ages. I did try to remake this script a while ago but I got bored and gave up.
