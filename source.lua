@@ -818,9 +818,6 @@ local antimlog = false -- for music
 local antiglog = false -- for gears [unused]
 local anticlog = false -- for chars [unused]
 
--- Users that can't use the admin pads
-local padbanned = {} 
-
 -- Keybinds
 local keybinds = { 
 	housekeybind = "h", -- Teleport to the house
@@ -855,15 +852,18 @@ local admin_stuff = {
 	-- Everyone in the server uses your admin to run commands!
 	alladmin = false,
 
-	-- Resets the admin pads every time someone gets a pad
-	SRegen = false,
+	-- All admin but for individual users
+	FAdmins = {},
 
 	-- Pad reinforcements (only 1 pad can be collected per player)
-	padreinforcements = false 
-}
+	padreinforcements = false,
 
--- All admin but for individual users
-local FAdmins = {}
+	-- Resets the admin pads every time someone gets a pad (padbanned for everyone)
+	SRegen = false,
+
+	-- People that cannot use the admin pads
+	padbanned = {} 
+}
 
 -- Antis (gears)
 local gear_antis = {
@@ -1149,13 +1149,6 @@ local antisplayers = { -- Antis for specific players
     antifling = {}
 }
 
--- Anti kill list, I didn't make it for any other antis so cry (if you're so desperate, contact me)
-local antikill = {}
-local antipunish = {}
-
--- People to get automatically charred to the ID set
-local autochar = {}
-
 -- More autos
 local auto_stuff = {
 	-- Auto forcefield (plr, all)
@@ -1169,8 +1162,8 @@ local auto_stuff = {
 	-- Automatically char yourself/others to the ID set
 	autocharme = false,
 	autocharall = false,
+	autochar = {},
 	autocharid = "nil",
-
 	
 	-- Fogend visualiser
 	fogdance = false,
@@ -2992,7 +2985,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          local dasplayer = string.sub(msg:lower(), #prefix + 7)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
-                if not table.find(FAdmins, player) then
+                if not table.find(admin_stuff.FAdmins, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
 					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been given admin! \n\n\n\n\n")
@@ -3001,7 +2994,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 				end
 			end
                         Remind("Admined "..player)
-                        table.insert(FAdmins, player)
+                        table.insert(admin_stuff.FAdmins, player)
                 else
                         Remind(player.." is already an admin!")
                 end
@@ -3014,7 +3007,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
          local dasplayer = string.sub(msg:lower(), #prefix + 9)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
-                if table.find(FAdmins, player) then
+                if table.find(admin_stuff.FAdmins, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
 					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been removed from admin. \n\n\n\n\n")
@@ -3023,7 +3016,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 				end
 			end
                         Remind("Unadmined "..player)
-                        table.remove(FAdmins, table.find(FAdmins, player))
+                        table.remove(admin_stuff.FAdmins, table.find(admin_stuff.FAdmins, player))
                 else
                         Remind(player.." was never an admin!")
                 end
@@ -3034,8 +3027,8 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
        if string.sub(msg, 1, #prefix + 9)  == prefix..'listadmins' then
           Remind("Check your console by running /console!")
-          for i = 1, #FAdmins do
-                  print(FAdmins[i])
+          for i = 1, #admin_stuff.FAdmins do
+                  print(admin_stuff.FAdmins[i])
           end
         end
 
@@ -7033,7 +7026,7 @@ Chat("h \n\n\n\n\n "..[[
 				Chat("h \n\n\n\n\n "..player.." has been padbanned. \n\n\n\n\n")
 			end
 		end
-                table.insert(padbanned, player)
+                table.insert(admin_stuff.padbanned, player)
          else
                 Remind('Cannot find player with the name: '..dasplayer)
          end
@@ -7050,7 +7043,7 @@ Chat("h \n\n\n\n\n "..[[
 				Chat("h \n\n\n\n\n "..player.." has been unpadbanned! \n\n\n\n\n")
 			end
 		end
-                table.remove(padbanned, table.find(padbanned, player))
+                table.remove(admin_stuff.padbanned, table.find(admin_stuff.padbanned, player))
          else
                 Remind('Cannot find player with the name: '..dasplayer)
          end
@@ -9239,9 +9232,9 @@ return
 		  	kia = args[2]
            	  	PLAYERCHECK(kia)
 	         	if player ~= nil then
-				if not table.find(antikill, player) then
+				if not table.find(antisplayers.antikill, player) then
 					Remind(player.." is on the list now!")
-					table.insert(antikill, player)
+					table.insert(antisplayers.antikill, player)
 				else
 					Remind(player.." is already in the table!")
 				end
@@ -9271,9 +9264,9 @@ return
 		  	kia = args[2]
            	  	PLAYERCHECK(kia)
 	         	if player ~= nil then
-				if table.find(antikill, player) then
+				if table.find(antisplayers.antikill, player) then
 					Remind(player.." is no longer in the list!")
-					table.remove(antikill, table.find(antikill, player))
+					table.remove(antisplayers.antikill, table.find(antisplayers.antikill, player))
 				else
 					Remind(player.." was never in the list!")
 				end
@@ -9519,9 +9512,9 @@ return
 		  	kia = args[2]
            	  	PLAYERCHECK(kia)
 	         	if player ~= nil then
-				if not table.find(antipunish, player) then
+				if not table.find(antisplayers.antipunish, player) then
 					Remind(player.." is on the list now!")
-					table.insert(antipunish, player)
+					table.insert(antisplayers.antipunish, player)
 				else
 					Remind(player.." is already in the table!")
 				end
@@ -9551,9 +9544,9 @@ return
 		  	kia = args[2]
            	  	PLAYERCHECK(kia)
 	         	if player ~= nil then
-				if table.find(antipunish, player) then
+				if table.find(antisplayers.antipunish, player) then
 					Remind(player.." is no longer in the list!")
-					table.remove(antipunish, table.find(antipunish, player))
+					table.remove(antisplayers.antipunish, table.find(antisplayers.antipunish, player))
 				else
 					Remind(player.." was never in the list!")
 				end
@@ -10176,9 +10169,9 @@ return
 			if auto_stuff.autocharid ~= nil then Remind("Could not reach user provided.") return end
 			
 			if player ~= nil then
-				if not table.find(autochar, player) then
+				if not table.find(auto_stuff.autochar, player) then
 					Remind(player.." is on the list now!")
-					table.insert(autochar, player)
+					table.insert(auto_stuff.autochar, player)
 				else
 					Remind(player.." is already in the list!")
 				end
@@ -10211,9 +10204,9 @@ return
 		  	kia = args[2]
            	  	PLAYERCHECK(kia)
 	         	if player ~= nil then
-				if table.find(autochar, player) then
+				if table.find(auto_stuff.autochar, player) then
 					Remind(player.." is no longer in the list!")
-					table.remove(autochar, table.find(autochar, player))
+					table.remove(auto_stuff.autochar, table.find(auto_stuff.autochar, player))
 				else
 					Remind(player.." was never in the list!")
 				end
@@ -11873,7 +11866,7 @@ connections[#connections + 1] =
                 for i, v in ipairs(game.Players:GetPlayers()) do
                         if v.Name ~= game.Players.LocalPlayer.Name and not table.find(thorn_ig_anti, v.Name) then
 
-         		        if auto_stuff.autocharall == true or table.find(autochar, v.Name) then 
+         		        if auto_stuff.autocharall == true or table.find(auto_stuff.autochar, v.Name) then 
                                         if auto_stuff.autocharid ~= v.CharacterAppearanceId then
                                                       Chat('char '..v.Name..' '..auto_stuff.autocharid)
                                         end
@@ -12007,7 +12000,7 @@ connections[#connections + 1] =
 					end
                                 end
 
-                                if antisall.antikill == true or table.find(antikill, v.Name) then
+                                if antisall.antikill == true or table.find(antisplayers.antikill, v.Name) then
                                         if v.Character then
 						if v.Character.Humanoid then
 							if v.Character.Humanoid.Health == 0 then
@@ -12051,7 +12044,7 @@ connections[#connections + 1] =
                                 	end
                                 end
 
-                                if antisall.antipunish == true or table.find(antipunish, v.Name) then
+                                if antisall.antipunish == true or table.find(antisplayers.antipunish, v.Name) then
                                         if game.Lighting:FindFirstChild(v.Name) then
                                         	Chat("unpunish "..v.Name)
                                 	end
@@ -13526,7 +13519,7 @@ function PLRSTART(v)
             -- END OF DEV SECTION --
 
             -- ADMIN
-            if (admin_stuff.alladmin == true or table.find(FAdmins, v.Name)) and not table.find(blacklist, v.Name) and not table.find(newplrslocked, v.Name) and not mainbar_stuff.slockenabled and v.Name ~= game.Players.LocalPlayer.Name then
+            if (admin_stuff.alladmin == true or table.find(admin_stuff.FAdmins, v.Name)) and not table.find(blacklist, v.Name) and not table.find(newplrslocked, v.Name) and not mainbar_stuff.slockenabled and v.Name ~= game.Players.LocalPlayer.Name then
                 local command = string.gsub(msg:lower(), "me", v.Name)
                 if string.sub(command, 1, 1) == ":" then
                     command = ""
@@ -13750,7 +13743,7 @@ end)
 task.spawn(function()
         while true do
                 task.wait(0)
-                for i, player in pairs(padbanned) do
+                for i, player in pairs(admin_stuff.padbanned) do
                         task.wait(0)
                         for i,pad in pairs(game:GetService("Workspace").Terrain["_Game"].Admin.Pads:GetDescendants()) do
                                 if pad.Name == player.."'s admin" then
@@ -16491,7 +16484,7 @@ function onPlayerAdded(player)
 				else
 					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You are whitelisted to use any gear! \n\n\n\n\n")
 				end
-			elseif table.find(FAdmins, player.Name) then
+			elseif table.find(admin_stuff.FAdmins, player.Name) then
 				if mainbar_stuff.watermark_kl then
          				Chat("h \n\n\n\n\n [KohlsLite]: Welcome to the server, " .. player.DisplayName .. ". You have been given free admin! \n\n\n\n\n")
 				else
@@ -17548,10 +17541,10 @@ function SpHammer()
 	        end
 
 	        if mode == "pban" then
-			if table.find(padbanned, p.Parent.Name) then 
+			if table.find(admin_stuff.padbanned, p.Parent.Name) then 
 				--
 			else
-				table.insert(padbanned, p.Parent.Name)
+				table.insert(admin_stuff.padbanned, p.Parent.Name)
 			end
 		        if player_relate.blwl_an then Chat("h \n\n\n\n\n ".. p.Parent.Name .. " got pad-banned for touching my hammer >:) \n\n\n\n\n") end
 	        end
