@@ -2453,12 +2453,6 @@ end
 
 print("\n") 
 
-if kah_np == false then
-	Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
-else
-	Speak("KohlsLite executed! Version: "..getgenv().klversion)
-end
-
 --[[
   ____ ___  __  __ __  __    _    _   _ ____    _     ___ ____ _____ 
  / ___/ _ \|  \/  |  \/  |  / \  | \ | |  _ \  | |   |_ _/ ___|_   _|
@@ -19682,7 +19676,13 @@ connections[#connections + 1] =
 	end
 end)
 
-Remind("KohlsLite: Griefing KAH since the beginning of 2024.", 3)
+if kah_np == false then
+	Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
+else
+	Speak("KohlsLite executed! Version: "..getgenv().klversion)
+end
+
+Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
 
 if kah_np == true then
 	print("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.")
