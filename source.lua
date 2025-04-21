@@ -698,13 +698,8 @@ mainbar_stuff = {
 	KeepKL = true
 }
 
--- Auto stuff
-local auto_stuff = {
-	-- Automatically char yourself/others to the ID set
-	autocharme = false,
-	autocharall = false,
-	autocharid = "nil",
-
+-- Auto stuff (extra)
+local auto_stuff_mbar = {
 	-- Auto rejoin if kicked
 	autorejoin = false,
 
@@ -724,13 +719,6 @@ local rand_players = {
 	-- Car lag
 	carcar = {}
 }
-
--- Anti kill list, I didn't make it for any other antis so cry (if you're so desperate, contact me)
-local antikill = {}
-local antipunish = {}
-
--- People to get automatically charred to the ID set
-local autochar = {}
 
 -- Gamepass saving 
 -- Users that use perm will be placed here
@@ -1161,7 +1149,15 @@ local antisplayers = { -- Antis for specific players
     antifling = {}
 }
 
-autos = {
+-- Anti kill list, I didn't make it for any other antis so cry (if you're so desperate, contact me)
+local antikill = {}
+local antipunish = {}
+
+-- People to get automatically charred to the ID set
+local autochar = {}
+
+-- More autos
+local auto_stuff = {
 	-- Auto forcefield (plr, all)
 	autoff = false,
 	autoffa = false,
@@ -1170,6 +1166,12 @@ autos = {
 	autogod = false,
 	autogoda = false,
 
+	-- Automatically char yourself/others to the ID set
+	autocharme = false,
+	autocharall = false,
+	autocharid = "nil",
+
+	
 	-- Fogend visualiser
 	fogdance = false,
 
@@ -3093,25 +3095,25 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         end
 
         if string.sub(msg, 1, #prefix + 6)  == prefix..'fogvis' then -- fonalc funny var
-                autos.fogdance = true
+                auto_stuff.fogdance = true
 		Remind("Fog visualiser is now on!")
         end
 
         if string.sub(msg, 1, #prefix + 8)  == prefix..'unfogvis' then -- fonalc funny var
-                autos.fogdance = false
+                auto_stuff.fogdance = false
                 task.wait(0.5)
                 Chat("fix")
 		Remind("Fog visualiser is now off!")
         end
 
         if string.sub(msg, 1, #prefix + 4)  == prefix..'ccol' then
-                autos.ccolours_id = tonumber(string.sub(msg:lower(), #prefix + 6))
-                autos.ccolours = true
+                auto_stuff.ccolours_id = tonumber(string.sub(msg:lower(), #prefix + 6))
+                auto_stuff.ccolours = true
 		Remind("Crazy colours!")
         end
 
         if string.sub(msg, 1, #prefix + 6)  == prefix..'unccol' then
-                autos.ccolours = false
+                auto_stuff.ccolours = false
                 task.wait(0.5)
                 Chat("fix")
 		Remind("No more crazy colours!")
@@ -7427,18 +7429,18 @@ return
    end
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'autoafk' then
-        auto_stuff.autoafk = true
+        auto_stuff_mbar.autoafk = true
 	Remind("Auto AFK is now enabled.")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unautoafk' then
-        auto_stuff.autoafk = false
+        auto_stuff_mbar.autoafk = false
 	Remind("Auto AFK is now disabled.")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'afkmsg' then
 	local args = string.split(msg, " ")
-        auto_stuff.AFKMessage = table.concat(args, " ", 2)
+        auto_stuff_mbar.AFKMessage = table.concat(args, " ", 2)
 	Remind("AFK message set!")
    end
 
@@ -8201,12 +8203,12 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'autorj' then
-	auto_stuff.autorejoin = true
+	auto_stuff_mbar.autorejoin = true
         Remind("You will now auto rejoin this server if you get disconnected.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unautorj' then
-	auto_stuff.autorejoin = false
+	auto_stuff_mbar.autorejoin = false
         Remind("You will no longer auto rejoin this server if you get disconnected.")
     end
 
@@ -10051,14 +10053,14 @@ return
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'autoff' then
 	local args = string.split(msg, " ")
         if args[2] == "me" then
-                autos.autoff = true
+                auto_stuff.autoff = true
                 Remind("Auto ff is on for you!")
         elseif args[2] == "others" then
-		autos.autoffa = true
+		auto_stuff.autoffa = true
                 Remind("Auto ff is on for others!")
         elseif args[2] == "all" then
-                autos.autoff = true
-		autos.autoffa = true
+                auto_stuff.autoff = true
+		auto_stuff.autoffa = true
                 Remind("Auto ff is on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -10068,14 +10070,14 @@ return
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unautoff' then
 	local args = string.split(msg, " ")
         if args[2] == "me" then
-                autos.autoff = false
+                auto_stuff.autoff = false
                 Remind("Auto ff is off for you!")
         elseif args[2] == "others" then
-		autos.autoffa = false
+		auto_stuff.autoffa = false
                 Remind("Auto ff is off for others!")
         elseif args[2] == "all" then
-                autos.autoff = false
-		autos.autoffa = false
+                auto_stuff.autoff = false
+		auto_stuff.autoffa = false
                 Remind("Auto ff is off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -10085,14 +10087,14 @@ return
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'autogod' then
 	local args = string.split(msg, " ")
         if args[2] == "me" then
-                autos.autogod = true
+                auto_stuff.autogod = true
                 Remind("Auto god is on for you!")
         elseif args[2] == "others" then
-		autos.autogoda = true
+		auto_stuff.autogoda = true
                 Remind("Auto god is on for others!")
         elseif args[2] == "all" then
-                autos.autogod = true
-		autos.autogoda = true
+                auto_stuff.autogod = true
+		auto_stuff.autogoda = true
                 Remind("Auto god is on for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -10102,14 +10104,14 @@ return
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unautogod' then
 	local args = string.split(msg, " ")
         if args[2] == "me" then
-                autos.autogod = false
+                auto_stuff.autogod = false
                 Remind("Auto god is off for you!")
         elseif args[2] == "others" then
-		autos.autogoda = false
+		auto_stuff.autogoda = false
                 Remind("Auto god is off for others!")
         elseif args[2] == "all" then
-                autos.autogod = false
-		autos.autogoda = false
+                auto_stuff.autogod = false
+		auto_stuff.autogoda = false
                 Remind("Auto god is off for everyone!")
         else
                 Remind("Invalid argument: Must be me, others, or all")
@@ -11458,7 +11460,7 @@ connections[#connections + 1] =
 	task.wait()
 
 	pcall(function()
-  	if autos.autoff == true or autos.tempautoff == true then
+  	if auto_stuff.autoff == true or auto_stuff.tempautoff == true then
 		if lp.Character then
             		if not lp.Character:FindFirstChild("ForceField") then
                 		Chat("ff me")
@@ -11467,7 +11469,7 @@ connections[#connections + 1] =
 		end
         end
 
-        if autos.autogod == true or autos.tempautogod == true then
+        if auto_stuff.autogod == true or auto_stuff.tempautogod == true then
 		if lp.Character then
 			if lp.Character.Humanoid then
             			if tostring(lp.Character.Humanoid.MaxHealth) ~= "inf" then
@@ -11936,7 +11938,7 @@ connections[#connections + 1] =
 					end
                                 end
 				
-                                if autos.autoffa == true then
+                                if auto_stuff.autoffa == true then
 					if v.Character then
 						if not v.Character:FindFirstChild("ForceField") then
                                                 	Chat("ff "..v.Name)
@@ -11944,7 +11946,7 @@ connections[#connections + 1] =
 					end
 				end
 
-		       		if autos.autogoda == true then
+		       		if auto_stuff.autogoda == true then
 					if v.Character then
 						if v.Character.Humanoid then
             						if tostring(v.Character.Humanoid.MaxHealth) ~= "inf" then
@@ -14152,7 +14154,7 @@ end
 task.spawn(function()
    while true do
         task.wait(0.1) -- rate limit
-        if autos.fogdance == true then
+        if auto_stuff.fogdance == true then
 			if kah_np == false then
                         	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
                                 	pbl = game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackLoudness / 10
@@ -14166,9 +14168,9 @@ task.spawn(function()
 			end
         end
 
-        if autos.ccolours == true then
-			if game.Lighting.FogEnd ~= auto.ccolours_id then
-            					Chat("fogend "..auto.ccolours_id)
+        if auto_stuff.ccolours == true then
+			if game.Lighting.FogEnd ~= auto_stuff.ccolours_id then
+            					Chat("fogend "..auto_stuff.ccolours_id)
         		end
                         Chat("fogcolor " ..tostring(math.random(0, 255)) .." " .. tostring(math.random(0, 255)) .. " " .. tostring(math.random(0, 255)))
         end
@@ -16601,27 +16603,27 @@ local UserInputService = game:GetService("UserInputService")
 isAFK = false
 UserInputService.WindowFocusReleased:Connect(function()
         task.wait(0.1)
-            if auto_stuff.autoafk == true then
+            if auto_stuff_mbar.autoafk == true then
 		    isAFK = true
-                    Chat("name me " .. auto_stuff.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName)
+                    Chat("name me " .. auto_stuff_mbar.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName)
                     Chat("ff me")
                     Chat("god me")
-		    if autos.autoff == false then
-		    	autos.tempautoff = true
+		    if auto_stuff.autoff == false then
+		    	auto_stuff.tempautoff = true
 		    end
-		    if autos.autogod == false then
-		    	autos.tempautogod = true
+		    if auto_stuff.autogod == false then
+		    	auto_stuff.tempautogod = true
 		    end
             end
 end)
 
 UserInputService.WindowFocused:Connect(function()
         task.wait(0.1)
-            if auto_stuff.autoafk == true then
+            if auto_stuff_mbar.autoafk == true then
 		isAFK = false
                 Chat("reset me")
-		autos.tempautoff = false
-		autos.tempautogod = false
+		auto_stuff.tempautoff = false
+		auto_stuff.tempautogod = false
                 Chat("unff me")
                 Chat("ungod me")
             end
@@ -16632,7 +16634,7 @@ task.spawn(function()
 	while true do
                 task.wait()
                 if isAFK == true then
-			if (workspace:FindFirstChild(game.Players.LocalPlayer.Name) and not workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChildOfClass("Model") or workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChildOfClass("Model").Name ~= auto_stuff.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName) then
+			if (workspace:FindFirstChild(game.Players.LocalPlayer.Name) and not workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChildOfClass("Model") or workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChildOfClass("Model").Name ~= auto_stuff_mbar.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName) then
 				Chat("name me " .. AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName)
 			end
 		end
