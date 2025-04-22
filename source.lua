@@ -10,7 +10,7 @@
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.19
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.22
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -109,7 +109,7 @@ getgenv().scriptname = "KohlsLite"
 getgenv().deprefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.2"
+getgenv().klversion = "X1.22"
 
 -- Notifications
 local function Remind(msg, length)
@@ -1219,6 +1219,7 @@ Admin_Folder = Game_Folder.Admin
 
 -- These are all of the music ids I've saved in a musiclist.
 -- YOU SHOULD DO song instead of gmusic FOR BETTER ONES THESE ARE ONLY ONES I GOT FROM VIDEOS AND THEY SUCK
+-- SERIOUSLY IT IS ALWAYS FUNK AND PHONK
 -- Thanks to Dizzy for this idea of writing my musiclist
 -- It being gmusic1 instead of gmusic 1 is intentional!
 local musicplay
@@ -1267,28 +1268,28 @@ local musictable = {
     ["42"] = {id = "1845458027", name = "Smooth Nylons"},
     ["43"] = {id = "9047105533", name = "No Smoking"},
     ["44"] = {id = "1846808350", name = "Get Up And Boogie"},
-    ["45"] = {id = "14366981962", name = "Diss na Hagi Łagi"},
-    ["46"] = {id = "11265157079", name = "Advance Slayer"},
-    ["47"] = {id = "11265140685", name = "Untitled"},
-    ["48"] = {id = "11265166921", name = "Pierniki"},
-    ["49"] = {id = "11265137944", name = "Slayers Hatred"},
-    ["50"] = {id = "11265148479", name = "Amogus"},
-    ["51"] = {id = "11265145737", name = "Blaze You"},
-    ["52"] = {id = "11265173310", name = "Biszkopty"},
-    ["53"] = {id = "11265164947", name = "Chipsy"},
-    ["54"] = {id = "11496561844", name = "Fresh New Age"},
+    ["45"] = {id = "14366981962", name = "DubloX - Diss na Hagi Lagi"},
+    ["46"] = {id = "11265157079", name = "Sirfake - Advance Slayer"},
+    ["47"] = {id = "11265140685", name = "Sirfake - Untitled"},
+    ["48"] = {id = "11265166921", name = "Bagieta - Pierniki"},
+    ["49"] = {id = "11265137944", name = "Sirfake - Slayer's Hatred"},
+    ["50"] = {id = "11265148479", name = "Sirfake - Amogus (Eurobeat Remix)"},
+    ["51"] = {id = "11265145737", name = "Sirfake - Blaze You"},
+    ["52"] = {id = "11265173310", name = "Bagieta - Biszkopty"},
+    ["53"] = {id = "11265164947", name = "Bagieta - Chipsy"},
+    ["54"] = {id = "11496561844", name = "FNA TJee - Fresh New Age"},
     ["55"] = {id = "14884822656", name = "CyPhrix - StartUpSequence.cprx"},
     ["56"] = {id = "14884819670", name = "CyPhrix - Wobble"},
-    ["57"] = {id = "14884823796", name = "XRAY"},
-    ["58"] = {id = "14884823178", name = "Three Dimensions"},
-    ["59"] = {id = "14884817162", name = "Angel Hour"},
-    ["60"] = {id = "14884823527", name = "Outcome"},
+    ["57"] = {id = "14884823796", name = "CyPhrix - XRAY"},
+    ["58"] = {id = "14884823178", name = "CyPhrix - Three Dimensions"},
+    ["59"] = {id = "14884817162", name = "CyPhrix - Angel Hour"},
+    ["60"] = {id = "14884823527", name = "CyPhrix - Outcome"},
     ["61"] = {id = "14366982317", name = "SAKU - GTA"},
-    ["62"] = {id = "15689442195", name = "CEO"},
-    ["63"] = {id = "15689441772", name = "HELLFIRE"},
-    ["64"] = {id = "15689451512", name = "Nothing Bad Is Going to Happen"},
-    ["65"] = {id = "15689446882", name = "EXISTANCE"},
-    ["66"] = {id = "16190782511", name = "uzipack"},
+    ["62"] = {id = "15689442195", name = "Generic - CEO"},
+    ["63"] = {id = "15689441772", name = "Din1c & Killahphonk - HELLFIRE"},
+    ["64"] = {id = "15689451512", name = "Generic - Nothing Bad Is Going to Happen"},
+    ["65"] = {id = "15689446882", name = "ORAPS - EXISTANCE"},
+    ["66"] = {id = "16190782511", name = "uzipack - DrillHouse"},
     ["67"] = {id = "9043887091", name = "Lo-fi Chill A"},
     ["68"] = {id = "1837768517", name = "Bossa Me (a)"},
     ["69"] = {id = "9039445224", name = "8 Bitty Kitty - Underscore"},
@@ -1310,7 +1311,7 @@ local musictable = {
     ["85"] = {id = "1840006904", name = "Tricky (a)"},
     ["86"] = {id = "2665943889", name = "get jebaited"},
     ["87"] = {id = "18841891575", name = "d3r, m1v, asteria - no escape"},
-    ["88"] = {id = "17422208483", name = "osquinn x luvbackpack - Drama"},
+    ["88"] = {id = "16190757458", name = "Bullet - Skibidi fanum tax (Prod. yakside)"},
     ["89"] = {id = "5616761718", name = "henry stickman"},
     ["90"] = {id = "15689448519", name = "Din1c - can you"},
     ["91"] = {id = "1847588120", name = "Epic Steps A"},
@@ -1398,6 +1399,18 @@ local musictable = {
     ["173"] = {id = "123150365153422", name = "'LUCID DREAMS' ~ Melodic Guitare Type Beat 2024"},
     ["174"] = {id = "111851390281777", name = "SIGMA (Slowed)"},
     ["175"] = {id = "72773974824127", name = "Rizzlers and Moggers 2"},
+    ["176"] = {id = "122197083209373", name = "Cappuccino Assassino FUNK"},
+    ["177"] = {id = "88157093772771", name = "Schimpanzini Bananini FUNK"},
+    ["178"] = {id = "134647289919930", name = "HUN_Cs' Long time"},
+    ["179"] = {id = "79595565352178", name = "ELEVATOR"},
+    ["180"] = {id = "110097819683439", name = "CLOSER"},
+    ["181"] = {id = "122600689240179", name = "Obby Odyssey"},
+    ["182"] = {id = "87795920050593", name = "Tender Echo"},
+    ["183"] = {id = "100085928114682", name = "TRIPI TROPI TROPA TRIPA PHONK"},
+    ["184"] = {id = "107884302373869", name = "TRALALERO TRALALA PHONK"},
+    ["185"] = {id = "125137999827669", name = "SpeedRun Music"},
+    ["186"] = {id = "132406629909648", name = "Tung Tung Tung Sahur FUNK"},
+
 }
 
 -- Saved gears
