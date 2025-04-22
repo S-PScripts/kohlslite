@@ -1,3 +1,5 @@
+-- back in school no more big updates 22/4/25
+
 -- Read all the information below before viewing the source.
 -- KOHLSLITE IS BEING MADE FOR NP SOON...
 
