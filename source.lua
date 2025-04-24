@@ -973,6 +973,9 @@ local player_relate = {
 	-- Announces to everyone that a person is using LOGS
 	PingLogs = false,
 
+	-- Prints when anti is activated
+	anti_say = true,
+
 	-- Stops users from checking logs if they say it
 	AntiLogs = false,
 	logmode = "default", -- How it should stop the user from seeing logs - "crack" uses the oofkohls gibberish
@@ -7543,7 +7546,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'nok' then
-		if not (string.sub(msg:lower(), 1, #prefix + 4) == prefix..'nok2' or string.sub(msg:lower(), 1, #prefix + 4) == prefix..'nok3') then
+		if (string.sub(msg:lower(), 1, #prefix + 4) == prefix..'nok2' or string.sub(msg:lower(), 1, #prefix + 4) == prefix..'nok3') then else
                 	NOK()
 			Remind("You will no longer die to the obby!")
 		end
@@ -7581,6 +7584,16 @@ return
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'autogb' then
                 player_relate.autogb = false
 		Remind("Auto gearban is now disabled.")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antisay' then
+	player_relate.anti_say = true
+	Remind("When one of your antis is triggered it prints in chat. NOTE: NOT IMPLEMENTED FOR WORKSPACE + OTHER PEOPLE YET.")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antisay' then
+	player_relate.anti_say = false
+	Remind("Turned off!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'qpunish' then -- idea from zercon
@@ -8288,20 +8301,22 @@ return
 	 Remind("Modified your walkspeed!")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'editsp' then
-	 editedstuff.editedspeed = true
-	 editedstuff.editedspeedis = tonumber(string.sub(msg:lower(), #prefix + 8))
-	 Remind("Your walkspeed is set until you unset it!")
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'editsp' then -- no point making this for everyone tbh
+	if antis.antispeed then antis.antispeed = false end -- ppl who somehow forgot
+	editedstuff.editedspeed = true
+	editedstuff.editedspeedis = tonumber(string.sub(msg:lower(), #prefix + 8))
+	Remind("Your walkspeed is set until you unset it!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'uneditsp' then
-	 editedstuff.editedspeed = false
-	 Remind("Unset the walkspeed.")
+	editedstuff.editedspeed = false
+	Remind("Unset the walkspeed.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 2) == prefix..'jp' then
-         game.Players.LocalPlayer.Character.Humanoid.JumpPower = tonumber(string.sub(msg:lower(), #prefix + 4))
-	 Remind("Modified your jumppower!")
+	if antis.antijump then antis.antjump = false end -- ppl who somehow forgot
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = tonumber(string.sub(msg:lower(), #prefix + 4))
+	Remind("Modified your jumppower!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'editjp' then
@@ -11499,11 +11514,12 @@ connections[#connections + 1] =
         end
 
         if antis.antiblind == true then
-            for i, v in pairs(lp.PlayerGui:GetDescendants()) do
-                if v.Name == "EFFECTGUIBLIND" then
-                    v:Destroy()
-                end
-            end
+        	for i, v in pairs(lp.PlayerGui:GetDescendants()) do
+                	if v.Name == "EFFECTGUIBLIND" then
+                    		v:Destroy()
+				if player_relate.anti_say then print("Your anti-blind was activated.") end
+                	end
+            	end
         end
 
         if antis.antivoid == true then
@@ -11529,9 +11545,10 @@ connections[#connections + 1] =
         end
 
         if antis.antigrayscale == true then
-            if game.Workspace.CurrentCamera:FindFirstChild("GrayScale") then
-                game.Workspace.CurrentCamera:FindFirstChild("GrayScale"):Destroy()
-            end
+        	if game.Workspace.CurrentCamera:FindFirstChild("GrayScale") then
+                	game.Workspace.CurrentCamera:FindFirstChild("GrayScale"):Destroy()
+			if player_relate.anti_say then print("Your anti-grayscale was activated.") end
+            	end
         end
 
         if antis.antiaddon == true then
@@ -11539,14 +11556,16 @@ connections[#connections + 1] =
             		if lp.Character:FindFirstChild("Addon") then
                 		lp.Character:FindFirstChild("Addon"):Destroy()
                 		Chat("reset me")
+				if player_relate.anti_say then print("Your anti-addon was activated.") end
             		end
 		end
         end
 
         if antis.anticlone == true then
-            if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild(lp.Name) then
-                Chat("unclone me")
-            end
+        	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild(lp.Name) then
+                	Chat("unclone me")
+			if player_relate.anti_say then print("Your anti-clone was activated.") end
+            	end
         end
 
         if antis.antidog == true then
@@ -11554,6 +11573,7 @@ connections[#connections + 1] =
             		for i, v in pairs(lp.Character:GetDescendants()) do
                 		if v:IsA("Seat") then
                     			Chat("undog me")
+					if player_relate.anti_say then print("Your anti-dog was activated.") end
                 		end
             		end
 		end
@@ -11565,6 +11585,7 @@ connections[#connections + 1] =
                 		if lp.Character.Torso:FindFirstChild("Fire") then
                     			lp.Character.Torso:FindFirstChild("Fire"):Destroy()
                     			Chat("unfire me")
+					if player_relate.anti_say then print("Your anti-fire was activated.") end
                 		end
 			end
         	end
@@ -11574,6 +11595,7 @@ connections[#connections + 1] =
 		if lp.Character then
             		if lp.Character:FindFirstChild("ice") then
                 		Chat("thaw me")
+				if player_relate.anti_say then print("Your anti-freeze was activated.") end
             		end
 		end
         end
@@ -11591,6 +11613,8 @@ connections[#connections + 1] =
                 		if lp.Character and lp.Character.Humanoid then
                     			lp.Character.Humanoid.PlatformStand = false
                 		end
+
+				if player_relate.anti_say then print("Your anti-fly was activated.") end
 			end
         	end
         end
@@ -11605,6 +11629,8 @@ connections[#connections + 1] =
                     lp.Character.Humanoid.PlatformStand = false
                 end
                 Chat("clip me")
+
+		if player_relate.anti_say then print("Your anti-noclip was activated.") end
             end
         end
 
@@ -11613,6 +11639,7 @@ connections[#connections + 1] =
             		if lp.Character:FindFirstChild("ForceField") then
                 		lp.Character:FindFirstChild("ForceField"):Destroy()
                 		Chat("unff me")
+				if player_relate.anti_say then print("Your anti-ff was activated.") end
 			end
         	end
         end
@@ -11623,6 +11650,7 @@ connections[#connections + 1] =
                 		if lp.Character.Torso:FindFirstChild("PointLight") then
                     			lp.Character.Torso:FindFirstChild("PointLight"):Destroy()
                     			Chat("unglow me")
+					if player_relate.anti_say then print("Your anti-glow was activated.") end
                 		end
             		end
 		end
@@ -11632,16 +11660,18 @@ connections[#connections + 1] =
 		if lp.Character then
             		if lp.Character.Humanoid then
 				if lp.Character.Humanoid.Health ~= 100 then
-               				 Chat("health me 100")
+               				Chat("health me 100")
+					if player_relate.anti_say then print("Your anti-health change was activated.") end
             			end
 			end
 		end
         end
 
         if antis.antijail == true then
-            if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild(lp.Name .. "'s jail") then
-                Chat("unjail me")
-            end
+        	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild(lp.Name .. "'s jail") then
+                	Chat("unjail me")
+			if player_relate.anti_say then print("Your anti-jail was activated.") end
+            	end
         end
 
         if antis.antijump == true then
@@ -11649,6 +11679,7 @@ connections[#connections + 1] =
             		if lp.Character.Humanoid then
 				if lp.Character.Humanoid.JumpPower ~= 50 then
                 			lp.Character.Humanoid.JumpPower = 50
+					if player_relate.anti_say then print("Your anti-jumppower was activated.") end
 				end
 			end
             	end
@@ -11669,6 +11700,7 @@ connections[#connections + 1] =
         		if lp.Character.Humanoid then
 				if lp.Character.Humanoid.Health == 0 then
                 			Chat("reset me")
+					if player_relate.anti_say then print("Your anti-kill was activated.") end
             			end
 			end
 		end
@@ -11676,13 +11708,16 @@ connections[#connections + 1] =
 
         if antis.antimessage == true then
             for i, v in pairs(lp.PlayerGui:GetDescendants()) do
-                if v.Name == "MessageGUI" or v.Name == "Message" or v.Name == "HintGUI" then -- or v.Name == "Ice" then
-                    v:Destroy()
+        	if v.Name == "MessageGUI" or v.Name == "Message" or v.Name == "HintGUI" then -- or v.Name == "Ice" then
+                	v:Destroy()
+			if player_relate.anti_say then print("Your anti-message was activated.") end
                 end
             end
+
             for i, v in pairs(game.Workspace.Terrain["_Game"].Folder:GetDescendants()) do
-                if v.Name == "Message" then
-                    v:Destroy()
+        	if v.Name == "Message" then
+                    	v:Destroy()
+			if player_relate.anti_say then print("Your anti-message was activated.") end
                 end
             end
         end
@@ -11691,6 +11726,7 @@ connections[#connections + 1] =
 		if lp.Character then
         		if lp.Character:FindFirstChildOfClass("Model") then
                 		Chat("unname me")
+				if player_relate.anti_say then print("Your anti-name was activated.") end
 			end
         	end
         end
@@ -11698,6 +11734,7 @@ connections[#connections + 1] =
         if antis.antichar == true then
             if lp.UserId ~= lp.CharacterAppearanceId then
                 Chat("unchar me")
+		if player_relate.anti_say then print("Your anti-char was activated.") end
             end
         end
 
@@ -11707,6 +11744,7 @@ connections[#connections + 1] =
                 		if lp.Character.Torso:FindFirstChild("ParticleEmitter") then
                     			lp.Character.Torso:FindFirstChild("ParticleEmitter"):Destroy()
                     			Chat("unparticle me")
+					if player_relate.anti_say then print("Your anti-particle was activated.") end
                 		end
             		end
 		end
@@ -11715,6 +11753,7 @@ connections[#connections + 1] =
         if antis.antipunish == true then
             if game.Lighting:FindFirstChild(lp.Name) then
                 Chat("unpunish me")
+		if player_relate.anti_say then print("Your anti-punish was activated.") end
             end
         end
 
@@ -11725,6 +11764,7 @@ connections[#connections + 1] =
                     			lp.Character.Rocket.CanCollide = false
                     			task.wait(0.5)
                     			v:Destroy()
+					if player_relate.anti_say then print("Your anti-rocket was activated.") end
                 		end
 			end
         	end
@@ -11736,6 +11776,7 @@ connections[#connections + 1] =
                 	if lp.Character.Humanoid.Sit then
                     		humanoid.Sit = false
                     		Chat("unsit me")
+				if player_relate.anti_say then print("Your anti-sit was activated.") end
 			end
                 end
             end
@@ -11750,6 +11791,7 @@ connections[#connections + 1] =
                 		lp.Character:FindFirstChild("Seizure"):Destroy()
                 		lp.Character.Torso.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
                 		lp.Character.Humanoid:ChangeState("GettingUp")
+				if player_relate.anti_say then print("Your anti-seizure was activated.") end
             		end
 		end
         end
@@ -11760,6 +11802,7 @@ connections[#connections + 1] =
                 		if lp.Character.Torso:FindFirstChild("Smoke") then
                     			lp.Character.Torso:FindFirstChild("Smoke"):Destroy()
                     			Chat("unsmoke me")
+					if player_relate.anti_say then print("Your anti-smoke was activated.") end
                 		end
             		end
 		end
@@ -11771,6 +11814,7 @@ connections[#connections + 1] =
                 		if lp.Character.Torso:FindFirstChild("Sparkles") then
                     			lp.Character.Torso:FindFirstChild("Sparkles"):Destroy()
                     			Chat("unsparkles me")
+					if player_relate.anti_say then print("Your anti-sparkles was activated.") end
                 		end
             		end
 		end
@@ -11781,6 +11825,7 @@ connections[#connections + 1] =
             		if lp.Character.Humanoid then
 				if lp.Character.Humanoid.WalkSpeed ~= 16 then
                 			lp.Character.Humanoid.WalkSpeed = 16
+					if player_relate.anti_say then print("Your anti-speed change was activated.") end
 				end
 			end
         	end
@@ -11797,12 +11842,13 @@ connections[#connections + 1] =
         end
 		
         if antis.antispin == true then
-            if lp.Character:FindFirstChild("Torso") then
-                if lp.Character.Torso:FindFirstChild("SPINNER") then
-                    lp.Character.Torso:FindFirstChild("SPINNER"):Destroy()
-                    Chat("unspin me")
-                end
-            end
+        	if lp.Character:FindFirstChild("Torso") then
+                	if lp.Character.Torso:FindFirstChild("SPINNER") then
+                    		lp.Character.Torso:FindFirstChild("SPINNER"):Destroy()
+                    		Chat("unspin me")
+				if player_relate.anti_say then print("Your anti-spin was activated.") end
+                	end
+            	end
         end
 
         if antis.antistun == true then
@@ -11811,6 +11857,7 @@ connections[#connections + 1] =
                 	if lp.Character.Humanoid.PlatformStand then
                     		humanoid.PlatformStand = false
                     		Chat("unstun me")
+				if player_relate.anti_say then print("Your anti-stun was activated.") end
 			end
                 end
             end
@@ -11827,6 +11874,7 @@ connections[#connections + 1] =
                         			lproot.Velocity = Vector3.new(0, 0, 0)
                         			lp.Character.HumanoidRootPart.CFrame = CFrame.new(lp.Character.HumanoidRootPart.Position.X,5,lp.Character.HumanoidRootPart.Position.Z)
                     				lp.Character.HumanoidRootPart.Velocity = Vector3.new(lp.Character.HumanoidRootPart.Velocity.X,0,lp.Character.HumanoidRootPart.Velocity.Z)
+						if player_relate.anti_say then print("Your anti-setgrav was activated.") end
                     			end
 
                     			if v:IsA("BodyPosition") then
@@ -11834,6 +11882,7 @@ connections[#connections + 1] =
                         			lproot.Velocity = Vector3.new(0, 0, 0)
 						lp.Character.HumanoidRootPart.CFrame = CFrame.new(lp.Character.HumanoidRootPart.Position.X,5,lp.Character.HumanoidRootPart.Position.Z)
                     				lp.Character.HumanoidRootPart.Velocity = Vector3.new(lp.Character.HumanoidRootPart.Velocity.X,0,lp.Character.HumanoidRootPart.Velocity.Z)
+						if player_relate.anti_say then print("Your anti-setgrav was activated.") end
                     			end
                			end
             		end
@@ -11845,6 +11894,7 @@ connections[#connections + 1] =
             		if lp.Character:FindFirstChild("EpicCape") then
                 		lp.Character:FindFirstChild("EpicCape"):Destroy()
                 		Chat("normal me")
+				if player_relate.anti_say then print("Your anti-swag was activated.") end
 			end
         	end
         end
@@ -11854,6 +11904,7 @@ connections[#connections + 1] =
             		if lp.Character:FindFirstChild("Torso") then
 				if lp.Character.Torso.Size.Y ~= 2 then
                 			Chat("unsize me")
+					if player_relate.anti_say then print("Your anti-swag was activated.") end
 				end
 			end
         	end
@@ -13622,6 +13673,7 @@ connections[#connections + 1] =
 			game:GetService('RunService').Heartbeat:Wait()
 			ch:Destroy()
 			workspace:WaitForChild(game.Players.LocalPlayer.Name).Torso.AssemblyLinearVelocity = Vector3.new(0,0,0)
+			if player_relate.anti_say then print("Your anti-fling was activated.") end
 		end
 	end)
 
