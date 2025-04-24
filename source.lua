@@ -2518,8 +2518,10 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         end
 
         if string.sub(msg:lower(), 1, #prefix + 2) == prefix..'iy' then -- the classic
-                   GExecute("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source")
-		   Remind("Executed Infinite Yield (IY).")
+		if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'iyshop' then else
+                	GExecute("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source")
+		   	Remind("Executed Infinite Yield (IY).")
+		end
         end
 		
         if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'cmdpi' then
@@ -7867,7 +7869,6 @@ return
 		rcannon("def")
     end
 
-
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'wrcannon' then
 		rcannon("wide")
     end
@@ -8050,7 +8051,6 @@ return
 	bullets = tonumber(string.sub(msg:lower(), #prefix + 14))
 	RFGUN(bullets)
     end
-
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unrfgun' then
 	Connections.rapidfiregun:Disconnect()
@@ -19825,6 +19825,11 @@ game.Players.LocalPlayer.OnTeleport:Connect(function(State)
 		queueteleport("loadstring(game:HttpGet('kohlslite.pages.dev/source.lua'))()")
 	end
 end)
+
+-- I want to attempt to add a GUI at some point. Even a simple one like Shortcut v3. I have Hydrogen Mac but unfortunately my brother uses it most of the time.
+-- ADD GUI HERE
+-- ADD GUI HERE
+-- ADD GUI HERE
 
 --Remind("HUGE UPDATES - BUGS MAY EXIST 2/4/25", 5)
 
