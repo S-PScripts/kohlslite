@@ -13662,7 +13662,7 @@ task.spawn(function()
     end
 end)
 
--- LOOPGRAB 2
+-- LOOPGRAB 2 (This was from Dizzy and it's basically the same as the one above but AI (weird camel case and name "headOfCharacter"))
 task.spawn(function()
    while true do
    task.wait(0)
