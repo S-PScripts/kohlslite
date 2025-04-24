@@ -16644,7 +16644,8 @@ local UserInputService = game:GetService("UserInputService")
 isAFK = false
 UserInputService.WindowFocusReleased:Connect(function()
         task.wait(0.1)
-            if auto_stuff_mbar.autoafk == true then
+	print("AFK")
+        if auto_stuff_mbar.autoafk == true then
 		    isAFK = true
                     Chat("name me " .. auto_stuff_mbar.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName)
                     Chat("ff me")
@@ -16655,21 +16656,20 @@ UserInputService.WindowFocusReleased:Connect(function()
 		    if auto_stuff.autogod == false then
 		    	auto_stuff.tempautogod = true
 		    end
-		    Remind("User has gone AFK... uploading their nud3s.")
-            end
+        end
 end)
 
 UserInputService.WindowFocused:Connect(function()
         task.wait(0.1)
-            if auto_stuff_mbar.autoafk == true then
+	print("No longer AFK")
+        if auto_stuff_mbar.autoafk == true then
 		isAFK = false
                 Chat("reset me")
 		auto_stuff.tempautoff = false
 		auto_stuff.tempautogod = false
                 Chat("unff me")
                 Chat("ungod me")
-		Remind("Welcome back! Nothing happened!")
-            end
+	end
 end)
 
 -- Auto name (used for the AFK)
