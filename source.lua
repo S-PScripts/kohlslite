@@ -4488,6 +4488,10 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         Remind("Contact me if you want this command - it would just be turning off all the antis, but I'm too lazy to add it.")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'antistatus' then
+        Remind("Soon...")
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'cmdbar' then
 	Remind("Created command bar! To remove it, say uncmdbar.")
 
