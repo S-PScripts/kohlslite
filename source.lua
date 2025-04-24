@@ -16655,6 +16655,7 @@ UserInputService.WindowFocusReleased:Connect(function()
 		    if auto_stuff.autogod == false then
 		    	auto_stuff.tempautogod = true
 		    end
+		    Remind("User has gone AFK... uploading their nud3s.")
             end
 end)
 
@@ -16667,6 +16668,7 @@ UserInputService.WindowFocused:Connect(function()
 		auto_stuff.tempautogod = false
                 Chat("unff me")
                 Chat("ungod me")
+		Remind("Welcome back! Nothing happened!")
             end
 end)
 
