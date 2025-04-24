@@ -1,5 +1,3 @@
--- back in school no more big updates 22/4/25
-
 -- Read all the information below before viewing the source.
 -- KOHLSLITE IS BEING MADE FOR NP SOON...
 
@@ -27,7 +25,7 @@ You can also use it for KAH BC but barely anyone plays it. This script isn't rec
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
 Shortcut v3-VAR has more stuff than KohlsLite but is not open-source and you need to ask the owner (Tech - his discord username is igotthemoveslikejagger) to be able to use the script.
 
-This script has been discontinued for the most part due to the fact that Kohls Admin House is an inactive game. This script also has most of the features that I want to have.
+This script is not updated that much now due to the fact that Kohls Admin House is an inactive game. This script also has most of the features that I want to have. I also have school and other things to deal with.
 
 This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g: Shortcut v2 src1 being an extension to Shortcut v1).
 
