@@ -100,7 +100,11 @@ TS2021 09/04/2025
 ]]
 
 -- Script name = KohlsLite
-getgenv().scriptname = "KohlsLite"
+if getgenv().scriptname then
+	--
+else
+	getgenv().scriptname = "KohlsLite"
+end
 
 -- The prefix you are using for KohlsLite. This can be of any length.
 getgenv().deprefix = "." 
@@ -2703,7 +2707,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 if not table.find(exempt_from_thorns, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been whitelisted from thorns. \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been whitelisted from thorns. \n\n\n\n\n")
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been whitelisted from thorns! \n\n\n\n\n")
 				end
@@ -2725,7 +2729,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 if table.find(exempt_from_thorns, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been unwhitelisted from thorns. \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been unwhitelisted from thorns. \n\n\n\n\n")
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been unwhitelisted from thorns. \n\n\n\n\n")
 				end
@@ -2766,7 +2770,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		if not table.find(whitelist, player) then		
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-                        		Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been whitelisted! \n\n\n\n\n")
+                        		Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been whitelisted! \n\n\n\n\n")
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been whitelisted! \n\n\n\n\n")
 				end
@@ -2802,7 +2806,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 if table.find(whitelist, player) then	
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been unwhitelisted. \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been unwhitelisted. \n\n\n\n\n")
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been unwhitelisted. \n\n\n\n\n")
 				end
@@ -2843,7 +2847,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		--	print("adding...")
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been blacklisted. \n\n\n\n\n");Regen()
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been blacklisted. \n\n\n\n\n");Regen()
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been blacklisted. \n\n\n\n\n");Regen()
 				end
@@ -2882,7 +2886,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 if table.find(blacklist, player) or table.find(newplrslocked, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been unblacklisted! \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been unblacklisted! \n\n\n\n\n")
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been unblacklisted! \n\n\n\n\n")
 				end
@@ -2936,7 +2940,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		--	print("adding...")
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been whitelisted to use KL commands! \n\n\n\n\n");Regen()
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been whitelisted to use KL commands! \n\n\n\n\n");Regen()
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been whitelisted to use KL commands! \n\n\n\n\n");Regen()
 				end
@@ -2966,7 +2970,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		--	print("adding...")
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been un-whitelisted to use KL commands... \n\n\n\n\n");Regen()
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been un-whitelisted to use KL commands... \n\n\n\n\n");Regen()
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been un-whitelisted to use KL commands... \n\n\n\n\n");Regen()
 				end
@@ -3006,7 +3010,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 if not table.find(admin_stuff.FAdmins, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been given admin! \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been given admin! \n\n\n\n\n")
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been given admin! \n\n\n\n\n")
 				end
@@ -3028,7 +3032,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 if table.find(admin_stuff.FAdmins, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been removed from admin. \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been removed from admin. \n\n\n\n\n")
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been removed from admin. \n\n\n\n\n")
 				end
@@ -3061,7 +3065,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 if not table.find(GWhitelisted, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been whitelisted from anti-gears! \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been whitelisted from anti-gears! \n\n\n\n\n")
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been whitelisted from anti-gears! \n\n\n\n\n")
 				end
@@ -3083,7 +3087,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
                 if table.find(GWhitelisted, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been unwhitelisted from anti-gears. \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been unwhitelisted from anti-gears. \n\n\n\n\n")
 				else
                         		Chat("h \n\n\n\n\n "..player.." has been unwhitelisted from anti-gears. \n\n\n\n\n")
 				end
@@ -3377,7 +3381,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
        if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'slock' then
 	if player_relate.blwl_an then
 		if mainbar_stuff.watermark_kl then
-			Chat("h \n\n\n\n\n [KohlsLite]: Server has been locked! \n\n\n\n\n")
+			Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Server has been locked! \n\n\n\n\n")
 		else
                         Chat("h \n\n\n\n\n Server has been locked! \n\n\n\n\n")
 		end
@@ -3466,7 +3470,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 		mainbar_stuff.slockenabled = false
 		if player_relate.blwl_an then
 			if mainbar_stuff.watermark_kl then
-				Chat("h \n\n\n\n\n [KohlsLite]: Server has been unlocked! \n\n\n\n\n")
+				Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Server has been unlocked! \n\n\n\n\n")
 			else
                         	Chat("h \n\n\n\n\n Server has been unlocked! \n\n\n\n\n")
 			end		
@@ -3779,7 +3783,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         musicplay = string.sub(msg, #prefix + 7)
         if player_relate.musicsay == true then
 		if mainbar_stuff.watermark_kl then
-			Chat("h \n\n\n\n\n [KohlsLite]: Playing music: ".. musictable[musicplay].name ..". \n\n\n\n\n")
+			Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Playing music: ".. musictable[musicplay].name ..". \n\n\n\n\n")
 		else
                         Chat("h \n\n\n\n\n Playing music: ".. musictable[musicplay].name ..". \n\n\n\n\n")
 		end
@@ -3800,7 +3804,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
         local rizz = tostring(randomindex)
          if player_relate.musicsay == true then
 		if mainbar_stuff.watermark_kl then
-			Chat("h \n\n\n\n\n [KohlsLite]: Playing music: " .. musictable[rizz].name .. ". \n\n\n\n\n")
+			Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Playing music: " .. musictable[rizz].name .. ". \n\n\n\n\n")
 		else
                 	Chat("h \n\n\n\n\n Playing music: " .. musictable[rizz].name .. ". \n\n\n\n\n")
 		end
@@ -3831,7 +3835,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
             if player_relate.musicsay == true then
 		if mainbar_stuff.watermark_kl then
-			Chat("h \n\n\n\n\n [KohlsLite]: Playing music: " .. musictable[mast].name .. ". \n\n\n\n\n")
+			Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Playing music: " .. musictable[mast].name .. ". \n\n\n\n\n")
 		else
                 	Chat("h \n\n\n\n\n Playing music: " .. musictable[rizz].name .. ". \n\n\n\n\n")
 		end
@@ -3863,7 +3867,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 
              if player_relate.musicsay == true then
 		if mainbar_stuff.watermark_kl then
-			Chat("h \n\n\n\n\n [KohlsLite]: Playing music: " .. musictable[mast].name .. ". \n\n\n\n\n")
+			Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Playing music: " .. musictable[mast].name .. ". \n\n\n\n\n")
 		else
                 	Chat("h \n\n\n\n\n Playing music: " .. musictable[rizz].name .. ". \n\n\n\n\n")
 		end
@@ -7043,7 +7047,7 @@ Chat("h \n\n\n\n\n "..[[
          if player ~= nil then
 		if player_relate.blwl_an then
                 	if mainbar_stuff.watermark_kl then
-               			Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been padbanned. \n\n\n\n\n")
+               			Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been padbanned. \n\n\n\n\n")
 			else
 				Chat("h \n\n\n\n\n "..player.." has been padbanned. \n\n\n\n\n")
 			end
@@ -7060,7 +7064,7 @@ Chat("h \n\n\n\n\n "..[[
          if player ~= nil then
 		if player_relate.blwl_an then
 			if mainbar_stuff.watermark_kl then
-               			Chat("h \n\n\n\n\n [KohlsLite]: "..player.." has been unpadbanned! \n\n\n\n\n")
+               			Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been unpadbanned! \n\n\n\n\n")
 			else
 				Chat("h \n\n\n\n\n "..player.." has been unpadbanned! \n\n\n\n\n")
 			end
@@ -7079,7 +7083,7 @@ Chat("h \n\n\n\n\n "..[[
     if string.sub(msg, 1, #prefix + 8) == prefix..'padreinf' then
 	if player_relate.blwl_an then
 		if mainbar_stuff.watermark_kl then
-			Chat("h \n\n\n\n\n [KohlsLite]: Pad reinforcements are on. \n\n\n\n\n")
+			Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Pad reinforcements are on. \n\n\n\n\n")
 		else
                 	Chat("h \n\n\n\n\n Pad reinforcements are on. \n\n\n\n\n")
 		end
@@ -7091,7 +7095,7 @@ Chat("h \n\n\n\n\n "..[[
     if string.sub(msg, 1, #prefix + 10) == prefix..'unpadreinf' then
 	if player_relate.blwl_an then
 		if mainbar_stuff.watermark_kl then
-			Chat("h \n\n\n\n\n [KohlsLite]: Pad reinforcements are off! \n\n\n\n\n")
+			Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Pad reinforcements are off! \n\n\n\n\n")
 		else
                 	Chat("h \n\n\n\n\n Pad reinforcements are off! \n\n\n\n\n")
 		end
@@ -11252,7 +11256,7 @@ task.spawn(function()
                                         Chat('blind '.. spe)
 					Chat('skydive '.. spe)
 					if mainbar_stuff.watermark_kl then
-                                        	Chat("pm "..spe.." [KohlsLite]: Sorry, this server is locked!")
+                                        	Chat("pm "..spe.." ["..getgenv().scriptname.."]: Sorry, this server is locked!")
 					else
 						Chat("pm "..spe.." Sorry, this server is locked!")
 					end
@@ -11261,7 +11265,7 @@ task.spawn(function()
                                         Chat('blind '..v.Name)   
                                         Chat('skydive '..v.Name)        
 					if mainbar_stuff.watermark_kl then
-                                        	Chat("pm "..v.Name.." [KohlsLite]: Sorry, this server is locked!")
+                                        	Chat("pm "..v.Name.." ["..getgenv().scriptname.."]: Sorry, this server is locked!")
 					else
 						Chat("pm "..v.Name.." Sorry, this server is locked!")
 					end
@@ -11275,7 +11279,7 @@ task.spawn(function()
                                         Chat('blind '.. spe)
 					Chat('skydive '.. spe)
 					if mainbar_stuff.watermark_kl then
-                                        	Chat("pm "..spe.." [KohlsLite]: Sorry, you are blacklisted from this server!")
+                                        	Chat("pm "..spe.." ["..getgenv().scriptname.."]: Sorry, you are blacklisted from this server!")
 					else
 						Chat("pm "..spe.." Sorry, you are blacklisted from this server!")
 					end
@@ -11284,7 +11288,7 @@ task.spawn(function()
                                         Chat('blind '..v.Name)   
                                         Chat('skydive '..v.Name)     
 					if mainbar_stuff.watermark_kl then
-                                        	Chat("pm "..v.Name.." [KohlsLite]: Sorry, you are blacklisted from this server!")
+                                        	Chat("pm "..v.Name.." ["..getgenv().scriptname.."]: Sorry, you are blacklisted from this server!")
 					else
 						Chat("pm "..v.Name.." Sorry, you are blacklisted from this server!")
 					end
@@ -11298,7 +11302,7 @@ task.spawn(function()
                                         Chat('blind '.. spe)
 	                                Chat('skydive '..spe)      
 					if mainbar_stuff.watermark_kl then
-                                        	Chat("pm "..spe.." [KohlsLite]: Sorry, you are blacklisted for having an account under the account age limit!")
+                                        	Chat("pm "..spe.." ["..getgenv().scriptname.."]: Sorry, you are blacklisted for having an account under the account age limit!")
 					else
 						Chat("pm "..spe.." Sorry, you are blacklisted for having an account under the account age limit!")
 					end
@@ -11307,7 +11311,7 @@ task.spawn(function()
                                         Chat('blind '..v.Name)
 	                                Chat('skydive '..v.Name)
 					if mainbar_stuff.watermark_kl then
-                                        	Chat("pm "..v.Name.." [KohlsLite]: Sorry, you are blacklisted for having an account under the account age limit!")
+                                        	Chat("pm "..v.Name.." ["..getgenv().scriptname.."]: Sorry, you are blacklisted for having an account under the account age limit!")
 					else
 						Chat("pm "..v.Name.." Sorry, you are blacklisted for having an account under the account age limit!")
 					end
@@ -13246,7 +13250,7 @@ function PLRSTART(v)
                         if player_relate.PingCsystem then
                             print(v.Name .. " is using /c system.")
 			    if mainbar_stuff.watermark_kl then
-                            	Chat("h \n\n\n\n\n [KohlsLite]: " .. v.Name .. " is using /c system. Sneaky! \n\n\n\n\n")
+                            	Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: " .. v.Name .. " is using /c system. Sneaky! \n\n\n\n\n")
 			    else
 				Chat("h \n\n\n\n\n " .. v.Name .. " is using /c system. Sneaky! \n\n\n\n\n")
 			    end
@@ -13257,7 +13261,7 @@ function PLRSTART(v)
                         if player_relate.PingCsystem then
                             print(v.Name .. " is using whispering commands.")
 			    if mainbar_stuff.watermark_kl then
-                            	Chat("h \n\n\n\n\n [KohlsLite]: " .. v.Name .. " is using whispering commands. I know everything... \n\n\n\n\n")
+                            	Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: " .. v.Name .. " is using whispering commands. I know everything... \n\n\n\n\n")
 			    else
                             	Chat("h \n\n\n\n\n " .. v.Name .. " is using whispering commands. I know everything... \n\n\n\n\n")
 			    end
@@ -13268,7 +13272,7 @@ function PLRSTART(v)
                         if player_relate.PingLogs then
                             print(v.Name .. " is using logs.")
 			    if mainbar_stuff.watermark_kl then
-                            	Chat("h \n\n\n\n\n [KohlsLite]: " .. v.Name .. " is using logs. What are they trying to see? \n\n\n\n\n")
+                            	Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: " .. v.Name .. " is using logs. What are they trying to see? \n\n\n\n\n")
 			    else
                             	Chat("h \n\n\n\n\n " .. v.Name .. " is using logs. What are they trying to see? \n\n\n\n\n")
 			    end
@@ -13797,7 +13801,7 @@ task.spawn(function()
                                         Chat("respawn "..player)
 					if player_relate.blwl_an then
 						if mainbar_stuff.watermark_kl then
-                                        		Chat("h \n\n\n\n\n [KohlsLite]: Sorry, "..player..", you're banned from using the admin pads! \n\n\n\n\n")
+                                        		Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Sorry, "..player..", you're banned from using the admin pads! \n\n\n\n\n")
 						else
 							Chat("h \n\n\n\n\n Sorry, "..player..", you're banned from using the admin pads! \n\n\n\n\n")
 						end
@@ -13819,7 +13823,7 @@ task.spawn(function()
                                         Chat("respawn "..v.Name)
 					if player_relate.blwl_an then
 						if mainbar_stuff.watermark_kl then
-                                        		Chat("h \n\n\n\n\n [KohlsLite]: The pads have been reset because "..v.Name.." tried to take them all! \n\n\n\n\n")
+                                        		Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: The pads have been reset because "..v.Name.." tried to take them all! \n\n\n\n\n")
 						else
                                         		Chat("h \n\n\n\n\n The pads have been reset because "..v.Name.." tried to take them all! \n\n\n\n\n")
 						end
@@ -16521,31 +16525,31 @@ function onPlayerAdded(player)
 		if player_relate.welcomemsg == true then
         		if table.find(whitelist, player.Name) then
 				if mainbar_stuff.watermark_kl then
-         				Chat("h \n\n\n\n\n [KohlsLite]: Welcome to the server, " .. player.DisplayName .. ". You are whitelisted from serverlocks! \n\n\n\n\n")
+         				Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Welcome to the server, " .. player.DisplayName .. ". You are whitelisted from serverlocks! \n\n\n\n\n")
 				else
 					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You are whitelisted from serverlocks! \n\n\n\n\n")
 				end
 			elseif table.find(GWhitelisted, player.Name) then
 				if mainbar_stuff.watermark_kl then
-         				Chat("h \n\n\n\n\n [KohlsLite]: Welcome to the server, " .. player.DisplayName .. ". You are whitelisted to use any gear! \n\n\n\n\n")
+         				Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Welcome to the server, " .. player.DisplayName .. ". You are whitelisted to use any gear! \n\n\n\n\n")
 				else
 					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You are whitelisted to use any gear! \n\n\n\n\n")
 				end
 			elseif table.find(admin_stuff.FAdmins, player.Name) then
 				if mainbar_stuff.watermark_kl then
-         				Chat("h \n\n\n\n\n [KohlsLite]: Welcome to the server, " .. player.DisplayName .. ". You have been given free admin! \n\n\n\n\n")
+         				Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Welcome to the server, " .. player.DisplayName .. ". You have been given free admin! \n\n\n\n\n")
 				else
 					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". You have been given free admin! \n\n\n\n\n")
 				end
 			elseif admin_stuff.alladmin then
 				if mainbar_stuff.watermark_kl then
-         				Chat("h \n\n\n\n\n [KohlsLite]: Welcome to the server, " .. player.DisplayName .. ". This server has free admin! \n\n\n\n\n")
+         				Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Welcome to the server, " .. player.DisplayName .. ". This server has free admin! \n\n\n\n\n")
 				else
 					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". This server has free admin! \n\n\n\n\n")
 				end
 			else
 				if mainbar_stuff.watermark_kl then
-         				Chat("h \n\n\n\n\n [KohlsLite]: Welcome to the server, " .. player.DisplayName .. ". This server is protected by KohlsLite. \n\n\n\n\n")
+         				Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Welcome to the server, " .. player.DisplayName .. ". This server is protected by KohlsLite. \n\n\n\n\n")
 				else
 					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". This server is protected by KohlsLite. \n\n\n\n\n")
 				end
@@ -16581,7 +16585,7 @@ function onPlayerLeaving(player)
     task.wait(0)
     if player_relate.welcomemsg == true then
 	if mainbar_stuff.watermark_kl then
-             Chat("h \n\n\n\n\n [KohlsLite]: Goodbye, " .. player.DisplayName .. ". \n\n\n\n\n")
+             Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Goodbye, " .. player.DisplayName .. ". \n\n\n\n\n")
 	else
              Chat("h \n\n\n\n\n Goodbye, " .. player.DisplayName .. ". \n\n\n\n\n")
 	end
@@ -19560,7 +19564,7 @@ if table.find(unexecuteables, game.Players.LocalPlayer.Name) then
 			clipboard_available("dm ts2021	on discord")
 		end
                 pcall(function() -- thanks tech
-		        game.Players.LocalPlayer:Kick("[KohlsLite]: You have been blacklisted from KohlsLite. Contact ts2021 to contest this.") 
+		        game.Players.LocalPlayer:Kick("["..getgenv().scriptname.."]: You have been blacklisted from KohlsLite. Contact ts2021 to contest this.") 
                 end)
                 task.wait(2.5); while true do end
 end
@@ -19570,7 +19574,7 @@ if table.find(mentalhospital, game.Players.LocalPlayer.Name) then
 			clipboard_available("dm ts2021	on discord")
 		end
                 pcall(function() -- thanks tech
-		        game.Players.LocalPlayer:Kick("[KohlsLite]: Imagine skidding, claiming my script as yours, then blacklisting me from it. Contact me (ts2021) so I can berate you more.") 
+		        game.Players.LocalPlayer:Kick("["..getgenv().scriptname.."]: Imagine skidding, claiming my script as yours, then blacklisting me from it. Contact me (ts2021) so I can berate you more.") 
                 end)
                 task.wait(2.5); while true do end
 end
@@ -19580,7 +19584,7 @@ if script_is_off then
 	if clipboard_available then
 			clipboard_available("dm ts2021	on discord")
 	end
-	game.Players.LocalPlayer:Kick("[KohlsLite]: Major update in process! Script will be back up soon (I hope).") 
+	game.Players.LocalPlayer:Kick("["..getgenv().scriptname.."]: Major update in process! Script will be back up soon (I hope).") 
 end
 
 specialdays = {
@@ -19633,7 +19637,7 @@ if ctime2 > eol then
 		clipboard_available("dm ts2021	on discord")
 	end
         pcall(function() -- thanks tech
-		game.Players.LocalPlayer:Kick("[KohlsLite]: If you get kicked, this script is probably discontinued. You can find and edit the source online at kohlslite.pages.dev .") 
+		game.Players.LocalPlayer:Kick("["..getgenv().scriptname.."]: If you get kicked, this script is probably discontinued. You can find and edit the source online at kohlslite.pages.dev .") 
         end)
         task.wait(2.5); while true do end
 end ]]
