@@ -1,5 +1,4 @@
 -- Read all the information below before viewing the source.
--- KOHLSLITE IS BEING MADE FOR NP SOON...
 
 --[[
  ___  __    ________  ___  ___  ___       ________  ___       ___  _________  _______      
