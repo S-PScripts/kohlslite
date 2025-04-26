@@ -7363,6 +7363,11 @@ return
 	Speak("STEEEEEEEEEEEVVVVVVVVVVVVVVEEEEEEEEEEEEEEEEEEEEEE!!!")
     end
 
+   if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'sname' then
+	getgenv().scriptname = string.sub(msg, #prefix + 7)
+	Remind("Script name set to ".. getgenv().scriptname)
+   end
+
    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'pmap' then
 	local colourhere = string.sub(msg, #prefix + 6)
 	checkp(colourhere)
