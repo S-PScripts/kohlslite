@@ -451,7 +451,7 @@ else
 end
 
 -- Defaults (you can change these)
-local defaults = {".tnok", ".antikill me", ".antimsg me"} --".antimsg me"
+local defaults = {".tnok", ".antikill me", ".cmdbar"} --".antimsg me"
 
 -- Misc variables (Do not edit these! They are for bug fixes... but they don't even work...).
 local backend_stuff = {
@@ -19821,6 +19821,8 @@ if kah_np == true then
 	print("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.")
 	Remind("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.", 3)
 end
+
+Remind("[WARNING]: Due to a recent Roblox chat update, until I get around to a full fix, you must use the command bar to run commands. Sorry!", 5)
 
 -- From Infinite Yield
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
