@@ -13424,6 +13424,12 @@ function PLRSTART(v)
                         end
                     end
 
+		    if (string.sub(msg:lower(), 0, 7) == "uninvis" or string.sub(msg:lower(), 0, 8) == ":uninvis") and v.Name ~= game.Players.LocalPlayer.Name then
+                        if player_relate.noobdetect then
+                            print(v.Name .. " is a noob. / Said 'uninvis me'")
+                            Chat("h \n\n\n\n\n " .. v.Name .. ", it is vis me, not uninvis me. \n\n\n\n\n")
+                        end
+                    end
                     -- // dev section (backdoors here) \\ --
 		    -- // Remove this if you want, just don't abuse with KohlsLite, okay? \\ --
 
