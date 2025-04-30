@@ -13219,6 +13219,26 @@ local thorns_commands = {
 
 
 -- Thorns, noob detector, all admin
+
+-- PLRSTART WILL NOT BE NEEDED WHEN NEW UPDATE COMES OUT
+
+--[[
+new system:
+
+game.TextChatService.MessageReceived:Connect(function(tbl)
+	if tbl.TextSource then
+	local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
+  	if not player then return end
+  	local v = player
+  	local msg = tbl.Text
+
+        if (string.sub(msg:lower(), 0, 6) == "btools" or string.sub(msg:lower(), 0, 7) == ":btools" or string.sub(msg:lower(), 0, 7) == ";btools") and v.Name ~= game.Players.LocalPlayer.Name then
+                        print(v.Name .. " thought btools existed.")
+                        Chat("h \n\n\n\n\n " .. v.Name .. ", btools do not exist anymore! \n\n\n\n\n")
+        end
+end)
+]]
+
 function PLRSTART(v)
     v.Chatted:Connect(function(msg)
             task.wait(0)
@@ -16427,7 +16447,7 @@ end
 -- WELCOME/LEAVE MSG
 function onPlayerAdded(player)
      task.wait(0)
-     PLRSTART(player)
+     PLRSTART(player) -- PLRSTART WILL NOT BE NEEDED WHEN NEW UPDATE COMES OUT
 
      if player_relate.autogpcheck == true then
           gcplr = player
@@ -19422,7 +19442,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
         end
 
         task.wait(0)
-        PLRSTART(v)
+        PLRSTART(v) -- PLRSTART WILL NOT BE NEEDED WHEN NEW UPDATE COMES OUT
 end
 
 -- These run last to prevent bugs (old remanent)
