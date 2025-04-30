@@ -2770,7 +2770,26 @@ local function ZCFUV_fake_script() -- CMDY.CMDY.LocalScript
 			end)
 		end)
 
-		Player.Chatted:Connect(function(msg)
+		game.TextChatService.MessageReceived:Connect(function(tbl)
+			if tbl.TextSource then
+				local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
+  				if not player then return end
+  				if player ~= game.Players.LocalPlayer then return end
+  				local msg = tbl.Text
+				local newmsg = string.lower(msg)
+				local args = newmsg:split(" ")
+				if args[1] == prefix .. cmdname then
+					local s,err = pcall(function()
+						assert(loadstring(func))()
+					end)
+					if not s then
+						print("Error with " .. cmdname .. ": " .. err)
+					end
+				end
+			end
+		end)
+		
+	--[[	Player.Chatted:Connect(function(msg)
 			local newmsg = string.lower(msg)
 			local args = newmsg:split(" ")
 			if args[1] == prefix .. cmdname then
@@ -2781,7 +2800,7 @@ local function ZCFUV_fake_script() -- CMDY.CMDY.LocalScript
 					print("Error with " .. cmdname .. ": " .. err)
 				end
 			end
-		end)
+		end) ]] 
 	end
 
 	local function act(ch)
@@ -2999,7 +3018,7 @@ local function ZCFUV_fake_script() -- CMDY.CMDY.LocalScript
 				elseif v.Parent.Parent.Name == "TabsContainer" and v:IsA("TextButton") then
 					v.BackgroundColor3 = Color3.fromRGB(48, 48, 48)
 				elseif v.Parent.Parent.Parent.Name == "TabsContainer" and v.Name == "ColorFrame" then
-					continue
+					-- continue
 				elseif v.Parent.Parent.Name == "TabsContainer" and v:IsA("Frame") then
 					v.BackgroundColor3 = Color3.fromRGB(26, 26, 26)
 				elseif v.Parent.Parent.Name == "TabsContainer" and v:IsA("TextBox") then
@@ -3027,7 +3046,7 @@ local function ZCFUV_fake_script() -- CMDY.CMDY.LocalScript
 				elseif v.Parent.Parent.Name == "TabsContainer" and v:IsA("TextButton") then
 					v.BackgroundColor3 = Color3.new(R/3, G/3, B/3)
 				elseif v.Parent.Parent.Parent.Name == "TabsContainer" and v.Name == "ColorFrame" then
-					continue
+					-- continue
 				elseif v.Parent.Parent.Name == "TabsContainer" and v:IsA("Frame") then
 					v.BackgroundColor3 = Color3.new(R/4, G/4, B/4)
 				elseif v.Parent.Parent.Name == "TabsContainer" and v:IsA("TextBox") then
@@ -3059,7 +3078,34 @@ local function ZCFUV_fake_script() -- CMDY.CMDY.LocalScript
 		newcmd.Visible = true
 		newcmd.Parent = CommandsP.ScrollingFrame
 
-		Player.Chatted:Connect(function(msg)
+		game.TextChatService.MessageReceived:Connect(function(tbl)
+			if tbl.TextSource then
+				local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
+  				if not player then return end
+  				if player ~= game.Players.LocalPlayer then return end
+  				local msg = tbl.Text
+				local newmsg = string.lower(msg)
+				local args = newmsg:split(" ")
+				if args[1] == prefix .. cmdname then 
+					if args[2] == nil then
+						func()
+					else	
+						func(newmsg:gsub(prefix .. cmdname .. " ", ""))
+					end
+				end
+				if alias ~= nil then
+					if args[1] == prefix .. alias then
+						if args[2] == nil then
+							func()
+						else	
+							func(newmsg:gsub(prefix .. alias .. " ", ""))
+						end
+					end
+				end
+			end
+		end)
+			
+	--[[	Player.Chatted:Connect(function(msg)
 			local newmsg = string.lower(msg)
 			local args = newmsg:split(" ")
 			if args[1] == prefix .. cmdname then 
@@ -3078,7 +3124,7 @@ local function ZCFUV_fake_script() -- CMDY.CMDY.LocalScript
 					end
 				end
 			end
-		end)
+		end) ]]
 	end
 
 	local function regen()
@@ -4620,7 +4666,7 @@ local function ZCFUV_fake_script() -- CMDY.CMDY.LocalScript
 		local function lenTbl(tbl)
 			local num = 0
 			for i,v in next, tbl do
-				num += 1
+				num = num + 1
 			end
 			return num
 		end
@@ -6387,7 +6433,7 @@ local function ZCFUV_fake_script() -- CMDY.CMDY.LocalScript
 		for _,v in pairs(Map["Obby Box"]:GetChildren()) do
 			if allclear() == false then break end
 			if v ~= nil and v.CFrame == CFrame.new(ogcframes[v.Name][1],ogcframes[v.Name][2],ogcframes[v.Name][3],ogcframes[v.Name][4],ogcframes[v.Name][5],ogcframes[v.Name][6],ogcframes[v.Name][7],ogcframes[v.Name][8],ogcframes[v.Name][9],ogcframes[v.Name][10],ogcframes[v.Name][11],ogcframes[v.Name][12]) then
-				continue
+				-- continue
 			else
 				if v ~= nil then
 					moved = true
@@ -6400,7 +6446,7 @@ local function ZCFUV_fake_script() -- CMDY.CMDY.LocalScript
 		for _,v in pairs(Map.Obby:GetChildren()) do
 			if allclear() == false then break end
 			if v ~= nil and v.CFrame == CFrame.new(ogcframes[v.Name][1],ogcframes[v.Name][2],ogcframes[v.Name][3],ogcframes[v.Name][4],ogcframes[v.Name][5],ogcframes[v.Name][6],ogcframes[v.Name][7],ogcframes[v.Name][8],ogcframes[v.Name][9],ogcframes[v.Name][10],ogcframes[v.Name][11],ogcframes[v.Name][12]) then
-				continue
+				-- continue
 			else
 				if v ~= nil then
 					moved = true
