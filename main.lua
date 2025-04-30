@@ -16,7 +16,7 @@ View the source here: https://kohlslite.pages.dev/source.lua
 getgenv().theprefix = "."
 
 -- Autorun commands
-getgenv().autoruncmds = {".antirocket me", ".tnok", ".antikill me"} --".antimsg me"
+getgenv().autoruncmds = {".cmdbar", ".tnok", ".antikill me"} --".antimsg me"
 
 -- Run these commands when the user joins
 getgenv().run_on_sight = {
