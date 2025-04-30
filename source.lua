@@ -2483,23 +2483,19 @@ print("\n")
 ]]
 
 --[[
-this needs to be the new format used
-the script is gonna need quite a big edit due to the crappy coding
-
-game.TextChatService.MessageReceived:Connect(function(tbl)
-        if tbl.TextSource then
-            local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
-            if not player then return end
-
-            print(tbl.Text)
-            print(player)
-        end
-end)
+NOTE: THE COMMENTED CODE WILL BE UNCOMMENTED ONCE THE CHATTED DEPRECATION AND REPLACEMENT WITH TEXTCHATSERVICE UPDATE COMES OUT
 ]]
 
 game.Players.LocalPlayer.Chatted:Connect(function(msg)
+-- game.TextChatService.MessageReceived:Connect(function(tbl)
         task.wait(0)
-		
+
+ --[[ if tbl.TextSource then
+	local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
+  	if not player then return end
+  	if player ~= game.Players.LocalPlayer then return end
+  	local msg = tbl.Text ]]
+			
         if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'kcmds' then
            CMDPrint()
            Remind("Check your console by running /console!")
