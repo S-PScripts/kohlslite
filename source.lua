@@ -1,3 +1,4 @@
+-- this script has some bugs rn i'll fix them sometime but for now i think move commands won't work
 -- Read all the information below before viewing the source.
 
 --[[
