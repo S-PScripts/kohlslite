@@ -151,7 +151,7 @@ else
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
+			Title = getgenv().scriptname.." Manager",
 			Text = "You are not in Kohls Admin House. Would you like to join KAH [NBC]?",
 			Duration = math.huge,
 			Callback = response,
@@ -3284,7 +3284,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
+			Title = getgenv().scriptname.. " Manager",
 			Text = "This might lag you. Are you sure about this?",
 			Duration = math.huge,
 			Callback = response,
@@ -5462,7 +5462,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
+			Title = getgenv().scriptname.. " Manager",
 			Text = "Are you sure about this?",
 			Duration = math.huge,
 			Callback = response,
@@ -5485,7 +5485,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
+			Title = getgenv().scriptname.. " Manager",
 			Text = "Are you sure about this?",
 			Duration = math.huge,
 			Callback = response,
@@ -5508,7 +5508,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
+			Title = getgenv().scriptname.. " Manager",
 			Text = "Are you sure about this?",
 			Duration = math.huge,
 			Callback = response,
@@ -5531,7 +5531,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
+			Title = getgenv().scriptname.. " Manager",
 			Text = "Are you sure about this?",
 			Duration = math.huge,
 			Callback = response,
@@ -5561,7 +5561,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
+			Title = getgenv().scriptname.. " Manager",
 			Text = "Are you sure about this?",
 			Duration = math.huge,
 			Callback = response,
@@ -5609,7 +5609,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
+			Title = getgenv().scriptname.. " Manager",
 			Text = "Are you sure about this?",
 			Duration = math.huge,
 			Callback = response,
@@ -5641,7 +5641,7 @@ game.Players.LocalPlayer.Chatted:Connect(function(msg)
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
+			Title = getgenv().scriptname.. " Manager",
 			Text = "Are you sure about this?",
 			Duration = math.huge,
 			Callback = response,
@@ -5669,7 +5669,7 @@ Commands required: shield]])
 				end
 			end
 			game:GetService("StarterGui"):SetCore("SendNotification", {
-				Title = "KohlsLite Manager",
+				Title = getgenv().scriptname.. " Manager",
 				Text = "Are you sure about this?",
 				Duration = math.huge,
 				Callback = response,
@@ -5693,7 +5693,7 @@ Commands required: shield]])
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
+			Title = getgenv().scriptname.. " Manager",
 			Text = "Are you sure about this? This is unreliable.",
 			Duration = math.huge,
 			Callback = response,
@@ -13062,7 +13062,7 @@ function PtSH()
 		end
 	end
 	game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
+			Title = getgenv().scriptname.. " Manager",
 			Text = "This server is crashed. Would you like to serverhop?",
 			Duration = math.huge,
 			Callback = response,
@@ -16833,7 +16833,7 @@ function checkp(colourhere)
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
-			Title = "KohlsLite Manager",
+			Title = getgenv().scriptname.. " Manager",
 			Text = "This cannot be reverted. Are you sure you want to run this?",
 			Duration = math.huge,
 			Callback = response,
