@@ -20,7 +20,7 @@ This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-P
 This will be one of the only KAH scripts that will work soon due to Roblox's chat update (30th APRIL 2025).
 
 You can play KAH (NBC version) here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
-You can also use it for KAH BC but barely anyone plays it. This script isn't recommended for KAH NP - it's not owned by agspureiam and there's a lot of things different.
+You can also use it for KAH BC but barely anyone plays it. This script isn't recommended for KAH NP - it's not owned by agspureiam and there are a lot of things different.
 
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
 Shortcut v3-VAR has more stuff than KohlsLite but is not open-source and you need to ask the owner (Tech - his discord username is igotthemoveslikejagger) to be able to use the script.
@@ -133,7 +133,7 @@ if getgenv().kohlsexecuted then
         Remind("You've already executed KohlsLite!") 
 end
 
-if getgenv().ignorewronggame then -- if you execute in NP for some reason
+if getgenv().ignorewronggame then
 	--
 else
 	getgenv().ignorewronggame = false
