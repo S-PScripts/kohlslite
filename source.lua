@@ -108,7 +108,7 @@ else
 end
 
 -- The prefix you are using for KohlsLite. This can be of any length.
-getgenv().deprefix = "." 
+getgenv().default_prefix = "." 
 
 -- The version of KohlsLite
 getgenv().klversion = "X1.22"
@@ -448,7 +448,7 @@ local prefix
 if getgenv().theprefix then
 	prefix = getgenv().theprefix
 else
-	prefix = getgenv().deprefix
+	prefix = getgenv().default_prefix
 end
 
 -- Defaults (you can change these)
