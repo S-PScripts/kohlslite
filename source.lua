@@ -68,7 +68,7 @@ Please don't use this script for bad. I made this free/open-source and don't wan
 Other stuff:
 -> There is no command handler and this script looks terrible to be honest. I'm not making a full rewrite of this script as that would take ages. I did try to remake this script a while ago but I got bored and gave up.
 -> I know my script is inconsistent when using Game with and without GetService... but I don't care.
--> I know my script is really crappy looking in terms of the source - mainly how I didn't utilise this sort of structure "variable_name = {onething = {}, twothing = {}}". Maybe I will fix it sometime.
+-> I know my script is really crappy looking in terms of the source - mainly how I didn't utilise a proper command handler.
 -> KohlsLite has been moved to this repo from my old repo called scripts (which is now renamed to kohlslite-work-old). This is because the old repo was messy and the old loadstring was clunky.
 
 ]]
