@@ -19444,6 +19444,14 @@ for i, v in pairs(game.Players:GetPlayers()) do
 
         task.wait(0)
         PLRSTART(v) -- PLRSTART WILL NOT BE NEEDED WHEN NEW UPDATE COMES OUT
+
+	if getgenv().run_on_sight[v.Name] then
+		print("Running commands set up for ".. v.Name)
+		Remind("Running commands set up for ".. v.Name)
+		for i, j in ipairs(getgenv().run_on_sight[v.Name]) do
+    			Chat(j)
+		end
+	end
 end
 
 -- These run last to prevent bugs (old remanent)
