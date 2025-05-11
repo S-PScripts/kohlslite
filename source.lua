@@ -104,7 +104,7 @@ TS2021 09/04/2025
 if getgenv().scriptname then
 	--
 else
-	getgenv().scriptname = "KohlsLite"
+	getgenv().scriptname = "KohlsLite" -- change this if you're a skid
 end
 
 -- The prefix you are using for KohlsLite. This can be of any length.
@@ -116,7 +116,7 @@ getgenv().klversion = "X1.22"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = "KohlsLite X"..getgenv().klversion, -- Now includes X since main updates are completed, still many to add though.
+                Title = getgenv().scriptname.. "X"..getgenv().klversion, -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
@@ -19855,6 +19855,12 @@ if kah_np == true then
 end
 
 Remind("[WARNING]: Due to a recent Roblox chat update, until I get around to a full fix, you must use the command bar to run commands. Sorry!", 5)
+
+if getgenv().scriptname == "KohlsLite" then
+	--
+else
+	Remind("I'm a skid and I'm proud! - You", 5)
+end
 
 -- From Infinite Yield
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
