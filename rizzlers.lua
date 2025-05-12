@@ -63,7 +63,7 @@ task.spawn(function()
         local text = lyric[2]
         -- Wait until the sound's TimePosition reaches or passes the lyric time
         while CheckSound() and sound.TimePosition < t do
-            task.wait(0.05)
+            task.wait(0)
         end
         if CheckSound() then
             Chat("h/"..text)
