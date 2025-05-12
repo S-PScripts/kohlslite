@@ -116,7 +116,7 @@ getgenv().klversion = "X1.22"
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = getgenv().scriptname.. "X"..getgenv().klversion, -- Now includes X since main updates are completed, still many to add though.
+                Title = getgenv().scriptname.. " " ..getgenv().klversion, -- Now includes X since main updates are completed, still many to add though.
                 Text = msg,
                 Duration = length or 1
         })
