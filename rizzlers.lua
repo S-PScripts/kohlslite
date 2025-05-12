@@ -66,7 +66,7 @@ task.spawn(function()
             task.wait(0.05)
         end
         if CheckSound() then
-            Chat(text)
+            Chat("h/"..text)
         else
             break
         end
