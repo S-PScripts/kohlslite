@@ -984,7 +984,7 @@ local player_relate = {
 	AntiLogs = false,
 	logmode = "default", -- How it should stop the user from seeing logs - "crack" uses the oofkohls gibberish
 
-	-- Announces to everyone that a person is using /c system
+	-- Announces to everyone that a person is trying to use /c system (IT DOESN'T EVEN EXIST ANYMORE)
 	PingCsystem = true,
 
 	-- Thorns (let's say someone does "kill (...)". The user who said it gets killed)
@@ -13257,11 +13257,11 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 		-- PING AND LOGS --
                     if string.sub(msg:lower(), 0, 9) == "/c system" and v.Name ~= game.Players.LocalPlayer.Name then
                         if player_relate.PingCsystem then
-                            print(v.Name .. " is using /c system.")
+                            print(v.Name .. " tried to /c system not knowing that it doesn't even exist anymore.")
 			    if mainbar_stuff.watermark_kl then
-                            	Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: " .. v.Name .. " is using /c system. Sneaky! \n\n\n\n\n")
+                            	Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: " .. v.Name .. " tried to use /c system... but it doesn't exist anymore! Noob. \n\n\n\n\n")
 			    else
-				Chat("h \n\n\n\n\n " .. v.Name .. " is using /c system. Sneaky! \n\n\n\n\n")
+				Chat("h \n\n\n\n\n " .. v.Name .. " tried to use /c system... but it doesn't exist anymore! Noob. \n\n\n\n\n")
 			    end
                         end
                     end
