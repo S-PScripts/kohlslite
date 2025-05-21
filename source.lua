@@ -2483,11 +2483,6 @@ print("\n")
  \____\___/|_|  |_|_|  |_/_/   \_\_| \_|____/  |_____|___|____/ |_|  
 ]]
 
---[[
-NOTE: THE COMMENTED CODE WILL BE UNCOMMENTED ONCE THE CHATTED DEPRECATION AND REPLACEMENT WITH TEXTCHATSERVICE UPDATE COMES OUT
-THIS WILL BE IN A FEW DAYS PROBABLY SINCE ROBLOX WILL AUTOMIGRATE IN MAY
-]]
-
 game.TextChatService.MessageReceived:Connect(function(tbl)
         task.wait(0)
 
@@ -17499,20 +17494,27 @@ function SpHammer()
         local phrases = {"Missclick","Really","Oops","Why","That is a very bad sin","while true do end","LOLWUT","You have been spun"}
 
         
-        game.Players.LocalPlayer.Chatted:Connect(function(msg)
-	           if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'hmode' then
+	game.TextChatService.MessageReceived:Connect(function(tbl)
+       		task.wait(0)
+        	if tbl.TextSource then
+			local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
+  			if not player then return end
+  			if player ~= game.Players.LocalPlayer then return end
+  			local msg = tbl.Text
+			if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'hmode' then
                                 local args = string.split(msg, " ")
                                 if #args == 2 then
                                         mode = args[2]
 				else
 					Remind("ARGUMENT ERROR: You need to use exactly 2 (hmode _).")
                                 end
-                   end
+                   	end
                 
-	           if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'hcmds' then       
+	           	if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'hcmds' then       
                                  Remind("Check your console by doing /console in chat!")
                                  HCMDS()
-                   end
+                   	end
+		end
         end)
 
         function HCMDS()
