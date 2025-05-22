@@ -16607,10 +16607,6 @@ function onPlayerLeaving(player)
                 kicking = false
     end
 
-    if table.find(list_on_sight.suser_on_sight, player.Name) then
-                table.remove(rand_players.suser_on_sight, table.find(rand_players.suser_on_sight, player))
-    end
-
     if table.find(rand_players.carcar, player.Name) then
                 table.remove(rand_players.carcar, table.find(rand_players.carcar, player))
     end
