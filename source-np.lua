@@ -1,3 +1,31 @@
+--[[
+no
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- KohlsLite for NP/LEGACY
 -- This is based off KohlsEco since it has a better structure. I never used the structure for normal KohlsLite since it would take me too long to remake
 -- This doesn't have as many features because I can't be bothered
