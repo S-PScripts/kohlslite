@@ -2851,7 +2851,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
                         	Remind("Blacklisted "..player)
 			end
                         table.insert(blacklist, player)
-		--	print("added...") debug msg
+			print("added...") --debug msg
                 else
                         Remind(player.." is already blacklisted!")        
                 end
