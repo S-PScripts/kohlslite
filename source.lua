@@ -2830,13 +2830,13 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = args[2]
          PLAYERCHECK(dasplayer)
          if player ~= nil then
-		-- print(player)
+		print(player)
 		if player == game.Players.LocalPlayer.Name then 
 			return Remind("You cannot blacklist yourself.")
 		end
 				
                 if not table.find(blacklist, player) then
-		--	print("adding...")
+			print("adding...")
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
 					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been blacklisted. \n\n\n\n\n");Regen()
