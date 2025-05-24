@@ -1,4 +1,4 @@
--- FIXED FOR NEW CHAT :D
+-- The bugs with blacklisting, whitelisting, and others requiring a player are now fixed. I think they were caused by the new Roblox update.
 -- Read all the information below before viewing the source.
 
 --[[
