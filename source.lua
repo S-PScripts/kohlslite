@@ -11073,24 +11073,22 @@ end)
 -- PLAYER CHECK (I hate this thing so much)
 function PLAYERCHECK(plr, rt)
   for i, v in pairs(game.Players:GetPlayers()) do
-      local u_found = false
       if string.sub(v.Name:lower(), 1, #plr) == plr:lower() then
           player = v.Name
-	  playerd = v.DisplayName
+          playerd = v.DisplayName
           cplr = v
-	  u_found = true
-	  if rt then return cplr end
+          if rt then return cplr end
           Remind("[KL User Search]: Found "..player)
+          break
       end
-
-      if u_found then break end
 
       if string.sub(v.DisplayName:lower(), 1, #plr) == plr:lower() then
           player = v.Name
-	  playerd = v.DisplayName
+          playerd = v.DisplayName
           cplr = v
-	  if rt then return cplr end
+          if rt then return cplr end
           Remind("[KL User Search]: Found "..player)
+          break
       end
   end
 end
@@ -19854,7 +19852,7 @@ if kah_np == true then
 	Remind("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
-Remind("i like my cheese dripp yburh", 5)
+Remind('debuf update 3", 5)
 -- Remind("[WARNING]: KOHLSLITE HAS BEEN UPDATED SO IT WORKS WITH THE NEW CHAT SYSTEM. HOWEVER, IT MAY NOT WORK AS I HAVEN'T TESTED IT YET", 5)
 
 if getgenv().scriptname == "KohlsLite" then
