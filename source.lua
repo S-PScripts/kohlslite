@@ -10210,7 +10210,7 @@ return
 			end
 		else
 			kia = args[2]
-           	  	PLAYERCHECK(kia)
+           	  	local cplr, player = PLAYERCHECK(kia)
 			oname = args[3]
 			auto_stuff.autocharid = nil
 			
@@ -10218,7 +10218,7 @@ return
 				auto_stuff.autocharid = game.Players:GetUserIdFromNameAsync(oname)
 			end)	         
 
-			if auto_stuff.autocharid ~= nil then Remind("Could not reach user provided.") return end
+			if auto_stuff.autocharid == nil then Remind("Could not reach user provided.") return end
 			
 			if player then
 				if not table.find(auto_stuff.autochar, player) then
