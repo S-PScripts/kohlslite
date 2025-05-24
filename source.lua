@@ -3440,7 +3440,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
         	if #args == 3 then
                		plr = args[2]
 			time = tonumber(args[3])
-			PLAYERCHECK(plr)
+			local cplr, player = PLAYERCHECK(plr)
          		if player then
                 		caged = cplr
 				trapped(caged, time)
@@ -3461,7 +3461,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
         	if #args == 3 then
                		plr = args[2]
 			time = tonumber(args[3])
-			PLAYERCHECK(plr)
+			local cplr, player = PLAYERCHECK(plr)
          		if player then
                 		caged = cplr
 				trapped(caged, time)
@@ -5937,7 +5937,7 @@ return
                 local args = string.split(msg, " ")
 		if #args == 2 then
                 	local caketar = args[2]
-			PLAYERCHECK(caketar)
+			local cplr, player = PLAYERCHECK(caketar)
          		if player then
                   		caketarsuccess = player
 				Chat("h \n\n\n\n\n Happy birthday, ".. caketarsuccess .."! \n\n\n\n\n")
@@ -6343,7 +6343,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'kitten' then -- nak3d would get tagged, inspired by simplekah
                 local meow = string.sub(msg:lower(), #prefix + 8)
-                PLAYERCHECK(meow)
+                local cplr, player = PLAYERCHECK(meow)
                 if player then
                          kit = cplr
                          if kit and kit.Character and kit.Character.Head then
@@ -6371,7 +6371,7 @@ return
 
    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'dumb' then -- pr/ii
                 local dum = string.sub(msg:lower(), #prefix + 6)
-                PLAYERCHECK(dum)        
+                local cplr, player = PLAYERCHECK(dum)        
                 if player then
                         dummy = player
                         idum = cplr
@@ -7709,7 +7709,7 @@ return
                  if player then
                         lemonman = player
                         lman = cplr
-                        Lemon(player, cplr)
+                        Lemon(lemonman, lman)
                  else
                         Remind('Cannot find player with the name: '..dasplayer)
                  end
@@ -7772,15 +7772,15 @@ return
 			local user = nil
 			RoNuke(amount, range, user)
 		elseif #args == 2 then
-			local tar = args[2]
-			PLAYERCHECK(tar)
-			if tar ~= nil then
+			local dasplayer = args[2]
+			local cplr, player = PLAYERCHECK(dasplayer)
+			if player then
 				local amount = nil
 				local range = nil
 				user = cplr
 				RoNuke(amount, range, user)
 			else
-				Remind('Cannot find player with the name: '..tar)
+				Remind('Cannot find player with the name: '..dasplayer)
 			end
 		else
 			Remind("Invalid amount of arguments (must be 2 [player] or 3 [range, amount]).")
@@ -7794,9 +7794,9 @@ return
 			jnu = nil
 			JNUKE(dj, jnu)
 		elseif #args == 2 then
-            		local target = args[2]
-                 	PLAYERCHECK(target)
-                 	if target ~= nil then
+            		local dasplayer = args[2]
+                 	local cplr, player = PLAYERCHECK(dasplayer)
+                 	if player then
                         	dj = "player"
 				jnu = cplr
 				JNUKE(dj, jnu)
@@ -7955,9 +7955,9 @@ return
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'weld' then
                 local args = string.split(msg, " ")
         	if #args >= 3 then
-            		local target = args[2]
-                 	PLAYERCHECK(target)
-                 	if target ~= nil then
+            		local dasplayer = args[2]
+                 	local cplr, player = PLAYERCHECK(dasplayer)
+                 	if player then
                         	welder = player
 				wld = cplr
 				mode = table.concat(args, " ", 3)
@@ -7973,9 +7973,9 @@ return
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'nweld' then
                 local args = string.split(msg, " ")
         	if #args == 2 then
-            		local target = args[2]
-                 	PLAYERCHECK(target)
-                 	if target ~= nil then
+            		local dasplayer = args[2]
+                 	local cplr, player = PLAYERCHECK(dasplayer)
+                 	if player then
                         	welder = player
 				wld = cplr
                         	NewW(welder, wld)
@@ -7990,9 +7990,9 @@ return
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'hfreeze' then
                 local args = string.split(msg, " ")
         	if #args == 2 then
-            		local target = args[2]
-                 	PLAYERCHECK(target)
-                 	if target ~= nil then
+            		local dasplayer = args[2]
+                 	local cplr, player = PLAYERCHECK(dasplayer)
+                 	if player then
                         	welder = player
 				wld = cplr
                         	HFreeze(welder, wld)
@@ -8007,9 +8007,9 @@ return
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'tattach' then
                 local args = string.split(msg, " ")
         	if #args == 2 then
-            		local target = args[2]
-                 	PLAYERCHECK(target)
-                 	if target ~= nil then
+            		local dasplayer = args[2]
+                 	local cplr, player = PLAYERCHECK(dasplayer)
+                 	if player then
                         	welder = player
 				wld = cplr
                         	TAttach(welder, wld)
@@ -10014,29 +10014,29 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'mkick' then -- haha i found it
-        acplr = string.sub(msg:lower(), #prefix + 7)
-           PLAYERCHECK(acplr)
-                   if player ~= nil and not table.find(nokick, player) then
-			acplr = player
-                           antichatplr = true
-                elseif table.find(nokick, player) then
-                        Remind("Sorry, this player cannot be kicked!")
-                else                           
-                        Remind("Player doesn't exist!")
-                  end
+        dasplayer = string.sub(msg:lower(), #prefix + 7)
+        local cplr, player = PLAYERCHECK(dasplayer)
+	if player and not table.find(nokick, player) then
+		acplr = player
+                antichatplr = true
+        elseif player and table.find(nokick, player) then
+                Remind("Sorry, this player cannot be kicked!")
+        else                           
+        	Remind("Player doesn't exist!")
+        end
     end
 
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'pmkick' then -- haha i found it
-        acplr = string.sub(msg:lower(), #prefix + 8)
-           PLAYERCHECK(acplr)
-                   if player ~= nil and not table.find(nokick, player) then
-			acplr = player
-                           antichatplr = true
-                elseif table.find(nokick, player) then
-                        Remind("Sorry, this player cannot be kicked!")
-                else                           
-                        Remind("Player doesn't exist!")
-                  end
+        dasplayer = string.sub(msg:lower(), #prefix + 7)
+        local cplr, player = PLAYERCHECK(dasplayer)
+	if player and not table.find(nokick, player) then
+		acplr = player
+                antichatplr = true
+        elseif player and table.find(nokick, player) then
+                Remind("Sorry, this player cannot be kicked!")
+        else                           
+        	Remind("Player doesn't exist!")
+        end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unmkick' then
@@ -10053,20 +10053,20 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'pkick' then
-                   acplr = string.sub(msg:lower(), #prefix + 7)
-                   PLAYERCHECK(acplr)
-                   if player ~= nil and not table.find(nokick, player) then
-                           Chat("freeze "..acplr)
-                           Chat("dog "..acplr)
-                           Chat("rainbowify "..acplr)
-                           Chat("name "..acplr.. " \n Imagine Getting \n CRASHED!!!")
-			   acplr = player
-                           antichatplr = true
-                   elseif table.find(nokick, player) then
-                        Remind("Sorry, this player cannot be kicked!")
-                else
-                           Remind("Player doesn't exist!")
-                  end
+	dasplayer = string.sub(msg:lower(), #prefix + 7)
+        local cplr, player = PLAYERCHECK(dasplayer)
+        if player and not table.find(nokick, player) then
+		acplr = player
+                Chat("freeze "..acplr)
+		Chat("dog "..acplr)
+        	Chat("rainbowify "..acplr)
+        	Chat("name "..acplr.. " \n Imagine Getting \n CRASHED!!!")
+         	antichatplr = true
+        elseif player and table.find(nokick, player) then
+                Remind("Sorry, this player cannot be kicked!")
+	else
+                Remind("Player doesn't exist!")
+        end
    end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unpkick' then
@@ -10076,17 +10076,18 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'lkick' then
-                   acplr = string.sub(msg:lower(), #prefix + 7)
-                   PLAYERCHECK(acplr)
-                   if player ~= nil and not table.find(nokick, player) then
-                           Chat(prefix.."laser "..acplr)
-			   Chat("blind "..acplr)
-                        antichatplr = true
-                   elseif table.find(nokick, player) then
-                        Remind("Sorry, this player cannot be kicked!")
-                else
-                           Remind("Player doesn't exist!")
-                  end
+	dasplayer = string.sub(msg:lower(), #prefix + 7)
+	local cplr, player = PLAYERCHECK(dasplayer)
+        if player and not table.find(nokick, player) then
+		acplr = player
+                Chat(prefix.."laser "..acplr)
+		Chat("blind "..acplr)
+        	antichatplr = true
+        elseif player and table.find(nokick, player) then
+        	Remind("Sorry, this player cannot be kicked!")
+        else
+                Remind("Player doesn't exist!")
+        end
    end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unlkick' then
@@ -11072,12 +11073,16 @@ end)
 ]]
 
 -- PLAYER CHECK (I hate this thing so much)
-function PLAYERCHECK(plr)
+function PLAYERCHECK(plr, rt)
     plr = plr:lower()
     for _, v in pairs(game.Players:GetPlayers()) do
         if string.sub(v.Name:lower(), 1, #plr) == plr or string.sub(v.DisplayName:lower(), 1, #plr) == plr then
             Remind("[KL User Search]: Found "..v.Name)
-            return v, v.Name  -- return both player instance and name
+            if rt then
+                return v -- only return Player instance
+            else
+                return v, v.Name -- return both
+            end
         end
     end
     return nil, nil
@@ -16223,15 +16228,16 @@ function editVis(variable, value)
         end
 
         if variable == "orbiter" then
-	    rt = true
-            local TargetPlayer = PLAYERCHECK(value, rt)
-            if TargetPlayer then
-                VisBindable:Fire("Edit", "Orbiter", TargetPlayer)
-            else
-                if value == "none" then
-                    VisBindable:Fire("Edit", "Orbiter", game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
-                end
-            end
+        	if value == "none" then
+    			VisBindable:Fire("Edit", "Orbiter", game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame)
+		else
+    			local TargetPlayer = select(1, PLAYERCHECK(value, true))
+    			if TargetPlayer then
+        			VisBindable:Fire("Edit", "Orbiter", TargetPlayer)
+    			else
+        			Remind("Player not found for orbiter command.")
+    			end
+		end
 		
         elseif variable == "axis" then
             if value == "x" or value == "y" or value == "z" then
@@ -19842,7 +19848,7 @@ if kah_np == true then
 	Remind("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
-Remind("debuf update Burhrrgu", 5)
+Remind("Bugs have been fixed.", 5)
 -- Remind("[WARNING]: KOHLSLITE HAS BEEN UPDATED SO IT WORKS WITH THE NEW CHAT SYSTEM. HOWEVER, IT MAY NOT WORK AS I HAVEN'T TESTED IT YET", 5)
 
 if getgenv().scriptname == "KohlsLite" then
