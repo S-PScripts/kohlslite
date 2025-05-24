@@ -2559,8 +2559,9 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 	end
 
 	if string.sub(msg, 1, #prefix + 3) == prefix..'vis' then
-			Remind("Booting the visualiser...")
-			partVisualiser()
+		Remind("This command does not work because I have had to re-code the player system.")
+			-- Remind("Booting the visualiser...")
+			-- partVisualiser()
 	end
 
 	if string.sub(msg, 1, #prefix + 7) == prefix..'stopvis' then
@@ -2690,8 +2691,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
         if string.sub(msg, 1, #prefix + 7)  == prefix..'thornwl' then
          local dasplayer = string.sub(msg:lower(), #prefix + 9)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
 		if player == game.Players.LocalPlayer.Name then 
 			return Remind("You cannot thorn-whitelist yourself.")
@@ -2717,8 +2718,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
         if string.sub(msg, 1, #prefix + 9)  == prefix..'unthornwl' then
          local dasplayer = string.sub(msg:lower(), #prefix + 11)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
                 if table.find(exempt_from_thorns, player) then
 			if player_relate.blwl_an then
@@ -2755,8 +2756,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
         if string.sub(msg, 1, #prefix + 2) == prefix..'wl' then
 	 local args = string.split(msg, " ")
          local dasplayer = args[2]
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
 		if player == game.Players.LocalPlayer.Name then 
 			return Remind("You cannot whitelist yourself.")
@@ -2796,8 +2797,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
        if string.sub(msg, 1, #prefix + 4) == prefix..'unwl' then
 	 local args = string.split(msg, " ")
          local dasplayer = args[2]
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
                 if table.find(whitelist, player) then	
 			if player_relate.blwl_an then
@@ -2832,8 +2833,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 	if string.sub(msg, 1, #prefix + 2) == prefix..'bl' then
 	 local args = string.split(msg, " ")
          local dasplayer = args[2]
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
 		print(player)
 		if player == game.Players.LocalPlayer.Name then 
@@ -2878,8 +2879,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
         if string.sub(msg, 1, #prefix + 4) == prefix..'unbl' then
  	 local args = string.split(msg, " ")
          local dasplayer = args[2]
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
                 if table.find(blacklist, player) or table.find(newplrslocked, player) then
 			if player_relate.blwl_an then
@@ -2927,8 +2928,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 	if string.sub(msg, 1, #prefix + 3) == prefix..'kwl' then
 	 local args = string.split(msg, " ")
          local dasplayer = args[2]
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
 		-- print(player)
 		if player == game.Players.LocalPlayer.Name then 
@@ -2958,8 +2959,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 	if string.sub(msg, 1, #prefix + 5) == prefix..'unkwl' then
 	 local args = string.split(msg, " ")
          local dasplayer = args[2]
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
 		-- print(player)
 		if player == game.Players.LocalPlayer.Name then 
@@ -3005,8 +3006,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
         if string.sub(msg, 1, #prefix + 5)  == prefix..'admin' then
          local dasplayer = string.sub(msg:lower(), #prefix + 7)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
                 if not table.find(admin_stuff.FAdmins, player) then
 			if player_relate.blwl_an then
@@ -3028,8 +3029,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
         if string.sub(msg, 1, #prefix + 7)  == prefix..'unadmin' then
          local dasplayer = string.sub(msg:lower(), #prefix + 9)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
                 if table.find(admin_stuff.FAdmins, player) then
 			if player_relate.blwl_an then
@@ -3058,8 +3059,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
         if string.sub(msg, 1, #prefix + 6)  == prefix..'gearwl' then
          local dasplayer = string.sub(msg:lower(), #prefix + 8)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
 		if player == game.Players.LocalPlayer.Name then 
 			return Remind("You cannot gear whitelist yourself.")
@@ -3085,8 +3086,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
         if string.sub(msg, 1, #prefix + 8)  == prefix..'ungearwl' then
          local dasplayer = string.sub(msg:lower(), #prefix + 10)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
                 if table.find(GWhitelisted, player) then
 			if player_relate.blwl_an then
@@ -3170,8 +3171,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
        if string.sub(msg, 1, #prefix + 8) == prefix..'loopkill' then
          local dasplayer = string.sub(msg:lower(), #prefix + 10)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
                 if not table.find(rand_players.loopkill, player) then
 			if player_relate.blwl_an then
@@ -3189,8 +3190,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
        if string.sub(msg, 1, #prefix + 10) == prefix..'unloopkill' then
          local dasplayer = string.sub(msg:lower(), #prefix + 12)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
                 if table.find(rand_players.loopkill, player) then
 			if player_relate.blwl_an then
@@ -3208,8 +3209,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
    	if string.sub(msg, 1, #prefix + 5) == prefix..'names' then
          local dasplayer = string.sub(msg:lower(), #prefix + 7)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
                 if not table.find(rand_players.byecam, player) then
 			if player_relate.blwl_an then
@@ -3227,8 +3228,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
        if string.sub(msg, 1, #prefix + 7) == prefix..'unnames' then
          local dasplayer = string.sub(msg:lower(), #prefix + 9)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
                 if table.find(rand_players.byecam, player) then
 			if player_relate.blwl_an then
@@ -3246,8 +3247,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
    if string.sub(msg, 1, #prefix + 6) == prefix..'lagged' then
          local dasplayer = string.sub(msg:lower(), #prefix + 8)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
                 if not table.find(rand_players.carcar, player) then
 			if player_relate.blwl_an then
@@ -3265,8 +3266,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
        if string.sub(msg, 1, #prefix + 8) == prefix..'unlagged' then
          local dasplayer = string.sub(msg:lower(), #prefix + 10)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		player = tostring(player)
                 if table.find(rand_players.carcar, player) then
 			if player_relate.blwl_an then
@@ -3307,8 +3308,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 		
        if string.sub(msg, 1, #prefix + 6) == prefix..'report' then
          local dasplayer = string.sub(msg:lower(), #prefix + 8)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
                         Remind("Reported "..player.."! Note that reporting doesn't work on some executors")
                         game.Players:ReportAbuse(game:GetService("Players"),player,"Cheating/Exploiting", "Spamming random stuff " .. math.random(1, 3276700))         
          else
@@ -3318,8 +3319,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
       if string.sub(msg, 1, #prefix + 9) == prefix..'checkperm' then
          local dasplayer = string.sub(msg:lower(), #prefix + 11)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
                 gcplr = cplr
                 gcplrn = player
                 checkforperm()
@@ -3342,8 +3343,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
        if string.sub(msg, 1, #prefix + 12) == prefix..'checkpersons' then
          local dasplayer = string.sub(msg:lower(), #prefix + 14)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
                 gcplr = cplr
                 gcplrn = player
                 checkforpersons()
@@ -3354,8 +3355,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
       if string.sub(msg, 1, #prefix + 8) == prefix..'checkgps' then
          local dasplayer = string.sub(msg:lower(), #prefix + 10)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
                 gcplr = cplr
                 gcplrn = player
                 checkforperm()
@@ -3440,7 +3441,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
                		plr = args[2]
 			time = tonumber(args[3])
 			PLAYERCHECK(plr)
-         		if player ~= nil then
+         		if player then
                 		caged = cplr
 				trapped(caged, time)
          		else
@@ -3461,7 +3462,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
                		plr = args[2]
 			time = tonumber(args[3])
 			PLAYERCHECK(plr)
-         		if player ~= nil then
+         		if player then
                 		caged = cplr
 				trapped(caged, time)
          		else
@@ -4581,8 +4582,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'cgoto' then
          local dasplayer = string.sub(msg:lower(), #prefix + 7)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
                 gotou = cplr
                 Goto2(gotou)
          else
@@ -4698,8 +4699,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'fcam' then
 		local dasplayer = string.sub(msg:lower(), #prefix + 6)
-                player = PLAYERCHECK(dasplayer)
-                if player ~= nil then
+                local cplr, player = PLAYERCHECK(dasplayer)
+                if player then
                         FCAM(cplr, player)
 			Remind("Freezing the person's camera...")
                 else                        
@@ -4870,8 +4871,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 			return
 		end
  		local dasplayer = string.sub(msg:lower(), #prefix + 11)
-                player = PLAYERCHECK(dasplayer)
-                if player ~= nil then
+                local cplr, player = PLAYERCHECK(dasplayer)
+                if player then
         		su = player
 			clipboard_available(su)
 			Remind("Successfully copied the player's username to clipboard.")
@@ -5731,7 +5732,7 @@ Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command
 Commands required: rocket]])
         else
                 local dasplayer = string.sub(msg:lower(), #prefix + 7)
-                   player = PLAYERCHECK(dasplayer)
+                   local cplr, player = PLAYERCHECK(dasplayer)
                    if player ~= nil and not table.find(nokick, player) then
                         rkickplr(cplr,player)
                         Remind("Rocket kicking "..player)
@@ -5762,7 +5763,7 @@ return
 		if 0 == 0 then return Remind("NO LONGER WORKS") end -- This kick could still work but it was terrible to begin with
 		Remind("This kick was found by Digitality.")
 		local dasplayer = string.sub(msg:lower(), #prefix + 10)
-                player = PLAYERCHECK(dasplayer)
+                local cplr, player = PLAYERCHECK(dasplayer)
 	
                 if player ~= nil and not table.find(nokick, player) then
 			kickin = cplr
@@ -5798,7 +5799,7 @@ return
 		if 0 == 0 then return Remind("NO LONGER WORKS") end
 		dzjecraft = false
 		local dasplayer = string.sub(msg:lower(), #prefix + 11)
-                player = PLAYERCHECK(dasplayer)
+                local cplr, player = PLAYERCHECK(dasplayer)
 	
                 if player ~= nil and not table.find(nokick, player) then
 			kickin = cplr
@@ -5822,7 +5823,7 @@ return
 		if 0 == 0 then return Remind("NO LONGER WORKS") end
 		dzjecraft = false
 		local dasplayer = string.sub(msg:lower(), #prefix + 10)
-                player = PLAYERCHECK(dasplayer)
+                local cplr, player = PLAYERCHECK(dasplayer)
 	
                 if player ~= nil and not table.find(nokick, player) then
 			kickin = cplr
@@ -5845,7 +5846,7 @@ return
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'hatkick' then  -- tech kick
 		if 0 == 0 then return Remind("NO LONGER WORKS") end
 		local dasplayer = string.sub(msg:lower(), #prefix + 9)
-                player = PLAYERCHECK(dasplayer)
+                local cplr, player = PLAYERCHECK(dasplayer)
 	
                 if player ~= nil and not table.find(nokick, player) then
 			kickin = cplr
@@ -5863,7 +5864,7 @@ return
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'meshkick' then  -- mesh kick haha
 		if 0 == 0 then return Remind("NO LONGER WORKS") end -- best code ever (what the heck is this)
 		local dasplayer = string.sub(msg:lower(), #prefix + 10)
-                player = PLAYERCHECK(dasplayer)
+                local cplr, player = PLAYERCHECK(dasplayer)
 	
                 if player ~= nil and not table.find(nokick, player) then
 			kickin = cplr
@@ -5937,7 +5938,7 @@ return
 		if #args == 2 then
                 	local caketar = args[2]
 			PLAYERCHECK(caketar)
-         		if player ~= nil then
+         		if player then
                   		caketarsuccess = player
 				Chat("h \n\n\n\n\n Happy birthday, ".. caketarsuccess .."! \n\n\n\n\n")
 				Speak("Happy birthday, "..caketarsuccess.."!")
@@ -5980,8 +5981,8 @@ return
 	-- this command might be broken, I don't know why :P
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'ncontrol' then -- really funny ngl (cmdpi)
         	local dasplayer = string.sub(msg:lower(), #prefix + 10)
-                player = PLAYERCHECK(dasplayer)
-                if player ~= nil then
+                local cplr, player = PLAYERCHECK(dasplayer)
+                if player then
 			ncontrol(player, cplr)
                 else                        
                         Remind('Cannot find player with the name: '..dasplayer)
@@ -6343,7 +6344,7 @@ return
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'kitten' then -- nak3d would get tagged, inspired by simplekah
                 local meow = string.sub(msg:lower(), #prefix + 8)
                 PLAYERCHECK(meow)
-                if player ~= nil then
+                if player then
                          kit = cplr
                          if kit and kit.Character and kit.Character.Head then
                                     Chat("paint "..kit.Name.." "..kit.Character.Head.BrickColor.Name)
@@ -6371,7 +6372,7 @@ return
    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'dumb' then -- pr/ii
                 local dum = string.sub(msg:lower(), #prefix + 6)
                 PLAYERCHECK(dum)        
-                if player ~= nil then
+                if player then
                         dummy = player
                         idum = cplr
                         DumbGuy(dummy, idum)
@@ -7053,8 +7054,8 @@ Chat("h \n\n\n\n\n "..[[
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'padban' then
          local dasplayer = string.sub(msg:lower(), #prefix + 8)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		if player_relate.blwl_an then
                 	if mainbar_stuff.watermark_kl then
                			Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been padbanned. \n\n\n\n\n")
@@ -7070,8 +7071,8 @@ Chat("h \n\n\n\n\n "..[[
 
     if string.sub(msg, 1, #prefix + 8) == prefix..'unpadban' then
          local dasplayer = string.sub(msg:lower(), #prefix + 10)
-         player = PLAYERCHECK(dasplayer)
-         if player ~= nil then
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
 		if player_relate.blwl_an then
 			if mainbar_stuff.watermark_kl then
                			Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been unpadbanned! \n\n\n\n\n")
@@ -7229,8 +7230,8 @@ Chat("h \n\n\n\n\n "..[[
     if string.sub(msg, 1, #prefix + 9) == prefix..'cannounce' then -- inspired by scv3-var
         local args = string.split(msg, " ")
         local dasplayer = args[2]
-        player = PLAYERCHECK(dasplayer)
-        if player ~= nil then
+        local cplr, player = PLAYERCHECK(dasplayer)
+        if player then
                         sus = player
                         whatsapp = table.concat(args, " ", 3)
                         AnnounceWM()
@@ -7248,8 +7249,8 @@ return
 		local args = string.split(msg, " ")
 		if #args == 3 then
         		local dasplayer = args[2]
-			player = PLAYERCHECK(dasplayer)
-			if player ~= nil then
+			local cplr, player = PLAYERCHECK(dasplayer)
+			if player then
 				puser = cplr
 				local len = tonumber(args[3])
 				Loops.pp = true
@@ -7271,8 +7272,8 @@ return
 		local args = string.split(msg, " ")
 		if #args == 2 then
         		local dasplayer = args[2]
-			player = PLAYERCHECK(dasplayer)
-			if player ~= nil then
+			local cplr, player = PLAYERCHECK(dasplayer)
+			if player then
 				Loops.pp = false
 			else
 				Remind('Cannot find player with the name: '..dasplayer)
@@ -7657,8 +7658,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'gearban' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 9)
-                 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+                 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
                         xplayer = player
                         xplr = cplr
                         Gearban(xplayer, xplr, 1)
@@ -7669,8 +7670,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'toolban' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 9)
-                 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+                 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
                         xplayer = player
                         xplr = cplr
                         Gearban(xplayer, xplr, 1)
@@ -7681,8 +7682,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cage' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 6)
-                 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+                 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
                         xplayer = player
                         xplr = cplr
                         Gearban(xplayer, xplr, 2)
@@ -7693,8 +7694,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'rail' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 6)
-                 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+                 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
                         railer = player
                         Rail()
                  else
@@ -7704,8 +7705,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'lemonman' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 10)
-                 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+                 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
                         lemonman = player
                         lman = cplr
                         Lemon(player, cplr)
@@ -7716,8 +7717,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'laser' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 7)
-                 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+                 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
                         laserman = player
                         laman = cplr
                         Laser(laserman, laman)
@@ -7738,8 +7739,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'surround' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 10)
-                 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+                 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
                         surrer = player
                         Surround("sur")
                  else
@@ -8086,8 +8087,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'nuke' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 6)
-                 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+                 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
                         surrer = player
                         Surround("nuke")
                  else
@@ -8102,8 +8103,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'age' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 5)
-                 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+                 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
                         myageis = cplr.AccountAge
 			print("Age of player: "..myageis)
                         Remind("Age of player: "..myageis)
@@ -8116,8 +8117,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'jdate' then
                  local dasplayer = string.sub(msg:lower(), #prefix + 7)
-                 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+                 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
                         local dates = {}
 			local user = game:HttpGet("https://users.roblox.com/v1/users/"..cplr.UserId)
 			local json = game.HttpService:JSONDecode(user)
@@ -8133,8 +8134,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'dkick' then -- buggy!
                  local dasplayer = string.sub(msg:lower(), #prefix + 7)
-		 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+		 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
 			if table.find(nokick, player) then
                         	Remind("Sorry, this player cannot be kicked!") return
 			end          
@@ -8150,8 +8151,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'undkick' then -- buggy!
                  local dasplayer = string.sub(msg:lower(), #prefix + 9)
-		 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+		 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
 			dkickin = false
 			Chat("respawn "..dkicked)
                  else
@@ -8161,8 +8162,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'slag' then -- buggy!
                  local dasplayer = string.sub(msg:lower(), #prefix + 6)
-		 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+		 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
                         slag(cplr, player)
 			Remind("Skate lagging the player!")
                  else
@@ -8177,8 +8178,8 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'nslag' then -- buggy!
                  local dasplayer = string.sub(msg:lower(), #prefix + 7)
-		 player = PLAYERCHECK(dasplayer)
-                 if player ~= nil then
+		 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
                         lagify(cplr,player)
 			Remind("Skate lagging the player (2)!")
                  else
@@ -8421,8 +8422,8 @@ return
 
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'checkc' then
         local dasplayer = string.sub(msg:lower(), #prefix + 8)
-        player = PLAYERCHECK(dasplayer)
-        if player ~= nil then
+        local cplr, player = PLAYERCHECK(dasplayer)
+        if player then
                         clientcheck = player
 			Chat("reload ".. clientcheck) ; task.wait(0.5)
                         Chat("unpunish " .. clientcheck)
@@ -8444,8 +8445,8 @@ return
 
    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'breakanims' then
         local dasplayer = string.sub(msg:lower(), #prefix + 12)
-        player = PLAYERCHECK(dasplayer)
-        if player ~= nil then
+        local cplr, player = PLAYERCHECK(dasplayer)
+        if player then
                         bokck = player
                             Chat('reset ' .. bokck)
                                 task.wait()
@@ -8653,7 +8654,7 @@ return
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'checkbp' then
         local checker = string.sub(msg:lower(), #prefix + 9)
         PLAYERCHECK(checker)
-        if player ~= nil then 
+        if player then 
                 CheckBackpack()
 		Remind("Check console by running /console!")
         else
@@ -9282,7 +9283,7 @@ return
         	else
 		  	kia = args[2]
            	  	PLAYERCHECK(kia)
-	         	if player ~= nil then
+	         	if player then
 				if not table.find(antisplayers.antikill, player) then
 					Remind(player.." is on the list now!")
 					table.insert(antisplayers.antikill, player)
@@ -9314,7 +9315,7 @@ return
         	else
 		  	kia = args[2]
            	  	PLAYERCHECK(kia)
-	         	if player ~= nil then
+	         	if player then
 				if table.find(antisplayers.antikill, player) then
 					Remind(player.." is no longer in the list!")
 					table.remove(antisplayers.antikill, table.find(antisplayers.antikill, player))
@@ -9562,7 +9563,7 @@ return
         	else
 		  	kia = args[2]
            	  	PLAYERCHECK(kia)
-	         	if player ~= nil then
+	         	if player then
 				if not table.find(antisplayers.antipunish, player) then
 					Remind(player.." is on the list now!")
 					table.insert(antisplayers.antipunish, player)
@@ -9594,7 +9595,7 @@ return
         	else
 		  	kia = args[2]
            	  	PLAYERCHECK(kia)
-	         	if player ~= nil then
+	         	if player then
 				if table.find(antisplayers.antipunish, player) then
 					Remind(player.." is no longer in the list!")
 					table.remove(antisplayers.antipunish, table.find(antisplayers.antipunish, player))
@@ -10219,7 +10220,7 @@ return
 
 			if auto_stuff.autocharid ~= nil then Remind("Could not reach user provided.") return end
 			
-			if player ~= nil then
+			if player then
 				if not table.find(auto_stuff.autochar, player) then
 					Remind(player.." is on the list now!")
 					table.insert(auto_stuff.autochar, player)
@@ -10254,7 +10255,7 @@ return
         	else
 		  	kia = args[2]
            	  	PLAYERCHECK(kia)
-	         	if player ~= nil then
+	         	if player then
 				if table.find(auto_stuff.autochar, player) then
 					Remind(player.." is no longer in the list!")
 					table.remove(auto_stuff.autochar, table.find(auto_stuff.autochar, player))
@@ -10527,7 +10528,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'headsit' then
 		local dasplayer = string.sub(msg:lower(), #prefix + 9)
-        	player = PLAYERCHECK(dasplayer)
+        	local cplr, player = PLAYERCHECK(dasplayer)
         	if player == nil then 
 			return 
 		else
@@ -10555,7 +10556,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'carpet' then
 		local dasplayer = string.sub(msg:lower(), #prefix + 8)
-        	player = PLAYERCHECK(dasplayer)
+        	local cplr, player = PLAYERCHECK(dasplayer)
         	if player == nil then 
 			return Remind("Fail: User not found!")
 		else
@@ -10609,7 +10610,7 @@ return
                         bangsp = tonumber(args[3])
                 end
 		local dasplayer = args[2]
-        	player = PLAYERCHECK(dasplayer)
+        	local cplr, player = PLAYERCHECK(dasplayer)
         	if player == nil then 
 			return Remind("Fail: User not found!")
 		elseif player == "ScriptingProgrammer" or player == "atprog" or player == "kohlslitedev" or player == "agspureiamReal" then
@@ -10706,7 +10707,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'view' then
 		local dasplayer = string.sub(msg:lower(), #prefix + 6)
-        	player = PLAYERCHECK(dasplayer)
+        	local cplr, player = PLAYERCHECK(dasplayer)
         	if player == nil then 
 			return Remind("Fail: User not found!")
 		else
@@ -11071,26 +11072,15 @@ end)
 ]]
 
 -- PLAYER CHECK (I hate this thing so much)
-function PLAYERCHECK(plr, rt)
-  for i, v in pairs(game.Players:GetPlayers()) do
-      if string.sub(v.Name:lower(), 1, #plr) == plr:lower() then
-          player = v.Name
-          playerd = v.DisplayName
-          cplr = v
-          if rt then return cplr end
-          Remind("[KL User Search]: Found "..player)
-          break
-      end
-
-      if string.sub(v.DisplayName:lower(), 1, #plr) == plr:lower() then
-          player = v.Name
-          playerd = v.DisplayName
-          cplr = v
-          if rt then return cplr end
-          Remind("[KL User Search]: Found "..player)
-          break
-      end
-  end
+function PLAYERCHECK(plr)
+    plr = plr:lower()
+    for _, v in pairs(game.Players:GetPlayers()) do
+        if string.sub(v.Name:lower(), 1, #plr) == plr or string.sub(v.DisplayName:lower(), 1, #plr) == plr then
+            Remind("[KL User Search]: Found "..v.Name)
+            return v, v.Name  -- return both player instance and name
+        end
+    end
+    return nil, nil
 end
 
 -- Only uses for blacklisting, there is NO way I am coding it for everything
@@ -19852,7 +19842,7 @@ if kah_np == true then
 	Remind("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
-Remind("debuf update pls help me", 5)
+Remind("debuf update Burhrrgu", 5)
 -- Remind("[WARNING]: KOHLSLITE HAS BEEN UPDATED SO IT WORKS WITH THE NEW CHAT SYSTEM. HOWEVER, IT MAY NOT WORK AS I HAVEN'T TESTED IT YET", 5)
 
 if getgenv().scriptname == "KohlsLite" then
