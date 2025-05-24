@@ -19460,7 +19460,7 @@ local DEVELOPER = {
 }
 
 local ADMIN = {
-    "decryptionites",
+    "Dekryptionite",
     "minecraftgamer2012YT",
     "clydekash",
     "ripcxo",
