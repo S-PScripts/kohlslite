@@ -8235,12 +8235,12 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'rejoin' then
-        Remind("Rejoinning... please wait.")
+        Remind("Rejoining... please wait.")
         REJOIN()
     end
 
     if string.sub(msg:lower(), 1, #prefix + 2) == prefix..'rj' then
-        Remind("Rejoinning... please wait.")
+        Remind("Rejoining... please wait.")
         REJOIN()
     end
 
@@ -8255,12 +8255,12 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'prj' then
-		Remind("Rejoinning... please wait.")
+		Remind("Rejoining... please wait.")
                 game:GetService("TeleportService"):TeleportToPrivateServer(game.PlaceId, game.PrivateServerId, game:GetService("Players").LocalPlayer)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'prejoin' then
-		Remind("Rejoinning... please wait.")
+		Remind("Rejoining... please wait.")
                 game:GetService("TeleportService"):TeleportToPrivateServer(game.PlaceId, game.PrivateServerId, game:GetService("Players").LocalPlayer)
     end
 
