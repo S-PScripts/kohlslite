@@ -2559,9 +2559,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 	end
 
 	if string.sub(msg, 1, #prefix + 3) == prefix..'vis' then
-		Remind("This command does not work because I have had to re-code the player system.")
-			-- Remind("Booting the visualiser...")
-			-- partVisualiser()
+			Remind("Booting the visualiser...")
+			partVisualiser()
 	end
 
 	if string.sub(msg, 1, #prefix + 7) == prefix..'stopvis' then
