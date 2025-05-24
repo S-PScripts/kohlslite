@@ -10254,7 +10254,7 @@ return
 			Chat("unchar all")
         	else
 		  	kia = args[2]
-           	  	PLAYERCHECK(kia)
+           	  	local cplr, player = PLAYERCHECK(kia)
 	         	if player then
 				if table.find(auto_stuff.autochar, player) then
 					Remind(player.." is no longer in the list!")
@@ -10263,7 +10263,7 @@ return
 					Remind(player.." was never in the list!")
 				end
                  	else                           
-                        	Remind('Cannot find player with the name: '..dasplayer)
+                        	Remind('Cannot find player with the name: '..kia)
 			end
 		end
 	else
