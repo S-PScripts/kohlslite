@@ -2692,6 +2692,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = string.sub(msg:lower(), #prefix + 9)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
 		if player == game.Players.LocalPlayer.Name then 
 			return Remind("You cannot thorn-whitelist yourself.")
 		end
@@ -2699,9 +2700,9 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
                 if not table.find(exempt_from_thorns, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..tostring(player).." has been whitelisted from thorns. \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been whitelisted from thorns. \n\n\n\n\n")
 				else
-                        		Chat("h \n\n\n\n\n "..tostring(player).." has been whitelisted from thorns! \n\n\n\n\n")
+                        		Chat("h \n\n\n\n\n "..player.." has been whitelisted from thorns! \n\n\n\n\n")
 				end
 			end
                         Remind("Thorn whitelisted "..player)
@@ -2718,12 +2719,13 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = string.sub(msg:lower(), #prefix + 11)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
                 if table.find(exempt_from_thorns, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..tostring(player).." has been unwhitelisted from thorns. \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been unwhitelisted from thorns. \n\n\n\n\n")
 				else
-                        		Chat("h \n\n\n\n\n "..tostring(player).." has been unwhitelisted from thorns. \n\n\n\n\n")
+                        		Chat("h \n\n\n\n\n "..player.." has been unwhitelisted from thorns. \n\n\n\n\n")
 				end
 			end
                         Remind("Un thorn whitelisted "..player)
@@ -2755,6 +2757,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = args[2]
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
 		if player == game.Players.LocalPlayer.Name then 
 			return Remind("You cannot whitelist yourself.")
 		end
@@ -2762,9 +2765,9 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 		if not table.find(whitelist, player) then		
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-                        		Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..tostring(player).." has been whitelisted! \n\n\n\n\n")
+                        		Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been whitelisted! \n\n\n\n\n")
 				else
-                        		Chat("h \n\n\n\n\n "..tostring(player).." has been whitelisted! \n\n\n\n\n")
+                        		Chat("h \n\n\n\n\n "..player.." has been whitelisted! \n\n\n\n\n")
 				end
 			end	
 			if table.find(blacklist, player) then
@@ -2795,12 +2798,13 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = args[2]
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
                 if table.find(whitelist, player) then	
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..tostring(player).." has been unwhitelisted. \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been unwhitelisted. \n\n\n\n\n")
 				else
-                        		Chat("h \n\n\n\n\n "..tostring(player).." has been unwhitelisted. \n\n\n\n\n")
+                        		Chat("h \n\n\n\n\n "..player.." has been unwhitelisted. \n\n\n\n\n")
 				end
 			end
                         Remind("Unwhitelisted "..player)
@@ -2830,6 +2834,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = args[2]
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
 		print(player)
 		if player == game.Players.LocalPlayer.Name then 
 			return Remind("You cannot blacklist yourself.")
@@ -2839,9 +2844,9 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 			print("adding...")
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..tostring(player).." has been blacklisted. \n\n\n\n\n");Regen()
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been blacklisted. \n\n\n\n\n");Regen()
 				else
-                        		Chat("h \n\n\n\n\n "..tostring(player).." has been blacklisted. \n\n\n\n\n");Regen()
+                        		Chat("h \n\n\n\n\n "..player.." has been blacklisted. \n\n\n\n\n");Regen()
 				end
 			end
 			if table.find(whitelist, player) then
@@ -2875,12 +2880,13 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = args[2]
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
                 if table.find(blacklist, player) or table.find(newplrslocked, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..tostring(player).." has been unblacklisted! \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been unblacklisted! \n\n\n\n\n")
 				else
-                        		Chat("h \n\n\n\n\n "..tostring(player).." has been unblacklisted! \n\n\n\n\n")
+                        		Chat("h \n\n\n\n\n "..player.." has been unblacklisted! \n\n\n\n\n")
 				end
 			end
 			if table.find(blacklist, player) then
@@ -2923,6 +2929,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = args[2]
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
 		-- print(player)
 		if player == game.Players.LocalPlayer.Name then 
 			return Remind("You cannot KL whitelist yourself.")
@@ -2932,9 +2939,9 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 		--	print("adding...")
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..tostring(player).." has been whitelisted to use KL commands! \n\n\n\n\n");Regen()
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been whitelisted to use KL commands! \n\n\n\n\n");Regen()
 				else
-                        		Chat("h \n\n\n\n\n "..tostring(player).." has been whitelisted to use KL commands! \n\n\n\n\n");Regen()
+                        		Chat("h \n\n\n\n\n "..player.." has been whitelisted to use KL commands! \n\n\n\n\n");Regen()
 				end
 			end
                         Remind("KohlsLite Whitelisted "..player)
@@ -2953,6 +2960,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = args[2]
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
 		-- print(player)
 		if player == game.Players.LocalPlayer.Name then 
 			return Remind("You cannot un KL whitelist yourself.")
@@ -2962,9 +2970,9 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 		--	print("adding...")
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..tostring(player).." has been un-whitelisted to use KL commands... \n\n\n\n\n");Regen()
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been un-whitelisted to use KL commands... \n\n\n\n\n");Regen()
 				else
-                        		Chat("h \n\n\n\n\n "..tostring(player).." has been un-whitelisted to use KL commands... \n\n\n\n\n");Regen()
+                        		Chat("h \n\n\n\n\n "..player.." has been un-whitelisted to use KL commands... \n\n\n\n\n");Regen()
 				end
 			end
                         Remind("Un-KohlsLite Whitelisted "..player)
@@ -2987,24 +2995,25 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 		
         if string.sub(msg, 1, #prefix + 8)  == prefix..'antimlog' then
                 antimlog = true
-		Remind("Players won't be finding out the music ids in this script now!")
+		Remind("Players won't be finding out the music IDs in this script now!")
         end
 
         if string.sub(msg, 1, #prefix + 10)  == prefix..'unantimlog' then
                 antimlog = false
-		Remind("Players can find out the music ids in this script now!")
+		Remind("Players can find out the music IDs in this script now!")
         end
 
         if string.sub(msg, 1, #prefix + 5)  == prefix..'admin' then
          local dasplayer = string.sub(msg:lower(), #prefix + 7)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
                 if not table.find(admin_stuff.FAdmins, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..tostring(player).." has been given admin! \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been given admin! \n\n\n\n\n")
 				else
-                        		Chat("h \n\n\n\n\n "..tostring(player).." has been given admin! \n\n\n\n\n")
+                        		Chat("h \n\n\n\n\n "..player.." has been given admin! \n\n\n\n\n")
 				end
 			end
                         Remind("Admined "..player)
@@ -3021,12 +3030,13 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = string.sub(msg:lower(), #prefix + 9)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
                 if table.find(admin_stuff.FAdmins, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..tostring(player).." has been removed from admin. \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been removed from admin. \n\n\n\n\n")
 				else
-                        		Chat("h \n\n\n\n\n "..tostring(player).." has been removed from admin. \n\n\n\n\n")
+                        		Chat("h \n\n\n\n\n "..player.." has been removed from admin. \n\n\n\n\n")
 				end
 			end
                         Remind("Unadmined "..player)
@@ -3050,6 +3060,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = string.sub(msg:lower(), #prefix + 8)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
 		if player == game.Players.LocalPlayer.Name then 
 			return Remind("You cannot gear whitelist yourself.")
 		end
@@ -3057,9 +3068,9 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
                 if not table.find(GWhitelisted, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..tostring(player).." has been whitelisted from anti-gears! \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been whitelisted from anti-gears! \n\n\n\n\n")
 				else
-                        		Chat("h \n\n\n\n\n "..tostring(player).." has been whitelisted from anti-gears! \n\n\n\n\n")
+                        		Chat("h \n\n\n\n\n "..player.." has been whitelisted from anti-gears! \n\n\n\n\n")
 				end
 			end
                         Remind("Gear whitelisted "..player)
@@ -3076,12 +3087,13 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = string.sub(msg:lower(), #prefix + 10)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
                 if table.find(GWhitelisted, player) then
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
-					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..tostring(player).." has been unwhitelisted from anti-gears. \n\n\n\n\n")
+					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been unwhitelisted from anti-gears. \n\n\n\n\n")
 				else
-                        		Chat("h \n\n\n\n\n "..tostring(player).." has been unwhitelisted from anti-gears. \n\n\n\n\n")
+                        		Chat("h \n\n\n\n\n "..player.." has been unwhitelisted from anti-gears. \n\n\n\n\n")
 				end
 			end
                         Remind("Un gear whitelisted "..player)
@@ -3160,9 +3172,10 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = string.sub(msg:lower(), #prefix + 10)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
                 if not table.find(rand_players.loopkill, player) then
 			if player_relate.blwl_an then
-                        	Chat("h \n\n\n\n\n "..tostring(player).." is being loopkilled. \n\n\n\n\n")
+                        	Chat("h \n\n\n\n\n "..player.." is being loopkilled. \n\n\n\n\n")
 			end
                         Remind("Loopkilling "..player)
                         table.insert(rand_players.loopkill, player)
@@ -3178,9 +3191,10 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = string.sub(msg:lower(), #prefix + 12)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
                 if table.find(rand_players.loopkill, player) then
 			if player_relate.blwl_an then
-                        	Chat("h \n\n\n\n\n "..tostring(player).." is no longer being loopkilled! \n\n\n\n\n")
+                        	Chat("h \n\n\n\n\n "..player.." is no longer being loopkilled! \n\n\n\n\n")
 			end
                         Remind("Stopped loopkilling "..player)
                         table.remove(rand_players.loopkill, table.find(rand_players.loopkill, player))
@@ -3196,9 +3210,10 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = string.sub(msg:lower(), #prefix + 7)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
                 if not table.find(rand_players.byecam, player) then
 			if player_relate.blwl_an then
-                        	Chat("h \n\n\n\n\n "..tostring(player).."'s camera is getting spam named! \n\n\n\n\n")
+                        	Chat("h \n\n\n\n\n "..player.."'s camera is getting spam named! \n\n\n\n\n")
 			end
                         Remind("Spam naming "..player)
                         table.insert(rand_players.byecam, player)
@@ -3214,9 +3229,10 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = string.sub(msg:lower(), #prefix + 9)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
                 if table.find(rand_players.byecam, player) then
 			if player_relate.blwl_an then
-                        	Chat("h \n\n\n\n\n "..tostring(player).."'s camera is no longer being spam named! \n\n\n\n\n")
+                        	Chat("h \n\n\n\n\n "..player.."'s camera is no longer being spam named! \n\n\n\n\n")
 			end
                         Remind("Stopped spam naming "..player)
                         table.remove(rand_players.byecam, table.find(rand_players.byecam, player))
@@ -3232,9 +3248,10 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = string.sub(msg:lower(), #prefix + 8)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
                 if not table.find(rand_players.carcar, player) then
 			if player_relate.blwl_an then
-                        	Chat("h \n\n\n\n\n "..tostring(player).." loves cars! Yummy! \n\n\n\n\n")
+                        	Chat("h \n\n\n\n\n "..player.." loves cars! Yummy! \n\n\n\n\n")
 			end
                         Remind("Spam car-ing "..player)
                         table.insert(rand_players.carcar, player)
@@ -3250,9 +3267,10 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = string.sub(msg:lower(), #prefix + 10)
          PLAYERCHECK(dasplayer)
          if player ~= nil then
+		player = tostring(player)
                 if table.find(rand_players.carcar, player) then
 			if player_relate.blwl_an then
-                        	Chat("h \n\n\n\n\n "..tostring(player).." hates cars! Rude! \n\n\n\n\n")
+                        	Chat("h \n\n\n\n\n "..player.." hates cars! Rude! \n\n\n\n\n")
 			end
                         Remind("Stopped spam car-ing "..player)
                         table.remove(rand_players.carcar, table.find(rand_players.carcar, player))
@@ -19836,7 +19854,7 @@ if kah_np == true then
 	Remind("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
-Remind("fsjkaffnajahbadsjkdg", 5)
+Remind("i like my cheese dripp yburh", 5)
 -- Remind("[WARNING]: KOHLSLITE HAS BEEN UPDATED SO IT WORKS WITH THE NEW CHAT SYSTEM. HOWEVER, IT MAY NOT WORK AS I HAVEN'T TESTED IT YET", 5)
 
 if getgenv().scriptname == "KohlsLite" then
@@ -19876,4 +19894,4 @@ Things that this script is missing:
 ]]
 
 -- Information about KohlsLite can be found at the top of this page
--- Last update: 22/05/2025
+-- Last update: 24/05/2025
