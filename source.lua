@@ -2835,14 +2835,14 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
          local dasplayer = args[2]
          local cplr, player = PLAYERCHECK(dasplayer)
          if player then
-		player = tostring(player)
-		print(player)
+		player = tostring(player) -- tostring isn't needed anymore but i used it for debugging purposes. 
+		-- print(player)
 		if player == game.Players.LocalPlayer.Name then 
 			return Remind("You cannot blacklist yourself.")
 		end
 				
                 if not table.find(blacklist, player) then
-			print("adding...")
+			-- print("adding...")
 			if player_relate.blwl_an then
 				if mainbar_stuff.watermark_kl then
 					Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: "..player.." has been blacklisted. \n\n\n\n\n");Regen()
@@ -2857,7 +2857,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
                         	Remind("Blacklisted "..player)
 			end
                         table.insert(blacklist, player)
-			print("added...") --debug msg
+			-- print("added...") --debug msg
                 else
                         Remind(player.." is already blacklisted!")        
                 end
