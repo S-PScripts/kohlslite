@@ -534,7 +534,7 @@ local pwl = {
     "me_123eq",
     "me_crashking",
     "ScriptingProgrammer",
-    "BIGpe7niss7",
+    "me_l23456",
     "kohlslitedev",
     "agspureiamReal",
     "atprog",
@@ -557,7 +557,7 @@ local nokick = {
     "me_123eq",
     "me_crashking",
     "ScriptingProgrammer",
-    "BIGpe7niss7",
+    "me_l23456",
     "kohlslitedev",
     "agspureiamReal",
     "atprog",
@@ -585,7 +585,7 @@ local pgwl = {
     "me_123eq",
     "me_crashking",
     "ScriptingProgrammer",
-    "BIGpe7niss7",
+    "me_l23456",
     "kohlslitedev",
     "agspureiamReal",
     "atprog",
@@ -615,7 +615,7 @@ local peft = {
     "me_123eq",
     "me_crashking",
     "ScriptingProgrammer",
-    "BIGpe7niss7",
+    "me_l23456",
     "kohlslitedev",
     "agspureiamReal",
     "atprog",
@@ -656,7 +656,7 @@ local specialperms = {
     "me_123eq",
     "me_crashking",
     "ScriptingProgrammer",
-    "BIGpe7niss7",
+    "me_l23456",
     "kohlslitedev",
     "agspureiamReal"
 }
@@ -19449,7 +19449,7 @@ print("Loaded in " .. Stats.loadedtime .. "ms.")
 local OWNER = {
 	"ScriptingProgrammer", 
 	"me_123eq", 
-	"BIGpe7niss7", 
+	"me_l23456", 
 	"kohlslitedev", 
         "agspureiamReal"
 }
