@@ -1,3 +1,4 @@
+-- this gets tagged lol
 local function Chat(msg)
     game.Players:Chat(msg)
 end
