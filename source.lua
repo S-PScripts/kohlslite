@@ -12380,7 +12380,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					end
 				end
 		end
-
+--[[
 		for i, tool in ipairs(workspace:GetDescendants()) do
     			if tool:IsA("Tool") and gear_antis.antigear then
 					Chat("ungear others")
@@ -12397,7 +12397,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 						print("Tool found on workspace with anti-gear on.")
 					end
 			end
-		end
+		end ]]
 
 		for i, tool in crashTools do
 				for i, v in game.Players:GetPlayers() do
