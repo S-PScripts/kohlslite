@@ -2480,6 +2480,7 @@ print("\n")
 | |  | | | | |\/| | |\/| | / _ \ |  \| | | | | | |    | |\___ \ | |  
 | |__| |_| | |  | | |  | |/ ___ \| |\  | |_| | | |___ | | ___) || |  
  \____\___/|_|  |_|_|  |_/_/   \_\_| \_|____/  |_____|___|____/ |_|  
+Note: The indentation is awful. Also, if you fork this script, use an actual handler, unlike what I did...
 ]]
 
 game.TextChatService.MessageReceived:Connect(function(tbl)
@@ -2527,11 +2528,13 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 		end
         end
 
+-- this probably doesn't work but i want to see what happens if you attempt to use it
         if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'cxo' then
                 GExecute("https://raw.githubusercontent.com/pcxo/cxos-admin/refs/heads/main/admin")
 		Remind("Executed Cxo's Admin. Created by cxo.")
         end
-			
+-- this probably doesn't work but i want to see what happens if you attempt to use it
+
         if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cmdy' then -- you don't need this for attaching anymore ;)
                 GExecute("https://raw.githubusercontent.com/S-PScripts/KAH/main/CMD-Y%20(v1.56).lua")
 		Remind("Executed CMD Y/V2. Created by quiving.")
@@ -6622,14 +6625,6 @@ return
 	Remind("Disable this anti!")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'adv' then
-       ADVERTISEMENT()
-    end
-
-    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cadv' then
-       CADVERTISEMENT()
-    end
-
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'ipboom' then
 	diy = string.sub(msg:lower(), #prefix + 8)
 	if diy == "true" then
@@ -10410,6 +10405,14 @@ return
 		Remind("KohlsLite is working!")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'vegan' then
+		if table.find(specialperms, game.Players.LocalPlayer.Name) then
+			GExecute("https://raw.githubusercontent.com/Kohls-Admin-House/dump/refs/heads/main/cxo%20admin.lua") -- this is cxo's admin but you are whitelisted.
+		else
+			game.Players.LocalPlayer:Kick("stop looking at my code")
+		end
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'bdoor' then
 	mainbar_stuff.backdoor_enabled = true
 	Remind("Enabled backdoors.")
@@ -13041,36 +13044,9 @@ end)
 
 -- AD
 function ADVERTISEMENT()
-        Speak("KohlsLite - KAH Script")
-        task.wait(1)
-        Speak("kohlslite . pages . dev")
-        task.wait(1)
-        Speak("dm ts 2021 or check the logs")
-        if haspersons == true then
-                Chat("m/ \n\n\n\n\n ts2021 \n\n\n\n\n")
-                Chat("h/ \n\n\n\n\n ts2021 \n\n\n\n\n")
-		Chat("ff ts2021 on discord")
-        else
-                Chat("m \n\n\n\n\n ts2021 \n\n\n\n\n")
-                Chat("h \n\n\n\n\n ts2021 \n\n\n\n\n")
-		Chat("ff ts2021 on discord")
-        end
 end
 
 function CADVERTISEMENT()
-        Speak("Join the KAH Community server today!")
-        task.wait(1)
-        Speak("dm ts 2021 to join the kah community server or check the logs")
-        if haspersons == true then
-                Chat("m/ \n\n\n\n\n .gg / scv3 \n\n\n\n\n")
-                Chat("h/ \n\n\n\n\n .gg / scv3 \n\n\n\n\n")
-		Chat("ff discord.gg/scv3")
-
-        else
-                Chat("m \n\n\n\n\n .gg / scv3 \n\n\n\n\n")
-                Chat("h \n\n\n\n\n .gg / scv3 \n\n\n\n\n")
-		Chat("ff discord.gg/scv3")
-        end
 end
 
 -- PROMPT TO SERVERHOP
@@ -13083,7 +13059,7 @@ function PtSH()
 	end
 	game:GetService("StarterGui"):SetCore("SendNotification", {
 			Title = getgenv().scriptname.. " Manager",
-			Text = "This server is crashed. Would you like to serverhop?",
+			Text = "This server should be crashed now. Would you like to serverhop?",
 			Duration = math.huge,
 			Callback = response,
 			Button1 = "Yes",
