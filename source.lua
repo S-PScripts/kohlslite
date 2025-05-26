@@ -2567,7 +2567,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 			VisBindable:Fire("Stop")
 			Remind("Visualiser has ended.")
 		else
-            		Remind("You need Person 299 Admin commands for this!")
+            		Remind("You need Person299 Admin commands for this!")
 		end
 	end
 
@@ -5665,7 +5665,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'scrash' then -- not a silent crash!
 	if kah_np == true then return Remind("Shield crashing is not possible on KAH NP.") end
         if haspersons == false then
-Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
+Remind([[Sorry, you don't have Person299 Admin Commands to perform this command!
 Commands required: shield]])
         else
 		if crash_settings.skipwarncrash then -- idea from sinx
@@ -5726,7 +5726,7 @@ Commands required: shield]])
 		
    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'rkick' then
         if haspersons == false then
-Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
+Remind([[Sorry, you don't have Person299 Admin Commands to perform this command!
 Commands required: rocket]])
         else
                 local dasplayer = string.sub(msg:lower(), #prefix + 7)
@@ -5744,7 +5744,7 @@ Commands required: rocket]])
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unrkick' then
 		if haspersons == false then
-Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
+Remind([[Sorry, you don't have Person299 Admin Commands to perform this command!
 Commands required: rocket]])
 return
 		end
@@ -6286,12 +6286,12 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'space' then -- kohls true anti kill
 		if haspersons == false then
-Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
+Remind([[Sorry, you don't have Person299 Admin Commands to perform this command!
 Commands required: rocket]])
 return
 		end
                 local person = string.sub(msg:lower(), #prefix + 7)
-                Chat("h \n\n\n\n\n Guys, we've finally done it! \n\n\n\n\n");task.wait(4)
+                Chat("h \n\n\n\n\n Everyone, we've finally done it! \n\n\n\n\n");task.wait(4)
                 Chat("h \n\n\n\n\n We're sending someone to space! \n\n\n\n\n");task.wait(4)
                 Chat("h \n\n\n\n\n Are we ready? Hopefully our volunteer is too! Here we go! \n\n\n\n\n")
                 Chat("time 0")
@@ -6310,7 +6310,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'tripin' then -- pr
                 local person = string.sub(msg:lower(), #prefix + 8)
-                Chat("h \n\n\n\n\n WOAH, LOOK OVER THERE! THAT GUY'S ASCENDING! \n\n\n\n\n")
+                Chat("h \n\n\n\n\n WOAH, LOOK OVER THERE! THAT PERSON'S ASCENDING! \n\n\n\n\n")
                 Chat("music 9061674082")
                 Chat("setgrav "..person.." -256")
                 Chat("trip "..person)
@@ -6382,7 +6382,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'bend' then -- pr/cxodek script
 		if haspersons == false then
-Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
+Remind([[Sorry, you don't have Person299 Admin Commands to perform this command!
 Commands required: rocket]])
 return
 		end
@@ -7240,7 +7240,7 @@ Chat("h \n\n\n\n\n "..[[
 
     if string.sub(msg, 1, #prefix + 6) == prefix..'shlong' then
 		if haspersons == false then
-Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
+Remind([[Sorry, you don't have Person299 Admin Commands to perform this command!
 Commands required: part]])
 return
 		end
@@ -7294,7 +7294,7 @@ return
 
     if string.sub(msg, 1, #prefix + 5) == prefix..'arena' then
 		if haspersons == false then
-Remind([[Sorry, you don't have Person 299 Admin Commands to perform this command!
+Remind([[Sorry, you don't have Person299 Admin Commands to perform this command!
 Commands required: part]])
 return
 		end
@@ -15909,7 +15909,7 @@ end
 
 function partVisualiser()
  	if not haspersons then
-            Remind("You need Person 299 Admin commands for this!")
+            Remind("You need Person299 Admin commands for this!")
             return
         end
 
@@ -16231,7 +16231,7 @@ end
 
 function editVis(variable, value)
  	if not haspersons then
-            Remind("You need Person 299 Admin commands for this!")
+            Remind("You need Person299 Admin commands for this!")
             return
         end
 
@@ -16273,7 +16273,7 @@ end
 
 function partDraw()
   	if not haspersons then
-            Remind("You need Person 299 Admin commands for this!")
+            Remind("You need Person299 Admin commands for this!")
             return
         end
 	
@@ -19822,7 +19822,7 @@ if getgenv().kohlsgui then
                     "This script was created by TS2021/S-PScripts/ScriptingProgrammer.",
 		    " ",
 		    "To see all the commands KohlsLite has, do the following:",
-		    "1. Chat .kcmds or .kcmd2 (commands split into 2 pages)",
+		    "1. Chat .kcmds or .kcmd2 or .kcmds3 (commands split into 3 pages)",
 		    "2. Chat /console and you're done",
 		    " ",
 		    "Have fun using my script!"
@@ -19856,7 +19856,7 @@ if kah_np == true then
 	Remind("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
-Remind("Bugs have been fixed.", 5)
+Remind("some aliases and autorun commands will no longer work due to roblox's chat update. i will not be fixing these for now. sorry.", 5)
 -- Remind("[WARNING]: KOHLSLITE HAS BEEN UPDATED SO IT WORKS WITH THE NEW CHAT SYSTEM. HOWEVER, IT MAY NOT WORK AS I HAVEN'T TESTED IT YET", 5)
 
 if getgenv().scriptname == "KohlsLite" then
