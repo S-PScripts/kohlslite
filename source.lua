@@ -8,7 +8,7 @@
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.23
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.25
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -109,7 +109,7 @@ end
 getgenv().default_prefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.23"
+getgenv().klversion = "X1.25"
 
 -- Notifications
 local function Remind(msg, length)
@@ -13912,6 +13912,14 @@ task.spawn(function()
 						game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackSpeed = 1 
 					end
                         	end
+
+                        	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+					if workspace.Sound:FindFirstChild("PitchShiftSoundEffect") then
+						print("spitch used")
+						workspace.Sound.PitchShiftSoundEffect:Destroy()
+						Chat("stopmusic")
+					end
+				end
 			else
                         	if game:GetService("Workspace"):FindFirstChild("Sound") then
                                 	if game:GetService("Workspace").Sound.PlaybackSpeed ~= 1 then
