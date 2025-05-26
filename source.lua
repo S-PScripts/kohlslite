@@ -2527,6 +2527,11 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 		end
         end
 
+        if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'cxo' then
+                GExecute("https://raw.githubusercontent.com/pcxo/cxos-admin/refs/heads/main/admin")
+		Remind("Executed Cxo's Admin. Created by cxo.")
+        end
+			
         if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cmdy' then -- you don't need this for attaching anymore ;)
                 GExecute("https://raw.githubusercontent.com/S-PScripts/KAH/main/CMD-Y%20(v1.56).lua")
 		Remind("Executed CMD Y/V2. Created by quiving.")
