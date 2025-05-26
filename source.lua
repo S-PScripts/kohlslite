@@ -452,6 +452,7 @@ else
 end
 
 -- Defaults (you can change these)
+-- no longer works (I'll find a fix if I can)
 local defaults = {".tnok", ".antikill me", ".cmdbar"} --".antimsg me"
 
 -- Misc variables (Do not edit these! They are for bug fixes... but they don't even work...).
@@ -885,9 +886,9 @@ local gear_antis = {
 	antipaint = false,
 
 	-- Stop users from using the Ivory Periastron, the attach gear
-	antiattach2 = false,
+	antiivory = false,
 
-	-- Stop users from using ANY periastron, including the Ivory
+	-- Stop users from using ANY periastron, excluding the Ivory
 	antiperi = true,
 
 	-- Stop users from using the ray gun gears
@@ -899,7 +900,7 @@ local gear_antis = {
 	-- Stop yourself from having gears in your inventory
 	antitoolm = false,
 
-	-- Stops you from getting kicked from crash gears (NOTE: This isn't really useful anymore.")
+	-- Stops you from getting kicked from crash gears (NOTE: This isn't useful anymore.)
 	antikick2 = false
 }
 
@@ -7656,39 +7657,54 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'gearban' then
-                 local dasplayer = string.sub(msg:lower(), #prefix + 9)
-                 local cplr, player = PLAYERCHECK(dasplayer)
-                 if player then
+		local dasplayer = string.sub(msg:lower(), #prefix + 9)
+		if dasplayer == "" or dasplayer == "me" then
+                        game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+			Remind("Gearbanned yourself... but why?")
+			return
+		end 
+                local cplr, player = PLAYERCHECK(dasplayer)
+                if player then
                         xplayer = player
                         xplr = cplr
                         Gearban(xplayer, xplr, 1)
-                 else
+                else
                         Remind('Cannot find player with the name: '..dasplayer)
-                 end
+                end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'toolban' then
-                 local dasplayer = string.sub(msg:lower(), #prefix + 9)
-                 local cplr, player = PLAYERCHECK(dasplayer)
-                 if player then
+		local dasplayer = string.sub(msg:lower(), #prefix + 9)
+		if dasplayer == "" or dasplayer == "me" then
+                        game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+			Remind("Gearbanned yourself... but why?")
+			return
+		end 
+		local cplr, player = PLAYERCHECK(dasplayer)
+                if player then
                         xplayer = player
                         xplr = cplr
                         Gearban(xplayer, xplr, 1)
-                 else
+                else
                         Remind('Cannot find player with the name: '..dasplayer)
-                 end
+                end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cage' then
-                 local dasplayer = string.sub(msg:lower(), #prefix + 6)
-                 local cplr, player = PLAYERCHECK(dasplayer)
-                 if player then
+		local dasplayer = string.sub(msg:lower(), #prefix + 6)
+		if dasplayer == "" or dasplayer == "me" then
+                        game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+			Remind("Gearbanned yourself... but why?")
+			return
+		end 
+                local cplr, player = PLAYERCHECK(dasplayer)
+                if player then
                         xplayer = player
                         xplr = cplr
                         Gearban(xplayer, xplr, 2)
-                 else
+                else
                         Remind('Cannot find player with the name: '..dasplayer)
-                 end
+                end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'rail' then
@@ -8793,12 +8809,12 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antiiv' then
-        gear_antis.antiattach2 = true
+        gear_antis.antiivory = true
 	Remind("Anti ivory is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unantiv' then
-        gear_antis.antiattach2 = false
+        gear_antis.antiivory = false
 	Remind("Anti ivory is now disabled.")
     end
 
@@ -8813,17 +8829,13 @@ return
     end	
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'antiattach' then
-	if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'antiattach2' then else
         	ws_antis.antiattach = true
 		Remind("Anti attach is now enabled.")
-	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unantiattach' then
-	if string.sub(msg:lower(), 1, #prefix + 13) == prefix..'unantiattach2' then else
         	ws_antis.antiattach = false
 		Remind("Anti attach is now disabled.")
-	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antifling' then
@@ -12279,7 +12291,6 @@ local PeriastronTools = {
     "FallPeriastron", --          2544549379
     "FestivePeriastron", --       139577901
     "GrimgoldPeriastron", --      73829193
-    "IvoryPeriastron", --         108158379
     "JoyfulPeriastron", --        233520257
     "NoirPeriastron", --          120307951
     "RainbowPeriastron" --        159229806
@@ -12494,7 +12505,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				for i, v in game.Players:GetPlayers() do
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Backpack:FindFirstChild(tool) then
-							if gear_antis.antiattach2 then
+							if gear_antis.antiivory then
 								gear_antis_punish(v)
 								Regen()
 
@@ -12513,7 +12524,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
 					if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
 						if v.Character and v.Character:FindFirstChild(tool) then
-							if gear_antis.antiattach2 then
+							if gear_antis.antiivory then
 								gear_antis_punish(v)
 								Regen()
 
@@ -12531,7 +12542,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					end
 				end
 
-				if workspace:FindFirstChild(tool) and gear_antis.antiattach2 then
+				if workspace:FindFirstChild(tool) and gear_antis.antiivory then
 					Chat("ungear others")
 					Chat("punish others")
 					Chat("clr")
