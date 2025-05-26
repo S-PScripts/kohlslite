@@ -16559,9 +16559,9 @@ function onPlayerAdded(player)
 				end
 			else
 				if mainbar_stuff.watermark_kl then
-         				Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Welcome to the server, " .. player.DisplayName .. ". This server is protected by KohlsLite. \n\n\n\n\n")
+         				Chat("h \n\n\n\n\n ["..getgenv().scriptname.."]: Welcome to the server, " .. player.DisplayName .. ". \n\n\n\n\n")
 				else
-					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". This server is protected by KohlsLite. \n\n\n\n\n")
+					Chat("h \n\n\n\n\n Welcome to the server, " .. player.DisplayName .. ". \n\n\n\n\n")
 				end
 			end
 		end
