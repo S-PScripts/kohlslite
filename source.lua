@@ -1171,6 +1171,9 @@ local auto_stuff = {
 	autocharall = false,
 	autochar = {},
 	autocharid = "nil",
+
+	autopitch = false,
+	autopitchid = 1,
 	
 	-- Fogend visualiser
 	fogdance = false,
@@ -10105,6 +10108,15 @@ return
 		Remind("No longer kicking "..acplr)
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'autopitch' then
+	auto_stuff.autopitch = true
+	auto_stuff.autopitchid = game:GetService("Workspace").Sound.PlaybackSpeed
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unautopitch' then
+	auto_stuff.autopitch = false
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'autoff' then
 	local args = string.split(msg, " ")
         if args[2] == "me" then
@@ -13904,6 +13916,22 @@ task.spawn(function()
                         	if game:GetService("Workspace"):FindFirstChild("Sound") then
                                 	if game:GetService("Workspace").Sound.PlaybackSpeed ~= 1 then
 						game:GetService("Workspace").Sound.PlaybackSpeed = 1
+					end
+                        	end
+			end
+    end
+
+    if music_related.autopitch == true then
+			if kah_np == false then
+                        	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
+                                	if game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackSpeed ~= auto_stuff.autopitchid then
+						game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackSpeed = auto_stuff.autopitchid
+					end
+                        	end
+			else
+                        	if game:GetService("Workspace"):FindFirstChild("Sound") then
+                                	if game:GetService("Workspace").Sound.PlaybackSpeed ~= auto_stuff.autopitchid then
+						game:GetService("Workspace").Sound.PlaybackSpeed = auto_stuff.autopitchid
 					end
                         	end
 			end
