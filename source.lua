@@ -23,7 +23,7 @@ You can play KAH (NBC version) here: https://www.roblox.com/games/112420803/Kohl
 You can also use it for KAH BC but barely anyone plays it. This script isn't recommended for KAH NP - it's not owned by agspureiam and there are a lot of things different.
 
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
-Shortcut v3-VAR has more stuff than KohlsLite but is not open-source and you need to ask the owner (Tech - his discord username is _teched) to be able to use the script.
+Shortcut v3-VAR has more stuff than KohlsLite but it is not open-source and you need to ask the owner (Tech - his discord username is _teched) to be able to use the script.
 
 This script is not updated that much now due to the fact that Kohls Admin House is an inactive game. This script also has most of the features that I want to have. I also have school and other things to deal with.
 
@@ -89,8 +89,6 @@ Before you continue viewing the source, here are some things you might want to k
 
 TS2021 09/04/2025
 ]]
-
--- GO TO LINE 450 FOR SETTINGS --
 
 --[[
  ____  _____ _____ _   _ ____  
@@ -9293,7 +9291,7 @@ return
                 	Remind("Turned this anti on for everyone!")
         	else
 		  	kia = args[2]
-           	  	PLAYERCHECK(kia)
+           	  	local cplr, player = PLAYERCHECK(kia)
 	         	if player then
 				if not table.find(antisplayers.antikill, player) then
 					Remind(player.." is on the list now!")
@@ -9325,7 +9323,7 @@ return
                 	Remind("Turned this anti off for everyone!")
         	else
 		  	kia = args[2]
-           	  	PLAYERCHECK(kia)
+           	  	local cplr, player = PLAYERCHECK(kia)
 	         	if player then
 				if table.find(antisplayers.antikill, player) then
 					Remind(player.." is no longer in the list!")
@@ -9573,7 +9571,7 @@ return
                 	Remind("Turned this anti on for everyone!")
         	else
 		  	kia = args[2]
-           	  	PLAYERCHECK(kia)
+           	  	local cplr, player = PLAYERCHECK(kia)
 	         	if player then
 				if not table.find(antisplayers.antipunish, player) then
 					Remind(player.." is on the list now!")
@@ -9605,7 +9603,7 @@ return
                 	Remind("Turned this anti off for everyone!")
         	else
 		  	kia = args[2]
-           	  	PLAYERCHECK(kia)
+           	  	local cplr, player = PLAYERCHECK(kia)
 	         	if player then
 				if table.find(antisplayers.antipunish, player) then
 					Remind(player.." is no longer in the list!")
