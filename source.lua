@@ -18624,8 +18624,9 @@ function centreAPI:Acton(action, getnum)
 
     	local gearID = gearIDS[action]
     	if not gearID then
-        	Remind("Invalid action. Please provide a valid action.")
-        	return
+		gearID = tonumber(action)
+        	--Remind("Invalid action. Please provide a valid action.")
+        	--return
     	end
 
 	Chat("ungear me");task.wait(0.5)
@@ -18642,13 +18643,13 @@ function centreAPI:Acton(action, getnum)
 		v:Activate()
         end
 
-	if gearID == "clone" or gearID == "cloneai" then
+	if action == "clone" or action == "cloneai" then
         	repeat task.wait() until (#workspace:GetChildren() - oldchild) >= getnum
         	Chat("ungear me")
        	 	game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = pos
 	end
 
-	if gearID == "spike" then
+	if action == "spike" then
 		for i,v in pairs(game.Players.LocalPlayer.Character:GetChildren()) do
     			if v:IsA("Tool") then
         			v.ClientInput:FireServer(Enum.KeyCode.E)
