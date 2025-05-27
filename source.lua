@@ -1021,6 +1021,21 @@ local music_related = {
 	autopitchid = 1,
 }
 
+-- Flashy stuff
+flashings = {
+	-- RGB spam top
+	tcolour = false,
+
+	-- RGB spam bottom
+	bcolour = false,
+
+	-- TCOLOUR + BCOLOUR
+	ccolour = false,
+
+	-- Black and red flash
+	redhell = false
+}
+
 -- Visualiser
 local vishub = {
 	VisAmount = 20, -- Amount of parts
@@ -1995,7 +2010,6 @@ local function replaceArgs2(name, args2)
     return string.gsub(name, "%[args2%]", args2)
 end
 
-
 -- Saved animations
 local animationlist = {
     armturbine = {"259438880", 100},
@@ -2562,6 +2576,36 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
                         GExecute("https://raw.githubusercontent.com/S-PScripts/scripts/main/Luau/KAH/Other%20Scripts/I%20loveee%20non%20persons.lua")
                 end
         end
+
+	if string.sub(msg, 1, #prefix + 5) == prefix..'flash' then
+		local args = string.split(msg, " ")
+		if #args == 2 then
+			local mode = args[2]
+			if flashings[mode] ~= nil then
+        			flashings[mode] = true
+        			Remind("Enabled mode ".. tostring(mode))
+    			else
+        			Remind("Unknown mode: ".. tostring(mode))
+    			end
+		else
+			Remind("Invalid amount of arguments (must be 2 [colour])")
+		end
+	end
+
+	if string.sub(msg, 1, #prefix + 7) == prefix..'unflash' then
+		local args = string.split(msg, " ")
+		if #args == 2 then
+			local mode = args[2]
+			if flashings[mode] ~= nil then
+        			flashings[mode] = false
+        			Remind("Disabled mode ".. tostring(mode))
+    			else
+        			Remind("Unknown mode: ".. tostring(mode))
+    			end
+		else
+			Remind("Invalid amount of arguments (must be 2 [colour])")
+		end
+	end
 
 	if string.sub(msg, 1, #prefix + 7) == prefix..'editvis' then
 		local args = string.split(msg, " ")
@@ -14432,6 +14476,63 @@ function leakedcords()
 	end
 
 end
+
+-- Shift colour helper
+local function colorShift(type, r, g, b, delay)
+    Chat(string.format("colorshift%s %d %d %d", type, r, g, b))
+    task.wait(delay or 0.005)
+end
+
+-- Modes
+local function colorCycleTopBottom()
+        colorShift("top", 10000, 0, 0)
+        colorShift("bottom", 10000, 0, 0)
+        colorShift("top", 0, 10000, 0)
+        colorShift("bottom", 0, 10000, 0)
+        colorShift("top", 0, 0, 10000)
+        colorShift("bottom", 0, 0, 10000)
+end
+
+local function colorCycleBottomOnly()
+        colorShift("bottom", 10000, 0, 0)
+        colorShift("bottom", 0, 10000, 0)
+        colorShift("bottom", 0, 0, 10000)
+end
+
+local function colorCycleTopOnly()
+        colorShift("top", 10000, 0, 0)
+        colorShift("top", 0, 10000, 0)
+        colorShift("top", 0, 0, 10000)
+end
+
+local function rapidHellMode()
+        colorShift("top", 10000, 0, 0, 0.125)
+        colorShift("bottom", 10000, 0, 0, 0.125)
+        colorShift("top", 100000000, 1000000000, 10000000000000, 0.125)
+        colorShift("bottom", 100000000, 1000000000, 10000000000000, 0.125)
+        Chat("time 0")
+        task.wait(0.125)
+end
+
+connections[#connections + 1] =
+    game:GetService("RunService").RenderStepped:Connect(function()
+	task.wait()
+	if flashings.tcolour then
+		colorCycleTopOnly()
+	end
+
+	if flashings.bcolour then
+		colorCycleBottomOnly()
+	end
+
+	if flashings.ccolour then
+		colorCycleTopBottom()
+	end
+	
+	if flashings.redhell then
+		rapidHellMode()
+	end
+end)
 
 -- LUA CMDS
 function Execute(testcode)
