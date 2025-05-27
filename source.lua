@@ -1002,9 +1002,8 @@ local music_related = {
 	-- The music ID for my music only
 	mymusiconlyid = 0,
 
-	-- Pitch (DO NOT EDIT)
-	pitch = 0,
-	
+	-- NOTE: MYMUSICONLY DOES NOT WORK WITH DIFFERENT PITCHES
+
 	-- Make the music go all over the place
 	audiotroll = false,
 
@@ -1015,7 +1014,11 @@ local music_related = {
 	antimusic = false,
 
 	-- Stop pitch from changing
-	antipitch = false
+	antipitch = false,
+
+	-- This sets the pitch for the song that is playing.
+	autopitch = false,
+	autopitchid = 1,
 }
 
 -- Visualiser
@@ -1171,9 +1174,6 @@ local auto_stuff = {
 	autocharall = false,
 	autochar = {},
 	autocharid = "nil",
-
-	autopitch = false,
-	autopitchid = 1,
 	
 	-- Fogend visualiser
 	fogdance = false,
@@ -4389,6 +4389,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
         		music_related.mymusiconly = true
         		gottenmode = 2
         		music_related.mymusiconlyid = tonumber(args[2])
+			music_related.antipitch = true
+			music_related.autopitch = false
         		Remind("Perm music is on.")
 		else
 			music_related.mymusiconlyid = 0
@@ -4398,7 +4400,6 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'pmu2' then
-	Remind("IFIKAFJKSNDMSB CNBMZBXJCNM")
 	if kah_np == false then
         	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
                                 local url = game:GetService("Workspace").Terrain["_Game"].Folder.Sound.SoundId
@@ -4407,7 +4408,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
                                 music_related.musicoff = false
                                 music_related.mymusiconly = true
                                 music_related.mymusiconlyid = number
-				music_related.pitch = 1
+				music_related.antipitch = true
+				music_related.autopitch = false
                                 Remind("Perm music is on (set to current id).")
         	end
 	else
@@ -4418,7 +4420,8 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
                                 music_related.musicoff = false
                                 music_related.mymusiconly = true
                                 music_related.mymusiconlyid = number
-				music_related.pitch = game:GetService("Workspace").Sound.PlaybackSpeed
+				music_related.antipitch = true
+				music_related.autopitch = false
                                 Remind("Perm music is on (set to current id).")
         	end
 	end
@@ -10109,12 +10112,12 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'autopitch' then
-	auto_stuff.autopitch = true
-	auto_stuff.autopitchid = game:GetService("Workspace").Sound.PlaybackSpeed
+	music_related.autopitch = true
+	music_related.autopitchid = game:GetService("Workspace").Sound.PlaybackSpeed
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unautopitch' then
-	auto_stuff.autopitch = false
+	music_related.autopitch = false
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'autoff' then
@@ -13946,6 +13949,17 @@ task.spawn(function()
 						game:GetService("Workspace").Sound.PlaybackSpeed = auto_stuff.autopitchid
 					end
                         	end
+
+				if game:GetService("Workspace"):FindFirstChild("Sound") then
+					if workspace.Sound:FindFirstChild("PitchShiftSoundEffect") then
+						kag = game:GetService("Workspace").Sound.SoundId
+						print("spitch used")
+						workspace.Sound.PitchShiftSoundEffect:Destroy()
+						Chat("stopmusic")
+						task.wait(.5)
+						Chat("music ".. tostring(kag))
+					end
+				end
 			end
     end
 
