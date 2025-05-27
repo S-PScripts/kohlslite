@@ -3561,7 +3561,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
         if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'synpbb' then -- sorta works
 		Remind("Setting up...")
-		SuperCMD(prefix.."gear me boombox")
+		SuperCMD("gear me 212641536")
 		task.wait(0.5)
   		local check = string.sub(msg:lower(), #prefix + 8, #prefix + 8)
 	    	if check == "g" then
@@ -3610,7 +3610,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
         if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'synmbb' then -- sorta works
 		Remind("Setting up...")
-		SuperCMD(prefix.."gear me boombox")
+		SuperCMD("gear me 212641536")
 		task.wait(0)
   		local check = string.sub(msg:lower(), #prefix + 8, #prefix + 8)
 	    	if check == "g" then
@@ -3644,7 +3644,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
         if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'boomci' then -- Boombox circulize (bcirca + circa + boombox creation)
 		-- Create boomboxes
-		SuperCMD(prefix.."gear me boombox")
+		SuperCMD("gear me 212641536")
 
 		-- Circa command
 		task.wait(0.5)
@@ -8191,8 +8191,14 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'skatelag' then
-                local dasplayer = string.sub(msg:lower(), #prefix + 10)
-		Chat(prefix.."slag "..dasplayer)
+                 local dasplayer = string.sub(msg:lower(), #prefix + 10)
+		 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
+                        slag(cplr, player)
+			Remind("Skate lagging the player!")
+                 else
+                        Remind('Cannot find player with the name: '..dasplayer)
+                 end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'nslag' then -- buggy!
@@ -8207,8 +8213,14 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'nskatelag' then
-                local dasplayer = string.sub(msg:lower(), #prefix + 11)
-		Chat(prefix.."nslag "..dasplayer)
+                 local dasplayer = string.sub(msg:lower(), #prefix + 11)
+		 local cplr, player = PLAYERCHECK(dasplayer)
+                 if player then
+                        lagify(cplr,player)
+			Remind("Skate lagging the player (2)!")
+                 else
+                        Remind('Cannot find player with the name: '..dasplayer)
+                 end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'rpaintui' then
@@ -8609,7 +8621,8 @@ return
      end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'padgrab' then
-		Chat(prefix.."allpads")
+		AllPads()
+		Remind("Got all the pads available. To continuously grab all the pads, do loopgrab.")    
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'loopgrab' then
@@ -10543,7 +10556,7 @@ return
 	end
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 9) == prefix.."animation" then
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'animation' then
 	local anim_name = msg:sub(#prefix + 11):gsub("^%s+", "")
         if anim_name ~= "" and animationlist[anim_name] then
             	PlayAnimation(table.unpack(animationlist[anim_name]))
@@ -10552,7 +10565,7 @@ return
         end
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 8) == prefix.."animlist" then
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'animlist' then
 	Remind("Check your console by running /console!")
 	for aname, aid in pairs(animationlist) do
     		print("Animation Name:", aname, "Animation ID:", aid[1])
@@ -14147,7 +14160,7 @@ function checkCrashType()
 	elseif crash_settings.crash_type == "ex" then
 		Chat(prefix.."ecrash")
 	elseif crash_settings.crash_type == "nerd" then
-		Chat(prefix.."crash")
+		Chat(prefix.."jcrash")
 	elseif crash_settings.crash_type == "dionte" then
 		Chat(prefix.."dicrash")
 	elseif crash_settings.crash_type == "fred" then
@@ -16879,7 +16892,7 @@ end
 
 -- Paint map
 function PaintMap(colourhere,mode)
-	Chat(prefix.."gear me painter")
+	Chat("gear me 18474459")
     	repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
     	local paint = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
    	paint.Parent = game.Players.LocalPlayer.Character
@@ -16910,7 +16923,7 @@ function PaintMap(colourhere,mode)
 end
 
 function PaintMap_2(r,g,b)
-	Chat(prefix.."gear me painter")
+	Chat("gear me 18474459")
     	repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
     	local paint = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
    	paint.Parent = game.Players.LocalPlayer.Character
@@ -16933,7 +16946,7 @@ end
 
 -- Fix paint
 function FixPaint()
-	Chat(prefix.."gear me painter")
+	Chat("gear me 18474459")
     	repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
     	local paint = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
    	paint.Parent = game.Players.LocalPlayer.Character
@@ -17188,7 +17201,7 @@ function pp(puser, len)
 	Chat("part/1/1/"..tostring(len))
 	repeat task.wait() until part
 
-	Chat(prefix.."gear me painter")
+	Chat("gear me 18474459")
 	repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
     	paint = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
    	paint.Parent = game.Players.LocalPlayer.Character
@@ -17963,7 +17976,7 @@ function PCheck()
 				Chat(prefix.."rpaintui")
 				t = true
 			else
-				Chat(prefix.."gear me painter")
+				Chat("gear me 18474459")
 				repeat wait() until game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
     				paint = game.Players.LocalPlayer.Backpack:FindFirstChild("PaintBucket")
    				paint.Parent = game.Players.LocalPlayer.Character
