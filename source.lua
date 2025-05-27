@@ -1033,7 +1033,10 @@ flashings = {
 	ccolour = false,
 
 	-- Black and red flash
-	redhell = false
+	redhell = false,
+
+	-- Rainbow
+	rainbow = false
 }
 
 -- Visualiser
@@ -14514,6 +14517,29 @@ local function rapidHellMode()
         task.wait(0.125)
 end
 
+local function rainbow()
+        colorShift("top", 0, 0, 10000)
+        colorShift("bottom", 0, 0, 10000)
+        colorShift("top", 0, 10000, 0)
+        colorShift("bottom", 0, 10000, 0)
+        colorShift("top", 10000, 0, 0)
+        colorShift("bottom", 10000, 0, 0)
+        colorShift("top", 15000, 10603, 0)
+        colorShift("bottom", 15000, 10603, 0)
+        colorShift("top", 10000, 9000, 5000)
+        colorShift("bottom", 10000, 9000, 5000)
+        colorShift("top", 10000, 0, 14135)
+        colorShift("bottom", 10000, 0, 14135)
+        colorShift("top", 10000, 0, 12000)
+        colorShift("bottom", 10000, 0, 12000)
+        colorShift("top", 10610, 7496, 0)
+        colorShift("bottom", 10610, 7496, 0)
+        colorShift("top", 100000000000000000, 0, 0)
+        colorShift("bottom", 100000000000000000, 0, 0)
+        colorShift("top", 10000000, 10000000, 10000000)
+        colorShift("bottom", 10000000, 10000000, 10000000)
+end
+
 connections[#connections + 1] =
     game:GetService("RunService").RenderStepped:Connect(function()
 	task.wait()
@@ -14531,6 +14557,10 @@ connections[#connections + 1] =
 	
 	if flashings.redhell then
 		rapidHellMode()
+	end
+
+	if flashings.rainbow then
+		rainbow()
 	end
 end)
 
