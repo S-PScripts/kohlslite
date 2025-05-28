@@ -7490,19 +7490,24 @@ return
 		PaintMap_2(r,g,b)
 		Remind("Painted the map (rbg)!")
    end
-		
- if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'rmap' then
-		if Loops.rainbowmap == false then
-			Loops.rainbowmap = true
-			rmap()
-			Remind("Rainbow map is now enabled.")
+
+   if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'rbricks' then
+		if Loops.rbricks == false then
+			Loops.rbricks = true
+			rbricks()
+			Remind("Rainbow obby bricks is now enabled.")
 		else
-			Loops.rainbowmap = false
+			Loops.rbricks = false
 			Remind("Disabled since it was already enabled!")
 		end
    end
 
- if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'rbase' then
+   if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unrbricks' then
+		Loops.rbricks = false
+		Remind("Run fixpaint to fix the obby brick's colour now!")
+   end
+
+   if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'rbase' then
 		if Loops.rbase == false then
 			Loops.rbase = true
 			rbase()
@@ -7513,7 +7518,12 @@ return
 		end
    end
 
- if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'rfog' then
+   if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unrbase' then
+		Loops.rbase = false
+		Remind("Run fixpaint to fix the baseplate's colour now!")
+   end
+
+   if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'rfog' then
 		deran = tonumber(string.sub(msg:lower(), #prefix + 6))
 		if Loops.rfog == false then
 			Loops.rfog = true
@@ -7525,20 +7535,26 @@ return
 		end
    end
 
-   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'unrmap' then
-		Loops.rainbowmap = false
-		Remind("Run fixpaint to fix the map's colours now!")
-   end
-
-   if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unrbase' then
-		Loops.rbase = false
-		Remind("Run fixpaint to fix the baseplate's colour now!")
-   end
-
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'unrfog' then
 		Loops.rfog = false
 		Remind("Rainbow fog is now disabled.")
 		Chat("fix")
+   end
+
+   if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'rmap' then
+		if Loops.rainbowmap == false then
+			Loops.rainbowmap = true
+			rmap()
+			Remind("Rainbow map is now enabled.")
+		else
+			Loops.rainbowmap = false
+			Remind("Disabled since it was already enabled!")
+		end
+   end
+
+   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'unrmap' then
+		Loops.rainbowmap = false
+		Remind("Run fixpaint to fix the map's colours now!")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'autoafk' then
@@ -7606,7 +7622,7 @@ return
 	Remind("Key binds enabled.")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'vkeybind' then
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'ukeybind' then
 	keybinds.keybindz_unsafe = true
 	Remind("UNSAFE Key binds enabled (include crash keybind).")
     end
@@ -7616,9 +7632,19 @@ return
 	Remind("Key binds disabled.")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unvkeybind' then
+    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unukeybind' then
 	keybinds.keybindz_unsafe = false
 	Remind("UNSAFE Key binds disabled.")
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'vkeybinds' then
+	Remind("Check your console by running /console!")
+	print("KEYBINDS:")
+	print("House keybind: " .. keybinds.housekeybind)
+	print("Reset keybind: " .. keybinds.rekeybind)
+	print("Fly keybind:   " .. keybinds.flykeybind)
+	print("Regen keybind: " .. keybinds.regenkeybind)
+	print("Crash keybind: " .. keybinds.crashkey)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'setkey' then
@@ -8762,7 +8788,7 @@ return
         PLAYERCHECK(checker)
         if player then 
                 CheckBackpack()
-		Remind("Check console by running /console!")
+		Remind("Check your console by running /console!")
         else
                 Remind('Cannot find player with the name: '..checker)
         end
@@ -18170,7 +18196,6 @@ function PCheck()
 end
 
 function rmap()
-
 		local RainbowValue = 0
 		Loops.rainbowmap = true
     		repeat task.wait()
@@ -18230,6 +18255,47 @@ function rbase()
                         			})
 				end		
 		until not Loops.rbase
+end
+
+function rbricks()
+        	if kah_np == false then	
+			pcall(function()
+				local par = #workspace.Terrain._Game.Workspace.Obby:GetChildren()
+				if par == 0 then
+					return Remind("NO OBBY BRICKS AVAILABLE.")
+				end
+			end)
+                	vro = game:GetService("Workspace").Terrain["_Game"].Workspace.Obby:GetChildren()
+		else
+			pcall(function()
+				local par = #game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()
+				if par == 0 then
+					return Remind("NO OBBY BRICKS AVAILABLE.")
+				end
+			end)
+			vro = game:GetService("Workspace").Terrain["_Game"].Workspace.Obby:GetChildren()
+		end
+
+		local RainbowValue = 0
+		Loops.rbricks = true
+    		repeat task.wait()
+        			RainbowValue = RainbowValue + 1/50
+    			        if RainbowValue >= 1 then
+        				RainbowValue = 0
+    				end
+
+				fwait()
+				PCheck()
+
+				if Loops.rbricks and t then
+					for i, v in pairs(vro) do
+						paint:WaitForChild("Remotes").ServerControls:InvokeServer("PaintPart",{
+                            				["Part"] = v,
+                           				["Color"] = Color3.fromHSV(RainbowValue,1,1)
+                        			})
+					end
+				end		
+		until not Loops.rbricks
 end
 
 function rfog(deranged)
