@@ -973,6 +973,9 @@ local player_relate = {
 	-- Annnounces to everyone when a player is blacklisted, whitelisted etc.
 	blwl_an = true,
 
+	-- This doesn't sent the PM to users that are blacklisted (issue with KAH Legacy)
+	what_was_wrong = false,
+
 	-- Announces to everyone that a person is using LOGS
 	PingLogs = false,
 
@@ -1018,6 +1021,8 @@ local music_related = {
 
 	-- This sets the pitch for the song that is playing.
 	autopitch = false,
+
+	-- The pitch for auto pitch
 	autopitchid = 1,
 }
 
@@ -3203,6 +3208,17 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
         if string.sub(msg, 1, #prefix + 8)  == prefix..'unblwlan' then
 			player_relate.blwl_an = false
 			Remind("Blacklist/whitelist/gearwhitelist etc announcements disabled.")
+	end
+
+
+	if string.sub(msg, 1, #prefix + 4)  == prefix..'pmbl' then
+			player_relate.what_was_wrong = true
+			Remind("Players blacklisted will be sent PMs stating this.")
+	end
+
+        if string.sub(msg, 1, #prefix + 6)  == prefix..'unpmbl' then
+			player_relate.what_was_wrong = false
+			Remind("Players blacklisted will not get sent PMs stating this.")
 	end
 
         if string.sub(msg, 1, #prefix + 9)  == prefix..'billboard' then
@@ -6042,7 +6058,7 @@ return
         	local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 local cplr, player = PLAYERCHECK(dasplayer)
                 if player then
-			ncontrol(player, cplr)
+			ncontrol(cplr, player)
                 else                        
                         Remind('Cannot find player with the name: '..dasplayer)
                 end
@@ -6546,6 +6562,17 @@ return
                 Chat("thaw " .. golding)
                 task.wait(.2)
                 Chat("explode " .. golding)
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'pwn' then
+		local boomer = string.sub(msg:lower(), #prefix + 5)
+		Chat("jail ".. boomer)
+		task.wait(0.1)
+		for i = 1, 50 do
+			Chat("explode ".. boomer)
+		end
+		task.wait(2.5)
+		Chat("unjail ".. boomer)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antidisco' then
@@ -10942,6 +10969,17 @@ return
 		Remind("Added animations!")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'grate' then
+		local dasplayer = string.sub(msg:lower(), #prefix + 7)
+		local cplr, player = PLAYERCHECK(dasplayer)
+		if player then
+			grate = math.random(0, 100)
+			Speak(player.." is " .. grate .. "% gay!")
+		else
+			Remind('Cannot find player with the name: '..dasplayer)
+		end
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'sit' then
 		game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Humanoid").Sit = true
 		Remind("You are now sitting! To stop sitting, jump... or do unsit.")
@@ -11357,19 +11395,23 @@ task.spawn(function()
                                 	Chat('punish '.. spe)
                                         Chat('blind '.. spe)
 					Chat('skydive '.. spe)
+					if player_relate.what_was_wrong == true then
 					if mainbar_stuff.watermark_kl then
                                         	Chat("pm "..spe.." ["..getgenv().scriptname.."]: Sorry, this server is locked!")
 					else
 						Chat("pm "..spe.." Sorry, this server is locked!")
 					end
+					end
                                 else
                                 	Chat('punish '..v.Name)
                                         Chat('blind '..v.Name)   
-                                        Chat('skydive '..v.Name)        
+                                        Chat('skydive '..v.Name)
+					if player_relate.what_was_wrong == true then
 					if mainbar_stuff.watermark_kl then
                                         	Chat("pm "..v.Name.." ["..getgenv().scriptname.."]: Sorry, this server is locked!")
 					else
 						Chat("pm "..v.Name.." Sorry, this server is locked!")
+					end
 					end
                                 end
                         end
@@ -11380,19 +11422,23 @@ task.spawn(function()
                                         Chat('punish '.. spe)
                                         Chat('blind '.. spe)
 					Chat('skydive '.. spe)
+					if player_relate.what_was_wrong == true then
 					if mainbar_stuff.watermark_kl then
                                         	Chat("pm "..spe.." ["..getgenv().scriptname.."]: Sorry, you are blacklisted from this server!")
 					else
 						Chat("pm "..spe.." Sorry, you are blacklisted from this server!")
 					end
+					end
                                 else
                                         Chat('punish '..v.Name)
                                         Chat('blind '..v.Name)   
-                                        Chat('skydive '..v.Name)     
+                                        Chat('skydive '..v.Name)
+					if player_relate.what_was_wrong == true then
 					if mainbar_stuff.watermark_kl then
                                         	Chat("pm "..v.Name.." ["..getgenv().scriptname.."]: Sorry, you are blacklisted from this server!")
 					else
 						Chat("pm "..v.Name.." Sorry, you are blacklisted from this server!")
+					end
 					end
                                 end
                         end
@@ -11402,24 +11448,28 @@ task.spawn(function()
                                 if isB then
                                         Chat('punish '.. spe)
                                         Chat('blind '.. spe)
-	                                Chat('skydive '..spe)      
+	                                Chat('skydive '..spe)
+					if player_relate.what_was_wrong == true then
 					if mainbar_stuff.watermark_kl then
                                         	Chat("pm "..spe.." ["..getgenv().scriptname.."]: Sorry, you are blacklisted for having an account under the account age limit!")
 					else
 						Chat("pm "..spe.." Sorry, you are blacklisted for having an account under the account age limit!")
 					end
+					end
                                 else
                                         Chat('punish '..v.Name)
                                         Chat('blind '..v.Name)
 	                                Chat('skydive '..v.Name)
+					if player_relate.what_was_wrong == true then
 					if mainbar_stuff.watermark_kl then
                                         	Chat("pm "..v.Name.." ["..getgenv().scriptname.."]: Sorry, you are blacklisted for having an account under the account age limit!")
 					else
 						Chat("pm "..v.Name.." Sorry, you are blacklisted for having an account under the account age limit!")
 					end
+					end
                                 end
                         end
-                    elseif mainbar_stuff.superchargeslock == true then -- tech's
+                    elseif mainbar_stuff.superchargeslock == true then -- tech-187's
 			if not game.Lighting:FindFirstChild(v.Name) then
 				game.Players:Chat(":blind all")
     				game.Players:Chat("fogcolor 0 0 0")
@@ -13059,7 +13109,7 @@ function Mover:Attach(object, moveToPos)
     end
 end
 
-function ncontrol(player, cplr)
+function ncontrol(cplr, player)
 			Remind("Attaching to "..player)
 			Chat('size me nan')
 			Chat('invis me')
@@ -20059,7 +20109,7 @@ game.Players.LocalPlayer.OnTeleport:Connect(function(State)
 	end
 end)
 
--- I want to attempt to add a GUI at some point. Even a simple one like Shortcut v3. I have Hydrogen Mac but unfortunately my brother uses it most of the time.
+-- I want to attempt to add a GUI at some point. Even a simple one like Shortcut v2. I have Hydrogen on my Mac, but unfortunately, my brother uses it most of the time.
 -- ADD GUI HERE
 -- ADD GUI HERE
 -- ADD GUI HERE
@@ -20078,4 +20128,4 @@ Things that this script is missing:
 ]]
 
 -- Information about KohlsLite can be found at the top of this page
--- Last update: 24/05/2025
+-- Last update: 28/05/2025
