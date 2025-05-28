@@ -10173,7 +10173,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'autopitch' then
 	music_related.autopitch = true
-	music_related.autopitchid = game:GetService("Workspace").Sound.PlaybackSpeed
+	music_related.autopitchid = tonumber(game:GetService("Workspace").Sound.PlaybackSpeed)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unautopitch' then
@@ -13985,12 +13985,13 @@ task.spawn(function()
 
 				if game:GetService("Workspace"):FindFirstChild("Sound") then
 					if workspace.Sound:FindFirstChild("PitchShiftSoundEffect") then
-						kag = game:GetService("Workspace").Sound.SoundId
+						local url = game:GetService("Workspace").Sound.SoundId
+                               			local number = url:match("id=(%d+)")
 						print("spitch used")
 						workspace.Sound.PitchShiftSoundEffect:Destroy()
 						Chat("stopmusic")
 						task.wait(.5)
-						Chat("music ".. tostring(kag))
+						Chat("music ".. tostring(url))
 					end
 				end
 			end
@@ -13999,25 +14000,26 @@ task.spawn(function()
     if music_related.autopitch == true then
 			if kah_np == false then
                         	if game:GetService("Workspace").Terrain["_Game"].Folder:FindFirstChild("Sound") then
-                                	if game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackSpeed ~= auto_stuff.autopitchid then
-						game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackSpeed = auto_stuff.autopitchid
+                                	if game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackSpeed ~= music_related.autopitchid then
+						game:GetService("Workspace").Terrain["_Game"].Folder.Sound.PlaybackSpeed = music_related.autopitchid
 					end
                         	end
 			else
                         	if game:GetService("Workspace"):FindFirstChild("Sound") then
-                                	if game:GetService("Workspace").Sound.PlaybackSpeed ~= auto_stuff.autopitchid then
-						game:GetService("Workspace").Sound.PlaybackSpeed = auto_stuff.autopitchid
+                                	if game:GetService("Workspace").Sound.PlaybackSpeed ~= music_related.autopitchid then
+						game:GetService("Workspace").Sound.PlaybackSpeed = music_related.autopitchid
 					end
                         	end
 
 				if game:GetService("Workspace"):FindFirstChild("Sound") then
 					if workspace.Sound:FindFirstChild("PitchShiftSoundEffect") then
-						kag = game:GetService("Workspace").Sound.SoundId
+						local url = game:GetService("Workspace").Sound.SoundId
+                               			local number = url:match("id=(%d+)")
 						print("spitch used")
 						workspace.Sound.PitchShiftSoundEffect:Destroy()
 						Chat("stopmusic")
 						task.wait(.5)
-						Chat("music ".. tostring(kag))
+						Chat("music ".. tostring(url))
 					end
 				end
 			end
