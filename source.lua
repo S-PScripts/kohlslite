@@ -10226,11 +10226,13 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'autopitch' then
 	music_related.autopitch = true
-	music_related.autopitchid = tonumber(game:GetService("Workspace").Sound.PlaybackSpeed)
+	music_related.autopitchid = tonumber(string.sub(msg:lower(), #prefix + 11))
+	Remind("Auto pitch enabled!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unautopitch' then
 	music_related.autopitch = false
+	Remind("Auto pitch disabled!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'autoff' then
@@ -14066,8 +14068,9 @@ task.spawn(function()
 						print("spitch used")
 						workspace.Sound.PitchShiftSoundEffect:Destroy()
 						Chat("stopmusic")
-						task.wait(.5)
-						Chat("music ".. tostring(url))
+						repeat task.wait() until not game:GetService("Workspace"):FindFirstChild("Sound")
+						task.wait(.1)
+						Chat("music ".. tostring(number))
 					end
 				end
 			end
@@ -14094,8 +14097,9 @@ task.spawn(function()
 						print("spitch used")
 						workspace.Sound.PitchShiftSoundEffect:Destroy()
 						Chat("stopmusic")
-						task.wait(.5)
-						Chat("music ".. tostring(url))
+						repeat task.wait() until not game:GetService("Workspace"):FindFirstChild("Sound")
+						task.wait(.1)
+						Chat("music ".. tostring(number))
 					end
 				end
 			end
