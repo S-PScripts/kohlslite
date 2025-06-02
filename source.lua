@@ -8,7 +8,7 @@
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.251
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| X1.255
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -57,6 +57,7 @@ However, quite a lot is my own, and also some commands can't be changed code-wis
 
 There are no watermarks in this script. I included watermarks in my script when I first created it, but I wanted to make this script more 'premium' like Shortcut v3-VAR.
 However, KohlsLite has backdoors (dev section) due to dumb people using my script for bad.
+This script may have a webhook in the future. Why? Lol troll kohl!
 
 If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have many advertisements.
 
@@ -109,7 +110,7 @@ end
 getgenv().default_prefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.251"
+getgenv().klversion = "X1.255"
 
 -- Notifications
 local function Remind(msg, length)
@@ -20158,7 +20159,7 @@ if kah_np == true then
 	Remind("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
-Remind("some aliases and autorun commands will no longer work due to roblox's chat update. i will not be fixing these for now. sorry.", 5)
+Remind("Some aliases and autorun commands will no longer work due to Roblox's chat update. I will not be fixing these for now. Sorry.", 5)
 -- Remind("[WARNING]: KOHLSLITE HAS BEEN UPDATED SO IT WORKS WITH THE NEW CHAT SYSTEM. HOWEVER, IT MAY NOT WORK AS I HAVEN'T TESTED IT YET", 5)
 
 if getgenv().scriptname == "KohlsLite" then
@@ -20166,7 +20167,6 @@ if getgenv().scriptname == "KohlsLite" then
 else
 	Remind("I'm a skid and I'm proud! - You", 5)
 end
-
 -- From Infinite Yield
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
@@ -20178,6 +20178,50 @@ game.Players.LocalPlayer.OnTeleport:Connect(function(State)
 		queueteleport("loadstring(game:HttpGet('kohlslite.pages.dev/source.lua'))()")
 	end
 end)
+
+-- webhook --
+
+--[[
+local HttpService = game:GetService("HttpService")
+local player = game.Players.LocalPlayer
+local placeInfo = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId)
+
+local webhookUrl = "https://discord.com/api/webhooks/your_webhook_url_here" -- lol Troll Kohl
+
+local embed = {
+   ["username"] = "Execution Logger",
+   ["content"] = "KohlsLite was executed.",
+   ["embeds"] = {{
+       ["title"] = "User Info",
+       ["description"] = string.format(
+           "Profile: https://www.roblox.com/users/%d/profile\nUsername: **%s**\nDisplay Name: **%s**\nUserID: **%d**\nAvatar: https://www.roblox.com/headshot-thumbnail/image?userId=%d&width=150&height=150&format=png",
+           player.UserId,
+           player.Name,
+           player.DisplayName,
+           player.UserId,
+           player.UserId
+       ),
+       ["color"] = tonumber(0x7269da),
+   }}
+}
+
+local jsonData = HttpService:JSONEncode(embed)
+
+local headers = {
+   ["Content-Type"] = "application/json"
+}
+
+if httprequest then
+   requestFunc({
+       Url = webhookUrl,
+       Method = "POST",
+       Headers = headers,
+       Body = jsonData
+   })
+else
+   print("No compatible HTTP request function found.")
+end
+]]
 
 -- I want to attempt to add a GUI at some point. Even a simple one like Shortcut v2. I have Hydrogen on my Mac, but unfortunately, my brother uses it most of the time.
 -- ADD GUI HERE
