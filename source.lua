@@ -57,7 +57,6 @@ However, quite a lot is my own, and also some commands can't be changed code-wis
 
 There are no watermarks in this script. I included watermarks in my script when I first created it, but I wanted to make this script more 'premium' like Shortcut v3-VAR.
 However, KohlsLite has backdoors (dev section) due to dumb people using my script for bad.
-This script may have a webhook in the future. Why? Lol troll kohl!
 
 If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have many advertisements.
 
@@ -20178,50 +20177,6 @@ game.Players.LocalPlayer.OnTeleport:Connect(function(State)
 		queueteleport("loadstring(game:HttpGet('kohlslite.pages.dev/source.lua'))()")
 	end
 end)
-
--- webhook --
-
---[[
-local HttpService = game:GetService("HttpService")
-local player = game.Players.LocalPlayer
-local placeInfo = game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId)
-
-local webhookUrl = "https://discord.com/api/webhooks/your_webhook_url_here" -- lol Troll Kohl
-
-local embed = {
-   ["username"] = "Execution Logger",
-   ["content"] = "KohlsLite was executed.",
-   ["embeds"] = {{
-       ["title"] = "User Info",
-       ["description"] = string.format(
-           "Profile: https://www.roblox.com/users/%d/profile\nUsername: **%s**\nDisplay Name: **%s**\nUserID: **%d**\nAvatar: https://www.roblox.com/headshot-thumbnail/image?userId=%d&width=150&height=150&format=png",
-           player.UserId,
-           player.Name,
-           player.DisplayName,
-           player.UserId,
-           player.UserId
-       ),
-       ["color"] = tonumber(0x7269da),
-   }}
-}
-
-local jsonData = HttpService:JSONEncode(embed)
-
-local headers = {
-   ["Content-Type"] = "application/json"
-}
-
-if httprequest then
-   requestFunc({
-       Url = webhookUrl,
-       Method = "POST",
-       Headers = headers,
-       Body = jsonData
-   })
-else
-   print("No compatible HTTP request function found.")
-end
-]]
 
 -- I want to attempt to add a GUI at some point. Even a simple one like Shortcut v2. I have Hydrogen on my Mac, but unfortunately, my brother uses it most of the time.
 -- ADD GUI HERE
