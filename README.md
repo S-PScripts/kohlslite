@@ -1,3 +1,2 @@
 # KohlsLite
-This is where KohlsLite, a Roblox exploiting script for Kohls Admin House I created, gets updated.
-I have discontinued it however (16/6/25).
+KohlsLite is an exploiting script for the Roblox game Kohls Admin House. I created the script, and I update it here. However, I discontinued it on 16/6/25.
