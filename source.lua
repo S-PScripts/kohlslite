@@ -1,4 +1,7 @@
--- The bugs with blacklisting, whitelisting, and others requiring a player are now fixed. I think they were caused by the new Roblox update.
+-- THIS SCRIPT IS DISCONTINUED
+-- THIS SCRIPT IS DISCONTINUED
+-- THIS SCRIPT IS DISCONTINUED
+
 -- Read all the information below before viewing the source.
 
 --[[
@@ -23,9 +26,12 @@ You can play KAH (NBC version) here: https://www.roblox.com/games/112420803/Kohl
 You can also use it for KAH BC but barely anyone plays it. This script isn't recommended for KAH NP - it's not owned by agspureiam and there are a lot of things different.
 
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
-Shortcut v3-VAR has more stuff than KohlsLite but it is not open-source and you need to ask the owner (Tech - his discord username is _teched) to be able to use the script.
+Shortcut v3-VAR has more stuff than KohlsLite but it is not open-source and you need to ask the owner (Tech) to be able to use the script.
+If you want to contact Tech, join his Discord server (link: sckah.space).
 
-This script is not updated that much now due to the fact that Kohls Admin House is an inactive game. This script also has most of the features that I want to have. I also have school and other things to deal with.
+This script is discontinued due to the fact that Kohls Admin House is an inactive game. This script also has most of the features that I want to have. I also have school and other things to deal with.
+This script has many bugs due to the May Roblox chat update. Aliases and autorun commands do not work anymore and a few commands may have issues.
+I am not fixing them since I do not play Roblox too much now. You are free to fix them yourself.
 
 This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g: Shortcut v2 src1 being an extension to Shortcut v1).
 
@@ -56,9 +62,9 @@ Some of the code here is from other creators, credit has been given.
 However, quite a lot is my own, and also some commands can't be changed code-wise that much.
 
 There are no watermarks in this script. I included watermarks in my script when I first created it, but I wanted to make this script more 'premium' like Shortcut v3-VAR.
-However, KohlsLite has backdoors (dev section) due to dumb people using my script for bad.
+KohlsLite, however, has backdoors (dev section) due to dumb people using my script for bad. However, they have been disabled.
 
-If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have many advertisements.
+If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have much advertising going for it.
 
 Please do not edit this script by simply removing the dev section and then proceeding to abuse in KAH. It makes me, and anyone playing the game, really annoyed.
 Instead, you can make your own script and take stuff from here if necessary.
@@ -76,7 +82,7 @@ Other stuff:
 --[[
 Before you continue viewing the source, here are some things you might want to know:
 - This script has been mostly discontinued since barely anyone plays Kohls Admin House anymore.
-- The people who do play KAH play the NP/"Legacy" version by Tech. You can play the NP version here: https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy
+- The people who do play KAH play the "Legacy" version (Project NP) by Tech. You can play it here: https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy
 - Interesting fact: The account the NP version is on, BoasGameTest, was agspureiam's alt until it got password guessed.
 - This script is not supported for the NP version.
 
@@ -84,11 +90,20 @@ Before you continue viewing the source, here are some things you might want to k
 - Even Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing - even 1,000 sometimes.
 - This is partially because it doesn't get boring fast unlike KAH. KAH is just you trying some admin commands, nothing else.
 - Therefore, I've decided to discontinue this script for the most part.
-- You can just use Solinium for a part builder.
-- This script also already has the most antis so I won't add antis for individual players/rewrite the anti system.
 
-TS2021 09/04/2025
+Here are some things that are missing in KohlsLite (that other scripts have):
+1. Boombox visualiser [proton]
+2. Part builder [ii's stupid admin, jotunnheim, cmd pi, solinium
+3. Custom commands [shortcut v3-var]
+
+There is no GUI.
+The anti system was also going to rewritten so that it would work for individual players.
+
+I will not be adding these features since KAH is a dead game and I don't have much interest for it anymore. If you want these features, use the scripts I mentioned above.
+
+TS2021 16/6/25
 ]]
+
 
 --[[
  ____  _____ _____ _   _ ____  
@@ -109,12 +124,12 @@ end
 getgenv().default_prefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "X1.255"
+getgenv().klversion = "XYZ"
 
 -- Notifications
 local function Remind(msg, length)
         game.StarterGui:SetCore("SendNotification", {
-                Title = getgenv().scriptname.. " " ..getgenv().klversion, -- Now includes X since main updates are completed, still many to add though.
+                Title = getgenv().scriptname.. " " ..getgenv().klversion, -- Now includes X since main updates are completed
                 Text = msg,
                 Duration = length or 1
         })
@@ -172,6 +187,8 @@ clipboard_available = setclipboard or toclipboard or set_clipboard or (Clipboard
 -- This is an edited version of Knocks' autocrasher
 -- You can find the original here: https://github.com/blueskykah/Solinium/blob/main/Solinium%20Autocrasher
 -- This needs to be in your autoexecute (could use queue_on_teleport maybe but ¯\_(ツ)_/¯)
+
+-- THIS PROBABLY DOES NOT WORK. CONTACT ME IF YOU ENCOUNTER ISSUES.
 ]]
 
 function acperm()
@@ -514,10 +531,6 @@ Mover.PosSet = false
 
 -- Serverlocked users
 local blacklist = {
-    "SlenderMan990921",
-    "aliihsan12345Bloxy",
-    "jhjssikeksms",
-    "grudgingDinosaur1"
 }
 
 -- Whitelist/gear whitelists
@@ -11555,7 +11568,7 @@ task.spawn(function()
                   		if ws_antis.antiflash == true then    
                           		if v.Name == "Flash" then
                               			v:Destroy() -- :)
-                              		Chat("fix")
+                              			Chat("fix")
                           		end
                   		end
             		end
@@ -12533,6 +12546,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
 					end
 				end
 		end
+
+-- oh no it doesn't work! feel free to fix this.
 --[[
 		for i, tool in ipairs(workspace:GetDescendants()) do
     			if tool:IsA("Tool") and gear_antis.antigear then
@@ -19882,10 +19897,8 @@ end
 
 -- KohlsLite Blacklist --
 local unexecuteables = {
-	"Temporary123516",
-	"XxSmurfXxSmurfXx",
-	"kjnjsknsdgkgnfgkjknf",
-	"NOTAVIRTUALMACHINE15"
+	"gag_isagoodgame",
+	"i_lovegag"
 }
 
 local mentalhospital = {
@@ -19902,7 +19915,7 @@ local mentalhospital = {
 
 if table.find(unexecuteables, game.Players.LocalPlayer.Name) then
 		if clipboard_available then
-			clipboard_available("dm ts2021	on discord")
+			clipboard_available("dm ts2021 on discord")
 		end
                 pcall(function() -- thanks tech
 		        game.Players.LocalPlayer:Kick("["..getgenv().scriptname.."]: You have been blacklisted from KohlsLite. Contact ts2021 to contest this.") 
@@ -19912,7 +19925,7 @@ end
 
 if table.find(mentalhospital, game.Players.LocalPlayer.Name) then
 		if clipboard_available then
-			clipboard_available("dm ts2021	on discord")
+			clipboard_available("dm ts2021 on discord")
 		end
                 pcall(function() -- thanks tech
 		        game.Players.LocalPlayer:Kick("["..getgenv().scriptname.."]: Imagine skidding, claiming my script as yours, then blacklisting me from it. Contact me (ts2021) so I can berate you more.") 
@@ -19923,7 +19936,7 @@ end
 script_is_off = false
 if script_is_off then
 	if clipboard_available then
-			clipboard_available("dm ts2021	on discord")
+			clipboard_available("dm ts2021 on discord")
 	end
 	game.Players.LocalPlayer:Kick("["..getgenv().scriptname.."]: Major update in process! Script will be back up soon (I hope).") 
 end
@@ -19967,21 +19980,23 @@ if ctime == specialdays.valentines then
 end
 
 if ctime == specialdays.foolsday then
-	Remind("April Fools Day! uwu")
+	Remind("April Fools Day! HEHEHE.")
 end
 
--- End of Life script. Removed as I'll just add a discontinued banner that shows when you boot this script
---[[ local eol = "12/31/2025" -- I'm not sure how long I will be updating KL for
+-- End of Life script. I will probably replace this with a 'discontinued' banner.
+local eol = "07/31/2025" 
 
 if ctime2 > eol then
     	if clipboard_available then
-		clipboard_available("dm ts2021	on discord")
+		clipboard_available("Need help on using KohlsLite? DM ts2021 on Discord")
 	end
         pcall(function() -- thanks tech
-		game.Players.LocalPlayer:Kick("["..getgenv().scriptname.."]: If you get kicked, this script is probably discontinued. You can find and edit the source online at kohlslite.pages.dev .") 
+		game.Players.LocalPlayer:Kick("KohlsLite has been discontinued (since 31st July 2025). You can find and edit the source at kohlslite.pages.dev. If you need help, please contact me on Discord (ts2021).")
         end)
         task.wait(2.5); while true do end
-end ]]
+end
+
+-- add discontinued banner here
 
 if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 883283806) then
         purchased_kl = true 
@@ -20132,7 +20147,7 @@ if getgenv().kohlsgui then
 	)
 end
 
--- Anti mesh
+-- Anti mesh (no clue why I put it so low down in this script)
 connections[#connections + 1] =
     game:GetService("RunService").RenderStepped:Connect(function()
 	task.wait()
@@ -20158,7 +20173,7 @@ if kah_np == true then
 	Remind("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
-Remind("Some aliases and autorun commands will no longer work due to Roblox's chat update. I will not be fixing these for now. Sorry.", 5)
+Remind("Some aliases and autorun commands will no longer work due to Roblox's chat update. I will not be fixing these. Sorry.", 5)
 -- Remind("[WARNING]: KOHLSLITE HAS BEEN UPDATED SO IT WORKS WITH THE NEW CHAT SYSTEM. HOWEVER, IT MAY NOT WORK AS I HAVEN'T TESTED IT YET", 5)
 
 if getgenv().scriptname == "KohlsLite" then
@@ -20166,6 +20181,7 @@ if getgenv().scriptname == "KohlsLite" then
 else
 	Remind("I'm a skid and I'm proud! - You", 5)
 end
+
 -- From Infinite Yield
 queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
 httprequest = (syn and syn.request) or (http and http.request) or http_request or (fluxus and fluxus.request) or request
@@ -20178,23 +20194,8 @@ game.Players.LocalPlayer.OnTeleport:Connect(function(State)
 	end
 end)
 
--- I want to attempt to add a GUI at some point. Even a simple one like Shortcut v2. I have Hydrogen on my Mac, but unfortunately, my brother uses it most of the time.
--- ADD GUI HERE
--- ADD GUI HERE
--- ADD GUI HERE
-
---Remind("HUGE UPDATES - BUGS MAY EXIST 2/4/25", 5)
-
---[[
-Things that this script is missing:
-1. Auto crasher - added,  untested
-2. Rewrite the anti system (so it works for individual players)
-3. Boombox visualiser
-4. Part builder
-5. Custom commands (file system would take a while to make :P)
-
--> I probably won't add the features above as I don't play KAH that much anymore (and it's an inactive game too).
-]]
-
 -- Information about KohlsLite can be found at the top of this page
--- Last update: 28/05/2025
+-- Last update: 16/06/2025
+-- ScriptingProgrammer / ts2021 / S-PScripts
+
+-- THIS SCRIPT IS DISCONTINUED
