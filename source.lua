@@ -1,4 +1,4 @@
--- This script is discontinued as of 19th June 2025.
+-- This script was discontinued on 19th June 2025.
 -- Read all the information below before viewing the source.
 
 --[[
@@ -20198,4 +20198,4 @@ end)
 
 -- Information about KohlsLite can be found at the top of this page.
 -- This script was created by ScriptingProgrammer / ts2021 / S-PScripts
--- This script is discontinued as of 19th June 2025.
+-- This script was discontinued on 19th June 2025.
