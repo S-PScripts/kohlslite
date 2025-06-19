@@ -2,7 +2,6 @@ print("--- INFORMATION ---")
 print("KohlsLite is a script for Kohls Admin House that was created in late 2023. This script was created by ScriptingProgrammer (Roblox)/ts2021 (Discord)/S-PScripts (GitHub).")
 print("For help, please contact me on Discord at ts2021")
 print("The version you are using is v"..getgenv().klversion..". This is the final version, as KohlsLite was discontinued in June 2025.")
-print("Better than SCV1 and SCV2 - approved by Tech!")
 print("\n")
 
 print("--- CREDITS ---")
