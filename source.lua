@@ -5020,7 +5020,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'fixfl' then   
-		if kah_np then return Remind("Unavailable.") end
+		if kah_np then return Remind("Unavailable. Run omove/ivmore to move the floor parts.") end
                 if movestatus == true then 
                         return 
                 end        
@@ -5046,7 +5046,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'movefl' then   
-		if kah_np then return Remind("Unavailable.") end
+		if kah_np then return Remind("Unavailable. Run omove/ivmore to move the floor parts.") end
                 if movestatus == true then 
                         return 
                 end        
@@ -16949,8 +16949,8 @@ local UserInputService = game:GetService("UserInputService")
 isAFK = false
 UserInputService.WindowFocusReleased:Connect(function()
         task.wait(0.1)
-	print("AFK")
         if auto_stuff_mbar.autoafk == true then
+		    print("AFK")
 		    isAFK = true
                     Chat("name me " .. auto_stuff_mbar.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName)
                     Chat("ff me")
@@ -16966,8 +16966,8 @@ end)
 
 UserInputService.WindowFocused:Connect(function()
         task.wait(0.1)
-	print("No longer AFK")
         if auto_stuff_mbar.autoafk == true then
+		print("No longer AFK")
 		isAFK = false
                 Chat("reset me")
 		auto_stuff.tempautoff = false
@@ -16983,7 +16983,7 @@ task.spawn(function()
                 task.wait()
                 if isAFK == true then
 			if (workspace:FindFirstChild(game.Players.LocalPlayer.Name) and not workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChildOfClass("Model") or workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChildOfClass("Model").Name ~= auto_stuff_mbar.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName) then
-				Chat("name me " .. AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName)
+				Chat("name me " .. auto_stuff_mbar.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName)
 			end
 		end
       	end
