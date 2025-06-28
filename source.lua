@@ -2654,9 +2654,9 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 		
 	if string.sub(msg, 1, #prefix + 4) == prefix..'draw' then
 			if drawState then
-				Remind("Booting up the drawer...")
-			else
 				Remind("Closing the drawer...")
+			else
+				Remind("Booting up the drawer...")
 			end
 			partDraw()
 	end
