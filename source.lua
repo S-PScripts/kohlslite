@@ -994,7 +994,7 @@ local player_relate = {
 	PingLogs = false,
 
 	-- Prints when anti is activated
-	anti_say = true,
+	anti_say = false,
 
 	-- Stops users from checking logs if they say it
 	AntiLogs = false,
