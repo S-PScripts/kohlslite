@@ -19333,10 +19333,12 @@ function yeahthemover(modez)
 				moveobject(target, 1)
 				task.wait(1.75)
 			end
-		
-			game.Chat["Delete Tool"].Parent = game.Players.LocalPlayer.Backpack
-			game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = prevcfarchive
-		
+
+			pcall(function()
+				game.Chat["Delete Tool"].Parent = game.Players.LocalPlayer.Backpack
+				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = prevcfarchive
+			end)
+
 			spawn(function()
     				task.wait(3)
     				if game.Chat:FindFirstChild("Delete Tool") then
