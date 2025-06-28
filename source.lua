@@ -16941,6 +16941,7 @@ UserInputService.WindowFocusReleased:Connect(function()
 		    print("AFK")
 		    isAFK = true
                     Chat("name me " .. auto_stuff_mbar.AFKMessage .. "\n" .. game.Players.LocalPlayer.DisplayName)
+		    if lp.Character:FindFirstChild("ForceField") then else
                     Chat("ff me")
                     Chat("god me")
 		    if auto_stuff.autoff == false then
