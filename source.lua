@@ -16950,6 +16950,7 @@ UserInputService.WindowFocusReleased:Connect(function()
 		    if auto_stuff.autogod == false then
 		    	auto_stuff.tempautogod = true
 		    end
+		end
         end
 end)
 
