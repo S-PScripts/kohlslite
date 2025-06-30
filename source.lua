@@ -8638,9 +8638,12 @@ return
 	repeat task.wait() until mready == true 
 	task.wait(0.5)
 	Chat("skydive me")
-	task.wait(0.75)
+	task.wait(0.5)
 	Chat("unskydive me")
-	task.wait(0.75)
+	Chat("unskydive me")
+	task.wait(0.5)
+	Chat("unskydive me")
+	task.wait(0.5)
 	Chat("respawn me")
 	--Remind("If this didn't work, it might be that you didn't fix YOUR own velo yet! Do fixvelo then try again.")
      end
