@@ -713,7 +713,7 @@ mainbar_stuff = {
 	billboard = true,
 
 	-- Execute KohlsLite when serverhopping
-	KeepKL = true
+	KeepKL = false
 }
 
 -- Auto stuff (extra)
@@ -8630,11 +8630,11 @@ return
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bpfixv' then
 	VFix()
 	if kah_np == false then
-		local target = workspace.Terrain["_Game"].Workspace.Baseplate
+		gtarget = workspace.Terrain["_Game"].Workspace.Baseplate
 	else
-		local target = game:GetService("Workspace").Tabby.Admin_House.Baseplate
+		gtarget = game:GetService("Workspace").Tabby.Admin_House.Baseplate
 	end
-	movepart(target)  
+	movepart(gtarget)  
 	repeat task.wait() until mready == true 
 	task.wait(0.5)
 	Chat("skydive me")
@@ -14240,12 +14240,14 @@ function Bring()
 end
 
 function VFix()
-   	for i,v in pairs(game:GetService("Workspace").Terrain._Game.Workspace:GetDescendants()) do
-        	if v:IsA("BasePart") then
-            		v.Velocity = Vector3.new(0,0,0)
-	    		v.RotVelocity = Vector3.new(0, 0, 0)
-        	end
-    	end
+	if kah_np == false then
+   		for i,v in pairs(game:GetService("Workspace").Terrain._Game.Workspace:GetDescendants()) do
+        		if v:IsA("BasePart") then
+            			v.Velocity = Vector3.new(0,0,0)
+	    			v.RotVelocity = Vector3.new(0, 0, 0)
+        		end
+    		end
+	end
 
 	if kah_np == false then
     		workspace.Terrain._Game.Workspace.Baseplate.Velocity = Vector3.new(0,0,0)
@@ -19340,6 +19342,7 @@ end
 
 -- attach v1 for fixing baseplate --
 function movepart(target)
+	--print(target)
 	repeat wait() until game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("Humanoid")
 	local cf = game.Players.LocalPlayer.Character.HumanoidRootPart
 	local rmoving = true;mready = false
@@ -19348,7 +19351,9 @@ function movepart(target)
 			while true do
 				fwait()
 				game.Players.LocalPlayer.Character['Humanoid']:ChangeState(11)
-				cf.CFrame = target.CFrame * CFrame.new(-1*(target.Size.X/2)-(game.Players.LocalPlayer.Character['Torso'].Size.X/2), 0, 0)
+				--pcall(function()
+					cf.CFrame = target.CFrame * CFrame.new(-1*(target.Size.X/2)-(game.Players.LocalPlayer.Character['Torso'].Size.X/2), 0, 0)
+				--end)
 				if not rmoving then 
 					break 
 				end
