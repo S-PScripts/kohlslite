@@ -102,7 +102,7 @@ If you read all of the above, thank you.
 I had a great time creating KohlsLite, but now it is time for me to move on.
 
 TS2021, 19th June 2025
-Note: I may still update this script if there happens to be any major issues.
+Note: I will still update this script if I find any bugs. I'm not going to be adding new features though.
 ]]
 
 
