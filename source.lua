@@ -10766,7 +10766,7 @@ return
         	if player == nil then 
 			return Remind("Fail: User not found!")
 		elseif player == "ScriptingProgrammer" or player == "kohlslitedev" or player == "agspureiamReal" then
-			return Remind("You can't bang developers!")
+			return Remind("You can't bang developers! NOOB.")
 		else
 			banger = cplr
 		end
@@ -19938,7 +19938,7 @@ if script_is_off then
 	if clipboard_available then
 			clipboard_available("dm ts2021 on discord")
 	end
-	game.Players.LocalPlayer:Kick("KohlsLite has been discontinued (since 31st July 2025). You can find and edit the source at kohlslite.pages.dev. If you need help, please contact me on Discord (ts2021).")
+	game.Players.LocalPlayer:Kick("KohlsLite has been discontinued. You can find and edit the source at kohlslite.pages.dev. If you need help, please contact me on Discord (ts2021).")
 end
 
 specialdays = {
@@ -19984,19 +19984,21 @@ if ctime == specialdays.foolsday then
 end
 
 -- End of Life script. I will probably replace this with a 'discontinued' banner.
-local eol = "07/31/2025" 
+--[[
+local eol = "12/31/2025" 
 
 if ctime2 > eol then
     	if clipboard_available then
 		clipboard_available("Need help on using KohlsLite? DM ts2021 on Discord")
 	end
         pcall(function() -- thanks tech
-		game.Players.LocalPlayer:Kick("KohlsLite has been discontinued (since 31st July 2025). You can find and edit the source at kohlslite.pages.dev. If you need help, please contact me on Discord (ts2021).")
+		game.Players.LocalPlayer:Kick("KohlsLite has been discontinued. You can find and edit the source at kohlslite.pages.dev. If you need help, please contact me on Discord (ts2021).")
         end)
         task.wait(2.5); while true do end
 end
+]]
 
--- add discontinued banner here
+-- add discontinued banner here (jeeeeeeeeeeeeeeeeeeee)
 
 if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 883283806) then
         purchased_kl = true 
@@ -20173,7 +20175,7 @@ if kah_np == true then
 	Remind("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
-Remind("This script is discontinued (19th June 2025). Please view more at the source: kohlslite.pages.dev", 5)
+Remind("This script is discontinued (19th June 2025). Please view more at the source: kohlslite.pages.dev", 8)
 -- Remind("Some aliases and autorun commands will no longer work due to Roblox's chat update. I will not be fixing these. Sorry.", 5)
 -- Remind("[WARNING]: KOHLSLITE HAS BEEN UPDATED SO IT WORKS WITH THE NEW CHAT SYSTEM. HOWEVER, IT MAY NOT WORK AS I HAVEN'T TESTED IT YET", 5)
 
