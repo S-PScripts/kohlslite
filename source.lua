@@ -10590,7 +10590,15 @@ return
         ChangeRig("R6")
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'promptr6' then
+        ChangeRig("R6")
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'r15' then
+        ChangeRig("R15")
+    end  
+
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'promptr15' then
         ChangeRig("R15")
     end  
 
