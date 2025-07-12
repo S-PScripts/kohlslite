@@ -3529,7 +3529,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 			Loops.trap = false
 	end
 
-	if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timeout' then
+	if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timeout' then -- ii's stupid admin
 		local args = string.split(msg, " ")
         	if #args == 3 then
                		plr = args[2]
@@ -6307,8 +6307,8 @@ return
 		Chat(prefix.."ecrash")
     end
 
-   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'wordle' then
-	Remind("no")
+   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fard' then
+	Remind("fard!?!")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'goon' then
@@ -11242,7 +11242,7 @@ end)
  \____\___/|____/|_____|
 ]]
 
--- PLAYER CHECK (I hate this thing so much)
+-- PLAYER CHECK
 function PLAYERCHECK(plr, rt)
     plr = plr:lower()
     for _, v in pairs(game.Players:GetPlayers()) do
@@ -13459,14 +13459,18 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 
 		    if kah_np == false then
                     if (string.sub(msg:lower(), 0, 6) == "btools" or string.sub(msg:lower(), 0, 7) == ":btools" or string.sub(msg:lower(), 0, 7) == ";btools") and v.Name ~= game.Players.LocalPlayer.Name then
-                        print(v.Name .. " thought btools existed.")
-                        Chat("h \n\n\n\n\n " .. v.Name .. ", btools do not exist anymore! \n\n\n\n\n")
+			if player_relate.noobdetect then
+                        	print(v.Name .. " thought btools existed.")
+                        	Chat("h \n\n\n\n\n " .. v.Name .. ", btools do not exist anymore! \n\n\n\n\n")
+			end
                     end
 		    end
 
                     if (string.sub(msg:lower(), 0, 3) == "f3x" or string.sub(msg:lower(), 0, 4) == ":f3x" or string.sub(msg:lower(), 0, 4) == ";f3x") and v.Name ~= game.Players.LocalPlayer.Name then
-                        print(v.Name .. " thought f3x existed.")
-                        Chat("h \n\n\n\n\n " .. v.Name .. ", f3x do not exist! \n\n\n\n\n")
+			if player_relate.noobdetect then
+                       		print(v.Name .. " thought f3x existed.")
+                        	Chat("h \n\n\n\n\n " .. v.Name .. ", f3x do not exist! \n\n\n\n\n")
+			end
                     end
 
                     if (string.sub(msg:lower(), 0, 3) == "sit" or string.sub(msg:lower(), 0, 4) == ":sit") and v.Name ~= game.Players.LocalPlayer.Name then
@@ -13600,6 +13604,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 		    -- // Remove this if you want, just don't abuse with KohlsLite, okay? \\ --
 
 -- for some reason specialperms table doesn't work but atprogsperms does i need to fix it
+-- i cant be bothered
                     if string.sub(msg:lower(), 0, 4) == "-klc" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then -- klc means KohlsLite Check
 			print("Oh no, I'm in danger")
                         if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
@@ -17625,6 +17630,10 @@ function Ungearban(plrg)
         task.wait(0.5)
         Chat("ungear me")
         Chat("speed "..plrg.." 16")
+
+	if player_relate.blwl_an then
+		Chat("h \n\n\n\n\n " .. plrg .. " got ungearbanned. Horray! \n\n\n\n\n")
+	end
 end
 
 function StoneMap()
@@ -19810,7 +19819,7 @@ local ADMIN = {
     "grimAuxiliatrix",
     "undertaker629",
     "dawninja21",
-    "dawninja21alt",
+    "Dawninja21alt",
     "jjjuuikjjikkju",
     "atprog",
     "IceStuds"
@@ -20149,7 +20158,7 @@ if getgenv().kohlsgui then
                     "This script was created by TS2021/S-PScripts/ScriptingProgrammer.",
 		    " ",
 		    "To see all the commands KohlsLite has, do the following:",
-		    "1. Chat .kcmds or .kcmd2 or .kcmds3 (commands split into 3 pages)",
+		    "1. Chat .kcmds or .kcmd2 or .kcmd3 (commands split into 3 pages)",
 		    "2. Chat /console and you're done",
 		    " ",
 		    "Have fun using my script!"
@@ -20179,8 +20188,8 @@ end
 -- Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
 
 if kah_np == true then
-	print("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.")
-	Remind("[WARNING]: You are playing KAH NP/LEGACY and KohlsLite is not fully compatible.", 3)
+	print("[WARNING]: You are playing KAH LEGACY and KohlsLite is not fully compatible.")
+	Remind("[WARNING]: You are playing KAH LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
 Remind("This script is discontinued (19th June 2025). Please view more at the source: kohlslite.pages.dev", 8)
