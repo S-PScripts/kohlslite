@@ -20,19 +20,19 @@ This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-P
 This is one of the only KAH scripts that works due to Roblox's chat update (30th APRIL 2025). Apart from CMD v3...
 
 You can play KAH (NBC version) here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
-You can also use it for KAH BC but barely anyone plays it. 
+You can also use it for KAH BC, but barely anyone plays it. 
 
 This script is not recommended for KAH Legacy (https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy).
-This is because there are many things different and therefore some features in this script are not compatible.
-Here is a fun fact about KAH Legacy/Project NP: the owner, BoasGameAlt, is actually agspureiam's alt. However, it was password guessed and is now owned by Tech.
+This is because the code there is rather different, and therefore some features in this script are not compatible.
+Here is a fun fact about KAH Legacy/Project NP: the owner, BoasGameAlt, is agspureiam's alt. However, it was password-guessed and is now owned by Tech.
 
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
-Shortcut v3-VAR has more stuff than KohlsLite but it is not open-source and you need to ask the owner (Tech) to be able to use the script.
+Shortcut v3-VAR has more stuff than KohlsLite, but it is not open-source, and you need to ask the owner (Tech) to be able to use the script.
 If you want to contact Tech, join his Discord server (link: sckah.space).
 
-This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g: Shortcut v2 src1 being an extension to Shortcut v1).
+This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g, Shortcut v2 src1 being an extension to Shortcut v1).
 
-KohlsLite is a bit like a mixture of all the scripts that already exist in KAH such as:
+KohlsLite is a bit like a mixture of all the scripts that already exist in KAH, such as:
   -- > CMD (v1) [by quiving, the same person who made the Solara executor]
   -- > CMD Y [by quiving]
   -- > CMD v3 (Pi) [by quiving]
@@ -55,7 +55,7 @@ KohlsLite is a bit like a mixture of all the scripts that already exist in KAH s
   -- > Proton Admin [by Digitality]
   -- > Many scripts from the KAH script archive by Damix [View it here: S-PScripts/kah-fork]
 
-Some of the code here is from other creators, credit has been given. However, quite a lot is my own, and also some commands can't be changed code-wise that much.
+Some of the code here is from other creators; credit has been given. However, quite a lot is my own, and also some commands can't be changed code-wise that much.
 
 There are no watermarks in this script. I included watermarks in my script when I first created it, but I wanted to make this script more 'premium' like Shortcut v3-VAR.
 KohlsLite, however, has backdoors (dev section) due to dumb people using my script for bad. However, they have been disabled.
@@ -13606,7 +13606,7 @@ game.TextChatService.MessageReceived:Connect(function(tbl)
 -- for some reason specialperms table doesn't work but atprogsperms does i need to fix it
 -- i cant be bothered
                     if string.sub(msg:lower(), 0, 4) == "-klc" and v.Name ~= game.Players.LocalPlayer.Name and table.find(specialperms, v.Name) then -- klc means KohlsLite Check
-			print("Oh no, I'm in danger")
+			print("test")
                         if table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) or mainbar_stuff.backdoor_enabled == false then
 				--print("kohlslite user")
 			else
