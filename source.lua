@@ -478,7 +478,8 @@ local backend_stuff = {
 	eincrash = false, -- ignore
 	notifiedRespectFiltering = false,
 	regfind = false,
-	i_like_my_9jn_drippy_bruh = true
+	i_like_my_9jn_drippy_bruh = true,
+	pkickrn = false
 }
 
 -- Thorn Anti Temp (DO NOT EDIT THIS)
@@ -562,7 +563,8 @@ local pwl = {
     "FR6DDIIE",
     "D_ionte",
     "dawninja21",
-    "Dawninja21alt"
+    "Dawninja21alt",
+    "t_echr"
 }
 
 -- Players you cannot kick... unless you're editing this source code (don't skid)
@@ -585,7 +587,8 @@ local nokick = {
     "FR6DDIIE",
     "D_ionte",
     "dawninja21",
-    "Dawninja21alt"
+    "Dawninja21alt",
+    "t_echr"
 }
 
 -- Users that can use blacklisted gears (or gears when antigear is on)
@@ -613,7 +616,8 @@ local pgwl = {
     "FR6DDIIE",
     "D_ionte",
     "dawninja21",
-    "Dawninja21alt"
+    "Dawninja21alt",
+    "t_echr"
 }
 
 -- People that are thorn whitelisted
@@ -623,6 +627,7 @@ local exempt_from_thorns = {
 -- People that can use your KohlsLite commands
 local kl_wlst = {
 }
+
 -- Perm thorn whitelist
 local peft = {
     "me_123eq",
@@ -643,7 +648,8 @@ local peft = {
     "FR6DDIIE",
     "D_ionte",
     "dawninja21",
-    "Dawninja21alt"
+    "Dawninja21alt",
+    "t_echr"
 }
 	
 
@@ -661,7 +667,8 @@ local atprogperms = {
     "FR6DDIIE",
     "D_ionte",
     "dawninja21",
-    "Dawninja21alt"
+    "Dawninja21alt",
+    "t_echr"
 }
 
 -- The developer of KohlsLite
@@ -10184,7 +10191,19 @@ return
 	Remind("No longer kicking "..acplr)
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'pkick' then
+ if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'pkick' then
+	dasplayer = string.sub(msg:lower(), #prefix + 7)
+        local cplr, player = PLAYERCHECK(dasplayer)
+        if player and not table.find(nokick, player) then
+		potatokick(cplr, player)
+        elseif player and table.find(nokick, player) then
+                Remind("Sorry, this player cannot be kicked!")
+	else
+                Remind("Player doesn't exist!")
+        end
+   end
+
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'prkick' then
 	dasplayer = string.sub(msg:lower(), #prefix + 7)
         local cplr, player = PLAYERCHECK(dasplayer)
         if player and not table.find(nokick, player) then
@@ -10201,7 +10220,7 @@ return
         end
    end
 
-    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unpkick' then
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unprkick' then
                 antichatplr = false
                 Chat("reset "..acplr)
 		Remind("No longer kicking "..acplr)
@@ -14798,6 +14817,46 @@ function techkick2(kickin, kickinplr) -- Tech's kick 2
         	Chat("invis "..kickinplr)
 		task.wait(.2)
 		Chat("reset "..kickinplr)
+end
+
+function potatokick(cplr, player) -- v, V.Name [cmd pi]
+	while backend_stuff.pkickrn do task.wait() end
+
+	backend_stuff.pkickrn = true
+	Chat("size " .. player .. " -nan")
+	Chat("noclip " .. player)
+	Chat("skydive " .. player)
+	for i = 1, 3 do
+		Chat("gear me 25741198")
+	end
+	repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= 3
+	for i, v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+        	if v.Name == "HotPotato" then
+            		task.spawn(function()
+                		local toolch
+
+                		v.Parent = game.Players.LocalPlayer.Character
+                		v:Activate()
+
+               			while v.Parent == game.Players.LocalPlayer.Character do
+                    			task.wait()
+                    			firetouchinterest(v:WaitForChild("Handle"), game.Players:FindFirstChild(player).Character.Torso, 0)
+					firetouchinterest(v:WaitForChild("Handle"), game.Players:FindFirstChild(player).Character.Torso, 1)
+                    			firetouchinterest(v:WaitForChild("Handle"), game.Players:FindFirstChild(player).Character.Torso, 0)
+					firetouchinterest(v:WaitForChild("Handle"), game.Players:FindFirstChild(player).Character.Torso, 1)
+				end
+
+               			toolch = workspace.ChildAdded:Connect(function(Child)
+                    			if Child == v then
+                        			Chat("clr")
+                        			toolch:Disconnect()
+                    			end
+                		end)
+            		end)
+        	end
+	end
+
+	backend_stuff.pkickrn = false
 end
 
 -- Skate lag
