@@ -479,7 +479,8 @@ local backend_stuff = {
 	notifiedRespectFiltering = false,
 	regfind = false,
 	i_like_my_9jn_drippy_bruh = true,
-	pkickrn = false
+	pkickrn = false,
+	btkickrn = false
 }
 
 -- Thorn Anti Temp (DO NOT EDIT THIS)
@@ -10203,6 +10204,24 @@ return
         end
    end
 
+ if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'btkick' then
+	dasplayer = string.sub(msg:lower(), #prefix + 8)
+        local cplr, player = PLAYERCHECK(dasplayer)
+        if player and not table.find(nokick, player) then
+		backend_stuff.btkickrn = true
+		btkick(cplr, player)
+        elseif player and table.find(nokick, player) then
+                Remind("Sorry, this player cannot be kicked!")
+	else
+                Remind("Player doesn't exist!")
+        end
+   end
+
+ if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unbtkick' then
+	backend_stuff.btkickrn = false
+	Remind("No longer kicking the player.")
+end
+
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'prkick' then
 	dasplayer = string.sub(msg:lower(), #prefix + 7)
         local cplr, player = PLAYERCHECK(dasplayer)
@@ -14857,6 +14876,15 @@ function potatokick(cplr, player) -- v, V.Name [cmd pi]
 	end
 
 	backend_stuff.pkickrn = false
+end
+
+function btkick(cplr, player)
+	while backend_stuff.btkickrn == true do
+ 		for i = 1, 100 do 
+			Chat("btools ".. player .. player .. player) 
+		end 
+		Chat("ungear ".. player) 
+	end
 end
 
 -- Skate lag
