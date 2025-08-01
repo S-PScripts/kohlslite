@@ -10205,7 +10205,8 @@ return
    end
 
  if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'btkick' then
-	dasplayer = string.sub(msg:lower(), #prefix + 8)
+	Remind("Already patched, buddy")
+	--[[dasplayer = string.sub(msg:lower(), #prefix + 8)
         local cplr, player = PLAYERCHECK(dasplayer)
         if player and not table.find(nokick, player) then
 		backend_stuff.btkickrn = true
@@ -10214,12 +10215,13 @@ return
                 Remind("Sorry, this player cannot be kicked!")
 	else
                 Remind("Player doesn't exist!")
-        end
+        end ]]
    end
 
  if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unbtkick' then
-	backend_stuff.btkickrn = false
-	Remind("No longer kicking the player.")
+	Remind("Already patched, buddy")
+	--[[ backend_stuff.btkickrn = false
+	Remind("No longer kicking the player.") ]]
 end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'prkick' then
