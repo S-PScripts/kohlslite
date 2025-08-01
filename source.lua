@@ -5844,7 +5844,8 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'seedkick' then -- could be better in a seedkick() function i guess
-		if 0 == 0 then return Remind("NO LONGER WORKS") end -- This kick could still work but it was terrible to begin with
+		Remind("NO LONGER WORKS")
+		--[[ This kick could still work but it was terrible to begin with
 		Remind("This kick was found by Digitality.")
 		local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 local cplr, player = PLAYERCHECK(dasplayer)
@@ -5877,10 +5878,12 @@ return
 		Chat("punish me")
 		task.wait(.5)
 		Chat("unpunish me")
+		]]
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'omeshkick' then  -- mesh kick haha
-		if 0 == 0 then return Remind("NO LONGER WORKS") end
+		Remind("NO LONGER WORKS")
+--[[
 		dzjecraft = false
 		local dasplayer = string.sub(msg:lower(), #prefix + 11)
                 local cplr, player = PLAYERCHECK(dasplayer)
@@ -5895,17 +5898,17 @@ return
                 else                        
                         return Remind('Cannot find player with the name: '..dasplayer)
                 end
-	
+	]]
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unomeshkick' then 
+   --[[ if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unomeshkick' then 
 	dzjecraft = true
 	Remind("Ended mesh-kick.")
-    end
+    end ]]
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'ohatkick' then  -- hat kick haha
-		if 0 == 0 then return Remind("NO LONGER WORKS") end
-		dzjecraft = false
+		Remind("NO LONGER WORKS")
+		--[[ dzjecraft = false
 		local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 local cplr, player = PLAYERCHECK(dasplayer)
 	
@@ -5918,18 +5921,17 @@ return
                         return Remind("Sorry, this player cannot be kicked!")
                 else                        
                         return Remind('Cannot find player with the name: '..dasplayer)
-                end
-	
+                end ]]
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unohatkick' then 
+--[[    if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unohatkick' then 
 	dzjecraft = true
 	Remind("Ended hat-kick.")
-    end
+    end ]]
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'hatkick' then  -- tech kick
-		if 0 == 0 then return Remind("NO LONGER WORKS") end
-		local dasplayer = string.sub(msg:lower(), #prefix + 9)
+		Remind("NO LONGER WORKS")
+		--[[ local dasplayer = string.sub(msg:lower(), #prefix + 9)
                 local cplr, player = PLAYERCHECK(dasplayer)
 	
                 if player ~= nil and not table.find(nokick, player) then
@@ -5941,13 +5943,13 @@ return
                         return Remind("Sorry, this player cannot be kicked!")
                 else                        
                         return Remind('Cannot find player with the name: '..dasplayer)
-                end
+                end ]]
 	
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'meshkick' then  -- mesh kick haha
-		if 0 == 0 then return Remind("NO LONGER WORKS") end -- best code ever (what the heck is this)
-		local dasplayer = string.sub(msg:lower(), #prefix + 10)
+	        Remind("NO LONGER WORKS")
+	--[[	local dasplayer = string.sub(msg:lower(), #prefix + 10)
                 local cplr, player = PLAYERCHECK(dasplayer)
 	
                 if player ~= nil and not table.find(nokick, player) then
@@ -5959,7 +5961,7 @@ return
                         return Remind("Sorry, this player cannot be kicked!")
                 else                        
                         return Remind('Cannot find player with the name: '..dasplayer)
-                end
+                end ]]
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antimesh' then 
@@ -10218,11 +10220,10 @@ return
         end ]]
    end
 
- if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unbtkick' then
-	Remind("Already patched, buddy")
-	--[[ backend_stuff.btkickrn = false
-	Remind("No longer kicking the player.") ]]
-end
+--[[ if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unbtkick' then
+	backend_stuff.btkickrn = false
+	Remind("No longer kicking the player.")
+end ]]
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'prkick' then
 	dasplayer = string.sub(msg:lower(), #prefix + 7)
