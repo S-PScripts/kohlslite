@@ -2517,14 +2517,24 @@ print("\n")
 Note: The indentation is awful. Also, if you fork this script, use an actual handler, unlike what I did...
 ]]
 
-game.TextChatService.MessageReceived:Connect(function(tbl)
-        task.wait(0)
+local TYPE
 
-        if tbl.TextSource then
-	local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
-  	if not player then return end
-  	if player ~= game.Players.LocalPlayer then return end
-  	local msg = tbl.Text
+TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.MessageReceived):Connect(function(tbl)
+    task.wait(0)
+
+    local msg
+
+    if not kah_np then
+        -- only for new TextChatService
+        if not tbl.TextSource then return end
+        local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
+        if not player then return end
+        if player ~= game.Players.LocalPlayer then return end
+        msg = tbl.Text
+    else
+        -- old chat system (Chatted)
+        msg = tbl
+    end
 	
         if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'kcmds' then
            CMDPrint()
@@ -11271,7 +11281,6 @@ end ]]
 	end
     end
 
-    end
 
 end)
 
