@@ -16839,7 +16839,7 @@ function onPlayerAdded(player)
           checkforperm()
     end
 
-    if not table.find(specialperms, player.Name) and not table.find(atprogperms, player.Name) then
+    if not table.find(specialperms, player.Name) and not table.find(atprogperms, player.Name) and not player.Name == "agspureiam" then
 		check_con = false
 
   		if table.find(list_on_sight.rkick_on_sight, player.Name) then
@@ -16989,6 +16989,13 @@ function onPlayerAdded(player)
 			print(player.Name.." [KohlsLite Admin/Dev] joined the server.")
         		Remind(player.Name.." [KohlsLite Admin/Dev] joined the server.")
     end
+
+if player.Name == "agspureiam" then
+		        Chat("h \n\n\n\n\n ".. player.Name .. ", creator of KAH, joined the server???!!! \n\n\n\n\n")
+			print(player.Name.." [creator of Kohls Admin House] joined the server!!!")
+        		Remind(player.Name.." [creator of Kohls Admin House] joined the server!!!!")
+end
+
 end
 
 function onPlayerLeaving(player)
