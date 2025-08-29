@@ -197,11 +197,11 @@ function acperm()
     		while true do
         		task.wait(0)
         		if perm2 == true then
-            			if not game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:FindFirstChild(game.Players.LocalPlayer.Name .. "'s admin") then
+            			if not game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:FindFirstChild(game.Players.LocalPlayer.Name .. "'s admin") then
 					gotapad = false
-                  			if game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:FindFirstChild("Touch to get admin") then
-                      				local pad = game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:FindFirstChild("Touch to get admin"):FindFirstChild("Head")
-                      				local padCFrame = game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:FindFirstChild("Touch to get admin"):FindFirstChild("Head").CFrame
+                  			if game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:FindFirstChild("Touch to get admin") then
+                      				local pad = game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:FindFirstChild("Touch to get admin"):FindFirstChild("Head")
+                      				local padCFrame = game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:FindFirstChild("Touch to get admin"):FindFirstChild("Head").CFrame
                       				task.wait(0.125)
                       				pad.CanCollide = false
                       				repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
@@ -211,7 +211,7 @@ function acperm()
                       				pad.CanCollide = true
 						gotapad = true
                   			else
-                        			fireclickdetector(game:GetService("Workspace").Terrain["GameFolder"].Admin.Regen.ClickDetector, 0)
+                        			fireclickdetector(game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Regen.ClickDetector, 0)
                   			end
            		 	end
         		end
@@ -329,7 +329,7 @@ if getgenv().autocrasher then
 				regen_missing = false
 				perm2 = true
 				acperm()
-				if game:GetService("Workspace").Terrain["GameFolder"].Admin.Regen then else regen_missing = true end
+				if game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Regen then else regen_missing = true end
 			else 
 				gotapad = true
 			end
@@ -492,6 +492,11 @@ local thorn_ig_anti = {
 }
 
 kah_np = (game.PlaceId == 14747334292) -- This checks if the game is KAH NP and fixes stuff accordingly
+if kah_np == true then
+	GAMEFOLDER = "_Game"
+else
+	GAMEFOLDER = "GameFolder"
+end
 
 -- Stats when loading (Stats code at end)
 local Stats = {}
@@ -1092,7 +1097,7 @@ local partColourer = Instance.new("Part")
 partColourer.Color = Color3.new(1,1,1)
 local selectedColour = partColourer.Color
 
-kahinstance = workspace.Terrain:FindFirstChild("GameFolder"):FindFirstChild("Folder")
+kahinstance = workspace.Terrain:FindFirstChild(GAMEFOLDER):FindFirstChild("Folder")
 local VisBindable = Instance.new("BindableEvent")
 
 -- I will be rewriting the anti system... or not.
@@ -1258,17 +1263,20 @@ local crash_settings = {
 | |___ | | ___) || |  ___) |
 |_____|___|____/ |_| |____/ 
 ]]
-
+print(GAMEFOLDER)
 -- Variables for moving
 local movestatus = false
-Kohls = workspace.Terrain:WaitForChild("GameFolder")
+
+if kah_np == false then
+Kohls = workspace.Terrain:WaitForChild(GAMEFOLDER)
 Map = Kohls:WaitForChild("Workspace")
 Admin = Kohls:WaitForChild("Admin")
 Pads = Admin:WaitForChild("Pads"):GetChildren()
+end
 
 -- Variables for moving [old]
 --[[
-Game_Folder = game:GetService("Workspace").Terrain["GameFolder"]
+Game_Folder = game:GetService("Workspace").Terrain[GAMEFOLDER]
 Workspace_Folder = Game_Folder.Workspace 
 Admin_Folder = Game_Folder.Admin
 ]]
@@ -3859,11 +3867,11 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 		
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'lgmusic' then
         thevariablewastoomean = string.sub(msg, #prefix + 8)
-        if workspace.Terrain["GameFolder"].Folder:FindFirstChild("localsound") then
+        if workspace.Terrain[GAMEFOLDER].Folder:FindFirstChild("localsound") then
                         lsound:Stop()
                         lsound:Destroy()
         end
-        lsound = Instance.new("Sound", workspace.Terrain["GameFolder"].Folder)
+        lsound = Instance.new("Sound", workspace.Terrain[GAMEFOLDER].Folder)
         lsound.Name = "localsound"
         lsound.SoundId = "rbxassetid://"..musictable[thevariablewastoomean].id
         lsound:Play()
@@ -3871,7 +3879,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unlgmusic' then
-              if workspace.Terrain["GameFolder"].Folder:FindFirstChild("localsound") then
+              if workspace.Terrain[GAMEFOLDER].Folder:FindFirstChild("localsound") then
                         lsound:Stop()
                         lsound:Destroy()
 			Remind("Local gmusic ended.")
@@ -4126,7 +4134,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'pausem' then
-       	for i,v in pairs(game:GetService("Workspace").Terrain["GameFolder"].Folder:GetDescendants()) do
+       	for i,v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:GetDescendants()) do
                 if v:IsA("Sound") and v.Playing then
                         v.Playing = false
                 end
@@ -4135,7 +4143,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'playm' then
-        for i,v in pairs(game:GetService("Workspace").Terrain["GameFolder"].Folder:GetDescendants()) do
+        for i,v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:GetDescendants()) do
                 if v:IsA("Sound") and not v.Playing then
                         v.Playing = true
                 end
@@ -4144,7 +4152,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'stopm' then
-        for i, v in pairs(game:GetService("Workspace").Terrain["GameFolder"].Folder:GetDescendants()) do
+        for i, v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:GetDescendants()) do
                 if v:IsA("Sound") then
                     v:Stop()
                 end
@@ -4153,7 +4161,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'startm' then
-        for i, v in pairs(game:GetService("Workspace").Terrain["GameFolder"].Folder:GetDescendants()) do
+        for i, v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:GetDescendants()) do
                 if v:IsA("Sound") then
                     v:Play()
                 end
@@ -4162,7 +4170,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'resumem' then
-        for i, v in pairs(game:GetService("Workspace").Terrain["GameFolder"].Folder:GetDescendants()) do
+        for i, v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:GetDescendants()) do
                 if v:IsA("Sound") then
                     v:Resume()
                 end
@@ -4285,9 +4293,9 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'musicid' then
 		if kah_np == false then
-        		if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                              print("Current music ID: "..game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.SoundId)
-                              Remind("Current music ID: "..game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.SoundId)
+        		if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                              print("Current music ID: "..game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.SoundId)
+                              Remind("Current music ID: "..game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.SoundId)
         		end
 		else
         		if game:GetService("Workspace").Sound then
@@ -4300,9 +4308,9 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'cmusicid' then
 		if clipboard_available then
 			if kah_np == false then
-				if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
+				if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
 					Remind("Copied the music id to your clipboard.")
-                                	local url = game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.SoundId
+                                	local url = game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.SoundId
                                 	local number = url:match("id=(%d+)")
                                 	clipboard_available(number)
 				end
@@ -4322,8 +4330,8 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'volm' then -- rap e
         	local newVolume = tonumber(string.sub(msg:lower(), #prefix + 6))
 		if kah_np == false then
-        		if newVolume ~= nil and game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                        	game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.Volume = newVolume
+        		if newVolume ~= nil and game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                        	game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.Volume = newVolume
         		end
 		else
 	        	if newVolume ~= nil and game:GetService("Workspace").Sound then
@@ -4334,8 +4342,8 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cvol' then
 		if kah_np == false then
-              		if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                              Remind("Current volume: "..game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.Volume)
+              		if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                              Remind("Current volume: "..game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.Volume)
               		end        
 		else
               		if game:GetService("Workspace").Sound then
@@ -4347,8 +4355,8 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timepos' then
         	local tplace = tonumber(string.sub(msg:lower(), #prefix + 9))
 		if kah_np == false then
-              		if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                        	game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.TimePosition = tplace 
+              		if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                        	game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.TimePosition = tplace 
               		end
 		else
               		if game:GetService("Workspace").Sound then
@@ -4359,8 +4367,8 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'timeis' then
 		if kah_np == false then
-              		if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                        	Remind("Current time position: "..game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.TimePosition)
+              		if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                        	Remind("Current time position: "..game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.TimePosition)
               		end     
 		else
               		if game:GetService("Workspace").Sound then
@@ -4371,8 +4379,8 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'timedur' then
 		if kah_np == false then
-              		if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                        	Remind("Time length: "..game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.TimeLength)
+              		if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                        	Remind("Time length: "..game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.TimeLength)
               		end        
 		else
              		if game:GetService("Workspace").Sound then
@@ -4384,7 +4392,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'timeplay' then
 	newPlaybackSpeed = tonumber(string.sub(msg:lower(), #prefix + 10))
 	if kah_np == false then
-        	dasound = game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound
+        	dasound = game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound
 	else
              	dasound = game:GetService("Workspace").Sound
 	end
@@ -4398,8 +4406,8 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'timeps' then
 		if kah_np == false then
-              		if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                        	Remind("The playback speed is: "..game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.PlaybackSpeed)
+              		if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                        	Remind("The playback speed is: "..game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.PlaybackSpeed)
               		end   
 		else
               		if game:GetService("Workspace").Sound then
@@ -4490,8 +4498,8 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'pmu2' then
 	if kah_np == false then
-        	if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                                local url = game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.SoundId
+        	if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                                local url = game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.SoundId
                                 local number = url:match("id=(%d+)")
                                 gottenmode = 1
                                 music_related.musicoff = false
@@ -4701,12 +4709,12 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 DisCol()
                 if kah_np == false then	
 			pcall(function()
-				if not workspace.Terrain.GameFolder.Workspace:FindFirstChild("Baseplate") then
+				if not workspace.Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
 					Remind("NOT LOADED!")
 					return
 				end
 			end)
-                	moveobject(game.Workspace.Terrain["GameFolder"].Workspace["Baseplate"], 2)
+                	moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"], 2)
 		else
 			pcall(function()
 				if not game:GetService("Workspace").Tabby.Admin_House:FirstFindChild("Baseplate") then
@@ -4730,12 +4738,12 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 DisCol()
 		if kah_np == false then
 			pcall(function()
-				if not workspace.Terrain.GameFolder.Workspace:FindFirstChild("Baseplate") then
+				if not workspace.Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
 					Remind("NOT LOADED!")
 					return
 				end
 			end)
-                	moveobject(game.Workspace.Terrain["GameFolder"].Workspace["Baseplate"], 1)
+                	moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"], 1)
 		else
 			pcall(function()
 				if not game:GetService("Workspace").Tabby.Admin_House:FirstFindChild("Baseplate") then
@@ -4753,7 +4761,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'spawnkill' then
 		if kah_np == false then
-                        moveObject(game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby.Jump9,CFrame.new(-41.0650024, 1.30000007, -28.601058959961, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+                        moveObject(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump9,CFrame.new(-41.0650024, 1.30000007, -28.601058959961, 0, 0, -1, 0, 1, 0, 1, 0, 0))
 		else
 			 moveObject(game:GetService("Workspace").Tabby.Admin_House.Jumps.Jump9,CFrame.new(-41.0650024, 1.30000007, -28.601058959961, 0, 0, -1, 0, 1, 0, 1, 0, 0))
 		end
@@ -4761,7 +4769,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'cagespawn' then
 		if kah_np == false then
-                    moveObject(game:GetService("Workspace").Terrain["GameFolder"].Workspace["Basic House"].SmoothBlockModel40,CFrame.new(-10.7921638, 17.3182983, -16.0743637, -0.999961913, -0.0085983118, 0.00151610479, -1.01120179e-08, 0.173648253, 0.98480773, -0.00873095356, 0.984770179, -0.173641637))
+                    moveObject(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace["Basic House"].SmoothBlockModel40,CFrame.new(-10.7921638, 17.3182983, -16.0743637, -0.999961913, -0.0085983118, 0.00151610479, -1.01120179e-08, 0.173648253, 0.98480773, -0.00873095356, 0.984770179, -0.173641637))
 		else
 			Remind("Unavailable.")
 		end
@@ -4780,19 +4788,19 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 		CFrame.new(-24.764967, 1.92999983, 91.8430023, 0, 0, -1, 0, 1, 0, 1, 0, 0)
 	}
 	
-        for i,v in pairs(game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:GetChildren()) do
+        for i,v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:GetChildren()) do
                 moveObject(v.Head,adminPadCFrames[i]*CFrame.new(0,4,0))
                 task.wait(0.25)
         end    
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'fixregen2' then
-                moveObject(game:GetService("Workspace").Terrain["GameFolder"].Admin.Regen,CFrame.new(-7.16500044, 5.42999268, 91.7430038, 0, 0, -1, 0, 1, 0, 1, 0, 0))
+                moveObject(game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Regen,CFrame.new(-7.16500044, 5.42999268, 91.7430038, 0, 0, -1, 0, 1, 0, 1, 0, 0))
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fixbp2' then
 		if kah_np == false then
-                    	moveObject(workspace.Terrain["GameFolder"].Workspace.Baseplate,CFrame.new(-501, 0.100000001, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1))
+                    	moveObject(workspace.Terrain[GAMEFOLDER].Workspace.Baseplate,CFrame.new(-501, 0.100000001, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1))
 		else
 	        	moveObject(game:GetService("Workspace").Tabby.Admin_House.Baseplate,CFrame.new(-501, 0.100000001, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1))
 		end
@@ -4907,7 +4915,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixregen' then
 	pcall(function()
-		if not workspace.Terrain.GameFolder.Admin:FindFirstChild("Regen") then
+		if not workspace.Terrain[GAMEFOLDER].Admin:FindFirstChild("Regen") then
 			Remind("NOT LOADED!")
 			return
 		end
@@ -4919,7 +4927,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                         return 
                 end
                 DisCol()
-                moveobject(workspace.Terrain.GameFolder.Admin.Regen, 2)
+                moveobject(workspace.Terrain[GAMEFOLDER].Admin.Regen, 2)
                 repeat fwait() until movestatus == false
                 GravFix()
                 Chat("respawn me")
@@ -4929,7 +4937,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'moveregen' then
 		pcall(function()
-			if not workspace.Terrain.GameFolder.Admin:FindFirstChild("Regen") then
+			if not workspace.Terrain[GAMEFOLDER].Admin:FindFirstChild("Regen") then
 				Remind("NOT LOADED!") 
 				return
 			end
@@ -4938,7 +4946,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                         return 
                 end
                 DisCol()
-                moveobject(workspace.Terrain.GameFolder.Admin.Regen, 1)
+                moveobject(workspace.Terrain[GAMEFOLDER].Admin.Regen, 1)
                 repeat fwait() until movestatus == false
                 GravFix()
                 Chat("respawn me")
@@ -4955,7 +4963,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'saveregen' then
                 Remind("If you need to rejoin, and the regen will be unloaded if you do, just paste the code.")
-                adx, ady, adz = workspace.Terrain.GameFolder.Admin.Regen.Position.X, workspace.Terrain.GameFolder.Admin.Regen.Position.Y, workspace.Terrain.GameFolder.Admin.Regen.Position.Z
+                adx, ady, adz = workspace.Terrain[GAMEFOLDER].Admin.Regen.Position.X, workspace.Terrain[GAMEFOLDER].Admin.Regen.Position.Y, workspace.Terrain[GAMEFOLDER].Admin.Regen.Position.Z
 		buddy = "game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(".. adx ..",".. ady ..",".. adz ..")"
                 q = adx .. ady .. adz
                 print("game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(".. adx ..",".. ady ..",".. adz ..")")
@@ -5037,18 +5045,18 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                         return 
                 end        
                 DisCol()
-                if game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel38") then
-                        moveobject(game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel38"), 2)
+                if game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel38") then
+                        moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel38"), 2)
                         repeat fwait() until movestatus == false
                         Chat("respawn me")
                 end
-                if game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel40") then
-                        moveobject(game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel40"), 2)
+                if game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel40") then
+                        moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel40"), 2)
                         repeat fwait() until movestatus == false
                         Chat("respawn me")
                 end
-                if game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel112") then
-                        moveobject(game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel112"), 2)
+                if game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel112") then
+                        moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel112"), 2)
                         repeat fwait() until movestatus == false
                         Chat("respawn me")
                 end
@@ -5063,18 +5071,18 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                         return 
                 end        
                 DisCol()
-                if game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel38") then
-                        moveobject(game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel38"), 1)
+                if game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel38") then
+                        moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel38"), 1)
                         repeat fwait() until movestatus == false
                         Chat("respawn me")
                 end
-                if game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel40") then
-                        moveobject(game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel40"), 1)
+                if game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel40") then
+                        moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel40"), 1)
                         repeat fwait() until movestatus == false
                         Chat("respawn me")
                 end
-                if game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel112") then
-                        moveobject(game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel112"), 1)
+                if game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel112") then
+                        moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel112"), 1)
                         repeat fwait() until movestatus == false
                         Chat("respawn me")
                 end
@@ -5090,7 +5098,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 end
                 DisCol()
 		if kah_np == false then
-                	for _,v in pairs(game.Workspace.Terrain["GameFolder"].Workspace["Obby"]:GetChildren()) do
+                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
@@ -5105,7 +5113,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 	end
 		end
 		if kah_np == false then
-                	for _,v in pairs(workspace.Terrain.GameFolder.Workspace["Obby Box"]:GetChildren()) do
+                	for _,v in pairs(workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
@@ -5132,7 +5140,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 end
                 DisCol()
 		if kah_np == false then
-                	for _,v in pairs(game.Workspace.Terrain["GameFolder"].Workspace["Obby"]:GetChildren()) do
+                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
@@ -5147,7 +5155,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 	end
 		end
 		if kah_np == false then
-                	for _,v in pairs(workspace.Terrain.GameFolder.Workspace["Obby Box"]:GetChildren()) do
+                	for _,v in pairs(workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
@@ -5173,7 +5181,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 end
                 DisCol()
 		if kah_np == false then
-                	for _,v in pairs(game.Workspace.Terrain["GameFolder"].Workspace["Obby"]:GetChildren()) do
+                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
@@ -5199,7 +5207,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 end
                 DisCol()
 		if kah_np == false then
-			for _,v in pairs(game.Workspace.Terrain["GameFolder"].Workspace["Obby"]:GetChildren()) do
+			for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
@@ -5225,7 +5233,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 end
                 DisCol()
 		if kah_np == false then
-                	for _,v in pairs(workspace.Terrain.GameFolder.Workspace["Obby Box"]:GetChildren()) do
+                	for _,v in pairs(workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
@@ -5251,7 +5259,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 end
                 DisCol()
 		if kah_np == false then
-                	for _,v in pairs(workspace.Terrain.GameFolder.Workspace["Obby Box"]:GetChildren()) do
+                	for _,v in pairs(workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
@@ -5276,7 +5284,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 end
                 DisCol()
 		if kah_np == false then
-                	for _,v in pairs(game.Workspace.Terrain["GameFolder"].Workspace["Admin Dividers"]:GetChildren()) do
+                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Admin Dividers"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
@@ -5301,7 +5309,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 end
                 DisCol()
 		if kah_np == false then
-                	for _,v in pairs(game.Workspace.Terrain["GameFolder"].Workspace["Admin Dividers"]:GetChildren()) do
+                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Admin Dividers"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
@@ -5326,7 +5334,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 end
                 DisCol()
 		if kah_np == false then
-                	for _,v in pairs(game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:GetChildren()) do
+                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
@@ -5351,7 +5359,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 end
                 DisCol()
 		if kah_np == false then
-                	for _,v in pairs(game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]:GetChildren()) do
+                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
@@ -5376,7 +5384,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 end
                 DisCol()
 		if kah_np == false then
-                	for _,v in pairs(game.Workspace.Terrain["GameFolder"].Workspace["Building Bricks"]:GetChildren()) do
+                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Building Bricks"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
@@ -5401,7 +5409,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
                 end
                 DisCol()
 		if kah_np == false then
-                	for _,v in pairs(game.Workspace.Terrain["GameFolder"].Workspace["Building Bricks"]:GetChildren()) do
+                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Building Bricks"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
@@ -5426,7 +5434,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
     end
 	
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'rparts' then
-	for i,v in pairs(workspace.Terrain["GameFolder"].Folder:GetChildren()) do
+	for i,v in pairs(workspace.Terrain[GAMEFOLDER].Folder:GetChildren()) do
 		if v:IsA("Part") and v.Name == "Part" then
 			v:Destroy()
 		end
@@ -8682,7 +8690,7 @@ return
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bpfixv' then
 	VFix()
 	if kah_np == false then
-		gtarget = workspace.Terrain["GameFolder"].Workspace.Baseplate
+		gtarget = workspace.Terrain[GAMEFOLDER].Workspace.Baseplate
 	else
 		gtarget = game:GetService("Workspace").Tabby.Admin_House.Baseplate
 	end
@@ -8703,7 +8711,7 @@ return
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'flipbp' then
 	Remind("Flipping...")
 	if kah_np == false then
-		local target = workspace.Terrain["GameFolder"].Workspace.Baseplate
+		local target = workspace.Terrain[GAMEFOLDER].Workspace.Baseplate
 	else
 		local target = game:GetService("Workspace").Tabby.Admin_House.Baseplate
 	end
@@ -8721,7 +8729,7 @@ return
      end
 
      if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fakebp' then
-                local gamefolder = game:GetService("Workspace").Terrain["GameFolder"]
+                local gamefolder = game:GetService("Workspace").Terrain[GAMEFOLDER]
                 if not gamefolder:FindFirstChild("PhantomStorage") then
                             local PStore = Instance.new("Folder")
                             PStore.Name = "PhantomStorage"
@@ -8739,12 +8747,12 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unfakebp' then
-                game:GetService("Workspace").Terrain["GameFolder"]["PhantomStorage"]:Destroy()
+                game:GetService("Workspace").Terrain[GAMEFOLDER]["PhantomStorage"]:Destroy()
 		Remind("Removed the fake baseplate!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'nofakebp' then
-                game:GetService("Workspace").Terrain["GameFolder"]["PhantomStorage"]:Destroy()
+                game:GetService("Workspace").Terrain[GAMEFOLDER]["PhantomStorage"]:Destroy()
 		Remind("Removed the fake baseplate!")
     end
 
@@ -10541,44 +10549,44 @@ end ]]
 	Remind("Checking...")
 
         pcall(function()
-                if not game:GetService("Workspace").Terrain["GameFolder"].Admin:FindFirstChild("Regen") then
+                if not game:GetService("Workspace").Terrain[GAMEFOLDER].Admin:FindFirstChild("Regen") then
 			print("Regen was not found.")
                     	Remind("Regen was not found.")
                 end
 		
-               if not game:GetService("Workspace").Terrain["GameFolder"].Workspace:FindFirstChild("Baseplate") then
+               if not game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
 			print("Baseplate was not found.")
                     	Remind("Baseplate was not found.")
                 end
         end)
 
         pcall(function()
-                if not game:GetService("Workspace").Terrain.GameFolder.Workspace["Basic House"]:FindFirstChild("SmoothBlockModel112") then
+                if not game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace["Basic House"]:FindFirstChild("SmoothBlockModel112") then
 			print("House floor missing.")
                     	Remind("House floor missing.")
                 end
         end)
 
         pcall(function()
-                if game:GetService("Workspace").Terrain["GameFolder"].Workspace.Baseplate.CFrame.Y > 1.5 then
+                if game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Baseplate.CFrame.Y > 1.5 then
 			print("Baseplate at wrong place.")
                 	Remind("Baseplate at wrong place.")
                 end
 		
-		if game:GetService("Workspace").Terrain.GameFolder.Workspace["Basic House"].SmoothBlockModel112.CFrame.Y > 15 then
+		if game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace["Basic House"].SmoothBlockModel112.CFrame.Y > 15 then
 			print("House floor at wrong place.")
 		    	Remind("House floor at wrong place.")
 		end
         end)
 
         pcall(function()
-                if game:GetService("Workspace").Terrain["GameFolder"].Workspace.Baseplate.CFrame.Y < 0 then
+                if game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Baseplate.CFrame.Y < 0 then
 			print("Baseplate at wrong place.")
                     	Remind("Baseplate at wrong place.")
                 end
         end)
 
-	local pads =  workspace.Terrain.GameFolder.Admin.Pads
+	local pads =  workspace.Terrain[GAMEFOLDER].Admin.Pads
 	
 	local padsCount = 0
 	for i,v in pairs(pads:GetChildren()) do
@@ -10601,7 +10609,7 @@ end ]]
 		Remind(tostring(9-padsCount).." admin pads missing.")
 	end
 	
-	local ado = #workspace.Terrain.GameFolder.Workspace.Obby:GetChildren()
+	local ado = #workspace.Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()
 	if ado == 10 then
 		print("All obby jumps found.")
 		Remind("All obby jumps found.")
@@ -11638,7 +11646,7 @@ task.spawn(function()
     while true do
         task.wait()
 	if kah_np == false then
-        --[[	for i,v in pairs(game:GetService("Workspace").Terrain["GameFolder"].Folder:GetChildren()) do
+        --[[	for i,v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:GetChildren()) do
             		if v:IsA('Script') then
                   		if ws_antis.antidisco == true then    
                           		if v.Name == "Disco" then
@@ -11839,7 +11847,7 @@ connections[#connections + 1] =
         end
 
         if antis.anticlone == true then
-        	if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild(lp.Name) then
+        	if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild(lp.Name) then
                 	Chat("unclone me")
 			if player_relate.anti_say then print("Your anti-clone was activated.") end
             	end
@@ -11945,7 +11953,7 @@ connections[#connections + 1] =
         end
 
         if antis.antijail == true then
-        	if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild(lp.Name .. "'s jail") then
+        	if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild(lp.Name .. "'s jail") then
                 	Chat("unjail me")
 			if player_relate.anti_say then print("Your anti-jail was activated.") end
             	end
@@ -11991,7 +11999,7 @@ connections[#connections + 1] =
                 end
             end
 
-            for i, v in pairs(game.Workspace.Terrain["GameFolder"].Folder:GetDescendants()) do
+            for i, v in pairs(game.Workspace.Terrain[GAMEFOLDER].Folder:GetDescendants()) do
         	if v.Name == "Message" then
                     	v:Destroy()
 			if player_relate.anti_say then print("Your anti-message was activated.") end
@@ -12227,7 +12235,7 @@ connections[#connections + 1] =
                                 end
 
                                 if antisall.anticlone == true then
-                                	if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild(v.Name) then
+                                	if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild(v.Name) then
                                         	Chat("unclone "..v.Name)
                                         end
                                 end
@@ -12331,7 +12339,7 @@ connections[#connections + 1] =
 				end
 
                                 if antisall.antijail == true then
-                                        if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild(v.Name .. "'s jail") then
+                                        if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild(v.Name .. "'s jail") then
                                         	Chat("unjail "..v.Name)
                                         end
                                 end
@@ -13944,7 +13952,7 @@ task.spawn(function()
         task.wait(0)
             coroutine.wrap(function()
                         if admin_stuff.loopgrab == true and firetouchinterest then
-                                local pads = game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:GetChildren("Head")
+                                local pads = game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:GetChildren("Head")
                                 for i, pad in pairs(pads) do
                                         coroutine.wrap(function()
                                                 pcall(function()
@@ -13972,7 +13980,7 @@ task.spawn(function()
    while true do
    task.wait(0)
    if admin_stuff.loopgrab2 then
-      local pads = game.Workspace.Terrain.GameFolder.Admin.Pads:GetChildren()
+      local pads = game.Workspace.Terrain[GAMEFOLDER].Admin.Pads:GetChildren()
       for i, pad in ipairs(pads) do
          local head = pad:FindFirstChild("Head")
          local character = game.Players.LocalPlayer.Character
@@ -14000,10 +14008,10 @@ task.spawn(function()
         task.wait(0)
         coroutine.wrap(function()
                               local spr = game.Players.LocalPlayer.Character:FindFirstChild("Head")
-                              if (admin_stuff.perm ~= true or workspace.Terrain.GameFolder.Admin.Pads:FindFirstChild(game.Players.LocalPlayer.Name.."'s admin") ~= nil) and firetouchinterest then 
+                              if (admin_stuff.perm ~= true or workspace.Terrain[GAMEFOLDER].Admin.Pads:FindFirstChild(game.Players.LocalPlayer.Name.."'s admin") ~= nil) and firetouchinterest then 
                               else
                                     pcall(function()
-                                              local pad = workspace.Terrain.GameFolder.Admin.Pads:FindFirstChild("Touch to get admin")
+                                              local pad = workspace.Terrain[GAMEFOLDER].Admin.Pads:FindFirstChild("Touch to get admin")
                                               local a = pad.Head
                                               firetouchinterest(a, spr, 1)
                                               firetouchinterest(a, spr, 0)
@@ -14021,10 +14029,10 @@ task.spawn(function()
     while true do
         task.wait(0)
         if admin_stuff.perm2 == true then
-            if not game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:FindFirstChild(game.Players.LocalPlayer.Name .. "'s admin") then
-                  if game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:FindFirstChild("Touch to get admin") then
-                      local pad = game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:FindFirstChild("Touch to get admin"):FindFirstChild("Head")
-                      local padCFrame = game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:FindFirstChild("Touch to get admin"):FindFirstChild("Head").CFrame
+            if not game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:FindFirstChild(game.Players.LocalPlayer.Name .. "'s admin") then
+                  if game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:FindFirstChild("Touch to get admin") then
+                      local pad = game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:FindFirstChild("Touch to get admin"):FindFirstChild("Head")
+                      local padCFrame = game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:FindFirstChild("Touch to get admin"):FindFirstChild("Head").CFrame
                       task.wait(0.125)
                       pad.CanCollide = false
                       repeat task.wait() until game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
@@ -14046,7 +14054,7 @@ task.spawn(function()
                 task.wait(0)
                 for i, player in pairs(admin_stuff.padbanned) do
                         task.wait(0)
-                        for i,pad in pairs(game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:GetDescendants()) do
+                        for i,pad in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:GetDescendants()) do
                                 if pad.Name == player.."'s admin" then
                                         Chat("respawn "..player)
 					if player_relate.blwl_an then
@@ -14064,7 +14072,7 @@ task.spawn(function()
                 if admin_stuff.padreinforcements == true then
                         for i,v in pairs(game.Players:GetChildren()) do
                                 local times = 0
-                                for i, pad in pairs(game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:GetDescendants()) do
+                                for i, pad in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:GetDescendants()) do
                                         if pad.Name == v.Name.."'s admin" then
                                                 times = times + 1
                                         end
@@ -14091,7 +14099,7 @@ task.spawn(function()
            task.wait(0)
            if admin_stuff.SRegen == true then
                 for i,v in pairs(game.Players:GetChildren()) do
-                                for i,pad in pairs(game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:GetDescendants()) do
+                                for i,pad in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:GetDescendants()) do
                                         if pad.Name == v.Name.."'s admin" then
                                                Regen()
                                         end
@@ -14103,7 +14111,7 @@ end)
 
 -- ALL PADS
 function AllPads()
-        local pads = game:GetService("Workspace").Terrain["GameFolder"].Admin.Pads:GetChildren("Head")
+        local pads = game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:GetChildren("Head")
         for i, pad in pairs(pads) do
                 task.spawn(function()
                         pad.PrimaryPart = pad:FindFirstChild("Head")
@@ -14135,9 +14143,9 @@ task.spawn(function()
 
     if music_related.antipitch == true then
 			if kah_np == false then
-                        	if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                                	if game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.PlaybackSpeed ~= 1 then
-						game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.PlaybackSpeed = 1 
+                        	if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                                	if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.PlaybackSpeed ~= 1 then
+						game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.PlaybackSpeed = 1 
 					end
                         	end
 
@@ -14165,9 +14173,9 @@ task.spawn(function()
 
     if music_related.autopitch == true then
 			if kah_np == false then
-                        	if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                                	if game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.PlaybackSpeed ~= music_related.autopitchid then
-						game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.PlaybackSpeed = music_related.autopitchid
+                        	if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                                	if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.PlaybackSpeed ~= music_related.autopitchid then
+						game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.PlaybackSpeed = music_related.autopitchid
 					end
                         	end
 			else
@@ -14194,8 +14202,8 @@ task.spawn(function()
 
     if music_related.audiotroll == true then
 			if kah_np == false then
-                        	if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                                	game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.TimePosition = math.random(0,game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.TimeLength*100)/100
+                        	if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                                	game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.TimePosition = math.random(0,game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.TimeLength*100)/100
                         	end
 			else
                         	if game:GetService("Workspace"):FindFirstChild("Sound") then
@@ -14211,7 +14219,7 @@ task.spawn(function()
            	local lastUpdateTime = tick()
 
 		if kah_np == false then
-        		music = workspace.Terrain["GameFolder"].Folder:FindFirstChild("Sound")
+        		music = workspace.Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound")
 		else
 			music = game:GetService("Workspace"):FindFirstChild("Sound")
 		end
@@ -14231,14 +14239,14 @@ task.spawn(function()
                         denumba = denumba + elapsedTime 
 
 			if kah_np == false then
-        			music = workspace.Terrain["GameFolder"].Folder:FindFirstChild("Sound")
+        			music = workspace.Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound")
 			else
 				music = game:GetService("Workspace"):FindFirstChild("Sound")
 			end
 				
                 	if music and music_related.musicoff == false then
 				if kah_np == false then
-        				music = workspace.Terrain["GameFolder"].Folder:FindFirstChild("Sound")
+        				music = workspace.Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound")
 				else
 					music = game:GetService("Workspace"):FindFirstChild("Sound")
 				end                            	
@@ -14263,9 +14271,9 @@ task.spawn(function()
 							end
                         			end
 					else
-						if workspace.Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                                			if workspace.Terrain["GameFolder"].Folder:FindFirstChild("Sound").PlaybackSpeed ~= 1 then
-								workspace.Terrain["GameFolder"].Folder:FindFirstChild("Sound").PlaybackSpeed = 1
+						if workspace.Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                                			if workspace.Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound").PlaybackSpeed ~= 1 then
+								workspace.Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound").PlaybackSpeed = 1
 								Chat("stopmusic")
 							end
                         			end
@@ -14325,7 +14333,7 @@ end
 
 function VFix()
 	if kah_np == false then
-   		for i,v in pairs(game:GetService("Workspace").Terrain.GameFolder.Workspace:GetDescendants()) do
+   		for i,v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace:GetDescendants()) do
         		if v:IsA("BasePart") then
             			v.Velocity = Vector3.new(0,0,0)
 	    			v.RotVelocity = Vector3.new(0, 0, 0)
@@ -14334,8 +14342,8 @@ function VFix()
 	end
 
 	if kah_np == false then
-    		workspace.Terrain.GameFolder.Workspace.Baseplate.Velocity = Vector3.new(0,0,0)
-    		workspace.Terrain.GameFolder.Workspace.Baseplate.RotVelocity = Vector3.new(0,0,0) 
+    		workspace.Terrain[GAMEFOLDER].Workspace.Baseplate.Velocity = Vector3.new(0,0,0)
+    		workspace.Terrain[GAMEFOLDER].Workspace.Baseplate.RotVelocity = Vector3.new(0,0,0) 
 	else
 		game:GetService("Workspace").Tabby.Admin_House.Baseplate.Velocity = Vector3.new(0,0,0)
 		game:GetService("Workspace").Tabby.Admin_House.Baseplate.RotVelocity = Vector3.new(0,0,0)
@@ -14505,8 +14513,8 @@ task.spawn(function()
         task.wait(0.1) -- rate limit
         if auto_stuff.fogdance == true then
 			if kah_np == false then
-                        	if game:GetService("Workspace").Terrain["GameFolder"].Folder:FindFirstChild("Sound") then
-                                	pbl = game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.PlaybackLoudness / 10
+                        	if game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound") then
+                                	pbl = game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.PlaybackLoudness / 10
                                         Chat("fogend "..pbl)
                         	end
 			else
@@ -14599,9 +14607,9 @@ function findregen()
         repeat
         	wait(.15)
                 root.CFrame = CFrame.new(-7.165, root.Position.Y + 2500 , 94.743)
-        until workspace.Terrain.gamefolder.Admin:FindFirstChild("Regen") or backend_stuff.regfind == false
+        until workspace.Terrain[GAMEFOLDER].Admin:FindFirstChild("Regen") or backend_stuff.regfind == false
 	root.Anchored = false
-     	root.CFrame = workspace.Terrain.GameFolder.Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
+     	root.CFrame = workspace.Terrain[GAMEFOLDER].Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
       	Chat("respawn me");Remind("Found the regen (skydived)")
 
 end
@@ -14612,10 +14620,10 @@ function findregen2()
         repeat
                 fwait()
                 root.CFrame = CFrame.new(math.random(-30593, -23388), math.random(-30593, -10455), math.random(-30593, -10455))
-        until workspace.Terrain.GameFolder.Admin:FindFirstChild("Regen") or backend_stuff.regfind == false
+        until workspace.Terrain[GAMEFOLDER].Admin:FindFirstChild("Regen") or backend_stuff.regfind == false
 	game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
         root.Anchored = false
-        root.CFrame = workspace.Terrain.GameFolder.Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
+        root.CFrame = workspace.Terrain[GAMEFOLDER].Admin:FindFirstChild("Regen").CFrame + Vector3.new(0, 3, 0)
 	Chat("respawn me");Remind("Found the regen (KL)")
 
 end
@@ -14653,7 +14661,7 @@ function leakedcords()
 	clientloadpos(CFrame.new(Vector3.new(51052, -49558, 34068)));task.wait(.5)
 	clientloadpos(CFrame.new(Vector3.new(-251773, 1000003, 382563)));task.wait(.5)
 	clientloadpos(CFrame.new(0, 2.5, 0));task.wait(.5)
-	if workspace.Terrain.GameFolder.Admin:FindFirstChild("Regen") then
+	if workspace.Terrain[GAMEFOLDER].Admin:FindFirstChild("Regen") then
 		Remind("Found regen!");Chat("respawn me")
 	else
 		Remind("Couldn't find regen!");Chat("respawn me")
@@ -15192,22 +15200,22 @@ end)
 
 -- NOK
 function NOK()
-	game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby.Jump.TouchInterest:destroy()
-	game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby.Jump1.TouchInterest:destroy()
-	game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby.Jump2.TouchInterest:destroy()
-	game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby.Jump3.TouchInterest:destroy()
-	game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby.Jump4.TouchInterest:destroy()
-	game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby.Jump5.TouchInterest:destroy()
-	game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby.Jump6.TouchInterest:destroy()
-	game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby.Jump7.TouchInterest:destroy()
-	game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby.Jump8.TouchInterest:destroy()
-	game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby.Jump9.TouchInterest:destroy()
+	game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump.TouchInterest:destroy()
+	game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump1.TouchInterest:destroy()
+	game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump2.TouchInterest:destroy()
+	game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump3.TouchInterest:destroy()
+	game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump4.TouchInterest:destroy()
+	game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump5.TouchInterest:destroy()
+	game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump6.TouchInterest:destroy()
+	game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump7.TouchInterest:destroy()
+	game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump8.TouchInterest:destroy()
+	game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump9.TouchInterest:destroy()
 	Remind("Rejoin the server to revert!")
 end
 
 -- NOK 2
 function NOK2()
-  for i,v in pairs(workspace.Terrain["GameFolder"]["Workspace"].Obby:GetDescendants()) do
+  for i,v in pairs(workspace.Terrain[GAMEFOLDER]["Workspace"].Obby:GetDescendants()) do
         if v:IsA("TouchTransmitter") then 
 		v:Destroy() 
         end
@@ -15217,7 +15225,7 @@ end
 
 -- NOK 3 (idk where it went but it's back now)
 function NOK3()
-    local objs = game:GetService("Workspace").Terrain.GameFolder.Workspace.Obby:GetChildren()
+    local objs = game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()
     for i, obj in pairs(objs) do
         coroutine.wrap(function()
             pcall(function()
@@ -15232,11 +15240,11 @@ end
 function TNOK(mode) -- vitalux cmd
 	pcall(function()
 		if kah_np == false then
-			if not game:GetService("Workspace").Terrain.GameFolder.Workspace.Obby:GetChildren() then
+			if not game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren() then
 				return 
 			end
 
-        		for i, v in pairs(game:GetService("Workspace").Terrain.GameFolder.Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
+        		for i, v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
                 		if mode == "true" then
                         		v.CanTouch = false
                 		else
@@ -15303,11 +15311,11 @@ end
 -- Removing and adding the obby locally
 function LocalObby(mode)
         if mode == "add" then
-                 game.Chat:FindFirstChild("Obby").Parent = workspace.Terrain["GameFolder"]["Workspace"]
-                     game.Chat:FindFirstChild("Obby Box").Parent = workspace.Terrain["GameFolder"]["Workspace"]
+                 game.Chat:FindFirstChild("Obby").Parent = workspace.Terrain[GAMEFOLDER]["Workspace"]
+                     game.Chat:FindFirstChild("Obby Box").Parent = workspace.Terrain[GAMEFOLDER]["Workspace"]
         else 
-                    workspace.Terrain["GameFolder"]["Workspace"].Obby.Parent = game.Chat
-                        workspace.Terrain["GameFolder"]["Workspace"]["Obby Box"].Parent = game.Chat
+                    workspace.Terrain[GAMEFOLDER]["Workspace"].Obby.Parent = game.Chat
+                        workspace.Terrain[GAMEFOLDER]["Workspace"]["Obby Box"].Parent = game.Chat
         end
 end
 
@@ -16229,7 +16237,7 @@ end
 
 -- GOTO REGEN
 function regentp()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Terrain["GameFolder"].Admin.Regen.CFrame
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Regen.CFrame
 end
 
 -- VG CRASH
@@ -17176,14 +17184,14 @@ end)
 -- REGEN
 function Regen()
 	pcall(function()
-		if workspace.Terrain.GameFolder.Admin.Regen then
+		if workspace.Terrain[GAMEFOLDER].Admin.Regen then
 		else 
 			return
 		end
 	end)
 
         if fireclickdetector then
-                fireclickdetector(workspace.Terrain.GameFolder.Admin.Regen.ClickDetector, 0)
+                fireclickdetector(workspace.Terrain[GAMEFOLDER].Admin.Regen.ClickDetector, 0)
         else 	
 		-- Remind("Sorry, your exploit does not support regenerating the admin pads (fireclickdetector)")
 	end
@@ -17365,14 +17373,14 @@ function FixPaint()
 	end)
 
 	pcall(function()
-		if game.Workspace.Terrain["GameFolder"].Workspace["Baseplate"] then
-			colorAPI.color(game.Workspace.Terrain["GameFolder"].Workspace["Baseplate"], colorAPI.transformToColor3(BrickColor.new("Bright green")))
+		if game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"] then
+			colorAPI.color(game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"], colorAPI.transformToColor3(BrickColor.new("Bright green")))
 		end
 	end)
 
 	pcall(function()
-		if game:GetService("Workspace").Terrain["GameFolder"].Admin.Regen then
-			colorAPI.color(game:GetService("Workspace").Terrain["GameFolder"].Admin.Regen, colorAPI.transformToColor3(BrickColor.new("Bright violet")))
+		if game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Regen then
+			colorAPI.color(game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Regen, colorAPI.transformToColor3(BrickColor.new("Bright violet")))
 		end
 	end)
 
@@ -17561,7 +17569,7 @@ end
 
 function pp(puser, len)
 	local part = nil
-	conn = workspace.Terrain["GameFolder"].Folder.ChildAdded:Connect(function(v)
+	conn = workspace.Terrain[GAMEFOLDER].Folder.ChildAdded:Connect(function(v)
 		if not part and v.Size == Vector3.new(1,1,len) then
 			part = v
 			conn:Disconnect()
@@ -17660,7 +17668,7 @@ function arena(plr1, plr2)
     end
 
     local woahwoahwoah = {}
-    woahwoahwoah.arena = workspace.Terrain["GameFolder"].Folder.ChildAdded:Connect(function(part)
+    woahwoahwoah.arena = workspace.Terrain[GAMEFOLDER].Folder.ChildAdded:Connect(function(part)
     	 if part.Size == Vector3.new(10,2.5,10) or part.Size == Vector3.new(1,5,1) or part.Size == Vector3.new(1, 1, 9) then
         	local localIndex = partIndex
         	partIndex = partIndex + 1
@@ -18158,9 +18166,9 @@ function SpHammer()
 		        Chat("music "..tostring(sound))
 	        end
                 
-	        repeat task.wait()  until game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.IsLoaded
+	        repeat task.wait()  until game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.IsLoaded
 	        task.spawn(function()
-	            wait(game:GetService("Workspace").Terrain["GameFolder"].Folder.Sound.TimeLength)
+	            wait(game:GetService("Workspace").Terrain[GAMEFOLDER].Folder.Sound.TimeLength)
 	            Chat("music nan")
 	        end)
         end)
@@ -18309,7 +18317,7 @@ task.spawn(function()
 		task.wait(0)
 		if Loops.alog then
 			if kah_np == false then
-				beaner = workspace.Terrain["GameFolder"].Folder:FindFirstChild("Sound")
+				beaner = workspace.Terrain[GAMEFOLDER].Folder:FindFirstChild("Sound")
 			else
 				beaner = game:GetService("Workspace"):FindFirstChild("Sound")
 			end
@@ -18375,7 +18383,7 @@ function rmap()
 				if Loops.rainbowmap and t then
 						paintmap(Color3.fromHSV(RainbowValue,1,1).R,Color3.fromHSV(RainbowValue,1,1).G,Color3.fromHSV(RainbowValue,1,1).B)
 						paint:WaitForChild("Remotes").ServerControls:InvokeServer("PaintPart",{
-                            					["Part"] = game:GetService("Workspace").Terrain["GameFolder"].Workspace.Baseplate,
+                            					["Part"] = game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Baseplate,
                            					["Color"] = Color3.fromHSV(RainbowValue,1,1)
                         			})
 				end		
@@ -18386,20 +18394,20 @@ end
 function rbase()
         	if kah_np == false then	
 			pcall(function()
-				if not workspace.Terrain.GameFolder.Workspace:FindFirstChild("Baseplate") then
+				if not workspace.Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
 					Remind("NOT LOADED!")
 					return
 				end
 			end)
-                	vro = game.Workspace.Terrain["GameFolder"].Workspace["Baseplate"]
+                	vro = game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"]
 		else
 			pcall(function()
-				if not game:GetService("GameFolder").Tabby.Admin_House:FirstFindChild("Baseplate") then
+				if not game:GetService(GAMEFOLDER).Tabby.Admin_House:FirstFindChild("Baseplate") then
 					Remind("NOT LOADED!")
 					return
 				end
 			end)
-			vro = game:GetService("GameFolder").Tabby.Admin_House.Baseplate
+			vro = game:GetService(GAMEFOLDER).Tabby.Admin_House.Baseplate
 		end
 
 		local RainbowValue = 0
@@ -18425,12 +18433,12 @@ end
 function rbricks()
         	if kah_np == false then	
 			pcall(function()
-				local par = #workspace.Terrain.GameFolder.Workspace.Obby:GetChildren()
+				local par = #workspace.Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()
 				if par == 0 then
 					return Remind("NO OBBY BRICKS AVAILABLE.")
 				end
 			end)
-                	vro = game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby:GetChildren()
+                	vro = game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()
 		else
 			pcall(function()
 				local par = #game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()
@@ -18438,7 +18446,7 @@ function rbricks()
 					return Remind("NO OBBY BRICKS AVAILABLE.")
 				end
 			end)
-			vro = game:GetService("Workspace").Terrain["GameFolder"].Workspace.Obby:GetChildren()
+			vro = game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()
 		end
 
 		local RainbowValue = 0
@@ -18756,7 +18764,7 @@ function removewater() -- cmd v3
         regpart.CanCollide = false
 
 	local wt = workspace.Terrain
-	local kgf = Terrain:FindFirstChild("GameFolder")
+	local kgf = Terrain:FindFirstChild(GAMEFOLDER)
 	local kw = kgf:FindFirstChild("Workspace")
         kw.Parent = workspace
 
@@ -19322,7 +19330,7 @@ function allclear()
                 if workspace:FindFirstChild(game.Players.LocalPlayer.Name) and hasperm == true and workspace:FindFirstChild(game.Players.LocalPlayer.Name) and workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChild("Humanoid") and workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChild("Humanoid").Health > 0 then
                         --print("TRUE")
                         return true
-                elseif workspace:FindFirstChild(game.Players.LocalPlayer.Name) and workspace.Terrain.GameFolder.Admin.Pads:FindFirstChild(game.Players.LocalPlayer.Name.."'s admin") and workspace:FindFirstChild(game.Players.LocalPlayer.Name) and workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChild("Humanoid") and workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChild("Humanoid").Health > 0 then
+                elseif workspace:FindFirstChild(game.Players.LocalPlayer.Name) and workspace.Terrain[GAMEFOLDER].Admin.Pads:FindFirstChild(game.Players.LocalPlayer.Name.."'s admin") and workspace:FindFirstChild(game.Players.LocalPlayer.Name) and workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChild("Humanoid") and workspace:FindFirstChild(game.Players.LocalPlayer.Name):FindFirstChild("Humanoid").Health > 0 then
                         --print("TRUE")
                         return true
                 else
@@ -19575,15 +19583,15 @@ end
 -- end
 
 colorAPI.colorRegen_2 = function(R,G,B)
-		if workspace.Terrain.GameFolder.Admin:FindFirstChild("Regen") then
-			colorAPI.color_2(workspace.Terrain.GameFolder.Admin.Regen,R,G,B)
+		if workspace.Terrain[GAMEFOLDER].Admin:FindFirstChild("Regen") then
+			colorAPI.color_2(workspace.Terrain[GAMEFOLDER].Admin.Regen,R,G,B)
 		end    
 end    
 
 
 colorAPI.colorObbyBox = function(color) -- Default is "Teal"
 	if kah_np == false then
-		parts = game.Workspace.Terrain["GameFolder"].Workspace["Obby Box"]
+		parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]
 	else
 		parts = game:GetService("Workspace").Tabby.Admin_House.Snow
 	end
@@ -19594,7 +19602,7 @@ end
 
 colorAPI.colorObbyBox_2 = function(R,G,B)
 	if kah_np == false then
-		parts = game.Workspace.Terrain["GameFolder"].Workspace["Obby Box"]
+		parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]
 	else
 		parts = game:GetService("Workspace").Tabby.Admin_House.Snow
 	end
@@ -19605,7 +19613,7 @@ end
 
 colorAPI.colorObbyBricks = function(color)-- Default is "Really red"
 	if kah_np == false then
-		parts = game.Workspace.Terrain["GameFolder"].Workspace["Obby"]
+		parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]
 	else
 		parts = game:GetService("Workspace").Tabby.Admin_House.Jumps
 	end
@@ -19616,7 +19624,7 @@ end
 
 colorAPI.colorObbyBricks_2 = function(R,G,B)
 	if kah_np == false then
-		parts = game.Workspace.Terrain["GameFolder"].Workspace["Obby"]
+		parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]
 	else
 		parts = game:GetService("Workspace").Tabby.Admin_House.Jumps
 	end
@@ -19627,7 +19635,7 @@ end
 
 colorAPI.colorAdminDivs = function(color)-- Default is "Dark stone grey"
 	if kah_np == false then
-                parts = game.Workspace.Terrain["GameFolder"].Workspace["Admin Dividers"]
+                parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Admin Dividers"]
 	else
 		parts = game:GetService("Workspace").Tabby.Admin_House.Grids
 	end
@@ -19638,7 +19646,7 @@ end
 
 colorAPI.colorAdminDivs_2 = function(R,G,B)
 	if kah_np == false then
-                parts = game.Workspace.Terrain["GameFolder"].Workspace["Admin Dividers"]
+                parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Admin Dividers"]
 	else
 		parts = game:GetService("Workspace").Tabby.Admin_House.Grids
 	end
@@ -19648,13 +19656,13 @@ colorAPI.colorAdminDivs_2 = function(R,G,B)
 end
  
 colorAPI.colorPads = function(color)-- Default is "Bright green"
-	for i,v in pairs(game.Workspace.Terrain["GameFolder"].Admin["Pads"]:GetChildren()) do
+	for i,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Admin["Pads"]:GetChildren()) do
 		colorAPI.color(v.Head, color)
 	end
 end
 
 colorAPI.colorPads_2 = function(R,G,B)
-	for i,v in pairs(game.Workspace.Terrain["GameFolder"].Admin["Pads"]:GetChildren()) do
+	for i,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Admin["Pads"]:GetChildren()) do
 		colorAPI.color_2(v.Head, R,G,B)
 	end
 end
@@ -19672,7 +19680,7 @@ colorAPI.colorHouse = function(arg)
 	  -------------------------------------------------------------------- House --------------------------------------------------------------------
 
 		if kah_np == false then
-			parts = workspace.Terrain.GameFolder.Workspace["Basic House"]
+			parts = workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]
                         Remind("agspureiam renamed the parts so you can't repaint the house with this script, sorry!! :P")
 		else
 			parts = game:GetService("Workspace").Tabby.Admin_House.House
@@ -19721,7 +19729,7 @@ colorAPI.colorHouse_2 = function(Extra)
 		local Roof = Extra.roofC
 		local ChimneyTopParts = Extra.chiC
 		if kah_np == false then
-			parts = game.Workspace.Terrain["GameFolder"].Workspace["Basic House"]
+			parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]
                         Remind("agspureiam renamed the parts so you can't repaint the house with this script, sorry!! :P")
 		else
 			parts = game:GetService("Workspace").Tabby.Admin_House.House
@@ -19748,8 +19756,8 @@ colorAPI.colorHouse_2 = function(Extra)
 				end
 			end))
 		end
-		colorAPI.color_2(workspace.Terrain["GameFolder"].Workspace["Basic House"].SmoothBlockModel40,Extra.baseC[1],Extra.baseC[2],Extra.baseC[3])
-		colorAPI.color_2(workspace.Terrain.GameFolder.Workspace["Basic House"].SmoothBlockModel112,Extra.floorC[1],Extra.floorC[2],Extra.floorC[3])
+		colorAPI.color_2(workspace.Terrain[GAMEFOLDER].Workspace["Basic House"].SmoothBlockModel40,Extra.baseC[1],Extra.baseC[2],Extra.baseC[3])
+		colorAPI.color_2(workspace.Terrain[GAMEFOLDER].Workspace["Basic House"].SmoothBlockModel112,Extra.floorC[1],Extra.floorC[2],Extra.floorC[3])
 end
 
 colorAPI.colorBuildingBricks = function(arg)
@@ -19766,7 +19774,7 @@ colorAPI.colorBuildingBricks = function(arg)
 		-------------------------------------------------------------------- Building Bricks --------------------------------------------------------------------
 
 		if kah_np == false then
-			parts = game.Workspace.Terrain["GameFolder"].Workspace["Building Bricks"]
+			parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Building Bricks"]
 		else
 			parts = game:GetService("Workspace").Tabby.Admin_House.Build_Stuff
 		end
@@ -19824,7 +19832,7 @@ colorAPI.colorBuildingBricks_2 = function(Extra)
 		local RR = Extra.RR
 
 		if kah_np == false then
-			parts = game.Workspace.Terrain["GameFolder"].Workspace["Building Bricks"]
+			parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Building Bricks"]
 		else
 			parts = game:GetService("Workspace").Tabby.Admin_House.Build_Stuff
 		end
