@@ -6932,7 +6932,7 @@ return
         	Chat("fix")
         	player_relate.musicsay = false
             	Chat("h \n\n\n\n\n "..custardmessage.." \n\n\n\n\n")
-		Chat(prefix.."gmusic175")
+		Chat(prefix.."gmusic174")
            	Chat("fogcolor 0 0 0")
 		Chat("time 0")
 		Chat("fogend 0")
@@ -12590,7 +12590,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
 		for i, v in game.Players:GetPlayers() do
 				if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
-					if v.Backpack and v.Backpack:FindFirstChildOfClass("Tool") then
+					if v.Backpack then
+                                        if v.Backpack:FindFirstChildOfClass("Tool") then
 						if gear_antis.antigear then
 							gear_antis_punish(v)
 							Regen()
@@ -12606,6 +12607,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 							end
 						end
 					end
+                                        end
 				end
 
 				if v.Name ~= game.Players.LocalPlayer.Name and (not table.find(GWhitelisted, v.Name) and not table.find(pgwl, v.Name)) then
