@@ -1437,7 +1437,7 @@ local musictable = {
     ["136"] = {id = "1843404009", name = "Happy Song"},
     ["137"] = {id = "1845149698", name = "Seek & Destroy"},
     ["138"] = {id = "89204425381132", name = "Someone You Loved"},
-    ["139"] = {id = "76463442516219", name = "Death Bed - the apple of the anchicent china"},
+    ["139"] = {id = "88572443994484", name = "Stronger Than You Sans Chara Duet (Reverbed)"},
     ["140"] = {id = "118939739460633", name = "Candyland"},
     ["141"] = {id = "137233554633338", name = "useless"},
     ["142"] = {id = "132973772452511", name = "Moscow"},
@@ -1473,6 +1473,7 @@ local musictable = {
     ["172"] = {id = "100085928114682", name = "TRIPI TROPI TROPA TRIPA PHONK"},
     ["173"] = {id = "125137999827669", name = "SpeedRun Music"},
     ["174"] = {id = "93359884317014", name = "Here Comes the Blue"},
+	["175"] = {id = "135134821355290", name = "honesty is so magical"},
 }
 
 -- Saved gears
