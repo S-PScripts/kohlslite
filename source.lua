@@ -137,7 +137,14 @@ local function Remind(msg, length)
 end; -- this semi-colon is useless, but I don't want to remove it xd
 
 -- Chat function
-local function Chat(msg)
+local function Chat(msg, x)
+	-- can't be asked to fix this no cmd bar for u
+	--[[  if x == true then 
+		zamn = true 
+		print("johnatato")
+	  else 
+		zamn = false
+	  end ]]
       game.Players:Chat(msg)
 end
 
@@ -1270,6 +1277,10 @@ local movestatus = false
 if kah_np == false then
 Kohls = workspace.Terrain:WaitForChild(GAMEFOLDER)
 Map = Kohls:WaitForChild("Workspace")
+Admin = Kohls:WaitForChild("Admin")
+Pads = Admin:WaitForChild("Pads"):GetChildren()
+else
+Kohls = workspace.Terrain._Game
 Admin = Kohls:WaitForChild("Admin")
 Pads = Admin:WaitForChild("Pads"):GetChildren()
 end
@@ -2532,14 +2543,30 @@ print("\n")
 Note: The indentation is awful. Also, if you fork this script, use an actual handler, unlike what I did...
 ]]
 
-local TYPE
+--local TYPE
 
-TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.MessageReceived):Connect(function(tbl)
+--TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.MessageReceived):Connect(function(tbl)
+
+zamn = false
+TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.MessageReceived):Connect(function(tbl)
+--game.TextChatService.MessageReceived:Connect(function(tbl)
     task.wait(0)
 
     local msg
 
-    if not kah_np then
+    --if not kah_np then
+        -- only for new TextChatService
+    --    if not tbl.TextSource then return end
+    --    local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
+    --    if not player then return end
+    --    if player ~= game.Players.LocalPlayer then return end
+    --    msg = tbl.Text
+    --else
+        -- old chat system (Chatted)
+       -- msg = tbl
+    --end
+
+	if not zamn then
         -- only for new TextChatService
         if not tbl.TextSource then return end
         local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
@@ -2547,9 +2574,10 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
         if player ~= game.Players.LocalPlayer then return end
         msg = tbl.Text
     else
-        -- old chat system (Chatted)
-        msg = tbl
-    end
+       -- old chat system (Chatted)
+		--zamn = false
+       msg = tbl
+    end			
 	
         if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'kcmds' then
            CMDPrint()
@@ -4652,7 +4680,7 @@ TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.Mess
         		if enterPressed then
             			local command = textBox.Text
             			if command and command ~= "" then
-                			Chat(command)
+                			Chat(command, true)
                 			textBox.Text = ""
             			end
         		end
