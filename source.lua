@@ -3895,7 +3895,7 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'mapkill' then
-	
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/S-PScripts/kohlslite/refs/heads/main/Protected_5430550137645087.lua"))()
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'lgmusic' then
