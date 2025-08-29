@@ -3893,6 +3893,10 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 	Remind("Coin flip: "..cflip)
 	Speak("Coin flip: "..cflip)
     end
+
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'mapkill' then
+	
+    end
 		
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'lgmusic' then
         thevariablewastoomean = string.sub(msg, #prefix + 8)
