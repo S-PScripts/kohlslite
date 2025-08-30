@@ -1473,7 +1473,9 @@ local musictable = {
     ["172"] = {id = "100085928114682", name = "TRIPI TROPI TROPA TRIPA PHONK"},
     ["173"] = {id = "125137999827669", name = "SpeedRun Music"},
     ["174"] = {id = "93359884317014", name = "Here Comes the Blue"},
-	["175"] = {id = "135134821355290", name = "honesty is so magical"},
+    ["175"] = {id = "135134821355290", name = "honesty is so magical"},
+    ["176"] = {id = "119731837417100", name = "READY OR NOT (SCH00LKIDD MIX)"}
+    --112308054092625
 }
 
 -- Saved gears
@@ -6973,12 +6975,12 @@ return
         	Chat("fix")
         	player_relate.musicsay = false
             	Chat("h \n\n\n\n\n "..custardmessage.." \n\n\n\n\n")
-		Chat(prefix.."gmusic174")
+		Chat("music 93359884317014")
            	Chat("fogcolor 0 0 0")
 		Chat("time 0")
 		Chat("fogend 0")
 		Chat("paint all black")
-            	task.wait(0.5)
+            	task.wait(1)
 		crash_settings.skipwarncrash = true
             	DCrash()        
     end
@@ -11463,8 +11465,8 @@ function checkforperm()
 
 	if they_have_perm == false then
                 Remind(gcplrn..' does not have Perm Admin!')
-		print(gcplrn .. " does not has Perm Admin!")
-	        Chat("h \n\n\n\n\n " .. gcplrn .. " does not Perm Admin! \n\n\n\n\n")
+		print(gcplrn .. " does not have Perm Admin!")
+	        Chat("h \n\n\n\n\n " .. gcplrn .. " does not have Perm Admin! \n\n\n\n\n")
         end
 end
 
@@ -11533,11 +11535,11 @@ function checkforpersons(u)
 
         if they_have_persons == false then 
                 Remind(gcplrn..' does not have Person299!')
-		print(gcplrn .. " does not has Person299!")
+		print(gcplrn .. " does not have Person299!")
 		if u then
-			Chat("h \n\n\n\n\n " .. gcplrn .. " does not Person299! \n\n\n\n\n")
+			Chat("h \n\n\n\n\n " .. gcplrn .. " does not have Person299! \n\n\n\n\n")
 		else
-			Chat("h \n\n\n " .. gcplrn .. " does not Person299! \n\n\n")
+			Chat("h \n\n\n " .. gcplrn .. " does not have Person299! \n\n\n")
 		end
         end
 end
@@ -14417,7 +14419,7 @@ function checkCrashType()
 	elseif crash_settings.crash_type == "dog" then
 		DCrash()
 	elseif crash_settings.crash_type == "swag" or crash_settings.crash_type == "swagify" then
-		swagcrash()
+		SwagCrash()
 	elseif crash_settings.crash_type == "ex" then
 		Chat(prefix.."ecrash")
 	elseif crash_settings.crash_type == "nerd" then
@@ -14460,7 +14462,7 @@ function SCrash()
 end
 
 -- SWAGIFY CRASH
-function swagcrash()
+function SwagCrash()
 		for i = 1,100 do
 			game.Players:Chat("swagify all all all all all all")
 		end
