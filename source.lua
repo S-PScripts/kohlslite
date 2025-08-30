@@ -7532,6 +7532,11 @@ return
 	Speak("collect my pages...")
     end
 
+    if string.sub(msg:lower(), 1, 4) == 'cook' then
+	plrs = string.sub(msg, 6)
+        Chat("fire "..plrs)
+    end
+
     if string.sub(msg:lower(), 1, 3) == 'twk' then
 	Speak("THOSE WHO NOSE...")
     end
@@ -14518,15 +14523,16 @@ end
 rkicking = false
 -- rocket kick
 function rkickplr(rkicker,rkicks) -- v, v.Name
-			Chat("jail/"..rkicker)
+print(rkicks)
+			Chat("jail/"..rkicks)
 			for i = 1, 128 do
-				Chat("rocket/"..rkicker.." me "..rkicker.." me")
+				Chat("rocket/"..rkicks.." me "..rkicks.." me")
 			end
 			task.wait(.49)
 			rkicking = true
-			local p = rkicks
+			local p = rkicker
 			repeat
-				Chat("rocket/"..rkicker.." me "..rkicker.." me")
+				Chat("rocket/"..rkicks.." me "..rkicks.." me")
 				game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = p.Character.HumanoidRootPart.CFrame * CFrame.Angles(0,math.rad(180),0) * CFrame.new(0,0,-2)
 				if game.Players.LocalPlayer.Character:FindFirstChild("Rocket") then
 					game.Players.LocalPlayer.Character.Rocket.CanCollide = false
