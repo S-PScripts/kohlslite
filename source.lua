@@ -20100,8 +20100,7 @@ end
 
 -- KohlsLite Blacklist --
 local unexecuteables = {
-	"gag_isagoodgame",
-	"i_lovegag"
+	"ScalyMoonsta"
 }
 
 local mentalhospital = {
