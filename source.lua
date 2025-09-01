@@ -19905,6 +19905,18 @@ colorAPI.colorBuildingBricks_2 = function(Extra)
 		end
 end
 
+for i,v in pairs(workspace:GetDescendants()) do 
+    if v:IsA("BasePart") then 
+        v.Locked = false 
+    end 
+end
+
+workspace.DescendantAdded:Connect(function(descendant)
+    if descendant:IsA("BasePart") then
+        descendant.Locked = false
+    end
+end)
+
 -- Player stuff
 for i, v in pairs(game.Players:GetPlayers()) do
 
