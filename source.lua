@@ -1000,7 +1000,7 @@ local player_relate = {
 	autogb = false,
 
 	-- NOOB Detector - they aren't getting away with 'poop' player...
-	noobdetect = true,
+	noobdetect = false,
 
 	-- Welcome/leave message when player joins/leaves
 	welcomemsg = false, -- No, I'm not going to be fancy and call it 'greetings'
@@ -1009,7 +1009,7 @@ local player_relate = {
 	crash_an = false,
 
 	-- Annnounces to everyone when a player is blacklisted, whitelisted etc.
-	blwl_an = true,
+	blwl_an = false,
 
 	-- This doesn't sent the PM to users that are blacklisted (issue with KAH Legacy)
 	what_was_wrong = false,
@@ -1025,13 +1025,13 @@ local player_relate = {
 	logmode = "default", -- How it should stop the user from seeing logs - "crack" uses the oofkohls gibberish
 
 	-- Announces to everyone that a person is trying to use /c system (IT DOESN'T EVEN EXIST ANYMORE)
-	PingCsystem = true,
+	PingCsystem = false,
 
 	-- Thorns (let's say someone does "kill (...)". The user who said it gets killed)
 	thorns = false,
 	
 	-- Announces the music for gmusic and song
-	musicsay = true
+	musicsay = false
 
 }
 
@@ -1129,7 +1129,7 @@ antis = {
     antiname = false,
     antichar = false,
     antiparticles = false,
-    antipunish = false,
+    antipunish = true,
     antirocket = false,
     antisit = false,
     antiseizure = false,
@@ -1484,6 +1484,7 @@ local gearlist = {
     
     ["f3x"] = {gearid = "142785488"},
 
+    ["skateboard"] = {gearid = "501966315"},
 	
     ["vg"] = {gearid = "94794847"},
     ["vampire"] = {gearid = "94794847"},
