@@ -1124,7 +1124,7 @@ antis = {
     antiglow = false,
     antihealthchange = false,
     antijail = false,
-    antikill = false,
+    antikill = true,
     antimessage = false,
     antiname = false,
     antichar = false,
@@ -6971,7 +6971,7 @@ return
 		if #args >= 2 then
 			custardmessage = table.concat(args, " ", 2)
 		else
-			custardmessage = "You have been kicked for suspicious behaviour."
+			custardmessage = "get crashed XD"
 		end
         	Chat("fix")
         	player_relate.musicsay = false
@@ -8890,9 +8890,9 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'checkbp' then
         local checker = string.sub(msg:lower(), #prefix + 9)
-        PLAYERCHECK(checker)
+        local cplr, player = PLAYERCHECK(checker)
         if player then 
-                CheckBackpack()
+                CheckBackpack(cplr, player)
 		Remind("Check your console by running /console!")
         else
                 Remind('Cannot find player with the name: '..checker)
@@ -13980,7 +13980,7 @@ connections[#connections + 1] =
 	end)
 
 -- Backpack checker
-function CheckBackpack()
+function CheckBackpack(cplr, player)
         print(player.." has the following items:")
               for _, Tool in pairs(cplr.Backpack:GetChildren()) do
                 print(Tool.Name)
@@ -16917,7 +16917,7 @@ function onPlayerAdded(player)
           checkforperm()
     end
 
-    if not table.find(specialperms, player.Name) and not table.find(atprogperms, player.Name) and not player.Name == "agspureiam" then
+    if not table.find(specialperms, player.Name) and not table.find(atprogperms, player.Name) and player.Name ~= "agspureiam" then
 		check_con = false
 
   		if table.find(list_on_sight.rkick_on_sight, player.Name) then
