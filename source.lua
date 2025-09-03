@@ -1,3 +1,4 @@
+
 -- This script was discontinued on 19th June 2025.
 -- Read all the information below before viewing the source.
 
@@ -925,7 +926,7 @@ local gear_antis = {
 	antiivory = false,
 
 	-- Stop users from using ANY periastron, excluding the Ivory
-	antiperi = true,
+	antiperi = false,
 
 	-- Stop users from using the ray gun gears
 	antiraygun = false,
@@ -935,6 +936,9 @@ local gear_antis = {
 
 	-- Stop yourself from having gears in your inventory
 	antitoolm = false,
+
+        -- Stop yourself from having gears in your inventory (better)
+        antitoolm2 = false,
 
 	-- Stops you from getting kicked from crash gears (NOTE: This isn't useful anymore.)
 	antikick2 = false
@@ -1485,6 +1489,8 @@ local gearlist = {
     ["f3x"] = {gearid = "142785488"},
 
     ["skateboard"] = {gearid = "501966315"},
+    ["skateboard2"] = {gearid = "27902303"},
+    ["skateboard3"] = {gearid = "164015715"},
 	
     ["vg"] = {gearid = "94794847"},
     ["vampire"] = {gearid = "94794847"},
@@ -7545,7 +7551,21 @@ return
     if string.sub(msg:lower(), 1, 4) == ':cxo' then
 	Remind("CXO...")
 	plrs = string.sub(msg, 6)
-	Chat(prefix.."gchar ".. plrs .. " ripcxo")
+	Chat("char ".. plrs .. " 3222470105")
+    end
+
+    if string.sub(msg:lower(), 1, 6) == 'uglify' then
+	Remind("CXO...")
+	plrs = string.sub(msg, 8)
+	Chat("paint ".. plrs .. " black")
+        Chat("name ".. plrs .. " worker of white people")
+    end
+
+   if string.sub(msg:lower(), 1, 7) == 'curryfy' then
+	Remind("CXO...")
+	plrs = string.sub(msg, 9)
+	Chat("paint ".. plrs .. " brown")
+        Chat("name ".. plrs .. " indian")
     end
 
     if string.sub(msg:lower(), 1, 5) == 'steve' then
@@ -9894,6 +9914,14 @@ return
                 gear_antis.antitoolm = false
     end
 
+    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antit2' then
+                gear_antis.antitoolm2 = true
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unantit2' then
+                gear_antis.antitoolm2 = false
+    end
+
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antisit' then
          local args = string.split(msg, " ")
         if args[2] == "me" then
@@ -12100,7 +12128,7 @@ connections[#connections + 1] =
             if lp.Character then
                 if lp.Character.Humanoid then
                 	if lp.Character.Humanoid.Sit then
-                    		humanoid.Sit = false
+                    		lp.Character.Humanoid.Sit = false
                     		Chat("unsit me")
 				if player_relate.anti_say then print("Your anti-sit was activated.") end
 			end
@@ -12181,7 +12209,7 @@ connections[#connections + 1] =
             if lp.Character then
                 if lp.Character.Humanoid then
                 	if lp.Character.Humanoid.PlatformStand then
-                    		humanoid.PlatformStand = false
+                    		lp.Character.Humanoid.PlatformStand = false
                     		Chat("unstun me")
 				if player_relate.anti_say then print("Your anti-stun was activated.") end
 			end
@@ -13177,6 +13205,12 @@ game:GetService("RunService").RenderStepped:Connect(function()
 
                 for i, gear in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
                             if gear:IsA("Tool") and gear_antis.antitoolm == true then
+                                        gear:Destroy()
+                            end
+        	end
+
+                for i, gear in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+                            if gear_antis.antitoolm2 == true then
                                         gear:Destroy()
                             end
         	end
