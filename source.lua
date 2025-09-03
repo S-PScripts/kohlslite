@@ -1,5 +1,3 @@
-
--- This script was discontinued on 19th June 2025.
 -- Read all the information below before viewing the source.
 
 --[[
@@ -78,10 +76,11 @@ There are some features in other scripts that KohlsLite does not have. Here are 
 - Boombox visualiser [Proton Admin]
 - Part builder [ii's Stupid Admin, Jotunnheim, CMD PI/V3, Solinium v2]
 - Custom commands [Shortcut v3-VAR]
+- Skateboard kick (it's a "don't leak it method")
 
 There is also no GUI, and the anti system does not work for individual players.
 
-This script is discontinued due to the lack of a playerbase in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters that will use this script.
+This script is mostly discontinued due to the lack of a playerbase in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters that will use this script.
 There is not enough demand for me to continue updating this script, and even if there was, what?
 
 Here is a quick fact. Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing - even 1,000 sometimes.
