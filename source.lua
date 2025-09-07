@@ -357,38 +357,35 @@ if getgenv().autocrasher then
 			
 			if getgenv().acmode then
 				if getgenv().acmode == "Dog" then
+						print("Dog crash no longer works, using Swag.")
       					for i = 1,100 do
-          					Chat("clone all all all                                discord")
-          					Chat("dog all all all                                  discord")
+          					Chat("swagify all all all all all all")
       					end
 				elseif getgenv().acmode == "Freeze" then
+						print("Freeze crash no longer works, using Swag.")
       					for i = 1,100 do
-          					Chat("clone all all all                                discord")
-          					Chat("freeze all all all                               discord")
+          					Chat("swagify all all all all all all")
       					end
-				elseif getgenv().acmode == "Shield" then
+				elseif getgenv().acmode == "Shield" or getgenv().acmode == "Rocket" then
+						print("Shield/Rocket crash no longer works, using Swag.")
 				      	for i = 1,100 do
-          					Chat("shield/all/all/all")
-          					Chat("rocket/all/all/all")
-          					Chat("clone all all all			discord")
+          					Chat("swagify all all all all all all")
       					end
 				elseif getgenv().acmode == "Swagify" or getgenv().acmode == "Swag" then
 				      	for i = 1,100 do
           					Chat("swagify all all all all all all")
       					end
 				else
-					print("Invalid auto crash mode used, using Dog as default.")
+					print("Invalid auto crash mode used, using Swag as default.")
 					for i = 1,100 do
-          					Chat("clone all all all                                discord")
-          					Chat("dog all all all                                  discord")
-      					end
+          					Chat("swagify all all all all all all")
+      				end
 				end
 			else
-					print("Auto crash mode unconfigured, using Dog as default.")
+					print("Auto crash mode unconfigured, using Swag as default.")
 					for i = 1,100 do
-          					Chat("clone all all all                                discord")
-          					Chat("dog all all all                                  discord")
-      					end
+          					Chat("swagify all all all all all all")
+      				end
 			end
 				
 			print("Server crashed. JobId: "..game.JobId)
@@ -1263,7 +1260,7 @@ local crash_settings = {
 	skipwarncrash = true,
 
 	-- The type of crash you want to default to
-	crash_type = "dog"
+	crash_type = "freeze"
 }
 
 --[[
@@ -5582,7 +5579,7 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
                 local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
                 for _, v in ipairs(Backpack:GetChildren()) do
                             v.Parent = game.Players.LocalPlayer.Character
-                             v:Activate()
+                            v:Activate()
                 end
 		Remind("Activated all items in your inventory!")
     end
@@ -5615,13 +5612,13 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'vgcrash' then
 	if crash_settings.skipwarncrash then -- idea from sinx
 		VGCrash()
-		Remind("VG Crashed the server. (VG IS TEMPORARY BTW)")
+		Remind("VG Crashed the server. This might be temporary.")
 	else
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
 		    		VGCrash()
-				Remind("VG Crashed the server. (VG IS TEMPORARY BTW)")
+				Remind("VG Crashed the server. This might be temporary.")
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -5638,13 +5635,13 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'cocrash' then
 	if crash_settings.skipwarncrash then -- idea from sinx
 		CoCrash()
-		Remind("VG Crashed (2) the server. (VG IS TEMPORARY BTW)")
+		Remind("VG Crashed (2) the server. This might be temporary.")
 	else
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
 		    		CoCrash()
-				Remind("VG Crashed (2) the server. (VG IS TEMPORARY BTW)")
+				Remind("VG Crashed (2) the server. This might be temporary.")
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -5661,13 +5658,13 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'emcrash' then
 	if crash_settings.skipwarncrash then -- idea from sinx
 		EmCrash()
-		Remind("Emerald Crashed the server.")
+		Remind("Emerald Crashed the server. This might be temporary.")
 	else
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
 		    		EmCrash()
-				Remind("Emerald Crashed the server.")
+				Remind("Emerald Crashed the server. This might be temporary.")
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -5684,13 +5681,13 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'pcrash' then
 	if crash_settings.skipwarncrash then -- idea from sinx
 		PCrash()
-		Remind("Orinthian Crashed the server.")
+		Remind("Orinthian Crashed the server. This might be temporary.")
 	else
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
 		    		PCrash()
-				Remind("Orinthian Crashed the server.")
+				Remind("Orinthian Crashed the server. This might be temporary.")
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -5755,11 +5752,12 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'kick' then
-	Remind("You need to specify the kick you want to use.")
+		Remind("You need to specify the kick you want to use.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'dcrash' then
-	if kah_np == true then return Remind("Dog crashing is not possible on KAH NP.") end
+		Remind("This command is patched.")
+--[[	if kah_np == true then return Remind("Dog crashing is not possible on KAH NP.") end
 	if crash_settings.skipwarncrash then -- idea from sinx
 		DCrash()
 		Remind("Dog Crashed the server.")
@@ -5779,13 +5777,12 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 			Button1 = "Yes",
 			Button2 = "No"
 		})
-	end
+	end ]]
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'dogcrash' then
-	Chat(prefix.."dcrash")
+		Remind("This command is patched.")
     end
-
 
    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'swagcrash' then
    if kah_np == true then return Remind("Swag crashing is not possible on KAH NP.") end
@@ -5812,11 +5809,12 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'silcrash' then
-	Remind("There are four types. Run dcrash (dog), fcrash (freeze), scrash (shield/rocket) or swagcrash (swagify)")
+		Remind("Please review the crash list.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fcrash' then
-	if kah_np == true then return Remind("Freeze crashing is not possible on KAH NP.") end
+		Remind("This command is patched.")
+	--[[if kah_np == true then return Remind("Freeze crashing is not possible on KAH NP.") end
 	if crash_settings.skipwarncrash then -- idea from sinx
 		FCrash()
 		Remind("Freeeze Crashed the server.")
@@ -5836,14 +5834,15 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 			Button1 = "Yes",
 			Button2 = "No"
 		})
-	end
+	end]]
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'scrash' then -- not a silent crash!
-	if kah_np == true then return Remind("Shield crashing is not possible on KAH NP.") end
+		Remind("This command is patched.")
+	--[[ if kah_np == true then return Remind("Shield crashing is not possible on KAH NP.") end
         if haspersons == false then
 Remind([[Sorry, you don't have Person299 Admin Commands to perform this command!
-Commands required: shield]])
+Commands required: shield)
         else
 		if crash_settings.skipwarncrash then -- idea from sinx
 			SCrash()
@@ -5865,7 +5864,7 @@ Commands required: shield]])
 				Button2 = "No"
 			})
 		end
-        end
+        end ]]
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'kcrash' then -- From tech-187!
@@ -6988,7 +6987,7 @@ return
 		Chat("paint all black")
             	task.wait(1)
 		crash_settings.skipwarncrash = true
-            	DCrash()        
+            	SwagCrash()        
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bcrash' then -- this probably doesn't work but idc
@@ -7019,7 +7018,7 @@ Chat("h \n\n\n\n\n "..[[
 		if blue_crash == false then
 		else
 			crash_settings.skipwarncrash = true
-            		DCrash()    
+            		SwagCrash()    
 		end
     end
 
@@ -7042,7 +7041,7 @@ Chat("h \n\n\n\n\n "..[[
 		Chat("respawn all")
 		task.wait(1.5)
 		crash_settings.skipwarncrash = true
-		DCrash()
+		SwagCrash()
     end
   
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'dicrash' then
@@ -7053,7 +7052,7 @@ Chat("h \n\n\n\n\n "..[[
 		Chat("name all Dionte is our hero!")
 		task.wait(1.5)
 		crash_settings.skipwarncrash = true
-		DCrash()
+		SwagCrash()
     end
   
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'fredcrash' then
@@ -7080,7 +7079,7 @@ Chat("h \n\n\n\n\n "..[[
         	Chat("char all " .. mehcrashchariz)
 		task.wait(1.5)
 		crash_settings.skipwarncrash = true
-		DCrash()
+		FCrash()
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'rockmap' then
@@ -14450,13 +14449,16 @@ end
 -- CHECK THE CRASH TYPE (then crash)
 function checkCrashType()
 	if crash_settings.crash_type == "freeze" then
-		FCrash()
+		Remind("Patched. Using swag crash...")
+		SwagCrash()
 	elseif crash_settings.crash_type == "shield" then
-		SCrash()
+		Remind("Patched. Using swag crash...")
+		SwagCrash()
 	elseif crash_settings.crash_type == "emr" then
 		KCrash()
 	elseif crash_settings.crash_type == "dog" then
-		DCrash()
+		Remind("Patched. Using swag crash...")
+		SwagCrash()
 	elseif crash_settings.crash_type == "swag" or crash_settings.crash_type == "swagify" then
 		SwagCrash()
 	elseif crash_settings.crash_type == "ex" then
@@ -14468,7 +14470,7 @@ function checkCrashType()
 	elseif crash_settings.crash_type == "fred" then
 		Chat(prefix.."fredcrash")
 	else
-		DCrash()
+		FCrash()
 	end
 end
 
@@ -14623,7 +14625,9 @@ quotes = {
 	"im not a skid vro",
 	"i haev never maed a typo",
 	"one year and counting... forever?",
-	"kl is a trash script - ts2021, 2025"
+	"kl is a trash script - ts2021, 2025",
+	"tech is a cool dude",
+	"agspureiam agspureiamed all over the place"
 }
 
 -- LOG SPAM
@@ -16317,12 +16321,21 @@ end
 
 -- VG CRASH
 function VGCrash()
-      Chat("gear me 00000000000000094794847")
-      repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("VampireVanquisher")
-      local vg = game.Players.LocalPlayer.Backpack:FindFirstChild("VampireVanquisher")
-      vg.Parent = game.Players.LocalPlayer.Character
-      task.wait(0.2)
-      vg:Activate()
+	  for i = 1, 10 do
+      		Chat("gear me 00000000000000094794847")
+	  end
+	  local oldchild = #workspace:GetChildren()
+      repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= 10
+      local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
+      for _, v in ipairs(Backpack:GetChildren()) do
+        	v.Parent = game.Players.LocalPlayer.Character
+		    v:Activate()
+      end
+      --repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("VampireVanquisher")
+      --local vg = game.Players.LocalPlayer.Backpack:FindFirstChild("VampireVanquisher")
+      --vg.Parent = game.Players.LocalPlayer.Character
+      --task.wait(0.2)
+      --vg:Activate()
       wait(.15)
       for i = 1,100 do
           Chat("unsize me me me")
@@ -16347,35 +16360,50 @@ end
 
 -- emerald crash
 function EmCrash()
-      Chat("gear me 000000000000000178076749")
-      repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("Emerald Knights of the Seventh Sanctum Sword and Shield")
-      local green = game.Players.LocalPlayer.Backpack:FindFirstChild("Emerald Knights of the Seventh Sanctum Sword and Shield")
-      green.Parent = game.Players.LocalPlayer.Character
-      task.wait(0.2)
-      green:Activate()
+	  for i = 1, 10 do
+      		Chat("gear me 000000000000000178076749")
+	  end
+	  local oldchild = #workspace:GetChildren()
+      repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= 10
+      local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
+      for _, v in ipairs(Backpack:GetChildren()) do
+        	v.Parent = game.Players.LocalPlayer.Character
+		    v:Activate()
+      end
+     -- repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("Emerald Knights of the Seventh Sanctum Sword and Shield")
+     -- local green = game.Players.LocalPlayer.Backpack:FindFirstChild("Emerald Knights of the Seventh Sanctum Sword and Shield")
+     -- green.Parent = game.Players.LocalPlayer.Character
+     -- task.wait(0.2)
+     -- green:Activate()
       wait(.15)
       for i = 1,100 do
-          Chat("dog me me me")
-          Chat("clone me me me")
+          Chat("unsize me me me")
       end
       PtSH()
 end
 
 -- sword and shield crash
 function PCrash() -- buggy
-	for i = 1, 2 do
-              Chat("gear me 00000000000000092628079")
-              repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("OrinthianSwordAndShield")
-              local ort = game.Players.LocalPlayer.Backpack:FindFirstChild("OrinthianSwordAndShield")
-              ort.Parent = game.Players.LocalPlayer.Character
-              task.wait(0.2)
-              ort:Activate()
-              task.wait(.15)
-              for i = 1,100 do
-                  Chat("unsize me me me")
-              end
+	for i = 1, 10 do
+    		Chat("gear me 00000000000000092628079")
 	end
-        PtSH()
+	local oldchild = #workspace:GetChildren()
+    repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= 10
+	local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
+    for _, v in ipairs(Backpack:GetChildren()) do
+        	v.Parent = game.Players.LocalPlayer.Character
+		    v:Activate()
+    end
+              --repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("OrinthianSwordAndShield")
+              --local ort = game.Players.LocalPlayer.Backpack:FindFirstChild("OrinthianSwordAndShield")
+             -- ort.Parent = game.Players.LocalPlayer.Character
+              --task.wait(0.2)
+              --ort:Activate()
+    task.wait(.15)
+    for i = 1,100 do
+    	Chat("unsize me me me")
+    end
+    PtSH()
 end
 
 -- SKIDNATION...
@@ -20422,7 +20450,7 @@ if kah_np == true then
 	Remind("[WARNING]: You are playing KAH LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
-Remind("This script is discontinued (19th June 2025). Please view more at the source: kohlslite.pages.dev", 8)
+Remind("This script is not updated often. View more at the source: kohlslite.pages.dev", 8)
 -- Remind("Some aliases and autorun commands will no longer work due to Roblox's chat update. I will not be fixing these. Sorry.", 5)
 -- Remind("[WARNING]: KOHLSLITE HAS BEEN UPDATED SO IT WORKS WITH THE NEW CHAT SYSTEM. HOWEVER, IT MAY NOT WORK AS I HAVEN'T TESTED IT YET", 5)
 
@@ -20446,4 +20474,3 @@ end)
 
 -- Information about KohlsLite can be found at the top of this page.
 -- This script was created by ScriptingProgrammer / ts2021 / S-PScripts
--- This script was discontinued on 19th June 2025.
