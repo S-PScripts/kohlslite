@@ -14477,8 +14477,8 @@ end
 -- FREEZE CRASH
 function FCrash()
       for i = 1,100 do
-          Chat("clone all all all                                discord")
-          Chat("freeze all all all                                discord")
+          Chat("clone all all all                                shitting_right_now")
+          Chat("freeze all all all                                shitting_right_now")
       end
       PtSH()
 end
@@ -14486,8 +14486,8 @@ end
 -- DOG CRASH
 function DCrash()
       for i = 1,100 do
-          Chat("clone all all all                                discord")
-          Chat("dog all all all                                  discord")
+          Chat("clone all all all                                shitting_right_now")
+          Chat("dog all all all                                  shitting_right_now")
       end
       PtSH()
 end
@@ -14497,7 +14497,7 @@ function SCrash()
       for i = 1,100 do
           Chat("shield/all/all/all")
           Chat("rocket/all/all/all")
-          Chat("clone all all all			discord")
+          Chat("clone all all all								shitting_right_now")
       end
       PtSH()
 end
@@ -14505,7 +14505,7 @@ end
 -- SWAGIFY CRASH
 function SwagCrash()
 		for i = 1,100 do
-			game.Players:Chat("swagify all all all all all all")
+			game.Players:Chat("swagify all all all all all all shitting_right_now")
 		end
 		PtSH()
 end
