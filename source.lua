@@ -1,3 +1,4 @@
+-- WARNING: agspureiam has returned to KAH and is using alts to find exploiters and ban them
 -- Read all the information below before viewing the source.
 
 --[[
@@ -16,10 +17,9 @@ Debugged with: https://glot.io/new/lua
 KohlsLite is a free, open-source script for the Roblox game created by agspureiam, Kohls Admin House (KAH).
 This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub). If there are any bugs in this script, please contact me.
 
-This is one of the only KAH scripts that works due to Roblox's chat update (30th APRIL 2025). Apart from CMD v3...
+This is one of the only KAH scripts that works due to Roblox's chat update (30th APRIL 2025). Apart from CMD v3 (but agspureiam made a small update that broke the script anyway).
 
-You can play KAH (NBC version) here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
-You can also use it for KAH BC, but barely anyone plays it. 
+You can play KAH here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
 
 This script is not recommended for KAH Legacy (https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy).
 This is because the code there is rather different, and therefore some features in this script are not compatible.
@@ -95,16 +95,15 @@ I do not want to spend hours upon hours adding the features that you can get eas
 Another reason for me discontinuing KohlsLite is the fact that I have exams to do; specifically my GCSEs.
 These are VERY important, and they take a lot of time away.
 
-This script has many bugs due to the May Roblox chat update. Aliases and autorun commands do not work anymore and a few commands may have issues.
+This script has many bugs due to the May Roblox chat update. Aliases and autorun commands do not work anymore, and a few commands may have issues.
 I am not fixing them since I do not play Roblox too much now. You are free to fix them yourself.
 
 If you read all of the above, thank you.
-I had a great time creating KohlsLite, but now it is time for me to move on.
+I had a great time creating KohlsLite!
 
 TS2021, 19th June 2025
-Note: I will still update this script if I find any bugs. I'm not going to be adding new features though.
+Note: I will still update this script if I find any bugs.
 ]]
-
 
 --[[
  ____  _____ _____ _   _ ____  
