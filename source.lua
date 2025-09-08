@@ -663,7 +663,7 @@ local peft = {
     "clydekash",
     "cxotus",
 	"GigaBlockSparkly",
-	"DeportedImported"
+	"DeportedImported",
     "grimAuxiliatrix",
     "undertaker629",
     "jjjuuikjjikkju",
@@ -683,7 +683,7 @@ local atprogperms = {
     "minecraftgamer2012YT",
     "clydekash",
     "cxotus",
-	"DeportedImported"
+	"DeportedImported",
     "GigaBlockSparkly",
     "undertaker629",
     "jjjuuikjjikkju",
