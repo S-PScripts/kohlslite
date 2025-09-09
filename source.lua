@@ -1270,7 +1270,7 @@ local crash_settings = {
 	skipwarncrash = true,
 
 	-- The type of crash you want to default to
-	crash_type = "freeze"
+	crash_type = "swagify"
 }
 
 --[[
@@ -14818,6 +14818,7 @@ local function rainbow()
         colorShift("bottom", 10000000, 10000000, 10000000)
 end
 
+-- this is broken but idc, use adminjoy lol
 connections[#connections + 1] =
     game:GetService("RunService").RenderStepped:Connect(function()
 	task.wait()
