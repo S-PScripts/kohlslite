@@ -562,7 +562,7 @@ local pwl = {
     "me_crashking",
     "ScriptingProgrammer",
     "me_I23456",
-    "kohlslitedev",
+    "RickyMartin05",
     "agspureiamReal",
     "atprog",
     "IceStuds",
@@ -589,7 +589,7 @@ local nokick = {
     "me_crashking",
     "ScriptingProgrammer",
     "me_I23456",
-    "kohlslitedev",
+    "RickyMartin05",
     "agspureiamReal",
     "atprog",
     "IceStuds",
@@ -621,7 +621,7 @@ local pgwl = {
     "me_crashking",
     "ScriptingProgrammer",
     "me_I23456",
-    "kohlslitedev",
+    "RickyMartin05",
     "agspureiamReal",
     "atprog",
     "IceStuds",
@@ -654,7 +654,7 @@ local peft = {
     "me_crashking",
     "ScriptingProgrammer",
     "me_I23456",
-    "kohlslitedev",
+    "RickyMartin05",
     "agspureiamReal",
     "atprog",
     "IceStuds",
@@ -701,7 +701,7 @@ local specialperms = {
     "ScriptingProgrammer",
     "me_I23456",
 	"atprog",
-    "kohlslitedev",
+    "RickyMartin05",
     "agspureiamReal"
 }
 
@@ -10941,7 +10941,7 @@ end ]]
         	local cplr, player = PLAYERCHECK(dasplayer)
         	if player == nil then 
 			return Remind("Fail: User not found!")
-		elseif player == "ScriptingProgrammer" or player == "kohlslitedev" or player == "agspureiamReal" then
+		elseif player == "ScriptingProgrammer" or player == "RickyMartin05" or player == "agspureiamReal" then
 			return Remind("You can't bang developers! NOOB.")
 		else
 			banger = cplr
@@ -20074,7 +20074,7 @@ local OWNER = {
 	"ScriptingProgrammer", 
 	"me_123eq", 
 	"me_I23456", 
-	"kohlslitedev", 
+	"RickyMartin05", 
         "agspureiamReal"
 }
 
