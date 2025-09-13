@@ -17046,7 +17046,7 @@ function onPlayerAdded(player)
 			end
         		print(player.Name.." joined the server. Server was automatically crashed as they are blacklisted.")
 			Remind(player.Name.." joined the server. Server was automatically crashed as they are blacklisted.")
-       		 	checkcrashtype();crash_settings.skipwarncrash = true
+       		 	checkCrashType();crash_settings.skipwarncrash = true
 			check_con = true
    		end
 
@@ -20001,7 +20001,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
                 Chat("h \n\n\n\n\n Server automatically crashed due to blacklisted user ("..v.Name..") being in the server. \n\n\n\n\n")
         	print(v.Name.." found in the server. Server was automatically crashed as they are blacklisted.")
 		Remind(v.Name.." found in the server. Server was automatically crashed as they are blacklisted.")               
-		checkcrashtype(); crash_settings.skipwarncrash = true
+		checkCrashType(); crash_settings.skipwarncrash = true
         end
 
         if table.find(list_on_sight.rkick_on_sight, v.Name) then
