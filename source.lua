@@ -7316,10 +7316,10 @@ Chat("h \n\n\n\n\n "..[[
 		Remind("You're on mobile! It would be so big that you wouldn't be able to close the GUI!")
 	else
 	    	danum = tonumber(string.sub(msg:lower(), #prefix + 9))
-	    	if danum == "" then
+	    	if danum == nil then
             		game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScrollGui").TextButton.Frame.Size = UDim2.new(0,1000,0,1000)
 	    	else
-			game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScrollGui").TextButton.Frame.Size = UDim2.new(0,danum,0,danum)
+					game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScrollGui").TextButton.Frame.Size = UDim2.new(0,danum,0,danum)
 	    	end
 		Remind("If you did this on mobile somehow... you're dumb.")
 	end    
@@ -7389,7 +7389,7 @@ Chat("h \n\n\n\n\n "..[[
 		Remind("Player has been sent to the void!")
     end
 
-    if string.sub(msg, 1, #prefix + 7) == prefix..'execute' then
+    if string.sub(msg, 1, #prefix + 7) == prefix..'execute' then -- execute = kill fr
         Execute(string.sub(msg, #prefix + 9))
 	Remind("Executed the text!")
     end
@@ -7429,7 +7429,7 @@ Chat("h \n\n\n\n\n "..[[
         end
     end
 
-    if string.sub(msg, 1, #prefix + 6) == prefix..'shlong' then
+    if string.sub(msg, 1, #prefix + 6) == prefix..'digify' then -- tagz
 		if haspersons == false then
 Remind([[Sorry, you don't have Person299 Admin Commands to perform this command!
 Commands required: part]])
@@ -7452,7 +7452,7 @@ return
 		end
     end
 
-    if string.sub(msg, 1, #prefix + 8) == prefix..'unshlong' then
+    if string.sub(msg, 1, #prefix + 8) == prefix..'undigify' then -- tagz
 		if haspersons == false then
 Remind([[Sorry, you don't have Person's to perform this command!
 Commands required: part]])
@@ -8721,7 +8721,8 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'nocam' then
-                NoCam()
+			Remind("Patched.")
+               -- NoCam()
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'wbcam' then
@@ -8735,7 +8736,8 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'breakcam' then
-                NoCam()
+		Remind("Patched.")
+               -- NoCam()
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fixcam' then
@@ -8750,7 +8752,7 @@ return
 
      if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'obpfixv' then
                 Remind("You need to be positioned by a wall! If you aren't, rerun this command after 5 seconds.")
-                Chat("sit me down");task.wait(1)
+                Chat("sit me");task.wait(1)
                 Chat("punish me");task.wait(1)
                 Chat("unpunish me");task.wait(1)
                 Chat("unskydive me")     
@@ -8968,7 +8970,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixpaint' then
-	if kah_np == true then return Remind("Due to how parts are named in KAH Legacy, fixing the paint is nearly impossible.") end
+	Remind("Unfortunately, agspureiam updated KAH and now some of the parts have the same name. This command no longer works.")
 	Remind("Fixing paint...")
         FixPaint()
      end
