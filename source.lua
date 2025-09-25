@@ -1,3 +1,5 @@
+-- no longer updated
+
 -- WARNING: agspureiam has returned to KAH and is using alts to find exploiters and ban them
 -- Read all the information below before viewing the source.
 
