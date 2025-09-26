@@ -7564,18 +7564,16 @@ return
 	Chat("char ".. plrs .. " 3222470105")
     end
 
-    if string.sub(msg:lower(), 1, 6) == 'uglify' then
-	Remind("CXO...")
+    if string.sub(msg:lower(), 1, 7) == 'slavify' then
 	plrs = string.sub(msg, 8)
 	Chat("paint ".. plrs .. " black")
         Chat("name ".. plrs .. " worker of white people")
     end
 
-   if string.sub(msg:lower(), 1, 7) == 'curryfy' then
-	Remind("CXO...")
+   if string.sub(msg:lower(), 1, 7) == 'currify' then
 	plrs = string.sub(msg, 9)
 	Chat("paint ".. plrs .. " brown")
-        Chat("name ".. plrs .. " indian")
+        Chat("name ".. plrs .. " asian")
     end
 
     if string.sub(msg:lower(), 1, 5) == 'steve' then
@@ -7583,6 +7581,10 @@ return
 	Speak("AM...");task.wait(1)
 	Speak("STEEEEEEEEEEEVVVVVVVVVVVVVVEEEEEEEEEEEEEEEEEEEEEE!!!")
     end
+
+    if string.sub(msg:lower(), 1, 8) == 'sixseven' then
+		Speak("SIX SEVEN")
+	end
 
    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'sname' then
 	getgenv().scriptname = string.sub(msg, #prefix + 7)
