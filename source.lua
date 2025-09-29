@@ -1,4 +1,4 @@
--- no longer updated
+-- No longer updated
 
 -- WARNING: agspureiam has returned to KAH and is using alts to find exploiters and ban them
 -- Read all the information below before viewing the source.
@@ -82,7 +82,7 @@ There are some features in other scripts that KohlsLite does not have. Here are 
 
 There is also no GUI, and the anti system does not work for individual players.
 
-This script is mostly discontinued due to the lack of a playerbase in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters that will use this script.
+This script is not really updated anymore due to the lack of a playerbase in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters that will use this script.
 There is not enough demand for me to continue updating this script, and even if there was, what?
 
 Here is a quick fact. Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing - even 1,000 sometimes.
@@ -94,7 +94,7 @@ Over years, I have added hundreds of commands/features (nearly 1,000), but now..
 I will not add the features I mentioned above. If you want them, just execute the scripts that I mentioned alongside KohlsLite.
 I do not want to spend hours upon hours adding the features that you can get easily via a simple extra execution.
 
-Another reason for me discontinuing KohlsLite is the fact that I have exams to do; specifically my GCSEs.
+Another reason for me stopping development of KohlsLite is the fact that I have exams to do; specifically my GCSEs.
 These are VERY important, and they take a lot of time away.
 
 This script has many bugs due to the May Roblox chat update. Aliases and autorun commands do not work anymore, and a few commands may have issues.
@@ -20492,3 +20492,5 @@ end)
 
 -- Information about KohlsLite can be found at the top of this page.
 -- This script was created by ScriptingProgrammer / ts2021 / S-PScripts
+
+-- No longer updated
