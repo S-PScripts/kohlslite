@@ -3,3 +3,4 @@ KohlsLite is an exploiting script for the Roblox game Kohls Admin House. I creat
 
 
 f*ck you cloudflare for stopping me from checking my pages.dev pages
+(i'm also to blame, anyways i'll fix the kohlslite domain soon)
