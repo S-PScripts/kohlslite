@@ -1,4 +1,4 @@
--- No longer updated
+-- Discontinued
 
 -- WARNING: agspureiam has returned to KAH and is using alts to find exploiters and ban them
 -- Read all the information below before viewing the source.
@@ -20467,8 +20467,7 @@ if kah_np == true then
 	Remind("[WARNING]: You are playing KAH LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
-Remind("This script is not updated often. View more at the source: kohlslite.pages.dev", 8)
-Remind("ROBLOX BROKE THIS SCRIPT, IT SHOULD BE FIXED SOON!", 3600)
+Remind("This script is no longer updated and is now broken. View more at the source: kohlslite.pages.dev", 10)
 -- Remind("Some aliases and autorun commands will no longer work due to Roblox's chat update. I will not be fixing these. Sorry.", 5)
 -- Remind("[WARNING]: KOHLSLITE HAS BEEN UPDATED SO IT WORKS WITH THE NEW CHAT SYSTEM. HOWEVER, IT MAY NOT WORK AS I HAVEN'T TESTED IT YET", 5)
 
@@ -20493,4 +20492,4 @@ end)
 -- Information about KohlsLite can be found at the top of this page.
 -- This script was created by ScriptingProgrammer / ts2021 / S-PScripts
 
--- No longer updated
+-- Discontinued
