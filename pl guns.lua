@@ -1,3 +1,7 @@
+settings = {
+    killfeed = true
+}
+
 local prefix = "-"
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -61,12 +65,12 @@ local gunAliases = {
 
 local allGuns = {"M9", "AK-47", "M4A1", "Remington 870"}
 
-local function Notify(text)
+local function Notify(text, time)
     pcall(function()
         StarterGui:SetCore("SendNotification", {
-            Title = "Gun Pickup";
+            Title = "PrisonX";
             Text = text;
-            Duration = 2;
+            Duration = time or 2;
         })
     end)
 end
@@ -95,9 +99,6 @@ local function GrabPad(pad)
 end
 
 local function JoinTeam(team)
-local Players = game:GetService("Players")
-local LocalPlayer = Players.LocalPlayer
-
 local function callConnections(signal)
     if not signal then return false end
     local conns = getconnections(signal)
@@ -185,6 +186,33 @@ local function GrabGuns(gunsToGrab)
     end
 end
 
+
+local function setInfiniteAmmo(tool)
+    if not tool then
+        warn("No tool found.")
+        return false
+    end
+
+    if tool:GetAttribute("MaxAmmo") ~= nil then
+        tool:SetAttribute("MaxAmmo", math.huge)
+        tool:SetAttribute("CurrentAmmo", math.huge)
+        tool:SetAttribute("AmmoPerClip", math.huge)
+        tool:SetAttribute("StoredAmmo", math.huge)
+        Notify("Set attributes on tool:", tool.Name)
+        return true
+    end
+end
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Killfeed = ReplicatedStorage:WaitForChild("Killfeed")
+
+Killfeed.ChildAdded:Connect(function(newChild)
+    if settings.killfeed == true then
+	    print("New killfeed entry:", newChild.Name)
+	    Notify(newChild.name, 1)
+    end
+end)
+
 local function handleCommand(msg)
     local lowerMsg = msg:lower()
 
@@ -234,9 +262,34 @@ local function handleCommand(msg)
         end
     end
 
+    if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."infammo" then
+        local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildWhichIsA("Tool")
+        if not tool then
+            Notify("You must hold the tool!")
+        else
+            setInfiniteAmmo(tool)
+        end
+    end
 
     if string.sub(lowerMsg, 1, #prefix + 2) == prefix.."iy" then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."killfeed" then
+        settings.killfeed = true
+        Notify("Enabled Kill Feed.")
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unkillfeed" then
+        settings.killfeed = false
+        Notify("Enabled Kill Feed.")
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."pkf" then
+        for i, v in ipairs(Killfeed:GetChildren()) do
+	        print(v.Name)
+        end
+        Notify("Printed Kill Feed to /console.")
     end
 
 end
