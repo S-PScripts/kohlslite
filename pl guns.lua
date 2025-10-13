@@ -1,11 +1,12 @@
-settings = {
-    killfeed = true
-}
-
 local prefix = "-"
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local StarterGui = game:GetService("StarterGui")
+
+local RunService = game:GetService("RunService")
+local hbeat = RunService.Heartbeat
+local rstep = RunService.RenderStepped
+local stepped = RunService.Stepped
 
 local Teleports = {
 	nspawn = CFrame.new(879, 28, 2349);
@@ -64,6 +65,14 @@ local gunAliases = {
 }
 
 local allGuns = {"M9", "AK-47", "M4A1", "Remington 870"}
+
+settings = {
+    killfeed = true,
+    antiarrest = true,
+    antitase = true,
+    autorespawn = true,
+    hidearrests = false
+}
 
 local function Notify(text, time)
     pcall(function()
@@ -186,6 +195,45 @@ local function GrabGuns(gunsToGrab)
     end
 end
 
+function unequip()
+    LocalPlayer.Character:FindFirstChild("Humanoid"):UnequipTools()
+end
+
+function equip(tool)
+    LocalPlayer.Character:FindFirstChild("Humanoid"):EquipTool(tool)
+end
+
+function unsit(tool, a)
+    if a then
+			local h = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+			for i = 1, 8 do 
+                hbeat:Wait()
+                h.Sit = false
+                rstep:Wait()
+                h.Sit = false
+                stepped:Wait()
+                h.Sit = false 
+            end
+	end
+    
+    LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Running)
+end
+
+-- PLAYER CHECK
+function PLAYERCHECK(plr, rt)
+    plr = plr:lower()
+    for _, v in pairs(game.Players:GetPlayers()) do
+        if string.sub(v.Name:lower(), 1, #plr) == plr or string.sub(v.DisplayName:lower(), 1, #plr) == plr then
+            Notify("Found "..v.Name)
+            if rt then
+                return v -- only return Player instance
+            else
+                return v, v.Name -- return both
+            end
+        end
+    end
+    return nil, nil
+end
 
 local function setInfiniteAmmo(tool)
     if not tool then
@@ -198,9 +246,108 @@ local function setInfiniteAmmo(tool)
         tool:SetAttribute("CurrentAmmo", math.huge)
         tool:SetAttribute("AmmoPerClip", math.huge)
         tool:SetAttribute("StoredAmmo", math.huge)
+        task.wait(0.01)
+        unequip()
+        task.wait(0.01)
+        equip(tool)
         Notify("Set attributes on tool:", tool.Name)
         return true
     end
+end
+
+local function setFireRate(tool, time)
+    if not tool then
+        warn("No tool found.")
+        return false
+    end
+
+    if tool:GetAttribute("MaxAmmo") ~= nil then
+        tool:SetAttribute("FireRate", time)
+        tool:SetAttribute("AutoFire", true)
+        task.wait(0.01)
+        unequip()
+        task.wait(0.01)
+        equip(tool)
+        Notify("Set attributes on tool:", tool.Name)
+        return true
+    end
+end
+
+function tpto(args)
+    LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = args
+end
+
+local rstorage = game:GetService("ReplicatedStorage")
+pcall(function()
+    local RegModule = require(game.ReplicatedStorage["Modules_client"]["RegionModule_client"])
+end)
+
+function getillegalreg(cplr)
+    local RegPlr = nil
+	if cplr.Character and RegModule then
+		for i, v in pairs(rstorage:FindFirstChild("PermittedRegions"):GetChildren()) do
+			if RegModule.findRegion(cplr.Character) then
+				RegPlr = RegModule.findRegion(cplr.Character)["Name"]
+			end
+			if v.Value == RegPlr then
+				return false
+			end
+		end
+		return true
+	else 
+        return true 
+    end
+end
+
+function arrestme(cplr)
+    workspace.Remote.arrest:InvokeServer(cplr.Character:FindFirstChildWhichIsA("Part"))
+end
+
+function currentping(cth, owt)
+	if cth then
+		return owt and LocalPlayer:GetNetworkPing() * 1000 or game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue()
+	else
+		return owt and LocalPlayer:GetNetworkPing() or game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue() / 1000
+	end
+end
+
+function arrest(cplr, sp, hidden)
+    aplr = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
+	local Timedout, readytoar = tick() + 6, tick() + currentping()
+	tpto(cplr.Character:FindFirstChild("HumanoidRootPart").CFrame)
+
+	repeat task.wait()
+		local charexalive = cplr.Character and cplr.Character:FindFirstChild("Humanoid").Health == 0
+		local plrcoporneutral = cplr.TeamColor == BrickColor.new("Bright blue") or cplr.TeamColor == BrickColor.new("Medium stone grey")
+		local hayop = cplr.TeamColor ~= BrickColor.new("Really red") and not getillegalreg(cplr)
+		if charexalive or gago or hayop then
+			break
+		end
+        
+        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid").Sit then
+			unsit()
+		end
+        
+        if hidden or settings.hidearrests then
+		    tpto(cplr.Character:FindFirstChild("Head").CFrame * CFrame.new(0, -12, -1))
+		else
+			tpto(cplr.Character:FindFirstChild("HumanoidRootPart").CFrame * CFrame.new(0, 0, -1))
+		end
+        
+        if tick() - readytoar >=0 then
+			task.spawn(arrestme(cplr))
+		end
+
+	until cplr.Character:FindFirstChild("Head"):FindFirstChild("handcuffedGui") or tick() - Timedout >= 0; Timedout = nil
+
+	if sp then
+		if LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Sit then
+			unsit(true)
+		end
+        
+        tpto(aplr)
+	end
+
 end
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -262,12 +409,65 @@ local function handleCommand(msg)
         end
     end
 
+    if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."arrest" then
+        local parts = lowerMsg:split(" ")
+        local arrestPlayer = parts[2]
+        local hidden = parts[3]
+        if not arrestPlayer then arrestPlayer = LocalPlayer.Name end
+
+        local cplr, player = PLAYERCHECK(arrestPlayer)
+        if player then
+            if cplr.TeamColor == BrickColor.new("Really red") or (cplr.TeamColor == BrickColor.new("Bright orange") and getillegalreg(cplr)) then
+				if player == LocalPlayer.Name then
+					arrestme(cplr)
+				else
+					arrest(cplr, true, parts[3] == "true")
+				end
+                Notify("Arrested " .. cplr.Name .. ".")
+			else
+                Notify("ERROR: Player is unarrestable.")
+            end
+
+		    player = tostring(player)
+            arrest(cplr, player)
+         else
+            Remind('Cannot find player with the name: '..arrestPlayer)
+         end
+    end
+
     if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."infammo" then
         local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildWhichIsA("Tool")
         if not tool then
             Notify("You must hold the tool!")
         else
             setInfiniteAmmo(tool)
+        end
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 5) == prefix.."opgun" then
+        local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildWhichIsA("Tool")
+        if not tool then
+            Notify("You must hold the tool!")
+        else
+            setInfiniteAmmo(tool)
+            setFireRate(tool)
+        end
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."firerate" then
+        local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildWhichIsA("Tool")
+        local parts = lowerMsg:split(" ")
+        local timePart = tonumber(parts[2])
+
+        if not timePart then 
+            timePart = 0.01
+        else
+        end
+
+        if not tool then
+            Notify("You must hold the tool!")
+        else
+            setFireRate(tool, timePart)
         end
     end
 
@@ -282,7 +482,27 @@ local function handleCommand(msg)
 
     if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unkillfeed" then
         settings.killfeed = false
-        Notify("Enabled Kill Feed.")
+        Notify("Disabled Kill Feed.")
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."antiar" then
+        settings.antiarrest = true
+        Notify("Enabled anti-arrest.")
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."unantiar" then
+        settings.antiarrest = false
+        Notify("Disabled anti-arrest.")
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."antitase" then
+        settings.antitase = true
+        Notify("Enabled anti-tase.")
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unantitase" then
+        settings.antitase = false
+        Notify("Disabled anti-tase.")
     end
 
     if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."pkf" then
@@ -306,4 +526,105 @@ LocalPlayer:GetMouse().KeyDown:Connect(function(key)
     if key:lower() == "g" then
         GrabGuns(allGuns)
     end
+end)
+
+
+
+local normalWS = 16
+local normalJP = 50
+
+task.spawn(function()
+	while hbeat:Wait() do
+		local char = LocalPlayer.Character
+		if char then
+			local hum = char:FindFirstChildOfClass("Humanoid")
+			if hum then
+				if hum.WalkSpeed > 0 then
+					normalWS = hum.WalkSpeed
+				end
+				if hum.JumpPower > 0 then
+					normalJP = hum.JumpPower
+				end
+			end
+		end
+	end
+end)
+
+LocalPlayer.CharacterAdded:Connect(function(char)
+	local humanoid = char:WaitForChild("Humanoid")
+	local animator = humanoid:WaitForChild("Animator")
+
+	animator.AnimationPlayed:Connect(function(des)
+		-- Anti Arrest
+		if settings.antiarrest and des.Animation.AnimationId == "rbxassetid://287112271" then
+			des:Stop()
+			des:Destroy()
+            StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+
+            local wspeed = normalWS
+			local jpower = normalJP
+
+			task.delay(4.95, function()
+				local cpos = char:WaitForChild("HumanoidRootPart").CFrame
+				local wascriminal = (LocalPlayer.TeamColor.Name == "Really red")
+
+				LocalPlayer.CharacterAdded:Wait()
+				repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+				if wascriminal then
+					GrabPad(workspace["Criminals Spawn"]:GetChildren()[7])
+				end
+
+                tpto(cpos)
+			end)
+
+			task.delay(0, function()
+				humanoid.WalkSpeed = wspeed
+				humanoid.JumpPower = jpower
+			end)
+		end
+
+		-- Anti Tase
+		if settings.antitase and des.Animation.AnimationId == "rbxassetid://279227693" then
+			des:Stop()
+			des:Destroy()
+            StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+			local wspeed = normalWS
+			local jpower = normalJP
+			hbeat:Wait()
+			humanoid.WalkSpeed = wspeed
+			humanoid.JumpPower = jpower
+		end
+	end)
+end)
+
+local lastDeathCFrame = nil
+
+LocalPlayer.CharacterAdded:Connect(function(char)
+	if settings.autorespawn then
+		local hrp = char:WaitForChild("HumanoidRootPart")
+		local hum = char:WaitForChild("Humanoid")
+
+		if lastDeathCFrame then
+			for i = 1, 3 do
+				RunService.Heartbeat:Wait()
+			end
+
+			for i = 1, 3 do
+				pcall(function()
+                    tpto(lastDeathCFrame)
+				end)
+				task.wait(0.03)
+			end
+
+			lastDeathCFrame = nil
+		end
+
+		hum.Died:Connect(function()
+			local hrp = char:FindFirstChild("HumanoidRootPart")
+			if hrp then
+				lastDeathCFrame = hrp.CFrame
+			end
+		end)
+	end
 end)
