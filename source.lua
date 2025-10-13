@@ -1,4 +1,5 @@
 -- Discontinued
+-- Do not ask me to fix the game.Players:Chat()
 
 -- WARNING: agspureiam has returned to KAH and is using alts to find exploiters and ban them
 -- Read all the information below before viewing the source.
@@ -82,7 +83,7 @@ There are some features in other scripts that KohlsLite does not have. Here are 
 
 There is also no GUI, and the anti system does not work for individual players.
 
-This script is not really updated anymore due to the lack of a playerbase in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters that will use this script.
+This script is practically discontinued due to the lack of a playerbase in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters that will use this script.
 There is not enough demand for me to continue updating this script, and even if there was, what?
 
 Here is a quick fact. Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing - even 1,000 sometimes.
@@ -103,8 +104,7 @@ I am not fixing them since I do not play Roblox too much now. You are free to fi
 If you read all of the above, thank you.
 I had a great time creating KohlsLite!
 
-TS2021, 19th June 2025
-Note: I will still update this script if I find any bugs.
+TS2021, October 2025
 ]]
 
 --[[
@@ -20066,7 +20066,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
 	end
 end
 
--- These run last to prevent bugs (old remanent)
+-- These run last to prevent bugs (old remnant)
 startupScripts()
 
 Stats.loadedtime = string.format("%.2f", os.clock() - Stats.starttime)
@@ -20081,7 +20081,7 @@ local OWNER = {
 	"me_123eq", 
 	"me_I23456", 
 	"RickyMartin05", 
-        "agspureiamReal"
+    "agspureiamReal"
 }
 
 local DEVELOPER = {
@@ -20106,9 +20106,9 @@ local function rankcheck(username)
     if table.find(OWNER, username) then
         return "Owner"
     elseif table.find(DEVELOPER, username) then
-	return "Developer"
+		return "Developer"
     elseif table.find(ADMIN, username) then
-	return "Admin"
+		return "Admin"
     else
         return "Member"
     end
@@ -20430,10 +20430,11 @@ if getgenv().kohlsgui then
 	createKohlsUi(
                 {
                     "Thanks for using KohlsLite!",
-                    "This script was created by TS2021/S-PScripts/ScriptingProgrammer.",
+                    "This script was created by TS2021/S-PScripts",
+					"/ScriptingProgrammer",
 		    " ",
 		    "To see all the commands KohlsLite has, do the following:",
-		    "1. Chat .kcmds or .kcmd2 or .kcmd3 (commands split into 3 pages)",
+		    "1. Chat .kcmds or .kcmd2 or .kcmd3 ",
 		    "2. Chat /console and you're done",
 		    " ",
 		    "Have fun using my script!"
