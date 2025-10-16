@@ -350,6 +350,60 @@ function arrest(cplr, sp, hidden)
 
 end
 
+function kill(plr, events, guntouse, waittodie)
+	local AK = LocalPlayer.Backpack:FindFirstChild("AK-47") or LocalPlayer.Character:FindFirstChild("AK-47")
+	if not AK and not guntouse then
+		GrabGun("AK-47")
+		task.wait()
+		AK = LocalPlayer.Backpack:FindFirstChild("AK-47") or LocalPlayer.Character:FindFirstChild("AK-47")
+	elseif guntouse then
+		AK = LocalPlayer.Backpack:FindFirstChild(guntouse) or LocalPlayer.Character:FindFirstChild(guntouse)
+		if not AK then
+			GrabGun(guntouse)
+			task.wait()
+			AK = LocalPlayer.Backpack:FindFirstChild(guntouse)
+		end
+	end
+	if plr.Character:FindFirstChild("Humanoid").Health == 0 or plr.Character:FindFirstChildWhichIsA("ForceField") then
+		return
+	end
+	local Eve = 10 or events
+	print(Eve)
+	local ShootEvents = {};
+	for i = 1, Eve do
+		ShootEvents[#ShootEvents + 1] = {
+			Hit = plr.Character:FindFirstChildOfClass("Part");
+			Cframe = CFrame.new();
+			RayObject = Ray.new(Vector3.new(), Vector3.new());
+			Distance = 0;
+		};
+	end
+	task.spawn(function()
+		for i = 1, 6 do
+			rstorage.ReloadEvent:FireServer(AK)
+			task.wait(.1)
+		end
+	end)
+	if plr.TeamColor == LocalPlayer.TeamColor then
+		if plr.TeamColor == BrickColor.new("Really red") or plr.TeamColor == BrickColor.new("Bright blue") then
+			--SavedPositions.AutoRe = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
+			--SaveCamPos()
+			JoinTeam("inmate")
+			rstorage.ShootEvent:FireServer(ShootEvents, AK)
+			task.wait(0.06)
+		else
+			 local crimPad = workspace["Criminals Spawn"]:GetChildren()[7]
+            GrabPad(crimPad)
+			rstorage.ShootEvent:FireServer(ShootEvents, AK)
+		end
+	else
+		rstorage.ShootEvent:FireServer(ShootEvents, AK)
+	end
+	if WaitToDie then
+		repeat task.wait() until not plr.Character or not plr.Character:FindFirstChildOfClass("Humanoid") or plr.Character:FindFirstChildOfClass("Humanoid").Health == 0 or plr.Character:FindFirstChildWhichIsA("ForceField")
+	end
+end
+
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Killfeed = ReplicatedStorage:WaitForChild("Killfeed")
 
@@ -430,6 +484,24 @@ local function handleCommand(msg)
 
 		    player = tostring(player)
             arrest(cplr, player)
+         else
+            Remind('Cannot find player with the name: '..arrestPlayer)
+         end
+    end
+
+	if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."kill" then
+        local parts = lowerMsg:split(" ")
+        local arrestPlayer = parts[2]
+        local hidden = parts[3]
+        if not killPlayer then killPlayer = LocalPlayer.Name end
+
+        local cplr, player = PLAYERCHECK(arrestPlayer)
+        if player then
+				player = tostring(player)
+
+				kill(cplr, true, parts[3] == "true")
+                Notify("Killed " .. cplr.Name .. ".")
+
          else
             Remind('Cannot find player with the name: '..arrestPlayer)
          end
