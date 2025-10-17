@@ -380,7 +380,7 @@ function kill(plr, events, guntouse, waittodie)
 	end
 	task.spawn(function()
 		for i = 1, 6 do
-			rstorage.ReloadEvent:FireServer(AK)
+			rstorage.GunRemotes.ReloadEvent:FireServer(AK)
 			task.wait(.1)
 		end
 	end)
@@ -389,15 +389,15 @@ function kill(plr, events, guntouse, waittodie)
 			--SavedPositions.AutoRe = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
 			--SaveCamPos()
 			JoinTeam("inmate")
-			rstorage.ShootEvent:FireServer(ShootEvents, AK)
+			rstorage.GunRemotes.ShootEvent:FireServer(ShootEvents, AK)
 			task.wait(0.06)
 		else
 			 local crimPad = workspace["Criminals Spawn"]:GetChildren()[7]
             GrabPad(crimPad)
-			rstorage.ShootEvent:FireServer(ShootEvents, AK)
+			rstorage.GunRemotes.ShootEvent:FireServer(ShootEvents, AK)
 		end
 	else
-		rstorage.ShootEvent:FireServer(ShootEvents, AK)
+		rstorage.GunRemotes.ShootEvent:FireServer(ShootEvents, AK)
 	end
 	if WaitToDie then
 		repeat task.wait() until not plr.Character or not plr.Character:FindFirstChildOfClass("Humanoid") or plr.Character:FindFirstChildOfClass("Humanoid").Health == 0 or plr.Character:FindFirstChildWhichIsA("ForceField")
