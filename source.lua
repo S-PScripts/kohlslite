@@ -1,7 +1,6 @@
--- Discontinued
--- Do not ask me to fix the game.Players:Chat()
+-- Discontinued permanently
+-- Do not ask me to fix the game.Players:Chat() or anything else
 
--- WARNING: agspureiam has returned to KAH and is using alts to find exploiters and ban them
 -- Read all the information below before viewing the source.
 
 --[[
@@ -83,26 +82,27 @@ There are some features in other scripts that KohlsLite does not have. Here are 
 
 There is also no GUI, and the anti system does not work for individual players.
 
-This script is practically discontinued due to the lack of a playerbase in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters that will use this script.
+This script is practically discontinued due to the lack of a player base in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters who will use this script.
 There is not enough demand for me to continue updating this script, and even if there was, what?
 
 Here is a quick fact. Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing - even 1,000 sometimes.
-Do you know why? It is partially because it does not get boring fast unlike KAH. KAH is just you trying some admin commands, nothing else.
+Do you know why? It is partially because it does not get boring fast, unlike KAH. KAH is just you trying some admin commands, nothing else.
 
 KAH has become boring to me, and so has this script. I have played KAH since August 2022, and have updated this script since its creation in December 2023.
-Over years, I have added hundreds of commands/features (nearly 1,000), but now... what is left?
+Over the past few years, I have added hundreds of commands/features (nearly 1,000), but now... what is left?
 
 I will not add the features I mentioned above. If you want them, just execute the scripts that I mentioned alongside KohlsLite.
 I do not want to spend hours upon hours adding the features that you can get easily via a simple extra execution.
 
-Another reason for me stopping development of KohlsLite is the fact that I have exams to do; specifically my GCSEs.
+Another reason for me stopping development of KohlsLite is the fact that I have exams to do, specifically my GCSEs.
 These are VERY important, and they take a lot of time away.
 
 This script has many bugs due to the May Roblox chat update. Aliases and autorun commands do not work anymore, and a few commands may have issues.
 I am not fixing them since I do not play Roblox too much now. You are free to fix them yourself.
 
-If you read all of the above, thank you.
-I had a great time creating KohlsLite!
+Agspureiam also came back around August 2025 and made many updates. He also banned some exploiters, including me. They broke some things in this script, and I will not fix them.
+
+If you read all of the above, thank you. I had a great time creating KohlsLite.
 
 TS2021, October 2025
 ]]
@@ -5797,7 +5797,9 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
     end
 
    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'swagcrash' then
-   if kah_np == true then return Remind("Swag crashing is not possible on KAH NP.") end
+			Remind("This command is patched.")
+
+ --[[  if kah_np == true then return Remind("Swag crashing is not possible on KAH NP.") end
 	if crash_settings.skipwarncrash then -- idea from sinx
 		SwagCrash()
 		Remind("Swag Crashed the server.")
@@ -5817,7 +5819,7 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 			Button1 = "Yes",
 			Button2 = "No"
 		})
-	end
+	end ]]
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'silcrash' then
@@ -14464,6 +14466,8 @@ end
 
 -- CHECK THE CRASH TYPE (then crash)
 function checkCrashType()
+	Remind("Crashes don't work anymore.")
+	--[[
 	if crash_settings.crash_type == "freeze" then
 		Remind("Patched. Using swag crash...")
 		SwagCrash()
@@ -14486,8 +14490,8 @@ function checkCrashType()
 	elseif crash_settings.crash_type == "fred" then
 		Chat(prefix.."fredcrash")
 	else
-		FCrash()
-	end
+		SwagCrash()
+	end ]]
 end
 
 -- FREEZE CRASH
@@ -20468,7 +20472,7 @@ if kah_np == true then
 	Remind("[WARNING]: You are playing KAH LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
-Remind("This script is no longer updated and is now broken. View more at the source: kohlslite.pages.dev", 10)
+Remind("OCTOBER 2025: This script is DISCONTINUED and many things NO LONGER WORK. View more at the source: kohlslite.pages.dev", 10)
 -- Remind("Some aliases and autorun commands will no longer work due to Roblox's chat update. I will not be fixing these. Sorry.", 5)
 -- Remind("[WARNING]: KOHLSLITE HAS BEEN UPDATED SO IT WORKS WITH THE NEW CHAT SYSTEM. HOWEVER, IT MAY NOT WORK AS I HAVEN'T TESTED IT YET", 5)
 
