@@ -2479,9 +2479,9 @@ ___  __    ________  ___  ___  ___       ________  ___       ___  _________  ___
 
 print("- Information -")
 print("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by ScriptingProgrammer.")
-Remind("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by ScriptingProgrammer.")
+Remind("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by ScriptingProgrammer.", 5)
 print("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
-Remind("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
+Remind("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .credits . DM me at ts2021 for help.", 5)
 	
 -- Check user for Perm and Persons
 function checkPerm()	
@@ -20294,7 +20294,45 @@ if ctime2 > eol then
 end
 ]]
 
--- add discontinued banner here (jeeeeeeeeeeeeeeeeeeee)
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "DiscontinuedBannerGui"
+screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+
+local background = Instance.new("Frame")
+background.Size = UDim2.new(1, 0, 1, 0) -- full screen
+background.Position = UDim2.new(0, 0, 0, 0)
+background.BackgroundColor3 = Color3.fromRGB(50, 50, 50) -- grey
+background.BackgroundTransparency = 0.5 -- semi-transparent
+background.BorderSizePixel = 0
+background.Parent = screenGui
+
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(0.8, 0, 0.3, 0) -- 80% width, 30% height
+label.Position = UDim2.new(0.1, 0, 0.35, 0) -- centered
+label.BackgroundTransparency = 1
+label.Text = "KohlsLite is discontinued.\nView the source here: https://kohlslite.pages.dev"
+label.TextColor3 = Color3.fromRGB(255, 255, 255)
+label.Font = Enum.Font.GothamBold
+label.TextSize = 25 -- smaller text
+label.TextWrapped = true
+label.TextScaled = true 
+label.TextXAlignment = Enum.TextXAlignment.Center
+label.TextYAlignment = Enum.TextYAlignment.Center
+label.Parent = background
+
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0.2, 0, 0.08, 0) -- 20% width, 8% height
+closeButton.Position = UDim2.new(0.4, 0, 0.7, 0) -- centered under text
+closeButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+closeButton.Text = "Close"
+closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+closeButton.Font = Enum.Font.GothamBold
+closeButton.TextSize = 25 -- slightly smaller
+closeButton.Parent = background
+
+closeButton.MouseButton1Click:Connect(function()
+    background:Destroy()
+end)
 
 if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 883283806) then
         purchased_kl = true 
@@ -20305,7 +20343,7 @@ end
 if purchased_kl or table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) then
 	-- filler
 else
-	Remind("Support me by buying my gamepass! Just do .purchase.")
+	--Remind("Support me by buying my gamepass! Just do .purchase.")
 end
 
 -- This UI is from Shortcut v2 --
