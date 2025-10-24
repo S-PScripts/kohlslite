@@ -137,16 +137,17 @@ local function Remind(msg, length)
         })
 end; -- this semi-colon is useless, but I don't want to remove it xd
 
+local TextChatService = game:GetService("TextChatService")
+
 -- Chat function
 local function Chat(msg, x)
 	-- can't be asked to fix this no cmd bar for u
 	--[[  if x == true then 
 		zamn = true 
-		print("johnatato")
 	  else 
 		zamn = false
 	  end ]]
-      game.Players:Chat(msg)
+	TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage(msg)
 end
 
 -- Check if KohlsLite is already executed
