@@ -1,14 +1,39 @@
 -- PrisonX (not working)
 local prefix = "-"
+
+-- Settings
+settings = {
+    killfeed = true,
+    antiarrest = true,
+    antitase = true,
+    autorespawn = true,
+}
+
+-- Notifications
+local StarterGui = game:GetService("StarterGui")
+local function Notify(text, time)
+    pcall(function()
+        StarterGui:SetCore("SendNotification", {
+            Title = "PrisonX";
+            Text = text;
+            Duration = time or 2;
+        })
+    end)
+end
+
+-- Variables
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
-local StarterGui = game:GetService("StarterGui")
 
 local RunService = game:GetService("RunService")
 local hbeat = RunService.Heartbeat
 local rstep = RunService.RenderStepped
 local stepped = RunService.Stepped
 
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Killfeed = ReplicatedStorage:WaitForChild("Killfeed")
+
+-- Teleport Locations
 local Teleports = {
 	nspawn = CFrame.new(879, 28, 2349);
 	cells = CFrame.new(918.9735107421875, 99.98998260498047, 2451.423583984375);
@@ -36,6 +61,7 @@ local Teleports = {
 	buildingroof = CFrame.new(-317.689331, 118.838821, 2009.28186, 0.749499857, 2.48145682e-09, 0.662004471, 3.51757373e-10, 1, -4.14664703e-09, -0.662004471, 3.34077632e-09, 0.749499857);
 }
 
+-- Teleport to location
 local function teleportTo(location)
 	local cframe = Teleports[location:lower()]
 	if not cframe then
@@ -65,26 +91,10 @@ local gunAliases = {
     ["m4a1"] = "M4A1"
 }
 
+-- Guns in the game
 local allGuns = {"M9", "AK-47", "M4A1", "Remington 870"}
 
-settings = {
-    killfeed = true,
-    antiarrest = true,
-    antitase = true,
-    autorespawn = true,
-    hidearrests = false
-}
-
-local function Notify(text, time)
-    pcall(function()
-        StarterGui:SetCore("SendNotification", {
-            Title = "PrisonX";
-            Text = text;
-            Duration = time or 2;
-        })
-    end)
-end
-
+-- Gun Pads
 local function GrabPad(pad)
     if not pad then
         warn("Pad not found")
@@ -108,6 +118,8 @@ local function GrabPad(pad)
     Notify("Touched pad:", pad.Name)
 end
 
+
+-- Join a team
 local function JoinTeam(team)
 local function callConnections(signal)
     if not signal then return false end
@@ -147,12 +159,14 @@ else
 end
 end
 
+-- Check if you already have the gun
 local function hasGun(name)
     local backpack = LocalPlayer:WaitForChild("Backpack")
     local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
     return backpack:FindFirstChild(name) or char:FindFirstChild(name)
 end
 
+-- Grab A Gun
 local function GrabGun(gun)
     local pad = workspace[gun]
     if not pad then
@@ -176,6 +190,7 @@ local function GrabGun(gun)
     return true
 end
 
+-- Grab All Guns
 local function GrabGuns(gunsToGrab)
     local obtained = {}
     for _, gun in ipairs(gunsToGrab) do
@@ -204,7 +219,6 @@ function equip(tool)
     LocalPlayer.Character:FindFirstChild("Humanoid"):EquipTool(tool)
 end
 
-
 -- PLAYER CHECK
 function PLAYERCHECK(plr, rt)
     plr = plr:lower()
@@ -221,6 +235,7 @@ function PLAYERCHECK(plr, rt)
     return nil, nil
 end
 
+-- Infinite Ammo Set
 local function setInfiniteAmmo(tool)
     if not tool then
         warn("No tool found.")
@@ -241,6 +256,7 @@ local function setInfiniteAmmo(tool)
     end
 end
 
+-- Fire Rate Set
 local function setFireRate(tool, time)
     if not tool then
         warn("No tool found.")
@@ -263,15 +279,118 @@ function tpto(args)
     LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = args
 end
 
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Killfeed = ReplicatedStorage:WaitForChild("Killfeed")
 
+-- Kill Feed
 Killfeed.ChildAdded:Connect(function(newChild)
     if settings.killfeed == true then
 	    print("New killfeed entry:", newChild.Name)
 	    Notify(newChild.name, 1)
     end
 end)
+
+
+
+local normalWS = 16
+local normalJP = 50
+
+task.spawn(function()
+	while hbeat:Wait() do
+		local char = LocalPlayer.Character
+		if char then
+			local hum = char:FindFirstChildOfClass("Humanoid")
+			if hum then
+				if hum.WalkSpeed > 0 then
+					normalWS = hum.WalkSpeed
+				end
+				if hum.JumpPower > 0 then
+					normalJP = hum.JumpPower
+				end
+			end
+		end
+	end
+end)
+
+-- Anti Arrest and Anti Tase
+LocalPlayer.CharacterAdded:Connect(function(char)
+	local humanoid = char:WaitForChild("Humanoid")
+	local animator = humanoid:WaitForChild("Animator")
+
+	animator.AnimationPlayed:Connect(function(des)
+		-- Anti Arrest
+		if settings.antiarrest and des.Animation.AnimationId == "rbxassetid://287112271" then
+			des:Stop()
+			des:Destroy()
+            StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+
+            local wspeed = normalWS
+			local jpower = normalJP
+
+			task.delay(4.95, function()
+				local cpos = char:WaitForChild("HumanoidRootPart").CFrame
+				local wascriminal = (LocalPlayer.TeamColor.Name == "Really red")
+
+				LocalPlayer.CharacterAdded:Wait()
+				repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+
+				if wascriminal then
+					GrabPad(workspace["Criminals Spawn"]:GetChildren()[7])
+				end
+
+                tpto(cpos)
+			end)
+
+			task.delay(0, function()
+				humanoid.WalkSpeed = wspeed
+				humanoid.JumpPower = jpower
+			end)
+		end
+
+		-- Anti Tase
+		if settings.antitase and des.Animation.AnimationId == "rbxassetid://279227693" then
+			des:Stop()
+			des:Destroy()
+            StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+			local wspeed = normalWS
+			local jpower = normalJP
+			hbeat:Wait()
+			humanoid.WalkSpeed = wspeed
+			humanoid.JumpPower = jpower
+		end
+	end)
+end)
+
+
+-- Auto Respawn
+local lastDeathCFrame = nil
+LocalPlayer.CharacterAdded:Connect(function(char)
+	if settings.autorespawn then
+		local hrp = char:WaitForChild("HumanoidRootPart")
+		local hum = char:WaitForChild("Humanoid")
+
+		if lastDeathCFrame then
+			for i = 1, 3 do
+				RunService.Heartbeat:Wait()
+			end
+
+			for i = 1, 3 do
+				pcall(function()
+                    tpto(lastDeathCFrame)
+				end)
+				task.wait(0.03)
+			end
+
+			lastDeathCFrame = nil
+		end
+
+		hum.Died:Connect(function()
+			local hrp = char:FindFirstChild("HumanoidRootPart")
+			if hrp then
+				lastDeathCFrame = hrp.CFrame
+			end
+		end)
+	end
+end)
+
 
 local function handleCommand(msg)
     local lowerMsg = msg:lower()
@@ -414,104 +533,4 @@ LocalPlayer:GetMouse().KeyDown:Connect(function(key)
     if key:lower() == "g" then
         GrabGuns(allGuns)
     end
-end)
-
-
-local normalWS = 16
-local normalJP = 50
-
-task.spawn(function()
-	while hbeat:Wait() do
-		local char = LocalPlayer.Character
-		if char then
-			local hum = char:FindFirstChildOfClass("Humanoid")
-			if hum then
-				if hum.WalkSpeed > 0 then
-					normalWS = hum.WalkSpeed
-				end
-				if hum.JumpPower > 0 then
-					normalJP = hum.JumpPower
-				end
-			end
-		end
-	end
-end)
-
-LocalPlayer.CharacterAdded:Connect(function(char)
-	local humanoid = char:WaitForChild("Humanoid")
-	local animator = humanoid:WaitForChild("Animator")
-
-	animator.AnimationPlayed:Connect(function(des)
-		-- Anti Arrest
-		if settings.antiarrest and des.Animation.AnimationId == "rbxassetid://287112271" then
-			des:Stop()
-			des:Destroy()
-            StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
-
-            local wspeed = normalWS
-			local jpower = normalJP
-
-			task.delay(4.95, function()
-				local cpos = char:WaitForChild("HumanoidRootPart").CFrame
-				local wascriminal = (LocalPlayer.TeamColor.Name == "Really red")
-
-				LocalPlayer.CharacterAdded:Wait()
-				repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-
-				if wascriminal then
-					GrabPad(workspace["Criminals Spawn"]:GetChildren()[7])
-				end
-
-                tpto(cpos)
-			end)
-
-			task.delay(0, function()
-				humanoid.WalkSpeed = wspeed
-				humanoid.JumpPower = jpower
-			end)
-		end
-
-		-- Anti Tase
-		if settings.antitase and des.Animation.AnimationId == "rbxassetid://279227693" then
-			des:Stop()
-			des:Destroy()
-            StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
-			local wspeed = normalWS
-			local jpower = normalJP
-			hbeat:Wait()
-			humanoid.WalkSpeed = wspeed
-			humanoid.JumpPower = jpower
-		end
-	end)
-end)
-
-local lastDeathCFrame = nil
-
-LocalPlayer.CharacterAdded:Connect(function(char)
-	if settings.autorespawn then
-		local hrp = char:WaitForChild("HumanoidRootPart")
-		local hum = char:WaitForChild("Humanoid")
-
-		if lastDeathCFrame then
-			for i = 1, 3 do
-				RunService.Heartbeat:Wait()
-			end
-
-			for i = 1, 3 do
-				pcall(function()
-                    tpto(lastDeathCFrame)
-				end)
-				task.wait(0.03)
-			end
-
-			lastDeathCFrame = nil
-		end
-
-		hum.Died:Connect(function()
-			local hrp = char:FindFirstChild("HumanoidRootPart")
-			if hrp then
-				lastDeathCFrame = hrp.CFrame
-			end
-		end)
-	end
 end)
