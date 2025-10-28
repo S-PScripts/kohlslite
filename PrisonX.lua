@@ -54,6 +54,14 @@ local stepped = RunService.Stepped
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Killfeed = ReplicatedStorage:WaitForChild("Killfeed")
 
+local PlayerGui = LocalPlayer.PlayerGui
+local HomeGUI = PlayerGui:WaitForChild("Home")
+
+local Camera = workspace.Camera
+
+local Teams = game:GetService("Teams")
+local TeamEvent = workspace:WaitForChild("Remote"):WaitForChild("TeamEvent")
+
 local version = "v1"
 
 -- Teleport Locations
@@ -141,46 +149,18 @@ local function GrabPad(pad)
     Notify("Touched pad:", pad.Name)
 end
 
-
--- Join a team
-local function JoinTeam(team)
-local function callConnections(signal)
-    if not signal then return false end
-    local conns = getconnections(signal)
-    if not conns or #conns == 0 then return false end
-    for _, c in ipairs(conns) do
-        if c.Function then
-            pcall(c.Function)
-        end
-    end
-    return true
+-- Fix camera
+local function FixCamera()
+	HomeGUI.hud.Visible = true
+	HomeGUI.intro.Visible = false
+	StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
+	Camera.CameraType = Enum.CameraType.Custom
+	if LocalPlayer.Character then
+		Camera.CameraSubject = LocalPlayer.Character:WaitForChild("Humanoid")
+	end
 end
 
-local switchButton = LocalPlayer.PlayerGui:WaitForChild("Home", 2)
-switchButton = switchButton.hud.MenuButton.MenuFrame:WaitForChild("respawn")
 
-local clicked = callConnections(switchButton.Activated) or callConnections(switchButton.MouseButton1Click)
-if not clicked then
-    --return warn("Could not click Switch Team button")
-end
---print("Switch Team button clicked")
-
-local menu = LocalPlayer.PlayerGui:WaitForChild("Home").intro
-repeat task.wait() until menu.Visible
-
-local teamsGui = menu.Content.menus:WaitForChild("teamsGui")
-local prisoners = teamsGui:WaitForChild(team)
-local prisonersButton = prisoners:WaitForChild("Button")
-repeat task.wait() until prisonersButton.Visible
-
-local success = callConnections(prisonersButton.Activated) or callConnections(prisonersButton.MouseButton1Click)
-if success then
-    Notify("Joined team")
-    --print("Join Prisoners button clicked")
-else
-    --warn("Could not click Join Prisoners button")
-end
-end
 
 -- Check if you already have the gun
 local function hasGun(name)
@@ -260,7 +240,7 @@ end
 
 -- Function to modify a gun
 local function modGun(gun, mode)
-    if gun and gun:GetAttributes then
+    if gun and gun:GetAttributes() then
         local attrs = gun:GetAttributes()
 		if mode == "pg_fg" then
         	attrs.Range = 999999999
@@ -341,6 +321,20 @@ task.spawn(function()
 	end
 end)
 
+local function die()
+	LocalPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+end
+
+local Status = LocalPlayer.Status
+local isArrested = Status.isArrested
+RunService.Heartbeat:Connect(function()
+    if isArrested.Value == true then
+		if settings.antiarrest == true then
+    		die()
+		end
+    end
+end)
+
 -- Anti Arrest and Anti Tase
 LocalPlayer.CharacterAdded:Connect(function(char)
 	local humanoid = char:WaitForChild("Humanoid")
@@ -349,17 +343,18 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	animator.AnimationPlayed:Connect(function(des)
 		-- Anti Arrest
 		if settings.antiarrest and des.Animation.AnimationId == "rbxassetid://287112271" then
-			des:Stop()
-			des:Destroy()
-            StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+		--	des:Stop()
+		--	des:Destroy()
+        --  StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
 
-            local wspeed = normalWS
-			local jpower = normalJP
+        --  local wspeed = normalWS
+		--	local jpower = normalJP
+
+			local cpos = char:WaitForChild("HumanoidRootPart").CFrame
+			local wascriminal = (LocalPlayer.TeamColor.Name == "Really red")
 
 			task.delay(4.95, function()
-				local cpos = char:WaitForChild("HumanoidRootPart").CFrame
-				local wascriminal = (LocalPlayer.TeamColor.Name == "Really red")
-
+				
 				LocalPlayer.CharacterAdded:Wait()
 				repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 
@@ -367,13 +362,15 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 					GrabPad(workspace["Criminals Spawn"]:GetChildren()[7])
 				end
 
-                tpto(cpos)
+				if settings.autorespawn == false then
+                	tpto(cpos)
+				end
 			end)
 
-			task.delay(0, function()
-				humanoid.WalkSpeed = wspeed
-				humanoid.JumpPower = jpower
-			end)
+			--task.delay(0, function()
+			--	humanoid.WalkSpeed = wspeed
+			--	humanoid.JumpPower = jpower
+			-- end)
 		end
 
 		-- Anti Tase
@@ -390,38 +387,94 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	end)
 end)
 
+-- Join a team
+local function SetTeam(team)
+	if team == Team.Criminals then
+		 SetTeam(Team.Inmates)
+		 local crimPad = workspace["Criminals Spawn"]:GetChildren()[7]
+         GrabPad(crimPad)
+		 repeat task.wait() until LocalPlayer.Team == team
+	else
+		repeat task.wait()
+			TeamEvent:FireServer(team)
+    	until LocalPlayer.Team == team
+	end
+	fixcam()
+end
+
+local function ChangeTeam(team)
+    SetTeam(Teams.Neutral)
+    SetTeam(team)
+    reset_cd()
+end
+
+local cd_dur = 10
+local coolingdown = false
+
+qr_available = true
+
+function reset_cd()	
+	if coolingdown == false then
+			coolingdown = true
+			qr_available = false
+			task.wait(cd_dur)
+			coolingdown = false
+			qr_available = true
+	end
+end
+
+local function qr_check()
+	return qr_available
+end
 
 -- Auto Respawn
 local lastDeathCFrame = nil
+local lastCameraCFrame = nil
+
+local function Teleport(TargetCFrame, Character)
+    if not Character then Character = LocalPlayer.Character end
+    if not Character then return end
+
+    local RootPart = Character:WaitForChild("HumanoidRootPart")
+    RootPart.CFrame = TargetCFrame
+    print("Teleport Success!")
+end
+
 LocalPlayer.CharacterAdded:Connect(function(char)
-	if settings.autorespawn then
-		local hrp = char:WaitForChild("HumanoidRootPart")
-		local hum = char:WaitForChild("Humanoid")
+    local hrp = char:WaitForChild("HumanoidRootPart")
+    local hum = char:WaitForChild("Humanoid")
 
-		if lastDeathCFrame then
-			for i = 1, 3 do
-				RunService.Heartbeat:Wait()
-			end
+    if lastDeathCFrame then
+        RunService.Heartbeat:Wait()
+        pcall(function()
+            Teleport(lastDeathCFrame, char)
+        end)
+        lastDeathCFrame = nil
+    end
 
-			for i = 1, 3 do
-				pcall(function()
-                    tpto(lastDeathCFrame)
-				end)
-				task.wait(0.03)
-			end
+	if lastCameraCFrame then
+        Camera.CFrame = lastCameraCFrame
+        lastCameraCFrame = nil
+    end
 
-			lastDeathCFrame = nil
+    hum.Died:Connect(function()
+		if settings.autorespawn == false then
+			--
+		else 
+        	local hrp = char:FindFirstChild("HumanoidRootPart")
+        	if hrp then
+            	lastDeathCFrame = hrp.CFrame
+        	end
+			lastCameraCFrame = Camera.CFrame
+
+        	if qr_check() then
+            	pcall(function()
+                	ChangeTeam(LocalPlayer.Team)
+            	end)
+        	end
 		end
-
-		hum.Died:Connect(function()
-			local hrp = char:FindFirstChild("HumanoidRootPart")
-			if hrp then
-				lastDeathCFrame = hrp.CFrame
-			end
-		end)
-	end
+    end)
 end)
-
 
 local function handleCommand(msg)
     local lowerMsg = msg:lower()
@@ -460,18 +513,17 @@ local function handleCommand(msg)
             local crimPad = workspace["Criminals Spawn"]:GetChildren()[7]
             GrabPad(crimPad)
         elseif teamArg == "inmate" then
-            JoinTeam("Prisoners")
+            SetTeam("Prisoners")
         elseif teamArg == "guards" then
-            if #game:GetService("Teams").Guards:GetPlayers() > 7 then
+            if #Teams.Guards:GetPlayers() > 7 then
                 Notify("The team is full, cannot join!")
 		    else
-                JoinTeam("Guards")
+                SetTeam("Guards")
             end
         else
             print("Unknown team:", teamArg)
         end
     end
-
 
     if string.sub(lowerMsg, 1, #prefix + 2) == prefix.."iy" then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
@@ -505,6 +557,16 @@ local function handleCommand(msg)
     if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unantitase" then
         settings.antitase = false
         Notify("Disabled anti-tase.")
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."autore" then
+        settings.autorespawn = true
+        Notify("Enabled auto-respawn.")
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."unautore" then
+        settings.autorespawn = false
+        Notify("Disabled auto-respawn.")
     end
 
 	if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."powguns" then
