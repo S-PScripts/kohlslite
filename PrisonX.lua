@@ -1,4 +1,5 @@
--- PrisonX (not working)
+-- PrisonX v1 (not working!)
+
 local prefix = "-"
 
 -- Settings
@@ -32,6 +33,8 @@ local stepped = RunService.Stepped
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Killfeed = ReplicatedStorage:WaitForChild("Killfeed")
+
+local version = "v1"
 
 -- Teleport Locations
 local Teleports = {
@@ -534,3 +537,6 @@ LocalPlayer:GetMouse().KeyDown:Connect(function(key)
         GrabGuns(allGuns)
     end
 end)
+
+print("PrisonX executed.")
+Notify("PrisonX executed.")
