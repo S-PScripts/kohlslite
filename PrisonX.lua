@@ -1,4 +1,5 @@
--- PrisonX v1 (not working!)
+-- PrisonX v1 (WIP: not working!)
+-- Coming to ScriptBlox soon.
 
 local prefix = "-"
 
