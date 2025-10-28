@@ -10,10 +10,24 @@ local prefix = "-"
 
 -- Settings
 settings = {
+	-- When a player dies, it tells you
     killfeed = true,
+
+	-- Respawn in same place upon arrest and make you criminal if you were one
     antiarrest = true,
+
+	-- Remove tased effects
     antitase = true,
+
+	-- Respawn in previous position if you die
     autorespawn = true,
+
+	-- Auto-Mod all guns to have a big range and spread  (pg = powerful gun)
+	auto_pg = true,
+	
+	-- Auto-Mod all guns to shoot really fast (fg = fast gun)
+	auto_fg = true,
+	auto_fgrate = 0 -- if you want to change it to be slower...
 }
 
 -- Notifications
@@ -244,45 +258,54 @@ function PLAYERCHECK(plr, rt)
     return nil, nil
 end
 
--- Infinite Ammo Set
-local function setInfiniteAmmo(tool)
-    if not tool then
-        warn("No tool found.")
-        return false
-    end
-
-    if tool:GetAttribute("MaxAmmo") ~= nil then
-        tool:SetAttribute("MaxAmmo", math.huge)
-        tool:SetAttribute("CurrentAmmo", math.huge)
-        tool:SetAttribute("AmmoPerClip", math.huge)
-        tool:SetAttribute("StoredAmmo", math.huge)
-        task.wait(0.01)
-        unequip()
-        task.wait(0.01)
-        equip(tool)
-        Notify("Set attributes on tool:", tool.Name)
+-- Function to modify a gun
+local function modGun(gun, mode)
+    if gun and gun:GetAttributes then
+        local attrs = gun:GetAttributes()
+		if mode == "pg_fg" then
+        	attrs.Range = 999999999
+        	attrs.Spread = 999999999
+			attrs.AutoFire = true
+        	attrs.FireRate = auto_fgrate
+		elseif mode == "pg" then
+			attrs.Range = 999999999
+        	attrs.Spread = 999999999
+		elseif mode == "fg" then
+			attrs.AutoFire = true
+        	attrs.FireRate = auto_fgrate
+		end
+        print(gun, "modded.")
         return true
     end
+    return false
 end
 
--- Fire Rate Set
-local function setFireRate(tool, time)
-    if not tool then
-        warn("No tool found.")
-        return false
-    end
+-- Hook __namecall
+local oldNamecall
+oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+    local method = getnamecallmethod()
+    
+    if method == "GetAttributes" then
+        local result = oldNamecall(self, ...)
 
-    if tool:GetAttribute("MaxAmmo") ~= nil then
-        tool:SetAttribute("FireRate", time)
-        tool:SetAttribute("AutoFire", true)
-        task.wait(0.01)
-        unequip()
-        task.wait(0.01)
-        equip(tool)
-        Notify("Set attributes on tool:", tool.Name)
-        return true
+		
+		if auto_pg == true and auto_fg == true then
+			modGun(self, "pg_fg")
+		elseif auto_pg == true then
+            modGun(self, "pg")
+		elseif auto_fg == true then
+			modGun(self, "fg")
+		else
+			--
+		end
+        
+        return result
     end
-end
+    
+    return oldNamecall(self, ...)
+end)
+
+
 
 function tpto(args)
     LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = args
@@ -296,7 +319,6 @@ Killfeed.ChildAdded:Connect(function(newChild)
 	    Notify(newChild.name, 1)
     end
 end)
-
 
 
 local normalWS = 16
@@ -451,42 +473,6 @@ local function handleCommand(msg)
     end
 
 
-    if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."infammo" then
-        local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildWhichIsA("Tool")
-        if not tool then
-            Notify("You must hold the tool!")
-        else
-            setInfiniteAmmo(tool)
-        end
-    end
-
-    if string.sub(lowerMsg, 1, #prefix + 5) == prefix.."opgun" then
-        local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildWhichIsA("Tool")
-        if not tool then
-            Notify("You must hold the tool!")
-        else
-            setInfiniteAmmo(tool)
-            setFireRate(tool)
-        end
-    end
-
-    if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."firerate" then
-        local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildWhichIsA("Tool")
-        local parts = lowerMsg:split(" ")
-        local timePart = tonumber(parts[2])
-
-        if not timePart then 
-            timePart = 0.01
-        else
-        end
-
-        if not tool then
-            Notify("You must hold the tool!")
-        else
-            setFireRate(tool, timePart)
-        end
-    end
-
     if string.sub(lowerMsg, 1, #prefix + 2) == prefix.."iy" then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
     end
@@ -519,6 +505,28 @@ local function handleCommand(msg)
     if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unantitase" then
         settings.antitase = false
         Notify("Disabled anti-tase.")
+    end
+
+	if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."powguns" then
+        auto_pg = true
+		Remind("Your guns will now have unlimited range and spread!")
+    end
+	
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."fastguns" then
+        auto_fg = true
+		Remind("Your guns will now have fast fire-rate.")
+    end
+
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."firerate" then
+		local parts = lowerMsg:split(" ")
+		auto_fgrate = tonumber(parts[2])
+		Remind("Firerate of all your guns will now be "..auto_fgrate.." from now on.")
+	end
+	
+	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."opguns" then
+        auto_pg = true
+		auto_fg = true
+		Remind("Your guns will now be powerful and fast!")
     end
 
     if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."pkf" then
