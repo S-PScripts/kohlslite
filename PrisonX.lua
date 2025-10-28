@@ -1,3 +1,4 @@
+-- PrisonX (not working)
 local prefix = "-"
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -203,21 +204,6 @@ function equip(tool)
     LocalPlayer.Character:FindFirstChild("Humanoid"):EquipTool(tool)
 end
 
-function unsit(tool, a)
-    if a then
-			local h = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
-			for i = 1, 8 do 
-                hbeat:Wait()
-                h.Sit = false
-                rstep:Wait()
-                h.Sit = false
-                stepped:Wait()
-                h.Sit = false 
-            end
-	end
-    
-    LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Running)
-end
 
 -- PLAYER CHECK
 function PLAYERCHECK(plr, rt)
@@ -275,133 +261,6 @@ end
 
 function tpto(args)
     LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = args
-end
-
-local rstorage = game:GetService("ReplicatedStorage")
-pcall(function()
-    local RegModule = require(game.ReplicatedStorage["Modules_client"]["RegionModule_client"])
-end)
-
-function getillegalreg(cplr)
-    local RegPlr = nil
-	if cplr.Character and RegModule then
-		for i, v in pairs(rstorage:FindFirstChild("PermittedRegions"):GetChildren()) do
-			if RegModule.findRegion(cplr.Character) then
-				RegPlr = RegModule.findRegion(cplr.Character)["Name"]
-			end
-			if v.Value == RegPlr then
-				return false
-			end
-		end
-		return true
-	else 
-        return true 
-    end
-end
-
-function arrestme(cplr)
-    workspace.Remote.arrest:InvokeServer(cplr.Character:FindFirstChildWhichIsA("Part"))
-end
-
-function currentping(cth, owt)
-	if cth then
-		return owt and LocalPlayer:GetNetworkPing() * 1000 or game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue()
-	else
-		return owt and LocalPlayer:GetNetworkPing() or game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue() / 1000
-	end
-end
-
-function arrest(cplr, sp, hidden)
-    aplr = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
-	local Timedout, readytoar = tick() + 6, tick() + currentping()
-	tpto(cplr.Character:FindFirstChild("HumanoidRootPart").CFrame)
-
-	repeat task.wait()
-		local charexalive = cplr.Character and cplr.Character:FindFirstChild("Humanoid").Health == 0
-		local plrcoporneutral = cplr.TeamColor == BrickColor.new("Bright blue") or cplr.TeamColor == BrickColor.new("Medium stone grey")
-		local hayop = cplr.TeamColor ~= BrickColor.new("Really red") and not getillegalreg(cplr)
-		if charexalive or gago or hayop then
-			break
-		end
-        
-        if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid").Sit then
-			unsit()
-		end
-        
-        if hidden or settings.hidearrests then
-		    tpto(cplr.Character:FindFirstChild("Head").CFrame * CFrame.new(0, -12, -1))
-		else
-			tpto(cplr.Character:FindFirstChild("HumanoidRootPart").CFrame * CFrame.new(0, 0, -1))
-		end
-        
-        if tick() - readytoar >=0 then
-			task.spawn(arrestme(cplr))
-		end
-
-	until cplr.Character:FindFirstChild("Head"):FindFirstChild("handcuffedGui") or tick() - Timedout >= 0; Timedout = nil
-
-	if sp then
-		if LocalPlayer.Character:FindFirstChildOfClass("Humanoid").Sit then
-			unsit(true)
-		end
-        
-        tpto(aplr)
-	end
-
-end
-
-function kill(plr, events, guntouse, waittodie)
-	local AK = LocalPlayer.Backpack:FindFirstChild("AK-47") or LocalPlayer.Character:FindFirstChild("AK-47")
-	if not AK and not guntouse then
-		GrabGun("AK-47")
-		task.wait()
-		AK = LocalPlayer.Backpack:FindFirstChild("AK-47") or LocalPlayer.Character:FindFirstChild("AK-47")
-	elseif guntouse then
-		AK = LocalPlayer.Backpack:FindFirstChild(guntouse) or LocalPlayer.Character:FindFirstChild(guntouse)
-		if not AK then
-			GrabGun(guntouse)
-			task.wait()
-			AK = LocalPlayer.Backpack:FindFirstChild(guntouse)
-		end
-	end
-	if plr.Character:FindFirstChild("Humanoid").Health == 0 or plr.Character:FindFirstChildWhichIsA("ForceField") then
-		return
-	end
-	local Eve = 10 or events
-	print(Eve)
-	local ShootEvents = {};
-	for i = 1, Eve do
-		ShootEvents[#ShootEvents + 1] = {
-			Hit = plr.Character:FindFirstChildOfClass("Part");
-			Cframe = CFrame.new();
-			RayObject = Ray.new(Vector3.new(), Vector3.new());
-			Distance = 0;
-		};
-	end
-	task.spawn(function()
-		for i = 1, 6 do
-			rstorage.GunRemotes.ReloadEvent:FireServer(AK)
-			task.wait(.1)
-		end
-	end)
-	if plr.TeamColor == LocalPlayer.TeamColor then
-		if plr.TeamColor == BrickColor.new("Really red") or plr.TeamColor == BrickColor.new("Bright blue") then
-			--SavedPositions.AutoRe = LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame
-			--SaveCamPos()
-			JoinTeam("inmate")
-			rstorage.GunRemotes.ShootEvent:FireServer(ShootEvents, AK)
-			task.wait(0.06)
-		else
-			 local crimPad = workspace["Criminals Spawn"]:GetChildren()[7]
-            GrabPad(crimPad)
-			rstorage.GunRemotes.ShootEvent:FireServer(ShootEvents, AK)
-		end
-	else
-		rstorage.GunRemotes.ShootEvent:FireServer(ShootEvents, AK)
-	end
-	if WaitToDie then
-		repeat task.wait() until not plr.Character or not plr.Character:FindFirstChildOfClass("Humanoid") or plr.Character:FindFirstChildOfClass("Humanoid").Health == 0 or plr.Character:FindFirstChildWhichIsA("ForceField")
-	end
 end
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -463,49 +322,6 @@ local function handleCommand(msg)
         end
     end
 
-    if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."arrest" then
-        local parts = lowerMsg:split(" ")
-        local arrestPlayer = parts[2]
-        local hidden = parts[3]
-        if not arrestPlayer then arrestPlayer = LocalPlayer.Name end
-
-        local cplr, player = PLAYERCHECK(arrestPlayer)
-        if player then
-            if cplr.TeamColor == BrickColor.new("Really red") or (cplr.TeamColor == BrickColor.new("Bright orange") and getillegalreg(cplr)) then
-				if player == LocalPlayer.Name then
-					arrestme(cplr)
-				else
-					arrest(cplr, true, parts[3] == "true")
-				end
-                Notify("Arrested " .. cplr.Name .. ".")
-			else
-                Notify("ERROR: Player is unarrestable.")
-            end
-
-		    player = tostring(player)
-            arrest(cplr, player)
-         else
-            Remind('Cannot find player with the name: '..arrestPlayer)
-         end
-    end
-
-	if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."kill" then
-        local parts = lowerMsg:split(" ")
-        local arrestPlayer = parts[2]
-        local hidden = parts[3]
-        if not killPlayer then killPlayer = LocalPlayer.Name end
-
-        local cplr, player = PLAYERCHECK(arrestPlayer)
-        if player then
-				player = tostring(player)
-
-				kill(cplr, true, parts[3] == "true")
-                Notify("Killed " .. cplr.Name .. ".")
-
-         else
-            Remind('Cannot find player with the name: '..arrestPlayer)
-         end
-    end
 
     if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."infammo" then
         local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildWhichIsA("Tool")
@@ -599,7 +415,6 @@ LocalPlayer:GetMouse().KeyDown:Connect(function(key)
         GrabGuns(allGuns)
     end
 end)
-
 
 
 local normalWS = 16
