@@ -3,6 +3,16 @@
 
 --[[
 Features:
+Kill Feed implementation
+Anti-arrest
+Anti-tase
+Auto-respawn
+Quick-respawn
+Auto gun mods
+Team Switcher
+Door Remover
+Gun Obtainer (WIP)
+Arrest Player (WIP)
 ]]
 
 
