@@ -48,7 +48,7 @@ local LocalPlayer = Players.LocalPlayer
 
 local RunService = game:GetService("RunService")
 local hbeat = RunService.Heartbeat
-local rstep = RunService.RenderStepped
+local rstepped = RunService.RenderStepped
 local stepped = RunService.Stepped
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
@@ -387,7 +387,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	end)
 end)
 
--- Join a team
+-- Team Setting + Changing
 local function SetTeam(team)
 	if team == Team.Criminals then
 		 SetTeam(Team.Inmates)
@@ -408,6 +408,7 @@ local function ChangeTeam(team)
     reset_cd()
 end
 
+-- Check if it is possible to switch teams
 local cd_dur = 10
 local coolingdown = false
 
@@ -427,7 +428,7 @@ local function qr_check()
 	return qr_available
 end
 
--- Auto Respawn
+-- Auto Respawn Handling
 local lastDeathCFrame = nil
 local lastCameraCFrame = nil
 
@@ -475,6 +476,44 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 		end
     end)
 end)
+
+-- Remove collision of doors
+function NoDoors()
+	local Doors = workspace:FindFirstChild("Doors")
+    for i,v in pairs(Doors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = false
+            v.Transparency = 0.6
+        end
+    end
+	
+    local CellDoors = workspace:FindFirstChild("CellDoors")
+    for i,v in pairs(CellDoors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = false
+            v.Transparency = 0.6
+        end
+    end
+end
+
+-- Add collision of doors
+function NoDoors()
+	local Doors = workspace:FindFirstChild("Doors")
+    for i,v in pairs(Doors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = true
+            v.Transparency = 0
+        end
+    end
+	
+    local CellDoors = workspace:FindFirstChild("CellDoors")
+    for i,v in pairs(CellDoors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = true
+            v.Transparency = 0
+        end
+    end
+end
 
 local function handleCommand(msg)
     local lowerMsg = msg:lower()
@@ -598,6 +637,15 @@ local function handleCommand(msg)
         Notify("Printed Kill Feed to /console.")
     end
 
+    if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."nodoors" then
+    	NoDoors()
+		Remind("Removed collision of doors.")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."adddoors" then
+    	AddDoors()
+		Remind("Added collision of doors.")
+	end
 end
 
 game:GetService("TextChatService").MessageReceived:Connect(function(tbl)
