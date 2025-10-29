@@ -540,37 +540,47 @@ local function ChangeTeam(targetTeam)
 end
 
 -- Auto respawn handling
+-- Auto-respawn with quick team-switch using teleport workaround
 LocalPlayer.CharacterAdded:Connect(function(char)
     local hrp = char:WaitForChild("HumanoidRootPart")
     local hum = char:WaitForChild("Humanoid")
 
-    -- Restore position and camera if stored
+    -- Teleport to last stored position if it exists
     if lastDeathCFrame then
-        RunService.Heartbeat:Wait()
-        pcall(function()
-            Teleport(lastDeathCFrame, char)
-        end)
-        lastDeathCFrame = nil
-    end
-
-    if lastCameraCFrame then
-        Camera.CFrame = lastCameraCFrame
-        lastCameraCFrame = nil
+        task.wait(0.1)
+        hrp.CFrame = lastDeathCFrame
     end
 
     hum.Died:Connect(function()
         if settings.autorespawn == false then return end
 
-        -- Store position and camera
-        local hrp = char:FindFirstChild("HumanoidRootPart")
         if hrp then
             lastDeathCFrame = hrp.CFrame
         end
-        lastCameraCFrame = Camera.CFrame
 
-        -- cooldown check (if it is 0, then it should switch team)
+        if _G.CanQuickRespawn and os.time() >= _G.TeamCooldown then
+            _G.CanQuickRespawn = false
+            task.spawn(function()
+                local currentTeam = LocalPlayer.Team
+                if currentTeam == Teams.Inmates then
+                    TeamEvent:FireServer(Teams.Neutral)
+                    task.wait(2)
+                    TeamEvent:FireServer(Teams.Inmates)
+                    fixcam()
+                elseif currentTeam == Teams.Guards then
+                    TeamEvent:FireServer(Teams.Neutral)
+                    task.wait(2)
+                    TeamEvent:FireServer(Teams.Guards)
+                    fixcam()
+                elseif currentTeam == Teams.Criminals then
+                    Remind("Quick respawn is not available for criminals!")
+                end
+                _G.CanQuickRespawn = true
+            end)
+        end
     end)
 end)
+
 
 -- Remove collision of doors
 function NoDoors()
@@ -762,4 +772,3 @@ Notify("PrisonX executed.")
 
 local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
 Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
-
