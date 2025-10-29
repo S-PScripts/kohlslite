@@ -7,7 +7,6 @@ Kill Feed implementation
 Anti-arrest
 Anti-tase
 Auto-respawn
-Quick-respawn
 Auto gun mods
 Team Switcher
 Door Remover
@@ -200,6 +199,36 @@ local function GrabGun(gun)
 
     return true
 end
+
+local function SwitchToCriminalAndReturn(dih, ocf)
+    local crimPad = workspace["Criminals Spawn"].SpawnLocation
+    local char = LocalPlayer.Character
+    if not char then return end
+    local hrp = char:WaitForChild("HumanoidRootPart")
+
+	local oldCFrame
+	if dih then
+    	oldCFrame = hrp.CFrame  -- store original position
+	else
+		oldCFrame = ocf
+	end
+
+    -- teleport to crim spawn pad
+    hrp.CFrame = crimPad.CFrame
+    Notify("Teleported to Criminal Spawn...")
+
+    -- switch team to Criminal
+    TeamEvent:FireServer(Teams.Criminals)
+
+    -- wait until team actually changes
+    repeat task.wait() until LocalPlayer.Team == Teams.Criminals
+    Notify("Now a Criminal!")
+
+    -- return to original position
+    hrp.CFrame = oldCFrame
+    Notify("Teleported back to original position.")
+end
+
 
 -- Grab All Guns
 local function GrabGuns(gunsToGrab)
@@ -443,6 +472,11 @@ end
 
 -- Core team switch logic
 local function SetTeam(targetTeam, skipCooldownCheck)
+    -- Skip cooldown if switching to Criminals
+    if targetTeam == Teams.Criminals then
+        skipCooldownCheck = true
+    end
+
     -- Only respect cooldown for manual switches
     if not skipCooldownCheck then
         if not CanSwitchTeam() then return end
@@ -450,7 +484,6 @@ local function SetTeam(targetTeam, skipCooldownCheck)
 
     local current = LocalPlayer.Team
 
-    -- Helper to switch reliably
     local function switch(team)
         repeat
             TeamEvent:FireServer(team)
@@ -458,26 +491,27 @@ local function SetTeam(targetTeam, skipCooldownCheck)
         until LocalPlayer.Team == team
     end
 
-    -- State-dependent transitions
     if current == Teams.Inmates then
         if targetTeam == Teams.Guards then
             switch(Teams.Neutral)
             switch(Teams.Guards)
         elseif targetTeam == Teams.Criminals then
             local crimPad = workspace["Criminals Spawn"].SpawnLocation
-            GrabPad(crimPad)
-            switch(Teams.Criminals)
+            SwitchToCriminalAndReturn()
         end
     elseif current == Teams.Guards then
         if targetTeam == Teams.Inmates then
             switch(Teams.Neutral)
             switch(Teams.Inmates)
         elseif targetTeam == Teams.Criminals then
+			local char = LocalPlayer.Character
+    		if not char then return end
+    		local hrp = char:WaitForChild("HumanoidRootPart")
+    		local ocf = hrp.CFrame 
             switch(Teams.Neutral)
             switch(Teams.Inmates)
-            local crimPad = workspace["Criminals Spawn"].SpawnLocation
-            GrabPad(crimPad)
-            switch(Teams.Criminals)
+			fixcam()
+			SwitchToCriminalAndReturn(false, ocf)
         end
     elseif current == Teams.Criminals then
         if targetTeam == Teams.Inmates then
@@ -491,15 +525,14 @@ local function SetTeam(targetTeam, skipCooldownCheck)
         switch(targetTeam)
     end
 
-    -- Apply cooldown after switching
-    if targetTeam == Teams.Inmates or targetTeam == Teams.Guards then
+    -- Apply cooldown for non-criminal switches
+    if targetTeam ~= Teams.Criminals and (targetTeam == Teams.Inmates or targetTeam == Teams.Guards) then
         _G.TeamCooldown = os.time() + 10
         task.spawn(_G.ResetCooldown)
     end
 
     fixcam()
 end
-
 
 local function ChangeTeam(targetTeam)
     SetTeam(targetTeam)
@@ -726,3 +759,7 @@ end)
 
 print("PrisonX executed.")
 Notify("PrisonX executed.")
+
+local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
+Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+
