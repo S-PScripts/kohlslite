@@ -160,7 +160,7 @@ local function GrabPad(pad)
 end
 
 -- Fix camera
-local function FixCamera()
+local function fixcam()
 	HomeGUI.hud.Visible = true
 	HomeGUI.intro.Visible = false
 	StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
@@ -169,8 +169,6 @@ local function FixCamera()
 		Camera.CameraSubject = LocalPlayer.Character:WaitForChild("Humanoid")
 	end
 end
-
-
 
 -- Check if you already have the gun
 local function hasGun(name)
@@ -369,7 +367,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 				repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 
 				if wascriminal then
-					GrabPad(workspace["Criminals Spawn"]:GetChildren()[7])
+					GrabPad(workspace["Criminals Spawn"].SpawnLocation)
 				end
 
 				if settings.autorespawn == false then
@@ -397,64 +395,123 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	end)
 end)
 
--- Team Setting + Changing
-local function SetTeam(team)
-	if team == Team.Criminals then
-		 SetTeam(Team.Inmates)
-		 local crimPad = workspace["Criminals Spawn"]:GetChildren()[7]
-         GrabPad(crimPad)
-		 repeat task.wait() until LocalPlayer.Team == team
-	else
-		repeat task.wait()
-			TeamEvent:FireServer(team)
-    	until LocalPlayer.Team == team
-	end
-	fixcam()
+
+-- Cooldown tracking
+if not _G.TeamCooldown then
+    _G.TeamCooldown = 0
 end
 
-local function ChangeTeam(team)
-    SetTeam(Teams.Neutral)
-    SetTeam(team)
-    reset_cd()
+-- Quick respawn tracking
+if not _G.CanQuickRespawn then
+    _G.CanQuickRespawn = true
 end
-
--- Check if it is possible to switch teams
 local cd_dur = 10
 local coolingdown = false
 
-qr_available = true
-
-function reset_cd()	
-	if coolingdown == false then
-			coolingdown = true
-			qr_available = false
-			task.wait(cd_dur)
-			coolingdown = false
-			qr_available = true
+function _G.ResetCooldown()
+	if not coolingdown then
+		coolingdown = true
+		_G.CanQuickRespawn = false
+		task.wait(cd_dur)
+		_G.CanQuickRespawn = true
+		coolingdown = false
 	end
 end
-
-local function qr_check()
-	return qr_available
-end
-
--- Auto Respawn Handling
+-- Store last death position and camera
 local lastDeathCFrame = nil
 local lastCameraCFrame = nil
 
+-- Helper to teleport player
 local function Teleport(TargetCFrame, Character)
     if not Character then Character = LocalPlayer.Character end
     if not Character then return end
-
     local RootPart = Character:WaitForChild("HumanoidRootPart")
     RootPart.CFrame = TargetCFrame
     print("Teleport Success!")
 end
 
+-- Check if team can be switched (cooldown)
+local function CanSwitchTeam()
+    local now = os.time()
+    if now < _G.TeamCooldown then
+        local remaining = _G.TeamCooldown - now
+        Notify("You will be able to switch teams in " .. remaining .. " seconds!")
+        return false
+    end
+    return true
+end
+
+-- Core team switch logic
+local function SetTeam(targetTeam, skipCooldownCheck)
+    -- Only respect cooldown for manual switches
+    if not skipCooldownCheck then
+        if not CanSwitchTeam() then return end
+    end
+
+    local current = LocalPlayer.Team
+
+    -- Helper to switch reliably
+    local function switch(team)
+        repeat
+            TeamEvent:FireServer(team)
+            task.wait(0.2)
+        until LocalPlayer.Team == team
+    end
+
+    -- State-dependent transitions
+    if current == Teams.Inmates then
+        if targetTeam == Teams.Guards then
+            switch(Teams.Neutral)
+            switch(Teams.Guards)
+        elseif targetTeam == Teams.Criminals then
+            local crimPad = workspace["Criminals Spawn"].SpawnLocation
+            GrabPad(crimPad)
+            switch(Teams.Criminals)
+        end
+    elseif current == Teams.Guards then
+        if targetTeam == Teams.Inmates then
+            switch(Teams.Neutral)
+            switch(Teams.Inmates)
+        elseif targetTeam == Teams.Criminals then
+            switch(Teams.Neutral)
+            switch(Teams.Inmates)
+            local crimPad = workspace["Criminals Spawn"].SpawnLocation
+            GrabPad(crimPad)
+            switch(Teams.Criminals)
+        end
+    elseif current == Teams.Criminals then
+        if targetTeam == Teams.Inmates then
+            switch(Teams.Neutral)
+            switch(Teams.Inmates)
+        elseif targetTeam == Teams.Guards then
+            switch(Teams.Neutral)
+            switch(Teams.Guards)
+        end
+    elseif current == Teams.Neutral then
+        switch(targetTeam)
+    end
+
+    -- Apply cooldown after switching
+    if targetTeam == Teams.Inmates or targetTeam == Teams.Guards then
+        _G.TeamCooldown = os.time() + 10
+        task.spawn(_G.ResetCooldown)
+    end
+
+    fixcam()
+end
+
+
+local function ChangeTeam(targetTeam)
+    SetTeam(targetTeam)
+    task.spawn(_G.ResetCooldown)
+end
+
+-- Auto respawn handling
 LocalPlayer.CharacterAdded:Connect(function(char)
     local hrp = char:WaitForChild("HumanoidRootPart")
     local hum = char:WaitForChild("Humanoid")
 
+    -- Restore position and camera if stored
     if lastDeathCFrame then
         RunService.Heartbeat:Wait()
         pcall(function()
@@ -463,27 +520,22 @@ LocalPlayer.CharacterAdded:Connect(function(char)
         lastDeathCFrame = nil
     end
 
-	if lastCameraCFrame then
+    if lastCameraCFrame then
         Camera.CFrame = lastCameraCFrame
         lastCameraCFrame = nil
     end
 
     hum.Died:Connect(function()
-		if settings.autorespawn == false then
-			--
-		else 
-        	local hrp = char:FindFirstChild("HumanoidRootPart")
-        	if hrp then
-            	lastDeathCFrame = hrp.CFrame
-        	end
-			lastCameraCFrame = Camera.CFrame
+        if settings.autorespawn == false then return end
 
-        	if qr_check() then
-            	pcall(function()
-                	ChangeTeam(LocalPlayer.Team)
-            	end)
-        	end
-		end
+        -- Store position and camera
+        local hrp = char:FindFirstChild("HumanoidRootPart")
+        if hrp then
+            lastDeathCFrame = hrp.CFrame
+        end
+        lastCameraCFrame = Camera.CFrame
+
+        -- cooldown check (if it is 0, then it should switch team)
     end)
 end)
 
@@ -507,7 +559,7 @@ function NoDoors()
 end
 
 -- Add collision of doors
-function NoDoors()
+function AddDoors()
 	local Doors = workspace:FindFirstChild("Doors")
     for i,v in pairs(Doors:GetDescendants()) do
         if v:IsA("BasePart") then
@@ -553,26 +605,26 @@ local function handleCommand(msg)
 		end
 	end
 
-    if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."team" then
-        local parts = lowerMsg:split(" ")
-        local teamArg = parts[2]
-        if not teamArg then return end
+if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."team" then
+    local parts = lowerMsg:split(" ")
+    local teamArg = parts[2]
+    if not teamArg then return end
 
-        if teamArg == "criminal" or teamArg == "crim" then
-            local crimPad = workspace["Criminals Spawn"]:GetChildren()[7]
-            GrabPad(crimPad)
-        elseif teamArg == "inmate" then
-            SetTeam("Prisoners")
-        elseif teamArg == "guards" then
-            if #Teams.Guards:GetPlayers() > 7 then
-                Notify("The team is full, cannot join!")
-		    else
-                SetTeam("Guards")
-            end
+    if teamArg == "criminal" or teamArg == "crim" then
+        ChangeTeam(Teams.Criminals)
+    elseif teamArg == "inmates" then
+        ChangeTeam(Teams.Inmates)
+    elseif teamArg == "guards" then
+        if #Teams.Guards:GetPlayers() > 7 then
+            Notify("The team is full, cannot join!")
         else
-            print("Unknown team:", teamArg)
+            ChangeTeam(Teams.Guards)
         end
+    else
+        print("Unknown team:", teamArg)
     end
+end
+
 
     if string.sub(lowerMsg, 1, #prefix + 2) == prefix.."iy" then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
