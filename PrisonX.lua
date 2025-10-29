@@ -206,7 +206,7 @@ local function SwitchToCriminalAndReturn(dih, ocf)
     if not char then return end
     local hrp = char:WaitForChild("HumanoidRootPart")
 
-	local oldCFrame
+	oldCFrame = nil
 	if dih then
     	oldCFrame = hrp.CFrame  -- store original position
 	else
@@ -563,14 +563,22 @@ LocalPlayer.CharacterAdded:Connect(function(char)
             task.spawn(function()
                 local currentTeam = LocalPlayer.Team
                 if currentTeam == Teams.Inmates then
-                    TeamEvent:FireServer(Teams.Neutral)
-                    task.wait(2)
-                    TeamEvent:FireServer(Teams.Inmates)
+                    repeat task.wait() 
+                        TeamEvent:FireServer(Teams.Neutral)
+                    until LocalPlayer.Team == Teams.Neutral
+
+                    repeat task.wait() 
+                        TeamEvent:FireServer(Teams.Inmates)
+                    until LocalPlayer.Team == Teams.Inmates
                     fixcam()
                 elseif currentTeam == Teams.Guards then
-                    TeamEvent:FireServer(Teams.Neutral)
-                    task.wait(2)
-                    TeamEvent:FireServer(Teams.Guards)
+                    repeat task.wait() 
+                        TeamEvent:FireServer(Teams.Neutral)
+                    until LocalPlayer.Team == Teams.Neutral
+
+                    repeat task.wait() 
+                        TeamEvent:FireServer(Teams.Guards)
+                    until LocalPlayer.Team == Teams.Guards
                     fixcam()
                 elseif currentTeam == Teams.Criminals then
                     Remind("Quick respawn is not available for criminals!")
