@@ -201,10 +201,10 @@ local function SwitchToCriminalAndReturn(dih, ocf)
 	oldCFrame = nil
 	if dih == true then
     	oldCFrame = hrp.CFrame  -- store original position
-		print(oldCFrame)
+		--print(oldCFrame)
 	else
 		oldCFrame = ocf
-		print(oldCFrame)
+		--print(oldCFrame)
 	end
 
     -- teleport to crim spawn pad
@@ -367,7 +367,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 				repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 
 				if wascriminal then
-					SwitchToCriminalAndReturn(workspace["Criminals Spawn"].SpawnLocation)
+					SwitchToCriminalAndReturn(false, cpos)
 				end
 
 				if settings.autorespawn == false then
