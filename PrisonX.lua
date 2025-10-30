@@ -711,6 +711,16 @@ end
 		Notify("Added collision of doors.")
 		AddDoors()
 	end
+
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."autoguns" then
+    	settings.autoguns = true
+		Notify("Guns auto given.")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unautoguns" then
+    	settings.autoguns = false
+		Notify("Guns no longer auto given.")
+	end
 end
 
 game:GetService("TextChatService").MessageReceived:Connect(function(tbl)
