@@ -391,7 +391,7 @@ local aremote = ReplicatedStorage.Remotes.ArrestPlayer
 RunService.Heartbeat:Connect(function()
     local root = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
     if not root then return end
-    if settings.arrestaura == true then return end
+    if settings.arrestaura == false then return end
 		
     for _, plr in Players:GetPlayers() do
         if plr == LocalPlayer then
