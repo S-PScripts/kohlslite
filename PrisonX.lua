@@ -47,8 +47,11 @@ settings = {
 
 	-- Kill aura
 	killaura = false,
-	killaura_radius = 20,              
-	killaura_sphere = false -- visual sphere
+	killaura_radius = 20, -- kinda broken 
+	killaura_sphere = false, -- visual sphere
+
+	-- Arrest aura
+	arrestaura = false
 
 }
 
@@ -361,6 +364,7 @@ Killfeed.ChildAdded:Connect(function(newChild)
 end)
 
 
+-- Anti tase fix
 local normalWS = 16
 local normalJP = 50
 
@@ -379,6 +383,38 @@ task.spawn(function()
 			end
 		end
 	end
+end)
+
+-- Arrest Aura
+local aremote = ReplicatedStorage.Remotes.ArrestPlayer
+
+RunService.Heartbeat:Connect(function()
+    local root = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    if not root then return end
+    if settings.arrestaura == true then return end
+		
+    for _, plr in Players:GetPlayers() do
+        if plr == LocalPlayer then
+			--
+		else
+        	local char = plr.Character
+        	if not char then
+				--
+			else
+        		local hrp = char:FindFirstChild("HumanoidRootPart")
+        		local hum = char:FindFirstChild("Humanoid")
+        		if not hrp or not hum or hum.Health <= 0 then 
+					--
+				else
+        			if (root.Position - hrp.Position).Magnitude <= 10 then
+            			task.spawn(function()
+                			pcall(aremote.InvokeServer, aremote, plr)
+            			end)
+					end
+				end
+        	end
+		end
+    end
 end)
 
 local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
@@ -632,26 +668,25 @@ local function handleCommand(msg)
 		end
 	end
 
-if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."team" then
-    local parts = lowerMsg:split(" ")
-    local teamArg = parts[2]
-    if not teamArg then return end
+	if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."team" then
+    	local parts = lowerMsg:split(" ")
+    	local teamArg = parts[2]
+    	if not teamArg then return end
 
-    if teamArg == "criminal" or teamArg == "crim" then
-        ChangeTeam(Teams.Criminals)
-    elseif teamArg == "inmates" then
-        ChangeTeam(Teams.Inmates)
-    elseif teamArg == "guards" then
-        if #Teams.Guards:GetPlayers() > 7 then
-            Notify("The team is full, cannot join!")
-        else
-            ChangeTeam(Teams.Guards)
-        end
-    else
-        print("Unknown team:", teamArg)
-    end
-end
-
+    	if teamArg == "criminals" or teamArg == "crims" or teamArg == "crim" or teamArg == "criminal" then
+        	ChangeTeam(Teams.Criminals)
+    	elseif teamArg == "inmates" or teamArg == "inmate" or teamArg == "prisoner" or teamArg == "prisoners" then
+        	ChangeTeam(Teams.Inmates)
+    	elseif teamArg == "guards" or teamArg == "guard" then
+        	if #Teams.Guards:GetPlayers() > 7 then
+            	Notify("The team is full, cannot join!")
+        	else
+            	ChangeTeam(Teams.Guards)
+        	end
+    	else
+        	print("Unknown team:", teamArg)
+    	end
+	end
 
     if string.sub(lowerMsg, 1, #prefix + 2) == prefix.."iy" then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
@@ -695,6 +730,16 @@ end
     if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unkillaura" then
         settings.killaura = false
         Notify("Disabled killaura.")
+    end
+
+	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."araura" then
+        settings.arrestaura = true
+        Notify("Enabled arrestaura - make sure you are on the Guards Team!")
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."unaraura" then
+        settings.arrestaura = false
+        Notify("Disabled arrestaura.")
     end
 
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."kasphere" then
