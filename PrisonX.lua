@@ -7,11 +7,11 @@ Kill Feed implementation
 Anti-arrest
 Anti-tase
 Auto-respawn
+Auto guns
 Auto gun mods
 Team Switcher
 Door Remover
-Gun Obtainer (WIP)
-Arrest Player (WIP)
+Gun Obtainer
 ]]
 
 
@@ -31,12 +31,18 @@ settings = {
 	-- Respawn in previous position if you die
     autorespawn = true,
 
+	-- Auto guns
+	autoguns = true,
+
 	-- Auto-Mod all guns to have a big range and spread  (pg = powerful gun)
 	auto_pg = true,
 	
 	-- Auto-Mod all guns to shoot really fast (fg = fast gun)
 	auto_fg = true,
-	auto_fgrate = 0 -- if you want to change it to be slower...
+	auto_fgrate = 0, -- if you want to change it to be slower...
+
+	-- Remove doors
+	nodoors = true
 }
 
 -- Notifications
@@ -134,28 +140,38 @@ local gunAliases = {
 -- Guns in the game
 local allGuns = {"M9", "AK-47", "M4A1", "Remington 870"}
 
--- Gun Pads
-local function GrabPad(pad)
-    if not pad then
-        warn("Pad not found")
-        return
+local AlreadyFound = {}
+local function FindGunSpawner(GunName)
+    if AlreadyFound[GunName] ~= nil then
+        return AlreadyFound[GunName], true
     end
+	for i,v in pairs(workspace:GetChildren()) do
+		if v.Name == "TouchGiver" then
+			if v:GetAttribute("ToolName") == GunName then
+                AlreadyFound[GunName] = v.TouchGiver
+				return v.TouchGiver, false
+			end
+		end
+	end
+end
 
-    local padCFrame = pad.CFrame
-    task.wait(0.125)
-    
-    pcall(function() pad.CanCollide = false end)
+local function GetTool(ToolName)
+    return LocalPlayer:FindFirstChild("Backpack") and LocalPlayer.Backpack:FindFirstChild(ToolName) or LocalPlayer.Character and LocalPlayer.Character:FindFirstChild(ToolName)
+end
 
-    repeat task.wait() until LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-    local hrp = LocalPlayer.Character.HumanoidRootPart
-
-    pad.CFrame = hrp.CFrame
-    task.wait(0.125)
-
-    pad.CFrame = padCFrame
-    pcall(function() pad.CanCollide = true end)
-
-    Notify("Touched pad:", pad.Name)
+local function GetGun(GunName)
+    local Giver, Found = FindGunSpawner(GunName)
+    if not Found then
+        local CloneGiver = Giver:Clone()
+        CloneGiver.Parent = Giver.Parent
+        Giver.Parent = workspace.Folder
+        Giver.CanCollide = false
+        Giver.Transparency = 1
+    end
+	local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+    repeat task.wait()
+        Giver.CFrame = hrp.CFrame * CFrame.new(math.random(-2, 2),0,0)
+    until GetTool(GunName)
 end
 
 -- Fix camera
@@ -176,49 +192,24 @@ local function hasGun(name)
     return backpack:FindFirstChild(name) or char:FindFirstChild(name)
 end
 
--- Grab A Gun
-local function GrabGun(gun)
-    local pad = workspace[gun]
-    if not pad then
-        warn("Pad not found:", gun)
-        return false
-    end
-
-    local padCFrame = pad.CFrame
-    task.wait(0.125)
-    pad.CanCollide = false
-
-    repeat task.wait() until LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-    local hrp = LocalPlayer.Character.HumanoidRootPart
-
-    pad.CFrame = hrp.CFrame
-    task.wait(0.125)
-
-    pad.CFrame = padCFrame
-    pad.CanCollide = true
-
-    return true
-end
-
 local function SwitchToCriminalAndReturn(dih, ocf)
     local crimPad = workspace["Criminals Spawn"].SpawnLocation
     local char = LocalPlayer.Character
     if not char then return end
-    local hrp = char:WaitForChild("HumanoidRootPart")
+    hrp = char:WaitForChild("HumanoidRootPart")
 
 	oldCFrame = nil
-	if dih then
+	if dih == true then
     	oldCFrame = hrp.CFrame  -- store original position
+		print(oldCFrame)
 	else
 		oldCFrame = ocf
+		print(oldCFrame)
 	end
 
     -- teleport to crim spawn pad
     hrp.CFrame = crimPad.CFrame
     Notify("Teleported to Criminal Spawn...")
-
-    -- switch team to Criminal
-    TeamEvent:FireServer(Teams.Criminals)
 
     -- wait until team actually changes
     repeat task.wait() until LocalPlayer.Team == Teams.Criminals
@@ -235,7 +226,7 @@ local function GrabGuns(gunsToGrab)
     local obtained = {}
     for _, gun in ipairs(gunsToGrab) do
         if not hasGun(gun) then
-            if GrabGun(gun) then
+            if GetGun(gun) then
                 table.insert(obtained, gun)
             end
             task.wait(0.35)
@@ -275,53 +266,33 @@ function PLAYERCHECK(plr, rt)
     return nil, nil
 end
 
--- Function to modify a gun
-local function modGun(gun, mode)
-    if gun and gun:GetAttributes() then
-        local attrs = gun:GetAttributes()
-		if mode == "pg_fg" then
-        	attrs.Range = 999999999
-        	attrs.Spread = 999999999
-			attrs.AutoFire = true
-        	attrs.FireRate = auto_fgrate
-		elseif mode == "pg" then
-			attrs.Range = 999999999
-        	attrs.Spread = 999999999
-		elseif mode == "fg" then
-			attrs.AutoFire = true
-        	attrs.FireRate = auto_fgrate
-		end
-        print(gun, "modded.")
-        return true
-    end
-    return false
-end
-
 -- Hook __namecall
-local oldNamecall
-oldNamecall = hookmetamethod(game, "__namecall", function(self, ...)
+local namecall
+namecall = hookmetamethod(game, "__namecall", function(self, ...)
     local method = getnamecallmethod()
     
     if method == "GetAttributes" then
-        local result = oldNamecall(self, ...)
+        local result = namecall(self, ...)
 
-		
-		if auto_pg == true and auto_fg == true then
-			modGun(self, "pg_fg")
-		elseif auto_pg == true then
-            modGun(self, "pg")
-		elseif auto_fg == true then
-			modGun(self, "fg")
-		else
-			--
-		end
-        
+        if settings.auto_pg and settings.auto_fg then
+            result.Range = 999999999
+            result.Spread = 999999999
+            result.AutoFire = true
+            result.FireRate = auto_fgrate
+        elseif settings.auto_pg then
+            result.Range = 999999999
+            result.Spread = 999999999
+        elseif settings.auto_fg then
+            result.AutoFire = true
+            result.FireRate = auto_fgrate
+        end
+
+        print(self, "modded")
         return result
     end
-    
-    return oldNamecall(self, ...)
-end)
 
+    return namecall(self, ...)
+end)
 
 
 function tpto(args)
@@ -396,7 +367,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 				repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 
 				if wascriminal then
-					GrabPad(workspace["Criminals Spawn"].SpawnLocation)
+					SwitchToCriminalAndReturn(workspace["Criminals Spawn"].SpawnLocation)
 				end
 
 				if settings.autorespawn == false then
@@ -496,8 +467,11 @@ local function SetTeam(targetTeam, skipCooldownCheck)
             switch(Teams.Neutral)
             switch(Teams.Guards)
         elseif targetTeam == Teams.Criminals then
-            local crimPad = workspace["Criminals Spawn"].SpawnLocation
-            SwitchToCriminalAndReturn()
+			local char = LocalPlayer.Character
+    		if not char then return end
+    		local hrp = char:WaitForChild("HumanoidRootPart")
+			local ocf = hrp.CFrame 
+            SwitchToCriminalAndReturn(false, ocf)
         end
     elseif current == Teams.Guards then
         if targetTeam == Teams.Inmates then
@@ -581,52 +555,13 @@ LocalPlayer.CharacterAdded:Connect(function(char)
                     until LocalPlayer.Team == Teams.Guards
                     fixcam()
                 elseif currentTeam == Teams.Criminals then
-                    Remind("Quick respawn is not available for criminals!")
+                    Notify("Quick respawn is not available for criminals!")
                 end
                 _G.CanQuickRespawn = true
             end)
         end
     end)
 end)
-
-
--- Remove collision of doors
-function NoDoors()
-	local Doors = workspace:FindFirstChild("Doors")
-    for i,v in pairs(Doors:GetDescendants()) do
-        if v:IsA("BasePart") then
-            v.CanCollide = false
-            v.Transparency = 0.6
-        end
-    end
-	
-    local CellDoors = workspace:FindFirstChild("CellDoors")
-    for i,v in pairs(CellDoors:GetDescendants()) do
-        if v:IsA("BasePart") then
-            v.CanCollide = false
-            v.Transparency = 0.6
-        end
-    end
-end
-
--- Add collision of doors
-function AddDoors()
-	local Doors = workspace:FindFirstChild("Doors")
-    for i,v in pairs(Doors:GetDescendants()) do
-        if v:IsA("BasePart") then
-            v.CanCollide = true
-            v.Transparency = 0
-        end
-    end
-	
-    local CellDoors = workspace:FindFirstChild("CellDoors")
-    for i,v in pairs(CellDoors:GetDescendants()) do
-        if v:IsA("BasePart") then
-            v.CanCollide = true
-            v.Transparency = 0
-        end
-    end
-end
 
 local function handleCommand(msg)
     local lowerMsg = msg:lower()
@@ -722,25 +657,41 @@ end
     end
 
 	if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."powguns" then
-        auto_pg = true
-		Remind("Your guns will now have unlimited range and spread!")
+        settings.auto_pg = true
+		Notify("Your guns will now have unlimited range and spread!")
+    end
+
+	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."unpowguns" then
+        settings.auto_pg = false
+		Notify("Your guns will no longer have unlimited range and spread.")
     end
 	
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."fastguns" then
-        auto_fg = true
-		Remind("Your guns will now have fast fire-rate.")
+        settings.auto_fg = true
+		Notify("Your guns will now have fast fire-rate.")
+    end
+
+	if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unfastguns" then
+        settings.auto_fg = false
+		Notify("Your guns will no longer have fast fire-rate.")
     end
 
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."firerate" then
 		local parts = lowerMsg:split(" ")
-		auto_fgrate = tonumber(parts[2])
-		Remind("Firerate of all your guns will now be "..auto_fgrate.." from now on.")
+		settings.auto_fgrate = tonumber(parts[2])
+		Notify("Firerate of all your guns will now be "..auto_fgrate.." from now on.")
 	end
 	
 	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."opguns" then
-        auto_pg = true
-		auto_fg = true
-		Remind("Your guns will now be powerful and fast!")
+        settings.auto_pg = true
+		settings.auto_fg = true
+		Notify("Your guns will now be powerful and fast!")
+    end
+
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."unopguns" then
+        settings.auto_pg = false
+		settings.auto_fg = false
+		Notify("Your guns will no longer be powerful and fast!")
     end
 
     if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."pkf" then
@@ -751,13 +702,14 @@ end
     end
 
     if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."nodoors" then
-    	NoDoors()
-		Remind("Removed collision of doors.")
+    	settings.nodoors = true
+		Notify("Removed collision of doors.")
 	end
 
-	if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."adddoors" then
-    	AddDoors()
-		Remind("Added collision of doors.")
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."adddoors" then
+    	settings.nodoors = false
+		Notify("Added collision of doors.")
+		AddDoors()
 	end
 end
 
@@ -778,5 +730,74 @@ end)
 print("PrisonX executed.")
 Notify("PrisonX executed.")
 
-local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
-Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+-- Remove collision of doors
+function NoDoors()
+	local Doors = workspace:FindFirstChild("Doors")
+    for i,v in pairs(Doors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = false
+            v.Transparency = 0.6
+        end
+    end
+	
+    local CellDoors = workspace:FindFirstChild("CellDoors")
+    for i,v in pairs(CellDoors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = false
+            v.Transparency = 0.6
+        end
+    end
+end
+
+-- Add collision of doors
+function AddDoors()
+	local Doors = workspace:FindFirstChild("Doors")
+    for i,v in pairs(Doors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = true
+            v.Transparency = 0
+        end
+    end
+	
+    local CellDoors = workspace:FindFirstChild("CellDoors")
+    for i,v in pairs(CellDoors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = true
+            v.Transparency = 0
+        end
+    end
+end
+
+function checkRIOT()	
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 643697197) then
+		return true, "NEW"
+	end
+
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 96651) then
+		return true, "LEGACY"
+	end
+
+	return false, "N/A"
+end
+
+plr_pass, type = checkRIOT()
+
+RunService.Heartbeat:Connect(function()
+    if settings.autoguns == true then
+		for i, v in allGuns do
+		--	print(v)
+			if v == "M4A1" and plr_pass == false then 
+			else
+				if not GetTool(v) then
+        			GetGun(v)
+    			end
+			end
+		end
+	end
+	if settings.nodoors == true then
+    	NoDoors()
+	end
+end)
+
+--local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
+--Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
