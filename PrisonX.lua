@@ -381,19 +381,10 @@ task.spawn(function()
 	end
 end)
 
-local function die()
-	LocalPlayer.Character.Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
+function die()
+	Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
 end
-
-local Status = LocalPlayer.Status
-local isArrested = Status.isArrested
-RunService.Heartbeat:Connect(function()
-    if isArrested.Value == true then
-		if settings.antiarrest == true then
-    		die()
-		end
-    end
-end)
 
 -- Anti Arrest and Anti Tase
 LocalPlayer.CharacterAdded:Connect(function(char)
@@ -409,28 +400,26 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 
         --  local wspeed = normalWS
 		--	local jpower = normalJP
-
+			local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
+			Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+				
 			local cpos = char:WaitForChild("HumanoidRootPart").CFrame
 			local wascriminal = (LocalPlayer.TeamColor.Name == "Really red")
-
-			task.delay(4.95, function()
 				
-				LocalPlayer.CharacterAdded:Wait()
-				repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+			LocalPlayer.CharacterAdded:Wait()
+			repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 
-				if wascriminal then
-					SwitchToCriminalAndReturn(false, cpos)
-				end
-
-				if settings.autorespawn == false then
-                	tpto(cpos)
-				end
-			end)
+			if wascriminal then
+				task.wait(1) -- band aid fix 
+				SwitchToCriminalAndReturn(false, cpos)
+			elseif settings.autorespawn == false then
+                tpto(cpos)
+			end
 
 			--task.delay(0, function()
 			--	humanoid.WalkSpeed = wspeed
 			--	humanoid.JumpPower = jpower
-			-- end)
+			-- end) ]]
 		end
 
 		-- Anti Tase
