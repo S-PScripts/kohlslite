@@ -1,5 +1,6 @@
 -- PrisonX v1 (WIP: not working!)
--- Coming to ScriptBlox soon.
+-- Credits to tomatotxt for stuff
+-- By TS2021
 
 --[[
 Features:
@@ -737,7 +738,7 @@ LocalPlayer:GetMouse().KeyDown:Connect(function(key)
     end
 end)
 
-print("PrisonX executed.")
+print("PrisonX executed! Created by TS2021.")
 Notify("PrisonX executed.")
 
 -- Remove collision of doors
