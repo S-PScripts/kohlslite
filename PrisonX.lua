@@ -43,7 +43,13 @@ settings = {
 	auto_fgrate = 0, -- if you want to change it to be slower...
 
 	-- Remove doors
-	nodoors = true
+	nodoors = true,
+
+	-- Kill aura
+	killaura = false,
+	killaura_radius = 20,              
+	killaura_sphere = false -- visual sphere
+
 }
 
 -- Notifications
@@ -293,13 +299,58 @@ namecall = hookmetamethod(game, "__namecall", function(self, ...)
     end
 
     return namecall(self, ...)
-end)
+end)     
 
+-- Kill aura
+local event = ReplicatedStorage:WaitForChild("meleeEvent")
+
+-- Sphere visual
+local sphere = Instance.new("Part")
+sphere.Shape = Enum.PartType.Ball
+sphere.Size = Vector3.new(settings.killaura_radius * 2, settings.killaura_radius * 2, settings.killaura_radius * 2)
+sphere.Anchored = true
+sphere.CanCollide = false
+sphere.Material = Enum.Material.ForceField
+sphere.Color = Color3.fromRGB(255, 0, 50)
+sphere.Transparency = settings.killaura_radius and 0.6 or 1
+sphere.Parent = workspace
+
+RunService.Heartbeat:Connect(function()
+    if not settings.killaura then
+        sphere.Transparency = 1
+        return
+    end
+
+	local player = game.Players.LocalPlayer
+    local char = player.Character
+    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+
+    -- Update sphere visuals
+    sphere.Size = Vector3.new(settings.killaura_radius * 2, settings.killaura_radius * 2, settings.killaura_radius * 2)
+    sphere.Transparency = settings.killaura_radius and 0.6 or 1
+    sphere.Position = hrp.Position
+
+    -- Get targets in radius
+    local touching = workspace:GetPartBoundsInRadius(hrp.Position, settings.killaura_radius)
+    local hitList = {}
+
+    for _, part in ipairs(touching) do
+        local model = part.Parent
+        local hum = model and model:FindFirstChild("Humanoid")
+        if hum then
+            local targetPlayer = Players:GetPlayerFromCharacter(model)
+            if targetPlayer and targetPlayer ~= player and not hitList[targetPlayer] then
+                hitList[targetPlayer] = true
+                event:FireServer(targetPlayer)
+            end
+        end
+    end
+end)
 
 function tpto(args)
     LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = args
 end
-
 
 -- Kill Feed
 Killfeed.ChildAdded:Connect(function(newChild)
@@ -418,6 +469,7 @@ function _G.ResetCooldown()
 		coolingdown = false
 	end
 end
+
 -- Store last death position and camera
 local lastDeathCFrame = nil
 local lastCameraCFrame = nil
@@ -515,7 +567,6 @@ local function ChangeTeam(targetTeam)
 end
 
 -- Auto respawn handling
--- Auto-respawn with quick team-switch using teleport workaround
 LocalPlayer.CharacterAdded:Connect(function(char)
     local hrp = char:WaitForChild("HumanoidRootPart")
     local hum = char:WaitForChild("Humanoid")
@@ -647,6 +698,26 @@ end
         Notify("Disabled anti-tase.")
     end
 
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."killaura" then
+        settings.killaura = true
+        Notify("Enabled killaura.")
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unkillaura" then
+        settings.killaura = false
+        Notify("Disabled killaura.")
+    end
+
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."kasphere" then
+        settings.killaura_sphere = true
+        Notify("Kill aura sphere visible.")
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unkasphere" then
+        settings.killaura_sphere = false
+        Notify("Kill aura sphere invisible.")
+    end
+
     if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."autore" then
         settings.autorespawn = true
         Notify("Enabled auto-respawn.")
@@ -680,8 +751,15 @@ end
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."firerate" then
 		local parts = lowerMsg:split(" ")
 		settings.auto_fgrate = tonumber(parts[2])
-		Notify("Firerate of all your guns will now be "..auto_fgrate.." from now on.")
+		Notify("Firerate of all your guns will now be "..settings.auto_fgrate..".")
 	end
+
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."karadius" then
+		local parts = lowerMsg:split(" ")
+		settings.killaura_radius = tonumber(parts[2])
+		Notify("Kill aura will now be "..settings.killaura_radius..".")
+	end
+
 	
 	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."opguns" then
         settings.auto_pg = true
