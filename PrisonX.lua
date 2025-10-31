@@ -1094,6 +1094,7 @@ local TeleportNames = {}
 for name in pairs(Teleports) do
 	table.insert(TeleportNames, name)
 end
+table.sort(TeleportNames)
 
 TeleportTab:CreateSection("Locations")
 
