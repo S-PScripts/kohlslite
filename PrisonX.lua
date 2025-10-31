@@ -1,6 +1,6 @@
--- PrisonX v1 (WIP: not working!)
--- Credits to tomatotxt for stuff
--- By TS2021
+-- PrisonX v1.1 by TS2021
+-- Credits to github.com/tomatotxt for stuff
+-- Credits to github.com/NewMatheusDC for most of the GUI
 
 --[[
 Features:
@@ -73,8 +73,8 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
     Name = "PrisonX",
     Icon = nil,
-    LoadingTitle = "PrisonX",
-    LoadingSubtitle = "by TS2021",
+    LoadingTitle = "PrisonX v1.1",
+    LoadingSubtitle = "Created by TS2021",
     ConfigurationSaving = {
         Enabled = false,
     },
