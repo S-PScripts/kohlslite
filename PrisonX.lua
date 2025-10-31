@@ -67,6 +67,29 @@ local function Notify(text, time)
     end)
 end
 
+-- GUI Setup
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+    Name = "PrisonX",
+    Icon = nil,
+    LoadingTitle = "PrisonX",
+    LoadingSubtitle = "by TS2021",
+    ConfigurationSaving = {
+        Enabled = false,
+    },
+    Discord = {
+        Enabled = false,
+    },
+    KeySystem = false,
+})
+
+local MainTab = Window:CreateTab("Main Features", nil)
+local CombatTab = Window:CreateTab("Combat", nil)
+local TeleportTab = Window:CreateTab("Teleport", nil)
+local SettingsTab = Window:CreateTab("Settings", nil)
+
+
 -- Variables
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
@@ -232,7 +255,7 @@ end
 
 
 -- Grab All Guns
-local function GrabGuns(gunsToGrab)
+function GrabGuns(gunsToGrab)
     local obtained = {}
     for _, gun in ipairs(gunsToGrab) do
         if not hasGun(gun) then
@@ -846,7 +869,15 @@ end)
 
 LocalPlayer:GetMouse().KeyDown:Connect(function(key)
     if key:lower() == "g" then
-        GrabGuns(allGuns)
+        for i, v in allGuns do
+		--	print(v)
+			if v == "M4A1" and plr_pass == false then 
+			else
+				if not GetTool(v) then
+        			GetGun(v)
+    			end
+			end
+		end
     end
 end)
 
@@ -924,3 +955,203 @@ end)
 
 --local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
 --Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+
+-- GUI
+
+-- Team Management --
+MainTab:CreateSection("Team Management")
+
+MainTab:CreateButton({
+    Name = "Switch to Inmates",
+    Callback = function()
+        ChangeTeam(Teams.Inmates)
+    end,
+})
+
+MainTab:CreateButton({
+    Name = "Switch to Guards",
+    Callback = function()
+        if #Teams.Guards:GetPlayers() > 7 then
+            Notify("The team is full, cannot join!")
+        else
+            ChangeTeam(Teams.Guards)
+        end
+    end,
+})
+
+MainTab:CreateButton({
+    Name = "Switch to Criminals",
+    Callback = function()
+        ChangeTeam(Teams.Criminals)
+    end,
+})
+
+-- Weapon Management --
+MainTab:CreateSection("Weapon Management")
+
+MainTab:CreateDropdown({
+    Name = "Get Specific Gun",
+    Options = allGuns,
+    Flag = "GunDropdown",
+    Callback = function(Option)
+        local gun = Option[1]
+        print(gun)
+        GetGun(gun)
+    end,
+})
+
+MainTab:CreateButton({
+    Name = "Get All Guns",
+    Callback = function()
+        for i, v in allGuns do
+            if v == "M4A1" and plr_pass == false then 
+            else
+                if not GetTool(v) then
+                    GetGun(v)
+                end
+            end
+        end
+    end,
+})
+
+-- Aura Settings --
+CombatTab:CreateSection("Aura Settings")
+
+CombatTab:CreateToggle({
+    Name = "Kill Aura",
+    CurrentValue = settings.killaura,
+    Flag = "KillAuraToggle",
+    Callback = function(Value)
+        settings.killaura = Value
+    end,
+})
+
+CombatTab:CreateToggle({
+    Name = "Arrest Aura",
+    CurrentValue = settings.arrestaura,
+    Flag = "ArrestAuraToggle",
+    Callback = function(Value)
+        settings.arrestaura = Value
+    end,
+})
+
+CombatTab:CreateToggle({
+    Name = "Kill Aura Sphere",
+    CurrentValue = settings.killaura_sphere,
+    Flag = "KASphereToggle",
+    Callback = function(Value)
+        settings.killaura_sphere = Value
+    end,
+})
+
+CombatTab:CreateSlider({
+    Name = "Kill Aura Radius",
+    Range = {1, 50},
+    Increment = 1,
+    Suffix = "studs",
+    CurrentValue = settings.killaura_radius,
+    Flag = "KARadiusSlider",
+    Callback = function(Value)
+        settings.killaura_radius = Value
+    end,
+})
+
+-- Weapon Modifications --
+CombatTab:CreateSection("Weapon Modifications")
+
+CombatTab:CreateToggle({
+    Name = "Powerful Guns",
+    CurrentValue = settings.auto_pg,
+    Flag = "PowerGunsToggle",
+    Callback = function(Value)
+        settings.auto_pg = Value
+    end,
+})
+
+CombatTab:CreateToggle({
+    Name = "Fast Guns",
+    CurrentValue = settings.auto_fg,
+    Flag = "FastGunsToggle",
+    Callback = function(Value)
+        settings.auto_fg = Value
+    end,
+})
+
+CombatTab:CreateSlider({
+    Name = "Fire Rate",
+    Range = {0, 100},
+    Increment = 1,
+    Suffix = "RPS",
+    CurrentValue = settings.auto_fgrate,
+    Flag = "FireRateSlider",
+    Callback = function(Value)
+        settings.auto_fgrate = Value
+    end,
+})
+
+-- Automation --
+SettingsTab:CreateSection("Automation")
+
+SettingsTab:CreateToggle({
+    Name = "Auto Respawn",
+    CurrentValue = settings.autorespawn,
+    Flag = "AutoRespawnToggle",
+    Callback = function(Value)
+        settings.autorespawn = Value
+    end,
+})
+
+SettingsTab:CreateToggle({
+    Name = "Auto Guns",
+    CurrentValue = settings.autoguns,
+    Flag = "AutoGunsToggle",
+    Callback = function(Value)
+        settings.autoguns = Value
+    end,
+})
+
+SettingsTab:CreateToggle({
+    Name = "No Doors",
+    CurrentValue = settings.nodoors,
+    Flag = "NoDoorsToggle",
+    Callback = function(Value)
+        settings.nodoors = Value
+        if not Value then
+            AddDoors()
+        end
+    end,
+})
+
+-- Protection --
+SettingsTab:CreateSection("Protection")
+
+SettingsTab:CreateToggle({
+    Name = "Anti Arrest",
+    CurrentValue = settings.antiarrest,
+    Flag = "AntiArrestToggle",
+    Callback = function(Value)
+        settings.antiarrest = Value
+    end,
+})
+
+SettingsTab:CreateToggle({
+    Name = "Anti Tase",
+    CurrentValue = settings.antitase,
+    Flag = "AntiTaseToggle",
+    Callback = function(Value)
+        settings.antitase = Value
+    end,
+})
+
+SettingsTab:CreateSection("UI")
+
+SettingsTab:CreateToggle({
+    Name = "Kill Feed Notifications",
+    CurrentValue = settings.killfeed,
+    Flag = "KillFeedToggle",
+    Callback = function(Value)
+        settings.killfeed = Value
+    end,
+})
+
+Rayfield:LoadConfiguration()
