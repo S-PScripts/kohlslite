@@ -1090,6 +1090,8 @@ CombatTab:CreateSlider({
 })
 
 -- Teleport Section --
+locName = nil
+
 local TeleportNames = {}
 for name in pairs(Teleports) do
 	table.insert(TeleportNames, name)
@@ -1103,9 +1105,16 @@ TeleportTab:CreateDropdown({
     Options = TeleportNames,
     Flag = "TPDropdown",
     Callback = function(Option)
-        local locName = Option[1]
+        locName = Option[1]
         --print("Teleporting to:", locName)
-		teleportTo(locName)
+		--teleportTo(locName)
+    end,
+})
+
+TeleportTab:CreateButton({
+    Name = "Go",
+    Callback = function()
+		teleportTo(locName)	
     end,
 })
 
