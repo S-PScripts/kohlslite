@@ -1089,6 +1089,25 @@ CombatTab:CreateSlider({
     end,
 })
 
+-- Teleport Section --
+local TeleportNames = {}
+for name in pairs(Teleports) do
+	table.insert(TeleportNames, name)
+end
+
+TeleportTab:CreateSection("Locations")
+
+TeleportTab:CreateDropdown({
+    Name = "Teleport To",
+    Options = TeleportNames,
+    Flag = "TPDropdown",
+    Callback = function(Option)
+        local locName = Option[1]
+        --print("Teleporting to:", locName)
+		teleportTo(locName)
+    end,
+})
+
 -- Automation --
 SettingsTab:CreateSection("Automation")
 
