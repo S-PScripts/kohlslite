@@ -663,6 +663,90 @@ LocalPlayer.CharacterAdded:Connect(function(char)
     end)
 end)
 
+LocalPlayer:GetMouse().KeyDown:Connect(function(key)
+    if key:lower() == "g" then
+        for i, v in allGuns do
+		--	print(v)
+			if v == "M4A1" and plr_pass == false then 
+			else
+				if not GetTool(v) then
+        			GetGun(v)
+    			end
+			end
+		end
+    end
+end)
+
+-- Remove collision of doors
+function NoDoors()
+	local Doors = workspace:FindFirstChild("Doors")
+    for i,v in pairs(Doors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = false
+            v.Transparency = 0.6
+        end
+    end
+	
+    local CellDoors = workspace:FindFirstChild("CellDoors")
+    for i,v in pairs(CellDoors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = false
+            v.Transparency = 0.6
+        end
+    end
+end
+
+-- Add collision of doors
+function AddDoors()
+	local Doors = workspace:FindFirstChild("Doors")
+    for i,v in pairs(Doors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = true
+            v.Transparency = 0
+        end
+    end
+	
+    local CellDoors = workspace:FindFirstChild("CellDoors")
+    for i,v in pairs(CellDoors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = true
+            v.Transparency = 0
+        end
+    end
+end
+
+function checkRIOT()	
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 643697197) then
+		return true, "NEW"
+	end
+
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 96651) then
+		return true, "LEGACY"
+	end
+
+	return false, "N/A"
+end
+
+plr_pass, type = checkRIOT()
+
+RunService.Heartbeat:Connect(function()
+    if settings.autoguns == true then
+		for i, v in allGuns do
+		--	print(v)
+			if v == "M4A1" and plr_pass == false then 
+			else
+				if not GetTool(v) then
+        			GetGun(v)
+    			end
+			end
+		end
+	end
+	if settings.nodoors == true then
+    	NoDoors()
+	end
+end)
+
+-- Command list
 local function handleCommand(msg)
     local lowerMsg = msg:lower()
 
@@ -867,96 +951,12 @@ game:GetService("TextChatService").MessageReceived:Connect(function(tbl)
     handleCommand(tbl.Text)
 end)
 
-LocalPlayer:GetMouse().KeyDown:Connect(function(key)
-    if key:lower() == "g" then
-        for i, v in allGuns do
-		--	print(v)
-			if v == "M4A1" and plr_pass == false then 
-			else
-				if not GetTool(v) then
-        			GetGun(v)
-    			end
-			end
-		end
-    end
-end)
-
-print("PrisonX executed! Created by TS2021.")
-Notify("PrisonX executed.")
-
--- Remove collision of doors
-function NoDoors()
-	local Doors = workspace:FindFirstChild("Doors")
-    for i,v in pairs(Doors:GetDescendants()) do
-        if v:IsA("BasePart") then
-            v.CanCollide = false
-            v.Transparency = 0.6
-        end
-    end
-	
-    local CellDoors = workspace:FindFirstChild("CellDoors")
-    for i,v in pairs(CellDoors:GetDescendants()) do
-        if v:IsA("BasePart") then
-            v.CanCollide = false
-            v.Transparency = 0.6
-        end
-    end
-end
-
--- Add collision of doors
-function AddDoors()
-	local Doors = workspace:FindFirstChild("Doors")
-    for i,v in pairs(Doors:GetDescendants()) do
-        if v:IsA("BasePart") then
-            v.CanCollide = true
-            v.Transparency = 0
-        end
-    end
-	
-    local CellDoors = workspace:FindFirstChild("CellDoors")
-    for i,v in pairs(CellDoors:GetDescendants()) do
-        if v:IsA("BasePart") then
-            v.CanCollide = true
-            v.Transparency = 0
-        end
-    end
-end
-
-function checkRIOT()	
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 643697197) then
-		return true, "NEW"
-	end
-
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 96651) then
-		return true, "LEGACY"
-	end
-
-	return false, "N/A"
-end
-
-plr_pass, type = checkRIOT()
-
-RunService.Heartbeat:Connect(function()
-    if settings.autoguns == true then
-		for i, v in allGuns do
-		--	print(v)
-			if v == "M4A1" and plr_pass == false then 
-			else
-				if not GetTool(v) then
-        			GetGun(v)
-    			end
-			end
-		end
-	end
-	if settings.nodoors == true then
-    	NoDoors()
-	end
-end)
-
 --local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
 --Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
 
--- GUI
+
+
+-- GUI --
 
 -- Team Management --
 MainTab:CreateSection("Team Management")
@@ -1174,3 +1174,6 @@ SettingsTab:CreateToggle({
 })
 
 Rayfield:LoadConfiguration()
+
+print("PrisonX executed! Created by TS2021.")
+Notify("PrisonX executed.")
