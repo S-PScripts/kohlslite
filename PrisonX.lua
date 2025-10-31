@@ -338,7 +338,7 @@ sphere.Anchored = true
 sphere.CanCollide = false
 sphere.Material = Enum.Material.ForceField
 sphere.Color = Color3.fromRGB(255, 0, 50)
-sphere.Transparency = settings.killaura_radius and 0.6 or 1
+sphere.Transparency = settings.killaura_sphere and 0.6 or 1
 sphere.Parent = workspace
 
 RunService.Heartbeat:Connect(function()
@@ -354,7 +354,7 @@ RunService.Heartbeat:Connect(function()
 
     -- Update sphere visuals
     sphere.Size = Vector3.new(settings.killaura_radius * 2, settings.killaura_radius * 2, settings.killaura_radius * 2)
-    sphere.Transparency = settings.killaura_radius and 0.6 or 1
+    sphere.Transparency = settings.killaura_sphere and 0.6 or 1
     sphere.Position = hrp.Position
 
     -- Get targets in radius
