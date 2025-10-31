@@ -42,16 +42,19 @@ settings = {
 	auto_fg = true,
 	auto_fgrate = 0, -- if you want to change it to be slower...
 
-	-- Remove doors
+	-- Remove doors (CAUSES 1 SEC OF LAG WHENEVER YOU RESPAWN)
 	nodoors = true,
 
 	-- Kill aura
 	killaura = false,
-	killaura_radius = 20, -- kinda broken 
+	killaura_radius = 10,
 	killaura_sphere = false, -- visual sphere
 
 	-- Arrest aura
-	arrestaura = false
+	arrestaura = false,
+
+	-- Keep reset button enabled at all times
+	enablere = true,
 
 }
 
@@ -436,6 +439,24 @@ RunService.Heartbeat:Connect(function()
 					end
 				end
         	end
+		end
+    end
+end)
+
+-- Enable reset button at all times
+local function forceEnableReset()
+    local success, err = pcall(function()
+        StarterGui:SetCore("ResetButtonCallback", true)
+    end)
+    if not success then
+        warn("Failed to enable reset button:", err)
+    end
+end
+
+task.spawn(function()
+    while task.wait(0) do
+		if settings.enablere then
+        	forceEnableReset()
 		end
     end
 end)
@@ -941,6 +962,17 @@ local function handleCommand(msg)
     	settings.autoguns = false
 		Notify("Guns no longer auto given.")
 	end
+
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."enablere" then
+    	settings.enablere = true
+		Notify("Reset button enabled at all time.")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unenablere" then
+    	settings.enablere = false
+		Notify("Disabled!")
+	end
+	
 end
 
 game:GetService("TextChatService").MessageReceived:Connect(function(tbl)
@@ -1046,7 +1078,7 @@ CombatTab:CreateToggle({
 
 CombatTab:CreateSlider({
     Name = "Kill Aura Radius",
-    Range = {1, 50},
+    Range = {1, 10},
     Increment = 1,
     Suffix = "studs",
     CurrentValue = settings.killaura_radius,
