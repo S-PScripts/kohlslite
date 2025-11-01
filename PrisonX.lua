@@ -4,15 +4,22 @@
 
 --[[
 Features:
-Kill Feed implementation
-Anti-arrest
-Anti-tase
-Auto-respawn
-Auto guns
-Auto gun mods
-Team Switcher
-Door Remover
-Gun Obtainer
+Gun Obtainer (-gun (GUN NAME))
+TP to Locations (-lc (LOCATION))
+Kill Feed (-killfeed / -unkillfeed)
+Anti Arrest (-antiar / -unantiar)
+Anti Tase (-antitase / -unantitase)
+Kill Aura (-killaura / -unkillaura)
+Kill Aura Radius (-karadius (NUMBER))
+Kill Aura Visibility (-kasphere / -unkasphere)
+Auto Respawn (spawn in the same place upon death) (-autore / -unautore)
+Quick Respawn (does a neat trick to spawn you faster for inmates/guards when possible, part of auto respawn)
+Powerful Guns (guns have unlimited range + spread) (-powguns / -unpowguns)
+Fast Guns (you can also change the rate, default is 0) (-fastguns / -unfastguns / -firerate)
+Run -opguns to turn on both (-unopguns to turn off both)
+Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
+Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
+Arrest Aura (-araura/-unaraura)
 ]]
 
 
