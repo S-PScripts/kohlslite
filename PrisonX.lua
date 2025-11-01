@@ -511,9 +511,10 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 
 		-- Anti Tase
 		if settings.antitase and des.Animation.AnimationId == "rbxassetid://279227693" then
+			local nbgui = game.Players.LocalPlayer.PlayerGui.Home.hud.BackpackUI
 			des:Stop()
 			des:Destroy()
-            StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+            nbgui.Visible = true
 			local wspeed = normalWS
 			local jpower = normalJP
 			hbeat:Wait()
@@ -994,6 +995,14 @@ end)
 --local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
 --Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
 
+-- remove new backpack (unused)
+--[[ game:GetService("Players").LocalPlayer.PlayerGui.Home.hud.BackpackUI:Destroy()
+game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true) ]] 
+
+-- remove old backpack
+game:GetService("RunService").RenderStepped:Connect(function()
+    game:GetService("StarterGui"):SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+end)
 
 
 -- GUI --
