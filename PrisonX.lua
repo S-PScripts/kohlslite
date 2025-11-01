@@ -1,4 +1,4 @@
--- PrisonX v1.1 by TS2021
+-- PrisonX v1.12 by TS2021
 -- Credits to github.com/tomatotxt for stuff
 -- Credits to github.com/NewMatheusDC for most of the GUI
 
@@ -113,7 +113,7 @@ local Camera = workspace.Camera
 local Teams = game:GetService("Teams")
 local TeamEvent = workspace:WaitForChild("Remote"):WaitForChild("TeamEvent")
 
-local version = "v1"
+local version = "v1.12"
 
 -- Teleport Locations
 local Teleports = {
@@ -965,10 +965,10 @@ local function handleCommand(msg)
 
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."enablere" then
     	settings.enablere = true
-		Notify("Reset button enabled at all time.")
+		Notify("The reset button will no longer get disabled when you get tased!")
 	end
 
-	if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unenablere" then
+	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."disablere" then
     	settings.enablere = false
 		Notify("Disabled!")
 	end
@@ -1212,6 +1212,15 @@ SettingsTab:CreateToggle({
     Flag = "KillFeedToggle",
     Callback = function(Value)
         settings.killfeed = Value
+    end,
+})
+
+SettingsTab:CreateToggle({
+    Name = "Keep Reset Button Enabled",
+    CurrentValue = settings.killfeed,
+    Flag = "ResetButtonToggle",
+    Callback = function(Value)
+        settings.enablere = Value
     end,
 })
 
