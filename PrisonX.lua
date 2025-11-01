@@ -53,7 +53,7 @@ settings = {
 	-- Arrest aura
 	arrestaura = false,
 
-	-- Keep reset button enabled at all times
+	-- Stop tases from disabling the reset button
 	enablere = true,
 
 }
@@ -584,26 +584,25 @@ local function SetTeam(targetTeam, skipCooldownCheck)
         until LocalPlayer.Team == team
     end
 
+	local char = LocalPlayer.Character
+    if not char then return end
+    local hrp = char:WaitForChild("HumanoidRootPart")
+	local ocf = hrp.CFrame 
+	
     if current == Teams.Inmates then
         if targetTeam == Teams.Guards then
             switch(Teams.Neutral)
             switch(Teams.Guards)
+			tpto(ocf)
         elseif targetTeam == Teams.Criminals then
-			local char = LocalPlayer.Character
-    		if not char then return end
-    		local hrp = char:WaitForChild("HumanoidRootPart")
-			local ocf = hrp.CFrame 
             SwitchToCriminalAndReturn(false, ocf)
         end
     elseif current == Teams.Guards then
         if targetTeam == Teams.Inmates then
             switch(Teams.Neutral)
             switch(Teams.Inmates)
+			tpto(ocf)
         elseif targetTeam == Teams.Criminals then
-			local char = LocalPlayer.Character
-    		if not char then return end
-    		local hrp = char:WaitForChild("HumanoidRootPart")
-    		local ocf = hrp.CFrame 
             switch(Teams.Neutral)
             switch(Teams.Inmates)
 			fixcam()
@@ -613,12 +612,14 @@ local function SetTeam(targetTeam, skipCooldownCheck)
         if targetTeam == Teams.Inmates then
             switch(Teams.Neutral)
             switch(Teams.Inmates)
+			tpto(ocf)
         elseif targetTeam == Teams.Guards then
             switch(Teams.Neutral)
             switch(Teams.Guards)
+			tpto(ocf)
         end
     elseif current == Teams.Neutral then
-        switch(targetTeam)
+        switch(targetTeam) -- ??
     end
 
     -- Apply cooldown for non-criminal switches
