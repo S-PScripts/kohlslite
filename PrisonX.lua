@@ -1,4 +1,4 @@
--- PrisonX v1.12 by TS2021
+-- PrisonX v1.15 by TS2021
 -- Credits to github.com/tomatotxt for stuff
 -- Credits to github.com/NewMatheusDC for most of the GUI
 
@@ -21,6 +21,8 @@ Fast Guns (you can also change the rate, default is 0) (-fastguns / -unfastguns 
 Run -opguns to turn on both (-unopguns to turn off both)
 Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
+
+All in a UI too!
 ]]
 
 if getgenv().plx_executed then
@@ -131,7 +133,7 @@ local Camera = workspace.Camera
 local Teams = game:GetService("Teams")
 local TeamEvent = workspace:WaitForChild("Remote"):WaitForChild("TeamEvent")
 
-local version = "v1.12"
+local version = "v1.15"
 
 -- Teleport Locations
 local Teleports = {
