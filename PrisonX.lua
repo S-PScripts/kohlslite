@@ -1,4 +1,4 @@
--- PrisonX v1.15 by TS2021
+-- PrisonX v1.16 by TS2021
 -- Credits to github.com/tomatotxt for stuff
 -- Credits to github.com/NewMatheusDC for most of the GUI
 
@@ -21,8 +21,11 @@ Fast Guns (you can also change the rate, default is 0) (-fastguns / -unfastguns 
 Run -opguns to turn on both (-unopguns to turn off both)
 Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
+Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors)
+Toilet Breaker (must have hammer) (-btoilets)
+Auto Toilet Breaker (-abtoilets / -unabtoilets)
 
-All in a UI too!
+All implemented in a UI too!
 ]]
 
 if getgenv().plx_executed then
@@ -73,6 +76,8 @@ settings = {
 	-- Stop tases from disabling the reset button
 	enablere = true,
 
+	-- Auto break toilets when you have a hammer
+	abtoilets = false
 }
 
 -- Notifications
@@ -133,7 +138,9 @@ local Camera = workspace.Camera
 local Teams = game:GetService("Teams")
 local TeamEvent = workspace:WaitForChild("Remote"):WaitForChild("TeamEvent")
 
-local version = "v1.15"
+local meleeEvent = ReplicatedStorage:WaitForChild("meleeEvent")
+
+local version = "v1.16"
 
 -- Teleport Locations
 local Teleports = {
@@ -355,7 +362,6 @@ else
 end
 
 -- Kill aura
-local event = ReplicatedStorage:WaitForChild("meleeEvent")
 
 -- Sphere visual
 local sphere = Instance.new("Part")
@@ -395,7 +401,7 @@ RunService.Heartbeat:Connect(function()
             local targetPlayer = Players:GetPlayerFromCharacter(model)
             if targetPlayer and targetPlayer ~= player and not hitList[targetPlayer] then
                 hitList[targetPlayer] = true
-                event:FireServer(targetPlayer)
+                meleeEvent:FireServer(targetPlayer)
             end
         end
     end
@@ -484,6 +490,35 @@ task.spawn(function()
 		end
     end
 end)
+
+-- Toilet breaker
+local hhe = false
+function BreakAllToilets()
+	local foundToilets = false
+    
+	for _, toilet in pairs(workspace:GetDescendants()) do
+        if toilet.Name == "Toilet" and toilet:IsA("Model") then
+            foundToilets = true
+            for i = 1, 15 do
+                meleeEvent:FireServer(toilet, 1)
+            end
+        end
+	end
+    
+	return foundToilets
+end
+
+local function hammer_check_t()
+    if not LocalPlayer.Character then return end
+    
+    local hrn = LocalPlayer.Character:FindFirstChild("Hammer") ~= nil
+    
+    if hrn and not hhe then
+        BreakAllToilets()
+    end
+    
+    hhe = hrn
+end
 
 local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
 function die()
@@ -780,6 +815,10 @@ game:GetService("RunService").Heartbeat:Connect(function()
         	end
 		end
     end
+
+	if settings.abtoilets then
+		hammer_check_t()
+	end
 end)
 
 function checkRIOT()	
@@ -1012,6 +1051,21 @@ local function handleCommand(msg)
 	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."unsodoors" then
     	settings.sodoors = false
 		Notify("No longer spam opening doors.")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."btoilets" then
+		hammer_check_t()
+		Notify("Toilets broken (assuming you had a hammer).")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."abtoilets" then
+    	settings.abtoilets = true
+		Notify("Auto breaking toilets.")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 11) == prefix.."unabtoilets" then
+    	settings.abtoilets = false
+		Notify("No longer auto breaking toilets.")
 	end
 	
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."autoguns" then
@@ -1257,6 +1311,15 @@ AutoTab:CreateToggle({
 })
 
 AutoTab:CreateToggle({
+    Name = "Auto Break Toilets",
+    CurrentValue = settings.autoguns,
+    Flag = "AutoBreakToiletsToggle",
+    Callback = function(Value)
+        settings.abtoilets = Value
+    end,
+})
+
+AutoTab:CreateToggle({
     Name = "No Doors",
     CurrentValue = settings.nodoors,
     Flag = "NoDoorsToggle",
@@ -1300,6 +1363,15 @@ ProtectTab:CreateToggle({
 })
 
 -- Other Tab --
+OtherTab:CreateSection("Actions")
+
+OtherTab:CreateButton({
+    Name = "Break All Toilets",
+    Callback = function()
+        hammer_check_t()
+    end,
+})
+
 -- UI --
 OtherTab:CreateSection("UI")
 
