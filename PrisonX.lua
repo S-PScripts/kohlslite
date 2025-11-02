@@ -1,6 +1,8 @@
 -- PrisonX v1.16 by TS2021
+-- OPEN-SOURCE
+
 -- Credits to github.com/tomatotxt for stuff
--- Credits to github.com/NewMatheusDC for most of the GUI
+-- Credits to github.com/NewMatheusDC for some of the GUI
 
 --[[
 Features:
