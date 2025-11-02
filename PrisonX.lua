@@ -1401,3 +1401,6 @@ print("PrisonX executed! Created by TS2021.")
 Notify("PrisonX executed.")
 
 getgenv().plx_executed = true
+
+-- infinite yield for esp, speed etc.
+loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
