@@ -23,6 +23,9 @@ Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
 ]]
 
+if getgenv().plx_executed then
+	return
+end
 
 local prefix = "-"
 
@@ -1264,3 +1267,5 @@ Rayfield:LoadConfiguration()
 
 print("PrisonX executed! Created by TS2021.")
 Notify("PrisonX executed.")
+
+getgenv().plx_executed = true
