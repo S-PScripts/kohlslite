@@ -970,7 +970,7 @@ local function handleCommand(msg)
 
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."aaradius" then
 		local parts = lowerMsg:split(" ")
-		settings.killaura_radius = tonumber(parts[2])
+		settings.arrestaura_radius = tonumber(parts[2])
 		Notify("Arrest aura will now have radius "..settings.arrestaura_radius..".")
 	end
 	
