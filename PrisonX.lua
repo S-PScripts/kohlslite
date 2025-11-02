@@ -71,7 +71,7 @@ settings = {
 
 	-- Arrest aura
 	arrestaura = false,
-	arrestaura_radius = 10,
+	arrestaura_radius = 15,
 
 	-- Stop tases from disabling the reset button
 	enablere = true,
@@ -1215,7 +1215,7 @@ CombatTab:CreateToggle({
 
 CombatTab:CreateSlider({
     Name = "Arrest Aura Radius",
-    Range = {1, 10},
+    Range = {1,15},
     Increment = 1,
     Suffix = "studs",
     CurrentValue = settings.arrestaura_radius,
