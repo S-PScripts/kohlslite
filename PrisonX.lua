@@ -324,6 +324,7 @@ end
 
 -- Hook __namecall
 local namecall
+if hookmetamethod then
 namecall = hookmetamethod(game, "__namecall", function(self, ...)
     local method = getnamecallmethod()
     
@@ -349,6 +350,9 @@ namecall = hookmetamethod(game, "__namecall", function(self, ...)
 
     return namecall(self, ...)
 end)     
+else
+	print("Executor does not support hookmetamethod; gun mods unavailable.")
+end
 
 -- Kill aura
 local event = ReplicatedStorage:WaitForChild("meleeEvent")
