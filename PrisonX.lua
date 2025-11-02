@@ -11,6 +11,8 @@ Anti Arrest (-antiar / -unantiar)
 Anti Tase (-antitase / -unantitase)
 Kill Aura (-killaura / -unkillaura)
 Kill Aura Radius (-karadius (NUMBER))
+Arrest Aura (-araura/-unaraura)
+Arrest Aura Radius (-aaradius)
 Kill Aura Visibility (-kasphere / -unkasphere)
 Auto Respawn (spawn in the same place upon death) (-autore / -unautore)
 Quick Respawn (does a neat trick to spawn you faster for inmates/guards when possible, part of auto respawn)
@@ -19,7 +21,6 @@ Fast Guns (you can also change the rate, default is 0) (-fastguns / -unfastguns 
 Run -opguns to turn on both (-unopguns to turn off both)
 Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
-Arrest Aura (-araura/-unaraura)
 ]]
 
 
@@ -59,6 +60,7 @@ settings = {
 
 	-- Arrest aura
 	arrestaura = false,
+	arrestaura_radius = 10,
 
 	-- Stop tases from disabling the reset button
 	enablere = true,
@@ -439,7 +441,7 @@ RunService.Heartbeat:Connect(function()
         		if not hrp or not hum or hum.Health <= 0 then 
 					--
 				else
-        			if (root.Position - hrp.Position).Magnitude <= 10 then
+        			if (root.Position - hrp.Position).Magnitude <= arrestaura_radius then
             			task.spawn(function()
                 			pcall(aremote.InvokeServer, aremote, plr)
             			end)
@@ -928,9 +930,14 @@ local function handleCommand(msg)
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."karadius" then
 		local parts = lowerMsg:split(" ")
 		settings.killaura_radius = tonumber(parts[2])
-		Notify("Kill aura will now be "..settings.killaura_radius..".")
+		Notify("Kill aura will now have radius "..settings.killaura_radius..".")
 	end
 
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."aaradius" then
+		local parts = lowerMsg:split(" ")
+		settings.killaura_radius = tonumber(parts[2])
+		Notify("Arrest aura will now have radius "..settings.arrestaura_radius..".")
+	end
 	
 	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."opguns" then
         settings.auto_pg = true
@@ -1076,15 +1083,6 @@ CombatTab:CreateToggle({
 })
 
 CombatTab:CreateToggle({
-    Name = "Arrest Aura",
-    CurrentValue = settings.arrestaura,
-    Flag = "ArrestAuraToggle",
-    Callback = function(Value)
-        settings.arrestaura = Value
-    end,
-})
-
-CombatTab:CreateToggle({
     Name = "Kill Aura Sphere",
     CurrentValue = settings.killaura_sphere,
     Flag = "KASphereToggle",
@@ -1102,6 +1100,27 @@ CombatTab:CreateSlider({
     Flag = "KARadiusSlider",
     Callback = function(Value)
         settings.killaura_radius = Value
+    end,
+})
+
+CombatTab:CreateToggle({
+    Name = "Arrest Aura",
+    CurrentValue = settings.arrestaura,
+    Flag = "ArrestAuraToggle",
+    Callback = function(Value)
+        settings.arrestaura = Value
+    end,
+})
+
+CombatTab:CreateSlider({
+    Name = "Arrest Aura Radius",
+    Range = {1, 10},
+    Increment = 1,
+    Suffix = "studs",
+    CurrentValue = settings.arrestaura_radius,
+    Flag = "AARadiusSlider",
+    Callback = function(Value)
+        settings.arrestaura_radius = Value
     end,
 })
 
