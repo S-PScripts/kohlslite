@@ -1,7 +1,8 @@
 print("--- INFORMATION ---")
+print("KOHLSLITE IS DISCONTINUED (AS OF SEPTEMBER 2025)! THINGS IN THE SCRIPT NO LONGER WORK, AND I WILL NOT FIX THEM.")
+
 print("KohlsLite is a script for Kohls Admin House that was created in late 2023. This script was created by ScriptingProgrammer (Roblox)/ts2021 (Discord)/S-PScripts (GitHub).")
 print("For help, please contact me on Discord at ts2021")
-print("The version you are using is v"..getgenv().klversion..". 14/09/2025")
 print("\n")
 
 print("--- CREDITS ---")
