@@ -56,6 +56,9 @@ settings = {
 	-- Remove doors (CAUSES 1 SEC OF LAG WHENEVER YOU RESPAWN)
 	nodoors = true,
 
+	-- Spam open doors (must be guard / have a keycard)
+	sodoors = false,
+
 	-- Kill aura
 	killaura = false,
 	killaura_radius = 10,
@@ -102,12 +105,15 @@ local Window = Rayfield:CreateWindow({
 local MainTab = Window:CreateTab("Main Features", nil)
 local CombatTab = Window:CreateTab("Combat", nil)
 local TeleportTab = Window:CreateTab("Teleport", nil)
-local SettingsTab = Window:CreateTab("Settings", nil)
+local AutoTab = Window:CreateTab("Automation", nil)
+local ProtectTab = Window:CreateTab("Protection", nil)
+local OtherTab = Window:CreateTab("Other", nil)
 
 
 -- Variables
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character
 
 local RunService = game:GetService("RunService")
 local hbeat = RunService.Heartbeat
@@ -712,9 +718,11 @@ LocalPlayer:GetMouse().KeyDown:Connect(function(key)
     end
 end)
 
+local Doors = workspace:FindFirstChild("Doors")
+local CellDoors = workspace:FindFirstChild("CellDoors")
+
 -- Remove collision of doors
 function NoDoors()
-	local Doors = workspace:FindFirstChild("Doors")
     for i,v in pairs(Doors:GetDescendants()) do
         if v:IsA("BasePart") then
             v.CanCollide = false
@@ -722,7 +730,6 @@ function NoDoors()
         end
     end
 	
-    local CellDoors = workspace:FindFirstChild("CellDoors")
     for i,v in pairs(CellDoors:GetDescendants()) do
         if v:IsA("BasePart") then
             v.CanCollide = false
@@ -733,7 +740,6 @@ end
 
 -- Add collision of doors
 function AddDoors()
-	local Doors = workspace:FindFirstChild("Doors")
     for i,v in pairs(Doors:GetDescendants()) do
         if v:IsA("BasePart") then
             v.CanCollide = true
@@ -741,7 +747,6 @@ function AddDoors()
         end
     end
 	
-    local CellDoors = workspace:FindFirstChild("CellDoors")
     for i,v in pairs(CellDoors:GetDescendants()) do
         if v:IsA("BasePart") then
             v.CanCollide = true
@@ -749,6 +754,27 @@ function AddDoors()
         end
     end
 end
+
+-- Spam Open Doors
+local Keycard = Character:FindFirstChild("Key card")
+local kcopener = Character["Right Arm"]
+
+local function touch(hb)
+    firetouchinterest(kcopener, hb, 0)
+    firetouchinterest(kcopener, hb, 1)
+end
+
+game:GetService("RunService").Heartbeat:Connect(function()
+	if settings.sodoors then
+    	if Character.Humanoid.Health > 0 then
+        	for i, v in pairs(Doors:GetDescendants()) do
+            	if v.Name == "hitbox" then
+                	task.spawn(touch, v)
+            	end
+        	end
+		end
+    end
+end)
 
 function checkRIOT()	
 	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 643697197) then
@@ -961,7 +987,7 @@ local function handleCommand(msg)
         Notify("Printed Kill Feed to /console.")
     end
 
-    if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."nodoors" then
+    if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."nodoors" then
     	settings.nodoors = true
 		Notify("Removed collision of doors.")
 	end
@@ -972,6 +998,16 @@ local function handleCommand(msg)
 		AddDoors()
 	end
 
+    if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."sodoors" then
+    	settings.sodoors = true
+		Notify("Spam opening doors (MUST BE A GUARD/HAVE A KEYCARD).")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."unsodoors" then
+    	settings.sodoors = false
+		Notify("No longer spam opening doors.")
+	end
+	
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."autoguns" then
     	settings.autoguns = true
 		Notify("Guns auto given.")
@@ -1017,6 +1053,7 @@ end)
 
 -- GUI --
 
+-- Main Tab --
 -- Team Management --
 MainTab:CreateSection("Team Management")
 
@@ -1073,6 +1110,7 @@ MainTab:CreateButton({
     end,
 })
 
+-- Combat Tab --
 -- Aura Settings --
 CombatTab:CreateSection("Aura Settings")
 
@@ -1160,7 +1198,8 @@ CombatTab:CreateSlider({
     end,
 })
 
--- Teleport Section --
+-- Teleport Tab --
+-- Locations --
 locName = nil
 
 local TeleportNames = {}
@@ -1189,10 +1228,11 @@ TeleportTab:CreateButton({
     end,
 })
 
+-- Automation Tab --
 -- Automation --
-SettingsTab:CreateSection("Automation")
+AutoTab:CreateSection("Automation")
 
-SettingsTab:CreateToggle({
+AutoTab:CreateToggle({
     Name = "Auto Respawn",
     CurrentValue = settings.autorespawn,
     Flag = "AutoRespawnToggle",
@@ -1201,7 +1241,7 @@ SettingsTab:CreateToggle({
     end,
 })
 
-SettingsTab:CreateToggle({
+AutoTab:CreateToggle({
     Name = "Auto Guns",
     CurrentValue = settings.autoguns,
     Flag = "AutoGunsToggle",
@@ -1210,7 +1250,7 @@ SettingsTab:CreateToggle({
     end,
 })
 
-SettingsTab:CreateToggle({
+AutoTab:CreateToggle({
     Name = "No Doors",
     CurrentValue = settings.nodoors,
     Flag = "NoDoorsToggle",
@@ -1222,10 +1262,20 @@ SettingsTab:CreateToggle({
     end,
 })
 
--- Protection --
-SettingsTab:CreateSection("Protection")
+AutoTab:CreateToggle({
+    Name = "Spam Open Doors",
+    CurrentValue = settings.nodoors,
+    Flag = "SoDoorsToggle",
+    Callback = function(Value)
+        settings.sodoors = Value
+    end,
+})
 
-SettingsTab:CreateToggle({
+-- Protection Tab --
+-- Protection --
+ProtectTab:CreateSection("Protection")
+
+ProtectTab:CreateToggle({
     Name = "Anti Arrest",
     CurrentValue = settings.antiarrest,
     Flag = "AntiArrestToggle",
@@ -1234,7 +1284,7 @@ SettingsTab:CreateToggle({
     end,
 })
 
-SettingsTab:CreateToggle({
+ProtectTab:CreateToggle({
     Name = "Anti Tase",
     CurrentValue = settings.antitase,
     Flag = "AntiTaseToggle",
@@ -1243,9 +1293,11 @@ SettingsTab:CreateToggle({
     end,
 })
 
-SettingsTab:CreateSection("UI")
+-- Other Tab --
+-- UI --
+OtherTab:CreateSection("UI")
 
-SettingsTab:CreateToggle({
+OtherTab:CreateToggle({
     Name = "Kill Feed Notifications",
     CurrentValue = settings.killfeed,
     Flag = "KillFeedToggle",
@@ -1254,7 +1306,7 @@ SettingsTab:CreateToggle({
     end,
 })
 
-SettingsTab:CreateToggle({
+OtherTab:CreateToggle({
     Name = "Keep Reset Button Enabled",
     CurrentValue = settings.killfeed,
     Flag = "ResetButtonToggle",
