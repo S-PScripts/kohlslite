@@ -235,7 +235,7 @@ local function GetGun(GunName)
     end
 	local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
     repeat task.wait()
-        Giver.CFrame = hrp.CFrame * CFrame.new(math.random(-2, 2),0,0)
+        hrp.CFrame = Giver.CFrame * CFrame.new(math.random(-2, 2),0,0)
     until GetTool(GunName)
 end
 
@@ -837,20 +837,35 @@ end
 
 plr_pass, type = checkRIOT()
 
+tring = false
+local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
 RunService.Heartbeat:Connect(function()
 	if settings.nodoors == true then
     	NoDoors()
 	end
 		
     if settings.autoguns == true then
-		for i, v in allGuns do
-		--	print(v)
-			if v == "M4A1" and plr_pass == false then 
-			else
-				if not GetTool(v) then
-        			GetGun(v)
-    			end
+		if not tring then
+			tring = true
+			local p = 0
+			oldhrp = hrp.CFrame
+			for i, v in allGuns do
+		--		print(v)
+				if v == "M4A1" and plr_pass == false then 
+				else
+					if not GetTool(v) then
+        				GetGun(v)
+						p += 1
+						tpto(oldhrp)
+    				end
+				end
 			end
+
+			if p ~= 0 then
+				tpto(oldhrp)
+			end
+
+			tring = false
 		end
 	end
 end)
@@ -1153,23 +1168,30 @@ MainTab:CreateDropdown({
     Options = allGuns,
     Flag = "GunDropdown",
     Callback = function(Option)
+		local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+		oldhrp = hrp.CFrame
         local gun = Option[1]
         print(gun)
         GetGun(gun)
+		hrp.CFrame = oldhrp
     end,
 })
 
 MainTab:CreateButton({
     Name = "Get All Guns",
     Callback = function()
-        for i, v in allGuns do
-            if v == "M4A1" and plr_pass == false then 
-            else
-                if not GetTool(v) then
-                    GetGun(v)
-                end
-            end
-        end
+		local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+		oldhrp = hrp.CFrame
+		for i, v in allGuns do
+		--	print(v)
+			if v == "M4A1" and plr_pass == false then 
+			else
+				if not GetTool(v) then
+        			GetGun(v)
+    			end
+			end
+		end
+		hrp.CFrame = oldhrp
     end,
 })
 
@@ -1315,7 +1337,7 @@ AutoTab:CreateToggle({
 
 AutoTab:CreateToggle({
     Name = "Auto Break Toilets",
-    CurrentValue = settings.autoguns,
+    CurrentValue = settings.abtoilets,
     Flag = "AutoBreakToiletsToggle",
     Callback = function(Value)
         settings.abtoilets = Value
@@ -1336,7 +1358,7 @@ AutoTab:CreateToggle({
 
 AutoTab:CreateToggle({
     Name = "Spam Open Doors",
-    CurrentValue = settings.nodoors,
+    CurrentValue = settings.sodoors,
     Flag = "SoDoorsToggle",
     Callback = function(Value)
         settings.sodoors = Value
