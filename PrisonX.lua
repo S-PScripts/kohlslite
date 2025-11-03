@@ -838,6 +838,10 @@ end
 plr_pass, type = checkRIOT()
 
 RunService.Heartbeat:Connect(function()
+	if settings.nodoors == true then
+    	NoDoors()
+	end
+		
     if settings.autoguns == true then
 		for i, v in allGuns do
 		--	print(v)
@@ -848,9 +852,6 @@ RunService.Heartbeat:Connect(function()
     			end
 			end
 		end
-	end
-	if settings.nodoors == true then
-    	NoDoors()
 	end
 end)
 
