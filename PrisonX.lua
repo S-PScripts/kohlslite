@@ -26,6 +26,7 @@ Auto guns (automatically pick up all guns you can when you respawn) (-autoguns /
 Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors)
 Toilet Breaker (must have hammer) (-btoilets)
 Auto Toilet Breaker (-abtoilets / -unabtoilets)
+Hide/Show Trees (-htrees / -strees)
 
 All implemented in a UI too!
 ]]
@@ -79,7 +80,10 @@ settings = {
 	enablere = true,
 
 	-- Auto break toilets when you have a hammer
-	abtoilets = false
+	abtoilets = false,
+
+	-- Hide trees
+	htrees = false,
 }
 
 -- Notifications
@@ -442,6 +446,27 @@ task.spawn(function()
 		end
 	end
 end)
+
+-- Hide trees
+function htrees(ht)
+	local trees = workspace:WaitForChild("Trees")
+	local kids = trees:GetChildren()
+	local preserve = kids[39]
+
+	for i = #kids, 1, -1 do
+    	local c = kids[i]
+    	if c ~= preserve then
+        	for _, descendant in ipairs(c:GetDescendants()) do
+            	if descendant:IsA("BasePart") then
+                	descendant.Transparency = ht and 1 or 0
+                	descendant.CanCollide = not ht
+                	descendant.CanQuery = not ht
+                	descendant.CanTouch = not ht
+            	end
+        	end
+    	end
+	end
+end
 
 -- Arrest Aura
 local aremote = ReplicatedStorage.Remotes.ArrestPlayer
@@ -1073,17 +1098,29 @@ local function handleCommand(msg)
 
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."btoilets" then
 		hammer_check_t()
-		Notify("Toilets broken (assuming you had a hammer).")
+		Notify("Toilets broken (assuming you had a hammer equipped).")
 	end
 
 	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."abtoilets" then
     	settings.abtoilets = true
-		Notify("Auto breaking toilets.")
+		Notify("Auto breaking toilets (have hammer equipped for this to work).")
 	end
 
 	if string.sub(lowerMsg, 1, #prefix + 11) == prefix.."unabtoilets" then
     	settings.abtoilets = false
 		Notify("No longer auto breaking toilets.")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."htrees" then
+    	settings.htrees = true
+		htrees(settings.htrees)
+		Notify("Trees hidden.")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."strees" then
+    	settings.htrees = false
+		htrees(settings.htrees)
+		Notify("Trees unhidden.")
 	end
 	
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."autoguns" then
@@ -1394,6 +1431,16 @@ OtherTab:CreateButton({
     Name = "Break All Toilets",
     Callback = function()
         hammer_check_t()
+    end,
+})
+
+OtherTab:CreateToggle({
+    Name = "Hide Trees",
+    CurrentValue = settings.htrees,
+    Flag = "HideTreesToggle",
+    Callback = function(Value)
+        settings.htrees = Value
+		htrees(settings.htrees)
     end,
 })
 
