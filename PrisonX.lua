@@ -32,7 +32,7 @@ Hide/Show Trees (-htrees / -strees)
 All implemented in a UI too!
 ]]
 
--- infinite yield for esp, speed etc.
+-- Infinite yield for ESP, speed, jump power
 loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 
 if getgenv().plx_executed then
