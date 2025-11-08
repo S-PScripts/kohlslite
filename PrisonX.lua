@@ -214,11 +214,12 @@ local gunAliases = {
     ["rem"] = "Remington 870",
     ["shotgun"] = "Remington 870",
     ["m4"] = "M4A1",
-    ["m4a1"] = "M4A1"
+    ["m4a1"] = "M4A1",
+	["fal"] = "FAL"
 }
 
 -- Guns in the game
-local allGuns = {"M9", "AK-47", "M4A1", "Remington 870"}
+local allGuns = {"M9", "AK-47", "M4A1", "Remington 870", "FAL"}
 
 local AlreadyFound = {}
 local function FindGunSpawner(GunName)
