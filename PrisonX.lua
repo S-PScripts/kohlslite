@@ -52,7 +52,7 @@ settings = {
     autorespawn = true,
 
 	-- Auto guns
-	autoguns = true,
+	autoguns = false,
 
 	-- Auto-Mod all guns to have a big range and spread  (pg = powerful gun)
 	auto_pg = true,
@@ -84,6 +84,12 @@ settings = {
 
 	-- Hide trees
 	htrees = false,
+
+	-- Inf jump
+	ijump = false,
+
+	-- Noclip
+	noclip = false
 }
 
 -- Notifications
@@ -120,6 +126,7 @@ local CombatTab = Window:CreateTab("Combat", nil)
 local TeleportTab = Window:CreateTab("Teleport", nil)
 local AutoTab = Window:CreateTab("Automation", nil)
 local ProtectTab = Window:CreateTab("Protection", nil)
+local PlayerTab = Window:CreateTab("Player", nil)
 local OtherTab = Window:CreateTab("Other", nil)
 
 
@@ -823,6 +830,57 @@ function AddDoors()
     end
 end
 
+-- Infinite Jump
+game:GetService("UserInputService").JumpRequest:Connect(function()
+            task.wait(0)
+            if settings.ijump == true then
+               game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid'):ChangeState("Jumping")
+            end
+end)
+
+-- Noclip
+local Noclipping = nil
+
+function noclip()
+	Clip = false; task.wait(0.1)
+	local function NoclipLoop()
+		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+			for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+				if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= floatName then
+					child.CanCollide = false
+				end
+			end
+		end
+	end
+	Noclipping = RunService.Stepped:Connect(NoclipLoop)
+end
+
+function clip()
+	if Noclipping then
+		Noclipping:Disconnect()
+	end
+	Clip = true
+end
+
+function getRoot(char)
+	local rootPart = char:FindFirstChild('HumanoidRootPart') or char:FindFirstChild('Torso') or char:FindFirstChild('UpperTorso')
+	return rootPart
+end
+
+-- Spin
+function spin(spinSpeed)
+		for i,v in pairs(getRoot(game.Players.LocalPlayer.Character):GetChildren()) do
+			if v.Name == "Spinning" then
+				v:Destroy()
+			end
+		end
+		local Spin = Instance.new("BodyAngularVelocity")
+		Spin.Name = "Spinning"
+		Spin.Parent = getRoot(game.Players.LocalPlayer.Character)
+		Spin.MaxTorque = Vector3.new(0, math.huge, 0)
+		Spin.AngularVelocity = Vector3.new(0,spinSpeed,0)
+end
+
 -- Spam Open Doors
 local Keycard = Character:FindFirstChild("Key card")
 local kcopener = Character["Right Arm"]
@@ -1421,6 +1479,66 @@ ProtectTab:CreateToggle({
     Flag = "AntiTaseToggle",
     Callback = function(Value)
         settings.antitase = Value
+    end,
+})
+
+
+-- Player Tab --
+PlayerTab:CreateSection("Actions")
+
+PlayerTab:CreateToggle({
+    Name = "Infinite Jump",
+    CurrentValue = settings.ijump,
+    Flag = "IJToggle",
+    Callback = function(Value)
+        settings.ijump = Value
+    end,
+})
+
+PlayerTab:CreateToggle({
+    Name = "Noclip",
+    CurrentValue = settings.noclip,
+    Flag = "NCToggle",
+    Callback = function(Value)
+        settings.noclip = Value
+		if Value == true then
+			noclip() 
+		else 
+			clip() 
+		end
+    end,
+})
+
+PlayerTab:CreateSlider({
+    Name = "Field Of View",
+    Range = {60, 120},
+    Increment = 1,
+    Suffix = "°",
+    CurrentValue = 90,
+    Flag = "FOVSlider",
+    Callback = function(Value)
+        workspace.Camera.FieldOfView = Value
+    end,
+})
+
+PlayerTab:CreateSlider({
+    Name = "Spin Speed",
+    Range = {0, 10},
+    Increment = 1,
+    Suffix = "speed",
+    CurrentValue = 0,
+    Flag = "SpinSpeedSlider",
+    Callback = function(Value)
+        spinSpeed = Value
+		if Value ~= 0 then 
+			spin(spinSpeed) 
+		else 	
+			for i,v in pairs(getRoot(game.Players.LocalPlayer.Character):GetChildren()) do
+				if v.Name == "Spinning" then
+					v:Destroy()
+				end
+			end
+		end
     end,
 })
 
