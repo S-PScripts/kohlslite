@@ -42,17 +42,17 @@ end
 local prefix = "-"
 
 -- Settings
-settings = {
+local defaults = {
 	-- When a player dies, it tells you
     killfeed = true,
 
-	-- Respawn in same place upon arrest and make you criminal if you were one
+	-- Respawn in the same place upon arrest, and make you a criminal if you were one
     antiarrest = true,
 
 	-- Remove tased effects
     antitase = true,
 
-	-- Respawn in previous position if you die
+	-- Respawn in your previous position if you die
     autorespawn = true,
 
 	-- Auto guns
@@ -95,6 +95,13 @@ settings = {
 	-- Noclip
 	noclip = false
 }
+
+local userSettings = getgenv().settings or {}
+
+settings = {}
+for k, v in pairs(defaults) do
+	settings[k] = (userSettings[k] ~= nil) and userSettings[k] or v
+end
 
 -- Notifications
 local StarterGui = game:GetService("StarterGui")
@@ -207,15 +214,15 @@ end
 
 local gunAliases = {
     ["m9"] = "M9",
-    ["ak-47"] = "AK-47",
-    ["ak"] = "AK-47",
-    ["ak47"] = "AK-47",
+    ["ak-47"] = "AK-47", -- broken rn bc of mafia pass update
+    ["ak"] = "AK-47", -- broken rn
+    ["ak47"] = "AK-47", -- broken rn
     ["remington"] = "Remington 870",
     ["rem"] = "Remington 870",
     ["shotgun"] = "Remington 870",
     ["m4"] = "M4A1",
     ["m4a1"] = "M4A1",
-	["fal"] = "FAL"
+	["fal"] = "FAL" -- broken rn, fix will come later
 }
 
 -- Guns in the game
@@ -788,7 +795,7 @@ LocalPlayer:GetMouse().KeyDown:Connect(function(key)
     if key:lower() == "g" then
         for i, v in allGuns do
 		--	print(v)
-			if v == "M4A1" and plr_pass == false then 
+			if (v == "M4A1" and riot_pass == false) or (v == "FAL" and mafia_pass == false) then 
 			else
 				if not GetTool(v) then
         			GetGun(v)
@@ -937,7 +944,16 @@ function checkRIOT()
 	return false, "N/A"
 end
 
-plr_pass, type = checkRIOT()
+function checkMAFIA()	
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 1443271) then
+		return true
+	end
+
+	return false
+end
+
+riot_pass, type = checkRIOT()
+mafia_pass = checkMAFIA()
 
 tring = false
 local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
@@ -953,11 +969,11 @@ RunService.Heartbeat:Connect(function()
 			oldhrp = hrp.CFrame
 			for i, v in allGuns do
 		--		print(v)
-				if v == "M4A1" and plr_pass == false then 
+				if (v == "M4A1" and riot_pass == false) or (v == "FAL" and mafia_pass == false) then 
 				else
 					if not GetTool(v) then
         				GetGun(v)
-						p += 1
+						p = p + 1
 						tpto(oldhrp)
     				end
 				end
@@ -987,7 +1003,7 @@ local function handleCommand(msg)
         if gunArg and gunAliases[gunArg] then
             GrabGuns({gunAliases[gunArg]})
         else
-            print("Unknown gun:", gunArg)
+            Notify("Unknown gun:", gunArg)
         end
     end
 
@@ -997,7 +1013,7 @@ local function handleCommand(msg)
 		if location then
 			teleportTo(location)
 		else
-			print("No location provided.")
+			Notify("No location provided.")
 		end
 	end
 
@@ -1017,7 +1033,7 @@ local function handleCommand(msg)
             	ChangeTeam(Teams.Guards)
         	end
     	else
-        	print("Unknown team:", teamArg)
+        	Notify("Unknown team:", teamArg)
     	end
 	end
 
@@ -1290,7 +1306,7 @@ MainTab:CreateDropdown({
 		local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
 		oldhrp = hrp.CFrame
         local gun = Option[1]
-        print(gun)
+        --print(gun)
         GetGun(gun)
 		hrp.CFrame = oldhrp
     end,
@@ -1303,7 +1319,7 @@ MainTab:CreateButton({
 		oldhrp = hrp.CFrame
 		for i, v in allGuns do
 		--	print(v)
-			if v == "M4A1" and plr_pass == false then 
+			if (v == "M4A1" and riot_pass == false) or (v == "FAL" and mafia_pass == false) then 
 			else
 				if not GetTool(v) then
         			GetGun(v)
