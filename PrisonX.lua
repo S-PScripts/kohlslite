@@ -1,4 +1,4 @@
--- PrisonX v1.16 by TS2021
+-- PrisonX v1.18 by TS2021
 -- OPEN-SOURCE
 
 -- Credits to github.com/tomatotxt for stuff
@@ -25,6 +25,7 @@ Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
 Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors)
 Toilet Breaker (must have hammer) (-btoilets)
+Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
 
@@ -113,7 +114,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
     Name = "PrisonX",
     Icon = nil,
-    LoadingTitle = "PrisonX v1.1",
+    LoadingTitle = "PrisonX v1.18",
     LoadingSubtitle = "Created by TS2021",
     ConfigurationSaving = {
         Enabled = false,
@@ -156,7 +157,7 @@ local TeamEvent = workspace:WaitForChild("Remote"):WaitForChild("TeamEvent")
 
 local meleeEvent = ReplicatedStorage:WaitForChild("meleeEvent")
 
-local version = "v1.16"
+local version = "v1.18"
 
 -- Teleport Locations
 local Teleports = {
@@ -909,6 +910,20 @@ game:GetService("RunService").Heartbeat:Connect(function()
 	end
 end)
 
+-- stop fence top killing you
+function ukfence()
+	for _, fence in pairs(workspace.Prison_Fences:GetDescendants()) do
+    	local damagePart = fence:FindFirstChild("damagePart")
+    	if damagePart then
+        	for _, child in pairs(damagePart:GetChildren()) do
+            	if child:IsA("TouchTransmitter") then
+                	child:Destroy()
+            	end
+        	end
+    	end
+	end
+end
+
 function checkRIOT()	
 	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 643697197) then
 		return true, "NEW"
@@ -1160,6 +1175,11 @@ local function handleCommand(msg)
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."btoilets" then
 		hammer_check_t()
 		Notify("Toilets broken (assuming you had a hammer equipped).")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."nkfence" then
+		ukfence()
+		Notify("The top of fences will no longer kill you!")
 	end
 
 	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."abtoilets" then
@@ -1530,7 +1550,7 @@ PlayerTab:CreateSlider({
     Increment = 1,
     Suffix = "speed",
     CurrentValue = 0,
-    Flag = "SpinSpeedSlider",
+	Flag = "SpinSpeedSlider",
     Callback = function(Value)
         spinSpeed = Value
 		if Value ~= 0 then 
@@ -1552,6 +1572,13 @@ OtherTab:CreateButton({
     Name = "Break All Toilets",
     Callback = function()
         hammer_check_t()
+    end,
+})
+
+OtherTab:CreateButton({
+    Name = "Unkillable Fence",
+    Callback = function()
+        ukfence()
     end,
 })
 
