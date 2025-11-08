@@ -15423,6 +15423,7 @@ end
 local Noclipping = nil
 
 function noclip()
+	Clip = false; task.wait(0.1)
 	local function NoclipLoop()
 		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
 			for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
@@ -15439,6 +15440,7 @@ function clip()
 	if Noclipping then
 		Noclipping:Disconnect()
 	end
+	Clip = true
 end
 
 -- KAH fly
