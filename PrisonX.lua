@@ -227,7 +227,7 @@ local function FindGunSpawner(GunName)
         return AlreadyFound[GunName], true
     end
 	
-	for i,v in pairs(workspace:GetChildren()) do
+	for i,v in pairs(workspace:GetDescendants()) do
 		if v.Name == "TouchGiver" then
 			if v:GetAttribute("ToolName") == GunName then
                 AlreadyFound[GunName] = v.TouchGiver
@@ -235,24 +235,7 @@ local function FindGunSpawner(GunName)
 			end
 		end
 	end
-
-    for _, v in pairs(workspace:GetDescendants()) do
-        if v.Name == "TouchGiver" then
-            local attrHolder = v
-            if not attrHolder:GetAttribute("ToolName") then
-                attrHolder = v.Parent
-            end
-
-            if attrHolder:GetAttribute("ToolName") == GunName then
-                local part = v.Parent:IsA("BasePart") and v.Parent or v.Parent:FindFirstChildWhichIsA("BasePart")
-                if part then
-                    AlreadyFound[GunName] = v
-                    return v, false
-                end
-            end
-        end
-    end
-
+	
     warn("Can't find", GunName)
 end
 
