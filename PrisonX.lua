@@ -222,7 +222,7 @@ local gunAliases = {
 local allGuns = {"M9", "AK-47", "M4A1", "Remington 870", "FAL"}
 
 local AlreadyFound = {}
-local function FindGunSpawner(GunName)
+local function FindGunSpawner(GunName, TargetCFrame, MaxDistance)
     if AlreadyFound[GunName] ~= nil then
         return AlreadyFound[GunName], true
     end
@@ -234,7 +234,34 @@ local function FindGunSpawner(GunName)
 			end
 		end
 	end
+	
+    for _, v in pairs(workspace:GetDescendants()) do
+        if v.Name == "TouchGiver" then
+            local attrHolder = v
+            if not attrHolder:GetAttribute("ToolName") then
+                attrHolder = v.Parent
+            end
+
+            if attrHolder:GetAttribute("ToolName") == GunName then
+                local part = v.Parent:IsA("BasePart") and v.Parent or v.Parent:FindFirstChildWhichIsA("BasePart")
+                if part then
+                    if TargetCFrame then
+                        local distance = (part.Position - TargetCFrame.Position).Magnitude
+                        if distance > (MaxDistance or 1) then
+                            continue
+                        end
+                    end
+
+                    AlreadyFound[GunName] = v
+                    return v, false
+                end
+            end
+        end
+    end
+
+    warn("Can't find", GunName)
 end
+
 
 local function GetTool(ToolName)
     return LocalPlayer:FindFirstChild("Backpack") and LocalPlayer.Backpack:FindFirstChild(ToolName) or LocalPlayer.Character and LocalPlayer.Character:FindFirstChild(ToolName)
