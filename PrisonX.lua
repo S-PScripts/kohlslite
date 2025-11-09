@@ -207,25 +207,26 @@ end
 
 local gunAliases = {
     ["m9"] = "M9",
-    ["ak-47"] = "AK-47", -- broken rn bc of mafia pass update
-    ["ak"] = "AK-47", -- broken rn
-    ["ak47"] = "AK-47", -- broken rn
+    ["ak-47"] = "AK-47",
+    ["ak"] = "AK-47",
+    ["ak47"] = "AK-47",
     ["remington"] = "Remington 870",
     ["rem"] = "Remington 870",
     ["shotgun"] = "Remington 870",
     ["m4"] = "M4A1",
     ["m4a1"] = "M4A1",
-	["fal"] = "FAL" -- broken rn, fix will come later
+	["fal"] = "FAL"
 }
 
 -- Guns in the game
 local allGuns = {"M9", "AK-47", "M4A1", "Remington 870", "FAL"}
 
 local AlreadyFound = {}
-local function FindGunSpawner(GunName, TargetCFrame, MaxDistance)
+local function FindGunSpawner(GunName)
     if AlreadyFound[GunName] ~= nil then
         return AlreadyFound[GunName], true
     end
+	
 	for i,v in pairs(workspace:GetChildren()) do
 		if v.Name == "TouchGiver" then
 			if v:GetAttribute("ToolName") == GunName then
@@ -234,7 +235,7 @@ local function FindGunSpawner(GunName, TargetCFrame, MaxDistance)
 			end
 		end
 	end
-	
+
     for _, v in pairs(workspace:GetDescendants()) do
         if v.Name == "TouchGiver" then
             local attrHolder = v
@@ -245,13 +246,6 @@ local function FindGunSpawner(GunName, TargetCFrame, MaxDistance)
             if attrHolder:GetAttribute("ToolName") == GunName then
                 local part = v.Parent:IsA("BasePart") and v.Parent or v.Parent:FindFirstChildWhichIsA("BasePart")
                 if part then
-                    if TargetCFrame then
-                        local distance = (part.Position - TargetCFrame.Position).Magnitude
-                        if distance > (MaxDistance or 1) then
-                            continue
-                        end
-                    end
-
                     AlreadyFound[GunName] = v
                     return v, false
                 end
