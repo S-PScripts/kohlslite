@@ -42,7 +42,7 @@ end
 local prefix = "-"
 
 -- Settings
-local defaults = {
+local settings = {
 	-- When a player dies, it tells you
     killfeed = true,
 
@@ -95,13 +95,6 @@ local defaults = {
 	-- Noclip
 	noclip = false
 }
-
-local userSettings = getgenv().settings or {}
-
-settings = {}
-for k, v in pairs(defaults) do
-	settings[k] = (userSettings[k] ~= nil) and userSettings[k] or v
-end
 
 -- Notifications
 local StarterGui = game:GetService("StarterGui")
