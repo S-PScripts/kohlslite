@@ -36,7 +36,8 @@ All implemented in a UI too!
 loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 
 if getgenv().plx_executed then
-	return
+	warn("PrisonX is already executed.") 
+	return 
 end
 
 local prefix = "-"
@@ -111,6 +112,8 @@ end
 -- GUI Setup
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
+local version = "v1.18"
+
 local Window = Rayfield:CreateWindow({
     Name = "PrisonX",
     Icon = nil,
@@ -157,7 +160,29 @@ local TeamEvent = workspace:WaitForChild("Remote"):WaitForChild("TeamEvent")
 
 local meleeEvent = ReplicatedStorage:WaitForChild("meleeEvent")
 
-local version = "v1.18"
+-- Pass checks
+function checkRIOT()	
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 643697197) then
+		return true, "NEW"
+	end
+
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 96651) then
+		return true, "LEGACY"
+	end
+
+	return false, "N/A"
+end
+
+function checkMAFIA()	
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 1443271) then
+		return true
+	end
+
+	return false
+end
+
+riot_pass, type = checkRIOT()
+mafia_pass = checkMAFIA()
 
 -- Teleport Locations
 local Teleports = {
@@ -218,8 +243,17 @@ local gunAliases = {
 	["fal"] = "FAL"
 }
 
+local allGuns
 -- Guns in the game
-local allGuns = {"M9", "AK-47", "M4A1", "Remington 870", "FAL"}
+if riot_pass == true and mafia_pass == true then
+	allGuns = {"M9", "AK-47", "M4A1", "Remington 870", "FAL"}
+elseif riot_pass == true and mafia_pass == false then
+	allGuns = {"M9", "AK-47", "M4A1", "Remington 870"}
+elseif riot_pass == false and mafia_pass == true then
+	allGuns = {"M9", "AK-47", "Remington 870", "FAL"}
+else
+	allGuns = {"M9", "AK-47", "Remington 870"}
+end
 
 local AlreadyFound = {}
 local function FindGunSpawner(GunName)
@@ -380,7 +414,7 @@ namecall = hookmetamethod(game, "__namecall", function(self, ...)
     return namecall(self, ...)
 end)     
 else
-	print("Executor does not support hookmetamethod; gun mods unavailable.")
+	warn("Executor does not support hookmetamethod; gun mods unavailable.")
 end
 
 -- Kill aura
@@ -652,7 +686,7 @@ local function Teleport(TargetCFrame, Character)
     if not Character then return end
     local RootPart = Character:WaitForChild("HumanoidRootPart")
     RootPart.CFrame = TargetCFrame
-    print("Teleport Success!")
+    --print("Teleport Success!")
 end
 
 -- Check if team can be switched (cooldown)
@@ -928,29 +962,6 @@ function ukfence()
     	end
 	end
 end
-
-function checkRIOT()	
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 643697197) then
-		return true, "NEW"
-	end
-
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 96651) then
-		return true, "LEGACY"
-	end
-
-	return false, "N/A"
-end
-
-function checkMAFIA()	
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 1443271) then
-		return true
-	end
-
-	return false
-end
-
-riot_pass, type = checkRIOT()
-mafia_pass = checkMAFIA()
 
 tring = false
 local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
