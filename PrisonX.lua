@@ -1306,18 +1306,26 @@ MainTab:CreateButton({
 -- Weapon Management --
 MainTab:CreateSection("Weapon Management")
 
+ggun = nil
 MainTab:CreateDropdown({
     Name = "Get Specific Gun",
     Options = allGuns,
     Flag = "GunDropdown",
     Callback = function(Option)
+		ggun = Option[1]
+    end,
+})
+
+MainTab:CreateButton({
+    Name = "Go",
+    Callback = function()
 		local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
 		oldhrp = hrp.CFrame
-        local gun = Option[1]
+        local gun = ggun
         --print(gun)
         GetGun(gun)
 		hrp.CFrame = oldhrp
-    end,
+	end,
 })
 
 MainTab:CreateButton({
