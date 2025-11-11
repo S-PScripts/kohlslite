@@ -627,7 +627,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 
 			if wascriminal then
 				task.wait(1) -- band aid fix 
-				SwitchToCriminalAndReturn(false, cpos)
+				SwitchToCriminalAndReturn(false, cpos) -- really slow
 			elseif settings.autorespawn == false then
                 tpto(cpos)
 			end
@@ -814,7 +814,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
                     until LocalPlayer.Team == Teams.Guards
                     fixcam()
                 elseif currentTeam == Teams.Criminals then
-                    Notify("Quick respawn is not available for criminals!")
+                    Notify("Quick respawn is not available for criminals!") -- the process would be too slow, faster to just wait
                 end
                 _G.CanQuickRespawn = true
             end)
@@ -969,7 +969,8 @@ RunService.Heartbeat:Connect(function()
 	if settings.nodoors == true then
     	NoDoors()
 	end
-		
+
+	-- sometimes this breaks
     if settings.autoguns == true then
 		if not tring then
 			tring = true
