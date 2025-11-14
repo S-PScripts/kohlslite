@@ -25,6 +25,7 @@ Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
 Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors)
 Toilet Breaker (must have hammer) (-btoilets)
+Remove jump cooldown (antijump removal) (-rjc)
 Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
@@ -963,6 +964,16 @@ function ukfence()
 	end
 end
 
+-- antijump removal (jump cooldown removal)
+function ajr()
+	local aj = Character:FindFirstChild("AntiJump")
+	if aj and aj:IsA("LocalScript") then
+   		pcall(function()
+        	aj:Destroy()
+    	end)
+	end
+end
+
 tring = false
 local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
 RunService.Heartbeat:Connect(function()
@@ -1201,6 +1212,11 @@ local function handleCommand(msg)
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."btoilets" then
 		hammer_check_t()
 		Notify("Toilets broken (assuming you had a hammer equipped).")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."rjc" then
+		ajr()
+		Notify("Jump cooldown removed!")
 	end
 
 	if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."nkfence" then
@@ -1613,6 +1629,13 @@ OtherTab:CreateButton({
     Name = "Unkillable Fence",
     Callback = function()
         ukfence()
+    end,
+})
+
+OtherTab:CreateButton({
+    Name = "Remove Jump Cooldown",
+    Callback = function()
+        ajr()
     end,
 })
 
