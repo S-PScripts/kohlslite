@@ -429,7 +429,7 @@ local IYchecks = {
 
 -- Speak function
 local function Speak(msg)
-    if IYchecks.legacyChat == false then
+    if IYchecks.legacyChat == true then
 		print("lc")
 		print(msg)
 		game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
