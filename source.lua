@@ -82,8 +82,10 @@ There are some features in other scripts that KohlsLite does not have. Here are 
 
 There is also no GUI, and the anti system does not work for individual players.
 
-This script is practically discontinued due to the lack of a player base in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters who will use this script.
+This script is discontinued due to the lack of a player base in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters who will use this script.
 There is not enough demand for me to continue updating this script, and even if there was, what?
+
+Also, Roblox removed game.Players:Chat() which was vital for this script, and there isn't a replacement for it.
 
 Here is a quick fact. Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing - even 1,000 sometimes.
 Do you know why? It is partially because it does not get boring fast, unlike KAH. KAH is just you trying some admin commands, nothing else.
@@ -20253,7 +20255,7 @@ local eol = "11/15/2025"
 
 if ctime2 > eol then
     pcall(function() -- thanks tech
-		game.Players.LocalPlayer:Kick("\nOctober 2025: After 2 years of development, KohlsLite has been discontinued due to me losing interest in Kohls Admin House and Roblox removing game.Players:Chat(). This function is vital, and without it, KL will be unable to work. \nYou can find and edit the source at kohlslite.pages.dev. \nIf you need help, please contact me on Discord (ts2021).")
+		game.Players.LocalPlayer:Kick("Discontinued. Source: kohlslite.pages.dev")
     end)
 end
 
