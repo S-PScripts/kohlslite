@@ -258,22 +258,34 @@ end
 
 local AlreadyFound = {}
 local function FindGunSpawner(GunName)
-    if AlreadyFound[GunName] ~= nil then
+    if AlreadyFound[GunName] then
         return AlreadyFound[GunName], true
     end
-	
-	for i,v in pairs(workspace:GetDescendants()) do
-		if v.Name == "TouchGiver" then
-			if v:GetAttribute("ToolName") == GunName then
-                AlreadyFound[GunName] = v.TouchGiver
-				return v.TouchGiver, false
-			end
-		end
-	end
-	
-    warn("Can't find", GunName)
-end
 
+    for _, v in ipairs(workspace:GetDescendants()) do
+        if v.Name == "TouchGiver" then
+            -- get the "actual" giver
+            local ActualGiver = v:FindFirstChild("TouchGiver") or v
+
+            -- check attribute on v (normal guns)
+            if v:GetAttribute("ToolName") == GunName then
+				--print("A CHECK")
+                AlreadyFound[GunName] = ActualGiver
+                return ActualGiver, false
+            end
+
+			-- check attribute on parent (FAL case)
+            if v.Parent and v.Parent:GetAttribute("ToolName") == GunName then
+				--print("B CHECK")
+                AlreadyFound[GunName] = ActualGiver
+                return ActualGiver, false
+            end
+        end
+    end
+
+    warn("Can't find", GunName)
+    return nil, nil
+end
 
 local function GetTool(ToolName)
     return LocalPlayer:FindFirstChild("Backpack") and LocalPlayer.Backpack:FindFirstChild(ToolName) or LocalPlayer.Character and LocalPlayer.Character:FindFirstChild(ToolName)
@@ -281,6 +293,7 @@ end
 
 local function GetGun(GunName)
     local Giver, Found = FindGunSpawner(GunName)
+	if not Giver then return end
     if not Found then
         local CloneGiver = Giver:Clone()
         CloneGiver.Parent = Giver.Parent
