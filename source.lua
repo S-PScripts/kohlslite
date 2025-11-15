@@ -240,7 +240,7 @@ function shopac() -- Autocrasher serverhop
             		game:HttpGet("https://games.roblox.com/v1/games/115670532/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true")
         	)
 
-        if NBC["errors"] and (getgenv().acgames == "All" or getgenv().acgames == "NBC") then
+        if NBC["errors"] then
             print("Failed to server hop. Retrying in 5 seconds...")
             task.spawn(function()
                 ratelimited = true
@@ -250,23 +250,13 @@ function shopac() -- Autocrasher serverhop
             return
         end
 
-        if BC["errors"] and (getgenv().acgames == "All" or getgenv().acgames == "BC") then
-            print("Failed to server hop. Retrying in 5 seconds...")
-            task.spawn(function()
-                ratelimited = true
-                task.wait(5)
-                ratelimited = false
-            end)
-            return
-        end
+
 		
         print("Checking for servers...")
         local NBC_data = NBC.data
-        local BC_data = BC.data
 
         local servers_found = {}
 
-	if getgenv().acgames == "All" or getgenv().acgames == "NBC" then
 		--print("checking nbc")
         	for i, v in pairs(NBC_data) do
 			--print("check 1" .. type(v) == "table")
@@ -277,24 +267,13 @@ function shopac() -- Autocrasher serverhop
                 		table.insert(servers_found, {["Version"] = "NBC", ["Job"] = v.id})
             		end
         	end
-	end
-
-	if getgenv().acgames == "All" or getgenv().acgames == "BC" then
-        	for i, v in pairs(BC_data) do
-           		if type(v) == "table" and v.id ~= game.JobId and --[[ tonumber(v.playing) < tonumber(v.maxPlayers) and ]] not table.find(v.playerTokens, getgenv().playertoken) then
-               	 		table.insert(servers_found, {["Version"] = "BC", ["Job"] = v.id})
-            		end
-        	end
-	end
 
 	print(#servers_found)
         if #servers_found > 0 then
             local servertohop = servers_found[math.random(1, #servers_found)]
             if servertohop["Version"] == "NBC" then
                 game:GetService("TeleportService"):TeleportToPlaceInstance(112420803, servertohop["Job"])
-            elseif servertohop["Version"] == "BC" then
-                game:GetService("TeleportService"):TeleportToPlaceInstance(115670532, servertohop["Job"])
-	    else end
+	    	else end
         else
             print("No servers available...")
         end
@@ -303,20 +282,7 @@ end
 
 if getgenv().autocrasher then
 	if getgenv().playertoken then
-		if getgenv().acgames then
-			if getgenv().acgames == "All" or getgenv().acgames == "NBC" or getgenv().acgames == "BC" then 
-				--
-			elseif getgenv().acgames == "NP" then
-				getgenv().acgames = "All"
-				print("NP is unsupported. Crashing NBC and BC as default.")
-			else
-				getgenv().acgames = "All"
-				print("Autocrash games invalid, crashing NBC and BC as default.")
-			end
-		else
-			getgenv().acgames = "All"
-			print("Autocrash games not set, crashing NBC and BC as default.")
-		end
+
 
 		repeat task.wait() until game:IsLoaded()
 
@@ -20282,20 +20248,15 @@ if ctime == specialdays.foolsday then
 	Remind("April Fools Day! HEHEHE.")
 end
 
--- End of Life script. I will probably replace this with a 'discontinued' banner.
---[[
-local eol = "12/31/2025" 
+
+local eol = "11/15/2025" 
 
 if ctime2 > eol then
-    	if clipboard_available then
-		clipboard_available("Need help on using KohlsLite? DM ts2021 on Discord")
-	end
-        pcall(function() -- thanks tech
-		game.Players.LocalPlayer:Kick("KohlsLite has been discontinued. You can find and edit the source at kohlslite.pages.dev. If you need help, please contact me on Discord (ts2021).")
-        end)
-        task.wait(2.5); while true do end
+    pcall(function() -- thanks tech
+		game.Players.LocalPlayer:Kick("\nOctober 2025: After 2 years of development, KohlsLite has been discontinued due to me losing interest in Kohls Admin House and Roblox removing game.Players:Chat(). This function is vital, and without it, KL will be unable to work. \nYou can find and edit the source at kohlslite.pages.dev. \nIf you need help, please contact me on Discord (ts2021).")
+    end)
 end
-]]
+
 
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "DiscontinuedBannerGui"
