@@ -98,6 +98,12 @@ local settings = {
 	noclip = false
 }
 
+-- arrest aura wl
+aa_wl = {"ScriptingProgrammer", "kohlslitedev"}
+
+-- kill aura wl
+ka_wl = {"ScriptingProgrammer", "kohlslitedev"}
+
 -- Notifications
 local StarterGui = game:GetService("StarterGui")
 local function Notify(text, time)
@@ -505,10 +511,50 @@ RunService.Heartbeat:Connect(function()
         if hum then
             local targetPlayer = Players:GetPlayerFromCharacter(model)
             if targetPlayer and targetPlayer ~= player and not hitList[targetPlayer] then
-                hitList[targetPlayer] = true
-                meleeEvent:FireServer(targetPlayer)
-            end
+				if table.find(ka_wl, targetPlayer.Name) then
+					--
+				else
+                	hitList[targetPlayer] = true
+                	meleeEvent:FireServer(targetPlayer)
+            	end
+			end
         end
+    end
+end)
+
+-- Arrest Aura
+local aremote = ReplicatedStorage.Remotes.ArrestPlayer
+
+RunService.Heartbeat:Connect(function()
+    local root = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    if not root then return end
+    if settings.arrestaura == false then return end
+		
+    for _, plr in Players:GetPlayers() do
+        if plr == LocalPlayer then
+			--
+		else
+        	local char = plr.Character
+        	if not char then
+				--
+			else
+				if table.find(aa_wl, plr.Name) then
+					--
+				else 
+					local hrp = char:FindFirstChild("HumanoidRootPart")
+        			local hum = char:FindFirstChild("Humanoid")
+        			if not hrp or not hum or hum.Health <= 0 then 
+						--
+					else
+        				if (root.Position - hrp.Position).Magnitude <= arrestaura_radius then
+            				task.spawn(function()
+                				pcall(aremote.InvokeServer, aremote, plr)
+            				end)
+						end
+					end
+				end
+        	end
+		end
     end
 end)
 
@@ -566,38 +612,6 @@ function htrees(ht)
     	end
 	end
 end
-
--- Arrest Aura
-local aremote = ReplicatedStorage.Remotes.ArrestPlayer
-
-RunService.Heartbeat:Connect(function()
-    local root = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-    if not root then return end
-    if settings.arrestaura == false then return end
-		
-    for _, plr in Players:GetPlayers() do
-        if plr == LocalPlayer then
-			--
-		else
-        	local char = plr.Character
-        	if not char then
-				--
-			else
-        		local hrp = char:FindFirstChild("HumanoidRootPart")
-        		local hum = char:FindFirstChild("Humanoid")
-        		if not hrp or not hum or hum.Health <= 0 then 
-					--
-				else
-        			if (root.Position - hrp.Position).Magnitude <= arrestaura_radius then
-            			task.spawn(function()
-                			pcall(aremote.InvokeServer, aremote, plr)
-            			end)
-					end
-				end
-        	end
-		end
-    end
-end)
 
 -- Enable reset button at all times
 local function forceEnableReset()
