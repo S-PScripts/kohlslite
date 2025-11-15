@@ -20255,7 +20255,8 @@ local eol = "11/15/2025"
 
 if ctime2 > eol then
     pcall(function() -- thanks tech
-		game.Players.LocalPlayer:Kick("Discontinued. Source: kohlslite.pages.dev")
+		print("fentanyl")
+		-- game.Players.LocalPlayer:Kick("Discontinued. Source: kohlslite.pages.dev")
     end)
 end
 
@@ -20466,6 +20467,7 @@ end)
 if kah_np == false then
 	--Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
 else
+	Speak("KohlsLite broken version by LongJohnSilvern Pro Max Optimus Prime executed!!! VInfinity is the version")
 	--Speak("KohlsLite executed! Version: "..getgenv().klversion)
 end
 
