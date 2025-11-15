@@ -141,6 +141,15 @@ end; -- this semi-colon is useless, but I don't want to remove it xd
 
 local TextChatService = game:GetService("TextChatService")
 
+-- From Infinite Yield
+local IYchecks = {
+	-- Check if KAH is using legacy chat
+	legacyChat = (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService),
+
+	-- Mobile checker
+	IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform())
+}
+
 -- Speak function
 local function Speak(msg)
     if IYchecks.legacyChat == true then
@@ -426,15 +435,6 @@ if getgenv().kohlsgui then
 else
 	getgenv().kohlsgui = false
 end
-
--- From Infinite Yield
-local IYchecks = {
-	-- Check if KAH is using legacy chat
-	legacyChat = (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService),
-
-	-- Mobile checker
-	IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform())
-}
 
 -- Prefix checker (Do not edit!)
 local prefix 
