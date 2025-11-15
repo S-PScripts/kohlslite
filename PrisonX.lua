@@ -141,7 +141,8 @@ local TeleportTab = Window:CreateTab("Teleport", nil)
 local AutoTab = Window:CreateTab("Automation", nil)
 local ProtectTab = Window:CreateTab("Protection", nil)
 local PlayerTab = Window:CreateTab("Player", nil)
-local OtherTab = Window:CreateTab("Other", nil)
+-- local ListsTab = Window:CreateTab("Lists", nil)
+local OtherTab = Window:CreateTab("Misc", nil)
 
 
 -- Variables
