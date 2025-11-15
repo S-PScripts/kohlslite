@@ -430,8 +430,12 @@ local IYchecks = {
 -- Speak function
 local function Speak(msg)
     if IYchecks.legacyChat == false then
+		print("lc")
+		print(msg)
 		game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
     else 
+		print("mc")
+		print(msg)
     	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
     end
 end
@@ -20465,10 +20469,9 @@ connections[#connections + 1] =
 end)
 
 if kah_np == false then
-	--Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
+	Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
 else
-	Speak("KohlsLite broken version by LongJohnSilvern Pro Max Optimus Prime executed!!! VInfinity is the version")
-	--Speak("KohlsLite executed! Version: "..getgenv().klversion)
+	Speak("KohlsLite executed! Version: "..getgenv().klversion)
 end
 
 -- Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
