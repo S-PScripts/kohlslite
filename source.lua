@@ -141,6 +141,15 @@ end; -- this semi-colon is useless, but I don't want to remove it xd
 
 local TextChatService = game:GetService("TextChatService")
 
+-- Speak function
+local function Speak(msg)
+    if IYchecks.legacyChat == true then
+		game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
+    else 
+    	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+    end
+end
+
 -- Chat function
 local function Chat(msg, x)
 	-- can't be asked to fix this no cmd bar for u
@@ -149,7 +158,7 @@ local function Chat(msg, x)
 	  else 
 		zamn = false
 	  end ]]
-	TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage(msg)
+	Speak(msg)
 end
 
 -- Check if KohlsLite is already executed
@@ -426,19 +435,6 @@ local IYchecks = {
 	-- Mobile checker
 	IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform())
 }
-
--- Speak function
-local function Speak(msg)
-    if IYchecks.legacyChat == true then
-		print("lc")
-		print(msg)
-		game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
-    else 
-		print("mc")
-		print(msg)
-    	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
-    end
-end
 
 -- Prefix checker (Do not edit!)
 local prefix 
