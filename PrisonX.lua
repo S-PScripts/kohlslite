@@ -1361,10 +1361,10 @@ MainTab:CreateSection("REMINDER: ONLY USE YOUR ALT TO EXPLOIT :D")
 MainTab:CreateSection("ANTI-CHEAT REMOVER")
 
 MainTab:CreateButton({
-    Name = "ANTICHEAT REMOVER v3",
+    Name = "ANTICHEAT REMOVER v4",
     Callback = function()
 		-- get fucked LOL
-        loadstring(game:HttpGet("https://pastes.io/raw/prison-life"))()
+        loadstring(game:HttpGet("https://pastes.io/raw/prison-life-admin"))()
     end,
 })
 
