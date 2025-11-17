@@ -1,5 +1,6 @@
 -- PrisonX v1.18 by TS2021
 -- OPEN-SOURCE
+-- THIS SCRIPT IS NO LONGER MAINTAINED
 
 -- Credits to github.com/tomatotxt for stuff
 -- Credits to github.com/NewMatheusDC for some of the GUI
