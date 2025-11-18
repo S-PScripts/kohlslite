@@ -310,8 +310,9 @@ local function GetGun(GunName)
         Giver.Transparency = 1
     end
 	local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+	hrp.CFrame = Giver.CFrame * CFrame.new(math.random(-2, 2),0,0)
     repeat task.wait()
-        hrp.CFrame = Giver.CFrame * CFrame.new(math.random(-2, 2),0,0)
+       
     until GetTool(GunName)
 end
 
