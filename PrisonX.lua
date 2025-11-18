@@ -23,6 +23,7 @@ Powerful Guns (guns have unlimited range + spread) (-powguns / -unpowguns)
 Fast Guns (you can also change the rate, default is 0) (-fastguns / -unfastguns / -firerate)
 Run -opguns to turn on both (-unopguns to turn off both)
 Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
+Destroy doors (-ddors) - CLIENT-SIDE!
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
 Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors)
 Toilet Breaker (must have hammer) (-btoilets)
@@ -939,6 +940,21 @@ function AddDoors()
     end
 end
 
+-- DESTROY doors
+function DestroyDoors()
+    for i,v in pairs(Doors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v:Destroy()
+        end
+    end
+	
+    for i,v in pairs(CellDoors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v:Destroy()
+        end
+    end
+end
+
 -- Infinite Jump
 game:GetService("UserInputService").JumpRequest:Connect(function()
             task.wait(0)
@@ -1269,6 +1285,10 @@ local function handleCommand(msg)
 		Notify("Spam opening doors (MUST BE A GUARD/HAVE A KEYCARD).")
 	end
 
+	if string.sub(lowerMsg, 1, #prefix + 5) == prefix.."ddoors" then
+    	DestroyDoors()
+	end
+	
 	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."unsodoors" then
     	settings.sodoors = false
 		Notify("No longer spam opening doors.")
@@ -1624,6 +1644,7 @@ ProtectTab:CreateToggle({
 
 
 -- Player Tab --
+-- Actions --
 PlayerTab:CreateSection("Actions")
 
 PlayerTab:CreateToggle({
@@ -1683,6 +1704,7 @@ PlayerTab:CreateSlider({
 })
 
 -- Other Tab --
+-- Actions --
 OtherTab:CreateSection("Actions")
 
 OtherTab:CreateButton({
@@ -1705,6 +1727,14 @@ OtherTab:CreateButton({
         ajr() -- broken
     end,
 })
+
+OtherTab:CreateButton({
+    Name = "Destroy Doors",
+    Callback = function()
+        DestroyDoors()
+    end,
+})
+
 
 OtherTab:CreateToggle({
     Name = "Hide Trees",
