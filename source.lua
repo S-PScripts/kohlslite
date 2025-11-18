@@ -17,9 +17,11 @@ Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/sou
 Debugged with: https://glot.io/new/lua
 
 KohlsLite is a free, open-source script for the Roblox game created by agspureiam, Kohls Admin House (KAH).
-This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub). If there are any bugs in this script, please contact me.
+This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub).
 
-This is one of the only KAH scripts that works due to Roblox's chat update (30th APRIL 2025). Apart from CMD v3 (but agspureiam made a small update that broke the script anyway).
+This script is DISCONTINUED permanently; scroll down for more information! 
+
+This was one of the only KAH scripts that worked due to Roblox's chat update (30th APRIL 2025). Apart from CMD v3 (but agspureiam made a small update that broke the script anyway).
 
 You can play KAH here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
 
@@ -28,8 +30,8 @@ This is because the code there is rather different, and therefore some features 
 Here is a fun fact about KAH Legacy/Project NP: the owner, BoasGameAlt, is agspureiam's alt. However, it was password-guessed and is now owned by Tech.
 
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
-Shortcut v3-VAR has more stuff than KohlsLite, but it is not open-source, and you need to ask the owner (Tech) to be able to use the script.
-If you want to contact Tech, join his Discord server (link: sckah.space).
+Shortcut v3-VAR had more stuff than KohlsLite, but it was not open-source, and you needed to ask the owner (Tech) to be able to use the script.
+If you want to contact Tech, join his Discord server (link: sckah.space). Do note that SCV3-VAR is no longer updated, and does not work.
 
 This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g, Shortcut v2 src1 being an extension to Shortcut v1).
 
@@ -64,10 +66,10 @@ KohlsLite, however, has backdoors (dev section) due to dumb people using my scri
 If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have much advertising going for it.
 Even though I do not update KohlsLite anymore (more below), perhaps I might make a script for another game in the future.
 
-Please do not skid and abuse with my script. I made this free/open-source and don't want stupid people doing stuff that forces me to make this obfuscated.
-Instead, you can make your own script and take stuff from here if necessary. As for abusing, you are just being annoying to everyone that plays. You are not fun.
+Please do not use my script to abuse in-game. Don't skid it either. I made this free/open-source and don't want stupid people doing stuff that forces me to make this obfuscated.
+Instead, you can make your own script and take stuff from here if necessary. As for abusing, you are just being annoying to everyone who plays. You are not fun.
 
-There is no command handler and this script looks terrible to be honest. I am not making a full rewrite of this script as that would take ages, and there is no point in doing so since this script still works fine. 
+There is no command handler, and this script looks terrible, to be honest. I am not making a full rewrite of this script, as that would take ages. There is no point in doing so, since this script still works fine. 
 Do note that I did try to remake this script a while ago, but I got bored and gave up.
 
 I know my script is inconsistent when using Game with and without GetService... but I don't care. There are also some other inconsistencies that I cannot be bothered to fix.
@@ -78,17 +80,33 @@ There are some features in other scripts that KohlsLite does not have. Here are 
 - Boombox visualiser [Proton Admin]
 - Part builder [ii's Stupid Admin, Jotunnheim, CMD PI/V3, Solinium v2]
 - Custom commands [Shortcut v3-VAR]
-- Skateboard kick (it's a "don't leak it method")
+- Skateboard kick [didn't bother to figure out how it works, method is private]
 
 There is also no GUI, and the anti system does not work for individual players.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 This script is discontinued due to the lack of a player base in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters who will use this script.
 There is not enough demand for me to continue updating this script, and even if there was, what?
 
-Also, Roblox removed game.Players:Chat() which was vital for this script, and there isn't a replacement for it.
+This script has many bugs due to the May Roblox chat update. Aliases and autorun commands do not work anymore, and a few commands may have issues.
+I am not fixing them since I do not play Roblox too much now. You are free to fix them yourself.
+
+Also, Roblox removed game.Players:Chat(), which was vital for this script, and there isn't a replacement for it. I changed Chat() to Speak() so this script isn't 100% dead, but it's just a crappy bandfix.
+
+Now, there are no more exploiters in Kohls Admin House, and no one is making scripts for the game. This is a good thing; exploiters ruin the fun of the game.
+It is a bit depressing, knowing I maintained one of the last KAH scripts. It's the end of a great era, with many people passing down the torch.
+But it has to end someday, you know. Maybe one day, someone might make another new KAH script.
+
+Agspureiam came back around August 2025 and made many updates. He also banned some exploiters, including me. They broke some things in this script, and I will not fix them.
+To be honest, I should have waited until he left again in September...
+
+KAH is dying, and yet it's not. Agspureiam somehow revived the game by his short return, and now it always has a few players in it (before it could be 0).
+Perhaps it's revived because the game has no exploiters now? Who knows.
 
 Here is a quick fact. Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing - even 1,000 sometimes.
 Do you know why? It is partially because it does not get boring fast, unlike KAH. KAH is just you trying some admin commands, nothing else.
+EDIT: Well, PL is actually getting updated again and managed to reach 50k players. This point is outdated... but oh well.
 
 KAH has become boring to me, and so has this script. I have played KAH since August 2022, and have updated this script since its creation in December 2023.
 Over the past few years, I have added hundreds of commands/features (nearly 1,000), but now... what is left?
@@ -96,15 +114,9 @@ Over the past few years, I have added hundreds of commands/features (nearly 1,00
 I will not add the features I mentioned above. If you want them, just execute the scripts that I mentioned alongside KohlsLite.
 I do not want to spend hours upon hours adding the features that you can get easily via a simple extra execution.
 
-Another reason for me stopping development of KohlsLite is the fact that I have exams to do, specifically my GCSEs.
-These are VERY important, and they take a lot of time away.
+Another reason for the discontinuation of KohlsLite's development is that I have exams to take, specifically my GCSEs. These are VERY important, and they take a lot of time away.
 
-This script has many bugs due to the May Roblox chat update. Aliases and autorun commands do not work anymore, and a few commands may have issues.
-I am not fixing them since I do not play Roblox too much now. You are free to fix them yourself.
-
-Agspureiam also came back around August 2025 and made many updates. He also banned some exploiters, including me. They broke some things in this script, and I will not fix them.
-
-If you read all of the above, thank you. I had a great time creating KohlsLite.
+If you read all of the above, thank you. I had a great time creating KohlsLite. <3
 
 TS2021, October 2025
 ]]
@@ -160,13 +172,7 @@ local function Speak(msg)
 end
 
 -- Chat function
-local function Chat(msg, x)
-	-- can't be asked to fix this no cmd bar for u
-	--[[  if x == true then 
-		zamn = true 
-	  else 
-		zamn = false
-	  end ]]
+local function Chat(msg)
 	Speak(msg)
 end
 
@@ -218,7 +224,7 @@ clipboard_available = setclipboard or toclipboard or set_clipboard or (Clipboard
 -- You can find the original here: https://github.com/blueskykah/Solinium/blob/main/Solinium%20Autocrasher
 -- This needs to be in your autoexecute (could use queue_on_teleport maybe but ¯\_(ツ)_/¯)
 
--- THIS PROBABLY DOES NOT WORK. CONTACT ME IF YOU ENCOUNTER ISSUES.
+-- This no longer works. All crashes are patched (swagify, I don't think so, but it sux)
 ]]
 
 function acperm()
