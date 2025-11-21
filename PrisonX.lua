@@ -2012,3 +2012,6 @@ print("PrisonX executed! Created by TS2021.")
 Notify("PrisonX executed.")
 Notify("Note: I got banned from ScriptBlox, which is why this script is missing there. I'll repost it in a week.", 4)
 getgenv().plx_executed = true
+
+task.wait(1)
+Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
