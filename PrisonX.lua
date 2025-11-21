@@ -1786,8 +1786,8 @@ AutoTab:CreateDropdown({
     end,
 })
 
-MainTab:CreateButton({
-    Name = "Add/Remove Gun From Auto-guns",
+AutoTab:CreateButton({
+    Name = "Add/Remove Gun From Auto-Guns",
     Callback = function()
         if not aggun then
             return
