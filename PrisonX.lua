@@ -2028,3 +2028,4 @@ getgenv().plx_executed = true
 
 task.wait(1)
 Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+print("plz work")
