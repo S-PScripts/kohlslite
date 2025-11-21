@@ -1029,8 +1029,13 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 
     -- Teleport to last stored position if it exists
     if lastDeathCFrame then
-        task.wait(0.1)
-        hrp.CFrame = lastDeathCFrame
+		if settings.autoguns then
+			print("give it a sec, getting guns")
+			repeat task.wait() until not tring
+		else
+        	task.wait(0.1)
+		end
+		hrp.CFrame = lastDeathCFrame
     end
 
     hum.Died:Connect(function()
