@@ -1238,9 +1238,11 @@ function ajr()
 end
 
 local tring = false
-local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
 
 RunService.Heartbeat:Connect(function()
+    local hrp = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
+
     -- No doors
     if settings.nodoors then
         NoDoors()
