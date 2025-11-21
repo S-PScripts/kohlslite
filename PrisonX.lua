@@ -1238,10 +1238,20 @@ function ajr()
 end
 
 local tring = false
+local hrp = nil
+
+-- When the character spawns
+LocalPlayer.CharacterAdded:Connect(function(char)
+    hrp = char:WaitForChild("HumanoidRootPart")
+    tring = false -- reset AutoGuns state
+end)
+
+if LocalPlayer.Character then
+    hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+end
 
 RunService.Heartbeat:Connect(function()
-    local hrp = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-    if not hrp then return end
+    if not hrp then return end -- wait until HumanoidRootPart exists
 
     -- No doors
     if settings.nodoors then
@@ -1257,7 +1267,7 @@ RunService.Heartbeat:Connect(function()
 
         for _, gunName in ipairs(settings.autoguns_list) do
             if (gunName == "M4A1" and not riot_pass) or (gunName == "FAL" and not mafia_pass) then
-                -- skip
+                -- skip guns you don't have access to
             else
                 if not GetTool(gunName) then
                     GetGun(gunName)
@@ -1274,6 +1284,7 @@ RunService.Heartbeat:Connect(function()
         tring = false
     end
 end)
+
 
 -- Command list
 local function handleCommand(msg)
