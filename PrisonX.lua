@@ -33,6 +33,8 @@ Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
 
 Coming soon:
+-> arrest aura wl + team check (no gui yet)
+-> kill aura wl + team check (no gui yet)
 -> Inventory checker
 -> Gamepass checker
 
@@ -83,6 +85,10 @@ local settings = {
 	killaura = false,
 	killaura_radius = 10,
 	killaura_sphere = false, -- visual sphere
+	
+	katc = false, -- team check
+	katype = "All", -- target types
+	katype_allowed = {}, -- table for allowed teams
 
 	-- Arrest aura
 	arrestaura = false,
@@ -484,6 +490,62 @@ end
 
 -- Kill aura
 
+local function UpdateKillableTeams()
+    local lteam = LocalPlayer.Team and LocalPlayer.Team.Name or ""
+    local katype = settings.katype
+
+    local allowed = {}
+
+    if katype == "All" then
+        allowed = {Criminals = true, Inmates = true, Guards = true}
+    elseif katype == "Criminals" then
+        allowed = {Criminals = true}
+    elseif katype == "Inmates" then
+        allowed = {Inmates = true}
+    elseif katype == "Guards" then
+        allowed = {Guards = true}
+    elseif katype == "Criminals + Inmates" then
+        allowed = {Criminals = true, Inmates = true}
+    elseif katype == "Criminals + Guards" then
+        allowed = {Criminals = true, Guards = true}
+    elseif katype == "Inmates + Guards" then
+        allowed = {Inmates = true, Guards = true}
+    elseif katype == "Other Teams" then
+        for _, team in ipairs({"Criminals","Inmates","Guards"}) do
+            if team ~= lteam then
+                allowed[team] = true
+            end
+        end
+    else
+        allowed = {}
+    end
+
+    settings.katype_allowed = allowed
+end
+
+local function IsKillable(plr)
+    -- Can't kill yourself
+    if plr == LocalPlayer then
+        return false
+    end
+
+    -- If team check is disabled, anyone else is killable
+    if not settings.katc then
+        return true
+    end
+
+    -- Target's team
+    local ttname = plr.Team and plr.Team.Name or ""
+
+    if settings.katype_allowed[ttname] then
+        return true
+    else
+        return false
+    end
+end
+UpdateKillableTeams()
+
+
 -- Sphere visual
 local sphere = Instance.new("Part")
 sphere.Shape = Enum.PartType.Ball
@@ -524,8 +586,12 @@ RunService.Heartbeat:Connect(function()
 				if table.find(ka_wl, targetPlayer.Name) then
 					--
 				else
-                	hitList[targetPlayer] = true
-                	meleeEvent:FireServer(targetPlayer)
+					if not IsKillable(targetPlayer) then
+						--
+					else
+						hitList[targetPlayer] = true
+                		meleeEvent:FireServer(targetPlayer)
+					end
             	end
 			end
         end
