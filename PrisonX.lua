@@ -67,6 +67,7 @@ local settings = {
 
 	-- Auto guns
 	autoguns = false,
+	autoguns_list = {"AK-47", "FAL"},
 
 	-- Auto-Mod all guns to have a big range and spread  (pg = powerful gun)
 	auto_pg = true,
@@ -1252,7 +1253,7 @@ RunService.Heartbeat:Connect(function()
         local localOldHRP = hrp.CFrame
         local pickedGuns = 0
 
-        for _, gunName in ipairs(allGuns) do
+        for _, gunName in ipairs(settings.autoguns_list) do
             if (gunName == "M4A1" and not riot_pass) or (gunName == "FAL" and not mafia_pass) then
                 -- skip
             else
@@ -1770,6 +1771,44 @@ AutoTab:CreateToggle({
     Flag = "AutoGunsToggle",
     Callback = function(Value)
         settings.autoguns = Value
+    end,
+})
+
+-- selected gun from dropdown
+local aggun = nil
+
+AutoTab:CreateDropdown({
+    Name = "Gun",
+    Options = allGuns,
+    Flag = "AGunDropdown",
+    Callback = function(Option)
+        aggun = Option[1]
+    end,
+})
+
+MainTab:CreateButton({
+    Name = "Add/Remove Gun From Auto-guns",
+    Callback = function()
+        if not aggun then
+            return
+        end
+
+        local found = false
+        for i, gun in ipairs(settings.autoguns_list) do
+            if gun == aggun then
+                table.remove(settings.autoguns_list, i)
+                found = true
+                print("Removed " .. aggun .. " from auto-guns list.")
+				Notify("Removed " .. aggun .. " from auto-guns list.")
+                break
+            end
+        end
+
+        if not found then
+            table.insert(settings.autoguns_list, aggun)
+            print("Added " .. aggun .. " to auto-guns list.")
+			Notify("Added " .. aggun .. " to auto-guns list.")
+        end
     end,
 })
 
