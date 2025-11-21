@@ -87,6 +87,8 @@ local settings = {
 	-- Arrest aura
 	arrestaura = false,
 	arrestaura_radius = 15,
+	aatc = false, -- arrest aura team check
+	aatype = "Both", -- what players it can arrest
 
 	-- Stop tases from disabling the reset button
 	enablere = true,
@@ -531,12 +533,52 @@ RunService.Heartbeat:Connect(function()
 end)
 
 -- Arrest Aura
+local function IsArrestable(plr)
+    -- Can't arrest yourself
+    if plr == LocalPlayer then
+        return false
+    end
+
+    -- Must be a Guard to arrest
+    if LocalPlayer.Team.Name ~= "Guards" then
+        return false
+    end
+
+    -- Can't arrest other Guards
+    if plr.Team.Name == "Guards" then
+        return false
+    end
+
+    -- If team check is disabled, anyone else is arrestable
+    if not settings.aatc then
+        return true
+    end
+
+    -- Check based on aatype setting
+    local ttname = plr.Team and plr.Team.Name or ""
+    if settings.aatype == "Criminals" then
+        if ttname ~= "Criminals" then
+            return false
+        end
+    elseif settings.aatype == "Inmates" then
+        if ttname ~= "Inmates" then
+            return false
+        end
+    elseif settings.aatype == "Both" then
+        --
+    else
+        return false
+    end
+	
+    return true
+end
+
 local aremote = ReplicatedStorage.Remotes.ArrestPlayer
 
 RunService.Heartbeat:Connect(function()
     local root = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
     if not root then return end
-    if settings.arrestaura == false then return end
+    if not settings.arrestaura  then return end
 		
     for _, plr in Players:GetPlayers() do
         if plr == LocalPlayer then
@@ -549,15 +591,19 @@ RunService.Heartbeat:Connect(function()
 				if table.find(aa_wl, plr.Name) then
 					--
 				else 
-					local hrp = char:FindFirstChild("HumanoidRootPart")
-        			local hum = char:FindFirstChild("Humanoid")
-        			if not hrp or not hum or hum.Health <= 0 then 
+					if not IsArrestable(plr) then
 						--
 					else
-        				if (root.Position - hrp.Position).Magnitude <= arrestaura_radius then
-            				task.spawn(function()
-                				pcall(aremote.InvokeServer, aremote, plr)
-            				end)
+						local hrp = char:FindFirstChild("HumanoidRootPart")
+        				local hum = char:FindFirstChild("Humanoid")
+        				if not hrp or not hum or hum.Health <= 0 then 
+							--
+						else
+        					if (root.Position - hrp.Position).Magnitude <= arrestaura_radius then
+            					task.spawn(function()
+                					pcall(aremote.InvokeServer, aremote, plr)
+            					end)
+							end
 						end
 					end
 				end
@@ -572,7 +618,7 @@ end
 
 -- Kill Feed
 Killfeed.ChildAdded:Connect(function(newChild)
-    if settings.killfeed == true then
+    if settings.killfeed then
 	    print("New killfeed entry:", newChild.Name)
 	    Notify(newChild.name, 1)
     end
@@ -962,7 +1008,7 @@ end
 -- Infinite Jump
 game:GetService("UserInputService").JumpRequest:Connect(function()
             task.wait(0)
-            if settings.ijump == true then
+            if settings.ijump then
                game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid'):ChangeState("Jumping")
             end
 end)
@@ -1059,38 +1105,40 @@ function ajr()
 	end
 end
 
-tring = false
+local tring = false
 local hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
+
 RunService.Heartbeat:Connect(function()
-	if settings.nodoors == true then
-    	NoDoors()
-	end
+    -- No doors
+    if settings.nodoors then
+        NoDoors()
+    end
 
-	-- sometimes this breaks
-    if settings.autoguns == true then
-		if not tring then
-			tring = true
-			local p = 0
-			oldhrp = hrp.CFrame
-			for i, v in allGuns do
-		--		print(v)
-				if (v == "M4A1" and riot_pass == false) or (v == "FAL" and mafia_pass == false) then 
-				else
-					if not GetTool(v) then
-        				GetGun(v)
-						p = p + 1
-						tpto(oldhrp)
-    				end
-				end
-			end
+    -- Auto guns
+    if settings.autoguns and not tring then
+        tring = true
 
-			if p ~= 0 then
-				tpto(oldhrp)
-			end
+        local localOldHRP = hrp.CFrame
+        local pickedGuns = 0
 
-			tring = false
-		end
-	end
+        for _, gunName in ipairs(allGuns) do
+            if (gunName == "M4A1" and not riot_pass) or (gunName == "FAL" and not mafia_pass) then
+                -- skip
+            else
+                if not GetTool(gunName) then
+                    GetGun(gunName)
+                    pickedGuns = pickedGuns + 1
+                end
+            end
+        end
+
+        -- Teleport back once after picking up guns
+        if pickedGuns > 0 then
+            tpto(localOldHRP)
+        end
+
+        tring = false
+    end
 end)
 
 -- Command list
