@@ -1,4 +1,4 @@
--- PrisonX v1.18 by TS2021
+-- PrisonX v1.2 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
 -- THIS SCRIPT IS NO LONGER MAINTAINED
 
@@ -35,8 +35,8 @@ Hide/Show Trees (-htrees / -strees)
 Coming soon:
 -> arrest aura wl + team check (no gui yet)
 -> kill aura wl + team check (no gui yet)
--> Inventory checker
--> Gamepass checker
+-> Inventory checker (unused rn)
+-> Gamepass checker (unused rn)
 
 All implemented in a UI too!
 ]]
@@ -133,13 +133,13 @@ end
 -- GUI Setup
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-local version = "v1.18"
+local version = "v1.2"
 
 local Window = Rayfield:CreateWindow({
     Name = "PrisonX",
     Icon = nil,
-    LoadingTitle = "PrisonX v1.18",
-    LoadingSubtitle = "Created by TS2021",
+    LoadingTitle = "PrisonX v1.2",
+    LoadingSubtitle = "Created by TS2021 // https://kohlslite.pages.dev/PrisonX.lua",
     ConfigurationSaving = {
         Enabled = false,
     },
@@ -267,11 +267,11 @@ local gunAliases = {
 
 local allGuns
 -- Guns in the game
-if riot_pass == true and mafia_pass == true then
+if riot_pass and mafia_pass then
 	allGuns = {"M9", "AK-47", "M4A1", "Remington 870", "FAL"}
-elseif riot_pass == true and mafia_pass == false then
+elseif riot_pass and mafia_pass then
 	allGuns = {"M9", "AK-47", "M4A1", "Remington 870"}
-elseif riot_pass == false and mafia_pass == true then
+elseif riot_pass and mafia_pass then
 	allGuns = {"M9", "AK-47", "Remington 870", "FAL"}
 else
 	allGuns = {"M9", "AK-47", "Remington 870"}
@@ -778,6 +778,71 @@ local function hammer_check_t()
     end
     
     hhe = hrn
+end
+
+-- Backpack checker
+function CheckBackpack(cplr, player)
+        print(player.." has the following items:")
+              for _, tool in pairs(cplr.Backpack:GetChildren()) do
+                print(tool.Name)
+        end
+end
+
+gamepasses = {
+	riots = {},
+	mafias = {}
+}
+
+-- Gamepass checker
+-- CHECK FOR RIOT
+function CheckForRiot(gcplr, gcplrn)
+	local they_have_riot = false
+    if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 643697197), 643697197) then
+    	Notify(gcplrn.." has Riot Police Access (New)!")
+		print(gcplrn .. " has Riot Police Access (New)!")
+		if they_have_riot == false then
+			they_have_riot = true
+            if not table.find(gamepasses.riots, gcplrn) then
+                table.insert(gamepasses.riots, gcplrn)
+        	end
+		end
+	end
+
+    if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 96651), 96651) then
+        Notify(gcplrn.." has Riot Police Access (Legacy)!")
+		print(gcplrn .. " has Riot Police Access (Legacy)!")
+		if they_have_riot == false then
+			they_have_riot = true
+			if not table.find(gamepasses.riots, gcplrn) then
+                table.insert(gamepasses.riots, gcplrn)
+            end
+		end
+	end
+
+	if they_have_riot == false then
+        Notify(gcplrn..' does not have Riot Police Access!')
+		print(gcplrn .. " does not have Riot Police Access!")
+    end
+end
+
+-- CHECK FOR MAFIA
+function CheckForMafia(gcplr, gcplrn)
+	local they_have_mafia = false
+    if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 1443271), 1443271) then
+    	Notify(gcplrn.." has the Mafia Pass!")
+		print(gcplrn .. " has the Mafia Pass!")
+		if they_have_mafia == false then
+			they_have_mafia = true
+            if not table.find(gamepasses.mafias, gcplrn) then
+                table.insert(gamepasses.mafias, gcplrn)
+        	end
+		end
+	end
+
+	if they_have_mafias == false then
+        Notify(gcplrn..' does not have the Mafia Pass!')
+		print(gcplrn .. " does not have the Mafia Pass!")
+    end
 end
 
 local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
@@ -1496,7 +1561,7 @@ end)
 
 -- Main Tab --
 -- Team Management --
-MainTab:CreateSection("REMINDER: ONLY USE YOUR ALT TO EXPLOIT :D")
+MainTab:CreateSection("Reminder: ONLY USE YOUR ALT TO EXPLOIT :D")
 
 MainTab:CreateSection("Team Management")
 
