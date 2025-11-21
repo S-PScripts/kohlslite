@@ -1,5 +1,5 @@
 -- PrisonX v1.18 by TS2021
--- OPEN-SOURCE
+-- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
 -- THIS SCRIPT IS NO LONGER MAINTAINED
 
 -- Credits to github.com/tomatotxt for stuff
