@@ -32,6 +32,10 @@ Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
 
+Coming soon:
+-> Inventory checker
+-> Gamepass checker
+
 All implemented in a UI too!
 ]]
 
