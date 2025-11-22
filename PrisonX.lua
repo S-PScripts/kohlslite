@@ -191,7 +191,7 @@ pcall(function()
 		TeamEvent = workspace.Remote.TeamEvent
 	else
 		print("new server")
-		TeamEvent = ReplicatedStorage:Remotes.RequestTeamChange
+		TeamEvent = ReplicatedStorage.Remotes.RequestTeamChange
 	end
 end)
 
