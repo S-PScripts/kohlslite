@@ -2049,4 +2049,4 @@ Notify("Note: I got banned from ScriptBlox, which is why this script is missing 
 getgenv().plx_executed = true
 
 Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
-print("CAN THIS CRAP WORK")
+print("CAN THIS DIDDY WORK")
