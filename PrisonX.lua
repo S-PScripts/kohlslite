@@ -185,15 +185,20 @@ local Camera = workspace.Camera
 local Teams = game:GetService("Teams")
 local TeamEvent
 
-pcall(function()
-	if workspace.Remote.TeamEvent then
-		print("old server")
-		TeamEvent = workspace.Remote.TeamEvent
-	else
-		print("new server")
-		TeamEvent = ReplicatedStorage.Remotes.RequestTeamChange
-	end
+local success, err = pcall(function()
+    local rf = workspace:FindFirstChild("Remote")
+    if rf and remoteFolder:FindFirstChild("TeamEvent") then
+        print("old server")
+        TeamEvent = rf.TeamEvent
+    else
+        print("new server")
+        TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
+    end
 end)
+
+if not success then
+    warn("Failed to get TeamEvent: " .. err)
+end
 
 meleeEvent = ReplicatedStorage.meleeEvent
 
