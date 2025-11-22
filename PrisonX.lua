@@ -677,7 +677,7 @@ RunService.Heartbeat:Connect(function()
         				if not hrp or not hum or hum.Health <= 0 then 
 							--
 						else
-        					if (root.Position - hrp.Position).Magnitude <= arrestaura_radius then
+        					if (root.Position - hrp.Position).Magnitude <= settings.arrestaura_radius then
             					task.spawn(function()
                 					pcall(aremote.InvokeServer, aremote, plr)
             					end)
