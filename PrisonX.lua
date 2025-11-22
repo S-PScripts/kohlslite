@@ -1033,7 +1033,15 @@ LocalPlayer.CharacterAdded:Connect(function(char)
     -- Teleport to last stored position if it exists
     if lastDeathCFrame then
 		if settings.autoguns then
-			print("no need for this shit")
+			print("give it a sec, getting guns")
+			task.wait(0.25)
+			repeat task.wait() until tring == false
+			repeat task.wait() 
+				print(fugging)
+			until fugging == false
+			print("task done")
+			task.wait(0.2)
+			hrp.CFrame = lastDeathCFrame
 		else
         	task.wait(0.1)
 			hrp.CFrame = lastDeathCFrame
@@ -1071,6 +1079,8 @@ LocalPlayer.CharacterAdded:Connect(function(char)
                     fixcam()
                 elseif currentTeam == Teams.Criminals then
                     Notify("Quick respawn is not available for criminals!") -- the process would be too slow, faster to just wait
+					tring = false
+    				fugging = false
                 end
                 _G.CanQuickRespawn = true
             end)
@@ -1286,9 +1296,11 @@ RunService.Heartbeat:Connect(function()
         end
 
         -- Teleport back once after picking up guns
-        if pickedGuns > 0 then
-            tpto(localOldHRP)
-        end
+		if settings.autorespawn == false then
+        	if pickedGuns > 0 then
+            	tpto(localOldHRP)
+        	end
+		end
 
         tring = false
 		--print("skibidi balls")
