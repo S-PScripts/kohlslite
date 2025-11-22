@@ -620,6 +620,7 @@ RunService.Heartbeat:Connect(function()
 				if table.find(ka_wl, targetPlayer.Name) then
 					--
 				else
+					print("Checking:", targetPlayer.Name, targetPlayer.Team and targetPlayer.Team.Name, settings.katype_allowed)
 					if not IsKillable(targetPlayer) then
 						--
 					else
