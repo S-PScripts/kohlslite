@@ -348,7 +348,9 @@ local function hasGun(name)
     return backpack:FindFirstChild(name) or char:FindFirstChild(name)
 end
 
+local fugging = false
 local function SwitchToCriminalAndReturn(dih, ocf)
+	fugging = true
     local crimPad = workspace["Criminals Spawn"].SpawnLocation
     local char = LocalPlayer.Character
     if not char then return end
@@ -374,6 +376,7 @@ local function SwitchToCriminalAndReturn(dih, ocf)
     -- return to original position
     hrp.CFrame = oldCFrame
     Notify("Teleported back to original position.")
+	fugging = false
 end
 
 
@@ -846,8 +849,6 @@ function CheckForMafia(gcplr, gcplrn)
     end
 end
 
-local fugging = false
-
 local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
 function die()
 	Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
@@ -877,10 +878,8 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 
 			if wascriminal then
-				fugging = true
 				task.wait(1) -- band aid fix 
 				SwitchToCriminalAndReturn(false, cpos) -- really slow
-				fugging = false
 			elseif settings.autorespawn == false then
                 tpto(cpos)
 			end
@@ -1036,11 +1035,13 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 		if settings.autoguns then
 			print("give it a sec, getting guns")
 			repeat task.wait() until not tring
-			repeat task.wait() until not fugging
+			repeat task.wait() until fugging == false
+			print("task done")
+			hrp.CFrame = lastDeathCFrame
 		else
         	task.wait(0.1)
+			hrp.CFrame = lastDeathCFrame
 		end
-		hrp.CFrame = lastDeathCFrame
     end
 
     hum.Died:Connect(function()
