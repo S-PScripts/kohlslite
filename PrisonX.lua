@@ -34,8 +34,8 @@ Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
 
 Coming soon:
--> arrest aura wl + team check (no gui yet)
--> kill aura wl + team check (no gui yet)
+-> arrest aura wl + team check (Not implemented in GUI or commands yet)
+-> Kill aura wl + team check (GUI only)
 -> Inventory checker (unused rn)
 -> Gamepass checker (unused rn)
 
@@ -512,6 +512,16 @@ function shop()
 end
 
 -- Kill aura
+katypes = {
+	"All",
+	"Criminals",
+	"Inmates",
+	"Guards",
+	"Criminals + Inmates",
+	"Criminals + Guards",
+	"Inmates + Guards",
+	"Other Teams"
+}
 
 local function UpdateKillableTeams()
     local lteam = LocalPlayer.Team and LocalPlayer.Team.Name or ""
@@ -1749,6 +1759,27 @@ CombatTab:CreateSlider({
     Flag = "KARadiusSlider",
     Callback = function(Value)
         settings.killaura_radius = Value
+    end,
+})
+
+CombatTab:CreateToggle({
+    Name = "Team Check",
+    CurrentValue = settings.killaura,
+    Flag = "KillAuraTCToggle",
+    Callback = function(Value)
+        settings.katc = Value
+    end,
+})
+
+CombatTab:CreateDropdown({
+    Name = "Teams Allowed",
+    Options = katypes,
+    CurrentValue = settings.katype,
+    Flag = "KillAuraTeamDropdown",
+    Callback = function(Value)
+        settings.katype = Value
+        UpdateKillableTeams()
+        print("Updated")
     end,
 })
 
