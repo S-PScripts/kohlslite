@@ -27,7 +27,8 @@ Destroy doors (-ddoors) - CLIENT-SIDE!
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
 Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors)
 Toilet Breaker (must have hammer) (-btoilets)
-Remove jump cooldown (antijump removal) (-rjc)
+Remove jump cooldown (anti-jump removal) (-rjc)
+Auto anti-jump removal (-aajr/-unajr)
 Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
@@ -100,6 +101,9 @@ local settings = {
 	-- Stop tases from disabling the reset button
 	enablere = true,
 
+	-- Auto anti-jump removal
+	aajr = true,
+	
 	-- Auto break toilets when you have a hammer
 	abtoilets = false,
 
@@ -1251,7 +1255,7 @@ function ukfence()
 	end
 end
 
--- antijump removal (jump cooldown removal)
+-- Anti-jump removal (jump cooldown removal)
 function ajr()
 	local aj = LocalPlayer.Character:FindFirstChild("AntiJump")
 	if aj and aj:IsA("LocalScript") then
@@ -1270,6 +1274,11 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	--if LocalPlayer.Team ~= Teams.Neutral then
     	tring = false -- reset AutoGuns state
 	--end
+
+	-- removal of anti-jump
+	if settings.aajr then
+		ajr()
+	end
 end)
 
 if LocalPlayer.Character then
@@ -1532,6 +1541,16 @@ local function handleCommand(msg)
 	if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."rjc" then
 		ajr()
 		Notify("Jump cooldown removed!")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."aajr" then
+		settings.aajr = true
+		Notify("Jump cooldown will be removed every time you respawn!")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."unaajr" then
+		settings.aajr = false
+		Notify("Disabled!")
 	end
 
 	if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."nkfence" then
@@ -1812,6 +1831,15 @@ AutoTab:CreateToggle({
 })
 
 AutoTab:CreateToggle({
+    Name = "Auto Anti-Jump Removal",
+    CurrentValue = settings.aajr,
+    Flag = "AutoAntiJumpRemovalToggle",
+    Callback = function(Value)
+        settings.aajr = Value
+    end,
+})
+
+AutoTab:CreateToggle({
     Name = "Auto Guns",
     CurrentValue = settings.autoguns,
     Flag = "AutoGunsToggle",
@@ -1990,9 +2018,9 @@ OtherTab:CreateButton({
 })
 
 OtherTab:CreateButton({
-    Name = "Remove Jump Cooldown (broken)",
+    Name = "Remove Jump Cooldown",
     Callback = function()
-        ajr() -- broken
+        ajr()
     end,
 })
 
