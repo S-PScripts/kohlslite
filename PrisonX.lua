@@ -1273,7 +1273,7 @@ RunService.Heartbeat:Connect(function()
 
     -- Auto guns
     if settings.autoguns and tring == false then
-		print("mf balls")
+		--print("mf balls")
         tring = true
 
         local localOldHRP = hrp.CFrame
@@ -1292,13 +1292,11 @@ RunService.Heartbeat:Connect(function()
 
         -- Teleport back once after picking up guns
         if pickedGuns > 0 then
-			if settings.autorespawn == false then
-            	tpto(localOldHRP)
-			end
+            tpto(localOldHRP)
         end
 
         tring = false
-		print("skibidi balls")
+		--print("skibidi balls")
     end
 end)
 
@@ -2044,4 +2042,4 @@ Notify("Note: I got banned from ScriptBlox, which is why this script is missing 
 getgenv().plx_executed = true
 
 Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
-print("adebug message crappy pron")
+print("PISS OFF")
