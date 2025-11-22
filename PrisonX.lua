@@ -179,9 +179,10 @@ local HomeGUI = PlayerGui:WaitForChild("Home")
 local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
-local TeamEvent = workspace:WaitForChild("Remote"):WaitForChild("TeamEvent")
-
-local meleeEvent = ReplicatedStorage:WaitForChild("meleeEvent")
+pcall(function()
+	local TeamEvent = workspace:WaitForChild("Remote"):WaitForChild("TeamEvent")
+	local meleeEvent = ReplicatedStorage:WaitForChild("meleeEvent")
+end)
 
 -- Pass checks
 function checkRIOT()	
