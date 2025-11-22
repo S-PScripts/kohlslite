@@ -187,13 +187,15 @@ local TeamEvent
 
 pcall(function()
 	if workspace.Remote.TeamEvent then
+		print("old server")
 		TeamEvent = workspace.Remote.TeamEvent
 	else
-		print("new server, teamevent broken :(")
+		print("new server")
+		TeamEvent = ReplicatedStorage:Remotes.RequestTeamChange
 	end
 end)
 
-meleeEvent = ReplicatedStorage:WaitForChild("meleeEvent")
+meleeEvent = ReplicatedStorage.meleeEvent
 
 -- Pass checks
 function checkRIOT()	
