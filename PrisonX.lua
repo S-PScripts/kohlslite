@@ -34,8 +34,9 @@ Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
 
 Coming soon:
--> arrest aura wl + team check (Not implemented in GUI or commands yet)
--> Kill aura wl + team check (GUI only)
+-> arrest aura team check (GUI only)
+-> Kill aura team check (GUI only)
+-> arrest aura/kill aura whitelist (unused rn)
 -> Inventory checker (unused rn)
 -> Gamepass checker (unused rn)
 
@@ -632,6 +633,12 @@ RunService.Heartbeat:Connect(function()
 end)
 
 -- Arrest Aura
+aatypes = {
+	"Criminals",
+	"Inmates",
+	"Both"
+}
+
 local function IsArrestable(plr)
     -- Can't arrest yourself
     if plr == LocalPlayer then
@@ -1764,7 +1771,7 @@ CombatTab:CreateSlider({
 
 CombatTab:CreateToggle({
     Name = "Team Check",
-    CurrentValue = settings.killaura,
+    CurrentValue = settings.katc,
     Flag = "KillAuraTCToggle",
     Callback = function(Value)
         settings.katc = Value
@@ -1804,6 +1811,28 @@ CombatTab:CreateSlider({
         settings.arrestaura_radius = Value
     end,
 })
+
+CombatTab:CreateToggle({
+    Name = "Team Check",
+    CurrentValue = settings.aatc,
+    Flag = "ArrestAuraTCToggle",
+    Callback = function(Value)
+        settings.aatc = Value
+    end,
+})
+
+CombatTab:CreateDropdown({
+    Name = "Teams Allowed",
+    Options = aatypes,
+    CurrentValue = settings.aatype,
+    Flag = "ArrestAuraTeamDropdown",
+    Callback = function(Value)
+        settings.aatype = Value
+        UpdateKillableTeams()
+        print("Updated")
+    end,
+})
+
 
 -- Weapon Modifications --
 CombatTab:CreateSection("Weapon Modifications")
