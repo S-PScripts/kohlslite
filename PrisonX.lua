@@ -1036,7 +1036,9 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			print("give it a sec, getting guns")
 			task.wait(0.25)
 			repeat task.wait() until tring == false
-			repeat task.wait() until fugging == false
+			repeat task.wait() 
+				print(fugging)
+			until fugging == false
 			print("task done")
 			hrp.CFrame = lastDeathCFrame
 		else
@@ -2042,4 +2044,4 @@ Notify("Note: I got banned from ScriptBlox, which is why this script is missing 
 getgenv().plx_executed = true
 
 Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
-print("PISS OFF")
+print("FUCKING HELL")
