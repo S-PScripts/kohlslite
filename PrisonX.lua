@@ -846,6 +846,8 @@ function CheckForMafia(gcplr, gcplrn)
     end
 end
 
+local fugging = false
+
 local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
 function die()
 	Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
@@ -875,8 +877,10 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 
 			if wascriminal then
+				fugging = true
 				task.wait(1) -- band aid fix 
 				SwitchToCriminalAndReturn(false, cpos) -- really slow
+				fugging = false
 			elseif settings.autorespawn == false then
                 tpto(cpos)
 			end
@@ -1032,6 +1036,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 		if settings.autoguns then
 			print("give it a sec, getting guns")
 			repeat task.wait() until not tring
+			repeat task.wait() until not fugging
 		else
         	task.wait(0.1)
 		end
@@ -1257,7 +1262,6 @@ end
 
 RunService.Heartbeat:Connect(function()
     if not hrp then return end -- wait until HumanoidRootPart exists
-
     -- No doors
     if settings.nodoors then
         NoDoors()
