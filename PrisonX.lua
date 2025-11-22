@@ -179,10 +179,12 @@ local HomeGUI = PlayerGui:WaitForChild("Home")
 local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
+local TeamEvent
 pcall(function()
-	local TeamEvent = workspace:WaitForChild("Remote"):WaitForChild("TeamEvent")
-	local meleeEvent = ReplicatedStorage:WaitForChild("meleeEvent")
+	TeamEvent = workspace:WaitForChild("Remote"):WaitForChild("TeamEvent")
 end)
+
+meleeEvent = ReplicatedStorage:WaitForChild("meleeEvent")
 
 -- Pass checks
 function checkRIOT()	
@@ -2046,4 +2048,4 @@ Notify("Note: I got banned from ScriptBlox, which is why this script is missing 
 getgenv().plx_executed = true
 
 Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
-print("CAN THIS SHITTY YCRAP WORK")
+print("tung tung tung tahur")
