@@ -1085,20 +1085,20 @@ LocalPlayer.CharacterAdded:Connect(function(char)
                 local currentTeam = LocalPlayer.Team
                 if currentTeam == Teams.Inmates then
                     repeat task.wait() 
-                        TeamEvent:FireServer(Teams.Neutral)
+                        TeamEvent:InvokeServer(Teams.Neutral)
                     until LocalPlayer.Team == Teams.Neutral
 
                     repeat task.wait() 
-                        TeamEvent:FireServer(Teams.Inmates)
+                        TeamEvent:InvokeServer(Teams.Inmates)
                     until LocalPlayer.Team == Teams.Inmates
                     fixcam()
                 elseif currentTeam == Teams.Guards then
                     repeat task.wait() 
-                        TeamEvent:FireServer(Teams.Neutral)
+                        TeamEvent:InvokeServer(Teams.Neutral)
                     until LocalPlayer.Team == Teams.Neutral
 
                     repeat task.wait() 
-                        TeamEvent:FireServer(Teams.Guards)
+                        TeamEvent:InvokeServer(Teams.Guards)
                     until LocalPlayer.Team == Teams.Guards
                     fixcam()
                 elseif currentTeam == Teams.Criminals then
