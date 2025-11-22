@@ -985,12 +985,24 @@ local function SetTeam(targetTeam, skipCooldownCheck)
 
     local current = LocalPlayer.Team
 
-    local function switch(team)
-        repeat
-            TeamEvent:FireServer(team)
-            task.wait(0.2)
-        until LocalPlayer.Team == team
-    end
+	local function switch(team)
+    	if not TeamEvent then
+        	warn("TeamEvent is missing!")
+        	return
+    	end
+
+    	repeat
+        	if TeamEvent:IsA("RemoteEvent") then
+            	TeamEvent:FireServer(team)
+        	elseif TeamEvent:IsA("RemoteFunction") then
+            	TeamEvent:InvokeServer(team)
+        	else
+            	warn("Unknown type of TeamEvent!")
+            	return
+        	end
+        	task.wait(0.2)
+    	until LocalPlayer.Team == team
+	end
 
 	local char = LocalPlayer.Character
     if not char then return end
