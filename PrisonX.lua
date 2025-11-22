@@ -1624,11 +1624,10 @@ end)
 
 
 -- GUI --
+MainTab:CreateSection("Reminder: ONLY USE YOUR ALT TO EXPLOIT.")
 
 -- Main Tab --
 -- Team Management --
-MainTab:CreateSection("Reminder: ONLY USE YOUR ALT TO EXPLOIT :D")
-
 MainTab:CreateSection("Team Management")
 
 MainTab:CreateButton({
@@ -1702,6 +1701,7 @@ MainTab:CreateButton({
 -- Combat Tab --
 -- Aura Settings --
 CombatTab:CreateSection("Aura Settings")
+CombatTab:CreateSection("Kill Aura")
 
 CombatTab:CreateToggle({
     Name = "Kill Aura",
@@ -1733,6 +1733,7 @@ CombatTab:CreateSlider({
     end,
 })
 
+CombatTab:CreateSection("Arrest Aura")
 CombatTab:CreateToggle({
     Name = "Arrest Aura",
     CurrentValue = settings.arrestaura,
@@ -1818,9 +1819,8 @@ TeleportTab:CreateButton({
 })
 
 -- Automation Tab --
--- Automation --
-AutoTab:CreateSection("Automation")
-
+-- Automation: Player Related --
+Autotab:CreateSection("Player Related")
 AutoTab:CreateToggle({
     Name = "Auto Respawn",
     CurrentValue = settings.autorespawn,
@@ -1839,6 +1839,8 @@ AutoTab:CreateToggle({
     end,
 })
 
+-- Automation: Auto Guns --
+AutoTab:CreateSection("Auto Guns")
 AutoTab:CreateToggle({
     Name = "Auto Guns",
     CurrentValue = settings.autoguns,
@@ -1886,6 +1888,8 @@ AutoTab:CreateButton({
     end,
 })
 
+-- Automation: Prison Related --
+AutoTab:CreateSection("Prison Related")
 AutoTab:CreateToggle({
     Name = "Auto Break Toilets",
     CurrentValue = settings.abtoilets,
@@ -2000,9 +2004,8 @@ PlayerTab:CreateSlider({
 })
 
 -- Other Tab --
--- Actions --
-OtherTab:CreateSection("Actions")
-
+-- Other: Prison Related --
+OtherTab:CreateSection("Prison Related")
 OtherTab:CreateButton({
     Name = "Break All Toilets",
     Callback = function()
@@ -2018,20 +2021,32 @@ OtherTab:CreateButton({
 })
 
 OtherTab:CreateButton({
-    Name = "Remove Jump Cooldown",
-    Callback = function()
-        ajr()
-    end,
-})
-
-OtherTab:CreateButton({
     Name = "Destroy Doors",
     Callback = function()
         DestroyDoors()
     end,
 })
 
+-- Other: Player Related --
+OtherTab:CreateSection("Player Related")
+OtherTab:CreateButton({
+    Name = "Remove Jump Cooldown",
+    Callback = function()
+        ajr()
+    end,
+})
 
+OtherTab:CreateToggle({
+    Name = "Keep Reset Button Enabled",
+    CurrentValue = settings.killfeed,
+    Flag = "ResetButtonToggle",
+    Callback = function(Value)
+        settings.enablere = Value
+    end,
+})
+
+-- Other: Map Related --
+OtherTab:CreateSection("Map Related")
 OtherTab:CreateToggle({
     Name = "Hide Trees",
     CurrentValue = settings.htrees,
@@ -2042,7 +2057,7 @@ OtherTab:CreateToggle({
     end,
 })
 
--- Server --
+-- Other: Server --
 OtherTab:CreateSection("Server")
 
 OtherTab:CreateButton({
@@ -2059,7 +2074,7 @@ OtherTab:CreateButton({
     end,
 })
 
--- UI --
+-- Other: UI --
 OtherTab:CreateSection("UI")
 
 OtherTab:CreateToggle({
@@ -2068,15 +2083,6 @@ OtherTab:CreateToggle({
     Flag = "KillFeedToggle",
     Callback = function(Value)
         settings.killfeed = Value
-    end,
-})
-
-OtherTab:CreateToggle({
-    Name = "Keep Reset Button Enabled",
-    CurrentValue = settings.killfeed,
-    Flag = "ResetButtonToggle",
-    Callback = function(Value)
-        settings.enablere = Value
     end,
 })
 
