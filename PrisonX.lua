@@ -1257,9 +1257,9 @@ local hrp = nil
 -- When the character spawns
 LocalPlayer.CharacterAdded:Connect(function(char)
     hrp = char:WaitForChild("HumanoidRootPart")
-	if LocalPlayer.Team ~= Teams.Neutral then
+	--if LocalPlayer.Team ~= Teams.Neutral then
     	tring = false -- reset AutoGuns state
-	end
+	--end
 end)
 
 if LocalPlayer.Character then
@@ -2044,4 +2044,4 @@ Notify("Note: I got banned from ScriptBlox, which is why this script is missing 
 getgenv().plx_executed = true
 
 Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
-print("FUCKING HELL")
+print("CAN THIS SHIT WORK")
