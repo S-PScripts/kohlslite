@@ -525,7 +525,7 @@ katypes = {
 }
 
 local function UpdateKillableTeams()
-    local lteam = LocalPlayer.Team and LocalPlayer.Team.Name or ""
+    local lteam = LocalPlayer.Team
     local katype = settings.katype
 
     local allowed = {}
@@ -569,7 +569,7 @@ local function IsKillable(plr)
     end
 
     -- Target's team
-    local ttname = plr.Team and plr.Team.Name or ""
+    local ttname = plr.Team
 
     if settings.katype_allowed[ttname] then
         return true
@@ -646,12 +646,12 @@ local function IsArrestable(plr)
     end
 
     -- Must be a Guard to arrest
-    if LocalPlayer.Team.Name ~= "Guards" then
+    if LocalPlayer.Team ~= Teams.Guards then
         return false
     end
 
     -- Can't arrest other Guards
-    if plr.Team.Name == "Guards" then
+    if plr.Team == Teams.Guards then
         return false
     end
 
@@ -661,13 +661,13 @@ local function IsArrestable(plr)
     end
 
     -- Check based on aatype setting
-    local ttname = plr.Team and plr.Team.Name or ""
+    local ttname = plr.Team
     if settings.aatype == "Criminals" then
-        if ttname ~= "Criminals" then
+        if ttname ~= Teams.Criminals then
             return false
         end
     elseif settings.aatype == "Inmates" then
-        if ttname ~= "Inmates" then
+        if ttname ~= Teams.Inmates then
             return false
         end
     elseif settings.aatype == "Both" then
