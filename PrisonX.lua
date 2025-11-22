@@ -180,9 +180,11 @@ local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
 local TeamEvent
-pcall(function()
+if workspace:WaitForChild("Remote"):WaitForChild("TeamEvent") then
 	TeamEvent = workspace:WaitForChild("Remote"):WaitForChild("TeamEvent")
-end)
+else
+	print("new server, teamevent broken :(")
+end
 
 meleeEvent = ReplicatedStorage:WaitForChild("meleeEvent")
 
@@ -1050,6 +1052,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
             lastDeathCFrame = hrp.CFrame
         end
 
+		if TeamEvent then
         if _G.CanQuickRespawn and os.time() >= _G.TeamCooldown then
             _G.CanQuickRespawn = false
             task.spawn(function()
@@ -1080,6 +1083,12 @@ LocalPlayer.CharacterAdded:Connect(function(char)
                 _G.CanQuickRespawn = true
             end)
         end
+
+		if LocalPlayer.Team == Teams.Criminals then 
+			tring = false 
+			fugging = false
+		end
+		end
     end)
 end)
 
