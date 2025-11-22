@@ -1034,7 +1034,8 @@ LocalPlayer.CharacterAdded:Connect(function(char)
     if lastDeathCFrame then
 		if settings.autoguns then
 			print("give it a sec, getting guns")
-			repeat task.wait() until not tring
+			task.wait(0.25)
+			repeat task.wait() until tring == false
 			repeat task.wait() until fugging == false
 			print("task done")
 			hrp.CFrame = lastDeathCFrame
@@ -1271,7 +1272,8 @@ RunService.Heartbeat:Connect(function()
     end
 
     -- Auto guns
-    if settings.autoguns and not tring then
+    if settings.autoguns and tring == false then
+		print("mf balls")
         tring = true
 
         local localOldHRP = hrp.CFrame
@@ -1290,10 +1292,13 @@ RunService.Heartbeat:Connect(function()
 
         -- Teleport back once after picking up guns
         if pickedGuns > 0 then
-            tpto(localOldHRP)
+			if settings.autorespawn == false then
+            	tpto(localOldHRP)
+			end
         end
 
         tring = false
+		print("skibidi balls")
     end
 end)
 
@@ -2039,4 +2044,4 @@ Notify("Note: I got banned from ScriptBlox, which is why this script is missing 
 getgenv().plx_executed = true
 
 Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
-print("addssadnsajkf snm")
+print("adebug message crappy pron")
