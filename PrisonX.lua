@@ -180,11 +180,14 @@ local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
 local TeamEvent
-if workspace:WaitForChild("Remote"):WaitForChild("TeamEvent") then
-	TeamEvent = workspace:WaitForChild("Remote"):WaitForChild("TeamEvent")
-else
-	print("new server, teamevent broken :(")
-end
+
+pcall(function()
+	if workspace.Remote.TeamEvent then
+		TeamEvent = workspace.Remote.TeamEvent
+	else
+		print("new server, teamevent broken :(")
+	end
+end)
 
 meleeEvent = ReplicatedStorage:WaitForChild("meleeEvent")
 
