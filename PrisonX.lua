@@ -1,4 +1,4 @@
--- PrisonX v1.2 by TS2021
+-- PrisonX v1.205 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
 -- THIS SCRIPT IS NO LONGER MAINTAINED
 
@@ -23,7 +23,7 @@ Powerful Guns (guns have unlimited range + spread) (-powguns / -unpowguns)
 Fast Guns (you can also change the rate, default is 0) (-fastguns / -unfastguns / -firerate)
 Run -opguns to turn on both (-unopguns to turn off both)
 Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
-Destroy doors (-ddors) - CLIENT-SIDE!
+Destroy doors (-ddoors) - CLIENT-SIDE!
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
 Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors)
 Toilet Breaker (must have hammer) (-btoilets)
@@ -134,13 +134,13 @@ end
 -- GUI Setup
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
-local version = "v1.2"
+local version = "v1.205"
 
 local Window = Rayfield:CreateWindow({
     Name = "PrisonX",
     Icon = nil,
-    LoadingTitle = "PrisonX v1.2",
-    LoadingSubtitle = "Created by TS2021 // https://kohlslite.pages.dev/PrisonX.lua",
+    LoadingTitle = "PrisonX v1.205",
+    LoadingSubtitle = "Created by TS2021 // kohlslite.pages.dev/PrisonX.lua",
     ConfigurationSaving = {
         Enabled = false,
     },
@@ -2060,4 +2060,4 @@ Notify("Note: I got banned from ScriptBlox, which is why this script is missing 
 getgenv().plx_executed = true
 
 Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
-print("tung tung tung tahur")
+print("Version: ".. version)
