@@ -1033,14 +1033,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
     -- Teleport to last stored position if it exists
     if lastDeathCFrame then
 		if settings.autoguns then
-			print("give it a sec, getting guns")
-			task.wait(0.25)
-			repeat task.wait() until tring == false
-			repeat task.wait() 
-				print(fugging)
-			until fugging == false
-			print("task done")
-			hrp.CFrame = lastDeathCFrame
+			print("no need for this shit")
 		else
         	task.wait(0.1)
 			hrp.CFrame = lastDeathCFrame
@@ -2044,4 +2037,4 @@ Notify("Note: I got banned from ScriptBlox, which is why this script is missing 
 getgenv().plx_executed = true
 
 Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
-print("CAN THIS SHIT WORK")
+print("CAN THIS CRAP WORK")
