@@ -1820,7 +1820,7 @@ TeleportTab:CreateButton({
 
 -- Automation Tab --
 -- Automation: Player Related --
-Autotab:CreateSection("Player Related")
+AutoTab:CreateSection("Player Related")
 AutoTab:CreateToggle({
     Name = "Auto Respawn",
     CurrentValue = settings.autorespawn,
