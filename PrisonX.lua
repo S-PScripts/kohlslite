@@ -634,6 +634,12 @@ RunService.Heartbeat:Connect(function()
     end
 end)
 
+LocalPlayer.CharacterAdded:Connect(function()
+    task.wait(0.5)
+    UpdateKillableTeams()
+end)
+
+
 -- Arrest Aura
 aatypes = {
 	"Criminals",
@@ -1830,7 +1836,6 @@ CombatTab:CreateDropdown({
     Flag = "ArrestAuraTeamDropdown",
     Callback = function(Value)
         settings.aatype = Value
-        UpdateKillableTeams()
         print("Updated")
     end,
 })
