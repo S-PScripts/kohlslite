@@ -49,26 +49,23 @@ local function createESP(player)
     local head, root, humanoid = waitForCharacterParts(char)
     if not head or not root or not humanoid then return end
 
-    local partsToHighlight = {}
+    -- Highlight all limbs
+    local limbESP = {}
     for _, part in pairs(char:GetChildren()) do
         if part:IsA("BasePart") then
-            table.insert(partsToHighlight, part)
+            local box = Instance.new("BoxHandleAdornment")
+            box.Adornee = part
+            box.Size = part.Size
+            box.Color3 = player.TeamColor.Color
+            box.Transparency = 0.5
+            box.AlwaysOnTop = true
+            box.ZIndex = 1
+            box.Parent = part
+            table.insert(limbESP, box)
         end
     end
 
-    local limbESP = {}
-    for _, part in pairs(partsToHighlight) do
-        local box = Instance.new("BoxHandleAdornment")
-        box.Adornee = part
-        box.Size = part.Size
-        box.Color3 = player.TeamColor.Color
-        box.Transparency = 0.5
-        box.AlwaysOnTop = true
-        box.ZIndex = 1
-        box.Parent = part
-        table.insert(limbESP, box)
-    end
-
+    -- BillboardGui for name + health + distance
     local billboard = Instance.new("BillboardGui")
     billboard.Name = "ESPName"
     billboard.Adornee = head
@@ -84,7 +81,7 @@ local function createESP(player)
     textLabel.TextScaled = false
     textLabel.Font = Enum.Font.SourceSansBold
     textLabel.TextSize = 14
-    textLabel.Text = player.Name
+    textLabel.Text = string.format("%s | Health: %d | Distance: %d", player.Name, humanoid.Health, math.floor((root.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude))
     textLabel.Parent = billboard
     billboard.Parent = char
 
