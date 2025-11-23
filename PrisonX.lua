@@ -71,27 +71,27 @@ local settings = {
     killfeed = true,
 
 	-- Respawn in the same place upon arrest, and make you a criminal if you were one
-    antiarrest = true,
+    antiarrest = false,
 
 	-- Remove tased effects
     antitase = true,
 
 	-- Respawn in your previous position if you die
-    autorespawn = true,
+    autorespawn = false,
 
 	-- Auto guns
 	autoguns = false,
-	autoguns_list = {"Remington 870"},
+	autoguns_list = {},
 
 	-- Auto-Mod all guns to have a big range and spread  (pg = powerful gun)
-	auto_pg = true,
+	auto_pg = false,
 	
 	-- Auto-Mod all guns to shoot really fast (fg = fast gun)
-	auto_fg = true,
+	auto_fg = false,
 	auto_fgrate = 0, -- if you want to change it to be slower...
 
 	-- Remove doors (CAUSES 1 SEC OF LAG WHENEVER YOU RESPAWN)
-	nodoors = true,
+	nodoors = false,
 
 	-- Spam open doors (must be guard / have a keycard)
 	sodoors = false,
