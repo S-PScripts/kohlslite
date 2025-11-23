@@ -2123,6 +2123,31 @@ PlayerTab:CreateSlider({
     end,
 })
 
+local espCleanup
+
+PlayerTab:CreateToggle({
+    Name = "ESP",
+    CurrentValue = false,
+    Flag = "ESPToggle",
+    Callback = function(Value)
+        if Value then
+            local success, result = pcall(function()
+                return loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/iy%20esp.lua", true))()
+            end)
+            if success then
+                espCleanup = result -- store cleanup function
+            else
+                warn("Failed to load ESP:", result)
+            end
+        else
+            if espCleanup then
+                espCleanup() -- remove ESP
+                espCleanup = nil
+            end
+        end
+    end,
+})
+
 -- Lists + Checks --
 -- Lists + Checks: Setup --
 local playerselector = LCTab:CreateDropdown({
