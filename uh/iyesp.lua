@@ -148,7 +148,10 @@ renderConnection = RunService.RenderStepped:Connect(function()
     if not getgenv().esp then return end
     if next(espObjects) == nil then return end
 
-    local localRoot = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+    local localChar = LocalPlayer.Character
+    if not localChar then return end
+
+    local localRoot = localChar:FindFirstChild("HumanoidRootPart")
     if not localRoot then return end
 
     for player, data in pairs(espObjects) do
@@ -158,10 +161,15 @@ renderConnection = RunService.RenderStepped:Connect(function()
 
         if root and humanoid and label then
             local distance = (root.Position - localRoot.Position).Magnitude
-            label.Text = string.format("%s | Health: %d | Distance: %d",player.Name,math.floor(humanoid.Health),math.floor(distance))
+            label.Text = string.format("%s | Health: %d | Distance: %d",
+                player.Name,
+                math.floor(humanoid.Health),
+                math.floor(distance)
+            )
         end
     end
 end)
+
 
 
 -- Function to enable ESP for all players
