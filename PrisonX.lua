@@ -14,9 +14,11 @@ Anti Arrest (-antiar / -unantiar)
 Anti Tase (-antitase / -unantitase)
 Kill Aura (-killaura / -unkillaura)
 Kill Aura Radius (-karadius (NUMBER))
-Arrest Aura (-araura/-unaraura)
-Arrest Aura Radius (-aaradius)
+Kill Aura Team Check + Options
 Kill Aura Visibility (-kasphere / -unkasphere)
+Arrest Aura (-araura/-unaraura)
+Arrest Aura Team Check + Options
+Arrest Aura Radius (-aaradius)
 Auto Respawn (spawn in the same place upon death) (-autore / -unautore)
 Quick Respawn (does a neat trick to spawn you faster for inmates/guards when possible, part of auto respawn)
 Powerful Guns (guns have unlimited range + spread) (-powguns / -unpowguns)
@@ -33,9 +35,6 @@ Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
 
-Coming soon:
--> arrest aura team check
--> Kill aura team check
 -> arrest aura/kill aura whitelist (unused rn)
 -> Inventory checker (unused rn)
 -> Gamepass checker (unused rn)
