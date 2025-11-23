@@ -718,6 +718,15 @@ function tpto(args)
     LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = args
 end
 
+function tptop(player)
+    local char = player.Character
+    if char and char:FindFirstChild("HumanoidRootPart") then
+        LocalPlayer.Character.HumanoidRootPart.CFrame = char.HumanoidRootPart.CFrame
+    else
+        warn(player.Name.." has no character or HumanoidRootPart")
+    end
+end
+
 -- Kill Feed
 Killfeed.ChildAdded:Connect(function(newChild)
     if settings.killfeed then
@@ -1900,7 +1909,7 @@ TeleportTab:CreateSection("Players")
 
 -- Lists + Checks --
 -- Lists + Checks: Setup --
-local playerselector2 = LCTab:CreateDropdown({
+local playerselector2 = TeleportTab:CreateDropdown({
     Name = "Players",
     Options = playerNames,
     CurrentValue = LocalPlayer.Name,
@@ -1912,7 +1921,7 @@ local playerselector2 = LCTab:CreateDropdown({
     end,
 })
 
-LCTab:CreateButton({
+TeleportTab:CreateButton({
     Name = "Refresh List",
     Callback = function()
         builder()
@@ -1921,10 +1930,10 @@ LCTab:CreateButton({
     end,
 })
 
-LCTab:CreateButton({
+TeleportTab:CreateButton({
     Name = "Go",
     Callback = function()
-		tpto(tcplayer)	
+		tptop(tcplayer)	
     end,
 })
 
