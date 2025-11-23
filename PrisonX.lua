@@ -531,42 +531,53 @@ local function UpdateKillableTeams()
     local allowed = {}
 
     if katype == "All" then
-        allowed = {"Criminals", "Inmates", "Guards"}
+        allowed = {Criminals = true, Inmates = true, Guards = true}
     elseif katype == "Criminals" then
-        allowed = {"Criminals"}
+        allowed = {Criminals = true}
     elseif katype == "Inmates" then
-        allowed = {"Inmates"}
+        allowed = {Inmates = true}
     elseif katype == "Guards" then
-        allowed = {"Guards"}
+        allowed = {Guards = true}
     elseif katype == "Criminals + Inmates" then
-        allowed = {"Criminals", "Inmates"}
+        allowed = {Criminals = true, Inmates = true}
     elseif katype == "Criminals + Guards" then
-        allowed = {"Criminals", "Guards"}
+        allowed = {Criminals = true, Guards = true}
     elseif katype == "Inmates + Guards" then
-        allowed = {"Inmates", "Guards"}
+        allowed = {Inmates = true, Guards = true}
     elseif katype == "Other Teams" then
         for _, team in ipairs({"Criminals","Inmates","Guards"}) do
             if team ~= lteam then
-                table.insert(allowed, team)
+                allowed[team] = true
             end
         end
+    else
+        allowed = {}
     end
 
     settings.katype_allowed = allowed
 end
 
 local function IsKillable(plr)
-    if plr == LocalPlayer then return false end
-    if not settings.katc then return true end
-
-    local ttname = plr.Team and tostring(plr.Team.Name) or ""
-    for _, team in ipairs(settings.katype_allowed) do
-        if ttname == team then
-            return true
-        end
+    -- Can't kill yourself
+    if plr == LocalPlayer then
+        return false
     end
-    return false
+
+    -- If team check is disabled, anyone else is killable
+    if not settings.katc then
+        return true
+    end
+
+    -- Target's team
+    local ttname = plr.Team and plr.Team.Name or ""
+
+    if settings.katype_allowed[ttname] then
+        return true
+    else
+        return false
+    end
 end
+UpdateKillableTeams()
 
 
 -- Sphere visual
@@ -609,8 +620,8 @@ RunService.Heartbeat:Connect(function()
 				if table.find(ka_wl, targetPlayer.Name) then
 					--
 				else
-					--print("Checking:", targetPlayer.Name, targetPlayer.Team and targetPlayer.Team.Name)
-					--for k,v in pairs(settings.katype_allowed) do print(k,v) end
+					print("Checking:", targetPlayer.Name, targetPlayer.Team and targetPlayer.Team.Name)
+					for k,v in pairs(settings.katype_allowed) do print(k,v) end
 					if not IsKillable(targetPlayer) then
 						--
 					else
@@ -621,6 +632,11 @@ RunService.Heartbeat:Connect(function()
 			end
         end
     end
+end)
+
+LocalPlayer.CharacterAdded:Connect(function()
+    task.wait(0.5)
+    UpdateKillableTeams()
 end)
 
 
@@ -1805,7 +1821,7 @@ CombatTab:CreateSlider({
 })
 
 CombatTab:CreateToggle({
-    Name = "Team Check (broken)",
+    Name = "Team Check",
     CurrentValue = settings.aatc,
     Flag = "ArrestAuraTCToggle",
     Callback = function(Value)
@@ -1814,7 +1830,7 @@ CombatTab:CreateToggle({
 })
 
 CombatTab:CreateDropdown({
-    Name = "Teams Allowed (broken)",
+    Name = "Teams Allowed",
     Options = aatypes,
     CurrentValue = settings.aatype,
     Flag = "ArrestAuraTeamDropdown",
