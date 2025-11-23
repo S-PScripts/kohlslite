@@ -509,8 +509,9 @@ katypes = {
 	"Other Teams"
 }
 
-local function UpdateKillableTeams()
+local function UpdateKillableTeams(v)
     local lteam = LocalPlayer.Team.Name
+	settings.katype = v
     local katype = settings.katype
 
     local allowed = {}
@@ -561,14 +562,15 @@ local function IsKillable(plr)
 
     -- Target's team
     local ttname = plr.Team.Name
-
+	print(ttname)
     for _, teamName in ipairs(settings.katype_allowed) do
+		print(teamName)
         if ttname == teamName then
             return true
         end
     end
 end
-UpdateKillableTeams()
+UpdateKillableTeams("All")
 
 
 -- Sphere visual
@@ -1763,8 +1765,7 @@ CombatTab:CreateDropdown({
     CurrentValue = settings.katype,
     Flag = "KillAuraTeamDropdown",
     Callback = function(Value)
-        settings.katype = Value
-        UpdateKillableTeams()
+        UpdateKillableTeams(Value)
         print("Updated")
     end,
 })
