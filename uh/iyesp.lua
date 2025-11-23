@@ -144,7 +144,7 @@ for _, player in pairs(Players:GetPlayers()) do
 end
 
 -- RenderStepped for distance updates
-renderConnection = RunService.RenderStepped:Connect(function()
+local function renderStepFunction()
     if not getgenv().esp then return end
     if next(espObjects) == nil then return end
 
@@ -168,9 +168,9 @@ renderConnection = RunService.RenderStepped:Connect(function()
             )
         end
     end
-end)
+end
 
-
+renderConnection = RunService.RenderStepped:Connect(renderStepFunction)
 
 -- Function to enable ESP for all players
 local function enableESPForAll()
@@ -192,6 +192,9 @@ spawn(function()
                 cleanupESP()
             else
                 enableESPForAll() -- <-- Apply ESP to currently alive players immediately
+                if not renderConnection then
+                    renderConnection = RunService.RenderStepped:Connect(renderStepFunction)
+                end
             end
         end
     end
