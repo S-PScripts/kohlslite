@@ -818,7 +818,7 @@ task.spawn(function()
         	if LocalPlayer.Character then
 				if LocalPlayer.Character.HumanoidRootPart then
 					if LocalPlayer.Character.HumanoidRootPart.Position.Y < -7 then
-                    	LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(LocalPlayer.Character.HumanoidRootPart.Position.X,5,LocalPlayer.Character.HumanoidRootPart.Position.Z)
+                    	LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(LocalPlayer.Character.HumanoidRootPart.Position.X,50,LocalPlayer.Character.HumanoidRootPart.Position.Z)
                     	LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(LocalPlayer.Character.HumanoidRootPart.Velocity.X,0,LocalPlayer.Character.HumanoidRootPart.Velocity.Z)
                 	end
 				end
