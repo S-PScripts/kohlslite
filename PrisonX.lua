@@ -160,7 +160,7 @@ local TeleportTab = Window:CreateTab("Teleport", nil)
 local AutoTab = Window:CreateTab("Automation", nil)
 local ProtectTab = Window:CreateTab("Protection", nil)
 local PlayerTab = Window:CreateTab("Player", nil)
--- local ListsTab = Window:CreateTab("Lists", nil)
+local LCTab = Window:CreateTab("Lists + Checks", nil)
 local OtherTab = Window:CreateTab("Other", nil)
 
 
@@ -817,6 +817,7 @@ end
 
 -- Backpack checker
 function CheckBackpack(cplr, player)
+		Notify("Check /console!")
         print(player.." has the following items:")
               for _, tool in pairs(cplr.Backpack:GetChildren()) do
                 print(tool.Name)
@@ -2061,6 +2062,91 @@ PlayerTab:CreateSlider({
 				end
 			end
 		end
+    end,
+})
+
+local lcplayer = nil
+local playerNames = {} -- store globally so builder() and Refresh can use it
+
+-- Function to build the player name list
+local function builder()
+    playerNames = {} -- clear old list
+    for _, plr in pairs(Players:GetPlayers()) do
+        table.insert(playerNames, plr.Name)
+    end
+end
+
+-- Build the initial list
+builder()
+
+-- Create the dropdown
+local playerselector = LCTab:CreateDropdown({
+    Name = "Players",
+    Options = playerNames,
+    CurrentValue = LocalPlayer.Name,
+    Flag = "PlayerChecks",
+    Callback = function(option)
+        local selectedName = option[1]
+        lcplayer = Players:FindFirstChild(selectedName)
+        print("Selected player:", lcplayer)
+    end,
+})
+
+-- Refresh button
+LCTab:CreateButton({
+    Name = "Refresh List",
+    Callback = function()
+        builder()
+        playerselector:Refresh(playerNames)
+        print("Player list refreshed")
+    end,
+})
+
+-- Auto-refresh when a new player joins
+Players.PlayerAdded:Connect(function(plr)
+    builder()
+    playerselector:Refresh(playerNames)
+end)
+
+
+-- Lists + Checks: Lists --
+LCTab:CreateSection("Lists")
+LCTab:CreateButton({
+    Name = "Add/Remove from Kill Aura WL",
+    Callback = function()
+		Notify("Soon...")
+        -- arrest_aura_wl(lcplayer, lcplayer.Name)
+    end,
+})
+
+LCTab:CreateButton({
+    Name = "Add/Remove from Arrest Aura WL",
+    Callback = function()
+		Notify("Soon...")
+        -- kill_aura_wl(lcplayer, lcplayer.Name)
+    end,
+})
+
+-- Lists + Checks: Checks --
+LCTab:CreateSection("Checks")
+LCTab:CreateButton({
+    Name = "Check Inventory",
+    Callback = function()
+        CheckBackpack(lcplayer, lcplayer.Name)
+    end,
+})
+
+LCTab:CreateButton({
+    Name = "Check For Riot Police Access",
+    Callback = function()
+        CheckForRiot(lcplayer, lcplayer.Name)
+    end,
+})
+
+LCTab:CreateButton({
+    Name = "Check For Mafia Pass",
+    Callback = function()
+        CheckForMafia(lcplayer, lcplayer.Name)
     end,
 })
 
