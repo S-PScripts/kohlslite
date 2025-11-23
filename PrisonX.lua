@@ -877,7 +877,7 @@ function CheckForMafia(gcplr, gcplrn)
 		end
 	end
 
-	if they_have_mafias == false then
+	if they_have_mafia == false then
         Notify(gcplrn..' does not have the Mafia Pass!')
 		print(gcplrn .. " does not have the Mafia Pass!")
     end
