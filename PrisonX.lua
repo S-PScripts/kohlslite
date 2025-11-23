@@ -1767,8 +1767,9 @@ CombatTab:CreateDropdown({
     Options = katypes,
     CurrentValue = settings.katype,
     Flag = "KillAuraTeamDropdown",
-    Callback = function(Value)
-        UpdateKillableTeams(Value)
+    Callback = function(Option)
+		opt = Option[1]
+        UpdateKillableTeams(opt)
         print("Updated")
     end,
 })
