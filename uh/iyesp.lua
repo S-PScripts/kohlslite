@@ -146,6 +146,7 @@ end
 -- RenderStepped for distance updates
 renderConnection = RunService.RenderStepped:Connect(function()
     if not getgenv().esp then return end
+    if next(espObjects) == nil then return end
 
     local localRoot = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
     if not localRoot then return end
