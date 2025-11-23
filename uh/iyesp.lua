@@ -105,14 +105,6 @@ local function createESP(player)
         humanoid = humanoid,
         root = root
     }
-
-    -- Update health dynamically
-    humanoid:GetPropertyChangedSignal("Health"):Connect(function()
-        if getgenv().esp and espObjects[player] then
-            local distance = math.floor((root.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
-            espObjects[player].textLabel.Text = string.format("%s | Health: %d | Distance: %d", player.Name, humanoid.Health, distance)
-        end
-    end)
 end
 
 -- Update ESP color
@@ -154,16 +146,22 @@ end
 -- RenderStepped for distance updates
 renderConnection = RunService.RenderStepped:Connect(function()
     if not getgenv().esp then return end
+
     local localRoot = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
     if not localRoot then return end
 
     for player, data in pairs(espObjects) do
-        if data.root and data.humanoid and data.textLabel then
-            local distance = math.floor((data.root.Position - localRoot.Position).Magnitude)
-            data.textLabel.Text = string.format("%s | Health: %d | Distance: %d", player.Name, data.humanoid.Health, distance)
+        local root = data.root
+        local humanoid = data.humanoid
+        local label = data.textLabel
+
+        if root and humanoid and label then
+            local distance = (root.Position - localRoot.Position).Magnitude
+            label.Text = string.format("%s | Health: %d | Distance: %d",player.Name,math.floor(humanoid.Health),math.floor(distance))
         end
     end
 end)
+
 
 -- Function to enable ESP for all players
 local function enableESPForAll()
