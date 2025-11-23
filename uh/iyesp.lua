@@ -161,11 +161,7 @@ local function renderStepFunction()
 
         if root and humanoid and label then
             local distance = (root.Position - localRoot.Position).Magnitude
-            label.Text = string.format("%s | Health: %d | Distance: %d",
-                player.Name,
-                math.floor(humanoid.Health),
-                math.floor(distance)
-            )
+            label.Text = string.format("%s | Health: %d | Distance: %d", player.Name, math.floor(humanoid.Health), math.floor(distance))
         end
     end
 end
