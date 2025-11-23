@@ -1,5 +1,5 @@
 -- Make sure the toggle exists
-getgenv().esp = getgenv().esp or true -- default ON
+getgenv().esp = false
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
