@@ -510,9 +510,9 @@ katypes = {
 }
 
 local function UpdateKillableTeams(v)
-	print("runnin")
+    print("UpdateKillableTeams called with:", v)
     local lteam = LocalPlayer.Team.Name
-	settings.katype = v
+    settings.katype = v
 
     local allowed = {}
 
@@ -535,13 +535,12 @@ local function UpdateKillableTeams(v)
         elseif lteam == "Criminals" then allowed = {"Inmates", "Guards"}
         elseif lteam == "Guards" then allowed = {"Criminals", "Inmates"}
         end
-	else
-		print("error")
+    else
+        print("ERROR: Unknown katype!", settings.katype)
     end
 
     settings.katype_allowed = allowed
 end
-
 
 local function IsKillable(plr)
     -- Can't kill yourself
@@ -573,8 +572,9 @@ local function IsKillable(plr)
         end
     end
 end
-UpdateKillableTeams("All")
 
+settings.katype = settings.katype or "All"
+UpdateKillableTeams(settings.katype)
 
 -- Sphere visual
 local sphere = Instance.new("Part")
