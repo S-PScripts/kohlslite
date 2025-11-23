@@ -1,9 +1,29 @@
--- LocalScript in StarterPlayerScripts
+-- Make sure the toggle exists
+getgenv().esp = getgenv().esp or true -- default ON
+
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local LocalPlayer = Players.LocalPlayer
 
 local espObjects = {}
+local renderConnection
+
+-- Cleanup function
+local function cleanupESP()
+    if renderConnection then
+        renderConnection:Disconnect()
+        renderConnection = nil
+    end
+    for player, _ in pairs(espObjects) do
+        if espObjects[player].billboard then espObjects[player].billboard:Destroy() end
+        if espObjects[player].limbs then
+            for _, box in pairs(espObjects[player].limbs) do
+                if box then box:Destroy() end
+            end
+        end
+    end
+    espObjects = {}
+end
 
 -- Wait until character has necessary parts
 local function waitForCharacterParts(char)
@@ -19,8 +39,9 @@ end
 
 -- Create ESP for a player
 local function createESP(player)
-    if player == LocalPlayer then return end -- Do not highlight yourself
-    removeESP(player) -- Remove previous ESP if exists
+    if not getgenv().esp then return end
+    if player == LocalPlayer then return end
+    removeESP(player)
 
     local char = player.Character
     if not char then return end
@@ -48,7 +69,6 @@ local function createESP(player)
         table.insert(limbESP, box)
     end
 
-    -- BillboardGui for name + health + distance
     local billboard = Instance.new("BillboardGui")
     billboard.Name = "ESPName"
     billboard.Adornee = head
@@ -78,19 +98,17 @@ local function createESP(player)
 
     -- Update health dynamically
     humanoid:GetPropertyChangedSignal("Health"):Connect(function()
-        if espObjects[player] then
+        if getgenv().esp and espObjects[player] then
             local distance = math.floor((root.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
             espObjects[player].textLabel.Text = string.format("%s | Health: %d | Distance: %d", player.Name, humanoid.Health, distance)
         end
     end)
 end
 
--- Remove ESP
+-- Remove ESP for a single player
 function removeESP(player)
     if espObjects[player] then
-        if espObjects[player].billboard then
-            espObjects[player].billboard:Destroy()
-        end
+        if espObjects[player].billboard then espObjects[player].billboard:Destroy() end
         if espObjects[player].limbs then
             for _, box in pairs(espObjects[player].limbs) do
                 if box then box:Destroy() end
@@ -100,7 +118,7 @@ function removeESP(player)
     end
 end
 
--- Update ESP color (team changes)
+-- Update ESP color
 local function updateESPColor(player)
     if espObjects[player] then
         local color = player.TeamColor.Color
@@ -115,7 +133,7 @@ local function updateESPColor(player)
     end
 end
 
--- Setup player ESP
+-- Setup player
 local function setupPlayer(player)
     player.CharacterAdded:Connect(function()
         createESP(player)
@@ -132,13 +150,13 @@ end
 Players.PlayerAdded:Connect(setupPlayer)
 Players.PlayerRemoving:Connect(removeESP)
 
--- Initialize existing players
 for _, player in pairs(Players:GetPlayers()) do
     setupPlayer(player)
 end
 
--- Update distances every frame
-RunService.RenderStepped:Connect(function()
+-- RenderStepped for distance updates
+renderConnection = RunService.RenderStepped:Connect(function()
+    if not getgenv().esp then return end
     local localRoot = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
     if not localRoot then return end
 
@@ -150,3 +168,12 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
+-- Listen for global toggle change
+spawn(function()
+    while true do
+        wait(0.1)
+        if not getgenv().esp then
+            cleanupESP()
+        end
+    end
+end)
