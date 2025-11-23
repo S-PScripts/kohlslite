@@ -3,38 +3,51 @@
 -- Better than Flash Hub (perhaps)
 
 --[[
-Features: All implemented in a UI too!
+Features: All implemented in a UI as well!
 Gun Obtainer (-gun (GUN NAME))
 TP to Locations (-lc (LOCATION))
 Kill Feed (-killfeed / -unkillfeed)
+
 Anti Arrest (-antiar / -unantiar)
 Anti Tase (-antitase / -unantitase)
+
 Kill Aura (-killaura / -unkillaura)
 Kill Aura Radius (-karadius (NUMBER))
 Kill Aura Team Check + Options
+Kill Aura Whitelist (-kawl / -unkawl)
 Kill Aura Visibility (-kasphere / -unkasphere)
+
 Arrest Aura (-araura/-unaraura)
-Arrest Aura Team Check + Options
 Arrest Aura Radius (-aaradius)
+Arrest Aura Team Check + Options
+Arrest Aura Whitelist (-aawl / -unaawl)
+
 Auto Respawn (spawn in the same place upon death) (-autore / -unautore)
 Quick Respawn (does a neat trick to spawn you faster for inmates/guards when possible, part of auto respawn)
+
 Powerful Guns (guns have unlimited range + spread) (-powguns / -unpowguns)
 Fast Guns (you can also change the rate, default is 0) (-fastguns / -unfastguns / -firerate)
 Run -opguns to turn on both (-unopguns to turn off both)
+Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
+
 Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
 Destroy doors (-ddoors) - CLIENT-SIDE!
-Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
 Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors)
+
 Toilet Breaker (must have hammer) (-btoilets)
+Auto Toilet Breaker (-abtoilets / -unabtoilets)
+
 Remove jump cooldown (anti-jump removal) (-rjc)
 Auto anti-jump removal (-aajr/-unajr)
-Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
-Auto Toilet Breaker (-abtoilets / -unabtoilets)
-Hide/Show Trees (-htrees / -strees)
-ESP (-esp/-unesp)
 
-To be added:
--> Arrest aura/Kill aura whitelist (unused rn)
+Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
+Hide/Show Trees (-htrees / -strees)
+
+ESP (-esp/-unesp)
+Noclip
+FOV
+Spin
+Infinite Jump
 
 Credits to github.com/tomatotxt for some stuff
 Credits to github.com/NewMatheusDC for some of the GUI
@@ -116,6 +129,9 @@ local settings = {
 	-- Noclip
 	noclip = false
 }
+
+-- ESP toggle
+getgenv().esp = false
 
 -- arrest aura wl
 aa_wl = {"ScriptingProgrammer", "kohlslitedev"}
@@ -496,6 +512,48 @@ function shop()
     end
 end
 
+-- kill aura whitelist
+function kill_aura_wl(lcplayer, lcplayerN)
+        if not lcplayer then
+            warn("No player selected")
+            return
+        end
+
+        local playerName = lcplayerN
+        local index = table.find(ka_wl, playerName)
+
+        if index then
+            table.remove(ka_wl, index)
+            print(playerName .. " unwhitelisted from kill aura.")
+			Notify(playerName .. " unwhitelisted from kill aura.")
+        else
+            table.insert(ka_wl, playerName)
+            print(playerName .. " whitelisted from kill aura.")
+			Notify(playerName .. " whitelisted from kill aura.")
+        end
+end
+
+-- arrest aura whitelist
+function arrest_aura_wl(lcplayer, lcplayerN)
+        if not lcplayer then
+            warn("No player selected")
+            return
+        end
+
+        local playerName = lcplayerN
+        local index = table.find(aa_wl, playerName)
+
+        if index then
+            table.remove(aa_wl, index)
+            print(playerName .. " unwhitelisted from arrest aura.")
+			Notify(playerName .. " unwhitelisted from arrest aura.")
+        else
+            table.insert(aa_wl, playerName)
+            print(playerName .. " whitelisted from arrest aura.")
+			Notify(playerName .. " whitelisted from arrest aura.")
+        end
+end
+
 -- Kill aura
 katypes = {
 	"All",
@@ -760,7 +818,7 @@ end)
 function htrees(ht)
 	local trees = workspace:WaitForChild("Trees")
 	local kids = trees:GetChildren()
-	local preserve = kids[39]
+	local preserve = kids[39] -- this is that tree that's used to get into the prison
 
 	for i = #kids, 1, -1 do
     	local c = kids[i]
@@ -826,6 +884,10 @@ end
 
 -- Backpack checker
 function CheckBackpack(cplr, player)
+		if not cplr then
+            warn("No player selected")
+            return
+        end
 		Notify("Check /console!")
         print(player.." has the following items:")
               for _, tool in pairs(cplr.Backpack:GetChildren()) do
@@ -841,6 +903,10 @@ gamepasses = {
 -- Gamepass checker
 -- CHECK FOR RIOT
 function CheckForRiot(gcplr, gcplrn)
+	if not gcplr then
+    	warn("No player selected")
+    	return
+    end
 	local they_have_riot = false
     if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 643697197), 643697197) then
     	Notify(gcplrn.." has Riot Police Access (New)!")
@@ -872,6 +938,10 @@ end
 
 -- CHECK FOR MAFIA
 function CheckForMafia(gcplr, gcplrn)
+	if not gcplr then
+    	warn("No player selected")
+    	return
+    end
 	local they_have_mafia = false
     if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 1443271), 1443271) then
     	Notify(gcplrn.." has the Mafia Pass!")
@@ -1338,7 +1408,6 @@ RunService.Heartbeat:Connect(function()
 
     -- Auto guns
     if settings.autoguns and tring == false then
-		--print("mf balls")
         tring = true
 
         local localOldHRP = hrp.CFrame
@@ -1367,10 +1436,8 @@ RunService.Heartbeat:Connect(function()
 		end
 
         tring = false
-		--print("skibidi balls")
     end
 end)
-
 
 -- Command list
 local function handleCommand(msg)
@@ -1381,26 +1448,97 @@ local function handleCommand(msg)
         return
     end
 
-    if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."gun" then
-        local parts = lowerMsg:split(" ")
-        local gunArg = parts[2]
-        if gunArg and gunAliases[gunArg] then
-            GrabGuns({gunAliases[gunArg]})
-        else
-            Notify("Unknown gun:", gunArg)
-        end
-    end
-
-    if string.sub(lowerMsg, 1, #prefix + 2) == prefix.."lc" then
-		local parts = lowerMsg:split(" ")
-		local location = parts[2]
-		if location then
-			teleportTo(location)
-		else
-			Notify("No location provided.")
-		end
+	if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."aawl" then
+    	local parts = lowerMsg:split(" ")
+    	local targetName = parts[2]
+    	if targetName then
+        	local player = PLAYERCHECK(targetName, true)
+        	if player then
+            	if not table.find(aa_wl, player.Name) then
+                	table.insert(aa_wl, player.Name)
+                	Notify(player.Name.." added to Arrest Aura Whitelist.")
+					print(player.Name.." added to Arrest Aura Whitelist.")
+            	else
+                	Notify(player.Name.." is already whitelisted.")
+					print(player.Name.." is already whitelisted.")
+            	end
+        	else
+            	Notify("Player not found:", targetName)
+        	end
+    	else
+        	Notify("No player specified.")
+   	 	end
 	end
 
+	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."unaawl" then
+    	local parts = lowerMsg:split(" ")
+    	local targetName = parts[2]
+    	if targetName then
+        	local player = PLAYERCHECK(targetName, true)
+        	if player then
+            	local index = table.find(aa_wl, player.Name)
+            	if index then
+                	table.remove(aa_wl, index)
+                	Notify(player.Name.." removed from Arrest Aura whitelist.")
+					print(player.Name.." removed from Arrest Aura whitelist.")
+            	else
+                	Notify(player.Name.." is not in the whitelist.")
+					print(player.Name.." is not in the whitelist.")
+            	end
+        	else
+            	Notify("Player not found:", targetName)
+        	end
+    	else
+        	Notify("No player specified.")
+   	 	end
+	end
+
+
+	if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."kawl" then
+    	local parts = lowerMsg:split(" ")
+    	local targetName = parts[2]
+    	if targetName then
+        	local player = PLAYERCHECK(targetName, true)
+        	if player then
+            	if not table.find(ka_wl, player.Name) then
+                	table.insert(ka_wl, player.Name)
+                	Notify(player.Name.." added to Kill Aura Whitelist.")
+					print(player.Name.." added to Kill Aura Whitelist.")
+            	else
+                	Notify(player.Name.." is already whitelisted.")
+					print(player.Name.." is already whitelisted.")
+            	end
+        	else
+            	Notify("Player not found:", targetName)
+        	end
+    	else
+        	Notify("No player specified.")
+   	 	end
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."unkawl" then
+    	local parts = lowerMsg:split(" ")
+    	local targetName = parts[2]
+    	if targetName then
+        	local player = PLAYERCHECK(targetName, true)
+        	if player then
+            	local index = table.find(ka_wl, player.Name)
+            	if index then
+                	table.remove(ka_wl, index)
+                	Notify(player.Name.." removed from Kill Aura whitelist.")
+					print(player.Name.." removed from Kill Aura Whitelist.")
+            	else
+                	Notify(player.Name.." is not in the whitelist.")
+				    print(player.Name.." is not in the whitelist.")
+            	end
+        	else
+            	Notify("Player not found:", targetName)
+        	end
+    	else
+        	Notify("No player specified.")
+   	 	end
+	end
+	
 	if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."team" then
     	local parts = lowerMsg:split(" ")
     	local teamArg = parts[2]
@@ -2130,7 +2268,6 @@ PlayerTab:CreateSlider({
     end,
 })
 
-getgenv().esp = false
 loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/iyesp.lua", true))()
 
 PlayerTab:CreateToggle({
@@ -2179,16 +2316,32 @@ LCTab:CreateSection("Lists")
 LCTab:CreateButton({
     Name = "Add/Remove from Kill Aura WL",
     Callback = function()
-		Notify("Soon...")
-        -- arrest_aura_wl(lcplayer, lcplayer.Name)
+        kill_aura_wl(lcplayer, lcplayer.Name)
+    end,
+})
+
+LCTab:CreateButton({
+    Name = "Print KA Wl List",
+    Callback = function()
+        for _, ka in ipairs(ka_wl) do
+    		print(ka)
+		end
     end,
 })
 
 LCTab:CreateButton({
     Name = "Add/Remove from Arrest Aura WL",
     Callback = function()
-		Notify("Soon...")
-        -- kill_aura_wl(lcplayer, lcplayer.Name)
+        arrest_aura_wl(lcplayer, lcplayer.Name)
+    end,
+})
+
+LCTab:CreateButton({
+    Name = "Print AA Wl List",
+    Callback = function()
+        for _, aa in ipairs(aa_wl) do
+    		print(aa)
+		end
     end,
 })
 
