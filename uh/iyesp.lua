@@ -1,5 +1,3 @@
--- ESP.lua
-return function()
 -- LocalScript in StarterPlayerScripts
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -140,8 +138,7 @@ for _, player in pairs(Players:GetPlayers()) do
 end
 
 -- Update distances every frame
-local renderConnection
-renderConnection = RunService.RenderStepped:Connect(function()
+RunService.RenderStepped:Connect(function()
     local localRoot = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
     if not localRoot then return end
 
@@ -153,12 +150,3 @@ renderConnection = RunService.RenderStepped:Connect(function()
     end
 end)
 
--- Return cleanup function so you can toggle ESP off
-return function()
-    if renderConnection then
-        renderConnection:Disconnect()
-    end
-    for player, _ in pairs(espObjects) do
-        removeESP(player)
-    end
-end
