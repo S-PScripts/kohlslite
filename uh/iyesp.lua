@@ -37,6 +37,19 @@ local function waitForCharacterParts(char)
     end
 end
 
+-- Remove ESP for a single player
+function removeESP(player)
+    if espObjects[player] then
+        if espObjects[player].billboard then espObjects[player].billboard:Destroy() end
+        if espObjects[player].limbs then
+            for _, box in pairs(espObjects[player].limbs) do
+                if box then box:Destroy() end
+            end
+        end
+        espObjects[player] = nil
+    end
+end
+
 -- Create ESP for a player
 local function createESP(player)
     if not getgenv().esp then return end
@@ -100,19 +113,6 @@ local function createESP(player)
             espObjects[player].textLabel.Text = string.format("%s | Health: %d | Distance: %d", player.Name, humanoid.Health, distance)
         end
     end)
-end
-
--- Remove ESP for a single player
-function removeESP(player)
-    if espObjects[player] then
-        if espObjects[player].billboard then espObjects[player].billboard:Destroy() end
-        if espObjects[player].limbs then
-            for _, box in pairs(espObjects[player].limbs) do
-                if box then box:Destroy() end
-            end
-        end
-        espObjects[player] = nil
-    end
 end
 
 -- Update ESP color
