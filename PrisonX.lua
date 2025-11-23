@@ -71,13 +71,13 @@ local settings = {
     killfeed = true,
 
 	-- Respawn in the same place upon arrest, and make you a criminal if you were one
-    antiarrest = false,
+    antiarrest = true,
 
 	-- Remove tased effects
     antitase = true,
 
 	-- Respawn in your previous position if you die
-    autorespawn = false,
+    autorespawn = true,
 
 	-- Auto guns
 	autoguns = false,
