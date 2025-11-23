@@ -2123,27 +2123,18 @@ PlayerTab:CreateSlider({
     end,
 })
 
-local espCleanup
+getgenv().esp = false
+loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/iyesp.lua", true))()
 
 PlayerTab:CreateToggle({
     Name = "ESP",
-    CurrentValue = false,
+    CurrentValue = getgenv().esp,
     Flag = "ESPToggle",
     Callback = function(Value)
         if Value then
-            local success, result = pcall(function()
-                return loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/iyesp.lua", true))()
-            end)
-            if success then
-                espCleanup = result -- store cleanup function
-            else
-                warn("Failed to load ESP:", result)
-            end
+			getgenv().esp = true
         else
-            if espCleanup then
-                espCleanup() -- remove ESP
-                espCleanup = nil
-            end
+            getgenv().esp = false
         end
     end,
 })
