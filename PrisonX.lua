@@ -1005,6 +1005,9 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 
 			if wascriminal then
 				task.wait(1) -- band aid fix 
+				if settings.autoguns then
+					repeat task.wait() until not tring
+				end
 				SwitchToCriminalAndReturn(false, cpos) -- really slow
 			elseif settings.autorespawn == false then
                 tpto(cpos)
