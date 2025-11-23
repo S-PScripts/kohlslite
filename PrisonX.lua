@@ -797,6 +797,7 @@ end)
 local normalWS = 16
 local normalJP = 50
 
+antivoid = true
 task.spawn(function()
 	while hbeat:Wait() do
 		local char = LocalPlayer.Character
@@ -811,6 +812,17 @@ task.spawn(function()
 				end
 			end
 		end
+
+		if antivoid then
+        	if LocalPlayer.Character then
+				if LocalPlayer.Character.HumanoidRootPart then
+					if LocalPlayer.Character.HumanoidRootPart.Position.Y < -7 then
+                    	LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(LocalPlayer.Character.HumanoidRootPart.Position.X,5,LocalPlayer.Character.HumanoidRootPart.Position.Z)
+                    	LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(LocalPlayer.Character.HumanoidRootPart.Velocity.X,0,LocalPlayer.Character.HumanoidRootPart.Velocity.Z)
+                	end
+				end
+            end
+        end
 	end
 end)
 
