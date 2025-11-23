@@ -562,7 +562,7 @@ local function IsKillable(plr)
 
     -- Target's team
     local ttname = plr.Team.Name
-	print("target team is".. ttname)
+	--print("target team is".. ttname)
     for _, teamName in ipairs(settings.katype_allowed) do
 		print("findin" .. teamName)
         if ttname == teamName then
