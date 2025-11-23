@@ -1,12 +1,9 @@
 -- PrisonX v1.205 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
--- Better than Flash Hub maybe?
-
--- Credits to github.com/tomatotxt for stuff
--- Credits to github.com/NewMatheusDC for some of the GUI
+-- Better than Flash Hub (perhaps)
 
 --[[
-Features:
+Features: All implemented in a UI too!
 Gun Obtainer (-gun (GUN NAME))
 TP to Locations (-lc (LOCATION))
 Kill Feed (-killfeed / -unkillfeed)
@@ -34,12 +31,13 @@ Auto anti-jump removal (-aajr/-unajr)
 Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
-ESP
-
-All implemented in a UI too!
+ESP (-esp/-unesp)
 
 To be added:
 -> Arrest aura/Kill aura whitelist (unused rn)
+
+Credits to github.com/tomatotxt for some stuff
+Credits to github.com/NewMatheusDC for some of the GUI
 ]]
 
 -- Infinite yield for ESP, speed, jump power
@@ -1636,6 +1634,14 @@ local function handleCommand(msg)
 		Notify("Guns no longer auto given.")
 	end
 
+	if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."esp" then
+		getgenv().esp = true
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 5) == prefix.."unesp" then
+		getgenv().esp = false
+	end
+	
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."enablere" then
     	settings.enablere = true
 		Notify("The reset button will no longer get disabled when you get tased!")
