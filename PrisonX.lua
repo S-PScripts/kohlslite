@@ -535,9 +535,11 @@ local function UpdateKillableTeams(v)
         elseif lteam == "Criminals" then allowed = {"Inmates", "Guards"}
         elseif lteam == "Guards" then allowed = {"Criminals", "Inmates"}
         end
+	else
+		print("error")
     end
 
-    return allowed
+    settings.katype_allowed = allowed
 end
 
 
@@ -1766,7 +1768,7 @@ CombatTab:CreateDropdown({
     CurrentValue = settings.katype,
     Flag = "KillAuraTeamDropdown",
     Callback = function(Value)
-        settings.katype_allowed = UpdateKillableTeams(Value)
+        UpdateKillableTeams(Value)
         print("Updated")
     end,
 })
