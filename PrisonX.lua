@@ -35,11 +35,10 @@ Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
 
--> arrest aura/kill aura whitelist (unused rn)
--> Inventory checker (unused rn)
--> Gamepass checker (unused rn)
-
 All implemented in a UI too!
+
+To be added:
+-> Arrest aura/Kill aura whitelist (unused rn)
 ]]
 
 -- Infinite yield for ESP, speed, jump power
@@ -566,7 +565,7 @@ local function IsKillable(plr)
     local ttname = plr.Team.Name
 	-- print("Target team is".. ttname)
     for _, teamName in ipairs(settings.katype_allowed) do
-		print("Finding " .. teamName)
+		-- print("Finding " .. teamName)
         if ttname == teamName then
 			-- print("Return it")
             return true
@@ -1067,7 +1066,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
     -- Teleport to last stored position if it exists
     if lastDeathCFrame then
 		if settings.autoguns then
-			print("nasser balls")
+			-- print("nasser balls")
 		else
         	task.wait(0.1)
 			hrp.CFrame = lastDeathCFrame
@@ -2090,7 +2089,7 @@ local playerselector = LCTab:CreateDropdown({
     Callback = function(option)
         local selectedName = option[1]
         lcplayer = Players:FindFirstChild(selectedName)
-        print("Selected player:", lcplayer)
+        --print("Selected player:", lcplayer)
     end,
 })
 
@@ -2100,7 +2099,7 @@ LCTab:CreateButton({
     Callback = function()
         builder()
         playerselector:Refresh(playerNames)
-        print("Player list refreshed")
+        --print("Player list refreshed")
     end,
 })
 
@@ -2146,9 +2145,27 @@ LCTab:CreateButton({
 })
 
 LCTab:CreateButton({
+    Name = "Print RPA List",
+    Callback = function()
+        for _, riot in ipairs(gamepasses.riots) do
+    		print(riot)
+		end
+    end,
+})
+
+LCTab:CreateButton({
     Name = "Check For Mafia Pass",
     Callback = function()
         CheckForMafia(lcplayer, lcplayer.Name)
+    end,
+})
+
+LCTab:CreateButton({
+    Name = "Print MP List",
+    Callback = function()
+        for _, mafia in ipairs(gamepasses.mafias) do
+    		print(mafia)
+		end
     end,
 })
 
