@@ -510,34 +510,34 @@ katypes = {
 }
 
 local function UpdateKillableTeams(v)
+	print("runnin")
     local lteam = LocalPlayer.Team.Name
 	settings.katype = v
-    local katype = settings.katype
 
     local allowed = {}
 
-    if katype == "All" then
+    if settings.katype == "All" then
         allowed = {"Criminals", "Inmates", "Guards"}
-    elseif katype == "Criminals" then
+    elseif settings.katype == "Criminals" then
         allowed = {"Criminals"}
-    elseif katype == "Inmates" then
+    elseif settings.katype == "Inmates" then
         allowed = {"Inmates"}
-    elseif katype == "Guards" then
+    elseif settings.katype == "Guards" then
         allowed = {"Guards"}
-    elseif katype == "Criminals + Inmates" then
+    elseif settings.katype == "Criminals + Inmates" then
         allowed = {"Criminals", "Inmates"}
-    elseif katype == "Criminals + Guards" then
+    elseif settings.katype == "Criminals + Guards" then
         allowed = {"Criminals", "Guards"}
-    elseif katype == "Inmates + Guards" then
+    elseif settings.katype == "Inmates + Guards" then
         allowed = {"Inmates", "Guards"}
-    elseif katype == "Other Teams" then
+    elseif settings.katype == "Other Teams" then
         if lteam == "Inmates" then allowed = {"Criminals", "Guards"}
         elseif lteam == "Criminals" then allowed = {"Inmates", "Guards"}
         elseif lteam == "Guards" then allowed = {"Criminals", "Inmates"}
         end
     end
 
-    settings.katype_allowed = allowed
+    return allowed
 end
 
 
@@ -1766,7 +1766,7 @@ CombatTab:CreateDropdown({
     CurrentValue = settings.katype,
     Flag = "KillAuraTeamDropdown",
     Callback = function(Value)
-        UpdateKillableTeams(Value)
+        settings.katype_allowed = UpdateKillableTeams(Value)
         print("Updated")
     end,
 })
