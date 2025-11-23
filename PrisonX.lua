@@ -536,13 +536,7 @@ local function UpdateKillableTeams()
         end
     end
 
-    -- Convert list into a dictionary
-    local dict = {}
-    for _, t in ipairs(allowed) do
-        dict[t] = true
-    end
-
-    settings.katype_allowed = dict
+    settings.katype_allowed = allowed
 end
 
 
@@ -561,16 +555,17 @@ local function IsKillable(plr)
 
     -- If team check is disabled, anyone else is killable
     if not settings.katc then
+		print("team check is disabled, killin")
         return true
     end
 
     -- Target's team
     local ttname = plr.Team.Name
 
-    if settings.katype_allowed[ttname] then
-        return true
-    else
-        return false
+    for _, teamName in ipairs(settings.katype_allowed) do
+        if ttname == teamName then
+            return true
+        end
     end
 end
 UpdateKillableTeams()
