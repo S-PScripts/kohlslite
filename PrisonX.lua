@@ -882,6 +882,21 @@ function CheckForMafia(gcplr, gcplrn)
     end
 end
 
+
+local lcplayer = nil
+local playerNames = {} -- store globally so builder() and Refresh can use it
+
+-- Function to build the player name list
+local function builder()
+    playerNames = {} -- clear old list
+    for _, plr in pairs(Players:GetPlayers()) do
+        table.insert(playerNames, plr.Name)
+    end
+end
+
+-- Build the initial list
+builder()
+
 local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
 function die()
 	Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
@@ -1881,6 +1896,39 @@ TeleportTab:CreateButton({
     end,
 })
 
+TeleportTab:CreateSection("Players")
+
+-- Lists + Checks --
+-- Lists + Checks: Setup --
+local playerselector2 = LCTab:CreateDropdown({
+    Name = "Players",
+    Options = playerNames,
+    CurrentValue = LocalPlayer.Name,
+    Flag = "TCPlayerChecks",
+    Callback = function(option)
+        local selectedName = option[1]
+        tcplayer = Players:FindFirstChild(selectedName)
+        --print("Selected player:", lcplayer)
+    end,
+})
+
+LCTab:CreateButton({
+    Name = "Refresh List",
+    Callback = function()
+        builder()
+        playerselector2:Refresh(playerNames)
+        --print("Player list refreshed")
+    end,
+})
+
+LCTab:CreateButton({
+    Name = "Go",
+    Callback = function()
+		tpto(tcplayer)	
+    end,
+})
+
+
 -- Automation Tab --
 -- Automation: Player Related --
 AutoTab:CreateSection("Player Related")
@@ -2066,26 +2114,13 @@ PlayerTab:CreateSlider({
     end,
 })
 
-local lcplayer = nil
-local playerNames = {} -- store globally so builder() and Refresh can use it
-
--- Function to build the player name list
-local function builder()
-    playerNames = {} -- clear old list
-    for _, plr in pairs(Players:GetPlayers()) do
-        table.insert(playerNames, plr.Name)
-    end
-end
-
--- Build the initial list
-builder()
-
--- Create the dropdown
+-- Lists + Checks --
+-- Lists + Checks: Setup --
 local playerselector = LCTab:CreateDropdown({
     Name = "Players",
     Options = playerNames,
     CurrentValue = LocalPlayer.Name,
-    Flag = "PlayerChecks",
+    Flag = "LCPlayerChecks",
     Callback = function(option)
         local selectedName = option[1]
         lcplayer = Players:FindFirstChild(selectedName)
@@ -2093,7 +2128,6 @@ local playerselector = LCTab:CreateDropdown({
     end,
 })
 
--- Refresh button
 LCTab:CreateButton({
     Name = "Refresh List",
     Callback = function()
@@ -2103,12 +2137,10 @@ LCTab:CreateButton({
     end,
 })
 
--- Auto-refresh when a new player joins
 Players.PlayerAdded:Connect(function(plr)
     builder()
     playerselector:Refresh(playerNames)
 end)
-
 
 -- Lists + Checks: Lists --
 LCTab:CreateSection("Lists")
