@@ -814,6 +814,7 @@ task.spawn(function()
 		end
 
 		if antivoid then
+			pcall(function()
         	if LocalPlayer.Character then
 				if LocalPlayer.Character.HumanoidRootPart then
 					if LocalPlayer.Character.HumanoidRootPart.Position.Y < -7 then
@@ -822,6 +823,7 @@ task.spawn(function()
                 	end
 				end
             end
+			end)
         end
 	end
 end)
