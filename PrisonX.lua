@@ -34,8 +34,8 @@ Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
 
 Coming soon:
--> arrest aura team check (GUI only)
--> Kill aura team check (GUI only)
+-> arrest aura team check (broken rn)
+-> Kill aura team check (broken rn)
 -> arrest aura/kill aura whitelist (unused rn)
 -> Inventory checker (unused rn)
 -> Gamepass checker (unused rn)
