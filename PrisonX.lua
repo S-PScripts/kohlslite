@@ -34,8 +34,8 @@ Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
 
 Coming soon:
--> arrest aura team check (broken rn)
--> Kill aura team check (broken rn)
+-> arrest aura team check
+-> Kill aura team check
 -> arrest aura/kill aura whitelist (unused rn)
 -> Inventory checker (unused rn)
 -> Gamepass checker (unused rn)
@@ -510,7 +510,7 @@ katypes = {
 }
 
 local function UpdateKillableTeams(v)
-    print("UpdateKillableTeams called with:", v)
+  --  print("UpdateKillableTeams called with:", v)
     local lteam = LocalPlayer.Team.Name
     settings.katype = v
 
@@ -535,8 +535,8 @@ local function UpdateKillableTeams(v)
         elseif lteam == "Criminals" then allowed = {"Inmates", "Guards"}
         elseif lteam == "Guards" then allowed = {"Criminals", "Inmates"}
         end
-    else
-        print("ERROR: Unknown katype!", settings.katype)
+  --  else
+  --      print("ERROR: Unknown katype!", settings.katype)
     end
 
     settings.katype_allowed = allowed
@@ -557,17 +557,17 @@ local function IsKillable(plr)
 
     -- If team check is disabled, anyone else is killable
     if not settings.katc then
-		print("team check is disabled, killin")
+		-- print("Team check is disabled, killing")
         return true
     end
 
     -- Target's team
     local ttname = plr.Team.Name
-	--print("target team is".. ttname)
+	-- print("Target team is".. ttname)
     for _, teamName in ipairs(settings.katype_allowed) do
-		print("findin" .. teamName)
+		print("Finding " .. teamName)
         if ttname == teamName then
-			print("thunder, return it")
+			-- print("Return it")
             return true
         end
     end
@@ -1770,7 +1770,7 @@ CombatTab:CreateDropdown({
     Callback = function(Option)
 		opt = Option[1]
         UpdateKillableTeams(opt)
-        print("Updated")
+        --print("Updated")
     end,
 })
 
@@ -1810,9 +1810,9 @@ CombatTab:CreateDropdown({
     Options = aatypes,
     CurrentValue = settings.aatype,
     Flag = "ArrestAuraTeamDropdown",
-    Callback = function(Value)
-        settings.aatype = Value
-        print("Updated")
+    Callback = function(Option)
+        settings.aatype = Option[1]
+        --print("Updated")
     end,
 })
 
