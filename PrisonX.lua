@@ -1,6 +1,6 @@
 -- PrisonX v1.205 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
--- THIS SCRIPT IS NO LONGER MAINTAINED
+-- Better than Flash Hub maybe?
 
 -- Credits to github.com/tomatotxt for stuff
 -- Credits to github.com/NewMatheusDC for some of the GUI
@@ -34,6 +34,7 @@ Auto anti-jump removal (-aajr/-unajr)
 Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Auto Toilet Breaker (-abtoilets / -unabtoilets)
 Hide/Show Trees (-htrees / -strees)
+ESP
 
 All implemented in a UI too!
 
