@@ -184,24 +184,9 @@ local HomeGUI = PlayerGui:WaitForChild("Home")
 local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
-local TeamEvent
+local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
 
-local success, err = pcall(function()
-    local rf = workspace:FindFirstChild("Remote")
-    if rf and remoteFolder:FindFirstChild("TeamEvent") then
-        print("old server")
-        TeamEvent = rf.TeamEvent
-    else
-        print("new server")
-        TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
-    end
-end)
-
-if not success then
-    warn("Failed to get TeamEvent: " .. err)
-end
-
-meleeEvent = ReplicatedStorage.meleeEvent
+local meleeEvent = ReplicatedStorage.meleeEvent
 
 -- Pass checks
 function checkRIOT()	
@@ -1011,20 +996,8 @@ local function SetTeam(targetTeam, skipCooldownCheck)
     local current = LocalPlayer.Team
 
 	local function switch(team)
-    	if not TeamEvent then
-        	warn("TeamEvent is missing!")
-        	return
-    	end
-
     	repeat
-        	if TeamEvent:IsA("RemoteEvent") then
-            	TeamEvent:FireServer(team)
-        	elseif TeamEvent:IsA("RemoteFunction") then
-            	TeamEvent:InvokeServer(team)
-        	else
-            	warn("Unknown type of TeamEvent!")
-            	return
-        	end
+			TeamEvent:InvokeServer(team)
         	task.wait(0.2)
     	until LocalPlayer.Team == team
 	end
