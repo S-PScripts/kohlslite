@@ -168,12 +168,27 @@ renderConnection = RunService.RenderStepped:Connect(function()
     end
 end)
 
+-- Function to enable ESP for all players
+local function enableESPForAll()
+    for _, player in pairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer and player.Character then
+            createESP(player)
+        end
+    end
+end
+
 -- Listen for global toggle change
 spawn(function()
+    local lastState = getgenv().esp
     while true do
         wait(0.1)
-        if not getgenv().esp then
-            cleanupESP()
+        if getgenv().esp ~= lastState then
+            lastState = getgenv().esp
+            if not getgenv().esp then
+                cleanupESP()
+            else
+                enableESPForAll() -- <-- Apply ESP to currently alive players immediately
+            end
         end
     end
 end)
