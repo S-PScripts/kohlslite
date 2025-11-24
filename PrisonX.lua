@@ -2488,9 +2488,7 @@ OtherTab:CreateToggle({
 
 Rayfield:LoadConfiguration()
 
-print("PrisonX executed! Created by TS2021.")
-Notify("PrisonX executed.")
-Notify("Note: I got banned from ScriptBlox, which is why this script is missing there. I'll repost it in a week.", 4)
+print("PrisonX executed! | Version: ".. version .." | Created by TS2021.")
+Notify("PrisonX executed! | Version: ".. version)
 
 Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
-print("Version: ".. version)
