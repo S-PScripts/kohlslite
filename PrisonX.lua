@@ -32,7 +32,7 @@ Auto guns (automatically pick up all guns you can when you respawn) (-autoguns /
 
 Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
 Destroy doors (-ddoors) - CLIENT-SIDE!
-Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors)
+Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors) - Patched (apparently)
 
 Toilet Breaker (must have hammer) (-btoilets)
 Auto Toilet Breaker (-abtoilets / -unabtoilets)
@@ -43,7 +43,7 @@ Auto anti-jump removal (-aajr/-unajr)
 Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Hide/Show Trees (-htrees / -strees)
 
-ESP (-esp/-unesp)
+ESP (distance from you + health + team colour) (-esp/-unesp)
 Noclip
 FOV
 Spin
