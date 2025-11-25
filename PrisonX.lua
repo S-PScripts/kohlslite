@@ -1,6 +1,6 @@
 -- PrisonX v1.205 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
--- Better than Flash Hub (perhaps)
+-- Has most features of Flash Hub; No silent aim, aimlock and targeted killing/arresting. ESP is also more limited.
 
 --[[
 Features: All implemented in a UI as well!
@@ -32,7 +32,7 @@ Auto guns (automatically pick up all guns you can when you respawn) (-autoguns /
 
 Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
 Destroy doors (-ddoors) - CLIENT-SIDE!
-Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors) - Patched (apparently)
+Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors) - Patched
 
 Toilet Breaker (must have hammer) (-btoilets)
 Auto Toilet Breaker (-abtoilets / -unabtoilets)
@@ -94,7 +94,7 @@ local settings = {
 	nodoors = false,
 
 	-- Spam open doors (must be guard / have a keycard)
-	sodoors = false,
+--	sodoors = false,
 
 	-- Kill aura
 	killaura = false,
@@ -1718,19 +1718,20 @@ local function handleCommand(msg)
 		AddDoors()
 	end
 
-    if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."sodoors" then
-    	settings.sodoors = true
-		Notify("Spam opening doors (MUST BE A GUARD/HAVE A KEYCARD).")
-	end
-
 	if string.sub(lowerMsg, 1, #prefix + 5) == prefix.."ddoors" then
     	DestroyDoors()
 	end
 	
+
+--[[    if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."sodoors" then
+    	settings.sodoors = true
+		Notify("Spam opening doors (MUST BE A GUARD/HAVE A KEYCARD).")
+	end
+
 	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."unsodoors" then
     	settings.sodoors = false
 		Notify("No longer spam opening doors.")
-	end
+	end ]]
 
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."btoilets" then
 		hammer_check_t()
@@ -2193,14 +2194,14 @@ AutoTab:CreateToggle({
     end,
 })
 
-AutoTab:CreateToggle({
+--[[ AutoTab:CreateToggle({
     Name = "Spam Open Doors",
     CurrentValue = settings.sodoors,
     Flag = "SoDoorsToggle",
     Callback = function(Value)
         settings.sodoors = Value
     end,
-})
+}) ]]
 
 -- Protection Tab --
 -- Protection --
