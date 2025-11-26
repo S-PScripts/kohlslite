@@ -1,6 +1,7 @@
 -- PrisonX v1.205 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
 -- Has most features of Flash Hub; No silent aim, aimlock and targeted killing/arresting. ESP is also more limited.
+-- Might try matching with Ultimate Script Hub
 
 --[[
 Features: All implemented in a UI as well!
@@ -512,6 +513,19 @@ function shop()
     end
 end
 
+-- one punch (unimplemented for now)
+function o_punch()
+	local Module = ReplicatedStorage:FindFirstChild("Modules") and ReplicatedStorage.Modules:FindFirstChild("ItemState")
+    if Module then
+        local rqm = require(Module)
+        if m["Fists"] then
+        	rqm["Fists"].Damage = math.huge 
+            rqm["Fists"].MaxDamage = math.huge
+            rqm["Fists"].PunchCooldown = 0 
+        end
+    end
+end
+
 -- kill aura whitelist
 function kill_aura_wl(lcplayer, lcplayerN)
         if not lcplayer then
@@ -813,6 +827,7 @@ task.spawn(function()
 			end
 		end
 
+		-- sometimes you can fall under the map, and you can't escape bc of autorespawn unless you turn it off
 		if antivoid then
 			pcall(function()
         	if LocalPlayer.Character then
@@ -1018,10 +1033,10 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 
 			if wascriminal then
-				task.wait(1) -- band aid fix 
 				if settings.autoguns then
 					repeat task.wait() until not tring
 				end
+				task.wait(2) -- crappy fix 
 				SwitchToCriminalAndReturn(false, cpos) -- really slow
 			elseif settings.autorespawn == false then
                 tpto(cpos)
