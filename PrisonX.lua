@@ -1372,7 +1372,7 @@ local function touch(hb)
 end
 
 game:GetService("RunService").Heartbeat:Connect(function()
-	if settings.sodoors then
+	--[[ if settings.sodoors then
     	if Character.Humanoid.Health > 0 then
         	for i, v in pairs(Doors:GetDescendants()) do
             	if v.Name == "hitbox" then
@@ -1380,7 +1380,7 @@ game:GetService("RunService").Heartbeat:Connect(function()
             	end
         	end
 		end
-    end
+    end ]]
 
 	if settings.abtoilets then
 		hammer_check_t()
