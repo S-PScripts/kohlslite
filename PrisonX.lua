@@ -2,6 +2,7 @@
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
 -- Has most features of Flash Hub; No silent aim, aimlock and targeted killing/arresting. ESP is also more limited.
 -- Might try matching with Ultimate Script Hub
+-- Not maintained
 
 --[[
 Features: All implemented in a UI as well!
