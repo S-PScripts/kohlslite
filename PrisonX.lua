@@ -1030,7 +1030,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
         --  local wspeed = normalWS
 		--	local jpower = normalJP
 			local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
-			Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+			die()
 				
 			local cpos = char:WaitForChild("HumanoidRootPart").CFrame
 			local wascriminal = (LocalPlayer.TeamColor.Name == "Really red")
@@ -2524,10 +2524,7 @@ OtherTab:CreateToggle({
     end,
 })
 
-
 Rayfield:LoadConfiguration()
 
 print("PrisonX executed! | Version: ".. version .." | Created by TS2021.")
-Notify("PrisonX executed! | Version: ".. version)
-
-Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
+Notify("PrisonX executed! | Version: ".. version); die()
