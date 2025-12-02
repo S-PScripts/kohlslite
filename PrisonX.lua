@@ -819,10 +819,15 @@ task.spawn(function()
 		if char then
 			local hum = char:FindFirstChildOfClass("Humanoid")
 			if hum then
-				if hum.WalkSpeed > 0 then
+				if hum.WalkSpeed == 0 then
+					hum.WalkSpeed = normalWS
+				else
 					normalWS = hum.WalkSpeed
 				end
-				if hum.JumpPower > 0 then
+					
+				if hum.JumpPower == 0 then
+					hum.JumpPower = normalJP
+				else
 					normalJP = hum.JumpPower
 				end
 			end
@@ -831,14 +836,14 @@ task.spawn(function()
 		-- sometimes you can fall under the map, and you can't escape bc of autorespawn unless you turn it off
 		if antivoid then
 			pcall(function()
-        	if LocalPlayer.Character then
-				if LocalPlayer.Character.HumanoidRootPart then
-					if LocalPlayer.Character.HumanoidRootPart.Position.Y < -7 then
-                    	LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(LocalPlayer.Character.HumanoidRootPart.Position.X,100,LocalPlayer.Character.HumanoidRootPart.Position.Z)
-                    	LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(LocalPlayer.Character.HumanoidRootPart.Velocity.X,0,LocalPlayer.Character.HumanoidRootPart.Velocity.Z)
-                	end
-				end
-            end
+        		if LocalPlayer.Character then
+					if LocalPlayer.Character.HumanoidRootPart then
+						if LocalPlayer.Character.HumanoidRootPart.Position.Y < -7 then
+                    		LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(LocalPlayer.Character.HumanoidRootPart.Position.X,100,LocalPlayer.Character.HumanoidRootPart.Position.Z)
+                    		LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(LocalPlayer.Character.HumanoidRootPart.Velocity.X,0,LocalPlayer.Character.HumanoidRootPart.Velocity.Z)
+                		end
+					end
+            	end
 			end)
         end
 	end
@@ -1054,12 +1059,15 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			local nbgui = game.Players.LocalPlayer.PlayerGui.Home.hud.BackpackUI
 			des:Stop()
 			des:Destroy()
+			LocalPlayer.Character.Humanoid.PlatformStand = false
+            LocalPlayer.Character.Humanoid.Sit = false
             nbgui.Visible = true
 			local wspeed = normalWS
 			local jpower = normalJP
 			hbeat:Wait()
 			humanoid.WalkSpeed = wspeed
 			humanoid.JumpPower = jpower
+			LocalPlayer.Character.ClientInputHandler.Disabled = false
 		end
 	end)
 end)
@@ -2268,6 +2276,8 @@ PlayerTab:CreateToggle({
 		end
     end,
 })
+
+if settings.noclip then noclip() else clip() end
 
 PlayerTab:CreateSlider({
     Name = "Field Of View",
