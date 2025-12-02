@@ -816,7 +816,7 @@ antivoid = true
 task.spawn(function()
 	while hbeat:Wait() do
 		local char = LocalPlayer.Character
-		if char then
+		if char and settings.antitase then
 			local hum = char:FindFirstChildOfClass("Humanoid")
 			if hum then
 				if hum.WalkSpeed == 0 then
