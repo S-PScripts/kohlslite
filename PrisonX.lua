@@ -132,8 +132,8 @@ local settings = {
 	noclip = false
 }
 
--- ESP toggle
-getgenv().esp = false
+getgenv().esp = false -- ESP toggle
+getgenv().aimlock = false -- Aimlock toggle (Unused)
 
 -- arrest aura wl
 aa_wl = {"ScriptingProgrammer", "kohlslitedev"}
@@ -153,16 +153,16 @@ local function Notify(text, time)
     end)
 end
 
+local version = "v1.205"
+
 -- GUI Setup
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
-
-local version = "v1.205"
 
 local Window = Rayfield:CreateWindow({
     Name = "PrisonX",
     Icon = nil,
     LoadingTitle = "PrisonX v1.205",
-    LoadingSubtitle = "Created by TS2021 // kohlslite.pages.dev/PrisonX.lua",
+    LoadingSubtitle = "Created by TS2021 | kohlslite.pages.dev",
     ConfigurationSaving = {
         Enabled = false,
     },
@@ -172,6 +172,7 @@ local Window = Rayfield:CreateWindow({
     KeySystem = false,
 })
 
+-- Tabs
 local MainTab = Window:CreateTab("Main Features", nil)
 local CombatTab = Window:CreateTab("Combat", nil)
 local TeleportTab = Window:CreateTab("Teleport", nil)
@@ -180,7 +181,6 @@ local ProtectTab = Window:CreateTab("Protection", nil)
 local PlayerTab = Window:CreateTab("Player", nil)
 local LCTab = Window:CreateTab("Lists + Checks", nil)
 local OtherTab = Window:CreateTab("Other", nil)
-
 
 -- Variables
 local Players = game:GetService("Players")
@@ -401,7 +401,6 @@ local function SwitchToCriminalAndReturn(dih, ocf)
 	fugging = false
 end
 
-
 -- Grab All Guns
 function GrabGuns(gunsToGrab)
     local obtained = {}
@@ -514,7 +513,7 @@ function shop()
     end
 end
 
--- one punch (unimplemented for now)
+-- one punch (unimplemented for now, pretty sure this doesn't even work)
 function o_punch()
 	local Module = ReplicatedStorage:FindFirstChild("Modules") and ReplicatedStorage.Modules:FindFirstChild("ItemState")
     if Module then
