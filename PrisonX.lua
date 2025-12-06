@@ -278,6 +278,7 @@ end
 local gunAliases = {
     ["m9"] = "M9",
     ["ak-47"] = "AK-47",
+	["mp5"] = "MP5",
     ["ak"] = "AK-47",
     ["ak47"] = "AK-47",
     ["remington"] = "Remington 870",
@@ -291,13 +292,13 @@ local gunAliases = {
 local allGuns
 -- Guns in the game
 if riot_pass and mafia_pass then
-	allGuns = {"M9", "AK-47", "M4A1", "Remington 870", "FAL"}
+	allGuns = {"M9", "AK-47", "M4A1", "Remington 870", "FAL", "MP5"}
 elseif riot_pass and mafia_pass then
-	allGuns = {"M9", "AK-47", "M4A1", "Remington 870"}
+	allGuns = {"M9", "AK-47", "M4A1", "Remington 870", "MP5"}
 elseif riot_pass and mafia_pass then
-	allGuns = {"M9", "AK-47", "Remington 870", "FAL"}
+	allGuns = {"M9", "AK-47", "Remington 870", "FAL", "MP5"}
 else
-	allGuns = {"M9", "AK-47", "Remington 870"}
+	allGuns = {"M9", "AK-47", "Remington 870", "MP5"}
 end
 
 local AlreadyFound = {}
