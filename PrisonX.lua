@@ -1030,7 +1030,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
         --  local wspeed = normalWS
 		--	local jpower = normalJP
 			local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
-			die()
+			Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
 				
 			local cpos = char:WaitForChild("HumanoidRootPart").CFrame
 			local wascriminal = (LocalPlayer.TeamColor.Name == "Really red")
