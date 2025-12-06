@@ -356,7 +356,7 @@ end
 -- Fix camera
 local function fixcam()
 	HomeGUI.hud.Visible = true
-	HomeGUI.intro.Visible = false
+--	HomeGUI.intro.Visible = false
 	StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, true)
 	Camera.CameraType = Enum.CameraType.Custom
 	if LocalPlayer.Character then
