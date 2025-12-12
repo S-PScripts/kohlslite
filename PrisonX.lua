@@ -1,8 +1,6 @@
 -- PrisonX v1.205 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
--- Has most features of Flash Hub; No silent aim, aimlock and targeted killing/arresting. ESP is also more limited.
--- Might try matching with Ultimate Script Hub
--- Not maintained
+-- No longer updated because Hydrogen Mac is down and I do not have a Windows computer (SCRIPTING ON MOBILE SUCKS)
 
 --[[
 Features: All implemented in a UI as well!
@@ -53,6 +51,12 @@ Infinite Jump
 
 Credits to github.com/tomatotxt for some stuff
 Credits to github.com/NewMatheusDC for some of the GUI
+]]
+
+--[[
+MISSING FEATURES:
+-> Aimbot
+-> Silent Aim
 ]]
 
 -- Infinite yield for ESP, speed, jump power
