@@ -2601,11 +2601,8 @@ OtherTab:CreateToggle({
 OtherTab:CreateToggle({
     Name = "Close Script",
     Callback = function(Value)
-		Notify("EXIT.")
-		getgenv().esp = false; getgenv().plx_executed = false
-		AddDoors(); clip(); htrees(false)
-        Rayfield:Destroy();
-		local settings={killfeed=false,antiarrest=false,antitase=false,autorespawn=false,autoguns=false,autoguns_list={},auto_pg=false,auto_fg=false,auto_fgrate=0,nodoors=false,killaura=false,killaura_radius=0,killaura_sphere=false,katc=false,katype="",katype_allowed={},arrestaura=false,arrestaura_radius=0,aatc=false,aatype="",enablere=false,aajr=false,abtoilets=false,htrees=false,ijump=false,noclip=false}
+		game.Players.LocalPlayer:Kick("PrisonX closed. Rejoinning...")
+		rj()
     end,
 })
 
