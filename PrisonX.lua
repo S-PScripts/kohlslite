@@ -44,6 +44,7 @@ Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Hide/Show Trees (-htrees / -strees)
 
 ESP (distance from you + health + team colour) (-esp/-unesp)
+Aimbot/Aimlock (+ team allowed + torso/head targetting)
 Noclip
 FOV
 Spin
