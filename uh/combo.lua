@@ -1,5 +1,7 @@
 -- Make sure the toggles exist
-getgenv().esp = false
+getgenv().espsettings = {
+    ESP = false
+}
 
 getgenv().aimlock = {
     Aimbot = false,
@@ -72,7 +74,7 @@ end
 
 -- Create ESP for a player
 local function createESP(player)
-    if not getgenv().esp then return end
+    if not getgenv().espsettings.ESP then return end
     if player == LocalPlayer then return end
     removeESP(player)
 
@@ -165,7 +167,7 @@ end
 
 -- RenderStepped for distance updates
 local function renderStepFunction()
-    if not getgenv().esp then return end
+    if not getgenv().espsettings.ESP then return end
     if next(espObjects) == nil then return end
 
     local localChar = LocalPlayer.Character
@@ -199,12 +201,12 @@ end
 
 -- Listen for global toggle change
 spawn(function()
-    local lastState = getgenv().esp
+    local lastState = getgenv().espsettings.ESP
     while true do
         wait(0.1)
-        if getgenv().esp ~= lastState then
-            lastState = getgenv().esp
-            if not getgenv().esp then
+        if getgenv().espsettings.ESP ~= lastState then
+            lastState = getgenv().espsettings.ESP
+            if not getgenv().espsettings.ESP then
                 cleanupESP()
             else
                 enableESPForAll() -- <-- Apply ESP to currently alive players immediately
