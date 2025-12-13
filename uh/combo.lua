@@ -7,8 +7,10 @@ getgenv().aimlock = {
     Aimbot = false,
     TeamCheck = { Criminals = false, Guards = false, Inmates = false },
     Target = { Torso = false, Head = true },
-    --ESP = false,
-    --ESPTeamCheck = { Criminals = false, Guards = false, Inmates = false }
+
+    -- ignore this, will be removed
+    ESP = false,
+    ESPTeamCheck = { Criminals = false, Guards = false, Inmates = false }
 }
 
 getgenv().aballowedguns = {
