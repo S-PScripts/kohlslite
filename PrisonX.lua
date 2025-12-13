@@ -1,4 +1,4 @@
--- PrisonX v1.205 by TS2021
+-- PrisonX v1.22 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
 -- No longer updated often!!!
 
@@ -43,8 +43,8 @@ Auto anti-jump removal (-aajr/-unajr)
 Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Hide/Show Trees (-htrees / -strees)
 
-ESP (distance from you + health + team colour) (-esp/-unesp)
-Aimbot/Aimlock (+ team allowed + torso/head targetting)
+ESP (distance from you + health + team colour) (+ teams allowed) (-esp/-unesp)
+Aimbot/Aimlock (+ teams allowed + torso/head targetting)
 Noclip
 FOV
 Spin
@@ -158,7 +158,7 @@ local function Notify(text, time)
     end)
 end
 
-local version = "v1.205"
+local version = "v1.22"
 
 -- GUI Setup
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
@@ -166,8 +166,8 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
     Name = "PrisonX",
     Icon = nil,
-    LoadingTitle = "PrisonX v1.205",
-    LoadingSubtitle = "Created by TS2021 | kohlslite.pages.dev",
+    LoadingTitle = "PrisonX v1.22",
+    LoadingSubtitle = "Created by TS2021 kohlslite.pages.dev",
     ConfigurationSaving = {
         Enabled = false,
     },
@@ -2323,13 +2323,58 @@ loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo.lua", true))()
 PlayerTab:CreateSection("ESP")
 PlayerTab:CreateToggle({
     Name = "ESP",
-    CurrentValue = getgenv().esp,
+    CurrentValue = getgenv().espsettings,
     Flag = "ESPToggle",
     Callback = function(Value)
         if Value then
 			getgenv().espsettings.ESP = true
         else
             getgenv().espsettings.ESP = false
+        end
+    end,
+})
+
+PlayerTab:CreateToggle({
+    Name = "Guards Allowed",
+    CurrentValue = getgenv().espsettings.ESPTeamCheck.Guards,
+    Flag = "GuardsAllowedESP",
+    Callback = function(Value)
+        if Value then
+			getgenv().espsettings.ESPTeamCheck.Guards = true
+			getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true
+        else
+            getgenv().espsettings.ESPTeamCheck.Guards = false
+			getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true
+        end
+    end,
+})
+
+PlayerTab:CreateToggle({
+    Name = "Criminals Allowed",
+    CurrentValue = getgenv().espsettings.ESPTeamCheck.Criminals,
+    Flag = "CriminalsAllowedESP",
+    Callback = function(Value)
+        if Value then
+			getgenv().espsettings.ESPTeamCheck.Criminals = true
+			getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true
+        else
+            getgenv().espsettings.ESPTeamCheck.Criminals = false
+			getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true
+        end
+    end,
+})
+
+PlayerTab:CreateToggle({
+    Name = "Inmates Allowed",
+    CurrentValue = getgenv().espsettings.ESPTeamCheck.Inmates,
+    Flag = "InmatesAllowedESP",
+    Callback = function(Value)
+        if Value then
+			getgenv().espsettings.ESPTeamCheck.Inmates = true
+			getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true
+        else
+            getgenv().espsettings.ESPTeamCheck.Inmates = false
+			getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true
         end
     end,
 })
@@ -2377,7 +2422,7 @@ PlayerTab:CreateToggle({
 PlayerTab:CreateToggle({
     Name = "Inmates Allowed",
     CurrentValue = getgenv().aimlock.TeamCheck.Inmates,
-    Flag = "InmatessAllowedALT",
+    Flag = "InmatesAllowedALT",
     Callback = function(Value)
         if Value then
 			getgenv().aimlock.TeamCheck.Inmates = true
