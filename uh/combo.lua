@@ -3,7 +3,7 @@ getgenv().esp = false
 
 getgenv().aimlock = {
     Aimbot = false,
-    TeamCheck = { Criminals = false, Guards = true, Inmates = false },
+    TeamCheck = { Criminals = false, Guards = false, Inmates = false },
     Target = { Torso = false, Head = true },
     --ESP = false,
     --ESPTeamCheck = { Criminals = false, Guards = false, Inmates = false }
