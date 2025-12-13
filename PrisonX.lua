@@ -56,7 +56,6 @@ Credits to github.com/NewMatheusDC for some of the GUI
 
 --[[
 MISSING FEATURES:
--> Aimbot
 -> Silent Aim
 ]]
 
