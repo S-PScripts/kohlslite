@@ -1,4 +1,4 @@
--- Make sure the toggles exist
+-- MAIN VARIABLES --
 getgenv().espsettings = {
     ESP = false
 }
@@ -19,6 +19,7 @@ getgenv().aballowedguns = {
     ["Taser"] = true
 }
 
+-- VARIABLE SETUP --
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
 local TweenService = game:GetService("TweenService")
@@ -29,6 +30,7 @@ local UIS = game:GetService("UserInputService")
 local LocalPlayer = Players.LocalPlayer
 local Camera = Workspace.CurrentCamera
 
+-- ESP --
 local espObjects = {}
 local renderConnection
 
@@ -220,6 +222,7 @@ spawn(function()
     end
 end)
 
+-- AIMLOCK --
 local function holdingValidGun()
     local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Tool")
     return tool and aballowedguns[tool.Name] or false
@@ -287,6 +290,7 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
+--[[
 local function teamAllowed(plr)
     if not plr.Team then return false end
     if plr.Team.Name == "Criminals" and aimlock.ESPTeamCheck.Criminals then return true end
@@ -359,3 +363,4 @@ RunService.RenderStepped:Connect(function()
         end
     end
 end)
+]]
