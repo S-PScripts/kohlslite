@@ -45,6 +45,7 @@ Hide/Show Trees (-htrees / -strees)
 
 ESP (distance from you + health + team colour) (+ teams allowed) (-esp/-unesp)
 Aimbot/Aimlock (+ teams allowed + torso/head targetting)
+(i forgot to add guns which are whitelisted, i'll add it when i have time)
 Noclip
 FOV
 Spin
