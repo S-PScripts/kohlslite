@@ -56,10 +56,10 @@ Credits to github.com/NewMatheusDC for some of the GUI
 
 --[[
 MISSING FEATURES:
--> Silent Aim
+-> Silent Aim / Invisibility
 ]]
 
--- Infinite yield for ESP, speed, jump power
+-- Infinite yield for speed, jump power
 loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 
 if getgenv().plx_executed then
