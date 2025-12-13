@@ -1,6 +1,7 @@
 -- MAIN VARIABLES --
 getgenv().espsettings = {
-    ESP = false
+    ESP = false,
+    ESPTeamCheck = { Criminals = false, Guards = false, Inmates = false }
 }
 
 getgenv().aimlock = {
@@ -8,9 +9,8 @@ getgenv().aimlock = {
     TeamCheck = { Criminals = false, Guards = false, Inmates = false },
     Target = { Torso = false, Head = true },
 
-    -- ignore this, will be removed
-    ESP = false,
-    ESPTeamCheck = { Criminals = false, Guards = false, Inmates = false }
+   --[[ ESP = false,
+    ESPTeamCheck = { Criminals = false, Guards = false, Inmates = false } ]]
 }
 
 getgenv().aballowedguns = {
@@ -78,7 +78,12 @@ end
 
 -- Create ESP for a player
 local function createESP(player)
-    if not getgenv().espsettings.ESP then return end
+    if not espsettings.ESP then return end
+
+    if not espsettings.ESPTeamCheck.Criminals and player.Team and player.Team.Name == "Criminals" then return end
+    if not espsettings.ESPTeamCheck.Guards and player.Team and player.Team.Name == "Guards" then return end
+    if not espsettings.ESPTeamCheck.Inmates and player.Team and player.Team.Name == "Inmates" then return end
+    
     if player == LocalPlayer then return end
     removeESP(player)
 
@@ -171,7 +176,7 @@ end
 
 -- RenderStepped for distance updates
 local function renderStepFunction()
-    if not getgenv().espsettings.ESP then return end
+    if not espsettings.ESP then return end
     if next(espObjects) == nil then return end
 
     local localChar = LocalPlayer.Character
@@ -205,12 +210,12 @@ end
 
 -- Listen for global toggle change
 spawn(function()
-    local lastState = getgenv().espsettings.ESP
+    local lastState = espsettings.ESP
     while true do
         wait(0.1)
-        if getgenv().espsettings.ESP ~= lastState then
-            lastState = getgenv().espsettings.ESP
-            if not getgenv().espsettings.ESP then
+        if espsettings.ESP ~= lastState then
+            lastState = espsettings.ESP
+            if not espsettings.ESP then
                 cleanupESP()
             else
                 enableESPForAll() -- <-- Apply ESP to currently alive players immediately
