@@ -324,33 +324,38 @@ RunService.RenderStepped:Connect(function()
         if plr ~= LocalPlayer and plr.Character then
             local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
             local hum = plr.Character:FindFirstChild("Humanoid")
-                
+
+            local teste = true
             if hrp or hum or hum.Health >= 0 then 
                 --
             else
-                removeHighlight(plr) 
+                removeHighlight(plr); teste = false
             end
                 
             if aimlock.ESP then 
                 --
             else
-                removeHighlight(plr)
+                removeHighlight(plr); teste = false
             end
                 
             if teamAllowed(plr) then 
                 --
             else
-                removeHighlight(plr) 
+                removeHighlight(plr); teste = false
             end
 
-            local h = getHighlight(plr)
-            h.Adornee = plr.Character
+            if teste then
+                local h = getHighlight(plr)
+                h.Adornee = plr.Character
 
-            local dist = (Camera.CFrame.Position - hrp.Position).Magnitude
-            h.OutlineColor = dist <= 25 and Color3.new(1,1,1) or Color3.new(0,0,0)
-            h.FillColor = teamColor(plr)
-            h.FillTransparency = 0.5
-            h.OutlineTransparency = 0
+                local dist = (Camera.CFrame.Position - hrp.Position).Magnitude
+                h.OutlineColor = dist <= 25 and Color3.new(1,1,1) or Color3.new(0,0,0)
+                h.FillColor = teamColor(plr)
+                h.FillTransparency = 0.5
+                h.OutlineTransparency = 0
+            else
+                --
+            end
         end
     end
 end)
