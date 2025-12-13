@@ -136,7 +136,7 @@ local settings = {
 	noclip = false
 }
 
-getgenv().esp = false -- ESP toggle
+getgenv().espsettings = false -- ESP toggle
 getgenv().aimlock = false -- Aimlock toggle (Unused)
 
 -- arrest aura wl
@@ -208,6 +208,8 @@ local Teams = game:GetService("Teams")
 local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
 
 local meleeEvent = ReplicatedStorage.meleeEvent
+
+local TeamList = {"Criminals", "Inmates", "Guards"}
 
 -- Pass checks
 function checkRIOT()	
@@ -2316,17 +2318,96 @@ PlayerTab:CreateSlider({
     end,
 })
 
-loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/iyesp.lua", true))()
-
+loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo.lua", true))()
+PlayerTab:CreateSection("ESP")
 PlayerTab:CreateToggle({
     Name = "ESP",
     CurrentValue = getgenv().esp,
     Flag = "ESPToggle",
     Callback = function(Value)
         if Value then
-			getgenv().esp = true
+			getgenv().espsettings.ESP = true
         else
-            getgenv().esp = false
+            getgenv().espsettings.ESP = false
+        end
+    end,
+})
+
+PlayerTab:CreateSection("Aimlock")
+PlayerTab:CreateToggle({
+    Name = "Aimlock",
+    CurrentValue = getgenv().aimlock.Aimbot,
+    Flag = "AimlockToggle",
+    Callback = function(Value)
+        if Value then
+			getgenv().aimlock.Aimbot = true
+        else
+            getgenv().aimlock.Aimbot = false
+        end
+    end,
+})
+
+PlayerTab:CreateToggle({
+    Name = "Guards Allowed",
+    CurrentValue = getgenv().aimlock.TeamCheck.Guards,
+    Flag = "GuardsAllowedALT",
+    Callback = function(Value)
+        if Value then
+			getgenv().aimlock.TeamCheck.Guards = true
+        else
+            getgenv().aimlock.TeamCheck.Guards = false
+        end
+    end,
+})
+
+PlayerTab:CreateToggle({
+    Name = "Criminals Allowed",
+    CurrentValue = getgenv().aimlock.TeamCheck.Criminals,
+    Flag = "CriminalsAllowedALT",
+    Callback = function(Value)
+        if Value then
+			getgenv().aimlock.TeamCheck.Criminals = true
+        else
+            getgenv().aimlock.TeamCheck.Criminals = false
+        end
+    end,
+})
+
+PlayerTab:CreateToggle({
+    Name = "Inmates Allowed",
+    CurrentValue = getgenv().aimlock.TeamCheck.Inmates,
+    Flag = "InmatessAllowedALT",
+    Callback = function(Value)
+        if Value then
+			getgenv().aimlock.TeamCheck.Inmates = true
+        else
+            getgenv().aimlock.TeamCheck.Inmates = false
+        end
+    end,
+})
+
+PlayerTab:CreateToggle({
+    Name = "Target Torso",
+    CurrentValue = getgenv().aimlock.Target.Torso,
+    Flag = "TTALT",
+    Callback = function(Value)
+        if Value then
+			getgenv().aimlock.Target.Torso = true
+        else
+            getgenv().aimlock.Target.Torso = false
+        end
+    end,
+})
+
+PlayerTab:CreateToggle({
+    Name = "Target Head",
+    CurrentValue = getgenv().aimlock.Target.Head,
+    Flag = "THALT",
+    Callback = function(Value)
+        if Value then
+			getgenv().aimlock.Target.Head = true
+        else
+            getgenv().aimlock.Target.Head = false
         end
     end,
 })
