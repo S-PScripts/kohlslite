@@ -1,7 +1,7 @@
 -- Make sure the toggles exist
 getgenv().esp = false
 
-getgenv().absettings = {
+getgenv().aimlock = {
     Aimbot = false,
     TeamCheck = { Criminals = false, Guards = true, Inmates = false },
     Target = { Torso = false, Head = true },
@@ -226,17 +226,17 @@ ESP_Folder.Name = "ESP_Storage"
 ESP_Folder.Parent = CoreGui
 
 local function validTeam(plr)
-    if not absettings.TeamCheck.Criminals and plr.Team and plr.Team.Name == "Criminals" then return false end
-    if not absettings.TeamCheck.Guards and plr.Team and plr.Team.Name == "Guards" then return false end
-    if not absettings.TeamCheck.Inmates and plr.Team and plr.Team.Name == "Inmates" then return false end
+    if not aimlock.TeamCheck.Criminals and plr.Team and plr.Team.Name == "Criminals" then return false end
+    if not aimlock.TeamCheck.Guards and plr.Team and plr.Team.Name == "Guards" then return false end
+    if not aimlock.TeamCheck.Inmates and plr.Team and plr.Team.Name == "Inmates" then return false end
     return true
 end
 
 local function getTargetPart(char)
     local hum = char:FindFirstChild("Humanoid")
     if not hum or hum.Health <= 0 then return nil end
-    if absettings.Target.Head and char:FindFirstChild("Head") then return char.Head end
-    if absettings.Target.Torso and char:FindFirstChild("Torso") then return char.Torso end
+    if aimlock.Target.Head and char:FindFirstChild("Head") then return char.Head end
+    if aimlock.Target.Torso and char:FindFirstChild("Torso") then return char.Torso end
     return nil
 end
 
@@ -272,7 +272,7 @@ local function getClosestScreenTarget()
 end
 
 RunService.RenderStepped:Connect(function()
-    if absettings.Aimbot and holdingValidGun() then
+    if aimlock.Aimbot and holdingValidGun() then
         local target = getClosestScreenTarget()
         if target then
             local part = getTargetPart(target)
@@ -285,9 +285,9 @@ end)
 
 local function teamAllowed(plr)
     if not plr.Team then return false end
-    if plr.Team.Name == "Criminals" and absettings.ESPTeamCheck.Criminals then return true end
-    if plr.Team.Name == "Guards" and absettings.ESPTeamCheck.Guards then return true end
-    if plr.Team.Name == "Inmates" and absettings.ESPTeamCheck.Inmates then return true end
+    if plr.Team.Name == "Criminals" and aimlock.ESPTeamCheck.Criminals then return true end
+    if plr.Team.Name == "Guards" and aimlock.ESPTeamCheck.Guards then return true end
+    if plr.Team.Name == "Inmates" and aimlock.ESPTeamCheck.Inmates then return true end
     return false
 end
 
@@ -320,9 +320,24 @@ RunService.RenderStepped:Connect(function()
         if plr ~= LocalPlayer and plr.Character then
             local hrp = plr.Character:FindFirstChild("HumanoidRootPart")
             local hum = plr.Character:FindFirstChild("Humanoid")
-            if not hrp or not hum or hum.Health <= 0 then removeHighlight(plr) continue end
-            if not absettings.ESP then removeHighlight(plr) continue end
-            if not teamAllowed(plr) then removeHighlight(plr) continue end
+                
+            if hrp or hum or hum.Health >= 0 then 
+                --
+            else
+                removeHighlight(plr) 
+            end
+                
+            if aimlock.ESP then 
+                --
+            else
+                removeHighlight(plr)
+            end
+                
+            if teamAllowed(plr) then 
+                --
+            else
+                removeHighlight(plr) 
+            end
 
             local h = getHighlight(plr)
             h.Adornee = plr.Character
