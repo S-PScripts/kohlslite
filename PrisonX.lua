@@ -297,9 +297,9 @@ local allGuns
 -- Guns in the game
 if riot_pass and mafia_pass then
 	allGuns = {"M9", "AK-47", "M4A1", "Remington 870", "FAL", "MP5"}
-elseif riot_pass and mafia_pass then
+elseif riot_pass then
 	allGuns = {"M9", "AK-47", "M4A1", "Remington 870", "MP5"}
-elseif riot_pass and mafia_pass then
+elseif mafia_pass then
 	allGuns = {"M9", "AK-47", "Remington 870", "FAL", "MP5"}
 else
 	allGuns = {"M9", "AK-47", "Remington 870", "MP5"}
