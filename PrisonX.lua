@@ -1,6 +1,6 @@
 -- PrisonX v1.205 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
--- No longer updated because Hydrogen Mac is down and I do not have a Windows computer (SCRIPTING ON MOBILE SUCKS)
+-- No longer updated often!!!
 
 --[[
 Features: All implemented in a UI as well!
