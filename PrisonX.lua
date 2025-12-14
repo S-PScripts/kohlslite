@@ -22,7 +22,7 @@ Arrest Aura Radius (-aaradius)
 Arrest Aura Team Check + Options
 Arrest Aura Whitelist (-aawl / -unaawl)
 
-Auto Respawn (spawn in the same place upon death) (-autore / -unautore)
+Auto Respawn (spawn in the same place upon death) (-autore / -unautore) - Patched
 Quick Respawn (does a neat trick to spawn you faster for inmates/guards when possible, part of auto respawn)
 
 Powerful Guns (guns have unlimited range + spread) (-powguns / -unpowguns)
@@ -2135,14 +2135,14 @@ TeleportTab:CreateButton({
 -- Automation Tab --
 -- Automation: Player Related --
 AutoTab:CreateSection("Player Related")
-AutoTab:CreateToggle({
+--[[ AutoTab:CreateToggle({
     Name = "Auto Respawn (Patched)",
     CurrentValue = settings.autorespawn,
     Flag = "AutoRespawnToggle",
     Callback = function(Value)
         settings.autorespawn = Value
     end,
-})
+}) ]]
 
 AutoTab:CreateToggle({
     Name = "Auto Anti-Jump Removal",
