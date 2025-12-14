@@ -1043,7 +1043,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 				if settings.autoguns then
 					repeat task.wait() until not tring
 				end
-				task.wait(3.5) -- bad fix 
+				task.wait(5) -- bad fix 
 				SwitchToCriminalAndReturn(false, cpos) -- really slow
 			elseif settings.autorespawn == false then
                 tpto(cpos)
@@ -1467,6 +1467,7 @@ RunService.Heartbeat:Connect(function()
 
     -- Auto guns
     if settings.autoguns and tring == false then
+		task.wait(TELEPORT_COOLDOWN)
         tring = true
 
         local localOldHRP = hrp.CFrame
@@ -1489,7 +1490,6 @@ RunService.Heartbeat:Connect(function()
             	tpto(localOldHRP)
         	end
 		else
-			task.wait(TELEPORT_COOLDOWN)
 			if pickedGuns > 0 then
             	hrp.CFrame = lastDeathCFrame
 			end
