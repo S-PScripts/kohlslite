@@ -1218,7 +1218,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 		if settings.autoguns then
 			-- print("nasser balls")
 		else
-        	task.wait(0.1)
+        	task.wait(TELEPORT_COOLDOWN)
 			hrp.CFrame = lastDeathCFrame
 		end
     end
@@ -1227,7 +1227,6 @@ LocalPlayer.CharacterAdded:Connect(function(char)
         if settings.autorespawn == false then return end
 
         if hrp then
-			task.wait(TELEPORT_COOLDOWN)
             lastDeathCFrame = hrp.CFrame
         end
 
