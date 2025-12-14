@@ -1041,7 +1041,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 
 			if wascriminal then
 				if settings.autoguns then
-					task.wait(5)
+					repeat task.wait() until gwak
 				end
 				SwitchToCriminalAndReturn(false, cpos) -- really slow
 			elseif settings.autorespawn == false then
@@ -1445,6 +1445,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
     hrp = char:WaitForChild("HumanoidRootPart")
 	--if LocalPlayer.Team ~= Teams.Neutral then
     	tring = false -- reset AutoGuns state
+		gwak = false
 	--end
 
 	lst = os.clock()
@@ -1497,7 +1498,7 @@ RunService.Heartbeat:Connect(function()
 			end
 		end
 
-       -- tring = false
+       gwak = true
     end
 end)
 
