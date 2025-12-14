@@ -308,6 +308,12 @@ else
 	allGuns = {"M9", "AK-47", "Remington 870", "MP5"}
 end
 
+local allGuns2 = {}
+for _, gun in ipairs(allGuns) do
+    table.insert(allGuns2, gun)
+end
+table.insert(allGuns2, "Taser")
+
 local AlreadyFound = {}
 local function FindGunSpawner(GunName)
     if AlreadyFound[GunName] then
@@ -2464,6 +2470,36 @@ PlayerTab:CreateToggle({
 			getgenv().aimlock.Target.Head = true
         else
             getgenv().aimlock.Target.Head = false
+        end
+    end,
+})
+
+-- selected gun from dropdown
+local abgun = nil
+
+PlayerTab:CreateDropdown({
+    Name = "Gun",
+    Options = allGuns2,
+    Flag = "ABGunDropdown",
+    Callback = function(Option)
+        abgun = Option[1]
+    end,
+})
+
+PlayerTab:CreateButton({
+    Name = "Add/Remove Gun From Aimlock",
+    Callback = function()
+        if not abgun then
+            return
+        end
+
+        local allowedGuns = getgenv().aballowedguns
+        if allowedGuns[abgun] then
+            allowedGuns[abgun] = false
+            Notify(abgun .. " disabled")
+        else
+            allowedGuns[abgun] = true
+            Notify(abgun .. " enabled")
         end
     end,
 })
