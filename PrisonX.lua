@@ -1016,6 +1016,7 @@ function die()
 	Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
 end
 
+gwak = false
 -- Anti Arrest and Anti Tase
 LocalPlayer.CharacterAdded:Connect(function(char)
 	local humanoid = char:WaitForChild("Humanoid")
