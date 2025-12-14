@@ -1467,9 +1467,9 @@ RunService.Heartbeat:Connect(function()
 
     -- Auto guns
     if settings.autoguns and tring == false then
-		print("it's waiting give it a sec")
+		print("Waiting...")
+		tring = true
 		task.wait(TELEPORT_COOLDOWN)
-        tring = true
 
         local localOldHRP = hrp.CFrame
         local pickedGuns = 0
