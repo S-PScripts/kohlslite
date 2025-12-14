@@ -2482,7 +2482,7 @@ ESPAimbotTab:CreateSection("Guns Allowed")
 local abgun = nil
 
 ESPAimbotTab:CreateDropdown({
-    Name = "Add/Remove Gun from Aimlock List",
+    Name = "Aimlock Gun List",
     Options = allGuns2,
     Flag = "ABGunDropdown",
     Callback = function(Option)
