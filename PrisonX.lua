@@ -22,7 +22,7 @@ Arrest Aura Radius (-aaradius)
 Arrest Aura Team Check + Options
 Arrest Aura Whitelist (-aawl / -unaawl)
 
-Auto Respawn (spawn in the same place upon death) (-autore / -unautore) - Patched
+Auto Respawn (spawn in the same place upon death) (-autore / -unautore)
 Quick Respawn (does a neat trick to spawn you faster for inmates/guards when possible, part of auto respawn)
 
 Powerful Guns (guns have unlimited range + spread) (-powguns / -unpowguns)
@@ -83,8 +83,8 @@ local settings = {
 	-- Remove tased effects
     antitase = true,
 
-	-- Respawn in your previous position if you die (patched)
-    autorespawn = false,
+	-- Respawn in your previous position if you die
+    autorespawn = true,
 
 	-- Auto guns
 	autoguns = false,
@@ -1049,7 +1049,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 				if settings.autoguns then
 					repeat task.wait() until not tring
 				end
-				task.wait(2) -- crappy fix 
+				task.wait(3.5) -- bad fix 
 				SwitchToCriminalAndReturn(false, cpos) -- really slow
 			elseif settings.autorespawn == false then
                 tpto(cpos)
@@ -1079,6 +1079,20 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	end)
 end)
 
+local TELEPORT_COOLDOWN = 1.6
+local lastTeleport = 0
+-- teleport time check
+local function CanTeleport()
+    local now = tick()
+    local delta = now - lastTeleport
+    if delta < TELEPORT_COOLDOWN then
+        local remaining = TELEPORT_COOLDOWN - delta
+        Notify("Wait " .. string.format("%.1f", remaining) .. "s before teleporting again")
+        return false
+    end
+    lastTeleport = now
+    return true
+end
 
 -- Cooldown tracking
 if not _G.TeamCooldown then
@@ -1218,6 +1232,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
         if settings.autorespawn == false then return end
 
         if hrp then
+			task.wait(TELEPORT_COOLDOWN)
             lastDeathCFrame = hrp.CFrame
         end
 
@@ -1478,6 +1493,7 @@ RunService.Heartbeat:Connect(function()
             	tpto(localOldHRP)
         	end
 		else
+			task.wait(TELEPORT_COOLDOWN)
 			if pickedGuns > 0 then
             	hrp.CFrame = lastDeathCFrame
 			end
@@ -2095,7 +2111,10 @@ TeleportTab:CreateDropdown({
 TeleportTab:CreateButton({
     Name = "Go",
     Callback = function()
-		teleportTo(locName)	
+		teleport_able = canTeleport()
+		if teleport_able then
+			teleportTo(locName)
+		end
     end,
 })
 
@@ -2127,7 +2146,10 @@ TeleportTab:CreateButton({
 TeleportTab:CreateButton({
     Name = "Go",
     Callback = function()
-		tptop(tcplayer)	
+		teleport_able = canTeleport()
+		if teleport_able then
+			tptop(tcplayer)
+		end
     end,
 })
 
@@ -2135,14 +2157,14 @@ TeleportTab:CreateButton({
 -- Automation Tab --
 -- Automation: Player Related --
 AutoTab:CreateSection("Player Related")
---[[ AutoTab:CreateToggle({
-    Name = "Auto Respawn (Patched)",
+AutoTab:CreateToggle({
+    Name = "Auto Respawn",
     CurrentValue = settings.autorespawn,
     Flag = "AutoRespawnToggle",
     Callback = function(Value)
         settings.autorespawn = Value
     end,
-}) ]]
+})
 
 AutoTab:CreateToggle({
     Name = "Auto Anti-Jump Removal",
