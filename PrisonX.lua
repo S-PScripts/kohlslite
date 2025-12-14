@@ -184,6 +184,7 @@ local TeleportTab = Window:CreateTab("Teleport", nil)
 local AutoTab = Window:CreateTab("Automation", nil)
 local ProtectTab = Window:CreateTab("Protection", nil)
 local PlayerTab = Window:CreateTab("Player", nil)
+local ESPAimbotTab = Window:CreateTab("Aimlock", nil)
 local LCTab = Window:CreateTab("Lists + Checks", nil)
 local OtherTab = Window:CreateTab("Other", nil)
 
@@ -2395,8 +2396,8 @@ PlayerTab:CreateToggle({
     end,
 })
 
-PlayerTab:CreateSection("Aimlock")
-PlayerTab:CreateToggle({
+ESPAimbotTab:CreateSection("Aimlock")
+ESPAimbotTab:CreateToggle({
     Name = "Aimlock",
     CurrentValue = getgenv().aimlock.Aimbot,
     Flag = "AimlockToggle",
@@ -2409,7 +2410,8 @@ PlayerTab:CreateToggle({
     end,
 })
 
-PlayerTab:CreateToggle({
+ESPAimbotTab:CreateSection("Teams Allowed")
+ESPAimbotTab:CreateToggle({
     Name = "Guards Allowed",
     CurrentValue = getgenv().aimlock.TeamCheck.Guards,
     Flag = "GuardsAllowedALT",
@@ -2422,7 +2424,7 @@ PlayerTab:CreateToggle({
     end,
 })
 
-PlayerTab:CreateToggle({
+ESPAimbotTab:CreateToggle({
     Name = "Criminals Allowed",
     CurrentValue = getgenv().aimlock.TeamCheck.Criminals,
     Flag = "CriminalsAllowedALT",
@@ -2435,7 +2437,7 @@ PlayerTab:CreateToggle({
     end,
 })
 
-PlayerTab:CreateToggle({
+ESPAimbotTab:CreateToggle({
     Name = "Inmates Allowed",
     CurrentValue = getgenv().aimlock.TeamCheck.Inmates,
     Flag = "InmatesAllowedALT",
@@ -2448,7 +2450,8 @@ PlayerTab:CreateToggle({
     end,
 })
 
-PlayerTab:CreateToggle({
+ESPAimbotTab:CreateSection("Targets")
+ESPAimbotTab:CreateToggle({
     Name = "Target Torso",
     CurrentValue = getgenv().aimlock.Target.Torso,
     Flag = "TTALT",
@@ -2461,7 +2464,7 @@ PlayerTab:CreateToggle({
     end,
 })
 
-PlayerTab:CreateToggle({
+ESPAimbotTab:CreateToggle({
     Name = "Target Head",
     CurrentValue = getgenv().aimlock.Target.Head,
     Flag = "THALT",
@@ -2474,11 +2477,12 @@ PlayerTab:CreateToggle({
     end,
 })
 
+ESPAimbotTab:CreateSection("Guns Allowed")
 -- selected gun from dropdown
 local abgun = nil
 
-PlayerTab:CreateDropdown({
-    Name = "Gun",
+ESPAimbotTab:CreateDropdown({
+    Name = "Add/Remove Gun from Aimlock List",
     Options = allGuns2,
     Flag = "ABGunDropdown",
     Callback = function(Option)
@@ -2486,7 +2490,7 @@ PlayerTab:CreateDropdown({
     end,
 })
 
-PlayerTab:CreateButton({
+ESPAimbotTab:CreateButton({
     Name = "Add/Remove Gun From Aimlock",
     Callback = function()
         if not abgun then
@@ -2496,16 +2500,17 @@ PlayerTab:CreateButton({
         local allowedGuns = getgenv().aballowedguns
         if allowedGuns[abgun] then
             allowedGuns[abgun] = false
-            Notify(abgun .. " disabled")
+            Notify(abgun .. " disabled in aimlock")
         else
             allowedGuns[abgun] = true
-            Notify(abgun .. " enabled")
+            Notify(abgun .. " enabled in aimlock")
         end
     end,
 })
 
 -- Lists + Checks --
 -- Lists + Checks: Setup --
+LCTab:CreateSection("Player Selector")
 local playerselector = LCTab:CreateDropdown({
     Name = "Players",
     Options = playerNames,
