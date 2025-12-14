@@ -1448,16 +1448,14 @@ LocalPlayer.CharacterAdded:Connect(function(char)
     	tring = false -- reset AutoGuns state
 	--end
 
+	lst = os.clock()
 	-- removal of anti-jump
 	if settings.aajr then
 		ajr()
 	end
 end)
 
-if LocalPlayer.Character then
-    hrp = LocalPlayer.Character:WaitForChild("HumanoidRootPart")
-end
-
+AUTOGUN_DELAY_AFTER_SPAWN = 1.6
 RunService.Heartbeat:Connect(function()
     if not hrp then return end -- wait until HumanoidRootPart exists
     -- No doors
@@ -1465,11 +1463,15 @@ RunService.Heartbeat:Connect(function()
         NoDoors()
     end
 
+	if os.clock() - lst < AUTOGUN_DELAY_AFTER_SPAWN then
+        return
+    end
+		
     -- Auto guns
     if settings.autoguns and tring == false then
-		print("Waiting...")
+		print("tell me this fixed it pluh")
 		tring = true
-		task.wait(TELEPORT_COOLDOWN)
+		--task.wait(TELEPORT_COOLDOWN)
 
         local localOldHRP = hrp.CFrame
         local pickedGuns = 0
