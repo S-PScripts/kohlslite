@@ -1,7 +1,7 @@
 -- MAIN VARIABLES --
 getgenv().espsettings = {
     ESP = false,
-    ESPTeamCheck = { Criminals = false, Guards = false, Inmates = false }
+    ESPTeamCheck = { Criminals = true, Guards = true, Inmates = true }
 }
 
 getgenv().aimlock = {
