@@ -2636,6 +2636,13 @@ OtherTab:CreateButton({
     end,
 })
 
+OtherTab:CreateButton({
+    Name = "Destroy Team Indicators",
+    Callback = function()
+        workspace.TeamIndicators:Destroy()
+    end,
+})
+
 -- Other: Player Related --
 OtherTab:CreateSection("Player Related")
 OtherTab:CreateButton({
