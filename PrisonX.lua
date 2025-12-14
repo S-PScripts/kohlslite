@@ -83,8 +83,8 @@ local settings = {
 	-- Remove tased effects
     antitase = true,
 
-	-- Respawn in your previous position if you die
-    autorespawn = true,
+	-- Respawn in your previous position if you die (patched)
+    autorespawn = false,
 
 	-- Auto guns
 	autoguns = false,
@@ -2136,7 +2136,7 @@ TeleportTab:CreateButton({
 -- Automation: Player Related --
 AutoTab:CreateSection("Player Related")
 AutoTab:CreateToggle({
-    Name = "Auto Respawn",
+    Name = "Auto Respawn (Patched)",
     CurrentValue = settings.autorespawn,
     Flag = "AutoRespawnToggle",
     Callback = function(Value)
