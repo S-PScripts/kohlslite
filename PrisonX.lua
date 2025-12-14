@@ -521,19 +521,6 @@ function shop()
     end
 end
 
--- one punch (unimplemented for now, pretty sure this doesn't even work)
-function o_punch()
-	local Module = ReplicatedStorage:FindFirstChild("Modules") and ReplicatedStorage.Modules:FindFirstChild("ItemState")
-    if Module then
-        local rqm = require(Module)
-        if m["Fists"] then
-        	rqm["Fists"].Damage = math.huge 
-            rqm["Fists"].MaxDamage = math.huge
-            rqm["Fists"].PunchCooldown = 0 
-        end
-    end
-end
-
 -- kill aura whitelist
 function kill_aura_wl(lcplayer, lcplayerN)
         if not lcplayer then
@@ -1081,8 +1068,9 @@ end)
 
 local TELEPORT_COOLDOWN = 1.6
 local lastTeleport = 0
+
 -- teleport time check
-local function CanTeleport()
+local function canTeleport()
     local now = tick()
     local delta = now - lastTeleport
     if delta < TELEPORT_COOLDOWN then
