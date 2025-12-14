@@ -42,9 +42,10 @@ Auto anti-jump removal (-aajr/-unajr)
 
 Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Hide/Show Trees (-htrees / -strees)
+Remove Team Indicators
 
 ESP (distance from you + health + team colour) (+ teams allowed) (-esp/-unesp)
-Aimbot/Aimlock (+ teams allowed + torso/head targetting)
+Aimbot/Aimlock (+ teams allowed + torso/head targetting + guns allowed)
 Noclip
 FOV
 Spin
