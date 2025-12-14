@@ -1041,9 +1041,8 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 
 			if wascriminal then
 				if settings.autoguns then
-					repeat task.wait() until not tring
+					task.wait(5)
 				end
-				task.wait(5) -- bad fix 
 				SwitchToCriminalAndReturn(false, cpos) -- really slow
 			elseif settings.autorespawn == false then
                 tpto(cpos)
@@ -1498,7 +1497,7 @@ RunService.Heartbeat:Connect(function()
 			end
 		end
 
-        tring = false
+       -- tring = false
     end
 end)
 
