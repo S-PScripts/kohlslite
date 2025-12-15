@@ -192,6 +192,7 @@ local OtherTab = Window:CreateTab("Other", nil)
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
 local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local Humanoid = Character:WaitForChild("Humanoid")
 local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 
 local RunService = game:GetService("RunService")
@@ -216,11 +217,11 @@ local TeamList = {"Criminals", "Inmates", "Guards"}
 
 -- Pass checks
 function checkRIOT()	
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 643697197) then
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(LocalPlayer.UserId, 643697197) then
 		return true, "NEW"
 	end
 
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 96651) then
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(LocalPlayer.UserId, 96651) then
 		return true, "LEGACY"
 	end
 
@@ -228,7 +229,7 @@ function checkRIOT()
 end
 
 function checkMAFIA()	
-	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 1443271) then
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(LocalPlayer.UserId, 1443271) then
 		return true
 	end
 
@@ -1020,7 +1021,6 @@ end
 -- Build the initial list
 builder()
 
-local Humanoid = LocalPlayer.Character:WaitForChild("Humanoid")
 function die()
 	Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
 end
@@ -1066,7 +1066,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 
 		-- Anti Tase
 		if settings.antitase and des.Animation.AnimationId == "rbxassetid://279227693" then
-			local nbgui = game.Players.LocalPlayer.PlayerGui.Home.hud.BackpackUI
+			local nbgui = LocalPlayer.PlayerGui.Home.hud.BackpackUI
 			des:Stop()
 			des:Destroy()
 			LocalPlayer.Character.Humanoid.PlatformStand = false
@@ -1362,8 +1362,8 @@ local Noclipping = nil
 function noclip()
 	Clip = false; task.wait(0.1)
 	local function NoclipLoop()
-		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
-			for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+		if Clip == false and LocalPlayer.Character ~= nil then
+			for _, child in pairs(LocalPlayer.Character:GetDescendants()) do
 				if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= floatName then
 					child.CanCollide = false
 				end
@@ -1387,14 +1387,14 @@ end
 
 -- Spin
 function spin(spinSpeed)
-		for i,v in pairs(getRoot(game.Players.LocalPlayer.Character):GetChildren()) do
+		for i,v in pairs(getRoot(LocalPlayer.Character):GetChildren()) do
 			if v.Name == "Spinning" then
 				v:Destroy()
 			end
 		end
 		local Spin = Instance.new("BodyAngularVelocity")
 		Spin.Name = "Spinning"
-		Spin.Parent = getRoot(game.Players.LocalPlayer.Character)
+		Spin.Parent = getRoot(LocalPlayer.Character)
 		Spin.MaxTorque = Vector3.new(0, math.huge, 0)
 		Spin.AngularVelocity = Vector3.new(0,spinSpeed,0)
 end
@@ -2361,7 +2361,7 @@ PlayerTab:CreateSlider({
 		if Value ~= 0 then 
 			spin(spinSpeed) 
 		else 	
-			for i,v in pairs(getRoot(game.Players.LocalPlayer.Character):GetChildren()) do
+			for i,v in pairs(getRoot(LocalPlayer.Character):GetChildren()) do
 				if v.Name == "Spinning" then
 					v:Destroy()
 				end
