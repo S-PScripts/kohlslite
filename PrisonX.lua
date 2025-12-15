@@ -241,55 +241,254 @@ mafia_pass = checkMAFIA()
 
 -- Teleport Locations
 local Teleports = {
-	neutral_spawn = CFrame.new(879.2, 36.09, 2349.8);
-	cell_block = CFrame.new(918.9735107421875, 99.98998260498047, 2451.423583984375);
-	nexus = CFrame.new(877.929688, 99.9899826, 2373.57031, 0.989495575, 1.64841456e-08, 0.144563332, -3.13438235e-08, 1, 1.00512544e-07, -0.144563332, -1.0398788e-07, 0.989495575);
-	armory = CFrame.new(836.130432, 99.9899826, 2284.55908, 0.999849498, 5.64007507e-08, -0.0173475463, -5.636889e-08, 1, 2.3254485e-09, 0.0173475463, -1.34723666e-09, 0.999849498);
-	yard = CFrame.new(787.560425, 97.9999237, 2468.32056, -0.999741256, -7.32754017e-08, -0.0227459427, -7.49895506e-08, 1, 7.45077955e-08, 0.0227459427, 7.6194226e-08, -0.999741256);
-	criminal_base = CFrame.new(-864.760071, 94.4760284, 2085.87671, 0.999284029, 1.78674284e-08, 0.0378339142, -1.85715123e-08, 1, 1.82584365e-08, -0.0378339142, -1.89479969e-08, 0.999284029);
-	cafeteria = CFrame.new(884.492798, 99.9899368, 2293.54907, -0.0628612712, -2.14097344e-08, -0.998022258, -9.52544568e-08, 1, -1.54524784e-08, 0.998022258, 9.40947018e-08, -0.0628612712);
-	kitchen = CFrame.new(936.633118, 99.9899368, 2224.77148, -0.00265917974, -9.30829671e-08, 0.999996483, -3.28682326e-08, 1, 9.29958901e-08, -0.999996483, -3.26208252e-08, -0.00265917974);
-	prison_roof = CFrame.new(918.694092, 139.709427, 2266.60986, -0.998788536, -7.55880691e-08, -0.0492084064, -7.8453354e-08, 1, 5.62961198e-08, 0.0492084064, 6.00884817e-08, -0.998788536);
-	vents = CFrame.new(933.55376574342, 121.534234671875, 2232.7952174975);
-	secret_room = CFrame.new(706.1928465, 103.14982749, 2344.3957382525);
-	yard_tower = CFrame.new(786.731873, 125.039917, 2587.79834, -0.0578307845, 8.82393678e-08, 0.998326421, 6.09781523e-08, 1, -8.48549675e-08, -0.998326421, 5.59688687e-08, -0.0578307845);
-	gtower = CFrame.new(505.551605, 125.039917, 2127.41138, -0.99910152, 5.44945458e-08, 0.0423811078, 5.36830491e-08, 1, -2.02856469e-08, -0.0423811078, -1.79922726e-08, -0.99910152);
-	garage = CFrame.new(618.705566, 98.039917, 2469.14136, 0.997341573, 1.85835844e-08, -0.0728682056, -1.79448154e-08, 1, 9.42077172e-09, 0.0728682056, -8.0881204e-09, 0.997341573);
-	sewers = CFrame.new(917.123657, 78.6990509, 2297.05298, -0.999281704, -9.98203404e-08, -0.0378962979, -1.01324503e-07, 1, 3.77708638e-08, 0.0378962979, 4.15835579e-08, -0.999281704);
-	neighborhood = CFrame.new(-281.254669, 54.1751289, 2484.75513, 0.0408788249, 3.26279768e-08, 0.999164104, -3.88249717e-08, 1, -3.10668256e-08, -0.999164104, -3.75225433e-08, 0.0408788249);
-	gas_station = CFrame.new(-497.284821, 54.3937759, 1686.3175, 0.585129559, -4.33374865e-08, -0.810939848, 5.33533938e-13, 1, -5.34406759e-08, 0.810939848, 3.12692876e-08, 0.585129559);
-	deadend = CFrame.new(-979.852478, 54.1750259, 1382.78967, 0.0152699631, 8.88235174e-09, 0.999883413, 6.75286884e-08, 1, -9.9146682e-09, -0.999883413, 6.76722109e-08, 0.0152699631);
-	store = CFrame.new(455.089508, 11.4253607, 1222.89746, 0.99995482, -3.92535604e-09, 0.00950394664, 2.84450263e-09, 1, 1.1374032e-07, -0.00950394664, -1.13708147e-07, 0.99995482);
-	roadend = CFrame.new(1060.81995, 67.5668106, 1847.08923, 0.0752086118, -1.01192255e-08, -0.997167826, 4.30985886e-10, 1, -1.01154605e-08, 0.997167826, 3.31004502e-10, 0.0752086118);
-	trapbuilding = CFrame.new(-306.715485, 84.2401199, 1984.13367, -0.802221119, 5.70582088e-08, -0.597027004, 4.81801123e-08, 1, 3.08312771e-08, 0.597027004, -4.0313255e-09, -0.802221119);
-	mansion = CFrame.new(-315.790436, 64.5724411, 1840.83521, 0.80697298, -4.47871713e-08, 0.590588331, 1.14004006e-08, 1, 6.02574701e-08, -0.590588331, -4.18932053e-08, 0.80697298);
-	trapbase = CFrame.new(-943.973145, 94.1287613, 1919.73694, 0.025614135, -1.48015129e-08, 0.999671876, 1.00375175e-07, 1, 1.22345032e-08, -0.999671876, 1.00028863e-07, 0.025614135);
-	buildingroof = CFrame.new(-317.689331, 118.838821, 2009.28186, 0.749499857, 2.48145682e-09, 0.662004471, 3.51757373e-10, 1, -4.14664703e-09, -0.662004471, 3.34077632e-09, 0.749499857);
+	neutral_spawn = {
+		name = "Neutral Spawn", 
+		cframe = CFrame.new(879.2, 36.09, 2349.8)
+	},
+	
+	cell_block = {
+		name = "(P) Cell Block",
+		cframe = CFrame.new(918.9735107421875, 99.98998260498047, 2451.423583984375)
+	},
+
+	nexus = {
+		name = "(P) Nexus",
+		cframe = CFrame.new(877.929688, 99.9899826, 2373.57031, 0.989495575, 1.64841456e-08, 0.144563332, -3.13438235e-08, 1, 1.00512544e-07, -0.144563332, -1.0398788e-07, 0.989495575)
+	},
+
+	armory = {
+		name = "(P) Armory",
+		cframe = CFrame.new(836.130432, 99.9899826, 2284.55908, 0.999849498, 5.64007507e-08, -0.0173475463, -5.636889e-08, 1, 2.3254485e-09, 0.0173475463, -1.34723666e-09, 0.999849498)
+	},
+		
+	yard = {
+		name = "(P) Yard",
+		cframe = CFrame.new(787.560425, 97.9999237, 2468.32056, -0.999741256, -7.32754017e-08, -0.0227459427, -7.49895506e-08, 1, 7.45077955e-08, 0.0227459427, 7.6194226e-08, -0.999741256)
+	},
+	
+	criminal_base = {
+		name = "Criminal Base / Warehouse",
+		cframe = CFrame.new(-864.760071, 94.4760284, 2085.87671, 0.999284029, 1.78674284e-08, 0.0378339142, -1.85715123e-08, 1, 1.82584365e-08, -0.0378339142, -1.89479969e-08, 0.999284029)
+	},
+	
+	cafeteria = {
+		name = "(P) Cafeteria",
+		cframe = CFrame.new(884.492798, 99.9899368, 2293.54907, -0.0628612712, -2.14097344e-08, -0.998022258, -9.52544568e-08, 1, -1.54524784e-08, 0.998022258, 9.40947018e-08, -0.0628612712)
+	},
+	
+	kitchen = {
+		name = "(P) Kitchen",
+		cframe = CFrame.new(936.633118, 99.9899368, 2224.77148, -0.00265917974, -9.30829671e-08, 0.999996483, -3.28682326e-08, 1, 9.29958901e-08, -0.999996483, -3.26208252e-08, -0.00265917974)
+	},
+	
+	prison_roof = {
+		name = "(P) Roof",
+		cframe = CFrame.new(918.694092, 139.709427, 2266.60986, -0.998788536, -7.55880691e-08, -0.0492084064, -7.8453354e-08, 1, 5.62961198e-08, 0.0492084064, 6.00884817e-08, -0.998788536)
+	},
+
+	vents = {
+		name = "(P) Vents",
+		cframe = CFrame.new(933.55376574342, 121.534234671875, 2232.7952174975)
+	},
+
+	secret_room = {
+		name = "(P) Secret Room / Office",
+		cframe = CFrame.new(706.1928465, 103.14982749, 2344.3957382525)
+	},
+
+	yard_tower = {
+		name = "(P) Yard Tower",
+		cframe = CFrame.new(786.731873, 125.039917, 2587.79834, -0.0578307845, 8.82393678e-08, 0.998326421, 6.09781523e-08, 1, -8.48549675e-08, -0.998326421, 5.59688687e-08, -0.0578307845)
+	},
+
+	prison_wall = { 
+		name = "(P) Left Front Wall", 
+		cframe = CFrame.new(505.551605, 125.039917, 2127.41138, -0.99910152, 5.44945458e-08, 0.0423811078, 5.36830491e-08, 1, -2.02856469e-08, -0.0423811078, -1.79922726e-08, -0.99910152)
+	},
+	
+	garage = {
+		name = "(P) Garage",
+		cframe = CFrame.new(618.705566, 98.039917, 2469.14136, 0.997341573, 1.85835844e-08, -0.0728682056, -1.79448154e-08, 1, 9.42077172e-09, 0.0728682056, -8.0881204e-09, 0.997341573)
+	},
+	
+	sewers = {
+		name = "(P) Sewers",
+		cframe = CFrame.new(917.123657, 78.6990509, 2297.05298, -0.999281704, -9.98203404e-08, -0.0378962979, -1.01324503e-07, 1, 3.77708638e-08, 0.0378962979, 4.15835579e-08, -0.999281704)
+	},
+
+	neighborhood = { 
+		name = "Neighbourhood",
+		cframe = CFrame.new(-281.254669, 54.1751289, 2484.75513, 0.0408788249, 3.26279768e-08, 0.999164104, -3.88249717e-08, 1, -3.10668256e-08, -0.999164104, -3.75225433e-08, 0.0408788249)
+	},
+	
+	gas_station = { 
+		name = "Gas Station",
+		cframe = CFrame.new(-497.284821, 54.3937759, 1686.3175, 0.585129559, -4.33374865e-08, -0.810939848, 5.33533938e-13, 1, -5.34406759e-08, 0.810939848, 3.12692876e-08, 0.585129559)
+	},
+	
+	roadend_by_warehouse = { 
+		name = "Roadend by Warehouse",
+		cframe = CFrame.new(-979.852478, 54.1750259, 1382.78967, 0.0152699631, 8.88235174e-09, 0.999883413, 6.75286884e-08, 1, -9.9146682e-09, -0.999883413, 6.76722109e-08, 0.0152699631)
+	},
+	
+	lakeside_grocer = { 
+		name = "Lakeside Grocer / Armory+",
+		cframe =CFrame.new(455.089508, 11.4253607, 1222.89746, 0.99995482, -3.92535604e-09, 0.00950394664, 2.84450263e-09, 1, 1.1374032e-07, -0.00950394664, -1.13708147e-07, 0.99995482)
+	},
+	
+	roadend_by_prison = { 
+		name = "Roadend by Prison",
+		cframe = CFrame.new(1060.81995, 67.5668106, 1847.08923, 0.0752086118, -1.01192255e-08, -0.997167826, 4.30985886e-10, 1, -1.01154605e-08, 0.997167826, 3.31004502e-10, 0.0752086118)
+	},
+	
+	big_building_trap = { 
+		name = "Inside Big Building (Trap)",
+		cframe = CFrame.new(-306.715485, 84.2401199, 1984.13367, -0.802221119, 5.70582088e-08, -0.597027004, 4.81801123e-08, 1, 3.08312771e-08, 0.597027004, -4.0313255e-09, -0.802221119)
+	},
+	
+	trapped_in_shops = { 
+		name = "Inside top of Shops (Trap)",
+		cframe = CFrame.new(-315.790436, 64.5724411, 1840.83521, 0.80697298, -4.47871713e-08, 0.590588331, 1.14004006e-08, 1, 6.02574701e-08, -0.590588331, -4.18932053e-08, 0.80697298)
+	},
+	
+	warehouse_trap = { 
+		name = "Inside Other Warehouse (Trap)",
+		cframe = CFrame.new(-943.973145, 94.1287613, 1919.73694, 0.025614135, -1.48015129e-08, 0.999671876, 1.00375175e-07, 1, 1.22345032e-08, -0.999671876, 1.00028863e-07, 0.025614135)
+	},
+	
+	big_building_roof = { 
+		name = "Top of Big Building",
+		cframe = CFrame.new(-317.689331, 118.838821, 2009.28186, 0.749499857, 2.48145682e-09, 0.662004471, 3.51757373e-10, 1, -4.14664703e-09, -0.662004471, 3.34077632e-09, 0.749499857)
+	}
+	
 }
 
-locName = nil
-local TeleportNames = {}
-for name in pairs(Teleports) do
-	table.insert(TeleportNames, name)
+local TeleportAliases = {
+    ["neutral spawn"] = "neutral_spawn",
+    ["spawn"] = "neutral_spawn",
+    ["nspawn"] = "neutral_spawn",
+
+    ["cell block"] = "cell_block",
+    ["cells"] = "cell_block",
+
+    ["nexus"] = "nexus",
+
+	["armory"] = "armory",
+
+	["yard"] = "yard",
+	["courtyard"] = "yard",
+
+	["cbase"] = "criminal_base",
+	["crimbase"] = "criminal_base",
+	["crim base"] = "criminal_base",
+	["crim spawn"] = "criminal_base",
+	["criminal base"] = "criminal_base",
+	["warehouse"] = "criminal_base",
+
+	["cafe"] = "cafeteria",
+	["cafeteria"] = "cafeteria",
+
+	["kitchen"] = "kitchen",
+
+	["prison roof"] = "prison_roof",
+	["proof"] = "prison_roof",
+	["roof"] = "prison_roof",
+
+	["vent"] = "vents",
+	["vents"] = "vents",
+
+	["secret room"] = "secret_room",
+	["secret"] = "secret_room",
+	["glitch room"] = "secret_room",
+	["area 52"] = "secret_room",
+	["office"] = "secret_room",
+
+	["ytower"] = "yard_tower",
+	["yard tower"] = "yard_tower",
+	["tower"] = "yard_tower",
+
+	["prison wall"] = "prison_wall",
+	["prison front"] = "prison_wall",
+	["pwall"] = "prison_wall",
+	["wall"] = "prison_wall",
+	["pfront"] = "prison_wall",
+	["front"] = "prison_wall",
+
+	["garage"] = "garage",
+	["garage"] = "garages",
+
+	["sewer"] = "sewers",
+	["sewers"] = "sewers",
+
+	["housing"] = "neighborhood",
+	["houses"] = "neighborhood",
+	["homes"] = "neighborhood",
+	["neighborhood"] = "neighborhood",
+	["neighbourhood"] = "neighborhood",
+
+	["gas"] = "gas_station",
+	["petrol"] = "gas_station",
+	["gas station"] = "gas_station",
+	["petrol station"] = "gas_station",
+
+	["wroadend"] = "roadend_by_warehouse",
+	["wdeadend"] = "roadend_by_warehouse",
+	["deadend"] = "roadend_by_warehouse",
+
+	["armory+"] = "lakeside_grocer",
+	["armory plus"] = "lakeside_grocer",
+	["lakeside"] = "lakeside_grocer",
+	["lakeside grocer"] = "lakeside_grocer",
+	["grocer"] = "lakeside_grocer",
+
+	["proadend"] = "roadend_by_prison",
+	["pdeadend"] = "roadend_by_prison",
+	["roadend"] = "roadend_by_prison",
+	
+	["bbt"] = "big_building_trap",
+	["bigtrap"] = "big_building_trap",
+	["buildtrap"] = "big_building_trap",
+	["bbtrap"] = "big_building_trap",
+
+	["shop trap"] = "trapped_in_shops",
+	["shops trap"] = "trapped_in_shops",
+	["shoptrap"] = "trapped_in_shops",
+	["shopstrap"] = "trapped_in_shops",
+
+	["warehouse trap"] = "warehouse_trap",
+	["wtrap"] = "warehouse_trap",
+	["whtrap"] = "warehouse_trap",
+
+	["bbroof"] = "big_building_roof",
+	["broof"] = "big_building_roof",
+	["bigroof"] = "big_building_roof",
+}
+
+local TeleportDisplayNames = {}
+local DisplayToId = {}
+
+for id, data in pairs(Teleports) do
+    table.insert(TeleportDisplayNames, data.name)
+    DisplayToId[data.name] = id
 end
-table.sort(TeleportNames)
+
+table.sort(TeleportDisplayNames)
+
 
 -- Teleport to location
-local function teleportTo(location)
-	local cframe = Teleports[location:lower()]
-	if not cframe then
-		warn("Location not found:", location)
-		return
-	end
+local function teleportTo(id)
+    local data = Teleports[id]
+    if not data then
+        warn("Teleport ID not found:", id)
+        return
+    end
 
-	local char = LocalPlayer.Character
-	if not char or not char:FindFirstChild("HumanoidRootPart") then
-		warn("Character not ready!")
-		return
-	end
+    local char = LocalPlayer.Character
+    local hrp = char and char:FindFirstChild("HumanoidRootPart")
+    if not hrp then return end
 
-	char.HumanoidRootPart.CFrame = cframe
-	Notify("Teleported to:".. location)
+    hrp.CFrame = data.cframe
+    Notify("Teleported to: " .. data.name)
 end
 
 local gunAliases = {
@@ -1090,7 +1289,7 @@ local function canTeleport()
     local delta = now - lastTeleport
     if delta < TELEPORT_COOLDOWN then
         local remaining = TELEPORT_COOLDOWN - delta
-        Notify("Wait " .. string.format("%.1f", remaining) .. "s before teleporting again")
+        Notify("Wait " .. string.format("%.1f", remaining) .. "s before teleporting again.")
         return false
     end
     lastTeleport = now
@@ -1517,11 +1716,15 @@ local function handleCommand(msg)
 	
 	if lowerMsg == prefix.."lc" or lowerMsg == prefix.."location" or lowerMsg == prefix.."pgoto" then
 		local parts = lowerMsg:split(" ")
-        local ln = parts[2]
+        local ln = table.concat(parts, " ", 2)
 		if not ln then Notify("Enter a location.") return end
-        if not Teleports[ln] then Notify("Invalid location: " .. ln) return end
-		teleport_able = canTeleport()
-		if teleport_able then
+
+		cln = input:lower():gsub("%s+", " "):gsub("^%s*(.-)%s*$", "%1")
+        local teleportId = TeleportAliases[cln] or cln:gsub(" ", "_")
+        if not Teleports[teleportId] then Notify("Invalid location: " .. ln) return end
+		
+		
+    	if canTeleport() then
 			teleportTo(locName)
 		end
     end
@@ -2122,26 +2325,32 @@ CombatTab:CreateSlider({
 
 -- Teleport Tab --
 -- Locations --
+local selectedTeleport = nil
 TeleportTab:CreateSection("Locations")
 
 TeleportTab:CreateDropdown({
     Name = "Teleport To",
-    Options = TeleportNames,
+    Options = TeleportDisplayNames,
     Flag = "TPDropdown",
-    Callback = function(Option)
-        locName = Option[1]
-        --print("Teleporting to:", locName)
-		--teleportTo(locName)
+    Callback = function(option)
+        local displayName = option[1] -- dropdown returns table
+        selectedTeleport = DisplayToId[displayName] -- map to internal ID
+        -- print("Selected teleport ID:", selectedTeleport)
     end,
 })
+
 
 TeleportTab:CreateButton({
     Name = "Go",
     Callback = function()
-		teleport_able = canTeleport()
-		if teleport_able then
-			teleportTo(locName)
-		end
+        if not selectedTeleport then
+            Notify("Select a location first!")
+            return
+        end
+
+        if canTeleport() then
+            teleportTo(selectedTeleport)
+        end
     end,
 })
 
