@@ -1073,7 +1073,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	end)
 end)
 
-local TELEPORT_COOLDOWN = 1.6
+local TELEPORT_COOLDOWN = 5 -- shame
 local lastTeleport = 0
 
 -- teleport time check
@@ -1456,7 +1456,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	end
 end)
 
-AUTOGUN_DELAY_AFTER_SPAWN = 1.6
+AUTOGUN_DELAY_AFTER_SPAWN = 5
 RunService.Heartbeat:Connect(function()
     if not hrp then return end -- wait until HumanoidRootPart exists
     -- No doors
