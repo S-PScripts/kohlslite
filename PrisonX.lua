@@ -191,7 +191,8 @@ local OtherTab = Window:CreateTab("Other", nil)
 -- Variables
 local Players = game:GetService("Players")
 local LocalPlayer = Players.LocalPlayer
-local Character = LocalPlayer.Character
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 
 local RunService = game:GetService("RunService")
 local hbeat = RunService.Heartbeat
@@ -264,6 +265,14 @@ local Teleports = {
 	trapbase = CFrame.new(-943.973145, 94.1287613, 1919.73694, 0.025614135, -1.48015129e-08, 0.999671876, 1.00375175e-07, 1, 1.22345032e-08, -0.999671876, 1.00028863e-07, 0.025614135);
 	buildingroof = CFrame.new(-317.689331, 118.838821, 2009.28186, 0.749499857, 2.48145682e-09, 0.662004471, 3.51757373e-10, 1, -4.14664703e-09, -0.662004471, 3.34077632e-09, 0.749499857);
 }
+
+locName = nil
+
+local TeleportNames = {}
+for name in pairs(Teleports) do
+	table.insert(TeleportNames, name)
+end
+table.sort(TeleportNames)
 
 -- Teleport to location
 local function teleportTo(location)
@@ -1073,7 +1082,8 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	end)
 end)
 
-local TELEPORT_COOLDOWN = 5 -- shame
+local TELEPORT_COOLDOWN = 3.5 -- shame
+local TELEPORT_COOLDOWN2 = 7.5 -- shame
 local lastTeleport = 0
 
 -- teleport time check
@@ -1219,7 +1229,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			-- print("nasser balls")
 		else
 			if settings.autorespawn then
-        		task.wait(TELEPORT_COOLDOWN)
+        		task.wait(TELEPORT_COOLDOWN2)
 				hrp.CFrame = lastDeathCFrame
 			end
 		end
@@ -1456,7 +1466,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	end
 end)
 
-AUTOGUN_DELAY_AFTER_SPAWN = 5
+AUTOGUN_DELAY_AFTER_SPAWN = 7.5
 RunService.Heartbeat:Connect(function()
     if not hrp then return end -- wait until HumanoidRootPart exists
     -- No doors
@@ -1470,7 +1480,7 @@ RunService.Heartbeat:Connect(function()
 		
     -- Auto guns
     if settings.autoguns and tring == false then
-		print("tell me this fixed it pluh")
+		--print("tell me this fixed it pluh")
 		tring = true
 		--task.wait(TELEPORT_COOLDOWN)
 
@@ -1506,6 +1516,33 @@ end)
 -- Command list
 local function handleCommand(msg)
     local lowerMsg = msg:lower()
+	
+	if lowerMsg == prefix.."lc" or lowerMsg == prefix.."location" or lowerMsg == prefix.."pgoto" then
+		local parts = lowerMsg:split(" ")
+        local ln = parts[2]
+		if not ln then Notify("Enter a location.") return end
+        if not Teleports[ln] then Notify("Invalid location: " .. ln) return end
+		teleport_able = canTeleport()
+		if teleport_able then
+			teleportTo(locName)
+		end
+    end
+
+	if lowerMsg:sub(1, #prefix + 3) == prefix.."gun" then
+    	local parts = lowerMsg:split(" ")
+    	local gun = parts[2]
+
+   	 	if not gun then Notify("Enter a gun name.") return end
+
+    	local ggun = gunAliases[input] or input:upper()
+    	if not table.find(allGuns, ggun) then Notify("Invalid gun: " .. gun) return end
+
+    	local char = LocalPlayer.Character; if not char then return end
+		local hrp = char:WaitForChild("HumanoidRootPart"); local oldhrp = hrp.CFrame
+
+    	GetGun(gunName)
+		hrp.CFrame = oldhrp
+	end
 
     if lowerMsg == prefix.."guns" or lowerMsg == prefix.."allguns" then
         GrabGuns(allGuns)
@@ -2087,14 +2124,6 @@ CombatTab:CreateSlider({
 
 -- Teleport Tab --
 -- Locations --
-locName = nil
-
-local TeleportNames = {}
-for name in pairs(Teleports) do
-	table.insert(TeleportNames, name)
-end
-table.sort(TeleportNames)
-
 TeleportTab:CreateSection("Locations")
 
 TeleportTab:CreateDropdown({
