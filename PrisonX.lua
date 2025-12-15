@@ -483,7 +483,7 @@ namecall = hookmetamethod(game, "__namecall", function(self, ...)
             result.FireRate = auto_fgrate
         end
 
-        print(self, "modded")
+       -- print(self, "modded")
         return result
     end
 
