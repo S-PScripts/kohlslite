@@ -268,7 +268,6 @@ local Teleports = {
 }
 
 locName = nil
-
 local TeleportNames = {}
 for name in pairs(Teleports) do
 	table.insert(TeleportNames, name)
@@ -1539,7 +1538,7 @@ local function handleCommand(msg)
     	local char = LocalPlayer.Character; if not char then return end
 		local hrp = char:WaitForChild("HumanoidRootPart"); local oldhrp = hrp.CFrame
 
-    	GetGun(gunName)
+    	GetGun(ggun)
 		hrp.CFrame = oldhrp
 	end
 
