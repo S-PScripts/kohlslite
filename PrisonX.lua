@@ -167,7 +167,7 @@ local Window = Rayfield:CreateWindow({
     Name = "PrisonX",
     Icon = nil,
     LoadingTitle = "PrisonX v1.22",
-    LoadingSubtitle = "Created by TS2021 kohlslite.pages.dev",
+    LoadingSubtitle = "Created by TS2021",
     ConfigurationSaving = {
         Enabled = false,
     },
@@ -280,7 +280,7 @@ local function teleportTo(location)
 	end
 
 	char.HumanoidRootPart.CFrame = cframe
-	Notify("Teleported to:", location)
+	Notify("Teleported to:".. location)
 end
 
 local gunAliases = {
