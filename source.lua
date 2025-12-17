@@ -119,6 +119,9 @@ Another reason for the discontinuation of KohlsLite's development is that I have
 If you read all of the above, thank you. I had a great time creating KohlsLite. <3
 
 TS2021, October 2025
+
+PS: KAH got revived again because of StromBrew during November 2025. Has 30 players at least, so a little less dead. And no exploiters still, that's neat I guess. Goodbye KAH!
+Maybe if someone else makes a KAH script or something related to f3x/btools is found I'll come back... (only if a game.Players:Chat() replacement is found as well)
 ]]
 
 --[[
