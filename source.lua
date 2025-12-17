@@ -7484,7 +7484,7 @@ return
 	Remind("Changed KohlsLite's prefix to ".. prefix .. "!")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'goodexec' then
+--[[    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'goodexec' then
 	Remind("Created by Tech (Tech-187)")
 
 	getgenv().scapproved = {
@@ -7510,7 +7510,7 @@ return
 	else
 		Remind("Your executor is NOT Shortcut Approved.")
 	end
-    end
+    end]]
 
     if string.sub(msg:lower(), 1, 7) == 'cprefix' then
         Remind("Your current prefix is "..prefix)
@@ -7599,7 +7599,7 @@ return
 		g = args[3]
 		b = args[4]
 		PaintMap_2(r,g,b)
-		Remind("Painted the map (rbg)!")
+		Remind("Painted the map (rgb)!")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'rbricks' then
@@ -10692,7 +10692,7 @@ end ]]
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'vegan' then
 		if table.find(specialperms, game.Players.LocalPlayer.Name) then
-			GExecute("https://raw.githubusercontent.com/Kohls-Admin-House/dump/refs/heads/main/cxo%20admin.lua") -- this is cxo's admin but you are whitelisted.
+			Notify("tuff")
 		else
 			game.Players.LocalPlayer:Kick("stop looking at my code")
 		end
@@ -17347,7 +17347,7 @@ end
 
 -- Check if game NP paint
 function checkp(colourhere)
-	if kah_np == true then
+--	if kah_np == true then
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
@@ -17363,10 +17363,10 @@ function checkp(colourhere)
 			Button1 = "Yes",
 			Button2 = "No"
 		})
-	else
-		PaintMap(colourhere,"norm")
-		Remind("Painted the map!")
-	end
+	--else
+	--	PaintMap(colourhere,"norm")
+	--	Remind("Painted the map!")
+--	end
 end
 
 -- Paint map
