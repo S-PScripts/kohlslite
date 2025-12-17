@@ -1,13 +1,18 @@
 -- MAIN VARIABLES --
 getgenv().espsettings = {
     ESP = false,
-    ESPTeamCheck = { Criminals = true, Guards = true, Inmates = true }
+    ESPTeamCheck = { Criminals = true, Guards = true, Inmates = true }, -- teams that will show up in ESP
+    names = true, -- show names of players in ESP
+    health = true, -- show health of players in ESP
+    distance = true, -- show distance player is away from you in ESP
+    boxcolors = true, -- use team colour for ESP boxes (off = white)
+    namecolors = true -- use team colour for ESP text (off = white)
 }
 
 getgenv().aimlock = {
     Aimbot = false,
-    TeamCheck = { Criminals = false, Guards = false, Inmates = false },
-    Target = { Torso = false, Head = true },
+    TeamCheck = { Criminals = false, Guards = false, Inmates = false }, -- teams aimlock will lock onto
+    Target = { Torso = false, Head = true }, -- what part of the player aimbot should toggle
 
    --[[ ESP = false,
     ESPTeamCheck = { Criminals = false, Guards = false, Inmates = false } ]]
@@ -76,6 +81,38 @@ function removeESP(player)
     end
 end
 
+local function makethething()
+    local showNames = getgenv().espsettings.names
+    local showHealth = getgenv().espsettings.health
+    local showDistance = getgenv().espsettings.distance
+
+    local playerName = player.Name
+    local playerHealth = math.floor(humanoid.Health)
+    local playerDistance = math.floor((root.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude)
+
+    local labelText = ""
+
+    if showNames then
+        labelText = labelText .. playerName
+    end
+
+    if showHealth then
+        if labelText ~= "" then
+            labelText = labelText .. " | "
+        end
+        labelText = labelText .. "Health: " .. playerHealth
+    end
+
+    if showDistance then
+        if labelText ~= "" then
+            labelText = labelText .. " | "
+        end
+        labelText = labelText .. "Distance: " .. playerDistance
+    end
+
+    return labelText
+end
+
 -- Create ESP for a player
 local function createESP(player)
     if not espsettings.ESP then return end
@@ -100,7 +137,11 @@ local function createESP(player)
             local box = Instance.new("BoxHandleAdornment")
             box.Adornee = part
             box.Size = part.Size
-            box.Color3 = player.TeamColor.Color
+            if getgenv().espsettings.boxcolors then
+                box.Color3 = player.TeamColor.Color
+            else
+                box.Color3 = Color3.new(1, 1, 1)
+            end
             box.Transparency = 0.5
             box.AlwaysOnTop = true
             box.ZIndex = 1
@@ -120,12 +161,17 @@ local function createESP(player)
     local textLabel = Instance.new("TextLabel")
     textLabel.Size = UDim2.new(1, 0, 1, 0)
     textLabel.BackgroundTransparency = 1
-    textLabel.TextColor3 = player.TeamColor.Color
+    if getgenv().espsettings.namecolors then
+        textLabel.TextColor3 = player.TeamColor.Color
+    else
+        textLabel.TextColor3 = Color3.new(1, 1, 1)
+    end
     textLabel.TextStrokeTransparency = 0
     textLabel.TextScaled = false
     textLabel.Font = Enum.Font.SourceSansBold
     textLabel.TextSize = 14
-    textLabel.Text = string.format("%s | Health: %d | Distance: %d", player.Name, humanoid.Health, math.floor((root.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude))
+    
+    textLabel.Text = makethething()
     textLabel.Parent = billboard
     billboard.Parent = char
 
@@ -141,13 +187,14 @@ end
 -- Update ESP color
 local function updateESPColor(player)
     if espObjects[player] then
-        local color = player.TeamColor.Color
+        local ncolor =  getgenv().espsettings.namecolors and player.TeamColor.Color or Color3.new(1, 1, 1)
+        local bcolor =  getgenv().espsettings.boxcolors and player.TeamColor.Color or Color3.new(1, 1, 1)
         if espObjects[player].textLabel then
-            espObjects[player].textLabel.TextColor3 = color
+            espObjects[player].textLabel.TextColor3 = ncolor
         end
         if espObjects[player].limbs then
             for _, box in pairs(espObjects[player].limbs) do
-                if box then box.Color3 = color end
+                if box then box.Color3 = bcolor end
             end
         end
     end
@@ -192,7 +239,7 @@ local function renderStepFunction()
 
         if root and humanoid and label then
             local distance = (root.Position - localRoot.Position).Magnitude
-            label.Text = string.format("%s | Health: %d | Distance: %d", player.Name, math.floor(humanoid.Health), math.floor(distance))
+            label.Text = makethething()
         end
     end
 end
