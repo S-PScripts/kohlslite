@@ -50,6 +50,7 @@ Noclip
 FOV
 Spin
 Infinite Jump
+Auto Sprint
 
 Credits to github.com/tomatotxt for some stuff
 Credits to github.com/NewMatheusDC for some of the GUI
@@ -130,6 +131,9 @@ local settings = {
 	-- Hide trees
 	htrees = false,
 
+	-- Auto sprint
+	autosprint = false,
+	
 	-- Inf jump
 	ijump = false,
 
@@ -184,7 +188,8 @@ local TeleportTab = Window:CreateTab("Teleport", nil)
 local AutoTab = Window:CreateTab("Automation", nil)
 local ProtectTab = Window:CreateTab("Protection", nil)
 local PlayerTab = Window:CreateTab("Player", nil)
-local ESPAimbotTab = Window:CreateTab("Aimlock", nil)
+local ESPTab = Window:CreateTab("Aimlock", nil)
+local AimbotTab = Window:CreateTab("Aimlock", nil)
 local LCTab = Window:CreateTab("Lists + Checks", nil)
 local OtherTab = Window:CreateTab("Other", nil)
 
@@ -1017,7 +1022,7 @@ end)
 
 
 -- Anti tase fix
-local normalWS = 16
+local normalWS = 25
 local normalJP = 50
 
 antivoid = true
@@ -1054,6 +1059,14 @@ task.spawn(function()
             	end
 			end)
         end
+
+		if settings.autosprint then
+			if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+                if LocalPlayer.Character.Humanoid.WalkSpeed < 25 then
+                	LocalPlayer.Character.Humanoid.WalkSpeed = 25
+                end
+            end
+		end
 	end
 end)
 
@@ -1222,6 +1235,12 @@ function die()
 	Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
 end
 
+function piss(wspeed, jpower)
+	task.wait(3)
+	LocalPlayer.Character:WaitForChild("Humanoid").WalkSpeed = wspeed -- W SPEED? :O
+	LocalPlayer.Character:WaitForChild("Humanoid").JumpPower = jpower
+end
+
 gwak = false
 -- Anti Arrest and Anti Tase
 LocalPlayer.CharacterAdded:Connect(function(char)
@@ -1275,6 +1294,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			humanoid.WalkSpeed = wspeed
 			humanoid.JumpPower = jpower
 			LocalPlayer.Character.ClientInputHandler.Disabled = false
+			piss(wspeed, jpower)
 		end
 	end)
 end)
@@ -2529,6 +2549,15 @@ PlayerTab:CreateToggle({
 })
 
 PlayerTab:CreateToggle({
+    Name = "Auto Sprint",
+    CurrentValue = settings.ijump,
+    Flag = "ASToggle",
+    Callback = function(Value)
+        settings.autosprint = Value
+    end,
+})
+
+PlayerTab:CreateToggle({
     Name = "Noclip",
     CurrentValue = settings.noclip,
     Flag = "NCToggle",
@@ -2565,7 +2594,7 @@ PlayerTab:CreateSlider({
 	Flag = "SpinSpeedSlider",
     Callback = function(Value)
         spinSpeed = Value
-		if Value ~= 0 then 
+		if Value ~= 0 then -- lazy ahh
 			spin(spinSpeed) 
 		else 	
 			for i,v in pairs(getRoot(LocalPlayer.Character):GetChildren()) do
@@ -2577,9 +2606,12 @@ PlayerTab:CreateSlider({
     end,
 })
 
-loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo.lua", true))()
-PlayerTab:CreateSection("ESP")
-PlayerTab:CreateToggle({
+loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo.lua", true))() -- load it cuz poo
+function toggleesp() getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true end
+
+-- ESP Tab --
+ESPTab:CreateSection("ESP")
+ESPTab:CreateToggle({
     Name = "ESP",
     CurrentValue = getgenv().espsettings,
     Flag = "ESPToggle",
@@ -2592,53 +2624,123 @@ PlayerTab:CreateToggle({
     end,
 })
 
-PlayerTab:CreateToggle({
+ESPTab:CreateSection("Teams Allowed")
+ESPTab:CreateToggle({
     Name = "Guards Allowed",
     CurrentValue = getgenv().espsettings.ESPTeamCheck.Guards,
     Flag = "GuardsAllowedESP",
     Callback = function(Value)
         if Value then
 			getgenv().espsettings.ESPTeamCheck.Guards = true
-			getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true
         else
             getgenv().espsettings.ESPTeamCheck.Guards = false
-			getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true
         end
+		toggleesp()
     end,
 })
 
-PlayerTab:CreateToggle({
+ESPTab:CreateToggle({
     Name = "Criminals Allowed",
     CurrentValue = getgenv().espsettings.ESPTeamCheck.Criminals,
     Flag = "CriminalsAllowedESP",
     Callback = function(Value)
         if Value then
 			getgenv().espsettings.ESPTeamCheck.Criminals = true
-			getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true
         else
             getgenv().espsettings.ESPTeamCheck.Criminals = false
-			getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true
         end
+		toggleesp()		
     end,
 })
 
-PlayerTab:CreateToggle({
+ESPTab:CreateToggle({
     Name = "Inmates Allowed",
     CurrentValue = getgenv().espsettings.ESPTeamCheck.Inmates,
     Flag = "InmatesAllowedESP",
     Callback = function(Value)
         if Value then
 			getgenv().espsettings.ESPTeamCheck.Inmates = true
-			getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true
         else
             getgenv().espsettings.ESPTeamCheck.Inmates = false
-			getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true
         end
+		toggleesp()
     end,
 })
 
-ESPAimbotTab:CreateSection("Aimlock")
-ESPAimbotTab:CreateToggle({
+ESPTab:CreateSection("Settings")
+ESPTab:CreateToggle({
+    Name = "Show Names",
+    CurrentValue = getgenv().espsettings.names,
+    Flag = "SNESP",
+    Callback = function(Value)
+        if Value then
+			getgenv().espsettings.names = true
+        else
+            getgenv().espsettings.names = false
+        end
+		toggleesp()
+    end,
+})
+
+ESPTab:CreateToggle({
+    Name = "Show Health",
+    CurrentValue = getgenv().espsettings.health,
+    Flag = "SHESP",
+    Callback = function(Value)
+        if Value then
+			getgenv().espsettings.health = true
+        else
+            getgenv().espsettings.health = false
+        end
+		toggleesp()
+    end,
+})
+
+ESPTab:CreateToggle({
+    Name = "Show Distance",
+    CurrentValue = getgenv().espsettings.distance,
+    Flag = "DISTESP",
+    Callback = function(Value)
+        if Value then
+			getgenv().espsettings.distance = true
+        else
+            getgenv().espsettings.distance = false
+        end
+		toggleesp()
+    end,
+})
+
+ESPTab:CreateToggle({
+    Name = "Show Boxes With Team Colors",
+    CurrentValue = getgenv().espsettings.boxcolors,
+    Flag = "BTCESP",
+    Callback = function(Value)
+        if Value then
+			getgenv().espsettings.boxcolors = true
+        else
+            getgenv().espsettings.boxcolors = false
+        end
+		toggleesp()
+    end,
+})
+
+ESPTab:CreateToggle({
+    Name = "Show Info With Team Colors",
+    CurrentValue = getgenv().espsettings.namecolors,
+    Flag = "NTCESP",
+    Callback = function(Value)
+        if Value then
+			getgenv().espsettings.namecolors = true
+        else
+            getgenv().espsettings.namecolors = false
+        end
+		toggleesp()
+    end,
+})
+
+-- Aimlock Tab --
+AimbotTab:CreateSection("Aimlock")
+AimbotTab:CreateToggle({
     Name = "Aimlock",
     CurrentValue = getgenv().aimlock.Aimbot,
     Flag = "AimlockToggle",
@@ -2651,8 +2753,8 @@ ESPAimbotTab:CreateToggle({
     end,
 })
 
-ESPAimbotTab:CreateSection("Teams Allowed")
-ESPAimbotTab:CreateToggle({
+AimbotTab:CreateSection("Teams Allowed")
+AimbotTab:CreateToggle({
     Name = "Guards Allowed",
     CurrentValue = getgenv().aimlock.TeamCheck.Guards,
     Flag = "GuardsAllowedALT",
@@ -2665,7 +2767,7 @@ ESPAimbotTab:CreateToggle({
     end,
 })
 
-ESPAimbotTab:CreateToggle({
+AimbotTab:CreateToggle({
     Name = "Criminals Allowed",
     CurrentValue = getgenv().aimlock.TeamCheck.Criminals,
     Flag = "CriminalsAllowedALT",
@@ -2678,7 +2780,7 @@ ESPAimbotTab:CreateToggle({
     end,
 })
 
-ESPAimbotTab:CreateToggle({
+AimbotTab:CreateToggle({
     Name = "Inmates Allowed",
     CurrentValue = getgenv().aimlock.TeamCheck.Inmates,
     Flag = "InmatesAllowedALT",
@@ -2691,8 +2793,8 @@ ESPAimbotTab:CreateToggle({
     end,
 })
 
-ESPAimbotTab:CreateSection("Targets")
-ESPAimbotTab:CreateToggle({
+AimbotTab:CreateSection("Targets")
+AimbotTab:CreateToggle({
     Name = "Target Torso",
     CurrentValue = getgenv().aimlock.Target.Torso,
     Flag = "TTALT",
@@ -2705,7 +2807,7 @@ ESPAimbotTab:CreateToggle({
     end,
 })
 
-ESPAimbotTab:CreateToggle({
+AimbotTab:CreateToggle({
     Name = "Target Head",
     CurrentValue = getgenv().aimlock.Target.Head,
     Flag = "THALT",
@@ -2718,11 +2820,11 @@ ESPAimbotTab:CreateToggle({
     end,
 })
 
-ESPAimbotTab:CreateSection("Guns Allowed")
+AimbotTab:CreateSection("Guns Allowed")
 -- selected gun from dropdown
 local abgun = nil
 
-ESPAimbotTab:CreateDropdown({
+AimbotTab:CreateDropdown({
     Name = "Aimlock Gun List",
     Options = allGuns2,
     Flag = "ABGunDropdown",
@@ -2731,7 +2833,7 @@ ESPAimbotTab:CreateDropdown({
     end,
 })
 
-ESPAimbotTab:CreateButton({
+AimbotTab:CreateButton({
     Name = "Add/Remove Gun From Aimlock",
     Callback = function()
         if not abgun then
