@@ -138,11 +138,14 @@ local settings = {
 	ijump = false,
 
 	-- Noclip
-	noclip = false
+	noclip = false,
+
+	-- Keep PrisonX after serverhop/rejoin
+	KeepPX = true
 }
 
 getgenv().espsettings = false -- ESP toggle
-getgenv().aimlock = false -- Aimlock toggle (Unused)
+getgenv().aimlock = false -- Aimlock toggle
 
 -- arrest aura wl
 aa_wl = {"ScriptingProgrammer", "kohlslitedev"}
@@ -2616,11 +2619,7 @@ ESPTab:CreateToggle({
     CurrentValue = getgenv().espsettings,
     Flag = "ESPToggle",
     Callback = function(Value)
-        if Value then
-			getgenv().espsettings.ESP = true
-        else
-            getgenv().espsettings.ESP = false
-        end
+		getgenv().espsettings.ESP = Value
     end,
 })
 
@@ -2630,11 +2629,7 @@ ESPTab:CreateToggle({
     CurrentValue = getgenv().espsettings.ESPTeamCheck.Guards,
     Flag = "GuardsAllowedESP",
     Callback = function(Value)
-        if Value then
-			getgenv().espsettings.ESPTeamCheck.Guards = true
-        else
-            getgenv().espsettings.ESPTeamCheck.Guards = false
-        end
+		getgenv().espsettings.ESPTeamCheck.Guards = Value
 		toggleesp()
     end,
 })
@@ -2644,11 +2639,7 @@ ESPTab:CreateToggle({
     CurrentValue = getgenv().espsettings.ESPTeamCheck.Criminals,
     Flag = "CriminalsAllowedESP",
     Callback = function(Value)
-        if Value then
-			getgenv().espsettings.ESPTeamCheck.Criminals = true
-        else
-            getgenv().espsettings.ESPTeamCheck.Criminals = false
-        end
+		getgenv().espsettings.ESPTeamCheck.Criminals = Value
 		toggleesp()		
     end,
 })
@@ -2658,11 +2649,7 @@ ESPTab:CreateToggle({
     CurrentValue = getgenv().espsettings.ESPTeamCheck.Inmates,
     Flag = "InmatesAllowedESP",
     Callback = function(Value)
-        if Value then
-			getgenv().espsettings.ESPTeamCheck.Inmates = true
-        else
-            getgenv().espsettings.ESPTeamCheck.Inmates = false
-        end
+        getgenv().espsettings.ESPTeamCheck.Inmates = Value
 		toggleesp()
     end,
 })
@@ -2673,11 +2660,7 @@ ESPTab:CreateToggle({
     CurrentValue = getgenv().espsettings.names,
     Flag = "SNESP",
     Callback = function(Value)
-        if Value then
-			getgenv().espsettings.names = true
-        else
-            getgenv().espsettings.names = false
-        end
+        getgenv().espsettings.names = Value
 		toggleesp()
     end,
 })
@@ -2687,11 +2670,7 @@ ESPTab:CreateToggle({
     CurrentValue = getgenv().espsettings.health,
     Flag = "SHESP",
     Callback = function(Value)
-        if Value then
-			getgenv().espsettings.health = true
-        else
-            getgenv().espsettings.health = false
-        end
+        getgenv().espsettings.health = Value
 		toggleesp()
     end,
 })
@@ -2701,11 +2680,7 @@ ESPTab:CreateToggle({
     CurrentValue = getgenv().espsettings.distance,
     Flag = "DISTESP",
     Callback = function(Value)
-        if Value then
-			getgenv().espsettings.distance = true
-        else
-            getgenv().espsettings.distance = false
-        end
+		getgenv().espsettings.distance = Value
 		toggleesp()
     end,
 })
@@ -2715,11 +2690,7 @@ ESPTab:CreateToggle({
     CurrentValue = getgenv().espsettings.boxcolors,
     Flag = "BTCESP",
     Callback = function(Value)
-        if Value then
-			getgenv().espsettings.boxcolors = true
-        else
-            getgenv().espsettings.boxcolors = false
-        end
+        getgenv().espsettings.boxcolors = Value
 		toggleesp()
     end,
 })
@@ -2729,11 +2700,7 @@ ESPTab:CreateToggle({
     CurrentValue = getgenv().espsettings.namecolors,
     Flag = "NTCESP",
     Callback = function(Value)
-        if Value then
-			getgenv().espsettings.namecolors = true
-        else
-            getgenv().espsettings.namecolors = false
-        end
+        getgenv().espsettings.namecolors = Value
 		toggleesp()
     end,
 })
@@ -2745,11 +2712,7 @@ AimbotTab:CreateToggle({
     CurrentValue = getgenv().aimlock.Aimbot,
     Flag = "AimlockToggle",
     Callback = function(Value)
-        if Value then
-			getgenv().aimlock.Aimbot = true
-        else
-            getgenv().aimlock.Aimbot = false
-        end
+		getgenv().aimlock.Aimbot = Value
     end,
 })
 
@@ -2759,11 +2722,7 @@ AimbotTab:CreateToggle({
     CurrentValue = getgenv().aimlock.TeamCheck.Guards,
     Flag = "GuardsAllowedALT",
     Callback = function(Value)
-        if Value then
-			getgenv().aimlock.TeamCheck.Guards = true
-        else
-            getgenv().aimlock.TeamCheck.Guards = false
-        end
+		getgenv().aimlock.TeamCheck.Guards = Value
     end,
 })
 
@@ -2772,12 +2731,8 @@ AimbotTab:CreateToggle({
     CurrentValue = getgenv().aimlock.TeamCheck.Criminals,
     Flag = "CriminalsAllowedALT",
     Callback = function(Value)
-        if Value then
-			getgenv().aimlock.TeamCheck.Criminals = true
-        else
-            getgenv().aimlock.TeamCheck.Criminals = false
-        end
-    end,
+		getgenv().aimlock.TeamCheck.Criminals = Value
+	end,
 })
 
 AimbotTab:CreateToggle({
@@ -2785,11 +2740,7 @@ AimbotTab:CreateToggle({
     CurrentValue = getgenv().aimlock.TeamCheck.Inmates,
     Flag = "InmatesAllowedALT",
     Callback = function(Value)
-        if Value then
-			getgenv().aimlock.TeamCheck.Inmates = true
-        else
-            getgenv().aimlock.TeamCheck.Inmates = false
-        end
+		getgenv().aimlock.TeamCheck.Inmates = Value
     end,
 })
 
@@ -2799,11 +2750,7 @@ AimbotTab:CreateToggle({
     CurrentValue = getgenv().aimlock.Target.Torso,
     Flag = "TTALT",
     Callback = function(Value)
-        if Value then
-			getgenv().aimlock.Target.Torso = true
-        else
-            getgenv().aimlock.Target.Torso = false
-        end
+		getgenv().aimlock.Target.Torso = Value
     end,
 })
 
@@ -2812,11 +2759,7 @@ AimbotTab:CreateToggle({
     CurrentValue = getgenv().aimlock.Target.Head,
     Flag = "THALT",
     Callback = function(Value)
-        if Value then
-			getgenv().aimlock.Target.Head = true
-        else
-            getgenv().aimlock.Target.Head = false
-        end
+		getgenv().aimlock.Target.Head = Value
     end,
 })
 
@@ -2842,11 +2785,9 @@ AimbotTab:CreateButton({
 
         local allowedGuns = getgenv().aballowedguns
         if allowedGuns[abgun] then
-            allowedGuns[abgun] = false
-            Notify(abgun .. " disabled in aimlock")
+            allowedGuns[abgun] = false; Notify(abgun .. " disabled in aimlock")
         else
-            allowedGuns[abgun] = true
-            Notify(abgun .. " enabled in aimlock")
+            allowedGuns[abgun] = true; Notify(abgun .. " enabled in aimlock")
         end
     end,
 })
@@ -3048,12 +2989,29 @@ OtherTab:CreateToggle({
 OtherTab:CreateToggle({
     Name = "Close Script",
     Callback = function(Value)
-		game.Players.LocalPlayer:Kick("PrisonX closed. Rejoinning...")
+		game.Players.LocalPlayer:Kick("PrisonX closed. Rejoinning..."); settings.KeepPX = false
 		rj()
     end,
 })
 
+OtherTab:CreateToggle({
+    Name = "Keep PrisonX After Rejoin/Serverhop",
+    Callback = function(Value)
+		settings.KeepPX = Value
+    end,
+})
+
 Rayfield:LoadConfiguration()
+
+queueteleport = (syn and syn.queue_on_teleport) or queue_on_teleport or (fluxus and fluxus.queue_on_teleport)
+
+local TeleportCheck = false
+game.Players.LocalPlayer.OnTeleport:Connect(function(State)
+	if settings.KeepPX and (not TeleportCheck) and queueteleport then
+		TeleportCheck = true
+		queueteleport("loadstring(game:HttpGet('kohlslite.pages.dev/PrisonX.lua'))()")
+	end
+end)
 
 print("PrisonX executed! | Version: ".. version .." | Created by TS2021.")
 Notify("PrisonX executed! | Version: ".. version); die()
