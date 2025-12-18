@@ -171,7 +171,7 @@ local function createESP(player)
     textLabel.Font = Enum.Font.SourceSansBold
     textLabel.TextSize = 14
     
-    textLabel.Text = makethething()
+    textLabel.Text = makethething(player)
     textLabel.Parent = billboard
     billboard.Parent = char
 
@@ -239,7 +239,7 @@ local function renderStepFunction()
 
         if root and humanoid and label then
             local distance = (root.Position - localRoot.Position).Magnitude
-            label.Text = makethething()
+            label.Text = makethething(player)
         end
     end
 end
