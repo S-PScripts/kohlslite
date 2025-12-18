@@ -355,7 +355,7 @@ local Teleports = {
 	},
 	
 	trapped_in_shops = { 
-		name = "Inside top of Shops (Trap)",
+		name = "Inside Top of Shops (Trap)",
 		cframe = CFrame.new(-315.790436, 64.5724411, 1840.83521, 0.80697298, -4.47871713e-08, 0.590588331, 1.14004006e-08, 1, 6.02574701e-08, -0.590588331, -4.18932053e-08, 0.80697298)
 	},
 	
