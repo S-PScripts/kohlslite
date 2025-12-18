@@ -133,6 +133,12 @@ local settings = {
 
 	-- Auto sprint
 	autosprint = false,
+
+	-- Speed changer
+	speedc = false,
+
+	-- Speed changer value
+	sval = 25,
 	
 	-- Inf jump
 	ijump = false,
@@ -1063,6 +1069,8 @@ task.spawn(function()
 			end)
         end
 
+		if settings.speedc and settings.autosprint then settings.autosprint = false end
+
 		if settings.autosprint then
 			if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
                 if LocalPlayer.Character.Humanoid.WalkSpeed < 25 then
@@ -1070,6 +1078,15 @@ task.spawn(function()
                 end
             end
 		end
+
+		if settings.speedc then
+			if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
+                if LocalPlayer.Character.Humanoid.WalkSpeed < settings.sval then
+                	LocalPlayer.Character.Humanoid.WalkSpeed = settings.sval
+                end
+            end
+		end
+			
 	end
 end)
 
@@ -2562,6 +2579,29 @@ PlayerTab:CreateToggle({
     Flag = "ASToggle",
     Callback = function(Value)
         settings.autosprint = Value
+		settings.speedc = false
+    end,
+})
+
+PlayerTab:CreateToggle({
+    Name = "WalkSpeed Changer",
+    CurrentValue = settings.speedc,
+    Flag = "WSCToggle",
+    Callback = function(Value)
+        settings.speedc = Value
+		settings.autosprint = false
+    end,
+})
+
+PlayerTab:CreateSlider({
+    Name = "WalkSpeed Value",
+    Range = {0, 100},
+    Increment = 1,
+    Suffix = "",
+    CurrentValue = 25,
+    Flag = "SpeedCSlider",
+    Callback = function(Value)
+        settings.sval = Value
     end,
 })
 
