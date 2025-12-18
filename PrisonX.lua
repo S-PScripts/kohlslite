@@ -1244,6 +1244,7 @@ function piss(wspeed, jpower)
 	LocalPlayer.Character:WaitForChild("Humanoid").JumpPower = jpower
 end
 
+fat = true
 gwak = false
 -- Anti Arrest and Anti Tase
 LocalPlayer.CharacterAdded:Connect(function(char)
@@ -1253,6 +1254,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	animator.AnimationPlayed:Connect(function(des)
 		-- Anti Arrest
 		if settings.antiarrest and des.Animation.AnimationId == "rbxassetid://287112271" then
+			fat = false
 		--	des:Stop()
 		--	des:Destroy()
         --  StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
@@ -1267,6 +1269,8 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 				
 			LocalPlayer.CharacterAdded:Wait()
 			repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+			task.wait(0.1)
+			fat = true
 
 			if wascriminal then
 				if settings.autoguns then
@@ -1276,6 +1280,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			elseif settings.autorespawn == false then
                 tpto(cpos)
 			end
+
 
 			--task.delay(0, function()
 			--	humanoid.WalkSpeed = wspeed
@@ -1449,7 +1454,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			-- print("nasser balls")
 		else
 			if settings.autorespawn then
-        		task.wait(TELEPORT_COOLDOWN2)
+				if fat then task.wait(TELEPORT_COOLDOWN2) else task.wait(TELEPORT_COOLDOWN) end
 				hrp.CFrame = lastDeathCFrame
 			end
 		end
