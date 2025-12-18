@@ -82,6 +82,10 @@ function removeESP(player)
 end
 
 local function makethething(player)
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:FindFirstChild("Humanoid")
+    local root = character:FindFirstChild("HumanoidRootPart")
+    
     local showNames = getgenv().espsettings.names
     local showHealth = getgenv().espsettings.health
     local showDistance = getgenv().espsettings.distance
