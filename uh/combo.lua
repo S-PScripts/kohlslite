@@ -81,7 +81,7 @@ function removeESP(player)
     end
 end
 
-local function makethething()
+local function makethething(player)
     local showNames = getgenv().espsettings.names
     local showHealth = getgenv().espsettings.health
     local showDistance = getgenv().espsettings.distance
