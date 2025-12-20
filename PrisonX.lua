@@ -1073,7 +1073,7 @@ task.spawn(function()
 
 		if settings.autosprint then
 			if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
-                if LocalPlayer.Character.Humanoid.WalkSpeed < 25 then
+                if LocalPlayer.Character.Humanoid.WalkSpeed ~= 25 then
                 	LocalPlayer.Character.Humanoid.WalkSpeed = 25
                 end
             end
@@ -1081,7 +1081,7 @@ task.spawn(function()
 
 		if settings.speedc then
 			if LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("Humanoid") then
-                if LocalPlayer.Character.Humanoid.WalkSpeed < settings.sval then
+                if LocalPlayer.Character.Humanoid.WalkSpeed ~= settings.sval then
                 	LocalPlayer.Character.Humanoid.WalkSpeed = settings.sval
                 end
             end
