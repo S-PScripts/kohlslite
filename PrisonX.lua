@@ -2612,9 +2612,11 @@ PlayerTab:CreateToggle({
     Callback = function(Value)
         settings.noclip = Value
 		if Value == true then
-			noclip() 
+			noclip()
+			game:GetService("ReplicatedStorage").Scripts.CharacterCollision.Enabled = false
 		else 
 			clip() 
+			game:GetService("ReplicatedStorage").Scripts.CharacterCollision.Enabled = true
 		end
     end,
 })
