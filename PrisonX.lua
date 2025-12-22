@@ -216,6 +216,7 @@ local stepped = RunService.Stepped
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Killfeed = ReplicatedStorage:WaitForChild("Killfeed")
+local CharacterCollision = ReplicatedStorage.Scripts:FindFirstChild("CharacterCollision")
 
 local PlayerGui = LocalPlayer.PlayerGui
 local HomeGUI = PlayerGui:WaitForChild("Home")
@@ -2613,10 +2614,10 @@ PlayerTab:CreateToggle({
         settings.noclip = Value
 		if Value == true then
 			noclip()
-			game:GetService("ReplicatedStorage").Scripts.CharacterCollision.Enabled = false
+			CharacterCollision.Enabled = false
 		else 
 			clip() 
-			game:GetService("ReplicatedStorage").Scripts.CharacterCollision.Enabled = true
+			CharacterCollision.Enabled = true
 		end
     end,
 })
