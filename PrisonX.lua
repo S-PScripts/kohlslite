@@ -84,14 +84,14 @@ local settings = {
 	-- Remove tased effects
     antitase = true,
 
-	-- Respawn in your previous position if you die
-    autorespawn = true,
+	-- Respawn in your previous position if you die (sucks because of tp update)
+    autorespawn = false,
 
 	-- Auto guns
 	autoguns = false,
 	autoguns_list = {},
 
-	-- Auto-Mod all guns to have a big range and spread  (pg = powerful gun)
+	-- Auto-Mod all guns to have a big range and spread (pg = powerful gun)
 	auto_pg = false,
 	
 	-- Auto-Mod all guns to shoot really fast (fg = fast gun)
@@ -1334,8 +1334,8 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	end)
 end)
 
-local TELEPORT_COOLDOWN = 3.5 -- shame
-local TELEPORT_COOLDOWN2 = 10 -- shame
+local TELEPORT_COOLDOWN = 6 -- shame
+local TELEPORT_COOLDOWN2 = 12.5 -- shame
 local lastTeleport = 0
 
 -- teleport time check
@@ -1481,7 +1481,11 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			-- print("nasser balls")
 		else
 			if settings.autorespawn then
-				if fat then task.wait(TELEPORT_COOLDOWN2) else task.wait(TELEPORT_COOLDOWN) end
+				if fat or LocalPlayer.Team.Name == "Criminals" then 
+					task.wait(TELEPORT_COOLDOWN2) 
+				else 
+					task.wait(TELEPORT_COOLDOWN)
+				end
 				hrp.CFrame = lastDeathCFrame
 			end
 		end
@@ -2449,7 +2453,7 @@ TeleportTab:CreateButton({
 -- Automation: Player Related --
 AutoTab:CreateSection("Player Related")
 AutoTab:CreateToggle({
-    Name = "Auto Respawn",
+    Name = "Auto Respawn (This sucks now)",
     CurrentValue = settings.autorespawn,
     Flag = "AutoRespawnToggle",
     Callback = function(Value)
