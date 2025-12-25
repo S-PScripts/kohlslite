@@ -839,17 +839,19 @@ local function UpdateKillableTeams(v)
 end
 
 local function IsKillable(plr)
+	local char = plr.Character
+	
     -- Can't kill yourself
     if plr == LocalPlayer then
         return false
     end
 
 	-- do not kill innocent inmates as a guard
---[[if LocalPlayer.Team.Name == "Guards" and plr.Team.Name == "Inmates" then
-		if not IsArrestable(plr) then
+    if LocalPlayer.Team.Name == "Guards" and plr.Team.Name == "Inmates" then
+		if not char:GetAttribute("Hostile") then
 			return false
 		end
-	end ]]
+	end
 
     -- If team check is disabled, anyone else is killable
     if not settings.katc then
@@ -931,6 +933,8 @@ aatypes = {
 }
 
 local function IsArrestable(plr)
+	local char = plr.Character
+	
     -- Can't arrest yourself
     if plr == LocalPlayer then
         return false
@@ -946,6 +950,11 @@ local function IsArrestable(plr)
         return false
     end
 
+	-- Can't arrest innocent Inmates
+    if plr.Team.Name == "Inmates" and not char:GetAttribute("Trespassing") then
+        return false
+    end
+	
     -- If team check is disabled, anyone else is arrestable
     if not settings.aatc then
         return true
