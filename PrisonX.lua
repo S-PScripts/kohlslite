@@ -1707,7 +1707,7 @@ RunService.RenderStepped:Connect(function()
         isOnCooldown = true
 
         task.spawn(function()
-            temporaryNoClip(1.2)
+            temporaryNoClip(1.6)
             task.wait(0.2)
             isOnCooldown = false
         end)
@@ -3155,7 +3155,7 @@ local TeleportCheck = false
 game.Players.LocalPlayer.OnTeleport:Connect(function(State)
 	if settings.KeepPX and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
-		queueteleport("loadstring(game:HttpGet('kohlslite.pages.dev/PrisonX.lua'))()")
+		queueteleport("loadstring(game:HttpGet('https://kohlslite.pages.dev/PrisonX.lua'))()")
 	end
 end)
 
