@@ -1667,6 +1667,7 @@ local lastMoveTime = 0
 local lastJumpTime = 0
 local isOnCooldown = false
 local gchr = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local ghum = ghum:WaitForChild("Humanoid")
 
 local snacks = {"Chips", "Chocolate", "Soda"}
 local function isHoldingSnack()
