@@ -47,6 +47,7 @@ Remove Team Indicators
 ESP (distance from you + health + team colour) (+ teams allowed) (-esp/-unesp)
 Aimbot/Aimlock (+ teams allowed + torso/head targetting + guns allowed)
 Noclip
+Snack Noclip
 FOV
 Spin
 Infinite Jump
@@ -146,6 +147,9 @@ local settings = {
 	-- Noclip
 	noclip = false,
 
+	-- Temp Noclip ONLY when jumping with the Snack item equipped
+	ncglitch = false,
+	
 	-- Keep PrisonX after serverhop/rejoin
 	KeepPX = true
 }
@@ -210,6 +214,8 @@ local Humanoid = Character:WaitForChild("Humanoid")
 local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
 
 local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+
 local hbeat = RunService.Heartbeat
 local rstepped = RunService.RenderStepped
 local stepped = RunService.Stepped
@@ -1606,7 +1612,7 @@ function DestroyDoors()
 end
 
 -- Infinite Jump
-game:GetService("UserInputService").JumpRequest:Connect(function()
+UserInputService.JumpRequest:Connect(function()
             task.wait(0)
             if settings.ijump then
                game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid'):ChangeState("Jumping")
@@ -1655,6 +1661,62 @@ function spin(spinSpeed)
 		Spin.MaxTorque = Vector3.new(0, math.huge, 0)
 		Spin.AngularVelocity = Vector3.new(0,spinSpeed,0)
 end
+
+-- Snack Noclip (based off hmza's)
+local lastMoveTime = 0
+local lastJumpTime = 0
+local isOnCooldown = false
+
+local snacks = {"Chips", "Chocolate", "Soda"}
+local function isHoldingSnack()
+    local tool = gchr:FindFirstChildOfClass("Tool")
+    return tool and table.find(snacks, tool.Name) ~= nil
+end
+
+local function temporaryNoClip(duration)
+    for _, part in pairs(gchr:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.CanCollide = false
+        end
+    end
+    task.wait(duration)
+    for _, part in pairs(character:GetDescendants()) do
+        if part:IsA("BasePart") then
+            part.CanCollide = true
+        end
+    end
+end
+
+UserInputService.JumpRequest:Connect(function()
+    lastJumpTime = tick()
+end)
+
+RunService.RenderStepped:Connect(function()
+	if not settings.ncglitch then return end
+    if not isHoldingSnack() then return end
+    if isOnCooldown then return end
+
+    local moveMagnitude = ghum.MoveDirection.Magnitude
+    if moveMagnitude > 0 then
+        lastMoveTime = tick()
+    end
+
+    if tick() - lastMoveTime < 0.6 and tick() - lastJumpTime < 0.6 then
+        isOnCooldown = true
+
+        task.spawn(function()
+            temporaryNoClip(0.8)
+            task.wait(0.2)
+            isOnCooldown = false
+        end)
+    end
+end)
+
+LocalPlayer.CharacterAdded:Connect(function(char)
+    gchr = char
+    ghum = char:WaitForChild("Humanoid")
+--    grp = char:WaitForChild("HumanoidRootPart")
+end)
 
 -- Spam Open Doors
 local Keycard = Character:FindFirstChild("Key card")
@@ -2636,7 +2698,27 @@ PlayerTab:CreateToggle({
     end,
 })
 
-if settings.noclip then noclip() else clip() end
+PlayerTab:CreateToggle({
+    Name = "Snack Noclip",
+    CurrentValue = settings.ncglitch,
+    Flag = "NCGToggle",
+    Callback = function(Value)
+        settings.ncglitch = Value
+		if Value == true then
+			CharacterCollision.Enabled = false
+		else 
+			CharacterCollision.Enabled = true
+		end
+    end,
+})
+
+if settings.ncglitch or settings.noclip then 
+	if settings.noclip then noclip() end
+	CharacterCollision.Enabled = false
+else 
+	if settings.noclip then clip() end
+	CharacterCollision.Enabled = true
+end
 
 PlayerTab:CreateSlider({
     Name = "Field Of View",
