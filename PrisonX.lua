@@ -1546,18 +1546,18 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 end)
 
 LocalPlayer:GetMouse().KeyDown:Connect(function(key)
-    if key:lower() == "g" then
-        for i, v in allGuns do
-		--	print(v)
-			if (v == "M4A1" and riot_pass == false) or (v == "FAL" and mafia_pass == false) then 
-			else
-				if not GetTool(v) then
-        			GetGun(v)
-    			end
-			end
-		end
+    key = key:lower()
+    if key == "1" then
+        if canTeleport() then
+            teleportTo("nexus")
+        end
+    elseif key == "2" then
+        if canTeleport() then
+            teleportTo("criminal_base")
+        end
     end
 end)
+
 
 local Doors = workspace:FindFirstChild("Doors")
 local CellDoors = workspace:FindFirstChild("CellDoors")
@@ -1843,13 +1843,12 @@ local function handleCommand(msg)
         local ln = table.concat(parts, " ", 2)
 		if not ln then Notify("Enter a location.") return end
 
-		cln = input:lower():gsub("%s+", " "):gsub("^%s*(.-)%s*$", "%1")
+		cln = ln:lower():gsub("%s+", " "):gsub("^%s*(.-)%s*$", "%1")
         local teleportId = TeleportAliases[cln] or cln:gsub(" ", "_")
         if not Teleports[teleportId] then Notify("Invalid location: " .. ln) return end
 		
-		
     	if canTeleport() then
-			teleportTo(locName)
+			teleportTo(teleportId)
 		end
     end
 
