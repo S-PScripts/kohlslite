@@ -1666,6 +1666,7 @@ end
 local lastMoveTime = 0
 local lastJumpTime = 0
 local isOnCooldown = false
+local gchr = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
 
 local snacks = {"Chips", "Chocolate", "Soda"}
 local function isHoldingSnack()
