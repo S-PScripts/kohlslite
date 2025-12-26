@@ -1682,7 +1682,7 @@ local function temporaryNoClip(duration)
         end
     end
     task.wait(duration)
-    for _, part in pairs(character:GetDescendants()) do
+    for _, part in pairs(gchr:GetDescendants()) do
         if part:IsA("BasePart") then
             part.CanCollide = true
         end
@@ -1707,7 +1707,7 @@ RunService.RenderStepped:Connect(function()
         isOnCooldown = true
 
         task.spawn(function()
-            temporaryNoClip(0.8)
+            temporaryNoClip(1.2)
             task.wait(0.2)
             isOnCooldown = false
         end)
