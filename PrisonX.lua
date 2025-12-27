@@ -1547,7 +1547,7 @@ end)
 
 LocalPlayer:GetMouse().KeyDown:Connect(function(key)
     key = key:lower()
-    if key == "k" then
+    if key == "p" then
         if canTeleport() then
             teleportTo("nexus")
         end
