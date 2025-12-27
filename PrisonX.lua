@@ -59,7 +59,9 @@ Credits to github.com/NewMatheusDC for some of the GUI
 
 --[[
 MISSING FEATURES:
--> Silent Aim / Invisibility
+-> Silent Aim 
+-> Invisibility
+-> C4 ESP
 ]]
 
 -- Infinite yield for speed, jump power
