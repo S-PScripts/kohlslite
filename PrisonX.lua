@@ -1547,11 +1547,11 @@ end)
 
 LocalPlayer:GetMouse().KeyDown:Connect(function(key)
     key = key:lower()
-    if key == "1" then
+    if key == "k" then
         if canTeleport() then
             teleportTo("nexus")
         end
-    elseif key == "2" then
+    elseif key == "l" then
         if canTeleport() then
             teleportTo("criminal_base")
         end
