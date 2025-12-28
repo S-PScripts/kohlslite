@@ -402,6 +402,7 @@ local TeleportAliases = {
     ["nexus"] = "nexus",
 
 	["armory"] = "armory",
+	["armoury"] = "armory",
 
 	["yard"] = "yard",
 	["courtyard"] = "yard",
@@ -415,6 +416,7 @@ local TeleportAliases = {
 
 	["cafe"] = "cafeteria",
 	["cafeteria"] = "cafeteria",
+	["canteen"] = "cafeteria",
 
 	["kitchen"] = "kitchen",
 
