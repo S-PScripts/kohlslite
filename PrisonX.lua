@@ -60,8 +60,13 @@ Credits to github.com/NewMatheusDC for some of the GUI
 --[[
 MISSING FEATURES:
 -> Silent Aim 
--> Invisibility
--> C4 ESP
+   (use https://scriptblox.com/script/Prison-Life-Silent-Aim-And-ESP-With-UI-SRC-78055)
+-> Invisibility 
+   (use https://scriptblox.com/script/Prison-Life-Keyless-72569 or https://scriptblox.com/script/MP5-Prison-Life-PLH-75263 or https://scriptblox.com/script/Prison-Life-Best-PL-Script-UNDETECTED-SILENT-AIM-INSTANT-KILL-AND-MORE-72300)
+-> C4 ESP [coming soon?]
+   (use https://scriptblox.com/script/Prison-Life-Silent-Aim-And-ESP-With-UI-SRC-78055)
+-> Auto Keycard/M9 grabber [coming soon?]
+   (use https://scriptblox.com/script/Prison-Life-Auto-pickup-keycard-open-SRC-79064)
 ]]
 
 -- Infinite yield for speed, jump power
