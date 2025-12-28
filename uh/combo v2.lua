@@ -11,16 +11,16 @@ getgenv().espsettings = {
 
 getgenv().aimlock = {
     -- Master switch
-    Aimbot = false,
+    Aimbot = true,
 
     -- Aim mode
     Mode = "Mouse", -- "Mouse" or "Crosshair"
 
     -- Team filtering
     TeamCheck = {
-        Criminals = false,
-        Guards = false,
-        Inmates = false
+        Criminals = true,
+        Guards = true,
+        Inmates = true
     },
 
     -- Target part priority
@@ -59,7 +59,6 @@ getgenv().aimlock = {
 
     -- Performance
     Update = {
-        UseRenderStepped = true,
         MaxDistance = 2000 -- studs (optional)
     }
 }
