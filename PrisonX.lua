@@ -45,13 +45,12 @@ Hide/Show Trees (-htrees / -strees)
 Remove Team Indicators
 
 ESP (distance from you + health + team colour) (+ teams allowed) (-esp/-unesp)
-Aimbot/Aimlock (+ teams allowed + torso/head targetting + guns allowed)
-Noclip
-Snack Noclip
-FOV
+Aimbot/Aimlock (+ teams allowed + torso/head targetting + guns allowed + FOV settings + types)
+Noclip / Snack Noclip
+FOV Changer
 Spin
 Infinite Jump
-Auto Sprint
+Auto Sprint / Speed Changer
 
 Credits to github.com/tomatotxt for some stuff
 Credits to github.com/NewMatheusDC for some of the GUI
