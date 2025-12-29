@@ -12,7 +12,7 @@ getgenv().espsettings = {
 
 -- Aimlock Settings
 getgenv().aimlock = {
-    Aimbot = false,     -- enables or disables the aimbot entirely; when off, nothing will auto-aim
+    Aimbot = true,     -- enables or disables the aimbot entirely; when off, nothing will auto-aim
     Mode = "Crosshair", -- determines how the aimbot aims (Mouse = Aim toward your cursor | Crosshair = Aim toward the centre of the screen)
 
     -- Team Allowed
