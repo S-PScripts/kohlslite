@@ -73,6 +73,7 @@ getgenv().aballowedguns = {
 -- VARIABLE SETUP --
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
+local GuiService = game:GetService("GuiService")
 local TweenService = game:GetService("TweenService")
 local CoreGui = game:GetService("CoreGui")
 local Workspace = game:GetService("Workspace")
@@ -327,6 +328,7 @@ end)
 -- AIMLOCK --
 local FOVCircle = Drawing.new("Circle")
 FOVCircle.Visible = false
+FOVCircle.Filled = false
 FOVCircle.Transparency = 0.5
 FOVCircle.Color = Color3.fromRGB(255, 0, 0) -- initial color
 FOVCircle.Thickness = 2
@@ -350,8 +352,8 @@ local function validTeam(plr)
 end
 
 local function getTargetPart(char)
-    local hum = char:FindFirstChild("Humanoid")
-    if aimlock.Checks.Alive and hum.Health <= 0 then
+    local hum = char:FindFirstChildOfClass("Humanoid")
+    if aimlock.Checks.Alive and (not hum or hum.Health <= 0) then
         return nil
     end
 
@@ -373,7 +375,10 @@ local function canSee(part, character)
 
     local params = RaycastParams.new()
     params.FilterType = Enum.RaycastFilterType.Blacklist
-    params.FilterDescendantsInstances = { LocalPlayer.Character }
+    params.FilterDescendantsInstances = {
+        LocalPlayer.Character,
+        character
+    }
 
     local ray = Workspace:Raycast(
         Camera.CFrame.Position,
@@ -388,8 +393,11 @@ local function getBestTarget()
     local bestPart = nil
     local bestDist = aimlock.FOV.Enabled and aimlock.FOV.Radius or math.huge
 
-    local guiInset = game:GetService("GuiService"):GetGuiInset()
-    local referencePos = UIS:GetMouseLocation() - Vector2.new(guiInset.X, guiInset.Y)
+    local guiInset = GuiService:GetGuiInset()
+    local referencePos =
+    aimlock.Mode == "Mouse"
+        and (UIS:GetMouseLocation() - Vector2.new(guiInset.X, guiInset.Y))
+        or Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
 
     for _, plr in ipairs(Players:GetPlayers()) do
         if plr ~= LocalPlayer
@@ -435,17 +443,15 @@ end)
 
 
 RunService.RenderStepped:Connect(function()
-    if not aimlock.Aimbot then return end
-    if not holdingValidGun() then return end
-
+    -- FOV circle should ALWAYS update
     if aimlock.FOV.Enabled and aimlock.FOV.ShowCircle then
-        FOVCircle.Visible = true
-        local guiInset = game:GetService("GuiService"):GetGuiInset()
+        local guiInset = GuiService:GetGuiInset()
         local mousePos = UIS:GetMouseLocation() - Vector2.new(guiInset.X, guiInset.Y)
 
+        FOVCircle.Visible = true
         FOVCircle.Position = aimlock.Mode == "Mouse"
             and mousePos
-            or Vector2.new(Camera.ViewportSize.X/2, Camera.ViewportSize.Y/2)
+            or Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
 
         FOVCircle.Radius = aimlock.FOV.Radius
         if aimlock.FOV.Rainbow then
@@ -457,6 +463,10 @@ RunService.RenderStepped:Connect(function()
         FOVCircle.Visible = false
     end
 
+    -- Aimbot logic below
+    if not aimlock.Aimbot then return end
+    if not holdingValidGun() then return end
+
     local targetPart = getBestTarget()
     if not targetPart then return end
 
@@ -464,10 +474,7 @@ RunService.RenderStepped:Connect(function()
     local goalCFrame = CFrame.new(camPos, targetPart.Position)
 
     if aimlock.Smooth.Enabled then
-        Camera.CFrame = Camera.CFrame:Lerp(
-            goalCFrame,
-            aimlock.Smooth.Amount
-        )
+        Camera.CFrame = Camera.CFrame:Lerp(goalCFrame, aimlock.Smooth.Amount)
     else
         Camera.CFrame = goalCFrame
     end
