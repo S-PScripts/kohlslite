@@ -1,65 +1,64 @@
 -- MAIN VARIABLES --
+-- ESP Settings
 getgenv().espsettings = {
     ESP = false,
     ESPTeamCheck = { Criminals = true, Guards = true, Inmates = true }, -- teams that will show up in ESP
-    names = true, -- show names of players in ESP
-    health = true, -- show health of players in ESP
-    distance = true, -- show distance player is away from you in ESP
+    names = true,     -- show names of players in ESP
+    health = true,    -- show health of players in ESP
+    distance = true,  -- show distance player is away from you in ESP
     boxcolors = true, -- use team colour for ESP boxes (off = white)
     namecolors = true -- use team colour for ESP text (off = white)
 }
 
+-- Aimlock Settings
 getgenv().aimlock = {
-    -- Master switch
-    Aimbot = false,
+    Aimbot = false,     -- enables or disables the aimbot entirely; when off, nothing will auto-aim
+    Mode = "Crosshair", -- determines how the aimbot aims (Mouse = Aim toward your cursor | Crosshair = Aim toward the centre of the screen)
 
-    -- Aim mode
-    Mode = "Crosshair", -- "Mouse" or "Crosshair"
-
-    -- Team filtering
+    -- Team Allowed
     TeamCheck = {
-        Criminals = true,
-        Guards = true,
-        Inmates = true
+        Criminals = true, -- if true, criminals can be aimed at
+        Guards = true,    -- if true, guards can be aimed at
+        Inmates = true    -- if true, inmates can be aimed at
     },
 
-    -- Target part priority
+    -- Targets
     Target = {
-        Head = true,
-        Torso = false
+        Head = true,  -- if true, the aimbot can aim at the torso
+        Torso = false -- if true, the aimbot can aim at the head
     },
 
-    -- Field of View
+    -- FOV Settings
     FOV = {
-        Enabled = true,
-        Radius = 200,      -- pixels
-        ShowCircle = true,
-        Color = Color3.fromRGB(255, 0, 0),
-        Rainbow = true
+        Enabled = true,                    -- enables the Field-of-View system; when off, the FOV circle is ignored
+        Radius = 200,                      -- sets the size of the FOV circle (in pixels/studs); larger radius means more leniency for auto-aim
+        ShowCircle = true,                 -- draws a visible circle around your cursor (or crosshair) showing the aimbot’s reach
+        Color = Color3.fromRGB(255, 0, 0), -- sets the colour of the FOV circle; ignored if Rainbow is enabled
+        Rainbow = true                     -- if on, the FOV circle cycles through colors automatically
     },
 
-    -- Smoothing (legit vs rage)
+    -- Smoothing
     Smooth = {
-        Enabled = false,
-        Amount = 0.15     -- 0 = instant snap, 1 = very slow
+        Enabled = false, -- smooths the camera movement toward the target, making aimlock less obvious (“legit” style)
+        Amount = 0.15    -- adjusts the speed of camera movement toward the target; 0 = instant snap, 1 = extremely slow/very smooth
     },
 
-    -- Safety checks
+    -- Checks
     Checks = {
-        Weapon = true,    -- holdingValidGun()
-        Wall = true,      -- raycast visibility
-        Alive = true
+        Weapon = true,    -- only enables aimlock if the player is holding an allowed gun
+        Wall = true,      -- only allows aimlock if the target is visible (raycast check)
+        Alive = true      -- only targets players that are alive (health > 0)
     },
 
     -- Activation
     Activation = {
-        Hold = false,     -- true = hold key, false = toggle
-        Key = Enum.KeyCode.E
+        Hold = false,        -- if on, aimlock only works while the activation key is pressed
+        Key = Enum.KeyCode.E -- sets which key will toggle or hold aimlock
     },
 
     -- Performance
     Update = {
-        MaxDistance = 2000 -- studs (optional)
+        MaxDistance = 2000 -- maximum distance (in studs) that aimlock will target players; beyond this range, players will be ignored
     }
 }
 
@@ -327,7 +326,11 @@ end)
 
 -- AIMLOCK --
 local FOVCircle = Drawing.new("Circle")
-FOVCircle.Visible = true
+if getgenv().aimlock.Aimbot then
+    FOVCircle.Visible = true
+else
+    FOVCircle.Visible = false
+end
 FOVCircle.Filled = false
 FOVCircle.Color = Color3.fromRGB(255, 0, 0) -- initial color
 FOVCircle.Radius = aimlock.FOV.Radius
