@@ -155,6 +155,9 @@ local settings = {
 
 	-- Temp Noclip ONLY when jumping with the Snack item equipped
 	ncglitch = false,
+
+	-- Legacy Aimlock (enabled cuz this one was actually tested properly, i can't test v2 or v3)
+	legacyAL = true,
 	
 	-- Keep PrisonX after serverhop/rejoin
 	KeepPX = true
@@ -2762,7 +2765,11 @@ PlayerTab:CreateSlider({
     end,
 })
 
-loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo v2.lua", true))() -- load it cuz poo
+if settings.legacyAL then
+	loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo.lua", true))() -- load it cuz poo
+else
+	loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo v2.lua", true))() -- load it cuz poo
+end
 function toggleesp() getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true end
 
 -- ESP Tab --
@@ -2869,6 +2876,7 @@ AimbotTab:CreateToggle({
     end,
 })
 
+if not settings.legacyAL then
 AimbotTab:CreateToggle({
     Name = "Aimlock Mode (Enabled = Mouse)",
     CurrentValue = false,
@@ -2881,6 +2889,7 @@ AimbotTab:CreateToggle({
 		end
     end,
 })
+end
 
 AimbotTab:CreateSection("Teams Allowed")
 AimbotTab:CreateToggle({
@@ -2958,6 +2967,7 @@ AimbotTab:CreateButton({
     end,
 })
 
+if not settings.legacyAL then
 AimbotTab:CreateSection("FOV Settings")
 AimbotTab:CreateToggle({
     Name = "FOV",
@@ -3090,6 +3100,7 @@ AimbotTab:CreateSlider({
 		getgenv().aimlock.Update.MaxDistance = Value
     end,
 })
+end
 
 -- Lists + Checks --
 -- Lists + Checks: Setup --
