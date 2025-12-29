@@ -11,10 +11,10 @@ getgenv().espsettings = {
 
 getgenv().aimlock = {
     -- Master switch
-    Aimbot = true,
+    Aimbot = false,
 
     -- Aim mode
-    Mode = "Mouse", -- "Mouse" or "Crosshair"
+    Mode = "Crosshair", -- "Mouse" or "Crosshair"
 
     -- Team filtering
     TeamCheck = {
