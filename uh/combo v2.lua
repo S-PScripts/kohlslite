@@ -24,8 +24,13 @@ getgenv().aimlock = {
 
     -- Targets
     Target = {
-        Head = true,  -- if true, the aimbot can aim at the torso
-        Torso = false -- if true, the aimbot can aim at the head
+        Head = true,             -- if true, the aimbot can aim at the torso
+        Torso = false,           -- if true, the aimbot can aim at the head
+        LeftArm = false,         -- if true, the aimbot can aim at the left arm
+        RightArm = false,        -- if true, the aimbot can aim at the right arm
+        LeftLeg = false,         -- if true, the aimbot can aim at the left leg
+        RightLeg = false,        -- if true, the aimbot can aim at the right leg
+        HumanoidRootPart = false -- if true, the aimbot can aim at HRP
     },
 
     -- FOV Settings
@@ -33,7 +38,7 @@ getgenv().aimlock = {
         Enabled = true,                    -- enables the Field-of-View system; when off, the FOV circle is ignored
         Radius = 200,                      -- sets the size of the FOV circle (in pixels/studs); larger radius means more leniency for auto-aim
         ShowCircle = true,                 -- draws a visible circle around your cursor (or crosshair) showing the aimbot’s reach
-        Color = Color3.fromRGB(255, 0, 0), -- sets the colour of the FOV circle; ignored if Rainbow is enabled
+        Color = Color3.fromRGB(255, 0, 0), -- sets the color of the FOV circle; ignored if Rainbow is enabled
         Rainbow = true                     -- if on, the FOV circle cycles through colors automatically
     },
 
@@ -45,11 +50,51 @@ getgenv().aimlock = {
 
     -- Checks
     Checks = {
-        Weapon = true,    -- only enables aimlock if the player is holding an allowed gun
-        Wall = true,      -- only allows aimlock if the target is visible (raycast check)
-        Alive = true      -- only targets players that are alive (health > 0)
+        Weapon = true,     -- only enables aimlock if the player is holding an allowed gun
+        Wall = true,       -- only allows aimlock if the target is visible (raycast check)
+        Alive = true,      -- only targets players that are alive (health > 0)
+        ForceField = true, -- skip players with forcefield
+        Vehicle = false,   -- skip players in vehicles
+
+        CriminalsNoInmates = false, -- criminals won't shoot inmates
+        InmatesNoCriminals = false, -- inmates won't shoot criminals
+        Hostile = true,             -- guards only, hostile inmates
+        Trespass = true,            -- guards only, trespassing inmates
+
+        TaserBypassHostile = false,  -- taser ignores hostile check
+        TaserBypassTrespass = false, -- taser ignores trespass check
+        TaserAlwaysHit = false,
+        IfPlayerStill = false,       -- always hit if player isn’t moving
+        StillThreshold = 0.5         -- how long the player needs to be still for
     },
 
+    -- Hit Chance and Miss Spread
+    Hit = {
+        HitChance = 100,              -- percent chance to hit
+        HitChanceAutoOnly = false,    -- only automatic weapons
+        MissSpread = 5,               -- distance to miss if shot misses
+        ShotgunNaturalSpread = false, -- let shotgun spread naturally
+        ShotgunGameHandled = false    -- let game handle shotgun spread
+    },
+    
+    -- Target Stickiness / Prioritize Closest
+    Targeting = {
+        PrioritizeClosest = false,      -- target closest to cursor
+        TargetStickiness = false,       -- stick to a target for a duration
+        TargetStickinessDuration = 0.6, -- duration in seconds
+        TargetStickinessRandom = false, -- randomize stickiness
+        TargetStickinessMin = 0.3,
+        TargetStickinessMax = 0.7
+    },
+
+    -- Shields / Special Handling
+    Shield = {
+        ShieldBreaker = false,    -- aim at shields instead of missing
+        ShieldFrontAngle = 0.3,   -- lower = wider shield coverage
+        ShieldRandomHead = false, -- randomly hit head instead of shield
+        ShieldHeadChance = 30     -- percent chance to hit head
+    },
+    
     -- Activation
     Activation = {
         Hold = false,        -- if on, aimlock only works while the activation key is pressed
@@ -59,9 +104,20 @@ getgenv().aimlock = {
     -- Performance
     Update = {
         MaxDistance = 2000 -- maximum distance (in studs) that aimlock will target players; beyond this range, players will be ignored
+    },
+
+    -- Visuals
+    Visuals = {
+        ShowTargetLine = false
+    },
+
+    -- Autoshoot
+    Autoshoot = {
+        Enabled = true,
+        Delay = 0.12,
+        StartDelay = 0.2
     }
 }
-
 
 getgenv().aballowedguns = {
     ["AK-47"] = true, ["FAL"] = true, ["M4A1"] = true,
