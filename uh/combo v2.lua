@@ -327,12 +327,11 @@ end)
 
 -- AIMLOCK --
 local FOVCircle = Drawing.new("Circle")
-FOVCircle.Visible = false
+FOVCircle.Visible = true
 FOVCircle.Filled = false
-FOVCircle.Transparency = 0.5
 FOVCircle.Color = Color3.fromRGB(255, 0, 0) -- initial color
+FOVCircle.Radius = aimlock.FOV.Radius
 FOVCircle.Thickness = 2
-FOVCircle.NumSides = 64
 
 local function holdingValidGun()
     if not aimlock.Checks.Weapon then
