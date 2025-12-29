@@ -40,7 +40,7 @@ getgenv().aimlock = {
 
     -- Smoothing (legit vs rage)
     Smooth = {
-        Enabled = true,
+        Enabled = false,
         Amount = 0.15     -- 0 = instant snap, 1 = very slow
     },
 
