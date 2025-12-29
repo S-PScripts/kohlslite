@@ -24,14 +24,8 @@ getgenv().aimlock = {
 
     -- Targets
     Target = {
-        Head = true,              -- if true, the aimbot can aim at the torso
-        Torso = false,            -- if true, the aimbot can aim at the head
-        LeftArm = false,          -- if true, the aimbot can aim at the left arm
-        RightArm = false,         -- if true, the aimbot can aim at the right arm
-        LeftLeg = false,          -- if true, the aimbot can aim at the left leg
-        RightLeg = false,         -- if true, the aimbot can aim at the right leg
-        HumanoidRootPart = false, -- if true, the aimbot can aim at HRP
-        RandomParts = false
+        Head = true,  -- if true, the aimbot can aim at the torso
+        Torso = false -- if true, the aimbot can aim at the head
     },
 
     -- FOV Settings
@@ -51,51 +45,11 @@ getgenv().aimlock = {
 
     -- Checks
     Checks = {
-        Weapon = true,     -- only enables aimlock if the player is holding an allowed gun
-        Wall = true,       -- only allows aimlock if the target is visible (raycast check)
-        Alive = true,      -- only targets players that are alive (health > 0)
-        ForceField = true, -- skip players with forcefield
-        Vehicle = false,   -- skip players in vehicles
-
-        CriminalsNoInmates = false, -- criminals won't shoot inmates
-        InmatesNoCriminals = false, -- inmates won't shoot criminals
-        Hostile = true,             -- guards only, hostile inmates
-        Trespass = true,            -- guards only, trespassing inmates
-
-        TaserBypassHostile = false,  -- taser ignores hostile check
-        TaserBypassTrespass = false, -- taser ignores trespass check
-        TaserAlwaysHit = false,
-        IfPlayerStill = false,       -- always hit if player isn’t moving
-        StillThreshold = 0.5         -- how long the player needs to be still for
+        Weapon = true,    -- only enables aimlock if the player is holding an allowed gun
+        Wall = true,      -- only allows aimlock if the target is visible (raycast check)
+        Alive = true      -- only targets players that are alive (health > 0)
     },
 
-    -- Hit Chance and Miss Spread
-    Hit = {
-        HitChance = 100,              -- percent chance to hit
-        HitChanceAutoOnly = false,    -- only automatic weapons
-        MissSpread = 5,               -- distance to miss if shot misses
-        ShotgunNaturalSpread = false, -- let shotgun spread naturally
-        ShotgunGameHandled = false    -- let game handle shotgun spread
-    },
-    
-    -- Target Stickiness / Prioritize Closest
-    Targeting = {
-        PrioritizeClosest = false,      -- target closest to cursor
-        TargetStickiness = false,       -- stick to a target for a duration
-        TargetStickinessDuration = 0.6, -- duration in seconds
-        TargetStickinessRandom = false, -- randomize stickiness
-        TargetStickinessMin = 0.3,
-        TargetStickinessMax = 0.7
-    },
-
-    -- Shields / Special Handling
-    Shield = {
-        ShieldBreaker = false,    -- aim at shields instead of missing
-        ShieldFrontAngle = 0.3,   -- lower = wider shield coverage
-        ShieldRandomHead = false, -- randomly hit head instead of shield
-        ShieldHeadChance = 30     -- percent chance to hit head
-    },
-    
     -- Activation
     Activation = {
         Hold = false,        -- if on, aimlock only works while the activation key is pressed
@@ -105,20 +59,9 @@ getgenv().aimlock = {
     -- Performance
     Update = {
         MaxDistance = 2000 -- maximum distance (in studs) that aimlock will target players; beyond this range, players will be ignored
-    },
-
-    -- Visuals
-    Visuals = {
-        ShowTargetLine = false
-    },
-
-    -- Autoshoot
-    Autoshoot = {
-        Enabled = true,
-        Delay = 0.12,
-        StartDelay = 0.2
     }
 }
+
 
 getgenv().aballowedguns = {
     ["AK-47"] = true, ["FAL"] = true, ["M4A1"] = true,
@@ -407,77 +350,23 @@ end
 
 local function validTeam(plr)
     if not plr.Team then return false end
-    local teamAllowed = aimlock.TeamCheck[plr.Team.Name] == true
-    if not teamAllowed then return false end
-
-    local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Tool")
-    local isTaser = tool and tool.Name == "Taser"
-
-    if not isTaser or not aimlock.Checks.TaserBypassHostile then
-        if aimlock.Checks.Hostile and plr:GetAttribute("Hostile") ~= true then
-            return false
-        end
-    end
-
-    if not isTaser or not aimlock.Checks.TaserBypassTrespass then
-        if aimlock.Checks.Trespass and plr:GetAttribute("Trespass") ~= true then
-            return false
-        end
-    end
-
-    if aimlock.Checks.CriminalsNoInmates and LocalPlayer:GetAttribute("Criminal") and plr:GetAttribute("Inmate") then
-        return false
-    end
-    if aimlock.Checks.InmatesNoCriminals and LocalPlayer:GetAttribute("Inmate") and plr:GetAttribute("Criminal") then
-        return false
-    end
-
-    if aimlock.Checks.Vehicle then
-        local char = plr.Character
-        if char then
-            for _, seat in ipairs(char:GetDescendants()) do
-                if seat:IsA("VehicleSeat") then
-                    return false
-                end
-            end
-        end
-    end
-
-    if aimlock.Checks.ForceField then
-        local char = plr.Character
-        if char and char:FindFirstChildOfClass("ForceField") then
-            return false
-        end
-    end
-
-
-    return true
+    return aimlock.TeamCheck[plr.Team.Name] == true
 end
 
 local function getTargetPart(char)
-    if not char then return nil end
     local hum = char:FindFirstChildOfClass("Humanoid")
-    if aimlock.Checks.Alive and (not hum or hum.Health <= 0) then return nil end
-
-    local partsList = {}
-    if aimlock.Target.Head then table.insert(partsList, "Head") end
-    if aimlock.Target.Torso then table.insert(partsList, "Torso") end
-    if aimlock.Target.LeftArm then table.insert(partsList, "Left Arm") end
-    if aimlock.Target.RightArm then table.insert(partsList, "Right Arm") end
-    if aimlock.Target.LeftLeg then table.insert(partsList, "Left Leg") end
-    if aimlock.Target.RightLeg then table.insert(partsList, "Right Leg") end
-    if aimlock.Target.HumanoidRootPart then table.insert(partsList, "HumanoidRootPart") end
-
-    if aimlock.Target.RandomParts then
-        local index = math.random(1, #partsList)
-        local partName = partsList[index]
-        return char:FindFirstChild(partName)
-    else
-        for _, partName in ipairs(partsList) do
-            local part = char:FindFirstChild(partName)
-            if part then return part end
-        end
+    if aimlock.Checks.Alive and (not hum or hum.Health <= 0) then
+        return nil
     end
+
+    if aimlock.Target.Head and char:FindFirstChild("Head") then
+        return char.Head
+    end
+
+    if aimlock.Target.Torso and char:FindFirstChild("Torso") then
+        return char.Torso
+    end
+
     return nil
 end
 
@@ -504,7 +393,7 @@ end
 
 local function getBestTarget()
     local bestPart = nil
-    local bestDist = aimlock.Targeting.PrioritizeClosest and math.huge or aimlock.FOV.Radius or math.huge
+    local bestDist = aimlock.FOV.Enabled and aimlock.FOV.Radius or math.huge
 
     local guiInset = GuiService:GetGuiInset()
     local referencePos =
@@ -524,16 +413,9 @@ local function getBestTarget()
                     local pos, visible = Camera:WorldToViewportPoint(part.Position)
                     if visible then
                         local dist = (Vector2.new(pos.X, pos.Y) - referencePos).Magnitude
-                        if aimlock.Targeting.PrioritizeClosest then
-                            if dist < bestDist and canSee(part, plr.Character) then
-                                bestDist = dist
-                                bestPart = part
-                            end
-                        else
-                            if canSee(part, plr.Character) then
-                                bestPart = part
-                                break
-                            end
+                        if dist < bestDist and canSee(part, plr.Character) then
+                            bestDist = dist
+                            bestPart = part
                         end
                     end
                 end
@@ -561,172 +443,44 @@ UIS.InputEnded:Connect(function(input)
     end
 end)
 
-local rng = Random.new()
-local lastTarget = nil
-local stickTime = 0
-local lastShot = 0
 
-local function isPlayerStill(humanoid)
-    if not aimlock.Checks.IfPlayerStill then return true end
-    if not humanoid or not humanoid.RootPart then return true end
-    return humanoid.RootPart.Velocity.Magnitude <= aimlock.Checks.StillThreshold
-end
-
-local function passesHitChance(toolName)
-    local hitChance = aimlock.Hit.HitChance
-    if hitChance >= 100 then return true end
-
-    local chance = rng:NextInteger(1,100)
-    if aimlock.Hit.HitChanceAutoOnly and toolName ~= "Taser" then
-        return chance <= hitChance
-    elseif toolName == "Taser" and aimlock.Hit.TaserAlwaysHit then
-        return true
-    else
-        return chance <= hitChance
-    end
-end
-
--- Apply miss spread
-local function applyMissSpread(pos)
-    local spread = aimlock.Hit.MissSpread
-    local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Tool")
-    if not tool then return pos end
-
-    if aimlock.Hit.ShotgunNaturalSpread and tool.Name:find("Shotgun") then
-        return pos -- game handles spread naturally
-    end
-    if aimlock.Hit.ShotgunGameHandled and tool.Name:find("Shotgun") then
-        return pos -- game handles spread
-    end
-
-    if spread and spread > 0 then
-        return pos + Vector3.new(
-            rng:NextNumber(-spread, spread)/10,
-            rng:NextNumber(-spread, spread)/10,
-            rng:NextNumber(-spread, spread)/10
-        )
-    end
-    return pos
-end
-
--- Check shield logic
-local function checkShield(part, char)
-    if aimlock.Shield.ShieldBreaker then
-        local shield = char:FindFirstChild("RiotShieldPart")
-        if shield and shield:IsA("BasePart") then
-            local myHRP = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-            local theirHRP = char:FindFirstChild("HumanoidRootPart")
-            if myHRP and theirHRP then
-                local toMe = (myHRP.Position - theirHRP.Position).Unit
-                local look = theirHRP.CFrame.LookVector
-                if toMe:Dot(look) > aimlock.Shield.ShieldFrontAngle then
-                    if aimlock.Shield.ShieldRandomHead and math.random(1,100) <= aimlock.Shield.ShieldHeadChance then
-                        return char:FindFirstChild("Head")
-                    end
-                    return shield
-                end
-            end
-        end
-    end
-    return part
-end
-
--- Stickiness helper
-local function getStickyTarget(best)
-    if aimlock.Targeting.TargetStickiness and lastTarget then
-        stickTime = stickTime + RunService.RenderStepped:Wait()
-        local duration = aimlock.Targeting.TargetStickinessDuration
-        if aimlock.Targeting.TargetStickinessRandom then
-            duration = rng:NextNumber(aimlock.Targeting.TargetStickinessMin, aimlock.Targeting.TargetStickinessMax)
-        end
-        if stickTime < duration then
-            return lastTarget
-        end
-        stickTime = 0
-    end
-    lastTarget = best
-    return best
-end
-
--- Autoshoot
-local lastShot = 0
-local shootStart = tick() + (aimlock.Autoshoot.StartDelay or 0)
-
-local function tryShoot()
-    if aimlock.Autoshoot.Enabled and tick() >= shootStart then
-        if tick() - lastShot >= (aimlock.Autoshoot.Delay or 0.12) then
-            local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Tool")
-            if tool and tool:FindFirstChild("Handle") then
-                tool:Activate()
-                lastShot = tick()
-            end
-        end
-    end
-end
-
-local TargetLine = Drawing.new("Line")
-TargetLine.Visible = false
-TargetLine.Color = Color3.fromRGB(0,255,0)
-TargetLine.Thickness = 2
-
--- Main RenderStepped
 RunService.RenderStepped:Connect(function()
-    -- FOV Circle Update
+    -- FOV circle should ALWAYS update
     if aimlock.FOV.Enabled and aimlock.FOV.ShowCircle then
         local guiInset = GuiService:GetGuiInset()
         local mousePos = UIS:GetMouseLocation() - Vector2.new(guiInset.X, guiInset.Y)
+
         FOVCircle.Visible = true
-        FOVCircle.Position = aimlock.Mode == "Mouse" and mousePos or Vector2.new(Camera.ViewportSize.X/2, Camera.ViewportSize.Y/2)
+        FOVCircle.Position = aimlock.Mode == "Mouse"
+            and mousePos
+            or Vector2.new(Camera.ViewportSize.X / 2, Camera.ViewportSize.Y / 2)
+
         FOVCircle.Radius = aimlock.FOV.Radius
-        FOVCircle.Color = aimlock.FOV.Rainbow and Color3.fromHSV(tick()%5/5,1,1) or aimlock.FOV.Color
+        if aimlock.FOV.Rainbow then
+            FOVCircle.Color = Color3.fromHSV(tick()%5/5, 1, 1)
+        else
+            FOVCircle.Color = aimlock.FOV.Color
+        end
     else
         FOVCircle.Visible = false
     end
 
-    -- Exit if aimbot disabled or not holding valid gun
-    if not aimlock.Aimbot or not holdingValidGun() then return end
+    -- Aimbot logic below
+    if not aimlock.Aimbot then return end
+    if not holdingValidGun() then return end
 
-    -- Target acquisition
-    local bestPart = getBestTarget()
-    if not bestPart then return end
+    local targetPart = getBestTarget()
+    if not targetPart then return end
 
-    if aimlock.Visuals.ShowTargetLine and bestPart then
-        local screenPos = Camera:WorldToViewportPoint(bestPart.Position)
-        local guiInset = GuiService:GetGuiInset()
-        local startPos = aimlock.Mode == "Mouse" and (UIS:GetMouseLocation() - Vector2.new(guiInset.X, guiInset.Y))
-                     or Vector2.new(Camera.ViewportSize.X/2, Camera.ViewportSize.Y/2)
-        TargetLine.From = startPos
-        TargetLine.To = Vector2.new(screenPos.X, screenPos.Y)
-        TargetLine.Visible = true
-    else
-        TargetLine.Visible = false
-    end
-        
-    local char = bestPart.Parent
-    local hum = char and char:FindFirstChildOfClass("Humanoid")
-    if aimlock.Checks.Alive and (not hum or hum.Health <= 0) then return end
-    if not isPlayerStill(hum) then return end
-
-    -- Shield / miss / hit chance
-    bestPart = checkShield(bestPart, char)
-    local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Tool")
-    if not passesHitChance(tool and tool.Name) then return end
-
-    local finalPos = applyMissSpread(bestPart.Position)
-
-    -- Smooth or instant aim
     local camPos = Camera.CFrame.Position
-    local goalCFrame = CFrame.new(camPos, finalPos)
+    local goalCFrame = CFrame.new(camPos, targetPart.Position)
+
     if aimlock.Smooth.Enabled then
         Camera.CFrame = Camera.CFrame:Lerp(goalCFrame, aimlock.Smooth.Amount)
     else
         Camera.CFrame = goalCFrame
     end
-
-    -- Autoshoot
-    tryShoot()
 end)
-
 
 --[[
 local ESP_Folder = Instance.new("Folder")
