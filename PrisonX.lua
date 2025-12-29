@@ -2763,7 +2763,7 @@ PlayerTab:CreateSlider({
     end,
 })
 
-loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo.lua", true))() -- load it cuz poo
+loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo v2.lua", true))() -- load it cuz poo
 function toggleesp() getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true end
 
 -- ESP Tab --
@@ -2870,6 +2870,19 @@ AimbotTab:CreateToggle({
     end,
 })
 
+AimbotTab:CreateToggle({
+    Name = "Aimlock Mode (Enabled = Mouse)",
+    CurrentValue = false,
+    Flag = "ALMode",
+    Callback = function(Value)
+		if Value == true then
+			getgenv().aimlock.Mode = "Mouse"
+		else
+			getgenv().aimlock.Mode = "Crosshair"
+		end
+    end,
+})
+
 AimbotTab:CreateSection("Teams Allowed")
 AimbotTab:CreateToggle({
     Name = "Guards Allowed",
@@ -2943,6 +2956,139 @@ AimbotTab:CreateButton({
         else
             allowedGuns[abgun] = true; Notify(abgun .. " enabled in aimlock")
         end
+    end,
+})
+
+AimbotTab:CreateSection("FOV Settings")
+AimbotTab:CreateToggle({
+    Name = "FOV",
+    CurrentValue = getgenv().aimlock.FOV.Enabled,
+    Flag = "ABFOV",
+    Callback = function(Value)
+		getgenv().aimlock.FOV.Enabled = Value
+    end,
+})
+
+AimbotTab:CreateToggle({
+    Name = "Show FOV Circle",
+    CurrentValue = getgenv().aimlock.FOV.ShowCircle,
+    Flag = "ABFOVC",
+    Callback = function(Value)
+		getgenv().aimlock.FOV.ShowCircle = Value
+    end,
+})
+
+AimbotTab:CreateSlider({
+    Name = "FOV Radius",
+    CurrentValue = getgenv().aimlock.FOV.Radius,
+	Range = {50, 1000},
+    Increment = 5,
+    Suffix = "studs",
+    Flag = "ABFOVR",
+    Callback = function(Value)
+		getgenv().aimlock.FOV.Radius = Value
+    end,
+})
+
+AimbotTab:CreateColorPicker({
+    Name = "Color Picker",
+    Color = getgenv().aimlock.FOV.Color,
+    Flag = "ABColorPicker",
+    Callback = function(Value)
+        getgenv().aimlock.FOV.Color = Value
+    end
+})
+
+AimbotTab:CreateToggle({
+    Name = "FOV Rainbow",
+    CurrentValue = getgenv().aimlock.FOV.Rainbow,
+    Flag = "ABFOVRAIN",
+    Callback = function(Value)
+		getgenv().aimlock.FOV.Rainbow = Value
+    end,
+})
+
+AimbotTab:CreateSection("Smoothing")
+AimbotTab:CreateToggle({
+    Name = "Enable Smoothing",
+    CurrentValue = getgenv().aimlock.Smooth.Enabled,
+    Flag = "ABSmoE",
+    Callback = function(Value)
+		getgenv().aimlock.Smooth.Enabled = Value
+    end,
+})
+
+AimbotTab:CreateSlider({
+    Name = "Smooth Amount",
+    CurrentValue = getgenv().aimlock.Smooth.Amount,
+	Range = {0, 1},
+    Increment = 0.01,
+    Suffix = "s",
+    Flag = "ABSmoA",
+    Callback = function(Value)
+		getgenv().aimlock.Smooth.Amount = Value
+    end,
+})
+
+AimbotTab:CreateSection("Checks")
+AimbotTab:CreateToggle({
+    Name = "Weapon Check",
+    CurrentValue = getgenv().aimlock.Checks.Weapon,
+    Flag = "ABWeaponC",
+    Callback = function(Value)
+		getgenv().aimlock.Checks.Weapon = Value
+    end,
+})
+
+AimbotTab:CreateToggle({
+    Name = "Wall Check",
+    CurrentValue = getgenv().aimlock.Checks.Wall,
+    Flag = "ABWallC",
+    Callback = function(Value)
+		getgenv().aimlock.Checks.Wall = Value
+    end,
+})
+
+AimbotTab:CreateToggle({
+    Name = "Alive Check",
+    CurrentValue = getgenv().aimlock.Checks.Alive,
+    Flag = "ABAliveC",
+    Callback = function(Value)
+		getgenv().aimlock.Checks.Alive = Value
+    end,
+})
+
+AimbotTab:CreateSection("Activation (Click E to toggle Aimlock)")
+AimbotTab:CreateToggle({
+    Name = "Hold Key (aimlock only on when key is held)",
+    CurrentValue = getgenv().aimlock.Activation.Hold,
+    Flag = "ABHoldAct",
+    Callback = function(Value)
+		getgenv().aimlock.Activation.Hold = Value
+    end,
+})
+
+AimbotTab:CreateInput({
+   Name = "Activation Key",
+   CurrentValue = "",
+   PlaceholderText = "Input Placeholder",
+   RemoveTextAfterFocusLost = false,
+   Flag = "ABActKey",
+   Callback = function(Text)
+   		pcall(function() getgenv().aimlock.Activation.Key = Enum.KeyCode[Text] end)()
+   end,
+})
+
+AimbotTab:CreateSection("Performance")
+AimbotTab:CreateSlider({
+    Name = "Max Distance",
+    CurrentValue = getgenv().aimlock.Update.MaxDistance,
+	Range = {200, 2000},
+    Increment = 5,
+    Suffix = "studs",
+    Flag = "AimbotMD",
+    Callback = function(Value)
+		getgenv().aimlock.Update.MaxDistance = Value
     end,
 })
 
