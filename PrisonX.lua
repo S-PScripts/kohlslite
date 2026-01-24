@@ -266,8 +266,19 @@ function checkMAFIA()
 	return false
 end
 
+function checkSniper()	
+	if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(LocalPlayer.UserId, 699360089) then
+		return true
+	end
+
+	return false
+end
+
+sniper_pass = checkSniper()
+
 riot_pass, type = checkRIOT()
 mafia_pass = checkMAFIA()
+sniper_pass = checkSniper()
 
 -- Teleport Locations
 local Teleports = {
