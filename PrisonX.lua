@@ -274,8 +274,6 @@ function checkSniper()
 	return false
 end
 
-sniper_pass = checkSniper()
-
 riot_pass, type = checkRIOT()
 mafia_pass = checkMAFIA()
 sniper_pass = checkSniper()
@@ -550,14 +548,20 @@ local gunAliases = {
 
 local allGuns
 -- Guns in the game
-if riot_pass and mafia_pass then
-	allGuns = {"AK-47", "M4A1", "Remington 870", "FAL", "MP5"}
-elseif riot_pass then
-	allGuns = {"AK-47", "M4A1", "Remington 870", "MP5"}
-elseif mafia_pass then
-	allGuns = {"AK-47", "Remington 870", "FAL", "MP5"}
-else
-	allGuns = {"AK-47", "Remington 870", "MP5"}
+
+allGuns = {"AK-47", "Remington 870", "MP5"}
+
+if riot_pass then
+	table.insert(allGuns, "M4A1")
+end
+
+if mafia_pass then
+	table.insert(allGuns, "FAL")
+end
+
+if sniper_pass then
+	table.insert(allGuns, "M700")
+	table.insert(allGuns, "Revolver")
 end
 
 local allGuns2 = {}
@@ -1831,7 +1835,7 @@ RunService.Heartbeat:Connect(function()
         local pickedGuns = 0
 
         for _, gunName in ipairs(settings.autoguns_list) do
-            if (gunName == "M4A1" and not riot_pass) or (gunName == "FAL" and not mafia_pass) then
+            if (gunName == "M4A1" and not riot_pass) or (gunName == "FAL" and not mafia_pass) or (gunName == "M700" and not sniper_pass) or (gunName == "Revolver" and not sniper_pass) then
                 -- skip guns you don't have access to
             else
                 if not GetTool(gunName) then
@@ -2325,7 +2329,7 @@ MainTab:CreateButton({
 		oldhrp = hrp.CFrame
 		for i, v in allGuns do
 		--	print(v)
-			if (v == "M4A1" and riot_pass == false) or (v == "FAL" and mafia_pass == false) then 
+			if (v == "M4A1" and riot_pass == false) or (v == "FAL" and mafia_pass == false) or (v == "M700" and not sniper_pass) or (v == "Revolver" and not sniper_pass) then 
 			else
 				if not GetTool(v) then
         			GetGun(v)
