@@ -45,7 +45,7 @@ Hide/Show Trees (-htrees / -strees)
 Remove Team Indicators
 
 ESP (distance from you + health + team colour) (+ teams allowed) (-esp/-unesp)
-Aimbot/Aimlock (+ teams allowed + torso/head targetting + guns allowed + FOV settings + types)
+Aimbot/Aimlock (+ teams allowed + torso/head targetting + guns allowed)
 Noclip / Snack Noclip
 FOV Changer
 Spin
