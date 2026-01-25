@@ -150,9 +150,6 @@ local settings = {
 
 	-- Temp Noclip ONLY when jumping with the Snack item equipped
 	ncglitch = false,
-
-	-- Legacy Aimlock (enabled cuz this one was actually tested properly, i can't test v2 or v3)
-	legacyAL = true,
 	
 	-- Keep PrisonX after serverhop/rejoin
 	KeepPX = true
@@ -2444,7 +2441,6 @@ TeleportTab:CreateDropdown({
     end,
 })
 
-
 TeleportTab:CreateButton({
     Name = "Go",
     Callback = function()
@@ -2882,6 +2878,19 @@ AimbotTab:CreateToggle({
     Callback = function(Value)
 		getgenv().aimlock.TeamCheck.Inmates = Value
     end,
+})
+
+AimbotTab:CreateSection("FOV")
+AimbotTab:CreateSlider({
+	Name = "FOV",
+	CurrentValue = getgenv().aimlock.FOV,
+	Range = {100, 1000},
+	Increment = 10,
+	Suffix = "",
+	Flag = "FOVABSlider",
+	Callback = function(Value)
+		getgenv().aimlock.FOV = Value
+	end,
 })
 
 AimbotTab:CreateSection("Targets")
