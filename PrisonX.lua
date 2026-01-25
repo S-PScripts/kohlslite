@@ -561,7 +561,7 @@ end
 
 if sniper_pass then
 	table.insert(allGuns, "M700")
-	table.insert(allGuns, "Revolver")
+	--table.insert(allGuns, "Revolver")
 end
 
 local allGuns2 = {}
