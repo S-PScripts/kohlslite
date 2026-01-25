@@ -103,6 +103,9 @@ local settings = {
 	-- Remove doors (CAUSES 1 SEC OF LAG WHENEVER YOU RESPAWN)
 	nodoors = false,
 
+	-- Transparent doors
+	tdoors = false,
+
 	-- Spam open doors (must be guard / have a keycard)
 --	sodoors = false,
 
@@ -1568,40 +1571,52 @@ LocalPlayer:GetMouse().KeyDown:Connect(function(key)
     end
 end)
 
-
 local Doors = workspace:FindFirstChild("Doors")
 local CellDoors = workspace:FindFirstChild("CellDoors")
+
+-- Transparent doors
+function tdoors(temmie)
+	for i,v in pairs(Doors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = false
+            if temmie then v.Transparency = 0.6 else v.Transparency = 0 end
+        end
+    end
+	
+    for i,v in pairs(CellDoors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.CanCollide = false
+            if temmie then v.Transparency = 0.6 else v.Transparency = 0 end
+        end
+    end
+end
 
 -- Remove collision of doors
 function NoDoors()
     for i,v in pairs(Doors:GetDescendants()) do
         if v:IsA("BasePart") then
             v.CanCollide = false
-            v.Transparency = 0.6
         end
     end
 	
     for i,v in pairs(CellDoors:GetDescendants()) do
         if v:IsA("BasePart") then
             v.CanCollide = false
-            v.Transparency = 0.6
         end
     end
 end
 
 -- Add collision of doors
-function AddDoors()
+function AddDoors(temmie)
     for i,v in pairs(Doors:GetDescendants()) do
         if v:IsA("BasePart") then
             v.CanCollide = true
-            v.Transparency = 0
         end
     end
 	
     for i,v in pairs(CellDoors:GetDescendants()) do
         if v:IsA("BasePart") then
             v.CanCollide = true
-            v.Transparency = 0
         end
     end
 end
@@ -1623,10 +1638,10 @@ end
 
 -- Infinite Jump
 UserInputService.JumpRequest:Connect(function()
-            task.wait(0)
-            if settings.ijump then
-               game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid'):ChangeState("Jumping")
-            end
+	task.wait(0)
+    if settings.ijump then
+        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid'):ChangeState("Jumping")
+    end
 end)
 
 -- Noclip
@@ -1804,6 +1819,10 @@ RunService.Heartbeat:Connect(function()
     if settings.nodoors then
         NoDoors()
     end
+
+	if settings.tdoors then
+		tdoors(settings.tdoors)
+	end
 
 	if os.clock() - lst < AUTOGUN_DELAY_AFTER_SPAWN then
         return
@@ -2495,7 +2514,7 @@ TeleportTab:CreateButton({
 -- Automation: Player Related --
 AutoTab:CreateSection("Player Related")
 AutoTab:CreateToggle({
-    Name = "Auto Respawn (This sucks now)",
+    Name = "Auto Respawn (don't use this)",
     CurrentValue = settings.autorespawn,
     Flag = "AutoRespawnToggle",
     Callback = function(Value)
@@ -2515,7 +2534,7 @@ AutoTab:CreateToggle({
 -- Automation: Auto Guns --
 AutoTab:CreateSection("Auto Guns")
 AutoTab:CreateToggle({
-    Name = "Auto Guns",
+    Name = "Auto Guns (don't use this)",
     CurrentValue = settings.autoguns,
     Flag = "AutoGunsToggle",
     Callback = function(Value)
@@ -2583,6 +2602,16 @@ AutoTab:CreateToggle({
         end
     end,
 })
+
+AutoTab:CreateToggle({
+    Name = "Transparent Doors",
+    CurrentValue = settings.tdoors,
+    Flag = "TDoorsToggle",
+    Callback = function(Value)
+        settings.tdoors = Value
+    end,
+})
+
 
 --[[ AutoTab:CreateToggle({
     Name = "Spam Open Doors",
