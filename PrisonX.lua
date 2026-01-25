@@ -1650,6 +1650,7 @@ local Noclipping = nil
 function noclip()
 	Clip = false; task.wait(0.1)
 	local function NoclipLoop()
+		CharacterCollision.Enabled = false
 		if Clip == false and LocalPlayer.Character ~= nil then
 			for _, child in pairs(LocalPlayer.Character:GetDescendants()) do
 				if child:IsA("BasePart") and child.CanCollide == true and child.Name ~= floatName then
@@ -1666,6 +1667,7 @@ function clip()
 		Noclipping:Disconnect()
 	end
 	Clip = true
+	CharacterCollision.Enabled = true
 end
 
 function getRoot(char)
@@ -1722,6 +1724,7 @@ RunService.RenderStepped:Connect(function()
 	if not settings.ncglitch then return end
     if not isHoldingSnack() then return end
     if isOnCooldown then return end
+	if CharacterCollision.Enabled == true then CharacterCollision.Enabled = false end
 
     local moveMagnitude = ghum.MoveDirection.Magnitude
     if moveMagnitude > 0 then
@@ -2698,7 +2701,6 @@ PlayerTab:CreateToggle({
         settings.noclip = Value
 		if Value == true then
 			noclip()
-			CharacterCollision.Enabled = false
 		else 
 			clip() 
 			CharacterCollision.Enabled = true
@@ -2712,9 +2714,7 @@ PlayerTab:CreateToggle({
     Flag = "NCGToggle",
     Callback = function(Value)
         settings.ncglitch = Value
-		if Value == true then
-			CharacterCollision.Enabled = false
-		else 
+		if Value == false then
 			CharacterCollision.Enabled = true
 		end
     end,
@@ -2722,7 +2722,6 @@ PlayerTab:CreateToggle({
 
 if settings.ncglitch or settings.noclip then 
 	if settings.noclip then noclip() end
-	CharacterCollision.Enabled = false
 else 
 	if settings.noclip then clip() end
 	CharacterCollision.Enabled = true
