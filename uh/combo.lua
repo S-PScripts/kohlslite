@@ -14,6 +14,7 @@ getgenv().aimlock = {
     SilentAim = false,
     TeamCheck = { Criminals = false, Guards = false, Inmates = false }, -- teams aimlock will lock onto
     Target = { Torso = false, Head = true }, -- what part of the player aimbot should toggle
+    FOV = 500
 
    --[[ ESP = false,
     ESPTeamCheck = { Criminals = false, Guards = false, Inmates = false } ]]
@@ -281,7 +282,6 @@ end)
 
 -- AIMLOCK --
 --// Config
-local FOV = 500
 local TargetPart = nil
 
 --// ESP folder (from script 1)
@@ -337,7 +337,7 @@ end
 
 --// Get closest target to mouse
 local function getClosestScreenTarget()
-    local bestChar, bestDist = nil, FOV
+    local bestChar, bestDist = nil, getgenv().aimlock.FOV
     local mousePos = UIS:GetMouseLocation()
 
     for _, plr in ipairs(Players:GetPlayers()) do
