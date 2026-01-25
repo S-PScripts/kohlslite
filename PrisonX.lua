@@ -1,4 +1,4 @@
--- PrisonX v1.22 by TS2021
+-- PrisonX v1.234 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
 -- No longer updated often!!!
 
@@ -184,7 +184,7 @@ local function Notify(text, time)
     end)
 end
 
-local version = "v1.22"
+local version = "v1.234"
 
 -- GUI Setup
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
@@ -192,7 +192,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
     Name = "PrisonX",
     Icon = nil,
-    LoadingTitle = "PrisonX v1.22",
+    LoadingTitle = "PrisonX v1.234",
     LoadingSubtitle = "Created by TS2021",
     ConfigurationSaving = {
         Enabled = false,
