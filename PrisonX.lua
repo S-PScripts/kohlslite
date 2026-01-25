@@ -25,9 +25,7 @@ Arrest Aura Whitelist (-aawl / -unaawl)
 Auto Respawn (spawn in the same place upon death) (-autore / -unautore)
 Quick Respawn (does a neat trick to spawn you faster for inmates/guards when possible, part of auto respawn)
 
-Powerful Guns (guns have unlimited range + spread) (-powguns / -unpowguns)
 Fast Guns (you can also change the rate, default is 0) (-fastguns / -unfastguns / -firerate)
-Run -opguns to turn on both (-unopguns to turn off both)
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
 
 Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
@@ -97,9 +95,6 @@ local settings = {
 	-- Auto guns
 	autoguns = false,
 	autoguns_list = {},
-
-	-- Auto-Mod all guns to have a big range and spread (pg = powerful gun)
-	auto_pg = false,
 	
 	-- Auto-Mod all guns to shoot really fast (fg = fast gun)
 	auto_fg = false,
@@ -726,15 +721,7 @@ namecall = hookmetamethod(game, "__namecall", function(self, ...)
     if method == "GetAttributes" then
         local result = namecall(self, ...)
 
-        if settings.auto_pg and settings.auto_fg then
-            result.Range = 999999999
-            result.Spread = 999999999
-            result.AutoFire = true
-            result.FireRate = auto_fgrate
-        elseif settings.auto_pg then
-            result.Range = 999999999
-            result.Spread = 999999999
-        elseif settings.auto_fg then
+        if settings.auto_fg then
             result.AutoFire = true
             result.FireRate = auto_fgrate
         end
@@ -2084,16 +2071,6 @@ local function handleCommand(msg)
         Notify("Disabled auto-respawn.")
     end
 
-	if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."powguns" then
-        settings.auto_pg = true
-		Notify("Your guns will now have unlimited range and spread!")
-    end
-
-	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."unpowguns" then
-        settings.auto_pg = false
-		Notify("Your guns will no longer have unlimited range and spread.")
-    end
-	
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."fastguns" then
         settings.auto_fg = true
 		Notify("Your guns will now have fast fire-rate.")
@@ -2121,18 +2098,6 @@ local function handleCommand(msg)
 		settings.arrestaura_radius = tonumber(parts[2])
 		Notify("Arrest aura will now have radius "..settings.arrestaura_radius..".")
 	end
-	
-	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."opguns" then
-        settings.auto_pg = true
-		settings.auto_fg = true
-		Notify("Your guns will now be powerful and fast!")
-    end
-
-	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."unopguns" then
-        settings.auto_pg = false
-		settings.auto_fg = false
-		Notify("Your guns will no longer be powerful and fast!")
-    end
 
     if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."pkf" then
         for i, v in ipairs(Killfeed:GetChildren()) do
@@ -2441,15 +2406,6 @@ CombatTab:CreateDropdown({
 
 -- Weapon Modifications --
 CombatTab:CreateSection("Weapon Modifications")
-
-CombatTab:CreateToggle({
-    Name = "Powerful Guns",
-    CurrentValue = settings.auto_pg,
-    Flag = "PowerGunsToggle",
-    Callback = function(Value)
-        settings.auto_pg = Value
-    end,
-})
 
 CombatTab:CreateToggle({
     Name = "Fast Guns",
