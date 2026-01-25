@@ -11,6 +11,7 @@ getgenv().espsettings = {
 
 getgenv().aimlock = {
     Aimbot = false,
+    SilentAim = false,
     TeamCheck = { Criminals = false, Guards = false, Inmates = false }, -- teams aimlock will lock onto
     Target = { Torso = false, Head = true }, -- what part of the player aimbot should toggle
 
@@ -279,72 +280,125 @@ spawn(function()
 end)
 
 -- AIMLOCK --
-local function holdingValidGun()
-    local tool = LocalPlayer.Character and LocalPlayer.Character:FindFirstChildOfClass("Tool")
-    return tool and aballowedguns[tool.Name] or false
-end
+--// Config
+local FOV = 500
+local TargetPart = nil
 
+--// ESP folder (from script 1)
 local ESP_Folder = Instance.new("Folder")
 ESP_Folder.Name = "ESP_Storage"
 ESP_Folder.Parent = CoreGui
 
+--// Check if holding valid gun
+local function holdingValidGun()
+    local char = LocalPlayer.Character
+    if not char then return false end
+    local tool = char:FindFirstChildOfClass("Tool")
+    return tool and aballowedguns[tool.Name] or false
+end
+
+--// Team validation
 local function validTeam(plr)
-    if not aimlock.TeamCheck.Criminals and plr.Team and plr.Team.Name == "Criminals" then return false end
-    if not aimlock.TeamCheck.Guards and plr.Team and plr.Team.Name == "Guards" then return false end
-    if not aimlock.TeamCheck.Inmates and plr.Team and plr.Team.Name == "Inmates" then return false end
+    if not plr.Team then return true end
+    if not aimlock.TeamCheck.Criminals and plr.Team.Name == "Criminals" then return false end
+    if not aimlock.TeamCheck.Guards and plr.Team.Name == "Guards" then return false end
+    if not aimlock.TeamCheck.Inmates and plr.Team.Name == "Inmates" then return false end
     return true
 end
 
+--// Get target body part
 local function getTargetPart(char)
     local hum = char:FindFirstChild("Humanoid")
     if not hum or hum.Health <= 0 then return nil end
-    if aimlock.Target.Head and char:FindFirstChild("Head") then return char.Head end
-    if aimlock.Target.Torso and char:FindFirstChild("Torso") then return char.Torso end
+
+    if aimlock.Target.Head and char:FindFirstChild("Head") then
+        return char.Head
+    end
+    if aimlock.Target.Torso and char:FindFirstChild("Torso") then
+        return char.Torso
+    end
     return nil
 end
 
+--// Raycast visibility check
+local function isVisible(part, character)
+    local params = RaycastParams.new()
+    params.FilterType = Enum.RaycastFilterType.Blacklist
+    params.FilterDescendantsInstances = {LocalPlayer.Character}
+
+    local ray = Workspace:Raycast(
+        Camera.CFrame.Position,
+        part.Position - Camera.CFrame.Position,
+        params
+    )
+
+    return not ray or ray.Instance:IsDescendantOf(character)
+end
+
+--// Get closest target to mouse
 local function getClosestScreenTarget()
-    local best, bestDist = nil, math.huge
+    local bestChar, bestDist = nil, FOV
     local mousePos = UIS:GetMouseLocation()
 
     for _, plr in ipairs(Players:GetPlayers()) do
-        if plr ~= LocalPlayer and plr.Character and validTeam(plr) then
+        if plr ~= LocalPlayer
+        and plr.Character
+        and validTeam(plr) then
+
             local part = getTargetPart(plr.Character)
             if part then
                 local pos, visible = Camera:WorldToViewportPoint(part.Position)
                 if visible then
-                    local diff = (Vector2.new(pos.X, pos.Y) - mousePos).Magnitude
-
-                    local rpc = RaycastParams.new()
-                    rpc.FilterType = Enum.RaycastFilterType.Blacklist
-                    rpc.FilterDescendantsInstances = {LocalPlayer.Character}
-
-                    local ray = Workspace:Raycast(Camera.CFrame.Position, part.Position - Camera.CFrame.Position, rpc)
-
-                    if not ray or (ray.Instance and ray.Instance:IsDescendantOf(plr.Character)) then
-                        if diff < bestDist then
-                            bestDist = diff
-                            best = plr.Character
-                        end
+                    local mag = (Vector2.new(pos.X, pos.Y) - mousePos).Magnitude
+                    if mag < bestDist and isVisible(part, plr.Character) then
+                        bestDist = mag
+                        bestChar = plr.Character
+                        TargetPart = part
                     end
                 end
             end
         end
     end
-    return best
+
+    if not bestChar then
+        TargetPart = nil
+    end
+
+    return bestChar
 end
 
+--// AIMLOCK (camera movement)
 RunService.RenderStepped:Connect(function()
     if aimlock.Aimbot and holdingValidGun() then
-        local target = getClosestScreenTarget()
-        if target then
-            local part = getTargetPart(target)
-            if part then
-                Camera.CFrame = CFrame.new(Camera.CFrame.Position, part.Position)
-            end
+        local targetChar = getClosestScreenTarget()
+        if targetChar and TargetPart then
+            Camera.CFrame = CFrame.new(Camera.CFrame.Position, TargetPart.Position)
         end
     end
 end)
+
+--// SILENT AIM (raycast hook)
+local OldHook
+OldHook = hookmetamethod(game, "__namecall", function(self, ...)
+    if not getgenv().aimlock.SilentAim then
+        return OldHook(self, ...)
+    end
+        
+    local args = {...}
+    local method = getnamecallmethod()
+
+    if not checkcaller()
+    and method == "Raycast"
+    and TargetPart
+    and holdingValidGun() then
+
+        args[2] = (TargetPart.Position - args[1]).Unit * 1000
+        return OldHook(self, unpack(args))
+    end
+
+    return OldHook(self, ...)
+end)
+
 
 --[[
 local function teamAllowed(plr)
