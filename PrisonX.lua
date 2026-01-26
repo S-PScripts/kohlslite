@@ -1,4 +1,4 @@
--- PrisonX v1.234 by TS2021
+-- PrisonX v1.24 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
 -- No longer updated often!!!
 
@@ -98,7 +98,7 @@ local settings = {
 	
 	-- Auto-Mod all guns to shoot really fast (fg = fast gun)
 	auto_fg = false,
-	auto_fgrate = 0, -- if you want to change it to be slower...
+	auto_fgrate = 0, -- if you want to make it slower...
 
 	-- Remove doors (CAUSES 1 SEC OF LAG WHENEVER YOU RESPAWN)
 	nodoors = false,
@@ -179,7 +179,7 @@ local function Notify(text, time)
     end)
 end
 
-local version = "v1.234"
+local version = "v1.24"
 
 -- GUI Setup
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
@@ -187,7 +187,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
     Name = "PrisonX",
     Icon = nil,
-    LoadingTitle = "PrisonX v1.234",
+    LoadingTitle = "PrisonX v1.24",
     LoadingSubtitle = "Created by TS2021",
     ConfigurationSaving = {
         Enabled = false,
