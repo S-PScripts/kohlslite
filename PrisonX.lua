@@ -1204,7 +1204,8 @@ end
 
 gamepasses = {
 	riots = {},
-	mafias = {}
+	mafias = {},
+	snipers = {}
 }
 
 -- Gamepass checker
@@ -1267,6 +1268,29 @@ function CheckForMafia(gcplr, gcplrn)
     end
 end
 
+-- CHECK FOR SNIPER
+function CheckForSniper(gcplr, gcplrn)
+	if not gcplr then
+    	warn("No player selected")
+    	return
+    end
+	local they_have_sniper = false
+    if string.match(game:HttpGet("https://inventory.roproxy.com/v1/users/" .. gcplr.UserId .. "/items/GamePass/" .. 699360089), 699360089) then
+    	Notify(gcplrn.." has the Sniper Pass!")
+		print(gcplrn .. " has the Sniper Pass!")
+		if they_have_sniper == false then
+			they_have_sniper = true
+            if not table.find(gamepasses.snipers, gcplrn) then
+                table.insert(gamepasses.snipers, gcplrn)
+        	end
+		end
+	end
+
+	if they_have_sniper == false then
+        Notify(gcplrn..' does not have the Sniper Pass!')
+		print(gcplrn .. " does not have the Sniper Pass!")
+    end
+end
 
 local lcplayer = nil
 local playerNames = {} -- store globally so builder() and Refresh can use it
@@ -3037,7 +3061,7 @@ LCTab:CreateButton({
 })
 
 LCTab:CreateButton({
-    Name = "Print KA Wl List",
+    Name = "Print KA WL List",
     Callback = function()
         for _, ka in ipairs(ka_wl) do
     		print(ka)
@@ -3053,7 +3077,7 @@ LCTab:CreateButton({
 })
 
 LCTab:CreateButton({
-    Name = "Print AA Wl List",
+    Name = "Print AA WL List",
     Callback = function()
         for _, aa in ipairs(aa_wl) do
     		print(aa)
@@ -3098,6 +3122,22 @@ LCTab:CreateButton({
     Callback = function()
         for _, mafia in ipairs(gamepasses.mafias) do
     		print(mafia)
+		end
+    end,
+})
+
+LCTab:CreateButton({
+    Name = "Check For Sniper Pass",
+    Callback = function()
+        CheckForSniper(lcplayer, lcplayer.Name)
+    end,
+})
+
+LCTab:CreateButton({
+    Name = "Print SP List",
+    Callback = function()
+        for _, sniper in ipairs(gamepasses.snipers) do
+    		print(sniper)
 		end
     end,
 })
