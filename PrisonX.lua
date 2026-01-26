@@ -1326,7 +1326,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 				end
 				SwitchToCriminalAndReturn(false, cpos) -- really slow
 			elseif settings.autorespawn == false then
-                tpto(cpos)
+               -- tpto(cpos)
 			end
 
 
