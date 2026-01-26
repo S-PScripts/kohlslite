@@ -565,6 +565,7 @@ for _, gun in ipairs(allGuns) do
 end
 table.insert(allGuns2, "Taser")
 table.insert(allGuns2, "M9")
+table.insert(allGuns2, "Revolver")
 
 local AlreadyFound = {}
 local function FindGunSpawner(GunName)
