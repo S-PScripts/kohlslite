@@ -1338,6 +1338,10 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 
 		-- Anti Tase
 		if settings.antitase and des.Animation.AnimationId == "rbxassetid://279227693" then
+			for i, v in pairs(getconnections(game:GetService("ReplicatedStorage").GunRemotes.PlayerTased.OnClientEvent)) do
+            	v:Disconnect()
+        	end
+					
 			local nbgui = LocalPlayer.PlayerGui.Home.hud.BackpackUI
 			des:Stop()
 			des:Destroy()
@@ -1586,18 +1590,31 @@ local Doors = workspace:FindFirstChild("Doors")
 local CellDoors = workspace:FindFirstChild("CellDoors")
 
 -- Transparent doors
-function tdoors(temmie)
+function tdoors()
 	for i,v in pairs(Doors:GetDescendants()) do
         if v:IsA("BasePart") then
-            v.CanCollide = false
-            if temmie then v.Transparency = 0.6 else v.Transparency = 0 end
+            v.Transparency = 0.6
         end
     end
 	
     for i,v in pairs(CellDoors:GetDescendants()) do
         if v:IsA("BasePart") then
-            v.CanCollide = false
-            if temmie then v.Transparency = 0.6 else v.Transparency = 0 end
+            v.Transparency = 0.6 
+        end
+    end
+end
+
+-- Untransparent doors
+function untdoors()
+	for i,v in pairs(Doors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.Transparency = 0
+        end
+    end
+	
+    for i,v in pairs(CellDoors:GetDescendants()) do
+        if v:IsA("BasePart") then
+            v.Transparency = 0
         end
     end
 end
@@ -1835,7 +1852,7 @@ RunService.Heartbeat:Connect(function()
     end
 
 	if settings.tdoors then
-		tdoors(settings.tdoors)
+		tdoors()
 	end
 
 	if os.clock() - lst < AUTOGUN_DELAY_AFTER_SPAWN then
@@ -2611,6 +2628,7 @@ AutoTab:CreateToggle({
     Flag = "NoDoorsToggle",
     Callback = function(Value)
         settings.nodoors = Value
+		task.wait(1)
         if not Value then
             AddDoors()
         end
@@ -2623,6 +2641,10 @@ AutoTab:CreateToggle({
     Flag = "TDoorsToggle",
     Callback = function(Value)
         settings.tdoors = Value
+		task.wait(1)
+		if not Value then
+			untdoors()
+		end
     end,
 })
 
