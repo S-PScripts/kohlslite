@@ -1559,21 +1559,27 @@ LocalPlayer.CharacterAdded:Connect(function(char)
     end)
 end)
 
-LocalPlayer:GetMouse().KeyDown:Connect(function(key)
-    key = key:lower()
-    if key == "p" then
+local UIS = game:GetService("UserInputService")
+
+UIS.InputBegan:Connect(function(input, gp)
+    if gp then return end -- ignore typing in chat
+
+    if input.KeyCode == Enum.KeyCode.P then
         if canTeleport() then
             teleportTo("nexus")
         end
-    elseif key == "l" then
+
+    elseif input.KeyCode == Enum.KeyCode.L then
         if canTeleport() then
             teleportTo("criminal_base")
         end
-	elseif key == "RightShift" then
-    	getgenv().aimlock.Aimbot = not getgenv().aimlock.Aimbot
-	elseif key == "RightControl" then
-		getgenv().espsettings.ESP = not getgenv().espsettings.ESP
-	end
+
+    elseif input.KeyCode == Enum.KeyCode.RightShift then
+        getgenv().aimlock.Aimbot = not getgenv().aimlock.Aimbot
+
+    elseif input.KeyCode == Enum.KeyCode.RightControl then
+        getgenv().espsettings.ESP = not getgenv().espsettings.ESP
+    end
 end)
 
 local Doors = workspace:FindFirstChild("Doors")
