@@ -1568,7 +1568,11 @@ LocalPlayer:GetMouse().KeyDown:Connect(function(key)
         if canTeleport() then
             teleportTo("criminal_base")
         end
-    end
+	elseif key == "RightShift" then
+    	getgenv().aimlock.Aimbot = not getgenv().aimlock.Aimbot
+	elseif key == "RightControl" then
+		getgenv().espsettings.ESP = not getgenv().espsettings.ESP
+	end
 end)
 
 local Doors = workspace:FindFirstChild("Doors")
