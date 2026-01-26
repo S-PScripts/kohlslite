@@ -380,7 +380,7 @@ end)
 --// SILENT AIM (raycast hook)
 local OldHook
 OldHook = hookmetamethod(game, "__namecall", function(self, ...)
-    if not getgenv().aimlock.SilentAim then
+    if getgenv().aimlock.SilentAim == false then
         return OldHook(self, ...)
     end
         
