@@ -2765,11 +2765,7 @@ PlayerTab:CreateSlider({
     end,
 })
 
-if settings.legacyAL then
-	loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo.lua", true))() -- load it cuz poo
-else
-	loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo v2.lua", true))() -- load it cuz poo
-end
+loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo.lua", true))() -- load it cuz poo
 function toggleesp() getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true end
 
 -- ESP Tab --
