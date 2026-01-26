@@ -23,7 +23,7 @@ getgenv().aimlock = {
 getgenv().aballowedguns = {
     ["AK-47"] = true, ["FAL"] = true, ["M4A1"] = true,
     ["M9"] = true, ["MP5"] = true, ["Remington 870"] = true,
-    ["Taser"] = true
+    ["Taser"] = true, ["Revolver"] = true, ["M700"] = true
 }
 
 -- VARIABLE SETUP --
