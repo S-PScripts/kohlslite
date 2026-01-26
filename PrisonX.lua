@@ -1635,7 +1635,7 @@ function NoDoors()
 end
 
 -- Add collision of doors
-function AddDoors(temmie)
+function AddDoors()
     for i,v in pairs(Doors:GetDescendants()) do
         if v:IsA("BasePart") then
             v.CanCollide = true
@@ -3195,7 +3195,7 @@ OtherTab:CreateToggle({
 OtherTab:CreateToggle({
     Name = "Close Script",
     Callback = function(Value)
-		game.Players.LocalPlayer:Kick("PrisonX closed. Rejoinning..."); settings.KeepPX = false
+		settings.KeepPX = false; game.Players.LocalPlayer:Kick("PrisonX closed. Rejoinning...")
 		rj()
     end,
 })
