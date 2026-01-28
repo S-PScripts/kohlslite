@@ -2858,6 +2858,16 @@ ESPTab:CreateToggle({
     end,
 })
 
+ESPTab:CreateToggle({
+    Name = "Show Team Mates",
+    CurrentValue = getgenv().espsettings.ESPTeamMates,
+    Flag = "TeamMatesESP",
+    Callback = function(Value)
+        getgenv().espsettings.ESPTeamMates = Value
+		toggleesp()
+    end,
+})
+
 ESPTab:CreateSection("Settings")
 ESPTab:CreateToggle({
     Name = "Show Names",
@@ -2956,6 +2966,16 @@ AimbotTab:CreateToggle({
 		getgenv().aimlock.TeamCheck.Inmates = Value
     end,
 })
+
+AimbotTab:CreateToggle({
+    Name = "Team Mates Allowed",
+    CurrentValue = getgenv().aimlock.ALTeamMates,
+    Flag = "TeamMatesAllowedALT",
+    Callback = function(Value)
+		getgenv().aimlock.ALTeamMates = Value
+    end,
+})
+
 
 AimbotTab:CreateSection("FOV")
 AimbotTab:CreateSlider({
