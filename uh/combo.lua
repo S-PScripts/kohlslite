@@ -128,7 +128,7 @@ local function createESP(player)
     if not espsettings.ESPTeamCheck.Criminals and player.Team and player.Team.Name == "Criminals" then return end
     if not espsettings.ESPTeamCheck.Guards and player.Team and player.Team.Name == "Guards" then return end
     if not espsettings.ESPTeamCheck.Inmates and player.Team and player.Team.Name == "Inmates" then return end
-    if espsettings.ESPTeamMates and game.Players.LocalPlayer.Team == player.Team then return end
+    if not espsettings.ESPTeamMates and game.Players.LocalPlayer.Team == player.Team then return end
 
     if player == LocalPlayer then return end
     removeESP(player)
@@ -306,7 +306,7 @@ local function validTeam(plr)
     if not aimlock.TeamCheck.Criminals and plr.Team.Name == "Criminals" then return false end
     if not aimlock.TeamCheck.Guards and plr.Team.Name == "Guards" then return false end
     if not aimlock.TeamCheck.Inmates and plr.Team.Name == "Inmates" then return false end
-    if aimlock.ALTeamMates and game.Players.LocalPlayer.Team == plr.Team then return false end
+    if not aimlock.ALTeamMates and game.Players.LocalPlayer.Team == plr.Team then return false end
     return true
 end
 
