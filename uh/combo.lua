@@ -2,17 +2,19 @@
 getgenv().espsettings = {
     ESP = false,
     ESPTeamCheck = { Criminals = true, Guards = true, Inmates = true }, -- teams that will show up in ESP
-    names = true, -- show names of players in ESP
-    health = true, -- show health of players in ESP
-    distance = true, -- show distance player is away from you in ESP
-    boxcolors = true, -- use team colour for ESP boxes (off = white)
-    namecolors = true -- use team colour for ESP text (off = white)
+    ESPTeamMates = true, -- show ESP for players on the same team as you (if turned off, ESP will not show for them even if the toggle for them is true)
+    names = true,        -- show names of players in ESP
+    health = true,       -- show health of players in ESP
+    distance = true,     -- show distance player is away from you in ESP
+    boxcolors = true,    -- use team colour for ESP boxes (off = white)
+    namecolors = true    -- use team colour for ESP text (off = white)
 }
 
 getgenv().aimlock = {
     Aimbot = false,
     SilentAim = false,
     TeamCheck = { Criminals = false, Guards = false, Inmates = false }, -- teams aimlock will lock onto
+    ALTeamMates = true, -- it will not target players on your team even if the toggle for them is true
     Target = { Torso = false, Head = true }, -- what part of the player aimbot should toggle
     FOV = 500
 
@@ -126,7 +128,8 @@ local function createESP(player)
     if not espsettings.ESPTeamCheck.Criminals and player.Team and player.Team.Name == "Criminals" then return end
     if not espsettings.ESPTeamCheck.Guards and player.Team and player.Team.Name == "Guards" then return end
     if not espsettings.ESPTeamCheck.Inmates and player.Team and player.Team.Name == "Inmates" then return end
-    
+    if espsettings.ESPTeamMates and game.Players.LocalPlayer.Team == player.Team then return end
+
     if player == LocalPlayer then return end
     removeESP(player)
 
@@ -303,6 +306,7 @@ local function validTeam(plr)
     if not aimlock.TeamCheck.Criminals and plr.Team.Name == "Criminals" then return false end
     if not aimlock.TeamCheck.Guards and plr.Team.Name == "Guards" then return false end
     if not aimlock.TeamCheck.Inmates and plr.Team.Name == "Inmates" then return false end
+    if aimlock.ALTeamMates and game.Players.LocalPlayer.Team == plr.Team then return false end
     return true
 end
 
