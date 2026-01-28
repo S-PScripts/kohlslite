@@ -1362,10 +1362,6 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 
 		-- Anti Tase
 		if settings.antitase and des.Animation.AnimationId == "rbxassetid://279227693" then
-			for i, v in pairs(getconnections(game:GetService("ReplicatedStorage").GunRemotes.PlayerTased.OnClientEvent)) do
-            	v:Disconnect()
-        	end
-					
 			local nbgui = LocalPlayer.PlayerGui.Home.hud.BackpackUI
 			des:Stop()
 			des:Destroy()
