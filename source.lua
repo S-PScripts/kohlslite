@@ -1,6 +1,4 @@
--- Discontinued permanently
--- Do not ask me to fix the game.Players:Chat() or anything else
-
+-- This script was discontinued on 19th June 2025.
 -- Read all the information below before viewing the source.
 
 --[[
@@ -17,21 +15,20 @@ Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/sou
 Debugged with: https://glot.io/new/lua
 
 KohlsLite is a free, open-source script for the Roblox game created by agspureiam, Kohls Admin House (KAH).
-This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub).
+This script was created by ScriptingProgrammer (Roblox) / ts2021 (Discord) / S-PScripts (GitHub). If there are any bugs in this script, please contact me.
 
-This script is DISCONTINUED permanently; scroll down for more information! 
+This is one of the only KAH scripts that works due to Roblox's chat update (30th APRIL 2025). Apart from CMD v3...
 
-This was one of the only KAH scripts that worked due to Roblox's chat update (30th APRIL 2025). Apart from CMD v3 (but agspureiam made a small update that broke the script anyway).
-
-You can play KAH here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
+You can play KAH (NBC version) here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
+You can also use it for KAH BC, but barely anyone plays it. 
 
 This script is not recommended for KAH Legacy (https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy).
 This is because the code there is rather different, and therefore some features in this script are not compatible.
 Here is a fun fact about KAH Legacy/Project NP: the owner, BoasGameAlt, is agspureiam's alt. However, it was password-guessed and is now owned by Tech.
 
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
-Shortcut v3-VAR had more stuff than KohlsLite, but it was not open-source, and you needed to ask the owner (Tech) to be able to use the script.
-If you want to contact Tech, join his Discord server (link: sckah.space). Do note that SCV3-VAR is no longer updated, and does not work.
+Shortcut v3-VAR has more stuff than KohlsLite, but it is not open-source, and you need to ask the owner (Tech) to be able to use the script.
+If you want to contact Tech, join his Discord server (link: sckah.space).
 
 This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g, Shortcut v2 src1 being an extension to Shortcut v1).
 
@@ -66,10 +63,10 @@ KohlsLite, however, has backdoors (dev section) due to dumb people using my scri
 If you want to support this script, you can donate Robux to me on Roblox, especially since this script doesn't have much advertising going for it.
 Even though I do not update KohlsLite anymore (more below), perhaps I might make a script for another game in the future.
 
-Please do not use my script to abuse in-game. Don't skid it either. I made this free/open-source and don't want stupid people doing stuff that forces me to make this obfuscated.
-Instead, you can make your own script and take stuff from here if necessary. As for abusing, you are just being annoying to everyone who plays. You are not fun.
+Please do not skid and abuse with my script. I made this free/open-source and don't want stupid people doing stuff that forces me to make this obfuscated.
+Instead, you can make your own script and take stuff from here if necessary. As for abusing, you are just being annoying to everyone that plays. You are not fun.
 
-There is no command handler, and this script looks terrible, to be honest. I am not making a full rewrite of this script, as that would take ages. There is no point in doing so, since this script still works fine. 
+There is no command handler and this script looks terrible to be honest. I am not making a full rewrite of this script as that would take ages, and there is no point in doing so since this script still works fine. 
 Do note that I did try to remake this script a while ago, but I got bored and gave up.
 
 I know my script is inconsistent when using Game with and without GetService... but I don't care. There are also some other inconsistencies that I cannot be bothered to fix.
@@ -80,49 +77,34 @@ There are some features in other scripts that KohlsLite does not have. Here are 
 - Boombox visualiser [Proton Admin]
 - Part builder [ii's Stupid Admin, Jotunnheim, CMD PI/V3, Solinium v2]
 - Custom commands [Shortcut v3-VAR]
-- Skateboard kick [didn't bother to figure out how it works, method is private]
 
 There is also no GUI, and the anti system does not work for individual players.
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-This script is discontinued due to the lack of a player base in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters who will use this script.
+This script is discontinued due to the lack of a playerbase in Kohls Admin House. There are barely any players (10 at maximum), and most of those players are not exploiters that will use this script.
 There is not enough demand for me to continue updating this script, and even if there was, what?
 
-This script has many bugs due to the May Roblox chat update. Aliases and autorun commands do not work anymore, and a few commands may have issues.
-I am not fixing them since I do not play Roblox too much now. You are free to fix them yourself.
-
-Also, Roblox removed game.Players:Chat(), which was vital for this script, and there isn't a replacement for it. I changed Chat() to Speak() so this script isn't 100% dead, but it's just a crappy bandfix.
-
-Now, there are no more exploiters in Kohls Admin House, and no one is making scripts for the game. This is a good thing; exploiters ruin the fun of the game.
-It is a bit depressing, knowing I maintained one of the last KAH scripts. It's the end of a great era, with many people passing down the torch.
-But it has to end someday, you know. Maybe one day, someone might make another new KAH script.
-
-Agspureiam came back around August 2025 and made many updates. He also banned some exploiters, including me. They broke some things in this script, and I will not fix them.
-To be honest, I should have waited until he left again in September...
-
-KAH is dying, and yet it's not. Agspureiam somehow revived the game by his short return, and now it always has a few players in it (before it could be 0).
-Perhaps it's revived because the game has no exploiters now? Who knows.
-
 Here is a quick fact. Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing - even 1,000 sometimes.
-Do you know why? It is partially because it does not get boring fast, unlike KAH. KAH is just you trying some admin commands, nothing else.
-EDIT: Well, PL is actually getting updated again and managed to reach 50k players. This point is outdated... but oh well.
+Do you know why? It is partially because it does not get boring fast unlike KAH. KAH is just you trying some admin commands, nothing else.
 
 KAH has become boring to me, and so has this script. I have played KAH since August 2022, and have updated this script since its creation in December 2023.
-Over the past few years, I have added hundreds of commands/features (nearly 1,000), but now... what is left?
+Over years, I have added hundreds of commands/features (nearly 1,000), but now... what is left?
 
 I will not add the features I mentioned above. If you want them, just execute the scripts that I mentioned alongside KohlsLite.
 I do not want to spend hours upon hours adding the features that you can get easily via a simple extra execution.
 
-Another reason for the discontinuation of KohlsLite's development is that I have exams to take, specifically my GCSEs. These are VERY important, and they take a lot of time away.
+Another reason for me discontinuing KohlsLite is the fact that I have exams to do; specifically my GCSEs.
+These are VERY important, and they take a lot of time away.
 
-If you read all of the above, thank you. I had a great time creating KohlsLite. <3
+This script has many bugs due to the May Roblox chat update. Aliases and autorun commands do not work anymore and a few commands may have issues.
+I am not fixing them since I do not play Roblox too much now. You are free to fix them yourself.
 
-TS2021, October 2025
+If you read all of the above, thank you.
+I had a great time creating KohlsLite, but now it is time for me to move on.
 
-PS: KAH got revived again because of StromBrew during November 2025. Has 30 players at least, so a little less dead. And no exploiters still, that's neat I guess. Goodbye KAH!
-Maybe if someone else makes a KAH script or something related to f3x/btools is found I'll come back... (only if a game.Players:Chat() replacement is found as well)
+TS2021, 19th June 2025
+Note: I will still update this script if I find any bugs. I'm not going to be adding new features though.
 ]]
+
 
 --[[
  ____  _____ _____ _   _ ____  
@@ -154,29 +136,16 @@ local function Remind(msg, length)
         })
 end; -- this semi-colon is useless, but I don't want to remove it xd
 
-local TextChatService = game:GetService("TextChatService")
-
--- From Infinite Yield
-local IYchecks = {
-	-- Check if KAH is using legacy chat
-	legacyChat = (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService),
-
-	-- Mobile checker
-	IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform())
-}
-
--- Speak function
-local function Speak(msg)
-    if IYchecks.legacyChat == true then
-		game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
-    else 
-    	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
-    end
-end
-
 -- Chat function
-local function Chat(msg)
-	Speak(msg)
+local function Chat(msg, x)
+	-- can't be asked to fix this no cmd bar for u
+	--[[  if x == true then 
+		zamn = true 
+		print("johnatato")
+	  else 
+		zamn = false
+	  end ]]
+      game.Players:Chat(msg)
 end
 
 -- Check if KohlsLite is already executed
@@ -227,7 +196,7 @@ clipboard_available = setclipboard or toclipboard or set_clipboard or (Clipboard
 -- You can find the original here: https://github.com/blueskykah/Solinium/blob/main/Solinium%20Autocrasher
 -- This needs to be in your autoexecute (could use queue_on_teleport maybe but ¯\_(ツ)_/¯)
 
--- This no longer works. All crashes are patched (swagify, I don't think so, but it sux)
+-- THIS PROBABLY DOES NOT WORK. CONTACT ME IF YOU ENCOUNTER ISSUES.
 ]]
 
 function acperm()
@@ -269,7 +238,7 @@ function shopac() -- Autocrasher serverhop
             		game:HttpGet("https://games.roblox.com/v1/games/115670532/servers/Public?sortOrder=Desc&limit=100&excludeFullGames=true")
         	)
 
-        if NBC["errors"] then
+        if NBC["errors"] and (getgenv().acgames == "All" or getgenv().acgames == "NBC") then
             print("Failed to server hop. Retrying in 5 seconds...")
             task.spawn(function()
                 ratelimited = true
@@ -279,13 +248,23 @@ function shopac() -- Autocrasher serverhop
             return
         end
 
-
+        if BC["errors"] and (getgenv().acgames == "All" or getgenv().acgames == "BC") then
+            print("Failed to server hop. Retrying in 5 seconds...")
+            task.spawn(function()
+                ratelimited = true
+                task.wait(5)
+                ratelimited = false
+            end)
+            return
+        end
 		
         print("Checking for servers...")
         local NBC_data = NBC.data
+        local BC_data = BC.data
 
         local servers_found = {}
 
+	if getgenv().acgames == "All" or getgenv().acgames == "NBC" then
 		--print("checking nbc")
         	for i, v in pairs(NBC_data) do
 			--print("check 1" .. type(v) == "table")
@@ -296,13 +275,24 @@ function shopac() -- Autocrasher serverhop
                 		table.insert(servers_found, {["Version"] = "NBC", ["Job"] = v.id})
             		end
         	end
+	end
+
+	if getgenv().acgames == "All" or getgenv().acgames == "BC" then
+        	for i, v in pairs(BC_data) do
+           		if type(v) == "table" and v.id ~= game.JobId and --[[ tonumber(v.playing) < tonumber(v.maxPlayers) and ]] not table.find(v.playerTokens, getgenv().playertoken) then
+               	 		table.insert(servers_found, {["Version"] = "BC", ["Job"] = v.id})
+            		end
+        	end
+	end
 
 	print(#servers_found)
         if #servers_found > 0 then
             local servertohop = servers_found[math.random(1, #servers_found)]
             if servertohop["Version"] == "NBC" then
                 game:GetService("TeleportService"):TeleportToPlaceInstance(112420803, servertohop["Job"])
-	    	else end
+            elseif servertohop["Version"] == "BC" then
+                game:GetService("TeleportService"):TeleportToPlaceInstance(115670532, servertohop["Job"])
+	    else end
         else
             print("No servers available...")
         end
@@ -311,7 +301,20 @@ end
 
 if getgenv().autocrasher then
 	if getgenv().playertoken then
-
+		if getgenv().acgames then
+			if getgenv().acgames == "All" or getgenv().acgames == "NBC" or getgenv().acgames == "BC" then 
+				--
+			elseif getgenv().acgames == "NP" then
+				getgenv().acgames = "All"
+				print("NP is unsupported. Crashing NBC and BC as default.")
+			else
+				getgenv().acgames = "All"
+				print("Autocrash games invalid, crashing NBC and BC as default.")
+			end
+		else
+			getgenv().acgames = "All"
+			print("Autocrash games not set, crashing NBC and BC as default.")
+		end
 
 		repeat task.wait() until game:IsLoaded()
 
@@ -354,35 +357,38 @@ if getgenv().autocrasher then
 			
 			if getgenv().acmode then
 				if getgenv().acmode == "Dog" then
-						print("Dog crash no longer works, using Swag.")
       					for i = 1,100 do
-          					Chat("swagify all all all all all all")
+          					Chat("clone all all all                                discord")
+          					Chat("dog all all all                                  discord")
       					end
 				elseif getgenv().acmode == "Freeze" then
-						print("Freeze crash no longer works, using Swag.")
       					for i = 1,100 do
-          					Chat("swagify all all all all all all")
+          					Chat("clone all all all                                discord")
+          					Chat("freeze all all all                               discord")
       					end
-				elseif getgenv().acmode == "Shield" or getgenv().acmode == "Rocket" then
-						print("Shield/Rocket crash no longer works, using Swag.")
+				elseif getgenv().acmode == "Shield" then
 				      	for i = 1,100 do
-          					Chat("swagify all all all all all all")
+          					Chat("shield/all/all/all")
+          					Chat("rocket/all/all/all")
+          					Chat("clone all all all			discord")
       					end
 				elseif getgenv().acmode == "Swagify" or getgenv().acmode == "Swag" then
 				      	for i = 1,100 do
           					Chat("swagify all all all all all all")
       					end
 				else
-					print("Invalid auto crash mode used, using Swag as default.")
+					print("Invalid auto crash mode used, using Dog as default.")
 					for i = 1,100 do
-          					Chat("swagify all all all all all all")
-      				end
+          					Chat("clone all all all                                discord")
+          					Chat("dog all all all                                  discord")
+      					end
 				end
 			else
-					print("Auto crash mode unconfigured, using Swag as default.")
+					print("Auto crash mode unconfigured, using Dog as default.")
 					for i = 1,100 do
-          					Chat("swagify all all all all all all")
-      				end
+          					Chat("clone all all all                                discord")
+          					Chat("dog all all all                                  discord")
+      					end
 			end
 				
 			print("Server crashed. JobId: "..game.JobId)
@@ -443,6 +449,24 @@ if getgenv().kohlsgui then
 	--
 else
 	getgenv().kohlsgui = false
+end
+
+-- From Infinite Yield
+local IYchecks = {
+	-- Check if KAH is using legacy chat
+	legacyChat = (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService),
+
+	-- Mobile checker
+	IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform())
+}
+
+-- Speak function
+local function Speak(msg)
+    if not IYchecks.legacyChat then
+	game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
+    else 
+    	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+    end
 end
 
 -- Prefix checker (Do not edit!)
@@ -542,16 +566,13 @@ local pwl = {
     "me_crashking",
     "ScriptingProgrammer",
     "me_I23456",
-    "RickyMartin05",
+    "kohlslitedev",
     "agspureiamReal",
     "atprog",
     "IceStuds",
     "Dekryptionite",
     "minecraftgamer2012YT",
     "clydekash",
-	"cxotus",
-	"DeportedImported",
-	"GigaBlockSparkly",
     "ripcxo",
     "grimAuxiliatrix",
     "undertaker629",
@@ -569,7 +590,7 @@ local nokick = {
     "me_crashking",
     "ScriptingProgrammer",
     "me_I23456",
-    "RickyMartin05",
+    "kohlslitedev",
     "agspureiamReal",
     "atprog",
     "IceStuds",
@@ -577,9 +598,6 @@ local nokick = {
     "minecraftgamer2012YT",
     "clydekash",
     "ripcxo",
-	"cxotus",
-	"GigaBlockSparkly",
-	"DeportedImported",
     "grimAuxiliatrix",
     "undertaker629",
     "jjjuuikjjikkju",
@@ -601,14 +619,13 @@ local pgwl = {
     "me_crashking",
     "ScriptingProgrammer",
     "me_I23456",
-    "RickyMartin05",
+    "kohlslitedev",
     "agspureiamReal",
     "atprog",
     "IceStuds",
     "Dekryptionite",
     "minecraftgamer2012YT",
     "clydekash",
-	"cxotus",
     "ripcxo",
     "grimAuxiliatrix",
     "undertaker629",
@@ -634,16 +651,14 @@ local peft = {
     "me_crashking",
     "ScriptingProgrammer",
     "me_I23456",
-    "RickyMartin05",
+    "kohlslitedev",
     "agspureiamReal",
     "atprog",
     "IceStuds",
     "Dekryptionite",
     "minecraftgamer2012YT",
     "clydekash",
-    "cxotus",
-	"GigaBlockSparkly",
-	"DeportedImported",
+    "ripcxo",
     "grimAuxiliatrix",
     "undertaker629",
     "jjjuuikjjikkju",
@@ -662,9 +677,8 @@ local atprogperms = {
     "Dekryptionite",
     "minecraftgamer2012YT",
     "clydekash",
-    "cxotus",
-	"DeportedImported",
-    "GigaBlockSparkly",
+    "ripcxo",
+    "grimAuxiliatrix",
     "undertaker629",
     "jjjuuikjjikkju",
     "FR6DDIIE",
@@ -680,8 +694,7 @@ local specialperms = {
     "me_crashking",
     "ScriptingProgrammer",
     "me_I23456",
-	"atprog",
-    "RickyMartin05",
+    "kohlslitedev",
     "agspureiamReal"
 }
 
@@ -912,7 +925,7 @@ local gear_antis = {
 	antiivory = false,
 
 	-- Stop users from using ANY periastron, excluding the Ivory
-	antiperi = false,
+	antiperi = true,
 
 	-- Stop users from using the ray gun gears
 	antiraygun = false,
@@ -922,9 +935,6 @@ local gear_antis = {
 
 	-- Stop yourself from having gears in your inventory
 	antitoolm = false,
-
-        -- Stop yourself from having gears in your inventory (better)
-        antitoolm2 = false,
 
 	-- Stops you from getting kicked from crash gears (NOTE: This isn't useful anymore.)
 	antikick2 = false
@@ -1114,7 +1124,7 @@ antis = {
     antiglow = false,
     antihealthchange = false,
     antijail = false,
-    antikill = true,
+    antikill = false,
     antimessage = false,
     antiname = false,
     antichar = false,
@@ -1250,7 +1260,7 @@ local crash_settings = {
 	skipwarncrash = true,
 
 	-- The type of crash you want to default to
-	crash_type = "swagify"
+	crash_type = "dog"
 }
 
 --[[
@@ -1475,8 +1485,6 @@ local gearlist = {
     ["f3x"] = {gearid = "142785488"},
 
     ["skateboard"] = {gearid = "501966315"},
-    ["skateboard2"] = {gearid = "27902303"},
-    ["skateboard3"] = {gearid = "164015715"},
 	
     ["vg"] = {gearid = "94794847"},
     ["vampire"] = {gearid = "94794847"},
@@ -2457,9 +2465,9 @@ ___  __    ________  ___  ___  ___       ________  ___       ___  _________  ___
 
 print("- Information -")
 print("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by ScriptingProgrammer.")
-Remind("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by ScriptingProgrammer.", 5)
+Remind("Thank you for using KohlsLite. The version you are using is v"..getgenv().klversion..". This script was created by ScriptingProgrammer.")
 print("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
-Remind("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .credits . DM me at ts2021 for help.", 5)
+Remind("Say .kcmds and .kcmd2 and .kcmd3 to see all the commands. Credits: .credits . DM me at ts2021 for help.")
 	
 -- Check user for Perm and Persons
 function checkPerm()	
@@ -5569,7 +5577,7 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
                 local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
                 for _, v in ipairs(Backpack:GetChildren()) do
                             v.Parent = game.Players.LocalPlayer.Character
-                            v:Activate()
+                             v:Activate()
                 end
 		Remind("Activated all items in your inventory!")
     end
@@ -5602,13 +5610,13 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'vgcrash' then
 	if crash_settings.skipwarncrash then -- idea from sinx
 		VGCrash()
-		Remind("VG Crashed the server. This might be temporary.")
+		Remind("VG Crashed the server. (VG IS TEMPORARY BTW)")
 	else
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
 		    		VGCrash()
-				Remind("VG Crashed the server. This might be temporary.")
+				Remind("VG Crashed the server. (VG IS TEMPORARY BTW)")
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -5625,13 +5633,13 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'cocrash' then
 	if crash_settings.skipwarncrash then -- idea from sinx
 		CoCrash()
-		Remind("VG Crashed (2) the server. This might be temporary.")
+		Remind("VG Crashed (2) the server. (VG IS TEMPORARY BTW)")
 	else
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
 		    		CoCrash()
-				Remind("VG Crashed (2) the server. This might be temporary.")
+				Remind("VG Crashed (2) the server. (VG IS TEMPORARY BTW)")
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -5648,13 +5656,13 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'emcrash' then
 	if crash_settings.skipwarncrash then -- idea from sinx
 		EmCrash()
-		Remind("Emerald Crashed the server. This might be temporary.")
+		Remind("Emerald Crashed the server.")
 	else
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
 		    		EmCrash()
-				Remind("Emerald Crashed the server. This might be temporary.")
+				Remind("Emerald Crashed the server.")
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -5671,13 +5679,13 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'pcrash' then
 	if crash_settings.skipwarncrash then -- idea from sinx
 		PCrash()
-		Remind("Orinthian Crashed the server. This might be temporary.")
+		Remind("Orinthian Crashed the server.")
 	else
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
 		    		PCrash()
-				Remind("Orinthian Crashed the server. This might be temporary.")
+				Remind("Orinthian Crashed the server.")
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
@@ -5742,12 +5750,11 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
     end
 		
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'kick' then
-		Remind("You need to specify the kick you want to use.")
+	Remind("You need to specify the kick you want to use.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'dcrash' then
-		Remind("This command is patched.")
---[[	if kah_np == true then return Remind("Dog crashing is not possible on KAH NP.") end
+	if kah_np == true then return Remind("Dog crashing is not possible on KAH NP.") end
 	if crash_settings.skipwarncrash then -- idea from sinx
 		DCrash()
 		Remind("Dog Crashed the server.")
@@ -5767,17 +5774,16 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 			Button1 = "Yes",
 			Button2 = "No"
 		})
-	end ]]
+	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'dogcrash' then
-		Remind("This command is patched.")
+	Chat(prefix.."dcrash")
     end
 
-   if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'swagcrash' then
-			Remind("This command is patched.")
 
- --[[  if kah_np == true then return Remind("Swag crashing is not possible on KAH NP.") end
+   if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'swagcrash' then
+   if kah_np == true then return Remind("Swag crashing is not possible on KAH NP.") end
 	if crash_settings.skipwarncrash then -- idea from sinx
 		SwagCrash()
 		Remind("Swag Crashed the server.")
@@ -5797,16 +5803,15 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 			Button1 = "Yes",
 			Button2 = "No"
 		})
-	end ]]
+	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'silcrash' then
-		Remind("Please review the crash list.")
+	Remind("There are four types. Run dcrash (dog), fcrash (freeze), scrash (shield/rocket) or swagcrash (swagify)")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fcrash' then
-		Remind("This command is patched.")
-	--[[if kah_np == true then return Remind("Freeze crashing is not possible on KAH NP.") end
+	if kah_np == true then return Remind("Freeze crashing is not possible on KAH NP.") end
 	if crash_settings.skipwarncrash then -- idea from sinx
 		FCrash()
 		Remind("Freeeze Crashed the server.")
@@ -5826,15 +5831,14 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 			Button1 = "Yes",
 			Button2 = "No"
 		})
-	end]]
+	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'scrash' then -- not a silent crash!
-		Remind("This command is patched.")
-	--[[ if kah_np == true then return Remind("Shield crashing is not possible on KAH NP.") end
+	if kah_np == true then return Remind("Shield crashing is not possible on KAH NP.") end
         if haspersons == false then
 Remind([[Sorry, you don't have Person299 Admin Commands to perform this command!
-Commands required: shield)
+Commands required: shield]])
         else
 		if crash_settings.skipwarncrash then -- idea from sinx
 			SCrash()
@@ -5856,7 +5860,7 @@ Commands required: shield)
 				Button2 = "No"
 			})
 		end
-        end ]]
+        end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'kcrash' then -- From tech-187!
@@ -6967,7 +6971,7 @@ return
 		if #args >= 2 then
 			custardmessage = table.concat(args, " ", 2)
 		else
-			custardmessage = "get crashed XD"
+			custardmessage = "You have been kicked for suspicious behaviour."
 		end
         	Chat("fix")
         	player_relate.musicsay = false
@@ -6979,7 +6983,7 @@ return
 		Chat("paint all black")
             	task.wait(1)
 		crash_settings.skipwarncrash = true
-            	SwagCrash()        
+            	DCrash()        
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bcrash' then -- this probably doesn't work but idc
@@ -7010,7 +7014,7 @@ Chat("h \n\n\n\n\n "..[[
 		if blue_crash == false then
 		else
 			crash_settings.skipwarncrash = true
-            		SwagCrash()    
+            		DCrash()    
 		end
     end
 
@@ -7033,7 +7037,7 @@ Chat("h \n\n\n\n\n "..[[
 		Chat("respawn all")
 		task.wait(1.5)
 		crash_settings.skipwarncrash = true
-		SwagCrash()
+		DCrash()
     end
   
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'dicrash' then
@@ -7044,7 +7048,7 @@ Chat("h \n\n\n\n\n "..[[
 		Chat("name all Dionte is our hero!")
 		task.wait(1.5)
 		crash_settings.skipwarncrash = true
-		SwagCrash()
+		DCrash()
     end
   
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'fredcrash' then
@@ -7071,7 +7075,7 @@ Chat("h \n\n\n\n\n "..[[
         	Chat("char all " .. mehcrashchariz)
 		task.wait(1.5)
 		crash_settings.skipwarncrash = true
-		FCrash()
+		DCrash()
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'rockmap' then
@@ -7298,10 +7302,10 @@ Chat("h \n\n\n\n\n "..[[
 		Remind("You're on mobile! It would be so big that you wouldn't be able to close the GUI!")
 	else
 	    	danum = tonumber(string.sub(msg:lower(), #prefix + 9))
-	    	if danum == nil then
+	    	if danum == "" then
             		game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScrollGui").TextButton.Frame.Size = UDim2.new(0,1000,0,1000)
 	    	else
-					game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScrollGui").TextButton.Frame.Size = UDim2.new(0,danum,0,danum)
+			game.Players.LocalPlayer.PlayerGui:FindFirstChild("ScrollGui").TextButton.Frame.Size = UDim2.new(0,danum,0,danum)
 	    	end
 		Remind("If you did this on mobile somehow... you're dumb.")
 	end    
@@ -7371,7 +7375,7 @@ Chat("h \n\n\n\n\n "..[[
 		Remind("Player has been sent to the void!")
     end
 
-    if string.sub(msg, 1, #prefix + 7) == prefix..'execute' then -- execute = kill fr
+    if string.sub(msg, 1, #prefix + 7) == prefix..'execute' then
         Execute(string.sub(msg, #prefix + 9))
 	Remind("Executed the text!")
     end
@@ -7411,7 +7415,7 @@ Chat("h \n\n\n\n\n "..[[
         end
     end
 
-    if string.sub(msg, 1, #prefix + 6) == prefix..'digify' then -- tagz
+    if string.sub(msg, 1, #prefix + 6) == prefix..'shlong' then
 		if haspersons == false then
 Remind([[Sorry, you don't have Person299 Admin Commands to perform this command!
 Commands required: part]])
@@ -7434,7 +7438,7 @@ return
 		end
     end
 
-    if string.sub(msg, 1, #prefix + 8) == prefix..'undigify' then -- tagz
+    if string.sub(msg, 1, #prefix + 8) == prefix..'unshlong' then
 		if haspersons == false then
 Remind([[Sorry, you don't have Person's to perform this command!
 Commands required: part]])
@@ -7487,7 +7491,7 @@ return
 	Remind("Changed KohlsLite's prefix to ".. prefix .. "!")
     end
 
---[[    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'goodexec' then
+    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'goodexec' then
 	Remind("Created by Tech (Tech-187)")
 
 	getgenv().scapproved = {
@@ -7513,7 +7517,7 @@ return
 	else
 		Remind("Your executor is NOT Shortcut Approved.")
 	end
-    end]]
+    end
 
     if string.sub(msg:lower(), 1, 7) == 'cprefix' then
         Remind("Your current prefix is "..prefix)
@@ -7541,19 +7545,7 @@ return
     if string.sub(msg:lower(), 1, 4) == ':cxo' then
 	Remind("CXO...")
 	plrs = string.sub(msg, 6)
-	Chat("char ".. plrs .. " 3222470105")
-    end
-
-    if string.sub(msg:lower(), 1, 7) == 'slavify' then
-	plrs = string.sub(msg, 8)
-	Chat("paint ".. plrs .. " black")
-        Chat("name ".. plrs .. " worker of white people")
-    end
-
-   if string.sub(msg:lower(), 1, 7) == 'currify' then
-	plrs = string.sub(msg, 9)
-	Chat("paint ".. plrs .. " brown")
-        Chat("name ".. plrs .. " asian")
+	Chat(prefix.."gchar ".. plrs .. " ripcxo")
     end
 
     if string.sub(msg:lower(), 1, 5) == 'steve' then
@@ -7561,10 +7553,6 @@ return
 	Speak("AM...");task.wait(1)
 	Speak("STEEEEEEEEEEEVVVVVVVVVVVVVVEEEEEEEEEEEEEEEEEEEEEE!!!")
     end
-
-    if string.sub(msg:lower(), 1, 8) == 'sixseven' then
-		Speak("SIX SEVEN")
-	end
 
    if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'sname' then
 	getgenv().scriptname = string.sub(msg, #prefix + 7)
@@ -7602,7 +7590,7 @@ return
 		g = args[3]
 		b = args[4]
 		PaintMap_2(r,g,b)
-		Remind("Painted the map (rgb)!")
+		Remind("Painted the map (rbg)!")
    end
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'rbricks' then
@@ -8705,8 +8693,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'nocam' then
-			Remind("Patched.")
-               -- NoCam()
+                NoCam()
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'wbcam' then
@@ -8720,8 +8707,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'breakcam' then
-		Remind("Patched.")
-               -- NoCam()
+                NoCam()
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fixcam' then
@@ -8736,7 +8722,7 @@ return
 
      if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'obpfixv' then
                 Remind("You need to be positioned by a wall! If you aren't, rerun this command after 5 seconds.")
-                Chat("sit me");task.wait(1)
+                Chat("sit me down");task.wait(1)
                 Chat("punish me");task.wait(1)
                 Chat("unpunish me");task.wait(1)
                 Chat("unskydive me")     
@@ -8904,9 +8890,9 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'checkbp' then
         local checker = string.sub(msg:lower(), #prefix + 9)
-        local cplr, player = PLAYERCHECK(checker)
+        PLAYERCHECK(checker)
         if player then 
-                CheckBackpack(cplr, player)
+                CheckBackpack()
 		Remind("Check your console by running /console!")
         else
                 Remind('Cannot find player with the name: '..checker)
@@ -8954,7 +8940,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixpaint' then
-	Remind("Unfortunately, agspureiam updated KAH and now some of the parts have the same name. This command no longer works.")
+	if kah_np == true then return Remind("Due to how parts are named in KAH Legacy, fixing the paint is nearly impossible.") end
 	Remind("Fixing paint...")
         FixPaint()
      end
@@ -9908,14 +9894,6 @@ return
                 gear_antis.antitoolm = false
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antit2' then
-                gear_antis.antitoolm2 = true
-    end
-
-    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unantit2' then
-                gear_antis.antitoolm2 = false
-    end
-
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antisit' then
          local args = string.split(msg, " ")
         if args[2] == "me" then
@@ -10695,7 +10673,7 @@ end ]]
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'vegan' then
 		if table.find(specialperms, game.Players.LocalPlayer.Name) then
-			Notify("tuff")
+			GExecute("https://raw.githubusercontent.com/Kohls-Admin-House/dump/refs/heads/main/cxo%20admin.lua") -- this is cxo's admin but you are whitelisted.
 		else
 			game.Players.LocalPlayer:Kick("stop looking at my code")
 		end
@@ -10927,7 +10905,7 @@ end ]]
         	local cplr, player = PLAYERCHECK(dasplayer)
         	if player == nil then 
 			return Remind("Fail: User not found!")
-		elseif player == "ScriptingProgrammer" or player == "RickyMartin05" or player == "agspureiamReal" then
+		elseif player == "ScriptingProgrammer" or player == "kohlslitedev" or player == "agspureiamReal" then
 			return Remind("You can't bang developers! NOOB.")
 		else
 			banger = cplr
@@ -12122,7 +12100,7 @@ connections[#connections + 1] =
             if lp.Character then
                 if lp.Character.Humanoid then
                 	if lp.Character.Humanoid.Sit then
-                    		lp.Character.Humanoid.Sit = false
+                    		humanoid.Sit = false
                     		Chat("unsit me")
 				if player_relate.anti_say then print("Your anti-sit was activated.") end
 			end
@@ -12203,7 +12181,7 @@ connections[#connections + 1] =
             if lp.Character then
                 if lp.Character.Humanoid then
                 	if lp.Character.Humanoid.PlatformStand then
-                    		lp.Character.Humanoid.PlatformStand = false
+                    		humanoid.PlatformStand = false
                     		Chat("unstun me")
 				if player_relate.anti_say then print("Your anti-stun was activated.") end
 			end
@@ -13202,12 +13180,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
                                         gear:Destroy()
                             end
         	end
-
-                for i, gear in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-                            if gear_antis.antitoolm2 == true then
-                                        gear:Destroy()
-                            end
-        	end
 end)
 
 -- stop dupe blacklist 
@@ -14008,7 +13980,7 @@ connections[#connections + 1] =
 	end)
 
 -- Backpack checker
-function CheckBackpack(cplr, player)
+function CheckBackpack()
         print(player.." has the following items:")
               for _, Tool in pairs(cplr.Backpack:GetChildren()) do
                 print(Tool.Name)
@@ -14444,19 +14416,14 @@ end
 
 -- CHECK THE CRASH TYPE (then crash)
 function checkCrashType()
-	Remind("Crashes don't work anymore.")
-	--[[
 	if crash_settings.crash_type == "freeze" then
-		Remind("Patched. Using swag crash...")
-		SwagCrash()
+		FCrash()
 	elseif crash_settings.crash_type == "shield" then
-		Remind("Patched. Using swag crash...")
-		SwagCrash()
+		SCrash()
 	elseif crash_settings.crash_type == "emr" then
 		KCrash()
 	elseif crash_settings.crash_type == "dog" then
-		Remind("Patched. Using swag crash...")
-		SwagCrash()
+		DCrash()
 	elseif crash_settings.crash_type == "swag" or crash_settings.crash_type == "swagify" then
 		SwagCrash()
 	elseif crash_settings.crash_type == "ex" then
@@ -14468,15 +14435,15 @@ function checkCrashType()
 	elseif crash_settings.crash_type == "fred" then
 		Chat(prefix.."fredcrash")
 	else
-		SwagCrash()
-	end ]]
+		DCrash()
+	end
 end
 
 -- FREEZE CRASH
 function FCrash()
       for i = 1,100 do
-          Chat("clone all all all                                shitting_right_now")
-          Chat("freeze all all all                                shitting_right_now")
+          Chat("clone all all all                                discord")
+          Chat("freeze all all all                                discord")
       end
       PtSH()
 end
@@ -14484,8 +14451,8 @@ end
 -- DOG CRASH
 function DCrash()
       for i = 1,100 do
-          Chat("clone all all all                                shitting_right_now")
-          Chat("dog all all all                                  shitting_right_now")
+          Chat("clone all all all                                discord")
+          Chat("dog all all all                                  discord")
       end
       PtSH()
 end
@@ -14495,7 +14462,7 @@ function SCrash()
       for i = 1,100 do
           Chat("shield/all/all/all")
           Chat("rocket/all/all/all")
-          Chat("clone all all all								shitting_right_now")
+          Chat("clone all all all			discord")
       end
       PtSH()
 end
@@ -14503,7 +14470,7 @@ end
 -- SWAGIFY CRASH
 function SwagCrash()
 		for i = 1,100 do
-			game.Players:Chat("swagify all all all all all all shitting_right_now")
+			game.Players:Chat("swagify all all all all all all")
 		end
 		PtSH()
 end
@@ -14623,9 +14590,7 @@ quotes = {
 	"im not a skid vro",
 	"i haev never maed a typo",
 	"one year and counting... forever?",
-	"kl is a trash script - ts2021, 2025",
-	"tech is a cool dude",
-	"agspureiam agspureiamed all over the place"
+	"kl is a trash script - ts2021, 2025"
 }
 
 -- LOG SPAM
@@ -14806,7 +14771,6 @@ local function rainbow()
         colorShift("bottom", 10000000, 10000000, 10000000)
 end
 
--- this is broken but idc, use adminjoy lol
 connections[#connections + 1] =
     game:GetService("RunService").RenderStepped:Connect(function()
 	task.wait()
@@ -15400,7 +15364,6 @@ end
 local Noclipping = nil
 
 function noclip()
-	Clip = false; task.wait(0.1)
 	local function NoclipLoop()
 		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
 			for _, child in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
@@ -15417,7 +15380,6 @@ function clip()
 	if Noclipping then
 		Noclipping:Disconnect()
 	end
-	Clip = true
 end
 
 -- KAH fly
@@ -16322,21 +16284,12 @@ end
 
 -- VG CRASH
 function VGCrash()
-	  for i = 1, 10 do
-      		Chat("gear me 00000000000000094794847")
-	  end
-	  local oldchild = #workspace:GetChildren()
-      repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= 10
-      local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-      for _, v in ipairs(Backpack:GetChildren()) do
-        	v.Parent = game.Players.LocalPlayer.Character
-		    v:Activate()
-      end
-      --repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("VampireVanquisher")
-      --local vg = game.Players.LocalPlayer.Backpack:FindFirstChild("VampireVanquisher")
-      --vg.Parent = game.Players.LocalPlayer.Character
-      --task.wait(0.2)
-      --vg:Activate()
+      Chat("gear me 00000000000000094794847")
+      repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("VampireVanquisher")
+      local vg = game.Players.LocalPlayer.Backpack:FindFirstChild("VampireVanquisher")
+      vg.Parent = game.Players.LocalPlayer.Character
+      task.wait(0.2)
+      vg:Activate()
       wait(.15)
       for i = 1,100 do
           Chat("unsize me me me")
@@ -16361,50 +16314,35 @@ end
 
 -- emerald crash
 function EmCrash()
-	  for i = 1, 10 do
-      		Chat("gear me 000000000000000178076749")
-	  end
-	  local oldchild = #workspace:GetChildren()
-      repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= 10
-      local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-      for _, v in ipairs(Backpack:GetChildren()) do
-        	v.Parent = game.Players.LocalPlayer.Character
-		    v:Activate()
-      end
-     -- repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("Emerald Knights of the Seventh Sanctum Sword and Shield")
-     -- local green = game.Players.LocalPlayer.Backpack:FindFirstChild("Emerald Knights of the Seventh Sanctum Sword and Shield")
-     -- green.Parent = game.Players.LocalPlayer.Character
-     -- task.wait(0.2)
-     -- green:Activate()
+      Chat("gear me 000000000000000178076749")
+      repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("Emerald Knights of the Seventh Sanctum Sword and Shield")
+      local green = game.Players.LocalPlayer.Backpack:FindFirstChild("Emerald Knights of the Seventh Sanctum Sword and Shield")
+      green.Parent = game.Players.LocalPlayer.Character
+      task.wait(0.2)
+      green:Activate()
       wait(.15)
       for i = 1,100 do
-          Chat("unsize me me me")
+          Chat("dog me me me")
+          Chat("clone me me me")
       end
       PtSH()
 end
 
 -- sword and shield crash
 function PCrash() -- buggy
-	for i = 1, 10 do
-    		Chat("gear me 00000000000000092628079")
+	for i = 1, 2 do
+              Chat("gear me 00000000000000092628079")
+              repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("OrinthianSwordAndShield")
+              local ort = game.Players.LocalPlayer.Backpack:FindFirstChild("OrinthianSwordAndShield")
+              ort.Parent = game.Players.LocalPlayer.Character
+              task.wait(0.2)
+              ort:Activate()
+              task.wait(.15)
+              for i = 1,100 do
+                  Chat("unsize me me me")
+              end
 	end
-	local oldchild = #workspace:GetChildren()
-    repeat task.wait() until #game.Players.LocalPlayer.Backpack:GetChildren() >= 10
-	local Backpack = game.Players.LocalPlayer:FindFirstChildOfClass("Backpack")
-    for _, v in ipairs(Backpack:GetChildren()) do
-        	v.Parent = game.Players.LocalPlayer.Character
-		    v:Activate()
-    end
-              --repeat task.wait() until game.Players.LocalPlayer.Backpack:WaitForChild("OrinthianSwordAndShield")
-              --local ort = game.Players.LocalPlayer.Backpack:FindFirstChild("OrinthianSwordAndShield")
-             -- ort.Parent = game.Players.LocalPlayer.Character
-              --task.wait(0.2)
-              --ort:Activate()
-    task.wait(.15)
-    for i = 1,100 do
-    	Chat("unsize me me me")
-    end
-    PtSH()
+        PtSH()
 end
 
 -- SKIDNATION...
@@ -16979,7 +16917,7 @@ function onPlayerAdded(player)
           checkforperm()
     end
 
-    if not table.find(specialperms, player.Name) and not table.find(atprogperms, player.Name) and player.Name ~= "agspureiam" then
+    if not table.find(specialperms, player.Name) and not table.find(atprogperms, player.Name) and not player.Name == "agspureiam" then
 		check_con = false
 
   		if table.find(list_on_sight.rkick_on_sight, player.Name) then
@@ -17036,7 +16974,7 @@ function onPlayerAdded(player)
 			end
         		print(player.Name.." joined the server. Server was automatically crashed as they are blacklisted.")
 			Remind(player.Name.." joined the server. Server was automatically crashed as they are blacklisted.")
-       		 	checkCrashType();crash_settings.skipwarncrash = true
+       		 	checkcrashtype();crash_settings.skipwarncrash = true
 			check_con = true
    		end
 
@@ -17350,7 +17288,7 @@ end
 
 -- Check if game NP paint
 function checkp(colourhere)
---	if kah_np == true then
+	if kah_np == true then
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
@@ -17366,10 +17304,10 @@ function checkp(colourhere)
 			Button1 = "Yes",
 			Button2 = "No"
 		})
-	--else
-	--	PaintMap(colourhere,"norm")
-	--	Remind("Painted the map!")
---	end
+	else
+		PaintMap(colourhere,"norm")
+		Remind("Painted the map!")
+	end
 end
 
 -- Paint map
@@ -19967,18 +19905,6 @@ colorAPI.colorBuildingBricks_2 = function(Extra)
 		end
 end
 
-for i,v in pairs(workspace:GetDescendants()) do 
-    if v:IsA("BasePart") then 
-        v.Locked = false 
-    end 
-end
-
-workspace.DescendantAdded:Connect(function(descendant)
-    if descendant:IsA("BasePart") then
-        descendant.Locked = false
-    end
-end)
-
 -- Player stuff
 for i, v in pairs(game.Players:GetPlayers()) do
 
@@ -19991,7 +19917,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
                 Chat("h \n\n\n\n\n Server automatically crashed due to blacklisted user ("..v.Name..") being in the server. \n\n\n\n\n")
         	print(v.Name.." found in the server. Server was automatically crashed as they are blacklisted.")
 		Remind(v.Name.." found in the server. Server was automatically crashed as they are blacklisted.")               
-		checkCrashType(); crash_settings.skipwarncrash = true
+		checkcrashtype(); crash_settings.skipwarncrash = true
         end
 
         if table.find(list_on_sight.rkick_on_sight, v.Name) then
@@ -20050,7 +19976,7 @@ for i, v in pairs(game.Players:GetPlayers()) do
 	end
 end
 
--- These run last to prevent bugs (old remnant)
+-- These run last to prevent bugs (old remanent)
 startupScripts()
 
 Stats.loadedtime = string.format("%.2f", os.clock() - Stats.starttime)
@@ -20064,8 +19990,8 @@ local OWNER = {
 	"ScriptingProgrammer", 
 	"me_123eq", 
 	"me_I23456", 
-	"RickyMartin05", 
-    "agspureiamReal"
+	"kohlslitedev", 
+        "agspureiamReal"
 }
 
 local DEVELOPER = {
@@ -20090,9 +20016,9 @@ local function rankcheck(username)
     if table.find(OWNER, username) then
         return "Owner"
     elseif table.find(DEVELOPER, username) then
-		return "Developer"
+	return "Developer"
     elseif table.find(ADMIN, username) then
-		return "Admin"
+	return "Admin"
     else
         return "Member"
     end
@@ -20259,56 +20185,22 @@ if ctime == specialdays.foolsday then
 	Remind("April Fools Day! HEHEHE.")
 end
 
-
-local eol = "11/15/2025" 
+-- End of Life script. I will probably replace this with a 'discontinued' banner.
+--[[
+local eol = "12/31/2025" 
 
 if ctime2 > eol then
-    pcall(function() -- thanks tech
-		print("fentanyl")
-		-- game.Players.LocalPlayer:Kick("Discontinued. Source: kohlslite.pages.dev")
-    end)
+    	if clipboard_available then
+		clipboard_available("Need help on using KohlsLite? DM ts2021 on Discord")
+	end
+        pcall(function() -- thanks tech
+		game.Players.LocalPlayer:Kick("KohlsLite has been discontinued. You can find and edit the source at kohlslite.pages.dev. If you need help, please contact me on Discord (ts2021).")
+        end)
+        task.wait(2.5); while true do end
 end
+]]
 
-
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "DiscontinuedBannerGui"
-screenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
-
-local background = Instance.new("Frame")
-background.Size = UDim2.new(1, 0, 1, 0) -- full screen
-background.Position = UDim2.new(0, 0, 0, 0)
-background.BackgroundColor3 = Color3.fromRGB(50, 50, 50) -- grey
-background.BackgroundTransparency = 0.5 -- semi-transparent
-background.BorderSizePixel = 0
-background.Parent = screenGui
-
-local label = Instance.new("TextLabel")
-label.Size = UDim2.new(0.8, 0, 0.3, 0) -- 80% width, 30% height
-label.Position = UDim2.new(0.1, 0, 0.35, 0) -- centered
-label.BackgroundTransparency = 1
-label.Text = "KohlsLite is discontinued.\nView the source here: https://kohlslite.pages.dev"
-label.TextColor3 = Color3.fromRGB(255, 255, 255)
-label.Font = Enum.Font.GothamBold
-label.TextSize = 25 -- smaller text
-label.TextWrapped = true
-label.TextScaled = true 
-label.TextXAlignment = Enum.TextXAlignment.Center
-label.TextYAlignment = Enum.TextYAlignment.Center
-label.Parent = background
-
-local closeButton = Instance.new("TextButton")
-closeButton.Size = UDim2.new(0.2, 0, 0.08, 0) -- 20% width, 8% height
-closeButton.Position = UDim2.new(0.4, 0, 0.7, 0) -- centered under text
-closeButton.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
-closeButton.Text = "Close"
-closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
-closeButton.Font = Enum.Font.GothamBold
-closeButton.TextSize = 25 -- slightly smaller
-closeButton.Parent = background
-
-closeButton.MouseButton1Click:Connect(function()
-    background:Destroy()
-end)
+-- add discontinued banner here (jeeeeeeeeeeeeeeeeeeee)
 
 if game:GetService("MarketplaceService"):UserOwnsGamePassAsync(game.Players.LocalPlayer.UserId, 883283806) then
         purchased_kl = true 
@@ -20319,7 +20211,7 @@ end
 if purchased_kl or table.find(specialperms, game.Players.LocalPlayer.Name) or table.find(atprogperms, game.Players.LocalPlayer.Name) then
 	-- filler
 else
-	--Remind("Support me by buying my gamepass! Just do .purchase.")
+	Remind("Support me by buying my gamepass! Just do .purchase.")
 end
 
 -- This UI is from Shortcut v2 --
@@ -20448,11 +20340,10 @@ if getgenv().kohlsgui then
 	createKohlsUi(
                 {
                     "Thanks for using KohlsLite!",
-                    "This script was created by TS2021/S-PScripts",
-					"/ScriptingProgrammer",
+                    "This script was created by TS2021/S-PScripts/ScriptingProgrammer.",
 		    " ",
 		    "To see all the commands KohlsLite has, do the following:",
-		    "1. Chat .kcmds or .kcmd2 or .kcmd3 ",
+		    "1. Chat .kcmds or .kcmd2 or .kcmd3 (commands split into 3 pages)",
 		    "2. Chat /console and you're done",
 		    " ",
 		    "Have fun using my script!"
@@ -20474,9 +20365,9 @@ connections[#connections + 1] =
 end)
 
 if kah_np == false then
-	Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
+	--Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
 else
-	Speak("KohlsLite executed! Version: "..getgenv().klversion)
+	--Speak("KohlsLite executed! Version: "..getgenv().klversion)
 end
 
 -- Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
@@ -20486,7 +20377,7 @@ if kah_np == true then
 	Remind("[WARNING]: You are playing KAH LEGACY and KohlsLite is not fully compatible.", 3)
 end
 
-Remind("OCTOBER 2025: This script is DISCONTINUED and many things NO LONGER WORK. View more at the source: kohlslite.pages.dev", 10)
+Remind("This script is discontinued (19th June 2025). Please view more at the source: kohlslite.pages.dev", 8)
 -- Remind("Some aliases and autorun commands will no longer work due to Roblox's chat update. I will not be fixing these. Sorry.", 5)
 -- Remind("[WARNING]: KOHLSLITE HAS BEEN UPDATED SO IT WORKS WITH THE NEW CHAT SYSTEM. HOWEVER, IT MAY NOT WORK AS I HAVEN'T TESTED IT YET", 5)
 
@@ -20510,5 +20401,4 @@ end)
 
 -- Information about KohlsLite can be found at the top of this page.
 -- This script was created by ScriptingProgrammer / ts2021 / S-PScripts
-
--- Discontinued
+-- This script was discontinued on 19th June 2025.
