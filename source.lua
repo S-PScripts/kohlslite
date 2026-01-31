@@ -437,7 +437,7 @@ local IYchecks = {
 -- Speak function
 local function Speak(msg)
     if not IYchecks.legacyChat then
-	game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
+		game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
     else 
     	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
     end
