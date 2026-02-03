@@ -1,5 +1,5 @@
 -- Discontinued permanently
--- Do not ask me to fix the game.Players:Chat() or anything else
+-- Do not ask me to fix the game.Players:Chat(), the lag problem, or anything else
 
 -- Read all the information below before viewing the source.
 
@@ -20284,7 +20284,7 @@ local label = Instance.new("TextLabel")
 label.Size = UDim2.new(0.8, 0, 0.3, 0) -- 80% width, 30% height
 label.Position = UDim2.new(0.1, 0, 0.35, 0) -- centered
 label.BackgroundTransparency = 1
-label.Text = "KohlsLite is discontinued.\nView the source here: https://kohlslite.pages.dev"
+label.Text = "KohlsLite is discontinued.\nView the source here: https://kohlslite.pages.dev\nAlso, this script has a lag problem and idk how to fix it..."
 label.TextColor3 = Color3.fromRGB(255, 255, 255)
 label.Font = Enum.Font.GothamBold
 label.TextSize = 25 -- smaller text
