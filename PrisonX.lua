@@ -42,8 +42,8 @@ Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Hide/Show Trees (-htrees / -strees)
 Remove Team Indicators
 
-Delete Prison Fences - CLIENT-SIDE!
-Delete Prison Gates - CLIENT-SIDE!
+Destroy Prison Fences (-dfences) - CLIENT-SIDE!
+Destroy Prison Gates (-dgates) - CLIENT-SIDE!
 
 ESP (distance from you + health + team colour) (+ teams allowed) (-esp/-unesp)
 Aimbot/Aimlock (+ silent aim + teams allowed + torso/head targetting + guns allowed)
@@ -2189,6 +2189,7 @@ local function handleCommand(msg)
 
 	if string.sub(lowerMsg, 1, #prefix + 5) == prefix.."ddoors" then
     	DestroyDoors()
+		Notify("Destroyed doors.")
 	end
 	
 
@@ -2225,6 +2226,25 @@ local function handleCommand(msg)
 	if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."nkfence" then
 		ukfence()
 		Notify("The top of fences will no longer kill you!")
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."dfences" then
+	 	pcall(function()
+       		for i, v in pairs(game.Workspace["Prison_Fences"]:GetChildren()) do
+				if v.Name == "fence" then
+					v:Destroy()
+				end
+			end
+			Notify("Fences destroyed!")
+		end)
+	end
+
+	if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."dfences" then
+	 	pcall(function()
+			game.Workspace["Prison_Fences"]["Prison_Gate"]:Destroy()
+			game.Workspace["Prison_Fences"]["gate"]:Destroy()
+			Notify("Gates destroyed!")
+		end)
 	end
 
 	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."abtoilets" then
@@ -3181,14 +3201,43 @@ OtherTab:CreateButton({
 OtherTab:CreateButton({
     Name = "Destroy Doors",
     Callback = function()
-        DestroyDoors()
+		pcall(function()
+        	DestroyDoors()
+		end)
+    end,
+})
+
+
+OtherTab:CreateButton({
+    Name = "Destroy Prison Fences",
+    Callback = function()
+	 	pcall(function()
+       		for i, v in pairs(game.Workspace["Prison_Fences"]:GetChildren()) do
+				if v.Name == "fence" then
+					v:Destroy()
+				end
+			end
+		end)
+    end,
+})
+
+
+OtherTab:CreateButton({
+    Name = "Destroy Prison Gates",
+    Callback = function()
+        pcall(function()
+			game.Workspace["Prison_Fences"]["Prison_Gate"]:Destroy()
+			game.Workspace["Prison_Fences"]["gate"]:Destroy()
+		end)
     end,
 })
 
 OtherTab:CreateButton({
     Name = "Destroy Team Indicators",
     Callback = function()
-        workspace.TeamIndicators:Destroy()
+		pcall(function()
+        	workspace.TeamIndicators:Destroy()
+		end)
     end,
 })
 
