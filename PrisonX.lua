@@ -42,6 +42,9 @@ Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Hide/Show Trees (-htrees / -strees)
 Remove Team Indicators
 
+Delete Prison Fences - CLIENT-SIDE!
+Delete Prison Gates - CLIENT-SIDE!
+
 ESP (distance from you + health + team colour) (+ teams allowed) (-esp/-unesp)
 Aimbot/Aimlock (+ silent aim + teams allowed + torso/head targetting + guns allowed)
 Noclip / Snack Noclip
@@ -60,9 +63,9 @@ MISSING FEATURES:
    (use https://scriptblox.com/script/Prison-Life-Silent-Aim-And-ESP-With-UI-SRC-78055)
 -> Invisibility 
    (use https://scriptblox.com/script/Prison-Life-Keyless-72569 or https://scriptblox.com/script/MP5-Prison-Life-PLH-75263 or https://scriptblox.com/script/Prison-Life-Best-PL-Script-UNDETECTED-SILENT-AIM-INSTANT-KILL-AND-MORE-72300)
--> C4 ESP [coming very soon]
+-> C4 ESP [coming not very soon]
    (use https://scriptblox.com/script/Prison-Life-Silent-Aim-And-ESP-With-UI-SRC-78055)
--> Auto Keycard/M9 grabber [coming soon?]
+-> Auto Keycard/M9 grabber [coming not soon]
    (use https://scriptblox.com/script/Prison-Life-Auto-pickup-keycard-open-SRC-79064)
 ]]
 
