@@ -3256,16 +3256,19 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 		Remind("No more crazy colours!")
         end
 		
-        if string.sub(msg, 1, #prefix + 6)  == prefix..'blwlan' then
+    if string.sub(msg, 1, #prefix + 6)  == prefix..'blwlan' then
 			player_relate.blwl_an = true
 			Remind("Blacklist/whitelist/gearwhitelist etc announcements enabled.")
 	end
 
-        if string.sub(msg, 1, #prefix + 8)  == prefix..'unblwlan' then
+    if string.sub(msg, 1, #prefix + 8)  == prefix..'unblwlan' then
 			player_relate.blwl_an = false
 			Remind("Blacklist/whitelist/gearwhitelist etc announcements disabled.")
 	end
 
+    if string.sub(msg, 1, #prefix + 8)  == prefix..'clearall' then
+			clearall()
+	end
 
 	if string.sub(msg, 1, #prefix + 4)  == prefix..'pmbl' then
 			player_relate.what_was_wrong = true
@@ -19097,6 +19100,40 @@ function rcannon(mode)
     			Chat("reset me")
     		end
    	end)
+end
+
+function clearall()
+	local function getTool(backpack, toolName)
+   		return backpack:FindFirstChild(toolName)
+	end
+
+	local function Delete(part, deleteRemote)
+   		if deleteRemote then
+       		coroutine.wrap(function()
+           		deleteRemote:FireServer(part)
+       		end)()
+   		else
+       		warn("Delete remote not found!")
+   		end
+	end
+
+	for i, player in ipairs(game.Players:GetPlayers()) do
+   		local deleteTool = getTool(player.Backpack, "Delete")
+   		if deleteTool then
+       		local deleteRemote = deleteTool:FindFirstChild("RemoteEvent")
+       		if deleteRemote then
+           		for _, part in ipairs(workspace:GetDescendants()) do
+               		if part:IsA("BasePart") then
+                   		Delete(part, deleteRemote)
+               		end
+           		end
+       		else
+           		warn("Delete remote not found in tool for player " .. player.Name)
+       		end
+   		else
+       		warn("Delete tool not found in backpack for player " .. player.Name)
+   		end
+	end
 end
 
 centreAPI = {}
