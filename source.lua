@@ -154,9 +154,27 @@ local function Remind(msg, length)
         })
 end; -- this semi-colon is useless, but I don't want to remove it xd
 
+-- From Infinite Yield
+local IYchecks = {
+	-- Check if KAH is using legacy chat
+	legacyChat = (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService),
+
+	-- Mobile checker
+	IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform())
+}
+
+-- Speak function
+local function Speak(msg)
+    if not IYchecks.legacyChat then
+		game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
+    else 
+    	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
+    end
+end
+
 -- Chat function
 local function Chat(msg)
-	game.Players:Chat(msg)
+	Speak(msg)
 end
 
 -- Check if KohlsLite is already executed
@@ -425,24 +443,6 @@ else
 	getgenv().kohlsgui = false
 end
 
--- From Infinite Yield
-local IYchecks = {
-	-- Check if KAH is using legacy chat
-	legacyChat = (game:GetService("TextChatService").ChatVersion == Enum.ChatVersion.LegacyChatService),
-
-	-- Mobile checker
-	IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform())
-}
-
--- Speak function
-local function Speak(msg)
-    if not IYchecks.legacyChat then
-		game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
-    else 
-    	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
-    end
-end
-	
 -- Prefix checker (Do not edit!)
 local prefix 
 
