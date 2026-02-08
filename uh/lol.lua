@@ -11,6 +11,18 @@ local tools = {
     ["AK-47"] = {
         ReloadSound = "rbxassetid://142491708",
         ShootSound   = "rbxassetid://153230498"
+    },
+    ["M9"] = {
+        ReloadSound = "rbxassetid://138084889",
+        ShootSound   = "rbxassetid://134436500"
+    },
+    ["Remington 870"] = {
+        ReloadSound = "rbxassetid://145081845",
+        ShootSound   = "rbxassetid://138083993"
+    },
+    ["M700"] = {
+        ReloadSound = "rbxassetid://97852355",
+        ShootSound   = "rbxassetid://406722373"
     }
 }
 
