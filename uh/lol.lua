@@ -6,11 +6,11 @@ local hookedTools = {}
 local tools = {
     ["M4A1"] = {
         ReloadSound = "rbxassetid://132456028",
-        FireSound   = "rbxassetid://150544849"
+        ShootSound   = "rbxassetid://150544849"
     },
     ["AK-47"] = {
         ReloadSound = "rbxassetid://142491708",
-        FireSound   = "rbxassetid://153230498"
+        ShootSound   = "rbxassetid://153230498"
     }
 }
 
