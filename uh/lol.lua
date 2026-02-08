@@ -5,7 +5,7 @@ local hookedTools = {}
 
 local tools = {
     ["M4A1"] = {
-        ReloadSound = "rbxassetid://132456028",
+        ReloadSound = "rbxassetid://142491708",
         ShootSound   = "rbxassetid://150544849"
     },
     ["AK-47"] = {
@@ -23,7 +23,13 @@ local tools = {
     ["M700"] = {
         ReloadSound = "rbxassetid://97852355",
         ShootSound   = "rbxassetid://406722373"
-    }
+    },
+    ["MP5"] = {
+        ReloadSound = "rbxassetid://142491708",
+    },
+    ["FAL"] = {
+        ReloadSound = "rbxassetid://142491708",
+    },
 }
 
 RunService.Heartbeat:Connect(function()
