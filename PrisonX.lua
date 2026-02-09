@@ -3,7 +3,7 @@
 
 -- PrisonX v1.24 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
--- No longer updated often!!!
+-- Discontinued
 
 --[[
 Features: All implemented in a UI as well!
