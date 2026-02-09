@@ -1,5 +1,4 @@
--- you know, maybe i should've listened to my warning
--- DO NOT EXPLOIT ON YOUR MAIN, AESTHETICAL ADDED SOMETHING TO THE GAME THAT CAN GET YOUR ACCOUNT PERMABANNED (FROM PRISON LIFE)
+-- DO NOT EXPLOIT ON YOUR MAIN!
 
 -- PrisonX v1.24 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
@@ -240,7 +239,7 @@ local HomeGUI = PlayerGui:WaitForChild("Home")
 local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
---local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
+local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
 
 local meleeEvent = ReplicatedStorage.meleeEvent
 
@@ -1464,7 +1463,7 @@ local function SetTeam(targetTeam, skipCooldownCheck)
 
 	local function switch(team)
     	repeat
-		--	TeamEvent:InvokeServer(team)
+			TeamEvent:InvokeServer(team)
         	task.wait(0.2)
     	until LocalPlayer.Team == team
 	end
@@ -2333,7 +2332,7 @@ MainTab:CreateSection("Team Management")
 MainTab:CreateButton({
     Name = "Switch to Inmates",
     Callback = function()
-        Notify("saved your ass, aesthetical honeypotted this remote")
+        ChangeTeam(Teams.Inmates)
     end,
 })
 
@@ -2341,9 +2340,9 @@ MainTab:CreateButton({
     Name = "Switch to Guards",
     Callback = function()
         if #Teams.Guards:GetPlayers() > 7 then
-            Notify("saved your ass, aesthetical honeypotted this remote")
+            Notify("The team is full, cannot join!")
         else
-            Notify("saved your ass, aesthetical honeypotted this remote")
+            ChangeTeam(Teams.Guards)
         end
     end,
 })
@@ -2351,7 +2350,7 @@ MainTab:CreateButton({
 MainTab:CreateButton({
     Name = "Switch to Criminals",
     Callback = function()
-        Notify("saved your ass, aesthetical honeypotted this remote")
+        ChangeTeam(Teams.Criminals)
     end,
 })
 
