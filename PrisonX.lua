@@ -240,7 +240,7 @@ local HomeGUI = PlayerGui:WaitForChild("Home")
 local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
-local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
+--local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
 
 local meleeEvent = ReplicatedStorage.meleeEvent
 
@@ -1464,7 +1464,7 @@ local function SetTeam(targetTeam, skipCooldownCheck)
 
 	local function switch(team)
     	repeat
-			TeamEvent:InvokeServer(team)
+		--	TeamEvent:InvokeServer(team)
         	task.wait(0.2)
     	until LocalPlayer.Team == team
 	end
@@ -2333,7 +2333,7 @@ MainTab:CreateSection("Team Management")
 MainTab:CreateButton({
     Name = "Switch to Inmates",
     Callback = function()
-        ChangeTeam(Teams.Inmates)
+        Notify("saved your ass, aesthetical honeypotted this remote")
     end,
 })
 
@@ -2341,9 +2341,9 @@ MainTab:CreateButton({
     Name = "Switch to Guards",
     Callback = function()
         if #Teams.Guards:GetPlayers() > 7 then
-            Notify("The team is full, cannot join!")
+            Notify("saved your ass, aesthetical honeypotted this remote")
         else
-            ChangeTeam(Teams.Guards)
+            Notify("saved your ass, aesthetical honeypotted this remote")
         end
     end,
 })
@@ -2351,7 +2351,7 @@ MainTab:CreateButton({
 MainTab:CreateButton({
     Name = "Switch to Criminals",
     Callback = function()
-        ChangeTeam(Teams.Criminals)
+        Notify("saved your ass, aesthetical honeypotted this remote")
     end,
 })
 
