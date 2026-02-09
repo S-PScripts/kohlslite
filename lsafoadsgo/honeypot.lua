@@ -16,4 +16,4 @@ until game.Players.LocalPlayer.Team == game:GetService("Teams").Inmates or game.
 
 task.wait(1)
 
-game.Players.LocalPlayer:Kick("You will get banned soon by Aesthetical! Goodbye!")
+game.Players.LocalPlayer:Kick("You will get banned by Aesthetical soon! Goodbye!")
