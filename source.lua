@@ -15331,7 +15331,7 @@ function TNOK(mode) -- vitalux cmd
                 		end
         		end
 		else
-        		for i, v in pairs(game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()) do -- also removes obby walls collision 
+        		for i, v in pairs(workspace.Tabby.Admin_House.Obby:GetChildren()) do -- also removes obby walls collision 
                 		if mode == "true" then
                         		v.CanTouch = false
                 		else
