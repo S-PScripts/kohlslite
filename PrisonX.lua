@@ -1,5 +1,4 @@
--- you know, maybe i should've listened to my warning
--- DO NOT EXPLOIT ON YOUR MAIN, AESTHETICAL ADDED SOMETHING TO THE GAME THAT CAN GET YOUR ACCOUNT PERMABANNED (FROM PRISON LIFE)
+
 
 -- PrisonX v1.24 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
