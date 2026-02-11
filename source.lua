@@ -1019,7 +1019,7 @@ local player_relate = {
 	thorns = false,
 	
 	-- Announces the music for gmusic and song
-	musicsay = false
+	musicsay = true
 
 }
 
@@ -1462,7 +1462,8 @@ local musictable = {
     ["173"] = {id = "125137999827669", name = "SpeedRun Music"},
     ["174"] = {id = "93359884317014", name = "Here Comes the Blue"},
     ["175"] = {id = "135134821355290", name = "honesty is so magical"},
-    ["176"] = {id = "119731837417100", name = "READY OR NOT (SCH00LKIDD MIX)"}
+    ["176"] = {id = "119731837417100", name = "READY OR NOT (SCH00LKIDD MIX)"},
+	["177"] = {id = "138859982416243", name = "EspiDev - Caramel"}
     --112308054092625
 }
 
