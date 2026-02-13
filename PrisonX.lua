@@ -59,7 +59,7 @@ Credits to github.com/NewMatheusDC for some of the GUI
 
 --[[
 MISSING FEATURES:
--> Mord Silent Aim/Aimlock Features
+-> More Silent Aim/Aimlock Features
    (use https://scriptblox.com/script/Prison-Life-Silent-Aim-And-ESP-With-UI-SRC-78055)
 -> Invisibility 
    (use https://scriptblox.com/script/Prison-Life-Keyless-72569 or https://scriptblox.com/script/MP5-Prison-Life-PLH-75263 or https://scriptblox.com/script/Prison-Life-Best-PL-Script-UNDETECTED-SILENT-AIM-INSTANT-KILL-AND-MORE-72300)
@@ -237,7 +237,7 @@ local HomeGUI = PlayerGui:WaitForChild("Home")
 local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
-local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
+--local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
 
 local meleeEvent = ReplicatedStorage.meleeEvent
 
@@ -1461,7 +1461,7 @@ local function SetTeam(targetTeam, skipCooldownCheck)
 
 	local function switch(team)
     	repeat
-			TeamEvent:InvokeServer(team)
+			--TeamEvent:InvokeServer(team)
         	task.wait(0.2)
     	until LocalPlayer.Team == team
 	end
