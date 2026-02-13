@@ -1,5 +1,3 @@
-
-
 -- PrisonX v1.24 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
 -- Discontinued
