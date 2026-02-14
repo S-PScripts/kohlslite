@@ -237,7 +237,7 @@ local HomeGUI = PlayerGui:WaitForChild("Home")
 local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
---local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
+local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
 
 local meleeEvent = ReplicatedStorage.meleeEvent
 
@@ -1461,7 +1461,9 @@ local function SetTeam(targetTeam, skipCooldownCheck)
 
 	local function switch(team)
     	repeat
-			--TeamEvent:InvokeServer(team)
+			if TeamEvent then
+				TeamEvent:InvokeServer(team)
+			end
         	task.wait(0.2)
     	until LocalPlayer.Team == team
 	end
