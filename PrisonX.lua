@@ -138,6 +138,9 @@ local settings = {
 
 	-- Auto keycard
 	akeycard = true,
+
+	-- Old gun sounds (neat ig)
+	oldsounds = true,
 	
 	-- Hide trees
 	htrees = false,
@@ -242,7 +245,7 @@ local Camera = workspace.Camera
 local Teams = game:GetService("Teams")
 --local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
 
-local meleeEvent = ReplicatedStorage.meleeEvent
+--local meleeEvent = ReplicatedStorage.meleeEvent
 
 local TeamList = {"Criminals", "Inmates", "Guards"}
 
@@ -1006,7 +1009,7 @@ local function IsArrestable(plr)
     return true
 end
 
-local aremote = ReplicatedStorage.Remotes.ArrestPlayer
+--local aremote = ReplicatedStorage.Remotes.ArrestPlayer
 
 RunService.Heartbeat:Connect(function()
     local root = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
@@ -1983,6 +1986,73 @@ LocalPlayer.CharacterAdded:Connect(function()
 end)
 
 start()
+
+local player = Players.LocalPlayer
+local hookedTools = {}
+
+local tools = {
+    ["M4A1"] = {
+        ReloadSound = "rbxassetid://142491708",
+        ShootSound   = "rbxassetid://150544849"
+    },
+    ["AK-47"] = {
+        ReloadSound = "rbxassetid://142491708",
+        ShootSound   = "rbxassetid://153230498"
+    },
+    ["M9"] = {
+        ReloadSound = "rbxassetid://138084889",
+        ShootSound   = "rbxassetid://134436500"
+    },
+    ["Remington 870"] = {
+        ReloadSound = "rbxassetid://145081845",
+        ShootSound   = "rbxassetid://138083993"
+    },
+    ["M700"] = {
+        ReloadSound = "rbxassetid://97852355",
+        ShootSound   = "rbxassetid://406722373"
+    },
+    ["MP5"] = {
+        ReloadSound = "rbxassetid://142491708",
+    },
+    ["FAL"] = {
+        ReloadSound = "rbxassetid://142491708",
+    },
+}
+
+RunService.Heartbeat:Connect(function()
+    local char = player.Character
+    if not char then return end
+	if not settings.oldsounds then return end
+		
+    for toolName, sounds in pairs(tools) do
+        local tool = char:FindFirstChild(toolName)
+        if tool and not hookedTools[tool] then
+            hookedTools[tool] = true
+
+            -- Hook new sounds dynamically
+            tool.DescendantAdded:Connect(function(obj)
+                if obj:IsA("Sound") then
+                    for soundName, id in pairs(sounds) do
+                        if obj.Name == soundName then
+                            obj.SoundId = id
+                        end
+                    end
+                end
+            end)
+
+            -- Update existing sounds immediately
+            for _, obj in ipairs(tool:GetDescendants()) do
+                if obj:IsA("Sound") then
+                    for soundName, id in pairs(sounds) do
+                        if obj.Name == soundName then
+                            obj.SoundId = id
+                        end
+                    end
+                end
+            end
+        end
+    end
+end)
 
 -- Command list
 local function handleCommand(msg)
@@ -3285,7 +3355,6 @@ OtherTab:CreateButton({
     end,
 })
 
-
 OtherTab:CreateButton({
     Name = "Destroy Prison Fences",
     Callback = function()
@@ -3298,7 +3367,6 @@ OtherTab:CreateButton({
 		end)
     end,
 })
-
 
 OtherTab:CreateButton({
     Name = "Destroy Prison Gates",
@@ -3334,6 +3402,15 @@ OtherTab:CreateToggle({
     Flag = "ResetButtonToggle",
     Callback = function(Value)
         settings.enablere = Value
+    end,
+})
+
+OtherTab:CreateToggle({
+    Name = "Use Old Gun Sounds",
+    CurrentValue = settings.oldsounds,
+    Flag = "OldSoundsToggle",
+    Callback = function(Value)
+        settings.oldsounds = Value
     end,
 })
 
