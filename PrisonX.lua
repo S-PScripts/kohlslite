@@ -1,6 +1,6 @@
--- PrisonX v1.24 by TS2021
+-- PrisonX v1.25 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
--- Discontinued (I do not have time)
+-- Discontinued
 
 --[[
 Features: All implemented in a UI as well!
@@ -53,6 +53,8 @@ Spin
 Infinite Jump
 Auto Sprint / Speed Changer
 
+Auto Keycard
+
 Credits to github.com/tomatotxt for some stuff
 Credits to github.com/NewMatheusDC for some of the GUI
 ]]
@@ -65,8 +67,6 @@ MISSING FEATURES:
    (use https://scriptblox.com/script/Prison-Life-Keyless-72569 or https://scriptblox.com/script/MP5-Prison-Life-PLH-75263 or https://scriptblox.com/script/Prison-Life-Best-PL-Script-UNDETECTED-SILENT-AIM-INSTANT-KILL-AND-MORE-72300)
 -> C4 ESP [coming not very soon]
    (use https://scriptblox.com/script/Prison-Life-Silent-Aim-And-ESP-With-UI-SRC-78055)
--> Auto Keycard/M9 grabber [coming not soon]
-   (use https://scriptblox.com/script/Prison-Life-Auto-pickup-keycard-open-SRC-79064)
 ]]
 
 -- Infinite yield for speed, jump power
@@ -136,6 +136,9 @@ local settings = {
 	-- Auto break toilets when you have a hammer
 	abtoilets = false,
 
+	-- Auto keycard
+	akeycard = true,
+	
 	-- Hide trees
 	htrees = false,
 
@@ -182,7 +185,7 @@ local function Notify(text, time)
     end)
 end
 
-local version = "v1.24"
+local version = "v1.25"
 
 -- GUI Setup
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
@@ -190,7 +193,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
     Name = "PrisonX",
     Icon = nil,
-    LoadingTitle = "PrisonX v1.24",
+    LoadingTitle = "PrisonX v1.25",
     LoadingSubtitle = "Created by TS2021",
     ConfigurationSaving = {
         Enabled = false,
@@ -237,7 +240,7 @@ local HomeGUI = PlayerGui:WaitForChild("Home")
 local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
-local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
+--local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
 
 local meleeEvent = ReplicatedStorage.meleeEvent
 
@@ -1919,6 +1922,68 @@ RunService.Heartbeat:Connect(function()
     end
 end)
 
+local RETRY_DELAY = 0.3
+local running = false
+
+local function getToolFromRS()
+    local toolsFolder = ReplicatedStorage:FindFirstChild("Tools")
+    if not toolsFolder then return end
+
+    return toolsFolder:FindFirstChild("Key card", true)
+end
+
+local function getToolFromPlayers()
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer then
+            local backpack = player:FindFirstChild("Backpack")
+            local tool = backpack and backpack:FindFirstChild("Key card")
+            if tool then
+                return tool
+            end
+        end
+    end
+end
+
+local function tryGiveTool()
+    local backpack = LocalPlayer:WaitForChild("Backpack")
+
+    if backpack:FindFirstChild("Key card") then
+        return true
+    end
+
+	if LocalPlayer.Team.Name == "Guards" then
+		return true
+	end
+	
+    local source = getToolFromRS() or getToolFromPlayers()
+    if source then
+        source:Clone().Parent = backpack
+        return true
+    end
+end
+
+local function start()
+    if running then return end
+    running = true
+
+    task.spawn(function()
+        while running do
+            pcall(tryGiveTool)
+            task.wait(RETRY_DELAY)
+        end
+    end)
+end
+
+LocalPlayer.CharacterAdded:Connect(function()
+    running = false
+    task.wait(0.5)
+	if settings.akeycard then
+    	start()
+	end
+end)
+
+start()
+
 -- Command list
 local function handleCommand(msg)
     local lowerMsg = msg:lower()
@@ -2696,6 +2761,14 @@ AutoTab:CreateToggle({
     end,
 })
 
+AutoTab:CreateToggle({
+    Name = "Keycard Grabber",
+    CurrentValue = settings.akeycard,
+    Flag = "KCGrabberToggle",
+    Callback = function(Value)
+        settings.akeycard = Value
+    end,
+})
 
 --[[ AutoTab:CreateToggle({
     Name = "Spam Open Doors",
