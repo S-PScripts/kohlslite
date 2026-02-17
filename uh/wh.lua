@@ -13,15 +13,22 @@ local Username = player.Name
 local DisplayName = player.DisplayName
 local UserId = player.UserId
 
--- Get player country safely
+-- Player country
 local Region = "Unknown"
 pcall(function()
     Region = LocalizationService:GetCountryRegionForPlayerAsync(player)
 end)
 
 -- Roblox avatar
-local Avatar = "https://www.roblox.com/headshot-thumbnail/image?userId="
-    .. UserId .. "&width=420&height=420&format=png"
+local thumbResponse = HttpService:JSONDecode(
+    game:HttpGet(
+        "https://thumbnails.roblox.com/v1/users/avatar-headshot?userIds="
+        .. UserId ..
+        "&size=420x420&format=Png&isCircular=false"
+    )
+)
+
+local Avatar = thumbResponse.data[1].imageUrl
 
 local Embed = {
     title = "Player Info",
