@@ -2014,6 +2014,7 @@ local tools = {
     },
     ["MP5"] = {
         ReloadSound = "rbxassetid://142491708",
+		ShootSound = "rbxassetid://153230559",
     },
     ["FAL"] = {
         ReloadSound = "rbxassetid://142491708",
