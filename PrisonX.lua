@@ -141,6 +141,7 @@ local settings = {
 
 	-- Old gun sounds (neat ig)
 	oldsounds = true,
+	oldsoundsmeonly = false, -- if you want it to just be you
 	
 	-- Hide trees
 	htrees = false,
@@ -2019,39 +2020,60 @@ local tools = {
     },
 }
 
-RunService.Heartbeat:Connect(function()
-    local char = player.Character
-    if not char then return end
+local function applySounds(tool)
 	if not settings.oldsounds then return end
-		
-    for toolName, sounds in pairs(tools) do
-        local tool = char:FindFirstChild(toolName)
-        if tool and not hookedTools[tool] then
-            hookedTools[tool] = true
+	if settings.oldsoundsmeonly and tool.Parent ~= LocalPlayer.Character then return end
+	
+	for soundName, id in pairs(tools[tool.Name] or {}) do
+		for _, obj in ipairs(tool:GetDescendants()) do
+			if obj:IsA("Sound") and obj.Name == soundName then
+				obj.SoundId = id
+			end
+		end
+	end
+end
 
-            -- Hook new sounds dynamically
-            tool.DescendantAdded:Connect(function(obj)
-                if obj:IsA("Sound") then
-                    for soundName, id in pairs(sounds) do
-                        if obj.Name == soundName then
-                            obj.SoundId = id
-                        end
-                    end
-                end
-            end)
+local function hookTool(tool)
+	if not tools[tool.Name] then return end
+	
+	applySounds(tool)
 
-            -- Update existing sounds immediately
-            for _, obj in ipairs(tool:GetDescendants()) do
-                if obj:IsA("Sound") then
-                    for soundName, id in pairs(sounds) do
-                        if obj.Name == soundName then
-                            obj.SoundId = id
-                        end
-                    end
-                end
-            end
-        end
-    end
+	tool.DescendantAdded:Connect(function(obj)
+		if obj:IsA("Sound") then
+			local id = tools[tool.Name][obj.Name]
+			if id then
+				obj.SoundId = id
+			end
+		end
+	end)
+end
+
+local function hookCharacter(char)
+	char.ChildAdded:Connect(function(child)
+		if child:IsA("Tool") then
+			hookTool(child)
+		end
+	end)
+
+	for _, child in ipairs(char:GetChildren()) do
+		if child:IsA("Tool") then
+			hookTool(child)
+		end
+	end
+end
+
+-- Existing players
+for _, plr in ipairs(Players:GetPlayers()) do
+	if plr.Character then
+		hookCharacter(plr.Character)
+	end
+	
+	plr.CharacterAdded:Connect(hookCharacter)
+end
+
+-- New players
+Players.PlayerAdded:Connect(function(plr)
+	plr.CharacterAdded:Connect(hookCharacter)
 end)
 
 -- Command list
@@ -3411,6 +3433,15 @@ OtherTab:CreateToggle({
     Flag = "OldSoundsToggle",
     Callback = function(Value)
         settings.oldsounds = Value
+    end,
+})
+
+OtherTab:CreateToggle({
+    Name = "Apply OGS For Yourself Only",
+    CurrentValue = settings.oldsoundsmeonly,
+    Flag = "OldSoundsJMToggle",
+    Callback = function(Value)
+        settings.oldsoundsmeonly = Value
     end,
 })
 
