@@ -46,7 +46,7 @@ Destroy Prison Fences (-dfences) - CLIENT-SIDE!
 Destroy Prison Gates (-dgates) - CLIENT-SIDE!
 
 ESP (distance from you + health + team colour) (+ teams allowed) (-esp/-unesp)
-Aimbot/Aimlock (+ silent aim + teams allowed + torso/head targetting + guns allowed)
+Aimbot/Aimlock (+ teams allowed + torso/head targetting + guns allowed)
 Noclip / Snack Noclip
 FOV Changer
 Spin
@@ -3121,15 +3121,6 @@ AimbotTab:CreateToggle({
     Flag = "AimlockToggle",
     Callback = function(Value)
 		getgenv().aimlock.Aimbot = Value
-    end,
-})
-
-AimbotTab:CreateToggle({
-    Name = "Silent Aim",
-    CurrentValue = getgenv().aimlock.SilentAim,
-    Flag = "SilentAimToggle",
-    Callback = function(Value)
-		getgenv().aimlock.SilentAim = Value
     end,
 })
 
