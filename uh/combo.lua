@@ -381,29 +381,6 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
---// SILENT AIM (raycast hook)
-local OldHook
-OldHook = hookmetamethod(game, "__namecall", function(self, ...)
-    if not getgenv().aimlock.SilentAim then
-        return OldHook(self, ...)
-    end
-        
-    local args = {...}
-    local method = getnamecallmethod()
-
-    if not checkcaller()
-    and method == "Raycast"
-    and TargetPart
-    and holdingValidGun() then
-
-        args[2] = (TargetPart.Position - args[1]).Unit * 1000
-        return OldHook(self, unpack(args))
-    end
-
-    return OldHook(self, ...)
-end)
-
-
 --[[
 local function teamAllowed(plr)
     if not plr.Team then return false end
