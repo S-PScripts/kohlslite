@@ -3516,3 +3516,4 @@ end)
 
 print("PrisonX executed! | Version: ".. version .." | Created by TS2021.")
 Notify("PrisonX executed! | Version: ".. version); die()
+Notify("This project is discontinued.", 10)
