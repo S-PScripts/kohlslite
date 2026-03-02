@@ -165,9 +165,11 @@ local IYchecks = {
 
 -- Speak function
 local function Speak(msg)
-    if not IYchecks.legacyChat then
-		game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
+    if IYchecks.legacyChat then
+        print("test")
+	game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
     else 
+        print('test 2')
     	game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "All")
     end
 end
@@ -19120,7 +19122,7 @@ function clearall()
 	for i, player in ipairs(game.Players:GetPlayers()) do
    		local deleteTool = getTool(player.Backpack, "Delete")
    		if deleteTool then
-       		local deleteRemote = deleteTool:FindFirstChild("RemoteEvent")
+       		local deleteRemote = deleteTool:FindFirstChild("RemoteEvent") or deleteTool:FindFirstChild("delete")
        		if deleteRemote then
            		for _, part in ipairs(workspace:GetDescendants()) do
                		if part:IsA("BasePart") then
