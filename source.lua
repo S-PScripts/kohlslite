@@ -1465,7 +1465,8 @@ local musictable = {
     ["174"] = {id = "93359884317014", name = "Here Comes the Blue"},
     ["175"] = {id = "135134821355290", name = "honesty is so magical"},
     ["176"] = {id = "119731837417100", name = "READY OR NOT (SCH00LKIDD MIX)"},
-	["177"] = {id = "138859982416243", name = "EspiDev - Caramel"}
+	["177"] = {id = "138859982416243", name = "EspiDev - Caramel"},
+	["178"] = {id = "92792684422929", name = "GLITCHTALE MASHUP (NOIRE)"}
     --112308054092625
 }
 
