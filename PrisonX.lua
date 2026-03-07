@@ -3010,6 +3010,8 @@ PlayerTab:CreateSlider({
 loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo.lua", true))() -- load it cuz poo
 function toggleesp() getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true end
 
+loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/emotemodule.lua", true))()
+
 -- ESP Tab --
 ESPTab:CreateSection("ESP")
 ESPTab:CreateToggle({
