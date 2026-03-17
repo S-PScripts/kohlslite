@@ -12,6 +12,7 @@ local Time = os.date("!*t", OSTime)
 local Username = player.Name
 local DisplayName = player.DisplayName
 local UserId = player.UserId
+local AccountAge = player.AccountAge
 
 -- Player country
 local Region = "Unknown"
@@ -30,6 +31,14 @@ local thumbResponse = HttpService:JSONDecode(
 
 local Avatar = thumbResponse.data[1].imageUrl
 
+-- Executor check
+pcall(function()
+    if identifyexecutor then
+        executor = identifyexecutor()
+    end
+end)
+
+-- Embed
 local Embed = {
     title = "Player Info",
     color = 99999,
@@ -56,6 +65,16 @@ local Embed = {
             inline = false
         },
         {
+            name = "Executor",
+            value = executor,
+            inline = true
+        },
+        {
+            name = "Account Age",
+            value = tostring(AccountAge) .. " days",
+            inline = true
+        },
+        {
             name = "Region",
             value = Region,
             inline = true
@@ -75,7 +94,7 @@ local Embed = {
         ["Content-Type"] = "application/json"
     },
     Body = HttpService:JSONEncode({
-        content = "A player executed the script!",
+        content = "I have been struck by the ban hammer!",
         embeds = { Embed }
     })
 })
