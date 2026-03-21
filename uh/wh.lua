@@ -32,6 +32,8 @@ local thumbResponse = HttpService:JSONDecode(
 local Avatar = thumbResponse.data[1].imageUrl
 
 -- Executor check
+local executor = "Unknown"
+
 pcall(function()
     if identifyexecutor then
         executor = identifyexecutor()
