@@ -2077,6 +2077,15 @@ Players.PlayerAdded:Connect(function(plr)
 	plr.CharacterAdded:Connect(hookCharacter)
 end)
 
+-- enable reset button
+local success, result = pcall(function()
+    StarterGui:SetCore("ResetButtonCallback", true)
+end)
+
+if not success then
+    warn("Failed to enable respawn button: " .. tostring(result))
+end
+
 -- Command list
 local function handleCommand(msg)
     local lowerMsg = msg:lower()
