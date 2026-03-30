@@ -2084,55 +2084,6 @@ if not success then
     warn("Failed to enable respawn button: " .. tostring(result))
 end
 
-local function equipSlot(index)
-    local character = player.Character
-    if not character then return end
-
-    local backpack = player:FindFirstChild("Backpack")
-    if not backpack then return end
-
-    local tools = {}
-
-    for _, tool in ipairs(backpack:GetChildren()) do
-        if tool:IsA("Tool") then
-            table.insert(tools, tool)
-        end
-    end
-
-    for _, tool in ipairs(character:GetChildren()) do
-        if tool:IsA("Tool") then
-            table.insert(tools, tool)
-        end
-    end
-
-    table.sort(tools, function(a, b)
-        return a.Name < b.Name
-    end)
-
-    local selectedTool = tools[index]
-    if selectedTool then
-        selectedTool.Parent = character
-    end
-end
-
-UIS.InputBegan:Connect(function(input, gameProcessed)
-    if gameProcessed then return end
-
-    if input.UserInputType == Enum.UserInputType.Keyboard then
-        local key = input.KeyCode
-
-        if key == Enum.KeyCode.One then equipSlot(1) end
-        if key == Enum.KeyCode.Two then equipSlot(2) end
-        if key == Enum.KeyCode.Three then equipSlot(3) end
-        if key == Enum.KeyCode.Four then equipSlot(4) end
-        if key == Enum.KeyCode.Five then equipSlot(5) end
-        if key == Enum.KeyCode.Six then equipSlot(6) end
-        if key == Enum.KeyCode.Seven then equipSlot(7) end
-        if key == Enum.KeyCode.Eight then equipSlot(8) end
-        if key == Enum.KeyCode.Nine then equipSlot(9) end
-    end
-end)
-
 -- Command list
 local function handleCommand(msg)
     local lowerMsg = msg:lower()
