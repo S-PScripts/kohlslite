@@ -376,7 +376,7 @@ RunService.RenderStepped:Connect(function()
     local char = LocalPlayer.Character
     local hum = char and char:FindFirstChild("Humanoid")
     
-    if aimlock.Aimbot and and hum and hum.Health > 0 and holdingValidGun() then
+    if aimlock.Aimbot and hum and hum.Health > 0 and holdingValidGun() then
         local targetChar = getClosestScreenTarget()
         if targetChar and TargetPart then
             Camera.CFrame = CFrame.new(Camera.CFrame.Position, TargetPart.Position)
