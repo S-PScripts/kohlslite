@@ -1316,6 +1316,33 @@ end
 -- Build the initial list
 builder()
 
+local function fixTools()
+    local char = LocalPlayer.Character
+    if not char then return end
+
+    local hum = char:FindFirstChild("Humanoid")
+    if not hum then return end
+
+    -- force unequip everything
+    hum:UnequipTools()
+
+    -- refresh backpack UI
+    local backpack = LocalPlayer:FindFirstChild("Backpack")
+    if backpack then
+        for _, tool in ipairs(backpack:GetChildren()) do
+            if tool:IsA("Tool") then
+                tool.Enabled = true
+            end
+        end
+    end
+
+    -- re-enable client input properly
+    local inputHandler = char:FindFirstChild("ClientInputHandler")
+    if inputHandler then
+        inputHandler.Disabled = false
+    end
+end
+
 function die()
 	Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
 end
@@ -1383,8 +1410,9 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			hbeat:Wait()
 			humanoid.WalkSpeed = wspeed
 			humanoid.JumpPower = jpower
-			LocalPlayer.Character.ClientInputHandler.Disabled = false
+			fixTools()
 			piss(wspeed, jpower)
+			task.delay(0.2, fixTools)
 		end
 	end)
 end)
