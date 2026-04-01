@@ -7,7 +7,7 @@ Features: All implemented in a UI as well!
 Gun Obtainer (-gun (GUN NAME))
 TP to Locations (-lc (LOCATION))
 Kill Feed (-killfeed / -unkillfeed)
-
+Trespassing/Hostile Player Detector (-htdetect / -unhtdetect)
 Anti Arrest (-antiar / -unantiar)
 Anti Tase (-antitase / -unantitase)
 
@@ -139,6 +139,9 @@ local settings = {
 	-- Auto keycard
 	akeycard = true,
 
+	-- Trespassing/Hostile Inmate detector
+	htdetect = true,
+	
 	-- Old gun sounds (neat ig)
 	oldsounds = true,
 	oldsoundsmeonly = false, -- if you want it to just be you
@@ -155,7 +158,7 @@ local settings = {
 	-- Speed changer value
 	sval = 25,
 	
-	-- Inf jump
+	-- Infinite jump
 	ijump = false,
 
 	-- Noclip
@@ -723,6 +726,8 @@ function PLAYERCHECK(plr, rt)
     return nil, nil
 end
 
+----------------------------------------------------------------------------------------
+
 -- Hook __namecall
 local namecall
 if hookmetamethod then
@@ -746,6 +751,8 @@ end)
 else
 	warn("Executor does not support hookmetamethod; gun mods unavailable.")
 end
+
+----------------------------------------------------------------------------------------
 
 TeleportService = game:GetService("TeleportService")
 PlaceId, JobId = game.PlaceId, game.JobId
@@ -781,6 +788,8 @@ function shop()
         Notify("No servers could be found.")
     end
 end
+
+----------------------------------------------------------------------------------------
 
 -- kill aura whitelist
 function kill_aura_wl(lcplayer, lcplayerN)
@@ -824,7 +833,9 @@ function arrest_aura_wl(lcplayer, lcplayerN)
         end
 end
 
--- Kill aura
+----------------------------------------------------------------------------------------
+
+-- Kill aura (PATCHED)
 katypes = {
 	"All",
 	"Criminals",
@@ -956,7 +967,9 @@ RunService.Heartbeat:Connect(function()
     end
 end)
 
--- Arrest Aura
+----------------------------------------------------------------------------------------
+
+-- Arrest Aura (PATCHED)
 aatypes = {
 	"Criminals",
 	"Inmates",
@@ -1049,6 +1062,8 @@ RunService.Heartbeat:Connect(function()
     end
 end)
 
+----------------------------------------------------------------------------------------
+
 function tpto(args)
     LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = args
 end
@@ -1062,6 +1077,8 @@ function tptop(player)
     end
 end
 
+----------------------------------------------------------------------------------------
+
 -- Kill Feed
 Killfeed.ChildAdded:Connect(function(newChild)
     if settings.killfeed then
@@ -1070,6 +1087,7 @@ Killfeed.ChildAdded:Connect(function(newChild)
     end
 end)
 
+----------------------------------------------------------------------------------------
 
 -- Anti tase fix
 local normalWS = 25
@@ -1131,6 +1149,8 @@ task.spawn(function()
 	end
 end)
 
+----------------------------------------------------------------------------------------
+
 -- Hide trees
 function htrees(ht)
 	local trees = workspace:WaitForChild("Trees")
@@ -1152,6 +1172,8 @@ function htrees(ht)
 	end
 end
 
+----------------------------------------------------------------------------------------
+
 -- Enable reset button at all times
 local function forceEnableReset()
     local success, err = pcall(function()
@@ -1169,6 +1191,8 @@ task.spawn(function()
 		end
     end
 end)
+
+----------------------------------------------------------------------------------------
 
 -- Toilet breaker
 local hhe = false
@@ -1199,6 +1223,8 @@ local function hammer_check_t()
     hhe = hrn
 end
 
+----------------------------------------------------------------------------------------
+
 -- Backpack checker
 function CheckBackpack(cplr, player)
 		if not cplr then
@@ -1211,6 +1237,8 @@ function CheckBackpack(cplr, player)
                 print(tool.Name)
         end
 end
+
+----------------------------------------------------------------------------------------
 
 gamepasses = {
 	riots = {},
@@ -1343,6 +1371,8 @@ local function fixTools()
     end
 end
 
+----------------------------------------------------------------------------------------
+
 function die()
 	Humanoid:ChangeState(Enum.HumanoidStateType.Dead)
 end
@@ -1355,6 +1385,7 @@ end
 
 fat = true
 gwak = false
+
 -- Anti Arrest and Anti Tase
 LocalPlayer.CharacterAdded:Connect(function(char)
 	local humanoid = char:WaitForChild("Humanoid")
@@ -1416,6 +1447,8 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 		end
 	end)
 end)
+
+----------------------------------------------------------------------------------------
 
 local TELEPORT_COOLDOWN = 6 -- shame
 local TELEPORT_COOLDOWN2 = 12.5 -- shame
@@ -1623,6 +1656,8 @@ LocalPlayer.CharacterAdded:Connect(function(char)
     end)
 end)
 
+----------------------------------------------------------------------------------------
+
 local UIS = game:GetService("UserInputService")
 
 UIS.InputBegan:Connect(function(input, gp)
@@ -1645,6 +1680,8 @@ UIS.InputBegan:Connect(function(input, gp)
         getgenv().espsettings.ESP = not getgenv().espsettings.ESP
     end
 end)
+
+----------------------------------------------------------------------------------------
 
 local Doors = workspace:FindFirstChild("Doors")
 local CellDoors = workspace:FindFirstChild("CellDoors")
@@ -1724,6 +1761,8 @@ function DestroyDoors()
     end
 end
 
+----------------------------------------------------------------------------------------
+
 -- Infinite Jump
 UserInputService.JumpRequest:Connect(function()
 	task.wait(0)
@@ -1731,6 +1770,8 @@ UserInputService.JumpRequest:Connect(function()
         game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid'):ChangeState("Jumping")
     end
 end)
+
+----------------------------------------------------------------------------------------
 
 -- Noclip
 local Noclipping = nil
@@ -1763,6 +1804,8 @@ function getRoot(char)
 	return rootPart
 end
 
+----------------------------------------------------------------------------------------
+
 -- Spin
 function spin(spinSpeed)
 		for i,v in pairs(getRoot(LocalPlayer.Character):GetChildren()) do
@@ -1776,6 +1819,8 @@ function spin(spinSpeed)
 		Spin.MaxTorque = Vector3.new(0, math.huge, 0)
 		Spin.AngularVelocity = Vector3.new(0,spinSpeed,0)
 end
+
+----------------------------------------------------------------------------------------
 
 -- Snack Noclip (based off hmza's)
 local lastMoveTime = 0
@@ -1836,6 +1881,8 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 --    grp = char:WaitForChild("HumanoidRootPart")
 end)
 
+----------------------------------------------------------------------------------------
+
 -- Spam Open Doors
 local Keycard = Character:FindFirstChild("Key card")
 local kcopener = Character["Right Arm"]
@@ -1875,6 +1922,8 @@ function ukfence()
 	end
 end
 
+----------------------------------------------------------------------------------------
+
 -- Anti-jump removal (jump cooldown removal)
 function ajr()
 	local aj = LocalPlayer.Character:FindFirstChild("AntiJump")
@@ -1903,6 +1952,9 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	end
 end)
 
+----------------------------------------------------------------------------------------
+
+-- no doors, auto gun
 AUTOGUN_DELAY_AFTER_SPAWN = 10
 RunService.Heartbeat:Connect(function()
     if not hrp then return end -- wait until HumanoidRootPart exists
@@ -1954,6 +2006,9 @@ RunService.Heartbeat:Connect(function()
     end
 end)
 
+----------------------------------------------------------------------------------------
+
+-- fake keycard grabber
 local RETRY_DELAY = 0.3
 local running = false
 
@@ -2016,6 +2071,9 @@ end)
 
 start()
 
+----------------------------------------------------------------------------------------
+
+-- old gun sounds
 local player = Players.LocalPlayer
 local hookedTools = {}
 
@@ -2103,14 +2161,59 @@ Players.PlayerAdded:Connect(function(plr)
 	plr.CharacterAdded:Connect(hookCharacter)
 end)
 
--- enable reset button
-local success, result = pcall(function()
-    StarterGui:SetCore("ResetButtonCallback", true)
-end)
+----------------------------------------------------------------------------------------
 
-if not success then
-    warn("Failed to enable respawn button: " .. tostring(result))
+-- trespassing/hostile player printer
+local lastState = {}
+
+local function monitor(plr)
+    local function track(char)
+        lastState[plr] = {
+            Trespassing = false,
+            Hostile = false
+        }
+
+        while char.Parent do
+            task.wait(0.2)
+
+            local tres = char:GetAttribute("Trespassing")
+            local hostile = char:GetAttribute("Hostile")
+
+            if plr.Team and plr.Team.Name:lower():find("inmate") then
+                if tres and not lastState[plr].Trespassing then
+					if settings.htdetect then
+                    	print(plr.Name .. " is TRESPASSING!")
+				    	Notify(plr.Name .. " is TRESPASSING!")
+					end
+                end
+
+                if hostile and not lastState[plr].Hostile then
+					if settings.htdetect then
+                    	print(plr.Name .. " is HOSTILE!")
+						Notify(plr.Name .. " is HOSTILE!")
+					end
+                end
+            end
+
+            lastState[plr].Trespassing = tres
+            lastState[plr].Hostile = hostile
+        end
+    end
+
+    plr.CharacterAdded:Connect(track)
+
+    if plr.Character then
+        task.spawn(track, plr.Character)
+    end
 end
+
+for _, plr in pairs(Players:GetPlayers()) do
+    monitor(plr)
+end
+
+Players.PlayerAdded:Connect(monitor)
+
+----------------------------------------------------------------------------------------
 
 -- Command list
 local function handleCommand(msg)
@@ -2274,6 +2377,16 @@ local function handleCommand(msg)
     if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unkillfeed" then
         settings.killfeed = false
         Notify("Disabled Kill Feed.")
+    end
+
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."htdetect" then
+        settings.htdetect = true
+        Notify("Enabled Hostile/Trespassing Feed.")
+    end
+
+    if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unhtdetect" then
+        settings.htdetect = false
+        Notify("Disabled Hostile/Trespassing Feed.")
     end
 
     if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."antiar" then
@@ -3449,7 +3562,7 @@ OtherTab:CreateButton({
 
 OtherTab:CreateToggle({
     Name = "Keep Reset Button Enabled",
-    CurrentValue = settings.killfeed,
+    CurrentValue = settings.enablere,
     Flag = "ResetButtonToggle",
     Callback = function(Value)
         settings.enablere = Value
@@ -3516,6 +3629,15 @@ OtherTab:CreateToggle({
 })
 
 OtherTab:CreateToggle({
+    Name = "Hostile/Trespassing Notifications",
+    CurrentValue = settings.htdetect,
+    Flag = "HTDetect",
+    Callback = function(Value)
+        settings.htdetect = Value
+    end,
+})
+
+OtherTab:CreateToggle({
     Name = "Close Script",
     Callback = function(Value)
 		settings.KeepPX = false; game.Players.LocalPlayer:Kick("PrisonX closed. Rejoinning...")
@@ -3525,6 +3647,7 @@ OtherTab:CreateToggle({
 
 OtherTab:CreateToggle({
     Name = "Keep PrisonX After Rejoin/Serverhop",
+	CurrentValue = settings.KeepPX,
     Callback = function(Value)
 		settings.KeepPX = Value
     end,
