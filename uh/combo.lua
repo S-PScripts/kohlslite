@@ -310,6 +310,29 @@ local function validTeam(plr)
     return true
 end
 
+--// do not target innocent players
+local function isDangerous(plr)
+    local val = plr:FindFirstChild("Hostile")
+    if val and val:IsA("BoolValue") and val.Value then
+        return true
+    end
+
+    local lchar = game.Players.LocalPlayer.Character
+    if not lchar then return false end
+
+    local tool = lchar:FindFirstChildOfClass("Tool")
+    if not (tool and tool.Name == "Taser") then
+        return false
+    end
+
+    local val2 = plr:FindFirstChild("Trespassing")
+    if val2 and val2:IsA("BoolValue") then
+        return val2.Value
+    end
+    
+    return false
+end
+
 --// Get target body part
 local function getTargetPart(char)
     local hum = char:FindFirstChild("Humanoid")
@@ -347,7 +370,8 @@ local function getClosestScreenTarget()
     for _, plr in ipairs(Players:GetPlayers()) do
         if plr ~= LocalPlayer
         and plr.Character
-        and validTeam(plr) then
+        and validTeam(plr)
+        and isDangerous(plr) then
 
             local part = getTargetPart(plr.Character)
             if part then
