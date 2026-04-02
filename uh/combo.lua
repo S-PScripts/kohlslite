@@ -312,11 +312,17 @@ end
 
 --// do not target innocent players
 local function isDangerous(plr)
+    if plr.Team and (plr.Team.Name == "Criminals" or plr.Team.Name == "Guards") then 
+        return true 
+    end
+
+    -- hostile inmate check
     local val = plr:FindFirstChild("Hostile")
     if val and val:IsA("BoolValue") and val.Value then
         return true
     end
 
+    -- make sure you're holding a taser if inmate is trespassing
     local lchar = game.Players.LocalPlayer.Character
     if not lchar then return false end
 
@@ -325,12 +331,14 @@ local function isDangerous(plr)
         return false
     end
 
+    -- trespassing inmate check
     local val2 = plr:FindFirstChild("Trespassing")
     if val2 and val2:IsA("BoolValue") then
         return val2.Value
     end
-    
-    return true
+
+    -- inmate is innocent
+    return false
 end
 
 --// Get target body part
