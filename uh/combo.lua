@@ -330,7 +330,7 @@ local function isDangerous(plr)
         return val2.Value
     end
     
-    return false
+    return true
 end
 
 --// Get target body part
