@@ -11,9 +11,9 @@ getgenv().espsettings = {
 }
 
 getgenv().aimlock = {
-    Aimbot = false,
+    Aimbot = true,
     SilentAim = false,
-    TeamCheck = { Criminals = false, Guards = false, Inmates = false }, -- teams aimlock will lock onto
+    TeamCheck = { Criminals = false, Guards = false, Inmates = true }, -- teams aimlock will lock onto
     ALTeamMates = true, -- it will not target players on your team even if the toggle for them is true
     Target = { Torso = false, Head = true }, -- what part of the player aimbot should toggle
     FOV = 500
@@ -312,15 +312,15 @@ end
 
 --// do not target innocent players
 local function isDangerous(plr)
-    print(plr.Name, "Team:", plr.Team and plr.Team.Name,
-      "Hostile:", plr:FindFirstChild("Hostile") and plr.Hostile.Value)
+    local char = plr.Character
+    if not char then return false end
+    
     if plr.Team and (plr.Team.Name == "Criminals" or plr.Team.Name == "Guards") then 
         return true 
     end
 
     -- hostile inmate check
-    local val = plr.Character and plr.Character:GetAttribute("Hostile")
-    if val and val:IsA("BoolValue") and val.Value then
+    if char:GetAttribute("Hostile") == true then
         return true
     end
 
@@ -334,9 +334,8 @@ local function isDangerous(plr)
     end
 
     -- trespassing inmate check
-    local val2 = plr.Character and plr.Character:GetAttribute("Trespassing")
-    if val2 and val2:IsA("BoolValue") then
-        return val2.Value
+    if char:GetAttribute("Trespassing") == true then
+        return true
     end
 
     -- inmate is innocent
