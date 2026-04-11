@@ -319,7 +319,7 @@ local function isDangerous(plr)
     end
 
     -- hostile inmate check
-    local val = plr:FindFirstChild("Hostile")
+    local val = plr.Character and plr.Character:GetAttribute("Hostile")
     if val and val:IsA("BoolValue") and val.Value then
         return true
     end
@@ -334,7 +334,7 @@ local function isDangerous(plr)
     end
 
     -- trespassing inmate check
-    local val2 = plr:FindFirstChild("Trespassing")
+    local val2 = plr.Character and plr.Character:GetAttribute("Trespassing")
     if val2 and val2:IsA("BoolValue") then
         return val2.Value
     end
