@@ -312,6 +312,8 @@ end
 
 --// do not target innocent players
 local function isDangerous(plr)
+    print(plr.Name, "Team:", plr.Team and plr.Team.Name,
+      "Hostile:", plr:FindFirstChild("Hostile") and plr.Hostile.Value)
     if plr.Team and (plr.Team.Name == "Criminals" or plr.Team.Name == "Guards") then 
         return true 
     end
