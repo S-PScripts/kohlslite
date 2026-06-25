@@ -23,15 +23,15 @@ This script is DISCONTINUED permanently; scroll down for more information!
 
 This was one of the only KAH scripts that worked due to Roblox's chat update (30th APRIL 2025). Apart from CMD v3 (but agspureiam made a small update that broke the script anyway).
 
-You can play KAH here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
+You could play the original KAH here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
 
-This script is not recommended for KAH Legacy (https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy).
-This is because the code there is rather different, and therefore some features in this script are not compatible.
-Here is a fun fact about KAH Legacy/Project NP: the owner, BoasGameAlt, is agspureiam's alt. However, it was password-guessed and is now owned by Tech.
+This script is not recommended for KAH X (Legacy/Project NP) (https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy).
+This is because the code there is rather different, and therefore many features in this script are not compatible.
+Here is a fun fact about KAH X: the owner, BoasGameAlt, is agspureiam's alt. However, it was password-guessed and is now owned by Tech.
 
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
 Shortcut v3-VAR had more stuff than KohlsLite, but it was not open-source, and you needed to ask the owner (Tech) to be able to use the script.
-If you want to contact Tech, join his Discord server (link: sckah.space). Do note that SCV3-VAR is no longer updated, and does not work.
+If you want to contact Tech, join his Discord server (link: sckah.space). Do note that SCV3-VAR is no longer updated and does not work.
 
 This script was built from the ground up. KohlsLite is not a fork of any other scripts (e.g, Shortcut v2 src1 being an extension to Shortcut v1).
 
@@ -120,8 +120,8 @@ If you read all of the above, thank you. I had a great time creating KohlsLite. 
 
 TS2021, October 2025
 
-PS: KAH got revived again because of StromBrew during November 2025. Has 30 players at least, so a little less dead. And no exploiters still, that's neat I guess. Goodbye KAH!
-Maybe if someone else makes a KAH script or something related to f3x/btools is found I'll come back... (only if a game.Players:Chat() replacement is found as well)
+PS: KAH got revived again because of StromBrew during November 2025. Has 30 players at least, so a little less dead. And no exploiters still, that's neat, I guess.
+Maybe if someone else makes a KAH script or something related to f3x/btools is found, I'll come back... (only if a game.Players:Chat() replacement is found as well)
 ]]
 
 --[[
@@ -482,7 +482,7 @@ local backend_stuff = {
 local thorn_ig_anti = {
 }
 
-kah_np = (game.PlaceId == 14747334292) -- This checks if the game is KAH NP and fixes stuff accordingly
+kah_np = (game.PlaceId == 14747334292) -- This checks if the game is KAH X and fixes stuff accordingly; variable called KAH NP as that was its old name
 if kah_np == true then
 	GAMEFOLDER = "_Game"
 else
