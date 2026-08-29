@@ -1,4 +1,5 @@
 -- Discontinued permanently
+-- Update Aug 2026: Once I get a new computer, I will try to fix minor bugs.
 -- Do not ask me to fix the game.Players:Chat(), the lag problem, or anything else
 
 -- Read all the information below before viewing the source.
@@ -10,7 +11,7 @@
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| XZ1
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| XZ1.1
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -143,7 +144,7 @@ end
 getgenv().default_prefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "XZ1"
+getgenv().klversion = "XZ1.1"
 
 -- Notifications
 local function Remind(msg, length)
@@ -228,7 +229,7 @@ clipboard_available = setclipboard or toclipboard or set_clipboard or (Clipboard
 -- You can find the original here: https://github.com/blueskykah/Solinium/blob/main/Solinium%20Autocrasher
 -- This needs to be in your autoexecute (could use queue_on_teleport maybe but ¯\_(ツ)_/¯)
 
--- This no longer works. All crashes are patched (swagify, I don't think so, but it sux)
+-- This no longer works. All crashes are patched (swagify, I don't think so, but it sucks)
 ]]
 
 function acperm()
@@ -311,7 +312,7 @@ function shopac() -- Autocrasher serverhop
 end
 
 if getgenv().autocrasher then
-	if getgenv().playertoken then
+	--[[ if getgenv().playertoken then
 
 
 		repeat task.wait() until game:IsLoaded()
@@ -410,7 +411,7 @@ if getgenv().autocrasher then
 			print("Once you have copied the code, join an empty server and run the code. Next, open a text editor like Notepad and find a string that looks like this: '5568CCBED82CD30E127119030810CE98'.")
 			print("Once you have found the string, copy it and input it into the playertoken variable.")		
 	end
-   end
+   end ]]
 end
 
 --[[
@@ -431,7 +432,7 @@ if not game:IsLoaded() then
 end
 
 if getgenv().autocrasher then
-	return 
+	-- return 
 end
 
 --loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
@@ -5626,7 +5627,7 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 		Remind("Dropped all items in your inventory!")
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'vgcrash' then
+ --[[   if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'vgcrash' then
 	if crash_settings.skipwarncrash then -- idea from sinx
 		VGCrash()
 		Remind("VG Crashed the server. This might be temporary.")
@@ -5770,7 +5771,7 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 		
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'kick' then
 		Remind("You need to specify the kick you want to use.")
-    end
+    end ]]
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'dcrash' then
 		Remind("This command is patched.")
@@ -8494,7 +8495,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'dummy' then
-                 Dummy()
+        Dummy()
 		 Remind("Creating test dummy...")
     end
 
@@ -8502,9 +8503,9 @@ return
         GravFix()
         Chat("respawn me")
         ColFix()
-	VFix()
+		VFix()
         movestatus = false
-	Remind("Fixed your game!")
+		Remind("Fixed your game!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'rejoin' then
@@ -17121,7 +17122,7 @@ function onPlayerAdded(player)
 			-- check_con = true
     		end
 
-    		if table.find(list_on_sight.crash_on_sight, player.Name) then
+    	--[[	if table.find(list_on_sight.crash_on_sight, player.Name) then
 		        if player_relate.welcomemsg == true then
         			Chat("h \n\n\n\n\n Server automatically crashed due to blacklisted user ("..player.DisplayName..") joining. \n\n\n\n\n")
 			end
@@ -17129,7 +17130,7 @@ function onPlayerAdded(player)
 			Remind(player.Name.." joined the server. Server was automatically crashed as they are blacklisted.")
        		 	checkCrashType();crash_settings.skipwarncrash = true
 			check_con = true
-   		end
+   		end ]]
 
     		if player.AccountAge < mainbar_stuff.newlen == true and mainbar_stuff.newplrautoslock == true then
 			if not table.find(whitelist, player.Name) and not table.find(pwl, player.Name) then
@@ -20100,6 +20101,7 @@ colorAPI.colorBuildingBricks_2 = function(Extra)
 		end
 end
 
+-- this was for some btool shenangians in the original kah
 for i,v in pairs(workspace:GetDescendants()) do 
     if v:IsA("BasePart") then 
         v.Locked = false 
@@ -20120,12 +20122,12 @@ for i, v in pairs(game.Players:GetPlayers()) do
 			Remind("Anti ray gun enabled (9jn found in server).")
         end
 
-        if table.find(list_on_sight.crash_on_sight, v.Name) then
+     --[[   if table.find(list_on_sight.crash_on_sight, v.Name) then
                 Chat("h \n\n\n\n\n Server automatically crashed due to blacklisted user ("..v.Name..") being in the server. \n\n\n\n\n")
         	print(v.Name.." found in the server. Server was automatically crashed as they are blacklisted.")
 		Remind(v.Name.." found in the server. Server was automatically crashed as they are blacklisted.")               
 		checkCrashType(); crash_settings.skipwarncrash = true
-        end
+        end ]]
 
         if table.find(list_on_sight.rkick_on_sight, v.Name) then
                 Chat("h \n\n\n\n\n Rocket kicking "..v.Name.." as they are blacklisted. \n\n\n\n\n")
