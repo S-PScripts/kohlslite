@@ -756,7 +756,116 @@ else
 end
 
 ----------------------------------------------------------------------------------------
+-- attempt to serverban player
+local currentConnection = nil
 
+local function findPartialPlayer(name)
+    for _, p in pairs(Players:GetPlayers()) do
+        if p.Name:lower():sub(1, #name) == name:lower() or p.DisplayName:lower():sub(1, #name) == name:lower() then
+            return p
+        end
+    end
+    return nil
+end
+
+local function serverban()
+	if currentConnection then
+        currentConnection:Disconnect()
+        currentConnection = nil
+		Notify("Cancelled.")
+        return
+    end
+
+    local localPlayer = Players.LocalPlayer
+    local localChar = localPlayer.Character
+    local localHumanoid = localChar and localChar:FindFirstChildOfClass("Humanoid")
+
+    local car = nil
+    if localHumanoid and localHumanoid.SeatPart then
+        local obj = localHumanoid.SeatPart
+        while obj and obj.Parent ~= workspace:FindFirstChild("CarContainer") and obj.Parent ~= workspace do
+            obj = obj.Parent
+        end
+        if obj and obj.Parent == workspace:FindFirstChild("CarContainer") then
+            car = obj
+        end
+    else
+        Notify("SIT IN A CAR FIRST!")
+        task.wait(1.5)
+        return
+    end
+
+    if not car then
+        Notify("CAR LAYER DETECT FAILED")
+        task.wait(1.5)
+        return
+    end
+
+    local wheelsFolder = car:FindFirstChild("Wheels")
+    local wheel = wheelsFolder and wheelsFolder:GetChildren()[4]
+
+    local targetPlayer = findPartialPlayer(UserInput.Text)
+    local targetChar = targetPlayer and targetPlayer.Character
+
+    if not targetChar or not targetChar:FindFirstChild("HumanoidRootPart") or not wheel then
+        Notify("TARGET NOT FOUND")
+        task.wait(1.5)
+        return
+    end
+
+    local targetRoot = targetChar.HumanoidRootPart
+    local localRoot = localChar.HumanoidRootPart
+    local targetHumanoid = targetChar:FindFirstChildOfClass("Humanoid")
+    
+    local predictionScale = 0.22 
+
+    currentConnection = RunService.Heartbeat:Connect(function()
+        -- DEATH + VALIDITY CHECK
+        if not targetChar or not targetRoot or not wheel or not car or not localChar or not localRoot 
+           or (targetHumanoid and targetHumanoid.Health == 0) 
+           or (localHumanoid and localHumanoid.Health == 0) then
+            
+            if currentConnection then currentConnection:Disconnect() end
+            currentConnection = nil
+            Notify("Ended.")
+            return
+        end
+
+        -- Disable local collisions
+        for _, part in pairs(localChar:GetDescendants()) do
+            if part:IsA("BasePart") then
+                part.CanCollide = false
+            end
+        end
+
+        -- CALCULATE LATENCY INTERPOLATION PREDICTION
+        local targetVelocity = targetRoot.AssemblyLinearVelocity
+        local predictedPosition = targetRoot.Position + (targetVelocity * predictionScale)
+        local predictedCFrame = CFrame.new(predictedPosition) * (targetRoot.CFrame - targetRoot.Position)
+
+        -- TOUGHNESS / TOUCH CHECK: Calculate edge-to-edge distance between weapon wheel and target torso
+        local actualDistance = (wheel.Position - targetRoot.Position).Magnitude
+        local touchThreshold = (wheel.Size.Y / 2) + (targetRoot.Size.Y / 2) + 0.5 -- Dynamic size radius check
+
+        if actualDistance == touchThreshold then
+            -- EXACT TOUCHING POINT: Force instant high velocity collision
+            wheel.AssemblyAngularVelocity = Vector3.new(150000, 150000, 150000)
+            wheel.AssemblyLinearVelocity = Vector3.new(150000, 150000, 150000)
+        else
+            -- GLUED TRACKING MODE: Fast tracking speed without physics breaking velocities
+            wheel.AssemblyAngularVelocity = Vector3.new(8000, 8000, 8000)
+            wheel.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+        end
+
+        -- Snap position based entirely on predicted vectors
+        localRoot.CFrame = predictedCFrame * CFrame.new(0, -1.5, 0)
+        localRoot.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+        wheel.CFrame = predictedCFrame
+	end)
+end)
+end
+
+----------------------------------------------------------------------------------------
 TeleportService = game:GetService("TeleportService")
 PlaceId, JobId = game.PlaceId, game.JobId
 
@@ -2919,6 +3028,27 @@ TeleportTab:CreateButton({
     end,
 })
 
+TeleportTab:CreateButton({
+    Name = "[X] Attempt Serverban",
+    Callback = function()
+		serverban()
+    end,
+})
+
+TeleportTab:CreateButton({
+    Name = "[X] Cancel Serverban",
+    Callback = function()
+    	if currentConnection then
+        	currentConnection:Disconnect()
+        	currentConnection = nil
+    	end
+    
+    	local localChar = Players.LocalPlayer.Character
+    	local localHumanoid = localChar and localChar:FindFirstChildOfClass("Humanoid")
+    	if localHumanoid then
+        	localHumanoid.Health = 0
+    	end,
+})
 
 -- Automation Tab --
 -- Automation: Player Related --
