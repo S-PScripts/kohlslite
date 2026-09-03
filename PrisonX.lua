@@ -862,7 +862,6 @@ local function serverban()
         localRoot.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
         wheel.CFrame = predictedCFrame
 	end)
-end)
 end
 
 ----------------------------------------------------------------------------------------
@@ -3047,7 +3046,8 @@ TeleportTab:CreateButton({
     	local localHumanoid = localChar and localChar:FindFirstChildOfClass("Humanoid")
     	if localHumanoid then
         	localHumanoid.Health = 0
-    	end,
+    	end
+	end,
 })
 
 -- Automation Tab --
