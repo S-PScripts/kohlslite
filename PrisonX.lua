@@ -173,6 +173,7 @@ local settings = {
 
 getgenv().espsettings = false -- ESP toggle
 getgenv().aimlock = false -- Aimlock toggle
+getgenv().risk_retard = false -- might get you banned, the "1" should prevent but untested
 
 -- arrest aura wl
 aa_wl = {"ScriptingProgrammer", "kohlslitedev"}
@@ -247,9 +248,11 @@ local HomeGUI = PlayerGui:WaitForChild("Home")
 local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
---local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
 
---local meleeEvent = ReplicatedStorage.meleeEvent
+if getgenv().risk_retard then
+	local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
+	local meleeEvent = ReplicatedStorage.meleeEvent
+end
 
 local TeamList = {"Criminals", "Inmates", "Guards"}
 
@@ -959,7 +962,7 @@ RunService.Heartbeat:Connect(function()
 						--
 					else
 						hitList[targetPlayer] = true
-                		meleeEvent:FireServer(targetPlayer)
+                		meleeEvent:FireServer(targetPlayer, 1)
 					end
             	end
 			end
@@ -1023,7 +1026,9 @@ local function IsArrestable(plr)
     return true
 end
 
---local aremote = ReplicatedStorage.Remotes.ArrestPlayer
+if getgenv().risk_retard then
+	local aremote = ReplicatedStorage.Remotes.ArrestPlayer
+end
 
 RunService.Heartbeat:Connect(function()
     local root = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
@@ -1051,7 +1056,7 @@ RunService.Heartbeat:Connect(function()
 						else
         					if (root.Position - hrp.Position).Magnitude <= settings.arrestaura_radius then
             					task.spawn(function()
-                					pcall(aremote.InvokeServer, aremote, plr)
+                					pcall(aremote.InvokeServer, aremote, plr, 1)
             					end)
 							end
 						end
@@ -1203,7 +1208,7 @@ function BreakAllToilets()
         if toilet.Name == "Toilet" and toilet:IsA("Model") then
             foundToilets = true
             for i = 1, 15 do
-                meleeEvent:FireServer(toilet, 1)
+                meleeEvent:FireServer(toilet, 1, 1)
             end
         end
 	end
@@ -1530,7 +1535,7 @@ local function SetTeam(targetTeam, skipCooldownCheck)
 	local function switch(team)
     	repeat
 			if TeamEvent then
-				TeamEvent:InvokeServer(team)
+				TeamEvent:InvokeServer(team, 1)
 			end
         	task.wait(0.2)
     	until LocalPlayer.Team == team
@@ -1623,20 +1628,20 @@ LocalPlayer.CharacterAdded:Connect(function(char)
                 local currentTeam = LocalPlayer.Team
                 if currentTeam == Teams.Inmates then
                     repeat task.wait() 
-                        TeamEvent:InvokeServer(Teams.Neutral)
+                        TeamEvent:InvokeServer(Teams.Neutral, 1)
                     until LocalPlayer.Team == Teams.Neutral
 
                     repeat task.wait() 
-                        TeamEvent:InvokeServer(Teams.Inmates)
+                        TeamEvent:InvokeServer(Teams.Inmates, 1)
                     until LocalPlayer.Team == Teams.Inmates
                     fixcam()
                 elseif currentTeam == Teams.Guards then
                     repeat task.wait() 
-                        TeamEvent:InvokeServer(Teams.Neutral)
+                        TeamEvent:InvokeServer(Teams.Neutral, 1)
                     until LocalPlayer.Team == Teams.Neutral
 
                     repeat task.wait() 
-                        TeamEvent:InvokeServer(Teams.Guards)
+                        TeamEvent:InvokeServer(Teams.Guards, 1)
                     until LocalPlayer.Team == Teams.Guards
                     fixcam()
                 elseif currentTeam == Teams.Criminals then
