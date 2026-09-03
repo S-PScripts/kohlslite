@@ -40,7 +40,7 @@ Auto anti-jump removal (-aajr/-unajr)
 
 Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Hide/Show Trees (-htrees / -strees)
-Remove Team Indicators
+Remove Team Indicators (-rti/-dti)
 
 Destroy Prison Fences (-dfences) - CLIENT-SIDE!
 Destroy Prison Gates (-dgates) - CLIENT-SIDE!
@@ -53,7 +53,7 @@ Spin
 Infinite Jump
 Auto Sprint / Speed Changer
 
-Auto Keycard
+Auto Keycard (-akeycard/-unakeycard)
 
 Credits to github.com/tomatotxt for some stuff
 Credits to github.com/NewMatheusDC for some of the GUI
@@ -2434,6 +2434,16 @@ local function handleCommand(msg)
         Notify("Disabled arrestaura.")
     end
 
+	if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."rti" then
+		workspace.TeamIndicators:Destroy()
+        Notify("Removed team indicators.")
+    end
+
+	if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."dti" then
+		workspace.TeamIndicators:Destroy()
+        Notify("Removed team indicators.")
+    end
+	
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."kasphere" then
         settings.killaura_sphere = true
         Notify("Kill aura sphere visible.")
@@ -2454,6 +2464,16 @@ local function handleCommand(msg)
         Notify("Disabled auto-respawn.")
     end
 
+	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."akeycard" then
+		settings.akeycard = true
+        Notify("Auto keycard grabber enabled.")
+    end
+
+	if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unakeycard" then
+		settings.akeycard = false
+        Notify("Auto keycard grabber disabled.")
+    end
+	
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."fastguns" then
         settings.auto_fg = true
 		Notify("Your guns will now have fast fire-rate.")
