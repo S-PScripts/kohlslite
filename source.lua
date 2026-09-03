@@ -483,6 +483,9 @@ local backend_stuff = {
 local thorn_ig_anti = {
 }
 
+-- tslock (don't edit)
+local conne = {}
+
 kah_np = (game.PlaceId == 14747334292) -- This checks if the game is KAH X and fixes stuff accordingly; variable called KAH NP as that was its old name
 if kah_np == true then
 	GAMEFOLDER = "_Game"
@@ -1725,35 +1728,35 @@ local gearlist = {
     },
 	
     ["god"] = { -- watered down version of ivory...
-	gearid = {
-		"159229806",
-		"93136802",
-		"108158379", 
-		"73829193", 
-		"69499437", 
-		"80661504",
-            	"120307951", 
-		"99119240", 
-		"94794774", 
-		"71037101", 
-		"93136746"
-	}
+		gearid = {
+			"159229806",
+			"93136802",
+			"108158379", 
+			"73829193", 
+			"69499437", 
+			"80661504",
+        	"120307951", 
+			"99119240", 
+			"94794774", 
+			"71037101", 
+			"93136746"
+		}
     },
 
     ["omni"] = {
-	gearid = {
-		"159229806",
-		"93136802",
-		"108158379", 
-		"73829193", 
-		"69499437", 
-		"80661504",
-            	"120307951", 
-		"99119240", 
-		"94794774", 
-		"71037101", 
-		"93136746"
-	}
+		gearid = {
+			"159229806",
+			"93136802",
+			"108158379", 
+			"73829193", 
+			"69499437", 
+			"80661504",
+            "120307951", 
+			"99119240", 
+			"94794774", 
+			"71037101", 
+			"93136746"
+		}
     },
 
 	
@@ -2514,12 +2517,12 @@ if hasperm then
 		admin_stuff.perm2 = true
 		print("You have been given a perm pad since the Legacy Perm gamepass does not work for the official Kohls Admin House games (NBC/BC).")
 	else
-        	print("A perm pad was not given as you have the Perm Admin gamepass!")
+        print("A perm pad was not given as you have the Perm Admin gamepass!")
 	end
 else
 	hasperm = false
 	admin_stuff.perm2 = true 
-        print("A perm pad was given as you don't have the Perm Admin gamepass!")
+    print("A perm pad was given as you don't have the Perm Admin gamepass!")
 end
 
 print("\n")
@@ -2529,11 +2532,11 @@ if haspersons then
 		haspersons = false
 		print("You will not have access to any KohlsLite commands that use Person299 since the Legacy P299 gamepass does not work for the official Kohls Admin House games (NBC/BC).")
 	else
-        	print("You have Person299's Admin! You have access to every KohlsLite command that use P299!")
+        print("You have Person299's Admin! You have access to every KohlsLite command that use P299!")
 	end
 else
 	haspersons = false
-        print("You do not have Person299's Admin, so you will not have access to any KohlsLite commands that use P299.")
+    print("You do not have Person299's Admin, so you will not have access to any KohlsLite commands that use P299.")
 end
 
 
@@ -2612,29 +2615,22 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
         end
 		
         if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'cmdpi' then
-		if IYchecks.IsOnMobile then
-			Remind("CMD PI/V3 does not work on mobile executors.")
-		else
+			if IYchecks.IsOnMobile then
+				Remind("CMD PI/V3 does not work on mobile executors.")
+			else
                 	GExecute("https://raw.githubusercontent.com/S-PScripts/KAH/main/CMD%20v3.lua")
-			Remind("Executed CMD PI/V3. Created by quiving.")
-		end
+				Remind("Executed CMD PI/V3. Created by quiving.")
+			end
         end
-
--- this probably doesn't work but i want to see what happens if you attempt to use it
-        if string.sub(msg:lower(), 1, #prefix + 3) == prefix..'cxo' then
-                GExecute("https://raw.githubusercontent.com/pcxo/cxos-admin/refs/heads/main/admin")
-		Remind("Executed Cxo's Admin. Created by cxo.")
-        end
--- this probably doesn't work but i want to see what happens if you attempt to use it
 
         if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cmdy' then -- you don't need this for attaching anymore ;)
                 GExecute("https://raw.githubusercontent.com/S-PScripts/KAH/main/CMD-Y%20(v1.56).lua")
-		Remind("Executed CMD Y/V2. Created by quiving.")
+				Remind("Executed CMD Y/V2. Created by quiving.")
         end
 
         if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'tricky' then -- CREDITS TO TECH
                 Remind("This might not work if it's already been executed. Sorry! Created by Tech")
-		Remind("Turn this off by typing stopmusic.")
+				Remind("Turn this off by typing stopmusic.")
                 if haspersons == true then
                         GExecute("https://raw.githubusercontent.com/Tech-187/Music-lyrics-on-time/main/Tricky%20lyrics.lua")
                 else
@@ -2697,7 +2693,7 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 			VisBindable:Fire("Stop")
 			Remind("Visualiser has ended.")
 		else
-            		Remind("You need Person299 Admin commands for this!")
+            Remind("You need Person299 Admin commands for this!")
 		end
 	end
 
@@ -2727,13 +2723,14 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 
    	if string.sub(msg, 1, #prefix + 6) == prefix..'brushc' then
 		local args = string.split(msg, " ")
-           	local Red = tonumber(args[2])
+		if #args ~= 4 then return Remind("ERROR: You must use 4 arguments (brushc R G B).") end
+        local Red = tonumber(args[2])
 		local Green = tonumber(args[3])
 		local Blue = tonumber(args[4])
 		partColourer.Color = Color3.new(Red,Green,Blue)
 		selectedColour = partColourer.Color		  
 		Remind("Brush colour changed.")
-      	end
+      end
 
 	if string.sub(msg, 1, #prefix + 5) == prefix..'build' then
 			Remind("Sorry, this command is not in KohlsLite. Please use CMD v3 for it.")
@@ -3578,18 +3575,26 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
        end
 
 	if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'tslock' then -- watered down timeout command
+		for _, thread in ipairs(conne) do -- retar prevent
+			task.cancel(thread)
+		end
+		conne = {}
 		local naughty_clock = tonumber(string.sub(msg:lower(), #prefix + 8))
 		if player_relate.blwl_an then
-        		Chat("h \n\n\n\n\n This is a NAUGHTY server so I need to put you all in TIME-OUT... \n\n\n\n\n");Regen()
+        		Chat("h \n\n\n\n\n lights out, wait... \n\n\n\n\n");Regen()
 		end
-        	mainbar_stuff.slockenabled = true
-			
-		task.delay(naughty_clock, function()
+        mainbar_stuff.slockenabled = true
+
+		conne[#conne + 1] = task.delay(naughty_clock, function()
 			mainbar_stuff.slockenabled = false
 		end)
 	end
 
 	if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'untslock' then
+		for _, thread in ipairs(conne) do
+			task.cancel(thread)
+		end
+		conne = {}
 		mainbar_stuff.slockenabled = false
 		Chat("h \n\n\n\n\n I hope you all learnt your lesson... \n\n\n\n\n")
 	end
@@ -11692,31 +11697,31 @@ task.spawn(function()
                         end
                     elseif mainbar_stuff.superchargeslock == true then -- tech-187's
 			if not game.Lighting:FindFirstChild(v.Name) then
-				game.Players:Chat(":blind all")
-    				game.Players:Chat("fogcolor 0 0 0")
-    				game.Players:Chat("fogend nil")
-    				game.Players:Chat("brightness nan")
-    				game.Players:Chat("time -")
+					Chat(":blind all")
+    				Chat("fogcolor 0 0 0")
+    				Chat("fogend nil")
+    				Chat("brightness nan")
+    				Chat("time -")
 							
-    				game.Players:Chat("unpunish all " .. math.random(1, 1000))
+    				Chat("unpunish all " .. math.random(1, 1000))
     				task.wait()
-    				game.Players:Chat("invis all " .. math.random(1, 1000))
-    				game.Players:Chat(":refresh all " .. math.random(1, 1000))
-    				game.Players:Chat("invis all " .. math.random(1, 1000))
-    				game.Players:Chat(":kill all " .. math.random(1, 1000))
-    				game.Players:Chat(":trip all " .. math.random(1, 1000))
-    				game.Players:Chat(
+    				Chat("invis all " .. math.random(1, 1000))
+    				Chat(":refresh all " .. math.random(1, 1000))
+    				Chat("invis all " .. math.random(1, 1000))
+    				Chat(":kill all " .. math.random(1, 1000))
+    				Chat(":trip all " .. math.random(1, 1000))
+    				Chat(
         					":setgrav all" .. " -1000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
     						)
     				wait(.1)
-    				game.Players:Chat("invis all all all " .. math.random(1, 1000))
-    				game.Players:Chat(":unpunish all all all " .. math.random(1, 1000))
+    				Chat("invis all all all " .. math.random(1, 1000))
+    				Chat(":unpunish all all all " .. math.random(1, 1000))
     				task.wait(.2)
-   				game.Players:Chat("invis all " .. math.random(1, 1000))
+   					Chat("invis all " .. math.random(1, 1000))
     				wait(.2)
-    				game.Players:Chat(":reset all " .. math.random(1, 1000))
+    				Chat(":reset all " .. math.random(1, 1000))
     				wait(.15)
-    				game.Players:Chat(
+    				Chat(
         					":punish all all all                                                                       " ..
             					math.random(1, 1000)
     						)
@@ -14595,7 +14600,7 @@ end
 -- SWAGIFY CRASH
 function SwagCrash()
 		for i = 1,100 do
-			game.Players:Chat("swagify all all all all all all shitting_right_now")
+			Chat("swagify all all all all all all shitting_right_now")
 		end
 		PtSH()
 end
@@ -18923,7 +18928,7 @@ function trapped(caged, time)
 
     	Chat("reset "..caged.Name)
     	task.wait()
-    	Chat("pm "..caged.Name.." You are no longer trapped. Don't be naughty again...")
+    	Chat("pm "..caged.Name.." You are no longer trapped. Don't be bad again...")
     	task.wait()
 end
 
@@ -19194,6 +19199,7 @@ function rcannon(mode)
 end
 
 function clearall()
+	Remind("If nothing happens, the command failed due to no one having btools or the remote being non-existent.")
 	local function getTool(backpack, toolName)
    		return backpack:FindFirstChild(toolName)
 	end
@@ -20639,7 +20645,7 @@ local TeleportCheck = false
 game.Players.LocalPlayer.OnTeleport:Connect(function(State)
 	if mainbar_stuff.KeepKL and (not TeleportCheck) and queueteleport then
 		TeleportCheck = true
-		queueteleport("loadstring(game:HttpGet('kohlslite.pages.dev/source.lua'))()")
+		queueteleport("loadstring(game:HttpGet('kohlslite.pages.dev/source.lua'))()") -- loadstring hosted
 	end
 end)
 
