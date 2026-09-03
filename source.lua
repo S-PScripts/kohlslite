@@ -14447,7 +14447,7 @@ function askGroq(prompt)
 				["Authorization"] = "Bearer " .. apiKey
 			},
 			Body = HttpService:JSONEncode({
-				model = "llama-3.3-70b-versatile",
+				model = "openai/gpt-oss-120b",
 
 				messages = {
 					{
