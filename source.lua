@@ -81,7 +81,7 @@ There are some features in other scripts that KohlsLite does not have. Here are 
 - Boombox visualiser [Proton Admin]
 - Part builder [ii's Stupid Admin, Jotunnheim, CMD PI/V3, Solinium v2]
 - Custom commands [Shortcut v3-VAR]
-- Skateboard kick [didn't bother to figure out how it works, method is private]
+- Skateboard kick [didn't bother to figure out how it works, method isn't private anymore but it doesn't work in KAH X]
 
 There is also no GUI, and the anti system does not work for individual players.
 
