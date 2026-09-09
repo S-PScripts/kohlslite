@@ -457,10 +457,18 @@ else
 end
 
 local apiKey
+local aiModel
+
 if getgenv().apiKey then
 	apiKey = getgenv().apiKey
 else
 	apiKey = ""
+end
+
+if getgenv().aiModel then
+	aiModel = getgenv().aiModel
+else
+	aiModel = "openai/gpt-oss-120b"
 end
 
 -- Defaults (you can change these)
@@ -14451,7 +14459,7 @@ function askGroq(prompt)
 				["Authorization"] = "Bearer " .. apiKey
 			},
 			Body = HttpService:JSONEncode({
-				model = "openai/gpt-oss-120b",
+				model = aiModel,
 
 				messages = {
 					{
