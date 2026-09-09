@@ -943,9 +943,9 @@ local gear_antis = {
 	-- Stop yourself from having gears in your inventory
 	antitoolm = false,
 
-        -- Stop yourself from having gears in your inventory (better)
-        antitoolm2 = false,
-
+    -- Stop yourself from having gears in your inventory (better)
+    antitoolm2 = false,
+	
 	-- Stops you from getting kicked from crash gears (NOTE: This isn't useful anymore.)
 	antikick2 = false
 }
@@ -998,7 +998,10 @@ local ws_antis = {
 	antiattach = false,
 
 	-- Stop lag
-	antilag = false
+	antilag = false,
+
+	-- Stop skateboard kick (not useful anymore tho I think)
+	antikick = false,
 }
 
 -- Auto stuff, things announced, pings
@@ -9933,10 +9936,18 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antikick' then
-                gear_antis.antikick2 = true
+            ws_antis.antikick = true
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantikick' then
+        	ws_antis.antikick = false
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'gantikick' then
+            gear_antis.antikick2 = true
+    end
+
+    if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'ungantikick' then
         	gear_antis.antikick2 = false
     end
 
@@ -11800,6 +11811,14 @@ task.spawn(function()
            end
         end
 
+		if ws_antis.antikick == true then
+    		for i, sk in workspace:GetDescendants() do
+        		if sk:IsA("SkateboardPlatform") then
+            		sk.CanTouch = false
+       		 	end
+    		end
+		end
+
         if ws_antis.antifogcolor == true then
                 if game.Lighting.FogColor ~= Color3.new(0.75294125080109,0.75294125080109,0.75294125080109) then
                         Chat("fogcolor 192 192 192")        
@@ -13232,22 +13251,21 @@ game:GetService("RunService").RenderStepped:Connect(function()
 				end
 		end
 
-		mybackpack = game.Players.LocalPlayer:FindFirstChild("Backpack")
-		if mybackpack then
-        	for i, gear in pairs(mybackpack:GetChildren()) do
-            	if gear:IsA("Tool") and gear_antis.antitoolm == true then
-            		gear:Destroy()
-            	end
-       		end
-		end
+	local mybackpack = game.Players.LocalPlayer:FindFirstChild("Backpack")
 
-        for i, gear in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-            if gear_antis.antitoolm2 == true then
+	if mybackpack then
+    	for _, gear in ipairs(mybackpack:GetChildren()) do
+        	if gear_antis.antitoolm2 == true then
             	gear:Destroy()
-            end
-        end
+        	elseif gear_antis.antitoolm == true and gear:IsA("Tool") then
+            	gear:Destroy()
+        	end
+    	end
+	end
+
 end)
 
+-- placed here as it won't work above
 workspace.DescendantAdded:Connect(function(obj)
 	if not gear_antis.antigear then
 		return
