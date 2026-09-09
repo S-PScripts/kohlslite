@@ -7554,7 +7554,7 @@ return
 
     if string.sub(msg:lower(), 1, 6) == 'sneban' then
         Speak("I'm gonna say the s word...")
-	task.wait(1) --# LIGMA #--
+	task.wait(2.57) --# LIGMA #--
 	Speak("You are a filthy snekkur ngl")
     end
 
@@ -7850,7 +7850,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'autogb' then
                 player_relate.autogb = true
-		Remind("Auto gearban is enabled. People get gearbanned when they join this server")
+		Remind("Auto gearban is enabled. People get gearbanned when they join this server.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'autogb' then
@@ -7860,7 +7860,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antisay' then
 	player_relate.anti_say = true
-	Remind("When one of your antis is triggered it prints in chat. NOTE: NOT IMPLEMENTED FOR WORKSPACE + OTHER PEOPLE YET.")
+	Remind("When one of your antis is triggered, it prints in chat. NOTE: NOT IMPLEMENTED FOR WORKSPACE + OTHER PEOPLE.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antisay' then
@@ -7869,42 +7869,42 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'qpunish' then -- idea from zercon
-                	local trolled = string.sub(msg:lower(), #prefix + 9)
-                        Chat("punish " .. trolled)
-                        Regen()
-			Remind("Quick punished the player.")
+        local trolled = string.sub(msg:lower(), #prefix + 9)
+    	Chat("punish " .. trolled)
+        Regen()
+		Remind("Quick punished the player.")
     end   
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'spunish' then -- ii's admin
-                	local trolled = string.sub(msg:lower(), #prefix + 9)
-                        Chat("speed "..trolled.." inf")
-			Remind("Sped the player to infinity!")
+        local trolled = string.sub(msg:lower(), #prefix + 9)
+        Chat("speed "..trolled.." inf")
+		Remind("Sped the player to infinity!")
     end   
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'gpunish' then -- ii's admin
-                	local trolled = string.sub(msg:lower(), #prefix + 9)
-                        Chat("setgrav "..trolled.." -9e9")
-			Remind("Setgraved player to the heavens!")
+        local trolled = string.sub(msg:lower(), #prefix + 9)
+        Chat("setgrav "..trolled.." -9e9")
+		Remind("Setgraved player to the heavens!")
     end   
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'ungearban' then
-                local plrg = string.sub(msg:lower(), #prefix + 11)
-                if plrg == "" or plrg == "me" then
-                        game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+    	local plrg = string.sub(msg:lower(), #prefix + 11)
+        if plrg == "" or plrg == "me" then
+            game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
 			Remind("Ungearbanned yourself.")
-                else 
-                        Ungearban(plrg)
-                end
+        else 
+            Ungearban(plrg)
+        end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'untoolban' then
-                local plrg = string.sub(msg:lower(), #prefix + 11)
-                if plrg == "" or plrg == "me" then
-                        game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
+        local plrg = string.sub(msg:lower(), #prefix + 11)
+        if plrg == "" or plrg == "me" then
+            game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
 			Remind("Ungearbanned yourself.")
-                else 
-                        Ungearban(plrg)
-                end
+        else 
+            Ungearban(plrg)
+        end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'gearban' then
@@ -7927,35 +7927,35 @@ return
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'toolban' then
 		local dasplayer = string.sub(msg:lower(), #prefix + 9)
 		if dasplayer == "" or dasplayer == "me" then
-                        game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+            game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
 			Remind("Gearbanned yourself... but why?")
 			return
 		end 
 		local cplr, player = PLAYERCHECK(dasplayer)
-                if player then
-                        xplayer = player
-                        xplr = cplr
-                        Gearban(xplayer, xplr, 1)
-                else
-                        Remind('Cannot find player with the name: '..dasplayer)
-                end
+        if player then
+            xplayer = player
+            xplr = cplr
+            Gearban(xplayer, xplr, 1)
+        else
+            Remind('Cannot find player with the name: '..dasplayer)
+    	end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cage' then
 		local dasplayer = string.sub(msg:lower(), #prefix + 6)
 		if dasplayer == "" or dasplayer == "me" then
-                        game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
+            game.StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, false)
 			Remind("Gearbanned yourself... but why?")
 			return
 		end 
-                local cplr, player = PLAYERCHECK(dasplayer)
-                if player then
-                        xplayer = player
-                        xplr = cplr
-                        Gearban(xplayer, xplr, 2)
-                else
-                        Remind('Cannot find player with the name: '..dasplayer)
-                end
+        local cplr, player = PLAYERCHECK(dasplayer)
+        if player then
+            xplayer = player
+            xplr = cplr
+            Gearban(xplayer, xplr, 2)
+        else
+            Remind('Cannot find player with the name: '..dasplayer)
+        end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'rail' then
@@ -8817,45 +8817,45 @@ return
      end
 
      if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fakebp' then
-                local gamefolder = game:GetService("Workspace").Terrain[GAMEFOLDER]
-                if not gamefolder:FindFirstChild("PhantomStorage") then
-                            local PStore = Instance.new("Folder")
-                            PStore.Name = "PhantomStorage"
-                            PStore.Parent = gamefolder
-                end
-                local Storage = gamefolder["PhantomStorage"] -- Phantom Storage folder
-                local Phantom_Baseplate = Instance.new("Part")
-                Phantom_Baseplate.BrickColor = BrickColor.new("Bright green")
-                Phantom_Baseplate.Material = Enum.Material.Plastic
-                Phantom_Baseplate.Position = Vector3. new(0, 0.1, 0)
-                Phantom_Baseplate.Size = Vector3. new(1000, 1.2, 1000)
-                Phantom_Baseplate.Anchored = true
-                Phantom_Baseplate.Parent = Storage
+        local gamefolder = game:GetService("Workspace").Terrain[GAMEFOLDER]
+        if not gamefolder:FindFirstChild("PhantomStorage") then
+            local PStore = Instance.new("Folder")
+            PStore.Name = "PhantomStorage"
+            PStore.Parent = gamefolder
+        end
+        local Storage = gamefolder["PhantomStorage"] -- Phantom Storage folder
+        local Phantom_Baseplate = Instance.new("Part")
+        Phantom_Baseplate.BrickColor = BrickColor.new("Bright green")
+        Phantom_Baseplate.Material = Enum.Material.Plastic
+        Phantom_Baseplate.Position = Vector3. new(0, 0.1, 0)
+        Phantom_Baseplate.Size = Vector3. new(1000, 1.2, 1000)
+        Phantom_Baseplate.Anchored = true
+        Phantom_Baseplate.Parent = Storage
 		Remind("Remove the fake baseplate by doing nofakebp.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unfakebp' then
-                game:GetService("Workspace").Terrain[GAMEFOLDER]["PhantomStorage"]:Destroy()
+        game:GetService("Workspace").Terrain[GAMEFOLDER]["PhantomStorage"]:Destroy()
 		Remind("Removed the fake baseplate!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'nofakebp' then
-                game:GetService("Workspace").Terrain[GAMEFOLDER]["PhantomStorage"]:Destroy()
+        game:GetService("Workspace").Terrain[GAMEFOLDER]["PhantomStorage"]:Destroy()
 		Remind("Removed the fake baseplate!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fixcol' then
-                ColFix()
+        ColFix()
 		Remind("Fixed your collisions.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'fixgrav' then
-                GravFix()
+        GravFix()
 		Remind("Fixed your gravity.")
     end
 
      if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'novelo' then
-                NoVelo()
+        NoVelo()
 		Remind("Breaking everyone's velocity...")
      end
 
@@ -8868,7 +8868,7 @@ return
      end
 
      if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'breakvelo' then
-                NoVelo()
+        NoVelo()
 		Remind("Breaking everyone's velocity...")
      end
 
@@ -8880,30 +8880,30 @@ return
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'loopgrab' then
     	if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'loopgrab2' then else
         	admin_stuff.loopgrab = true
-		Remind("Loopgrabbing the pads!")
-	end
+			Remind("Loopgrabbing the pads!")
+		end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unloopgrab' then
-	if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unloopgrab2' then else
-		admin_stuff.loopgrab = false
-		Remind("Stopped loopgrabbing the pads!")
-	end
+		if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unloopgrab2' then else
+			admin_stuff.loopgrab = false
+			Remind("Stopped loopgrabbing the pads!")
+		end
     end
 
      if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fastpads' then
-                FastPads()	
+        FastPads()	
 		Remind("Teleporting to the pads.")
      end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'loopgrab2' then
         admin_stuff.loopgrab2 = true
-	Remind("Loopgrabbing the pads (2)!")
+		Remind("Loopgrabbing the pads (2)!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unloopgrab2' then
         admin_stuff.loopgrab2 = false
-	Remind("Stopped loopgrabbing the pads (2)!")
+		Remind("Stopped loopgrabbing the pads (2)!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'perm' then
@@ -8914,24 +8914,24 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'unperm' then
-	if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unperm2' then else
+		if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unperm2' then else
         	admin_stuff.perm = false
-		Remind("You no longer have a perm pad!")
-	end
+			Remind("You no longer have a perm pad!")
+		end
     end
 
-   if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'perm2' then
+  	if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'perm2' then
         admin_stuff.perm2 = true
-	Remind("You now have a perm pad (2)!")
+		Remind("You now have a perm pad (2)!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unperm2' then
         admin_stuff.perm2 = false
-	Remind("You no longer have a perm pad (2)!")
+		Remind("You no longer have a perm pad (2)!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'allpads' then
-                AllPads()
+        AllPads()
 		Remind("Got all the pads available. To continuously grab all the pads, do loopgrab.")
     end
 
@@ -8939,30 +8939,30 @@ return
         local checker = string.sub(msg:lower(), #prefix + 9)
         local cplr, player = PLAYERCHECK(checker)
         if player then 
-                CheckBackpack(cplr, player)
-		Remind("Check your console by running /console!")
+        	CheckBackpack(cplr, player)
+			Remind("Check your console by running /console!")
         else
-                Remind('Cannot find player with the name: '..checker)
+            Remind('Cannot find player with the name: '..checker)
         end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'gotosky' then
-                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,1000,0)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0,1000,0)
 		Remind("Skydived you!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'sungr' then
-                Chat("ungear me																				all	all")
+        Chat("ungear me																				all	all")
 		Remind("Ungeared yourself... and everyone.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'ungearme' then
-                Chat("ungear me																				all	all")
+        Chat("ungear me																				all	all")
 		Remind("Ungeared yourself... and everyone.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'watermap' then
-                SuperCMD("gear me 236438668")
+        SuperCMD("gear me 236438668")
 		Chat("Do actall then ungear so they don't retract.")
     end
 -- what in the spam
@@ -8987,59 +8987,59 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixpaint' then
-	Remind("Unfortunately, agspureiam updated KAH and now some of the parts have the same name. This command no longer works.")
-	Remind("Fixing paint...")
+		Remind("Unfortunately, agspureiam updated KAH, and now some of the parts have the same name. This command no longer works.")
+		Remind("Fixing paint...")
         FixPaint()
      end
 
    if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'anticrash' then
-        gear_antis.anticrash = true
-	Remind("Anti crash is now enabled.")
+   	    gear_antis.anticrash = true
+		Remind("Anti crash is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unanticrash' then
         gear_antis.anticrash = false
-	Remind("Anti crash is now disabled.")
+		Remind("Anti crash is now disabled.")
     end
 
    if string.sub(msg:lower(), 1, #prefix + 14) == prefix..'emranticrash' then
         crash_settings.emranticrash = true
-	Remind("EMR Anti crash is now enabled.")
+		Remind("EMR Anti crash is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 16) == prefix..'unemranticrash' then
         crash_settings.emranticrash = false
-	Remind("EMR Anti crash is now disabled.")
+		Remind("EMR Anti crash is now disabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antigs' then -- what is this?
         antis.antigrayscale = true
-	Remind("Enabled this anti!")
+		Remind("Enabled this anti!")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unantigs' then 
         antis.antigrayscale = false
-	Remind("Disabled this anti!")
+		Remind("Disabled this anti!")
     end	   
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antipaint' then
         gear_antis.antipaint = true
-	Remind("Anti paint is now enabled.")
+		Remind("Anti paint is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unantipaint' then
         gear_antis.antipaint = false
-	Remind("Anti paint is now disabled.")
+		Remind("Anti paint is now disabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antigear' then
         gear_antis.antigear = true
-	Remind("Anti gear is now enabled.")
+		Remind("Anti gear is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantigear' then
         gear_antis.antigear = false
-	Remind("Anti gear is now disabled.")
+		Remind("Anti gear is now disabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'allowgb' then
@@ -9063,23 +9063,23 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'dbwait' then
-	da_wait = tonumber(string.sub(msg:lower(), #prefix + 8))
-	Remind("Debounce wait set.")
+		da_wait = tonumber(string.sub(msg:lower(), #prefix + 8))
+		Remind("Debounce wait set.")
    end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antigb' then
         gear_antis.antigb = true
-	Remind("Anti gearban is now enabled.")
+		Remind("Anti gearban is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unantigb' then
         gear_antis.antigb = false
-	Remind("Anti gearban is now disabled.")
+		Remind("Anti gearban is now disabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'antiiv' then
         gear_antis.antiivory = true
-	Remind("Anti ivory is now enabled.")
+		Remind("Anti ivory is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'unantiv' then
@@ -9098,52 +9098,52 @@ return
     end	
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'antiattach' then
-        	ws_antis.antiattach = true
+        ws_antis.antiattach = true
 		Remind("Anti attach is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'unantiattach' then
-        	ws_antis.antiattach = false
+        ws_antis.antiattach = false
 		Remind("Anti attach is now disabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antifling' then
         antis.antifling = true
-	Remind("Anti fling is now enabled.")
+		Remind("Anti fling is now enabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 11) == prefix..'unantifling' then
         antis.antifling = false
-	Remind("Anti fling is now disabled.")
+		Remind("Anti fling is now disabled.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'noblt' then
         gear_antis.noblt = true
-	Remind("Players can no longer use some tools since they are annoying.")
+		Remind("Players can no longer use some tools since they are annoying.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'unnoblt' then
         gear_antis.noblt = false
-	Remind("Players can now use the annoying tools.")
+		Remind("Players can now use the annoying tools.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'antiray' then
         gear_antis.antiraygun = true
-	Remind("Players can no longer use the ray gun.")
+		Remind("Players can no longer use the ray gun.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'unantiray' then
         gear_antis.antiraygun = false
-	Remind("Players can now use the ray gun.")
+		Remind("Players can now use the ray gun.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'novoid' then
-                workspace.FallenPartsDestroyHeight = 0/0
+        workspace.FallenPartsDestroyHeight = 0/0
 		Remind("Void removed.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'fixvoid' then
-                workspace.FallenPartsDestroyHeight = -500
+        workspace.FallenPartsDestroyHeight = -500
 		Remind("Void returned.")
     end
 
@@ -9158,42 +9158,42 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'pinglogs' then
         player_relate.PingLogs = true
-	Remind("You'll get pinged when someone uses logs.")
+		Remind("You'll get pinged when someone uses logs.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unpinglogs' then
         player_relate.PingLogs = false
-	Remind("You'll no longer get pinged when someone uses logs.")
+		Remind("You'll no longer get pinged when someone uses logs.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'antilogs' then
         player_relate.AntiLogs = true
-	Remind("Auto-spamming the logs now when someone tries looking.")
+		Remind("Auto-spamming the logs now when someone tries looking.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unantilogs' then
         player_relate.AntiLogs = false
-	Remind("No longer auto-spamming the logs now when someone tries looking.")
+		Remind("No longer auto-spamming the logs now when someone tries looking.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'pingcsys' then
         player_relate.PingCsystem = true
-	Remind("You'll get pinged when someone uses /c system or /w.")
+		Remind("You'll get pinged when someone uses /c system or /w.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'unpingcsys' then
         player_relate.PingCsystem = false
-	Remind("You'll no longer get pinged when someone uses /c system or /w.")
+		Remind("You'll no longer get pinged when someone uses /c system or /w.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 10) == prefix..'noobdetect' then
         player_relate.noobdetect = true
-	Remind("You'll get pinged when someone uses baby commands or wrong prefixes")
+		Remind("You'll get pinged when someone uses baby commands or wrong prefixes.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 12) == prefix..'noobdetect' then
         player_relate.noobdetect = false
-	Remind("You'll no longer get pinged when someone uses baby commands or wrong prefixes")
+		Remind("You'll no longer get pinged when someone uses baby commands or wrong prefixes.")
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antiblind' then
@@ -9206,7 +9206,6 @@ return
 	Remind("Turned this anti off for you!")
     end
 
--- !! I WILL TRY TO FIX THE ANTI SYSTEM SO IT CAN BE INDIVIDUAL PLAYERS FOR EVERYTHING. ALSO, I WILL FIX THE VARIABLE NAMES !! --
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'antiaddon' then
         local args = string.split(msg, " ")
         if args[2] == "me" then
