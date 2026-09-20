@@ -175,7 +175,6 @@ local settings = {
 
 getgenv().espsettings = false -- ESP toggle
 getgenv().aimlock = false -- Aimlock toggle
-getgenv().risk_retard = true -- might get you banned, the "1" should prevent but untested
 
 -- arrest aura wl
 aa_wl = {"ScriptingProgrammer", "kohlslitedev"}
@@ -251,10 +250,8 @@ local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
 
-if getgenv().risk_retard then
-	TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
-	meleeEvent = ReplicatedStorage.meleeEvent
-end
+-- local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
+-- local meleeEvent = ReplicatedStorage.meleeEvent
 
 local TeamList = {"Criminals", "Inmates", "Guards"}
 
@@ -1136,9 +1133,7 @@ local function IsArrestable(plr)
     return true
 end
 
-if getgenv().risk_retard then
-	local aremote = ReplicatedStorage.Remotes.ArrestPlayer
-end
+-- aremote = ReplicatedStorage.Remotes.ArrestPlayer
 
 RunService.Heartbeat:Connect(function()
     local root = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
