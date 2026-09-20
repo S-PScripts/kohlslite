@@ -175,7 +175,7 @@ local settings = {
 
 getgenv().espsettings = false -- ESP toggle
 getgenv().aimlock = false -- Aimlock toggle
-getgenv().risk_retard = false -- might get you banned, the "1" should prevent but untested
+getgenv().risk_retard = true -- might get you banned, the "1" should prevent but untested
 
 -- arrest aura wl
 aa_wl = {"ScriptingProgrammer", "kohlslitedev"}
