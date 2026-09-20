@@ -252,8 +252,8 @@ local Camera = workspace.Camera
 local Teams = game:GetService("Teams")
 
 if getgenv().risk_retard then
-	local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
-	local meleeEvent = ReplicatedStorage.meleeEvent
+	TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
+	meleeEvent = ReplicatedStorage.meleeEvent
 end
 
 local TeamList = {"Criminals", "Inmates", "Guards"}
