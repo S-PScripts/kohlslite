@@ -715,7 +715,7 @@ local function findPartialPlayer(name)
     return nil
 end
 
-local function serverban()
+local function serverban(tcplayer)
 	if currentConnection then
         currentConnection:Disconnect()
         currentConnection = nil
@@ -751,7 +751,7 @@ local function serverban()
     local wheelsFolder = car:FindFirstChild("Wheels")
     local wheel = wheelsFolder and wheelsFolder:GetChildren()[4]
 
-    local targetPlayer = findPartialPlayer(UserInput.Text)
+    local targetPlayer = tcplayer
     local targetChar = targetPlayer and targetPlayer.Character
 
     if not targetChar or not targetChar:FindFirstChild("HumanoidRootPart") or not wheel then
@@ -2160,7 +2160,7 @@ TeleportTab:CreateButton({
 TeleportTab:CreateButton({
     Name = "[X] Attempt Serverban",
     Callback = function()
-		serverban()
+		serverban(tcplayer)
     end,
 })
 
