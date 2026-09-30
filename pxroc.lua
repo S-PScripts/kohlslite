@@ -43,6 +43,7 @@ local settings = {
 	-- Spam open doors (must be guard / have a keycard)
 --	sodoors = false,
 
+	--[[
 	-- Kill aura
 	killaura = false,
 	killaura_radius = 10,
@@ -57,7 +58,7 @@ local settings = {
 	arrestaura_radius = 15,
 	aatc = false, -- arrest aura team check
 	aatype = "Both", -- what players it can arrest
-
+]]
 	-- Stop tases from disabling the reset button
 	enablere = true,
 
