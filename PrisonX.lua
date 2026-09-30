@@ -1210,14 +1210,10 @@ UIS.InputBegan:Connect(function(input, gp)
     if gp then return end -- ignore typing in chat
 
     if input.KeyCode == Enum.KeyCode.P then
-        if canTeleport() then
             teleportTo("nexus")
-        end
 
     elseif input.KeyCode == Enum.KeyCode.L then
-        if canTeleport() then
             teleportTo("criminal_base")
-        end
 
     elseif input.KeyCode == Enum.KeyCode.RightShift then
         getgenv().aimlock.Aimbot = not getgenv().aimlock.Aimbot
@@ -1758,9 +1754,7 @@ local function handleCommand(msg)
         local teleportId = TeleportAliases[cln] or cln:gsub(" ", "_")
         if not Teleports[teleportId] then Notify("Invalid location: " .. ln) return end
 		
-    	if canTeleport() then
-			teleportTo(teleportId)
-		end
+		teleportTo(teleportId)
     end
 
 	if lowerMsg:sub(1, #prefix + 3) == prefix.."gun" then
@@ -2116,9 +2110,7 @@ TeleportTab:CreateButton({
             return
         end
 
-        if canTeleport() then
-            teleportTo(selectedTeleport)
-        end
+        teleportTo(selectedTeleport)
     end,
 })
 
@@ -2150,10 +2142,7 @@ TeleportTab:CreateButton({
 TeleportTab:CreateButton({
     Name = "Go",
     Callback = function()
-		teleport_able = canTeleport()
-		if teleport_able then
-			tptop(tcplayer)
-		end
+		tptop(tcplayer)
     end,
 })
 
