@@ -1,6 +1,6 @@
 -- Check this out: https://gist.github.com/S-PScripts/7056888427287e0667047c0b0a4cc827
 
--- PrisonX v1.25 by TS2021
+-- PrisonX v1.3 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
 -- Discontinued
 
@@ -13,29 +13,12 @@ Trespassing/Hostile Player Detector (-htdetect / -unhtdetect)
 Anti Arrest (-antiar / -unantiar)
 Anti Tase (-antitase / -unantitase)
 
-Kill Aura (-killaura / -unkillaura)
-Kill Aura Radius (-karadius (NUMBER))
-Kill Aura Team Check + Options
-Kill Aura Whitelist (-kawl / -unkawl)
-Kill Aura Visibility (-kasphere / -unkasphere)
-
-Arrest Aura (-araura/-unaraura)
-Arrest Aura Radius (-aaradius)
-Arrest Aura Team Check + Options
-Arrest Aura Whitelist (-aawl / -unaawl)
-
-Auto Respawn (spawn in the same place upon death) (-autore / -unautore)
-Quick Respawn (does a neat trick to spawn you faster for inmates/guards when possible, part of auto respawn)
-
 Fast Guns (you can also change the rate, default is 0) (-fastguns / -unfastguns / -firerate)
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
 
 Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
 Destroy doors (-ddoors) - CLIENT-SIDE!
 Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors) - Patched
-
-Toilet Breaker (must have hammer) (-btoilets)
-Auto Toilet Breaker (-abtoilets / -unabtoilets)
 
 Remove jump cooldown (anti-jump removal) (-rjc)
 Auto anti-jump removal (-aajr/-unajr)
@@ -57,18 +40,10 @@ Auto Sprint / Speed Changer
 
 Auto Keycard (-akeycard/-unakeycard)
 
-Credits to github.com/tomatotxt for some stuff
-Credits to github.com/NewMatheusDC for some of the GUI
-]]
+Fling/Kick any player (soon)
 
---[[
-MISSING FEATURES:
--> More Silent Aim/Aimlock Features
-   (use https://scriptblox.com/script/Prison-Life-Silent-Aim-And-ESP-With-UI-SRC-78055)
--> Invisibility 
-   (use https://scriptblox.com/script/Prison-Life-Keyless-72569 or https://scriptblox.com/script/MP5-Prison-Life-PLH-75263 or https://scriptblox.com/script/Prison-Life-Best-PL-Script-UNDETECTED-SILENT-AIM-INSTANT-KILL-AND-MORE-72300)
--> C4 ESP [coming not very soon]
-   (use https://scriptblox.com/script/Prison-Life-Silent-Aim-And-ESP-With-UI-SRC-78055)
+Credits to github.com/tomatotxt for the initial code
+Credits to github.com/NewMatheusDC for a bit of the GUI
 ]]
 
 -- Infinite yield for speed, jump power
@@ -94,9 +69,6 @@ local settings = {
 	-- Remove tased effects
     antitase = true,
 
-	-- Respawn in your previous position if you die (sucks because of tp update)
-    autorespawn = false,
-
 	-- Auto guns
 	autoguns = false,
 	autoguns_list = {},
@@ -114,30 +86,12 @@ local settings = {
 	-- Spam open doors (must be guard / have a keycard)
 --	sodoors = false,
 
-	-- Kill aura
-	killaura = false,
-	killaura_radius = 10,
-	killaura_sphere = false, -- visual sphere
-	
-	katc = false, -- team check
-	katype = "All", -- target types
-	katype_allowed = {}, -- table for allowed teams
-
-	-- Arrest aura
-	arrestaura = false,
-	arrestaura_radius = 15,
-	aatc = false, -- arrest aura team check
-	aatype = "Both", -- what players it can arrest
-
 	-- Stop tases from disabling the reset button
 	enablere = true,
 
 	-- Auto anti-jump removal
 	aajr = true,
 	
-	-- Auto break toilets when you have a hammer
-	abtoilets = false,
-
 	-- Auto keycard
 	akeycard = true,
 
@@ -175,12 +129,6 @@ local settings = {
 
 getgenv().espsettings = false -- ESP toggle
 getgenv().aimlock = false -- Aimlock toggle
-
--- arrest aura wl
-aa_wl = {"ScriptingProgrammer", "kohlslitedev"}
-
--- kill aura wl
-ka_wl = {"ScriptingProgrammer", "kohlslitedev"}
 
 -- Notifications
 local StarterGui = game:GetService("StarterGui")
@@ -901,279 +849,6 @@ end
 
 ----------------------------------------------------------------------------------------
 
--- kill aura whitelist
-function kill_aura_wl(lcplayer, lcplayerN)
-        if not lcplayer then
-            warn("No player selected")
-            return
-        end
-
-        local playerName = lcplayerN
-        local index = table.find(ka_wl, playerName)
-
-        if index then
-            table.remove(ka_wl, index)
-            print(playerName .. " unwhitelisted from kill aura.")
-			Notify(playerName .. " unwhitelisted from kill aura.")
-        else
-            table.insert(ka_wl, playerName)
-            print(playerName .. " whitelisted from kill aura.")
-			Notify(playerName .. " whitelisted from kill aura.")
-        end
-end
-
--- arrest aura whitelist
-function arrest_aura_wl(lcplayer, lcplayerN)
-        if not lcplayer then
-            warn("No player selected")
-            return
-        end
-
-        local playerName = lcplayerN
-        local index = table.find(aa_wl, playerName)
-
-        if index then
-            table.remove(aa_wl, index)
-            print(playerName .. " unwhitelisted from arrest aura.")
-			Notify(playerName .. " unwhitelisted from arrest aura.")
-        else
-            table.insert(aa_wl, playerName)
-            print(playerName .. " whitelisted from arrest aura.")
-			Notify(playerName .. " whitelisted from arrest aura.")
-        end
-end
-
-----------------------------------------------------------------------------------------
-
--- Kill aura (PATCHED)
-katypes = {
-	"All",
-	"Criminals",
-	"Inmates",
-	"Guards",
-	"Criminals + Inmates",
-	"Criminals + Guards",
-	"Inmates + Guards",
-	"Other Teams"
-}
-
-local function UpdateKillableTeams(v)
-  --  print("UpdateKillableTeams called with:", v)
-    local lteam = LocalPlayer.Team.Name
-    settings.katype = v
-
-    local allowed = {}
-
-    if settings.katype == "All" then
-        allowed = {"Criminals", "Inmates", "Guards"}
-    elseif settings.katype == "Criminals" then
-        allowed = {"Criminals"}
-    elseif settings.katype == "Inmates" then
-        allowed = {"Inmates"}
-    elseif settings.katype == "Guards" then
-        allowed = {"Guards"}
-    elseif settings.katype == "Criminals + Inmates" then
-        allowed = {"Criminals", "Inmates"}
-    elseif settings.katype == "Criminals + Guards" then
-        allowed = {"Criminals", "Guards"}
-    elseif settings.katype == "Inmates + Guards" then
-        allowed = {"Inmates", "Guards"}
-    elseif settings.katype == "Other Teams" then
-        if lteam == "Inmates" then allowed = {"Criminals", "Guards"}
-        elseif lteam == "Criminals" then allowed = {"Inmates", "Guards"}
-        elseif lteam == "Guards" then allowed = {"Criminals", "Inmates"}
-        end
-  --  else
-  --      print("ERROR: Unknown katype!", settings.katype)
-    end
-
-    settings.katype_allowed = allowed
-end
-
-local function IsKillable(plr)
-	local char = plr.Character
-	
-    -- Can't kill yourself
-    if plr == LocalPlayer then
-        return false
-    end
-
-	-- do not kill innocent inmates as a guard
-    if LocalPlayer.Team.Name == "Guards" and plr.Team.Name == "Inmates" then
-		if not char:GetAttribute("Hostile") then
-			return false
-		end
-	end
-
-    -- If team check is disabled, anyone else is killable
-    if not settings.katc then
-		-- print("Team check is disabled, killing")
-        return true
-    end
-
-    -- Target's team
-    local ttname = plr.Team.Name
-	-- print("Target team is".. ttname)
-    for _, teamName in ipairs(settings.katype_allowed) do
-		-- print("Finding " .. teamName)
-        if ttname == teamName then
-			-- print("Return it")
-            return true
-        end
-    end
-end
-
-settings.katype = settings.katype or "All"
-UpdateKillableTeams(settings.katype)
-
--- Sphere visual
-local sphere = Instance.new("Part")
-sphere.Shape = Enum.PartType.Ball
-sphere.Size = Vector3.new(settings.killaura_radius * 2, settings.killaura_radius * 2, settings.killaura_radius * 2)
-sphere.Anchored = true
-sphere.CanCollide = false
-sphere.Material = Enum.Material.ForceField
-sphere.Color = Color3.fromRGB(255, 0, 50)
-sphere.Transparency = settings.killaura_sphere and 0.6 or 1
-sphere.Parent = workspace
-
-RunService.Heartbeat:Connect(function()
-    if not settings.killaura then
-        sphere.Transparency = 1
-        return
-    end
-
-    local char = LocalPlayer.Character
-    local hrp = char and char:FindFirstChild("HumanoidRootPart")
-    if not hrp then return end
-
-    -- Update sphere visuals
-    sphere.Size = Vector3.new(settings.killaura_radius * 2, settings.killaura_radius * 2, settings.killaura_radius * 2)
-    sphere.Transparency = settings.killaura_sphere and 0.6 or 1
-    sphere.Position = hrp.Position
-
-    -- Get targets in radius
-    local touching = workspace:GetPartBoundsInRadius(hrp.Position, settings.killaura_radius)
-    local hitList = {}
-
-    for _, part in ipairs(touching) do
-        local model = part.Parent
-        local hum = model and model:FindFirstChild("Humanoid")
-        if hum then
-            local targetPlayer = Players:GetPlayerFromCharacter(model)
-            if targetPlayer and targetPlayer ~= player and not hitList[targetPlayer] then
-				if table.find(ka_wl, targetPlayer.Name) then
-					--
-				else
-					if not IsKillable(targetPlayer) then
-						--
-					else
-						hitList[targetPlayer] = true
-                		meleeEvent:FireServer(targetPlayer, 1)
-					end
-            	end
-			end
-        end
-    end
-end)
-
-----------------------------------------------------------------------------------------
-
--- Arrest Aura (PATCHED)
-aatypes = {
-	"Criminals",
-	"Inmates",
-	"Both"
-}
-
-local function IsArrestable(plr)
-	local char = plr.Character
-	
-    -- Can't arrest yourself
-    if plr == LocalPlayer then
-        return false
-    end
-
-    -- Must be a Guard to arrest
-    if LocalPlayer.Team.Name ~= "Guards" then
-        return false
-    end
-
-    -- Can't arrest other Guards
-    if plr.Team.Name == "Guards" then
-        return false
-    end
-
-	-- Can't arrest innocent Inmates
-    if plr.Team.Name == "Inmates" and not char:GetAttribute("Trespassing") then
-        return false
-    end
-	
-    -- If team check is disabled, anyone else is arrestable
-    if not settings.aatc then
-        return true
-    end
-
-    -- Check based on aatype setting
-    local ttname = plr.Team.Name
-    if settings.aatype == "Criminals" then
-        if ttname ~= "Criminals" then
-            return false
-        end
-    elseif settings.aatype == "Inmates" then
-        if ttname ~= "Inmates" then
-            return false
-        end
-    elseif settings.aatype == "Both" then
-        --
-    else
-        return false
-    end
-	
-    return true
-end
-
--- aremote = ReplicatedStorage.Remotes.ArrestPlayer
-
-RunService.Heartbeat:Connect(function()
-    local root = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-    if not root then return end
-    if not settings.arrestaura  then return end
-		
-    for _, plr in Players:GetPlayers() do
-        if plr == LocalPlayer then
-			--
-		else
-        	local char = plr.Character
-        	if not char then
-				--
-			else
-				if table.find(aa_wl, plr.Name) then
-					--
-				else 
-					if not IsArrestable(plr) then
-						--
-					else
-						local hrp = char:FindFirstChild("HumanoidRootPart")
-        				local hum = char:FindFirstChild("Humanoid")
-        				if not hrp or not hum or hum.Health <= 0 then 
-							--
-						else
-        					if (root.Position - hrp.Position).Magnitude <= settings.arrestaura_radius then
-            					task.spawn(function()
-                					pcall(aremote.InvokeServer, aremote, plr, 1)
-            					end)
-							end
-						end
-					end
-				end
-        	end
-		end
-    end
-end)
-
-----------------------------------------------------------------------------------------
-
 function tpto(args)
     LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = args
 end
@@ -1224,7 +899,7 @@ task.spawn(function()
 			end
 		end
 
-		-- sometimes you can fall under the map, and you can't escape bc of autorespawn unless you turn it off
+		-- sometimes you can fall under the map
 		if antivoid then
 			pcall(function()
         		if LocalPlayer.Character then
@@ -1301,37 +976,6 @@ task.spawn(function()
 		end
     end
 end)
-
-----------------------------------------------------------------------------------------
-
--- Toilet breaker
-local hhe = false
-function BreakAllToilets()
-	local foundToilets = false
-    
-	for _, toilet in pairs(workspace:GetDescendants()) do
-        if toilet.Name == "Toilet" and toilet:IsA("Model") then
-            foundToilets = true
-            for i = 1, 15 do
-                meleeEvent:FireServer(toilet, 1, 1)
-            end
-        end
-	end
-    
-	return foundToilets
-end
-
-local function hammer_check_t()
-    if not LocalPlayer.Character then return end
-    
-    local hrn = LocalPlayer.Character:FindFirstChild("Hammer") ~= nil
-    
-    if hrn and not hhe then
-        BreakAllToilets()
-    end
-    
-    hhe = hrn
-end
 
 ----------------------------------------------------------------------------------------
 
@@ -1527,7 +1171,7 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 					repeat task.wait() until gwak
 				end
 				SwitchToCriminalAndReturn(false, cpos) -- really slow
-			elseif settings.autorespawn == false then
+			--elseif settings.autorespawn == false then
                -- tpto(cpos)
 			end
 
@@ -1556,214 +1200,6 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			task.delay(0.2, fixTools)
 		end
 	end)
-end)
-
-----------------------------------------------------------------------------------------
-
-local TELEPORT_COOLDOWN = 6 -- shame
-local TELEPORT_COOLDOWN2 = 12.5 -- shame
-local lastTeleport = 0
-
--- teleport time check
-local function canTeleport()
-    local now = tick()
-    local delta = now - lastTeleport
-    if delta < TELEPORT_COOLDOWN then
-        local remaining = TELEPORT_COOLDOWN - delta
-        Notify("Wait " .. string.format("%.1f", remaining) .. "s before teleporting again.")
-        return false
-    end
-    lastTeleport = now
-    return true
-end
-
--- Cooldown tracking
-if not _G.TeamCooldown then
-    _G.TeamCooldown = 0
-end
-
--- Quick respawn tracking
-if not _G.CanQuickRespawn then
-    _G.CanQuickRespawn = true
-end
-local cd_dur = 10
-local coolingdown = false
-
-function _G.ResetCooldown()
-	if not coolingdown then
-		coolingdown = true
-		_G.CanQuickRespawn = false
-		task.wait(cd_dur)
-		_G.CanQuickRespawn = true
-		coolingdown = false
-	end
-end
-
--- Store last death position and camera
-local lastDeathCFrame = nil
-local lastCameraCFrame = nil
-
--- Helper to teleport player
-local function Teleport(TargetCFrame, Character)
-    if not Character then Character = LocalPlayer.Character end
-    if not Character then return end
-    local RootPart = Character:WaitForChild("HumanoidRootPart")
-    RootPart.CFrame = TargetCFrame
-    --print("Teleport Success!")
-end
-
--- Check if team can be switched (cooldown)
-local function CanSwitchTeam()
-    local now = os.time()
-    if now < _G.TeamCooldown then
-        local remaining = _G.TeamCooldown - now
-        Notify("You will be able to switch teams in " .. remaining .. " seconds!")
-        return false
-    end
-    return true
-end
-
--- Core team switch logic
-local function SetTeam(targetTeam, skipCooldownCheck)
-    -- Skip cooldown if switching to Criminals
-    if targetTeam == Teams.Criminals then
-        skipCooldownCheck = true
-    end
-
-    -- Only respect cooldown for manual switches
-    if not skipCooldownCheck then
-        if not CanSwitchTeam() then return end
-    end
-
-    local current = LocalPlayer.Team
-
-	local function switch(team)
-    	repeat
-			if TeamEvent then
-				TeamEvent:InvokeServer(team, 1)
-			end
-        	task.wait(0.2)
-    	until LocalPlayer.Team == team
-	end
-
-	local char = LocalPlayer.Character
-    if not char then return end
-    local hrp = char:WaitForChild("HumanoidRootPart")
-	local ocf = hrp.CFrame 
-	
-    if current == Teams.Inmates then
-        if targetTeam == Teams.Guards then
-            switch(Teams.Neutral)
-            switch(Teams.Guards)
-			tpto(ocf)
-        elseif targetTeam == Teams.Criminals then
-            SwitchToCriminalAndReturn(false, ocf)
-        end
-    elseif current == Teams.Guards then
-        if targetTeam == Teams.Inmates then
-            switch(Teams.Neutral)
-            switch(Teams.Inmates)
-			tpto(ocf)
-        elseif targetTeam == Teams.Criminals then
-            switch(Teams.Neutral)
-            switch(Teams.Inmates)
-			fixcam()
-			SwitchToCriminalAndReturn(false, ocf)
-        end
-    elseif current == Teams.Criminals then
-        if targetTeam == Teams.Inmates then
-            switch(Teams.Neutral)
-            switch(Teams.Inmates)
-			tpto(ocf)
-        elseif targetTeam == Teams.Guards then
-            switch(Teams.Neutral)
-            switch(Teams.Guards)
-			tpto(ocf)
-        end
-    elseif current == Teams.Neutral then
-        switch(targetTeam) -- ??
-    end
-
-    -- Apply cooldown for non-criminal switches
-    if targetTeam ~= Teams.Criminals and (targetTeam == Teams.Inmates or targetTeam == Teams.Guards) then
-        _G.TeamCooldown = os.time() + 10
-        task.spawn(_G.ResetCooldown)
-    end
-
-    fixcam()
-end
-
-local function ChangeTeam(targetTeam)
-    SetTeam(targetTeam)
-    task.spawn(_G.ResetCooldown)
-end
-
--- Auto respawn handling
-LocalPlayer.CharacterAdded:Connect(function(char)
-    local hrp = char:WaitForChild("HumanoidRootPart")
-    local hum = char:WaitForChild("Humanoid")
-
-    -- Teleport to last stored position if it exists
-    if lastDeathCFrame then
-		if settings.autoguns then
-			-- print("nasser balls")
-		else
-			if settings.autorespawn then
-				if fat or LocalPlayer.Team.Name == "Criminals" then 
-					task.wait(TELEPORT_COOLDOWN2) 
-				else 
-					task.wait(TELEPORT_COOLDOWN)
-				end
-				hrp.CFrame = lastDeathCFrame
-			end
-		end
-    end
-
-    hum.Died:Connect(function()
-        if settings.autorespawn == false then return end
-
-        if hrp then
-            lastDeathCFrame = hrp.CFrame
-        end
-
-		if TeamEvent then
-        if _G.CanQuickRespawn and os.time() >= _G.TeamCooldown then
-            _G.CanQuickRespawn = false
-            task.spawn(function()
-                local currentTeam = LocalPlayer.Team
-                if currentTeam == Teams.Inmates then
-                    repeat task.wait() 
-                        TeamEvent:InvokeServer(Teams.Neutral, 1)
-                    until LocalPlayer.Team == Teams.Neutral
-
-                    repeat task.wait() 
-                        TeamEvent:InvokeServer(Teams.Inmates, 1)
-                    until LocalPlayer.Team == Teams.Inmates
-                    fixcam()
-                elseif currentTeam == Teams.Guards then
-                    repeat task.wait() 
-                        TeamEvent:InvokeServer(Teams.Neutral, 1)
-                    until LocalPlayer.Team == Teams.Neutral
-
-                    repeat task.wait() 
-                        TeamEvent:InvokeServer(Teams.Guards, 1)
-                    until LocalPlayer.Team == Teams.Guards
-                    fixcam()
-                elseif currentTeam == Teams.Criminals then
-                    Notify("Quick respawn is not available for criminals!") -- the process would be too slow, faster to just wait
-					tring = false
-    				fugging = false
-                end
-                _G.CanQuickRespawn = true
-            end)
-        end
-
-		if LocalPlayer.Team == Teams.Criminals then 
-			tring = false 
-			fugging = false
-		end
-		end
-    end)
 end)
 
 ----------------------------------------------------------------------------------------
@@ -2002,22 +1438,6 @@ local function touch(hb)
     firetouchinterest(kcopener, hb, 1)
 end
 
-game:GetService("RunService").Heartbeat:Connect(function()
-	--[[ if settings.sodoors then
-    	if Character.Humanoid.Health > 0 then
-        	for i, v in pairs(Doors:GetDescendants()) do
-            	if v.Name == "hitbox" then
-                	task.spawn(touch, v)
-            	end
-        	end
-		end
-    end ]]
-
-	if settings.abtoilets then
-		hammer_check_t()
-	end
-end)
-
 -- stop fence top killing you
 function ukfence()
 	for _, fence in pairs(workspace.Prison_Fences:GetDescendants()) do
@@ -2102,15 +1522,15 @@ RunService.Heartbeat:Connect(function()
         end
 
         -- Teleport back once after picking up guns
-		if settings.autorespawn == false then
+		--if settings.autorespawn == false then
         	if pickedGuns > 0 then
             	tpto(localOldHRP)
         	end
-		else
+		--[[ else
 			if pickedGuns > 0 then
             	hrp.CFrame = lastDeathCFrame
 			end
-		end
+		end ]]
 
        gwak = true
     end
@@ -2364,117 +1784,6 @@ local function handleCommand(msg)
         return
     end
 
-	if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."aawl" then
-    	local parts = lowerMsg:split(" ")
-    	local targetName = parts[2]
-    	if targetName then
-        	local player = PLAYERCHECK(targetName, true)
-        	if player then
-            	if not table.find(aa_wl, player.Name) then
-                	table.insert(aa_wl, player.Name)
-                	Notify(player.Name.." added to Arrest Aura Whitelist.")
-					print(player.Name.." added to Arrest Aura Whitelist.")
-            	else
-                	Notify(player.Name.." is already whitelisted.")
-					print(player.Name.." is already whitelisted.")
-            	end
-        	else
-            	Notify("Player not found:", targetName)
-        	end
-    	else
-        	Notify("No player specified.")
-   	 	end
-	end
-
-	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."unaawl" then
-    	local parts = lowerMsg:split(" ")
-    	local targetName = parts[2]
-    	if targetName then
-        	local player = PLAYERCHECK(targetName, true)
-        	if player then
-            	local index = table.find(aa_wl, player.Name)
-            	if index then
-                	table.remove(aa_wl, index)
-                	Notify(player.Name.." removed from Arrest Aura whitelist.")
-					print(player.Name.." removed from Arrest Aura whitelist.")
-            	else
-                	Notify(player.Name.." is not in the whitelist.")
-					print(player.Name.." is not in the whitelist.")
-            	end
-        	else
-            	Notify("Player not found:", targetName)
-        	end
-    	else
-        	Notify("No player specified.")
-   	 	end
-	end
-
-
-	if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."kawl" then
-    	local parts = lowerMsg:split(" ")
-    	local targetName = parts[2]
-    	if targetName then
-        	local player = PLAYERCHECK(targetName, true)
-        	if player then
-            	if not table.find(ka_wl, player.Name) then
-                	table.insert(ka_wl, player.Name)
-                	Notify(player.Name.." added to Kill Aura Whitelist.")
-					print(player.Name.." added to Kill Aura Whitelist.")
-            	else
-                	Notify(player.Name.." is already whitelisted.")
-					print(player.Name.." is already whitelisted.")
-            	end
-        	else
-            	Notify("Player not found:", targetName)
-        	end
-    	else
-        	Notify("No player specified.")
-   	 	end
-	end
-
-	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."unkawl" then
-    	local parts = lowerMsg:split(" ")
-    	local targetName = parts[2]
-    	if targetName then
-        	local player = PLAYERCHECK(targetName, true)
-        	if player then
-            	local index = table.find(ka_wl, player.Name)
-            	if index then
-                	table.remove(ka_wl, index)
-                	Notify(player.Name.." removed from Kill Aura whitelist.")
-					print(player.Name.." removed from Kill Aura Whitelist.")
-            	else
-                	Notify(player.Name.." is not in the whitelist.")
-				    print(player.Name.." is not in the whitelist.")
-            	end
-        	else
-            	Notify("Player not found:", targetName)
-        	end
-    	else
-        	Notify("No player specified.")
-   	 	end
-	end
-	
-	if string.sub(lowerMsg, 1, #prefix + 4) == prefix.."team" then
-    	local parts = lowerMsg:split(" ")
-    	local teamArg = parts[2]
-    	if not teamArg then return end
-
-    	if teamArg == "criminals" or teamArg == "crims" or teamArg == "crim" or teamArg == "criminal" then
-        	ChangeTeam(Teams.Criminals)
-    	elseif teamArg == "inmates" or teamArg == "inmate" or teamArg == "prisoner" or teamArg == "prisoners" then
-        	ChangeTeam(Teams.Inmates)
-    	elseif teamArg == "guards" or teamArg == "guard" then
-        	if #Teams.Guards:GetPlayers() > 7 then
-            	Notify("The team is full, cannot join!")
-        	else
-            	ChangeTeam(Teams.Guards)
-        	end
-    	else
-        	Notify("Unknown team:", teamArg)
-    	end
-	end
-
     if string.sub(lowerMsg, 1, #prefix + 2) == prefix.."iy" then
         loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
     end
@@ -2548,26 +1857,6 @@ local function handleCommand(msg)
 		workspace.TeamIndicators:Destroy()
         Notify("Removed team indicators.")
     end
-	
-	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."kasphere" then
-        settings.killaura_sphere = true
-        Notify("Kill aura sphere visible.")
-    end
-
-    if string.sub(lowerMsg, 1, #prefix + 10) == prefix.."unkasphere" then
-        settings.killaura_sphere = false
-        Notify("Kill aura sphere invisible.")
-    end
-
-    if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."autore" then
-        settings.autorespawn = true
-        Notify("Enabled auto-respawn.")
-    end
-
-    if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."unautore" then
-        settings.autorespawn = false
-        Notify("Disabled auto-respawn.")
-    end
 
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."akeycard" then
 		settings.akeycard = true
@@ -2593,18 +1882,6 @@ local function handleCommand(msg)
 		local parts = lowerMsg:split(" ")
 		settings.auto_fgrate = tonumber(parts[2])
 		Notify("Firerate of all your guns will now be "..settings.auto_fgrate..".")
-	end
-
-	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."karadius" then
-		local parts = lowerMsg:split(" ")
-		settings.killaura_radius = tonumber(parts[2])
-		Notify("Kill aura will now have radius "..settings.killaura_radius..".")
-	end
-
-	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."aaradius" then
-		local parts = lowerMsg:split(" ")
-		settings.arrestaura_radius = tonumber(parts[2])
-		Notify("Arrest aura will now have radius "..settings.arrestaura_radius..".")
 	end
 
     if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."pkf" then
@@ -2640,11 +1917,6 @@ local function handleCommand(msg)
     	settings.sodoors = false
 		Notify("No longer spam opening doors.")
 	end ]]
-
-	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."btoilets" then
-		hammer_check_t()
-		Notify("Toilets broken (assuming you had a hammer equipped).")
-	end
 
 	if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."rjc" then
 		ajr()
@@ -2683,16 +1955,6 @@ local function handleCommand(msg)
 			game.Workspace["Prison_Fences"]["gate"]:Destroy()
 			Notify("Gates destroyed!")
 		end)
-	end
-
-	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."abtoilets" then
-    	settings.abtoilets = true
-		Notify("Auto breaking toilets (have hammer equipped for this to work).")
-	end
-
-	if string.sub(lowerMsg, 1, #prefix + 11) == prefix.."unabtoilets" then
-    	settings.abtoilets = false
-		Notify("No longer auto breaking toilets.")
 	end
 
 	if string.sub(lowerMsg, 1, #prefix + 6) == prefix.."htrees" then
@@ -2762,37 +2024,6 @@ end)
 MainTab:CreateSection("Reminder: ONLY USE YOUR ALT TO EXPLOIT.")
 
 -- Main Tab --
--- Team Management --
-MainTab:CreateSection("Team Management")
-
-MainTab:CreateButton({
-    Name = "Switch to Inmates",
-    Callback = function()
-        ChangeTeam(Teams.Inmates)
-        Notify("You will regret that.", 999)
-    end,
-})
-
-MainTab:CreateButton({
-    Name = "Switch to Guards",
-    Callback = function()
-        if #Teams.Guards:GetPlayers() > 7 then
-            Notify("The team is full, cannot join!")
-        else
-            ChangeTeam(Teams.Guards)
-            Notify("You will regret that.", 999)
-        end
-    end,
-})
-
-MainTab:CreateButton({
-    Name = "Switch to Criminals",
-    Callback = function()
-        ChangeTeam(Teams.Criminals)
-        Notify("You will regret that.", 999)
-    end,
-})
-
 -- Weapon Management --
 MainTab:CreateSection("Weapon Management")
 
@@ -2837,104 +2068,6 @@ MainTab:CreateButton({
 })
 
 -- Combat Tab --
--- Aura Settings --
-CombatTab:CreateSection("Aura Settings")
-CombatTab:CreateSection("Kill Aura")
-
-CombatTab:CreateToggle({
-    Name = "Kill Aura",
-    CurrentValue = settings.killaura,
-    Flag = "KillAuraToggle",
-    Callback = function(Value)
-        settings.killaura = Value
-    end,
-})
-
-CombatTab:CreateToggle({
-    Name = "Kill Aura Sphere",
-    CurrentValue = settings.killaura_sphere,
-    Flag = "KASphereToggle",
-    Callback = function(Value)
-        settings.killaura_sphere = Value
-    end,
-})
-
-CombatTab:CreateSlider({
-    Name = "Kill Aura Radius",
-    Range = {1, 10},
-    Increment = 1,
-    Suffix = "studs",
-    CurrentValue = settings.killaura_radius,
-    Flag = "KARadiusSlider",
-    Callback = function(Value)
-        settings.killaura_radius = Value
-    end,
-})
-
-CombatTab:CreateToggle({
-    Name = "Team Check",
-    CurrentValue = settings.katc,
-    Flag = "KillAuraTCToggle",
-    Callback = function(Value)
-        settings.katc = Value
-    end,
-})
-
-CombatTab:CreateDropdown({
-    Name = "Teams Allowed",
-    Options = katypes,
-    CurrentValue = settings.katype,
-    Flag = "KillAuraTeamDropdown",
-    Callback = function(Option)
-		opt = Option[1]
-        UpdateKillableTeams(opt)
-        --print("Updated")
-    end,
-})
-
-CombatTab:CreateSection("Arrest Aura")
-CombatTab:CreateToggle({
-    Name = "Arrest Aura",
-    CurrentValue = settings.arrestaura,
-    Flag = "ArrestAuraToggle",
-    Callback = function(Value)
-        settings.arrestaura = Value
-    end,
-})
-
-CombatTab:CreateSlider({
-    Name = "Arrest Aura Radius",
-    Range = {1,15},
-    Increment = 1,
-    Suffix = "studs",
-    CurrentValue = settings.arrestaura_radius,
-    Flag = "AARadiusSlider",
-    Callback = function(Value)
-        settings.arrestaura_radius = Value
-    end,
-})
-
-CombatTab:CreateToggle({
-    Name = "Team Check",
-    CurrentValue = settings.aatc,
-    Flag = "ArrestAuraTCToggle",
-    Callback = function(Value)
-        settings.aatc = Value
-    end,
-})
-
-CombatTab:CreateDropdown({
-    Name = "Teams Allowed",
-    Options = aatypes,
-    CurrentValue = settings.aatype,
-    Flag = "ArrestAuraTeamDropdown",
-    Callback = function(Option)
-        settings.aatype = Option[1]
-        --print("Updated")
-    end,
-})
-
-
 -- Weapon Modifications --
 CombatTab:CreateSection("Weapon Modifications")
 
@@ -3051,15 +2184,6 @@ TeleportTab:CreateButton({
 -- Automation: Player Related --
 AutoTab:CreateSection("Player Related")
 AutoTab:CreateToggle({
-    Name = "Auto Respawn (don't use this)",
-    CurrentValue = settings.autorespawn,
-    Flag = "AutoRespawnToggle",
-    Callback = function(Value)
-        settings.autorespawn = Value
-    end,
-})
-
-AutoTab:CreateToggle({
     Name = "Auto Anti-Jump Removal",
     CurrentValue = settings.aajr,
     Flag = "AutoAntiJumpRemovalToggle",
@@ -3114,17 +2238,6 @@ AutoTab:CreateButton({
             print("Added " .. aggun .. " to auto-guns list.")
 			Notify("Added " .. aggun .. " to auto-guns list.")
         end
-    end,
-})
-
--- Automation: Prison Related --
-AutoTab:CreateSection("Prison Related")
-AutoTab:CreateToggle({
-    Name = "Auto Break Toilets",
-    CurrentValue = settings.abtoilets,
-    Flag = "AutoBreakToiletsToggle",
-    Callback = function(Value)
-        settings.abtoilets = Value
     end,
 })
 
@@ -3554,40 +2667,6 @@ Players.PlayerAdded:Connect(function(plr)
     playerselector:Refresh(playerNames)
 end)
 
--- Lists + Checks: Lists --
-LCTab:CreateSection("Lists")
-LCTab:CreateButton({
-    Name = "Add/Remove from Kill Aura WL",
-    Callback = function()
-        kill_aura_wl(lcplayer, lcplayer.Name)
-    end,
-})
-
-LCTab:CreateButton({
-    Name = "Print KA WL List",
-    Callback = function()
-        for _, ka in ipairs(ka_wl) do
-    		print(ka)
-		end
-    end,
-})
-
-LCTab:CreateButton({
-    Name = "Add/Remove from Arrest Aura WL",
-    Callback = function()
-        arrest_aura_wl(lcplayer, lcplayer.Name)
-    end,
-})
-
-LCTab:CreateButton({
-    Name = "Print AA WL List",
-    Callback = function()
-        for _, aa in ipairs(aa_wl) do
-    		print(aa)
-		end
-    end,
-})
-
 -- Lists + Checks: Checks --
 LCTab:CreateSection("Checks")
 LCTab:CreateButton({
@@ -3648,13 +2727,6 @@ LCTab:CreateButton({
 -- Other Tab --
 -- Other: Prison Related --
 OtherTab:CreateSection("Prison Related")
-OtherTab:CreateButton({
-    Name = "Break All Toilets",
-    Callback = function()
-        hammer_check_t()
-    end,
-})
-
 OtherTab:CreateButton({
     Name = "Unkillable Fence",
     Callback = function()
