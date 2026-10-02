@@ -1,5 +1,3 @@
--- Check this out: https://gist.github.com/S-PScripts/7056888427287e0667047c0b0a4cc827
-
 -- PrisonX v1.3 by TS2021
 -- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
 -- Discontinued
