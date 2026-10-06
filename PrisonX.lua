@@ -701,7 +701,7 @@ else
 end
 
 ----------------------------------------------------------------------------------------
--- attempt to serverban player
+--- attempt to serverban player
 local currentConnection = nil
 
 local function findPartialPlayer(name)
@@ -713,11 +713,15 @@ local function findPartialPlayer(name)
     return nil
 end
 
-local function serverban(tcplayer)
-	if currentConnection then
+local function serverban(target)
+    if currentConnection then
         currentConnection:Disconnect()
         currentConnection = nil
-		Notify("Cancelled.")
+        Notify("Cancelled/Reset active tracking.")
+    end
+
+    if not target then
+        Notify("NO TARGET SPECIFIED")
         return
     end
 
@@ -747,28 +751,30 @@ local function serverban(tcplayer)
     end
 
     local wheelsFolder = car:FindFirstChild("Wheels")
-    local wheel = wheelsFolder and wheelsFolder:GetChildren()[4]
+    local wheel = wheelsFolder and wheelsFolder:GetChildren()[4] 
 
-    local targetPlayer = tcplayer
-    local targetChar = targetPlayer and targetPlayer.Character
-
+    local targetChar = target.Character
     if not targetChar or not targetChar:FindFirstChild("HumanoidRootPart") or not wheel then
         Notify("TARGET NOT FOUND")
         task.wait(1.5)
         return
     end
 
-    local targetRoot = targetChar.HumanoidRootPart
     local localRoot = localChar.HumanoidRootPart
-    local targetHumanoid = targetChar:FindFirstChildOfClass("Humanoid")
     
     local predictionScale = 0.22 
+    Notify("Tracking: " .. target.Name)
 
     currentConnection = RunService.Heartbeat:Connect(function()
+        -- Fetch target parts inside the loop to ensure they are updated constantly if they respawn/change
+        local currentTargetChar = target.Character
+        local targetRoot = currentTargetChar and currentTargetChar:FindFirstChild("HumanoidRootPart")
+        local targetHumanoid = currentTargetChar and currentTargetChar:FindFirstChildOfClass("Humanoid")
+
         -- DEATH + VALIDITY CHECK
-        if not targetChar or not targetRoot or not wheel or not car or not localChar or not localRoot 
-           or (targetHumanoid and targetHumanoid.Health == 0) 
-           or (localHumanoid and localHumanoid.Health == 0) then
+        if not currentTargetChar or not targetRoot or not wheel or not car or not localChar or not localRoot 
+           or (targetHumanoid and targetHumanoid.Health <= 0) 
+           or (localHumanoid and localHumanoid.Health <= 0) then
             
             if currentConnection then currentConnection:Disconnect() end
             currentConnection = nil
@@ -788,26 +794,25 @@ local function serverban(tcplayer)
         local predictedPosition = targetRoot.Position + (targetVelocity * predictionScale)
         local predictedCFrame = CFrame.new(predictedPosition) * (targetRoot.CFrame - targetRoot.Position)
 
-        -- TOUGHNESS / TOUCH CHECK: Calculate edge-to-edge distance between weapon wheel and target torso
+        -- TOUGHNESS / TOUCH CHECK
         local actualDistance = (wheel.Position - targetRoot.Position).Magnitude
-        local touchThreshold = (wheel.Size.Y / 2) + (targetRoot.Size.Y / 2) + 0.5 -- Dynamic size radius check
+        local touchThreshold = (wheel.Size.Y / 2) + (targetRoot.Size.Y / 2) + 0.5 
 
-        if actualDistance == touchThreshold then
-            -- EXACT TOUCHING POINT: Force instant high velocity collision
+        if actualDistance <= touchThreshold then
             wheel.AssemblyAngularVelocity = Vector3.new(150000, 150000, 150000)
             wheel.AssemblyLinearVelocity = Vector3.new(150000, 150000, 150000)
         else
-            -- GLUED TRACKING MODE: Fast tracking speed without physics breaking velocities
             wheel.AssemblyAngularVelocity = Vector3.new(8000, 8000, 8000)
             wheel.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
         end
 
-        -- Snap position based entirely on predicted vectors
+        -- Snap position every single frame continuous update
         localRoot.CFrame = predictedCFrame * CFrame.new(0, -1.5, 0)
         localRoot.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
         wheel.CFrame = predictedCFrame
 	end)
 end
+
 
 ----------------------------------------------------------------------------------------
 TeleportService = game:GetService("TeleportService")
@@ -2147,6 +2152,7 @@ TeleportTab:CreateButton({
 TeleportTab:CreateButton({
     Name = "[X] Attempt Serverban",
     Callback = function()
+        print(tcplayer)
 		serverban(tcplayer)
     end,
 })
@@ -2407,7 +2413,7 @@ PlayerTab:CreateSlider({
     end,
 })
 
-loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo.lua", true))() -- load it cuz poo
+loadstring(game:HttpGet("https://pastefy.app/3Y0bBDOx/raw", true))() -- load it cuz poo
 function toggleesp() getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true end
 
 loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/emotemodule.lua", true))()
