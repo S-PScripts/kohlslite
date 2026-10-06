@@ -14107,8 +14107,9 @@ task.spawn(function()
                                                         local cre = pad.Head
                                                         local spr = game.Players.LocalPlayer.Character:FindFirstChild("Head")
                                                         firetouchinterest(cre, spr, 1)
-                                                            firetouchinterest(cre, spr, 0)
-                                                            firetouchinterest(cre, spr, 1)
+														task.wait()
+                                                        firetouchinterest(cre, spr, 0)
+                                                        firetouchinterest(cre, spr, 1)
                                                         task.wait()
                                                         firetouchinterest(cre, spr, 0)
 
@@ -14136,6 +14137,7 @@ task.spawn(function()
 
          if head and headOfCharacter and firetouchinterest then
             firetouchinterest(head, headOfCharacter, 1)
+			wait()
             firetouchinterest(head, headOfCharacter, 0)
             firetouchinterest(head, headOfCharacter, 1)
             wait()
@@ -14162,6 +14164,7 @@ task.spawn(function()
                                               local pad = workspace.Terrain[GAMEFOLDER].Admin.Pads:FindFirstChild("Touch to get admin")
                                               local a = pad.Head
                                               firetouchinterest(a, spr, 1)
+								              task.wait()
                                               firetouchinterest(a, spr, 0)
                                               firetouchinterest(a, spr, 1)
                                               task.wait()
@@ -14249,7 +14252,8 @@ task.spawn(function()
                 for i,v in pairs(game.Players:GetChildren()) do
                                 for i,pad in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Admin.Pads:GetDescendants()) do
                                         if pad.Name == v.Name.."'s admin" then
-                                               Regen()
+                                        		Regen()
+												Remind("Pads reset as ".. v.Name.. " took one."); print("Pads reset as ".. v.Name.. " took one.")
                                         end
                                 end
                 end
@@ -14465,7 +14469,6 @@ task.spawn(function()
 end)
 
 -- AI CHAT
-
 local HttpService = game:GetService("HttpService")
 function askGroq(prompt)
 	local success, response = pcall(function()
