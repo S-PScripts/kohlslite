@@ -41,9 +41,9 @@ local settings = {
 	tdoors = false,
 
 	-- Spam open doors (must be guard / have a keycard)
---	sodoors = false,
+sodoors = false,
 
-	--[[
+	
 	-- Kill aura
 	killaura = false,
 	killaura_radius = 10,
@@ -58,7 +58,7 @@ local settings = {
 	arrestaura_radius = 15,
 	aatc = false, -- arrest aura team check
 	aatype = "Both", -- what players it can arrest
-]]
+
 	-- Stop tases from disabling the reset button
 	enablere = true,
 
@@ -956,16 +956,6 @@ end
 settings.katype = settings.katype or "All"
 UpdateKillableTeams(settings.katype)
 
--- Sphere visual
-local sphere = Instance.new("Part")
-sphere.Shape = Enum.PartType.Ball
-sphere.Size = Vector3.new(settings.killaura_radius * 2, settings.killaura_radius * 2, settings.killaura_radius * 2)
-sphere.Anchored = true
-sphere.CanCollide = false
-sphere.Material = Enum.Material.ForceField
-sphere.Color = Color3.fromRGB(255, 0, 50)
-sphere.Transparency = settings.killaura_sphere and 0.6 or 1
-sphere.Parent = workspace
 
 RunService.Heartbeat:Connect(function()
     if not settings.killaura then
