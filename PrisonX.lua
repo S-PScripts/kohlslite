@@ -38,7 +38,7 @@ Auto Sprint / Speed Changer
 
 Auto Keycard (-akeycard/-unakeycard)
 
-Fling/Kick any player (soon)
+Fling Any Player
 
 Credits to github.com/tomatotxt for the initial code
 Credits to github.com/NewMatheusDC for a bit of the GUI
@@ -2150,7 +2150,7 @@ TeleportTab:CreateButton({
 })
 
 TeleportTab:CreateButton({
-    Name = "[X] Attempt Serverban",
+    Name = "[X] Fling",
     Callback = function()
         print(tcplayer)
 		serverban(tcplayer)
@@ -2158,7 +2158,7 @@ TeleportTab:CreateButton({
 })
 
 TeleportTab:CreateButton({
-    Name = "[X] Cancel Serverban",
+    Name = "[X] Cancel Fling",
     Callback = function()
     	if currentConnection then
         	currentConnection:Disconnect()
