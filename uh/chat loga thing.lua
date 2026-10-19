@@ -1,15 +1,13 @@
--- chat loga thing
-function PLRSTART(v)
-  v.Chatted:Connect(function(msg)
-    task.wait(0)
-    print(msg)
-  end)
-end
+local TextChatService = game:GetService("TextChatService")
 
-game.Players.PlayerAdded:Connect(function(player)
-  PLRSTART(player)
+TextChatService.MessageReceived:Connect(function(textChatMessage)
+	local msg = textChatMessage.Text
+	
+	local textSource = textChatMessage.TextSource
+	if textSource then
+		local player = game.Players:GetPlayerByUserId(textSource.UserId)
+		if player then
+			print(player.Name .. ": " .. msg)
+		end
+	end
 end)
-
-for i, v in pairs(game.Players:GetPlayers()) do
-  PLRSTART(v)
-end
