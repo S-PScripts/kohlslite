@@ -40,6 +40,9 @@ Auto Keycard (-akeycard/-unakeycard)
 
 Fling Any Player
 
+NOTE: I removed the quick respawn mechanic code due to the movement anti-cheat, but now that is gone. 
+I'm not re-adding it though as it is still weaker than it once was.
+
 Credits to github.com/tomatotxt for the initial code
 Credits to github.com/NewMatheusDC for a bit of the GUI
 ]]
