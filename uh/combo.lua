@@ -1,3 +1,6 @@
+-- AIMLOCK/ESP
+-- A bit limited compared to other PL scripts, but it does a good enough job
+
 -- MAIN VARIABLES --
 getgenv().espsettings = {
     ESP = false,
