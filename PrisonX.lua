@@ -1104,6 +1104,7 @@ end
 -- Build the initial list
 builder()
 
+-- tasefixer
 local function fixTools()
     local char = LocalPlayer.Character
     if not char then return end
@@ -1177,8 +1178,8 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 					repeat task.wait() until gwak
 				end
 				SwitchToCriminalAndReturn(false, cpos) -- really slow
-			--elseif settings.autorespawn == false then
-               -- tpto(cpos)
+			else
+               tpto(cpos)
 			end
 
 
@@ -1487,7 +1488,7 @@ end)
 ----------------------------------------------------------------------------------------
 
 -- no doors, auto gun
-AUTOGUN_DELAY_AFTER_SPAWN = 10
+AUTOGUN_DELAY_AFTER_SPAWN = 1
 RunService.Heartbeat:Connect(function()
     if not hrp then return end -- wait until HumanoidRootPart exists
     -- No doors
@@ -1505,9 +1506,7 @@ RunService.Heartbeat:Connect(function()
 		
     -- Auto guns
     if settings.autoguns and tring == false then
-		--print("tell me this fixed it pluh")
 		tring = true
-		--task.wait(TELEPORT_COOLDOWN)
 
         local localOldHRP = hrp.CFrame
         local pickedGuns = 0
@@ -1523,16 +1522,10 @@ RunService.Heartbeat:Connect(function()
             end
         end
 
-        -- Teleport back once after picking up guns
-		--if settings.autorespawn == false then
-        	if pickedGuns > 0 then
-            	tpto(localOldHRP)
-        	end
-		--[[ else
-			if pickedGuns > 0 then
-            	hrp.CFrame = lastDeathCFrame
-			end
-		end ]]
+
+        if pickedGuns > 0 then
+            tpto(localOldHRP)
+		end
 
        gwak = true
     end
