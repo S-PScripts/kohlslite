@@ -816,12 +816,32 @@ local function serverban(target)
 	end)
 end
 ----------------------------------------------------------------------------------------
+local MAX_SPEED = 50
+local isSitting = false
+
 -- anti-sit
-Humanoid.Seated:Connect(function(isSitting, seatPart)
-    if isSitting then
-		if settings.antisit then
-        	Humanoid.Sit = false
-		end
+Humanoid.Seated:Connect(function(sittingActive, seatPart)
+    isSitting = sittingActive
+    
+    if isSitting and settings.antisit then
+        task.defer(function()
+            Humanoid.Sit = false
+        end)
+    end
+end)
+
+-- velocity limit
+RunService.Heartbeat:Connect(function()
+    if HumanoidRootPart and not isSitting then
+        local curv = HumanoidRootPart.AssemblyLinearVelocity
+        local horv = Vector3.new(curv.X, 0, curv.Z)
+        
+        if horv.Magnitude > MAX_SPEED then
+            HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(0, curv.Y, 0)
+            
+            -- local clampedHorizontal = horizontalVelocity.Unit * MAX_SPEED
+            -- HumanoidRootPart.AssemblyLinearVelocity = Vector3.new(clampedHorizontal.X, currentVelocity.Y, clampedHorizontal.Z)
+        end
     end
 end)
 
@@ -1008,6 +1028,7 @@ end
 
 ----------------------------------------------------------------------------------------
 
+-- list of players with each gamepass
 gamepasses = {
 	riots = {},
 	mafias = {},
