@@ -1,9 +1,8 @@
--- PrisonX v1.3 by TS2021
--- OPEN-SOURCE (so you can edit this script and add stuff, rather than starting from scratch)
--- Discontinued
+-- PrisonX v1.33 by TS2021 [OPEN-SOURCE]
+-- Not updated constantly
 
 --[[
-Features: All implemented in a UI as well!
+Features: This script also uses RAYFIELD UI (https://github.com/SiriusSoftwareLtd/Rayfield/)
 Gun Obtainer (-gun (GUN NAME))
 TP to Locations (-lc (LOCATION))
 Kill Feed (-killfeed / -unkillfeed)
@@ -83,8 +82,8 @@ local settings = {
 	-- Transparent doors
 	tdoors = false,
 
-	-- Spam open doors (must be guard / have a keycard)
---	sodoors = false,
+	-- Spawn back at previous location upon death
+	reback = false,
 
 	-- Stop tases from disabling the reset button
 	enablere = true,
@@ -98,9 +97,9 @@ local settings = {
 	-- Trespassing/Hostile Inmate detector
 	htdetect = true,
 	
-	-- Old gun sounds (neat ig)
+	-- Old gun sounds
 	oldsounds = true,
-	oldsoundsmeonly = false, -- if you want it to just be you
+	oldsoundsmeonly = false, -- if you want it to just apply to your guns
 	
 	-- Hide trees
 	htrees = false,
@@ -142,7 +141,7 @@ local function Notify(text, time)
     end)
 end
 
-local version = "v1.25"
+local version = "v1.33"
 
 -- GUI Setup
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
@@ -150,7 +149,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 local Window = Rayfield:CreateWindow({
     Name = "PrisonX",
     Icon = nil,
-    LoadingTitle = "PrisonX v1.25",
+    LoadingTitle = "PrisonX v1.33",
     LoadingSubtitle = "Created by TS2021",
     ConfigurationSaving = {
         Enabled = false,
@@ -1916,17 +1915,6 @@ local function handleCommand(msg)
 		Notify("Destroyed doors.")
 	end
 	
-
---[[    if string.sub(lowerMsg, 1, #prefix + 7) == prefix.."sodoors" then
-    	settings.sodoors = true
-		Notify("Spam opening doors (MUST BE A GUARD/HAVE A KEYCARD).")
-	end
-
-	if string.sub(lowerMsg, 1, #prefix + 9) == prefix.."unsodoors" then
-    	settings.sodoors = false
-		Notify("No longer spam opening doors.")
-	end ]]
-
 	if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."rjc" then
 		ajr()
 		Notify("Jump cooldown removed!")
@@ -1989,11 +1977,11 @@ local function handleCommand(msg)
 	end
 
 	if string.sub(lowerMsg, 1, #prefix + 3) == prefix.."esp" then
-		getgenv().esp = true
+		getgenv().espsettings.ESP = true
 	end
 
 	if string.sub(lowerMsg, 1, #prefix + 5) == prefix.."unesp" then
-		getgenv().esp = false
+		getgenv().espsettings.ESP = false
 	end
 	
 	if string.sub(lowerMsg, 1, #prefix + 8) == prefix.."enablere" then
@@ -2292,15 +2280,6 @@ AutoTab:CreateToggle({
     end,
 })
 
---[[ AutoTab:CreateToggle({
-    Name = "Spam Open Doors",
-    CurrentValue = settings.sodoors,
-    Flag = "SoDoorsToggle",
-    Callback = function(Value)
-        settings.sodoors = Value
-    end,
-}) ]]
-
 -- Protection Tab --
 -- Protection --
 ProtectTab:CreateSection("Protection")
@@ -2436,9 +2415,11 @@ PlayerTab:CreateSlider({
     end,
 })
 
-loadstring(game:HttpGet("https://pastefy.app/3Y0bBDOx/raw", true))() -- load it cuz poo
+-- load in aimlock + ESP
+loadstring(game:HttpGet("https://pastefy.app/3Y0bBDOx/raw", true))()
 function toggleesp() getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true end
 
+-- re enable emotes
 loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/emotemodule.lua", true))()
 
 -- ESP Tab --
