@@ -12,6 +12,7 @@ Anti Tase (-antitase / -unantitase)
 
 Fast Guns (you can also change the rate, default is 0) (-fastguns / -unfastguns / -firerate)
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
+TP Back Upon Respawn (untested)
 
 Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
 Destroy doors (-ddoors) - CLIENT-SIDE!
@@ -19,8 +20,6 @@ Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors) - Patch
 
 Remove jump cooldown (anti-jump removal) (-rjc)
 Auto anti-jump removal (-aajr/-unajr)
-
-TP Back Upon Respawn (untested)
 
 Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Hide/Show Trees (-htrees / -strees)
@@ -96,6 +95,9 @@ local settings = {
 
 	-- Trespassing/Hostile Inmate detector
 	htdetect = true,
+
+	-- Prevent sitting
+	antisit = false,
 	
 	-- Old gun sounds
 	oldsounds = true,
@@ -813,7 +815,15 @@ local function serverban(target)
         wheel.CFrame = predictedCFrame
 	end)
 end
-
+----------------------------------------------------------------------------------------
+-- anti-sit
+Humanoid.Seated:Connect(function(isSitting, seatPart)
+    if isSitting then
+		if settings.antisit then
+        	Humanoid.Sit = false
+		end
+    end
+end)
 
 ----------------------------------------------------------------------------------------
 TeleportService = game:GetService("TeleportService")
@@ -2302,6 +2312,14 @@ ProtectTab:CreateToggle({
     end,
 })
 
+ProtectTab:CreateToggle({
+    Name = "Anti Sit",
+    CurrentValue = settings.antitase,
+    Flag = "AntiSitToggle",
+    Callback = function(Value)
+        settings.antisit = Value
+    end,
+})
 
 -- Player Tab --
 -- Actions --
