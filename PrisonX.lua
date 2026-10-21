@@ -21,6 +21,8 @@ Spam open doors (must be a guard/have a keycard) (-sodoors / -unsodoors) - Patch
 Remove jump cooldown (anti-jump removal) (-rjc)
 Auto anti-jump removal (-aajr/-unajr)
 
+TP Back Upon Respawn (untested)
+
 Unkillable Fence (if you step on top of it, you won't die) (-nkfence)
 Hide/Show Trees (-htrees / -strees)
 Remove Team Indicators (-rti/-dti)
@@ -39,9 +41,6 @@ Auto Sprint / Speed Changer
 Auto Keycard (-akeycard/-unakeycard)
 
 Fling Any Player
-
-NOTE: I removed the quick respawn mechanic code due to the movement anti-cheat, but now that is gone. 
-I'm not re-adding it though as it is still weaker than it once was.
 
 Credits to github.com/tomatotxt for the initial code
 Credits to github.com/NewMatheusDC for a bit of the GUI
@@ -1144,7 +1143,7 @@ function piss(wspeed, jpower)
 	LocalPlayer.Character:WaitForChild("Humanoid").JumpPower = jpower
 end
 
-fat = true
+CONTI = true
 gwak = false
 
 -- Anti Arrest and Anti Tase
@@ -1155,7 +1154,6 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	animator.AnimationPlayed:Connect(function(des)
 		-- Anti Arrest
 		if settings.antiarrest and des.Animation.AnimationId == "rbxassetid://287112271" then
-			fat = false
 		--	des:Stop()
 		--	des:Destroy()
         --  StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Backpack, true)
@@ -1171,17 +1169,18 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 			LocalPlayer.CharacterAdded:Wait()
 			repeat task.wait() until LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
 			task.wait(0.1)
-			fat = true
+			CONTI = false
 
+			if settings.autoguns then
+				repeat task.wait() until gwak
+			end
+					
 			if wascriminal then
-				if settings.autoguns then
-					repeat task.wait() until gwak
-				end
 				SwitchToCriminalAndReturn(false, cpos) -- really slow
 			else
                tpto(cpos)
 			end
-
+			CONTI = true
 
 			--task.delay(0, function()
 			--	humanoid.WalkSpeed = wspeed
@@ -1430,6 +1429,14 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 --    grp = char:WaitForChild("HumanoidRootPart")
 end)
 
+local deapos = nil
+Humanoid.Died:Connect(function()
+    local rp = Character:FindFirstChild("HumanoidRootPart")
+    if rp then
+        deapos = rp.Position
+    end
+end)
+
 ----------------------------------------------------------------------------------------
 
 -- Spam Open Doors
@@ -1488,19 +1495,21 @@ end)
 ----------------------------------------------------------------------------------------
 
 -- no doors, auto gun
-AUTOGUN_DELAY_AFTER_SPAWN = 1
+DELAY_AFTER_SPAWN = 1
 RunService.Heartbeat:Connect(function()
     if not hrp then return end -- wait until HumanoidRootPart exists
-    -- No doors
+  
+	-- No doors
     if settings.nodoors then
         NoDoors()
     end
 
+	-- Transparent doors
 	if settings.tdoors then
 		tdoors()
 	end
 
-	if os.clock() - lst < AUTOGUN_DELAY_AFTER_SPAWN then
+	if os.clock() - lst < DELAY_AFTER_SPAWN then
         return
     end
 		
@@ -1508,7 +1517,12 @@ RunService.Heartbeat:Connect(function()
     if settings.autoguns and tring == false then
 		tring = true
 
-        local localOldHRP = hrp.CFrame
+		if settings.reback then
+        	local localOldHRP = deapos
+		else
+			local localOldHRP = hrp.CFrame
+		end
+			
         local pickedGuns = 0
 
         for _, gunName in ipairs(settings.autoguns_list) do
@@ -1522,13 +1536,15 @@ RunService.Heartbeat:Connect(function()
             end
         end
 
-
-        if pickedGuns > 0 then
-            tpto(localOldHRP)
+		if CONTI then
+       		tpto(localOldHRP)
 		end
-
-       gwak = true
-    end
+        gwak = true
+	elseif settings.reback then
+		if CONTI then
+			tpto(deapos)
+		end
+	end
 end)
 
 ----------------------------------------------------------------------------------------
@@ -2189,6 +2205,17 @@ AutoTab:CreateToggle({
     Flag = "AutoGunsToggle",
     Callback = function(Value)
         settings.autoguns = Value
+    end,
+})
+
+-- Automation: Respawn Back --
+AutoTab:CreateSection("Respawn Back")
+AutoTab:CreateToggle({
+    Name = "Respawn Back",
+    CurrentValue = settings.reback,
+    Flag = "ReBackToggle",
+    Callback = function(Value)
+        settings.reback = Value
     end,
 })
 
