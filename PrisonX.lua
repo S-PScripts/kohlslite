@@ -1520,6 +1520,12 @@ LocalPlayer.CharacterAdded:Connect(function(char)
 	if settings.aajr then
 		ajr()
 	end
+
+	if settings.reback and settings.autoguns == false then
+		if CONTI then
+			tpto(deapos)
+		end
+	end
 end)
 
 ----------------------------------------------------------------------------------------
@@ -1570,10 +1576,6 @@ RunService.Heartbeat:Connect(function()
        		tpto(localOldHRP)
 		end
         gwak = true
-	elseif settings.reback then
-		if CONTI then
-			tpto(deapos)
-		end
 	end
 end)
 
