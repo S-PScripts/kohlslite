@@ -1463,7 +1463,7 @@ local deapos = nil
 Humanoid.Died:Connect(function()
     local rp = Character:FindFirstChild("HumanoidRootPart")
     if rp then
-        deapos = rp.Position
+        deapos = rp.CFrame
     end
 end)
 
@@ -2455,7 +2455,7 @@ PlayerTab:CreateSlider({
 })
 
 -- load in aimlock + ESP
-loadstring(game:HttpGet("https://pastefy.app/3Y0bBDOx/raw", true))()
+loadstring(game:HttpGet("https://kohlslite.pages.dev/uh/combo.lua", true))()
 function toggleesp() getgenv().espsettings.ESP = false; task.wait(0.1); getgenv().espsettings.ESP = true end
 
 -- re enable emotes
