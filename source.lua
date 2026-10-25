@@ -2576,11 +2576,14 @@ Note: The indentation is awful. Also, if you fork this script, use an actual han
 ]]
 
 local ChatGui = game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Chat")
+print(ChatGui)
 local Frame = ChatGui and ChatGui:FindFirstChild("Frame")
+print(Frame)
 local TextBox = Frame and (Frame:FindFirstChildWhichIsA("TextBox") or Frame:FindFirstChild("Box") or Frame:FindFirstChild("TextBox"))
+print(TextBox)
 
 if TextBox then
- 	TYPE = TextBox.FocusLost:Connect(function(pressedEnter)
+ 	TextBox.FocusLost:Connect(function(pressedEnter)
         if not pressedEnter then return end
         
         local msg = TextBox.Text
