@@ -1,7 +1,4 @@
--- Discontinued permanently
--- Update Aug 2026: Once I get a new computer, I will try to fix minor bugs.
--- Do not ask me to fix the game.Players:Chat(), the lag problem, or anything else
-
+-- No longer updated
 -- Read all the information below before viewing the source.
 
 --[[
@@ -26,8 +23,7 @@ This was one of the only KAH scripts that worked due to Roblox's chat update (30
 
 You could play the original KAH here: https://www.roblox.com/games/112420803/Kohls-Admin-House-NBC-Updated
 
-This script is not recommended for KAH X (Legacy/Project NP) (https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy).
-This is because the code there is rather different, and therefore many features in this script are not compatible.
+This script was not built for KAH X: https://www.roblox.com/games/14747334292/Kohls-Admin-House-NBC-Legacy.
 Here is a fun fact about KAH X: the owner, BoasGameAlt, is agspureiam's alt. However, it was password-guessed and is now owned by Tech.
 
 KohlsLite is currently the longest/largest Kohls Admin House script that is open-source and freely available.
@@ -108,16 +104,13 @@ Perhaps it's revived because the game has no exploiters now? Who knows.
 Here is a quick fact. Prison Life, a game without any major update since its v2.0 release 7 years ago, gets at least 500 people playing - even 1,000 sometimes.
 Do you know why? It is partially because it does not get boring fast, unlike KAH. KAH is just you trying some admin commands, nothing else.
 EDIT: Well, PL is actually getting updated again and managed to reach 50k players. This point is outdated... but oh well.
+EDIT 2: Aesthetical left again but game is still quite popular. Point stands again.
 
 KAH has become boring to me, and so has this script. I have played KAH since August 2022, and have updated this script since its creation in December 2023.
 Over the past few years, I have added hundreds of commands/features (nearly 1,000), but now... what is left?
 
 I will not add the features I mentioned above. If you want them, just execute the scripts that I mentioned alongside KohlsLite.
 I do not want to spend hours upon hours adding the features that you can get easily via a simple extra execution.
-
-Another reason for the discontinuation of KohlsLite's development is that I have exams to take, specifically my GCSEs. These are VERY important, and they take a lot of time away.
-
-If you read all of the above, thank you. I had a great time creating KohlsLite. <3
 
 TS2021, October 2025
 
@@ -760,6 +753,9 @@ local auto_stuff_mbar = {
 local rand_players = {
 	-- Players loopkilled
 	loopkill = {},
+
+	-- Loopkill for all
+	loopkillall = false,
 	
 	-- Spam name users
 	byecam = {},
@@ -3326,7 +3322,11 @@ if TextBox then
                         Remind(player.." is already being loopkilled!")
                 end
          else
-                Remind('Cannot find player with the name: '..dasplayer)
+				if player == "others" or player == "all" then -- im not making yourself loopkill, why would you want that
+					rand_players.loopkillall = true
+				else
+               		Remind('Cannot find player with the name: '..dasplayer)
+				end
          end
        end
 
@@ -3345,7 +3345,11 @@ if TextBox then
                         Remind(player.." was never loopkilled!")
                 end
          else
-                Remind('Cannot find player with the name: '..dasplayer)
+                if player == "others" or player == "all" then -- im not making yourself loopkill, why would you want that
+					rand_players.loopkillall = false
+				else
+               		Remind('Cannot find player with the name: '..dasplayer)
+				end
          end
        end
 
@@ -12271,7 +12275,7 @@ connections[#connections + 1] =
                                         end
                                 end
 
-                                if table.find(rand_players.loopkill, v.Name) then
+                                if table.find(rand_players.loopkill, v.Name) or rand_players.loopkillall == true then
                                         if v.Character then
 						if v.Character.Humanoid then
 							if v.Character.Humanoid.Health ~= 0 then
