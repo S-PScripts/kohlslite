@@ -164,6 +164,15 @@ local IYchecks = {
 	IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform())
 }
 
+local playerGui = game.Players.LocalPlayer:FindFirstChild("PlayerGui")
+local customChat = playerGui and playerGui:FindFirstChild("Chat")
+local chatFrame = customChat and customChat:FindFirstChild("Frame")
+
+if chatFrame and chatFrame.Visible == true then
+	print("ver latest");
+	assold = true
+end
+
 -- Speak function
 local function Speak(msg)
     if IYchecks.legacyChat then
@@ -178,7 +187,11 @@ end
 
 -- Chat function
 local function Chat(msg)
-	Speak(msg)
+    if assold then
+        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "System") 
+    else
+       game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
+    end
 end
 
 -- Check if KohlsLite is already executed
@@ -2562,42 +2575,18 @@ print("\n")
 Note: The indentation is awful. Also, if you fork this script, use an actual handler, unlike what I did...
 ]]
 
---local TYPE
+local ChatGui = game.Players.LocalPlayer:WaitForChild("PlayerGui"):FindFirstChild("Chat")
+local Frame = ChatGui and ChatGui:FindFirstChild("Frame")
+local TextBox = Frame and (Frame:FindFirstChildWhichIsA("TextBox") or Frame:FindFirstChild("Box") or Frame:FindFirstChild("TextBox"))
 
---TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.MessageReceived):Connect(function(tbl)
-
--- tech changed how this works so script is broken ffs
-zamn = true
-TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.MessageReceived):Connect(function(tbl)
---game.TextChatService.MessageReceived:Connect(function(tbl)
-    task.wait(0)
-
-    local msg
-
-    --if not kah_np then
-        -- only for new TextChatService
-    --    if not tbl.TextSource then return end
-    --    local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
-    --    if not player then return end
-    --    if player ~= game.Players.LocalPlayer then return end
-    --    msg = tbl.Text
-    --else
-        -- old chat system (Chatted)
-       -- msg = tbl
-    --end
-
-	if not zamn then
-        -- only for new TextChatService
-        if not tbl.TextSource then return end
-        local player = game:GetService("Players"):GetPlayerByUserId(tbl.TextSource.UserId)
-        if not player then return end
-        if player ~= game.Players.LocalPlayer then return end
-        msg = tbl.Text
-    else
-       -- old chat system (Chatted)
-		--zamn = false
-       msg = tbl
-    end			
+if TextBox then
+ 	TYPE = TextBox.FocusLost:Connect(function(pressedEnter)
+        if not pressedEnter then return end
+        
+        local msg = TextBox.Text
+        if not msg or msg == "" then return end
+        
+        task.wait(0)
 	
         if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'kcmds' then
            CMDPrint()
@@ -2609,7 +2598,7 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
            Remind("Check your console by running /console!")
         end
 
-	if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'kcmd3' then
+		if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'kcmd3' then
            CMDPrint3()
            Remind("Check your console by running /console!")
         end
@@ -2620,17 +2609,17 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
         end
 
         if string.sub(msg:lower(), 1, #prefix + 2) == prefix..'iy' then -- the classic
-		if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'iyshop' then else
-                	GExecute("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source")
-		   	Remind("Executed Infinite Yield (IY).")
-		end
+			if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'iyshop' then else
+                GExecute("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source")
+		   		Remind("Executed Infinite Yield (IY).")
+			end
         end
 		
         if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'cmdpi' then
 			if IYchecks.IsOnMobile then
 				Remind("CMD PI/V3 does not work on mobile executors.")
 			else
-                	GExecute("https://raw.githubusercontent.com/S-PScripts/KAH/main/CMD%20v3.lua")
+                GExecute("https://raw.githubusercontent.com/S-PScripts/KAH/main/CMD%20v3.lua")
 				Remind("Executed CMD PI/V3. Created by quiving.")
 			end
         end
@@ -2652,7 +2641,7 @@ TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.Messag
 
         if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'ilove' then -- CREDITS TO TECH
                 Remind("This might not work if it's already been executed. Sorry! Created by Tech")
-		Remind("Turn this off by typing stopmusic.")
+				Remind("Turn this off by typing stopmusic.")
                 if haspersons == true then
                         GExecute("https://raw.githubusercontent.com/Tech-187/Music-lyrics-on-time/main/I%20loveee.lua")
                 else
@@ -11438,6 +11427,7 @@ end ]]
 
 
 end)
+end
 
 --[[
   ____ ___  ____  _____ 
@@ -20677,8 +20667,6 @@ game.Players.LocalPlayer.OnTeleport:Connect(function(State)
 		queueteleport("loadstring(game:HttpGet('kohlslite.pages.dev/source.lua'))()") -- loadstring hosted
 	end
 end)
-
-print(TYPE)
 
 -- Information about KohlsLite can be found at the top of this page.
 -- This script was created by ScriptingProgrammer / ts2021 / S-PScripts
