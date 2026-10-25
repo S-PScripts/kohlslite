@@ -1116,11 +1116,7 @@ local partColourer = Instance.new("Part")
 partColourer.Color = Color3.new(1,1,1)
 local selectedColour = partColourer.Color
 
-if kah_np then
-	kahinstance = workspace.Terrain:FindFirstChild(GAMEFOLDER):FindFirstChild("Folder")
-else
-	kahinstance = workspace.Terrain:FindFirstChild(GAMEFOLDER):FindFirstChild("Folder")
-end
+kahinstance = workspace.Terrain:FindFirstChild(GAMEFOLDER):FindFirstChild("Folder")
 	
 local VisBindable = Instance.new("BindableEvent")
 
@@ -5023,7 +5019,6 @@ if TextBox then
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'fixfl' then   
-		if kah_np then return Remind("Unavailable. Run omove/ivmore to move the floor parts.") end
                 if movestatus == true then 
                         return 
                 end        
@@ -5049,7 +5044,6 @@ if TextBox then
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'movefl' then   
-		if kah_np then return Remind("Unavailable. Run omove/ivmore to move the floor parts.") end
                 if movestatus == true then 
                         return 
                 end        
@@ -14317,14 +14311,12 @@ function Bring()
 end
 
 function VFix()
-	if kah_np == false then
-   		for i,v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace:GetDescendants()) do
+   	for i,v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace:GetDescendants()) do
         		if v:IsA("BasePart") then
             			v.Velocity = Vector3.new(0,0,0)
 	    			v.RotVelocity = Vector3.new(0, 0, 0)
         		end
-    		end
-	end
+    end
 
     workspace.Terrain[GAMEFOLDER].Workspace.Baseplate.Velocity = Vector3.new(0,0,0)
     workspace.Terrain[GAMEFOLDER].Workspace.Baseplate.RotVelocity = Vector3.new(0,0,0) 
@@ -15229,27 +15221,17 @@ end
 -- temp NOK
 function TNOK(mode) -- vitalux cmd
 	pcall(function()
-		if kah_np == false then
 			if not game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren() then
 				return 
 			end
-
-        		for i, v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
+        		
+			for i, v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
                 		if mode == "true" then
                         		v.CanTouch = false
                 		else
                         		v.CanTouch = true
                 		end
-        		end
-		else
-        		for i, v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
-                		if mode == "true" then
-                        		v.CanTouch = false
-                		else
-                        		v.CanTouch = true
-                		end
-        		end	
-		end
+        	end	
 	end)
 end
 
@@ -20381,10 +20363,10 @@ end
 
 -- Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
 
-if kah_np == true then
-	print("[WARNING]: You are playing KAH LEGACY and KohlsLite is not fully compatible.")
-	Remind("[WARNING]: You are playing KAH LEGACY and KohlsLite is not fully compatible.", 3)
-end
+--if kah_np == true then
+--	print("[WARNING]: You are playing KAH LEGACY and KohlsLite is not fully compatible.")
+--	Remind("[WARNING]: You are playing KAH LEGACY and KohlsLite is not fully compatible.", 3)
+--end
 
 Remind("OCTOBER 2025: This script is DISCONTINUED and many things NO LONGER WORK. View more at the source: kohlslite.pages.dev", 10)
 -- Remind("Some aliases and autorun commands will no longer work due to Roblox's chat update. I will not be fixing these. Sorry.", 5)
