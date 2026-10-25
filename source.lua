@@ -2566,7 +2566,8 @@ Note: The indentation is awful. Also, if you fork this script, use an actual han
 
 --TYPE = (kah_np and game.Players.LocalPlayer.Chatted or game.TextChatService.MessageReceived):Connect(function(tbl)
 
-zamn = false
+-- tech changed how this works so script is broken ffs
+zamn = true
 TYPE = (zamn and game.Players.LocalPlayer.Chatted or game.TextChatService.MessageReceived):Connect(function(tbl)
 --game.TextChatService.MessageReceived:Connect(function(tbl)
     task.wait(0)
@@ -20645,7 +20646,7 @@ end)
 if kah_np == false then
 	Chat("h \n\n\n\n\n KohlsLite executed! Version: "..getgenv().klversion.." \n\n\n\n\n")
 else
-	Speak("KohlsLite executed! Version: "..getgenv().klversion)
+	-- Speak("KohlsLite executed! Version: "..getgenv().klversion)
 end
 
 -- Remind("KohlsLite: Griefing KAH since the beginning of 2024.")
@@ -20676,6 +20677,8 @@ game.Players.LocalPlayer.OnTeleport:Connect(function(State)
 		queueteleport("loadstring(game:HttpGet('kohlslite.pages.dev/source.lua'))()") -- loadstring hosted
 	end
 end)
+
+print(TYPE)
 
 -- Information about KohlsLite can be found at the top of this page.
 -- This script was created by ScriptingProgrammer / ts2021 / S-PScripts
