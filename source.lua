@@ -164,15 +164,6 @@ local IYchecks = {
 	IsOnMobile = table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform())
 }
 
-local playerGui = game.Players.LocalPlayer:FindFirstChild("PlayerGui")
-local customChat = playerGui and playerGui:FindFirstChild("Chat")
-local chatFrame = customChat and customChat:FindFirstChild("Frame")
-
-if chatFrame and chatFrame.Visible == true then
-	print("ver latest");
-	assold = true
-end
-
 -- Speak function
 local function Speak(msg)
     if IYchecks.legacyChat then
@@ -185,13 +176,8 @@ local function Speak(msg)
     end
 end
 
--- Chat function
 local function Chat(msg)
-    if assold then
-        game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(msg, "System") 
-    else
-       game:GetService("TextChatService").TextChannels.RBXGeneral:SendAsync(msg)
-    end
+    Speak(msg)
 end
 
 -- Check if KohlsLite is already executed
