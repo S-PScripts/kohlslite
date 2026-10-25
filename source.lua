@@ -197,7 +197,7 @@ end
 if getgenv().ignorewronggame then 
 	--
 else
-	if game.PlaceId ~= 112420803 and game.PlaceId ~= 115670532 and game.PlaceId ~= 14747334292 then
+	if game.PlaceId ~= 112420803 and game.PlaceId ~= 115670532 and game.PlaceId ~= 136318028703525 then
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
@@ -494,7 +494,7 @@ local thorn_ig_anti = {
 -- tslock (don't edit)
 local conne = {}
 
-kah_np = (game.PlaceId == 14747334292) -- This checks if the game is KAH X and fixes stuff accordingly; variable called KAH NP as that was its old name
+kah_np = (game.PlaceId == 136318028703525) -- This checks if the game is KAH X and fixes stuff accordingly; variable called KAH NP as that was its old name
 if kah_np == true then
 	GAMEFOLDER = "_Game"
 else
@@ -1118,7 +1118,7 @@ partColourer.Color = Color3.new(1,1,1)
 local selectedColour = partColourer.Color
 
 if kah_np then
-	kahinstance = workspace
+	kahinstance = workspace.Terrain:FindFirstChild(GAMEFOLDER):FindFirstChild("Folder")
 else
 	kahinstance = workspace.Terrain:FindFirstChild(GAMEFOLDER):FindFirstChild("Folder")
 end
