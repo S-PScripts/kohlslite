@@ -11,7 +11,7 @@
  \ \   ___  \ \  \\\  \ \   __  \ \  \    \ \_____  \ \  \    \ \  \   \ \  \ \ \  \_|/__  
   \ \  \\ \  \ \  \\\  \ \  \ \  \ \  \____\|____|\  \ \  \____\ \  \   \ \  \ \ \  \_|\ \ 
    \ \__\\ \__\ \_______\ \__\ \__\ \_______\____\_\  \ \_______\ \__\   \ \__\ \ \_______\
-    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| XZ1.1
+    \|__| \|__|\|_______|\|__|\|__|\|_______|\_________\|_______|\|__|    \|__|  \|_______| XZ1.2
 
 View the source here: https://kohlslite.pages.dev/source.lua
 Kohlslite is updated here: https://github.com/S-PScripts/kohlslite/blob/main/source.lua
@@ -144,7 +144,7 @@ end
 getgenv().default_prefix = "." 
 
 -- The version of KohlsLite
-getgenv().klversion = "XZ1.1"
+getgenv().klversion = "XZ1.2"
 
 -- Notifications
 local function Remind(msg, length)
@@ -4752,34 +4752,25 @@ if TextBox then
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'fixbp' then
-	if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fixbp2' then
-	else
+		if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fixbp2' then
+			else
                 if movestatus == true then 
                         return 
                 end
                 DisCol()
-                if kah_np == false then	
-			pcall(function()
-				if not workspace.Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
-					Remind("NOT LOADED!")
-					return
-				end
-			end)
-                	moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"], 2)
-		else
-			pcall(function()
-				if not game:GetService("Workspace").Tabby.Admin_House:FirstFindChild("Baseplate") then
-					Remind("NOT LOADED!")
-					return
-				end
-			end)
-			moveobject(game:GetService("Workspace").Tabby.Admin_House.Baseplate, 2)
-		end
+				pcall(function()
+					if not workspace.Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
+						Remind("NOT LOADED!")
+						return
+					end
+				end)
+                moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"], 2)
+
                 repeat fwait() until movestatus == false
                 GravFix()
                 Chat("respawn me")
                 ColFix()
-	end
+		end
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'movebp' then
@@ -4787,23 +4778,14 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
-			pcall(function()
-				if not workspace.Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
-					Remind("NOT LOADED!")
-					return
-				end
-			end)
-                	moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"], 1)
-		else
-			pcall(function()
-				if not game:GetService("Workspace").Tabby.Admin_House:FirstFindChild("Baseplate") then
-					Remind("NOT LOADED!")
-					return
-				end
-			end)
-			moveobject(game:GetService("Workspace").Tabby.Admin_House.Baseplate, 1)
-		end
+				pcall(function()
+					if not workspace.Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
+						Remind("NOT LOADED!")
+						return
+					end
+				end)
+                moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"], 1)
+		
                 repeat fwait() until movestatus == false
                 GravFix()
                 Chat("respawn me")
@@ -4811,19 +4793,11 @@ if TextBox then
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'spawnkill' then
-		if kah_np == false then
-                        moveObject(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump9,CFrame.new(-41.0650024, 1.30000007, -28.601058959961, 0, 0, -1, 0, 1, 0, 1, 0, 0))
-		else
-			 moveObject(game:GetService("Workspace").Tabby.Admin_House.Jumps.Jump9,CFrame.new(-41.0650024, 1.30000007, -28.601058959961, 0, 0, -1, 0, 1, 0, 1, 0, 0))
-		end
+        moveObject(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby.Jump9,CFrame.new(-41.0650024, 1.30000007, -28.601058959961, 0, 0, -1, 0, 1, 0, 1, 0, 0))
     end
 
     if string.sub(msg:lower(), 1, #prefix + 9) == prefix..'cagespawn' then
-		if kah_np == false then
-                    moveObject(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace["Basic House"].SmoothBlockModel40,CFrame.new(-10.7921638, 17.3182983, -16.0743637, -0.999961913, -0.0085983118, 0.00151610479, -1.01120179e-08, 0.173648253, 0.98480773, -0.00873095356, 0.984770179, -0.173641637))
-		else
-			Remind("Unavailable.")
-		end
+        moveObject(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace["Basic House"].SmoothBlockModel40,CFrame.new(-10.7921638, 17.3182983, -16.0743637, -0.999961913, -0.0085983118, 0.00151610479, -1.01120179e-08, 0.173648253, 0.98480773, -0.00873095356, 0.984770179, -0.173641637))
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixpads2' then
@@ -4850,11 +4824,7 @@ if TextBox then
     end
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fixbp2' then
-		if kah_np == false then
-                    	moveObject(workspace.Terrain[GAMEFOLDER].Workspace.Baseplate,CFrame.new(-501, 0.100000001, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1))
-		else
-	        	moveObject(game:GetService("Workspace").Tabby.Admin_House.Baseplate,CFrame.new(-501, 0.100000001, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1))
-		end
+        moveObject(workspace.Terrain[GAMEFOLDER].Workspace.Baseplate,CFrame.new(-501, 0.100000001, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1))
     end
 
     if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'fcam' then
@@ -4873,8 +4843,7 @@ if TextBox then
                         return 
                 end        
                 DisCol()
-		if kah_np == false then
-			local Map = Kohls:WaitForChild("Workspace")
+				local Map =  workspace.Terrain[GAMEFOLDER].Workspace
                 	if Map:FindFirstChild("Spawn1") then
                         	moveobject(Map:FindFirstChild("Spawn1"), 2)
                         	repeat fwait() until movestatus == false
@@ -4892,25 +4861,7 @@ if TextBox then
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	if game:GetService("Workspace").Tabby.Admin_House.Spawn1 then
-                        	moveobject(game:GetService("Workspace").Tabby.Admin_House.Spawn1, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-                	task.wait(1)
-                	if game:GetService("Workspace").Tabby.Admin_House.Spawn2 then
-                        	moveobject(game:GetService("Workspace").Tabby.Admin_House.Spawn2, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-                	task.wait(1)
-                	if game:GetService("Workspace").Tabby.Admin_House.Spawn3 then
-                        	moveobject(game:GetService("Workspace").Tabby.Admin_House.Spawn3, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -4921,8 +4872,7 @@ if TextBox then
                         return 
                 end        
                 DisCol()
-		if kah_np == false then
-			local Map = Kohls:WaitForChild("Workspace")
+			local Map = workspace.Terrain[GAMEFOLDER].Workspace
                 	if Map:FindFirstChild("Spawn1") then
                         	moveobject(Map:FindFirstChild("Spawn1"), 1)
                         	repeat fwait() until movestatus == false
@@ -4940,25 +4890,7 @@ if TextBox then
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	if game:GetService("Workspace").Tabby.Admin_House.Spawn1 then
-                        	moveobject(game:GetService("Workspace").Tabby.Admin_House.Spawn1, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-                	task.wait(1)
-                	if game:GetService("Workspace").Tabby.Admin_House.Spawn2 then
-                        	moveobject(game:GetService("Workspace").Tabby.Admin_House.Spawn2, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-                	task.wait(1)
-                	if game:GetService("Workspace").Tabby.Admin_House.Spawn3 then
-                        	moveobject(game:GetService("Workspace").Tabby.Admin_House.Spawn3, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+	
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -5148,36 +5080,19 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
                 	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
-		if kah_np == false then
+		
                 	for _,v in pairs(workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Snow:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -5190,36 +5105,20 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
                 	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
-		if kah_np == false then
+		
                 	for _,v in pairs(workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Snow:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+		
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -5231,21 +5130,13 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
                 	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -5257,21 +5148,13 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
 			for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-			for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+		
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -5283,21 +5166,13 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
                 	for _,v in pairs(workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Snow:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -5309,21 +5184,13 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
                 	for _,v in pairs(workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Snow:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+		
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -5334,21 +5201,13 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
-                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Admin Dividers"]:GetChildren()) do
+                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Admin["Admin Dividers"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-			for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Grids:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -5359,21 +5218,13 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
-                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Admin Dividers"]:GetChildren()) do
+                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Admin["Admin Dividers"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-			for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Grids:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+	
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -5384,21 +5235,13 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
                 	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.House:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -5409,21 +5252,13 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
                 	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.House:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+	
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -5434,21 +5269,13 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
                 	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Building Bricks"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 2)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Build_Stuff:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+		
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -5459,21 +5286,13 @@ if TextBox then
                         return 
                 end
                 DisCol()
-		if kah_np == false then
                 	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Building Bricks"]:GetChildren()) do
                         	if allclear() == false then break end
                         	moveobject(v, 1)
                         	repeat fwait() until movestatus == false
                         	Chat("respawn me")
                 	end
-		else
-                	for _,v in pairs(game:GetService("Workspace").Tabby.Admin_House.Build_Stuff:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		end
+		
                 GravFix()
                 Chat("respawn me")
                 ColFix()
@@ -8767,11 +8586,7 @@ return
 
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bpfixv' then
 	VFix()
-	if kah_np == false then
-		gtarget = workspace.Terrain[GAMEFOLDER].Workspace.Baseplate
-	else
-		gtarget = game:GetService("Workspace").Tabby.Admin_House.Baseplate
-	end
+	gtarget = workspace.Terrain[GAMEFOLDER].Workspace.Baseplate
 	movepart(gtarget)  
 	repeat task.wait() until mready == true 
 	task.wait(0.5)
@@ -8788,11 +8603,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'flipbp' then
 	Remind("Flipping...")
-	if kah_np == false then
-		local target = workspace.Terrain[GAMEFOLDER].Workspace.Baseplate
-	else
-		local target = game:GetService("Workspace").Tabby.Admin_House.Baseplate
-	end
+	local target = workspace.Terrain[GAMEFOLDER].Workspace.Baseplate
 	movepart(target)  
 	repeat task.wait() until mready == true
 	task.wait(0.5)
@@ -14515,13 +14326,9 @@ function VFix()
     		end
 	end
 
-	if kah_np == false then
-    		workspace.Terrain[GAMEFOLDER].Workspace.Baseplate.Velocity = Vector3.new(0,0,0)
-    		workspace.Terrain[GAMEFOLDER].Workspace.Baseplate.RotVelocity = Vector3.new(0,0,0) 
-	else
-		game:GetService("Workspace").Tabby.Admin_House.Baseplate.Velocity = Vector3.new(0,0,0)
-		game:GetService("Workspace").Tabby.Admin_House.Baseplate.RotVelocity = Vector3.new(0,0,0)
-	end
+    workspace.Terrain[GAMEFOLDER].Workspace.Baseplate.Velocity = Vector3.new(0,0,0)
+    workspace.Terrain[GAMEFOLDER].Workspace.Baseplate.RotVelocity = Vector3.new(0,0,0) 
+
 --game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
 end
 
@@ -15435,7 +15242,7 @@ function TNOK(mode) -- vitalux cmd
                 		end
         		end
 		else
-        		for i, v in pairs(workspace.Tabby.Admin_House.Obby:GetChildren()) do -- also removes obby walls collision 
+        		for i, v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
                 		if mode == "true" then
                         		v.CanTouch = false
                 		else
@@ -18601,23 +18408,14 @@ function rmap()
 end
 
 function rbase()
-        	if kah_np == false then	
-			pcall(function()
-				if not workspace.Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
-					Remind("NOT LOADED!")
-					return
-				end
-			end)
-                	vro = game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"]
-		else
-			pcall(function()
-				if not game:GetService(GAMEFOLDER).Tabby.Admin_House:FirstFindChild("Baseplate") then
-					Remind("NOT LOADED!")
-					return
-				end
-			end)
-			vro = game:GetService(GAMEFOLDER).Tabby.Admin_House.Baseplate
-		end
+		pcall(function()
+			if not workspace.Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
+				Remind("NOT LOADED!")
+				return
+			end
+		end)
+    	
+		vro = game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"]
 
 		local RainbowValue = 0
 		Loops.rbase = true
@@ -18640,23 +18438,14 @@ function rbase()
 end
 
 function rbricks()
-        	if kah_np == false then	
-			pcall(function()
-				local par = #workspace.Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()
-				if par == 0 then
+		pcall(function()
+			local par = #workspace.Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()
+			if par == 0 then
 					return Remind("NO OBBY BRICKS AVAILABLE.")
-				end
-			end)
-                	vro = game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()
-		else
-			pcall(function()
-				local par = #game:GetService("Workspace").Tabby.Admin_House.Jumps:GetChildren()
-				if par == 0 then
-					return Remind("NO OBBY BRICKS AVAILABLE.")
-				end
-			end)
-			vro = game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()
-		end
+			end
+		end)	
+
+		vro = game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()
 
 		local RainbowValue = 0
 		Loops.rbricks = true
@@ -19835,86 +19624,64 @@ end
 -- end
 
 colorAPI.colorRegen_2 = function(R,G,B)
-		if workspace.Terrain[GAMEFOLDER].Admin:FindFirstChild("Regen") then
-			colorAPI.color_2(workspace.Terrain[GAMEFOLDER].Admin.Regen,R,G,B)
-		end    
+	if workspace.Terrain[GAMEFOLDER].Admin:FindFirstChild("Regen") then
+		colorAPI.color_2(workspace.Terrain[GAMEFOLDER].Admin.Regen,R,G,B)
+	end    
 end    
 
 
 colorAPI.colorObbyBox = function(color) -- Default is "Teal"
-	if kah_np == false then
-		parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]
-	else
-		parts = game:GetService("Workspace").Tabby.Admin_House.Snow
-	end
+	parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]
 	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color(v, color) -- colorAPI.transformToColor3(BrickColor.new("Bright red"))
 	end
 end
 
 colorAPI.colorObbyBox_2 = function(R,G,B)
-	if kah_np == false then
-		parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]
-	else
-		parts = game:GetService("Workspace").Tabby.Admin_House.Snow
-	end
+	parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]
 	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color_2(v,R,G,B)
 	end
 end
 
 colorAPI.colorObbyBricks = function(color)-- Default is "Really red"
-	if kah_np == false then
-		parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]
-	else
-		parts = game:GetService("Workspace").Tabby.Admin_House.Jumps
-	end
+	parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]
 	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color(v, color)
 	end
 end
 
 colorAPI.colorObbyBricks_2 = function(R,G,B)
-	if kah_np == false then
-		parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]
-	else
-		parts = game:GetService("Workspace").Tabby.Admin_House.Jumps
-	end
+	parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]
 	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color_2(v, R,G,B)
 	end
 end
 
 colorAPI.colorAdminDivs = function(color)-- Default is "Dark stone grey"
-	if kah_np == false then
-                parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Admin Dividers"]
-	else
-		parts = game:GetService("Workspace").Tabby.Admin_House.Grids
-	end
+	parts = game.Workspace.Terrain[GAMEFOLDER].Admin["Admin Dividers"]
 	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color(v, color)
 	end
 end
 
 colorAPI.colorAdminDivs_2 = function(R,G,B)
-	if kah_np == false then
-                parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Admin Dividers"]
-	else
-		parts = game:GetService("Workspace").Tabby.Admin_House.Grids
-	end
+	parts = game.Workspace.Terrain[GAMEFOLDER].Admin["Admin Dividers"]
 	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color_2(v, R,G,B)
 	end
 end
  
 colorAPI.colorPads = function(color)-- Default is "Bright green"
-	for i,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Admin["Pads"]:GetChildren()) do
+	parts = game.Workspace.Terrain[GAMEFOLDER].Admin["Pads"]
+	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color(v.Head, color)
 	end
 end
 
 colorAPI.colorPads_2 = function(R,G,B)
-	for i,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Admin["Pads"]:GetChildren()) do
+	parts = game.Workspace.Terrain[GAMEFOLDER].Admin["Pads"]
+	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color_2(v.Head, R,G,B)
 	end
 end
@@ -19931,12 +19698,8 @@ colorAPI.colorHouse = function(arg)
  
 	  -------------------------------------------------------------------- House --------------------------------------------------------------------
 
-		if kah_np == false then
-			parts = workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]
-                        Remind("agspureiam renamed the parts so you can't repaint the house with this script, sorry!! :P")
-		else
-			parts = game:GetService("Workspace").Tabby.Admin_House.House
-		end
+		parts = workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]
+
 		for i,v in pairs(parts:GetChildren()) do
 			coroutine.wrap(function()
 					if v.Name == "SmoothBlockModel103" or v.Name == "SmoothBlockModel105" or v.Name == "SmoothBlockModel106" or v.Name == "SmoothBlockModel108" or v.Name == "SmoothBlockModel11" or v.Name == "SmoothBlockModel113" or v.Name == "SmoothBlockModel114" or v.Name == "SmoothBlockModel115" or v.Name == "SmoothBlockModel116" or v.Name == "SmoothBlockModel118" or v.Name == "SmoothBlockModel122" or v.Name == "SmoothBlockModel126" or v.Name == "SmoothBlockModel129" or v.Name == "SmoothBlockModel13" or v.Name == "SmoothBlockModel130" or v.Name == "SmoothBlockModel131" or v.Name == "SmoothBlockModel132" or v.Name == "SmoothBlockModel134" or v.Name == "SmoothBlockModel135" or v.Name == "SmoothBlockModel14" or v.Name == "SmoothBlockModel140" or v.Name == "SmoothBlockModel142" or v.Name == "SmoothBlockModel147" or v.Name == "SmoothBlockModel15" or v.Name == "SmoothBlockModel154" or v.Name == "SmoothBlockModel155" or v.Name == "SmoothBlockModel164" or v.Name == "SmoothBlockModel166" or v.Name == "SmoothBlockModel173" or v.Name == "SmoothBlockModel176" or v.Name == "SmoothBlockModel179" or v.Name == "SmoothBlockModel185" or v.Name == "SmoothBlockModel186" or v.Name == "SmoothBlockModel190" or v.Name == "SmoothBlockModel191" or v.Name == "SmoothBlockModel196" or v.Name == "SmoothBlockModel197" or v.Name == "SmoothBlockModel198" or v.Name == "SmoothBlockModel20" or v.Name == "SmoothBlockModel201" or v.Name == "SmoothBlockModel203" or v.Name == "SmoothBlockModel205" or v.Name == "SmoothBlockModel207" or v.Name == "SmoothBlockModel208" or v.Name == "SmoothBlockModel209" or v.Name == "SmoothBlockModel210" or v.Name == "SmoothBlockModel211" or v.Name == "SmoothBlockModel213" or v.Name == "SmoothBlockModel218" or v.Name == "SmoothBlockModel22" or v.Name == "SmoothBlockModel223" or v.Name == "SmoothBlockModel224" or v.Name == "SmoothBlockModel226" or v.Name == "SmoothBlockModel26" or v.Name == "SmoothBlockModel29" or v.Name == "SmoothBlockModel30" or v.Name == "SmoothBlockModel31" or v.Name == "SmoothBlockModel36" or v.Name == "SmoothBlockModel37" or v.Name == "SmoothBlockModel38" or v.Name == "SmoothBlockModel39" or v.Name == "SmoothBlockModel41" or v.Name == "SmoothBlockModel48" or v.Name == "SmoothBlockModel49" or v.Name == "SmoothBlockModel51" or v.Name == "SmoothBlockModel56" or v.Name == "SmoothBlockModel67" or v.Name == "SmoothBlockModel68" or v.Name == "SmoothBlockModel69" or v.Name == "SmoothBlockModel70" or v.Name == "SmoothBlockModel72" or v.Name == "SmoothBlockModel75" or v.Name == "SmoothBlockModel8" or v.Name == "SmoothBlockModel81" or v.Name == "SmoothBlockModel85" or v.Name == "SmoothBlockModel93" or v.Name == "SmoothBlockModel98" then
@@ -19980,12 +19743,9 @@ colorAPI.colorHouse_2 = function(Extra)
 		local Walls = Extra.wallsC
 		local Roof = Extra.roofC
 		local ChimneyTopParts = Extra.chiC
-		if kah_np == false then
-			parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]
-                        Remind("agspureiam renamed the parts so you can't repaint the house with this script, sorry!! :P")
-		else
-			parts = game:GetService("Workspace").Tabby.Admin_House.House
-		end
+
+		parts = workspace.Terrain[GAMEFOLDER].Workspace["Basic House"]
+
 		for i,v in pairs(parts:GetChildren()) do
 			coroutine.resume(coroutine.create(function()
 				if v.Name == "SmoothBlockModel103" or v.Name == "SmoothBlockModel105" or v.Name == "SmoothBlockModel106" or v.Name == "SmoothBlockModel108" or v.Name == "SmoothBlockModel11" or v.Name == "SmoothBlockModel113" or v.Name == "SmoothBlockModel114" or v.Name == "SmoothBlockModel115" or v.Name == "SmoothBlockModel116" or v.Name == "SmoothBlockModel118" or v.Name == "SmoothBlockModel122" or v.Name == "SmoothBlockModel126" or v.Name == "SmoothBlockModel129" or v.Name == "SmoothBlockModel13" or v.Name == "SmoothBlockModel130" or v.Name == "SmoothBlockModel131" or v.Name == "SmoothBlockModel132" or v.Name == "SmoothBlockModel134" or v.Name == "SmoothBlockModel135" or v.Name == "SmoothBlockModel14" or v.Name == "SmoothBlockModel140" or v.Name == "SmoothBlockModel142" or v.Name == "SmoothBlockModel147" or v.Name == "SmoothBlockModel15" or v.Name == "SmoothBlockModel154" or v.Name == "SmoothBlockModel155" or v.Name == "SmoothBlockModel164" or v.Name == "SmoothBlockModel166" or v.Name == "SmoothBlockModel173" or v.Name == "SmoothBlockModel176" or v.Name == "SmoothBlockModel179" or v.Name == "SmoothBlockModel185" or v.Name == "SmoothBlockModel186" or v.Name == "SmoothBlockModel190" or v.Name == "SmoothBlockModel191" or v.Name == "SmoothBlockModel196" or v.Name == "SmoothBlockModel197" or v.Name == "SmoothBlockModel198" or v.Name == "SmoothBlockModel20" or v.Name == "SmoothBlockModel201" or v.Name == "SmoothBlockModel203" or v.Name == "SmoothBlockModel205" or v.Name == "SmoothBlockModel207" or v.Name == "SmoothBlockModel208" or v.Name == "SmoothBlockModel209" or v.Name == "SmoothBlockModel210" or v.Name == "SmoothBlockModel211" or v.Name == "SmoothBlockModel213" or v.Name == "SmoothBlockModel218" or v.Name == "SmoothBlockModel22" or v.Name == "SmoothBlockModel223" or v.Name == "SmoothBlockModel224" or v.Name == "SmoothBlockModel226" or v.Name == "SmoothBlockModel26" or v.Name == "SmoothBlockModel29" or v.Name == "SmoothBlockModel30" or v.Name == "SmoothBlockModel31" or v.Name == "SmoothBlockModel36" or v.Name == "SmoothBlockModel37" or v.Name == "SmoothBlockModel38" or v.Name == "SmoothBlockModel39" or v.Name == "SmoothBlockModel41" or v.Name == "SmoothBlockModel48" or v.Name == "SmoothBlockModel49" or v.Name == "SmoothBlockModel51" or v.Name == "SmoothBlockModel56" or v.Name == "SmoothBlockModel67" or v.Name == "SmoothBlockModel68" or v.Name == "SmoothBlockModel69" or v.Name == "SmoothBlockModel70" or v.Name == "SmoothBlockModel72" or v.Name == "SmoothBlockModel75" or v.Name == "SmoothBlockModel8" or v.Name == "SmoothBlockModel81" or v.Name == "SmoothBlockModel85" or v.Name == "SmoothBlockModel93" or v.Name == "SmoothBlockModel98" then
@@ -20025,11 +19785,7 @@ colorAPI.colorBuildingBricks = function(arg)
  
 		-------------------------------------------------------------------- Building Bricks --------------------------------------------------------------------
 
-		if kah_np == false then
-			parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Building Bricks"]
-		else
-			parts = game:GetService("Workspace").Tabby.Admin_House.Build_Stuff
-		end
+		parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Building Bricks"]
 
 		for i,v in pairs(parts:GetChildren()) do
 			coroutine.wrap(function()
@@ -20083,12 +19839,7 @@ colorAPI.colorBuildingBricks_2 = function(Extra)
 		local TP = Extra.TP
 		local RR = Extra.RR
 
-		if kah_np == false then
-			parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Building Bricks"]
-		else
-			parts = game:GetService("Workspace").Tabby.Admin_House.Build_Stuff
-		end
-
+		parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Building Bricks"]
 
 		for i,v in pairs(parts:GetChildren()) do
 			coroutine.resume(coroutine.create(function()
