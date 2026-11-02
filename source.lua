@@ -194,12 +194,12 @@ else
 		local response = Instance.new("BindableFunction")
 		function response.OnInvoke(answer)
 			if answer == "Yes" then
-		    		game:GetService("TeleportService"):Teleport(112420803, game:GetService("Players").LocalPlayer) -- nbc join only.
+		    		game:GetService("TeleportService"):Teleport(136318028703525, game:GetService("Players").LocalPlayer)
 			end
 		end
 		game:GetService("StarterGui"):SetCore("SendNotification", {
 			Title = getgenv().scriptname.." Manager",
-			Text = "You are not in Kohls Admin House. Would you like to join KAH [NBC]?",
+			Text = "You are not in Kohls Admin House. Would you like to join KAH X?",
 			Duration = math.huge,
 			Callback = response,
 			Button1 = "Yes",
