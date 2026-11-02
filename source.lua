@@ -18280,7 +18280,7 @@ if writefile and readfile then
 			print("All KohlsLite list files were found.")
 		else
 			if not isfile("KohlsLite/Blacklisted.json") then
-				writefile("KohlsLite/Blacklisted.json", game:GetService("HttpService"):JSONEncode({})) -- The JSON comes from Knocks!
+				writefile("KohlsLite/Blacklisted.json", game:GetService("HttpService"):JSONEncode({}))
 				print("Blacklist list missing - created!")
 			end
 
@@ -18378,7 +18378,7 @@ task.spawn(function()
 					print("The song being played is "..beaner.SoundId)
                                 	nmusicid = musicid:match("id=(%d+)")
 					table.insert(musiclog, musicid)
-					if writefile and readfile then -- dizzy momento
+					if writefile and readfile then
 	    					local cd = os.date("%Y-%m-%d %H:%M:%S") -- current date
     						local logdsc = "Audio was detected at: [".. cd .. "] \n The music id was: [" .. nmusicid .. "] \n The music file was: [".. musicid .."]\n" -- alog text
    						local file = "KohlsLite/AudioLogger.txt" -- file name
