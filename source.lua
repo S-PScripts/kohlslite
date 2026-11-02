@@ -42,7 +42,7 @@ KohlsLite is a bit like a mixture of all the scripts that already exist in KAH, 
   -- > Shortcut v3-VAR  [by Tech; do note that I do not have the source]
   -- > ii's Stupid Admin [by iiDk]
   -- > Old PR Script [by atprog]
-  -- > KohlsNoob [by gamingkhoaito#1014 and haroldjd2017ipad#4295]
+  -- > Old KohlsNoob [by gamingkhoaito#1014 and haroldjd2017ipad#4295]
   -- > KohlsCool [by sergioesquina/kohlscool]
   -- > Noobsploit [by NoobSploit]
   -- > Jotunnheim [by Jotunn]
@@ -114,8 +114,9 @@ I do not want to spend hours upon hours adding the features that you can get eas
 
 TS2021, October 2025
 
-PS: KAH got revived again because of StromBrew during November 2025. Has 30 players at least, so a little less dead. And no exploiters still, that's neat, I guess.
-Maybe if someone else makes a KAH script or something related to f3x/btools is found, I'll come back... (only if a game.Players:Chat() replacement is found as well)
+UPDATE: KAH got revived again because of StromBrew during November 2025. Has 30 players at least, so a little less dead. And no exploiters still; that's neat, I guess.
+HaroldNyx also returned to make a better version of KohlsNoob. It has a lot of f3x/btools stuff that KL doesn't have. Don't think I'll add them.
+
 ]]
 
 --[[
@@ -756,6 +757,12 @@ local rand_players = {
 
 	-- Loopkill for all
 	loopkillall = false,
+
+	-- Trapped in jail
+	permjail = {},
+
+	-- Everyone is trapped in jail
+	permjailall = false,
 	
 	-- Spam name users
 	byecam = {},
@@ -765,7 +772,6 @@ local rand_players = {
 }
 
 -- Gamepass saving 
--- Users that use perm will be placed here
 local gamepasses = { 
 	-- Users that use perm will be placed here
 	permusers = {},
@@ -856,7 +862,6 @@ else
 	}
 end
 
-
 -- Anti logs
 local antimlog = false -- for music
 local antiglog = false -- for gears [unused]
@@ -874,9 +879,9 @@ local keybinds = {
 	keybindz_unsafe = false -- Enable crash keybind, risky!
 }
 
--- Clicking (bizzare recode, I'm probably the first one to make a dynamic click)
+-- Clicking (bizarre recode, I'm probably the first one to make a dynamic click)
 local click_stuff = {
-	-- Click and it'll run the command below
+	-- Click, and it'll run the command below
 	click_for_something = false,
 
 	-- The command that should be run on the thing clicked in question
@@ -2595,26 +2600,18 @@ if TextBox then
 		   		Remind("Executed Infinite Yield (IY).")
 			end
         end
-		
-        if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'cmdpi' then
-			if IYchecks.IsOnMobile then
-				Remind("CMD PI/V3 does not work on mobile executors.")
-			else
-                GExecute("https://raw.githubusercontent.com/S-PScripts/KAH/main/CMD%20v3.lua")
-				Remind("Executed CMD PI/V3. Created by quiving.")
-			end
-        end
 
-        if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'cmdy' then -- you don't need this for attaching anymore ;)
-                GExecute("https://raw.githubusercontent.com/S-PScripts/KAH/main/CMD-Y%20(v1.56).lua")
-				Remind("Executed CMD Y/V2. Created by quiving.")
+        if string.sub(msg:lower(), 1, #prefix + 4) == prefix..'klno' then
+                GExecute("https://raw.githubusercontent.com/Kohls-Admin-House/Scripts/refs/heads/main/KohlsNoob.lua")
+				Remind("Executed KohlsNoob. Created by HaroldNyx.")
         end
 
         if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'tricky' then -- CREDITS TO TECH
                 Remind("This might not work if it's already been executed. Sorry! Created by Tech")
 				Remind("Turn this off by typing stopmusic.")
                 if haspersons == true then
-                        GExecute("https://raw.githubusercontent.com/Tech-187/Music-lyrics-on-time/main/Tricky%20lyrics.lua")
+					-- this is the non-persons version tech took it down and i can't be bothered to make a non-person version
+                        GExecute("https://raw.githubusercontent.com/S-PScripts/scripts/main/Luau/KAH/Other%20Scripts/Tricky%20Lyrics%20non%20persons.lua")
                 else
                         GExecute("https://raw.githubusercontent.com/S-PScripts/scripts/main/Luau/KAH/Other%20Scripts/Tricky%20Lyrics%20non%20persons.lua")
                 end
@@ -2624,7 +2621,7 @@ if TextBox then
                 Remind("This might not work if it's already been executed. Sorry! Created by Tech")
 				Remind("Turn this off by typing stopmusic.")
                 if haspersons == true then
-                        GExecute("https://raw.githubusercontent.com/Tech-187/Music-lyrics-on-time/main/I%20loveee.lua")
+                        GExecute("https://raw.githubusercontent.com/S-PScripts/scripts/main/Luau/KAH/Other%20Scripts/I%20loveee%20non%20persons.lua")
                 else
                         GExecute("https://raw.githubusercontent.com/S-PScripts/scripts/main/Luau/KAH/Other%20Scripts/I%20loveee%20non%20persons.lua")
                 end
@@ -2715,7 +2712,7 @@ if TextBox then
       end
 
 	if string.sub(msg, 1, #prefix + 5) == prefix..'build' then
-			Remind("Sorry, this command is not in KohlsLite. Please use CMD v3 for it.")
+			Remind("Sorry, this command is not in KohlsLite. Please skid CMD Pi for it.")
 	end
 
 	if string.sub(msg:lower(), 1, #prefix + 6) == prefix.."aichat" then
@@ -3322,7 +3319,7 @@ if TextBox then
                         Remind(player.." is already being loopkilled!")
                 end
          else
-				if player == "others" or player == "all" then -- im not making yourself loopkill, why would you want that
+				if player == "others" or player == "all" then
 					rand_players.loopkillall = true
 				else
                		Remind('Cannot find player with the name: '..dasplayer)
@@ -3345,8 +3342,54 @@ if TextBox then
                         Remind(player.." was never loopkilled!")
                 end
          else
-                if player == "others" or player == "all" then -- im not making yourself loopkill, why would you want that
+                if player == "others" or player == "all" then
 					rand_players.loopkillall = false
+				else
+               		Remind('Cannot find player with the name: '..dasplayer)
+				end
+         end
+       end
+
+       if string.sub(msg, 1, #prefix + 8) == prefix..'permjail' then
+         local dasplayer = string.sub(msg:lower(), #prefix + 10)
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
+		player = tostring(player)
+                if not table.find(rand_players.permjail, player) then
+			if player_relate.blwl_an then
+                        	Chat("h \n\n\n\n\n "..player.." is being permjailed. \n\n\n\n\n")
+			end
+                        Remind("Permjailing "..player)
+                        table.insert(rand_players.permjail, player)
+                else
+                        Remind(player.." is already being permjailed!")
+                end
+         else
+				if player == "others" or player == "all" then
+					rand_players.permjailall = true
+				else
+               		Remind('Cannot find player with the name: '..dasplayer)
+				end
+         end
+       end
+
+       if string.sub(msg, 1, #prefix + 10) == prefix..'unpermjail' then
+         local dasplayer = string.sub(msg:lower(), #prefix + 12)
+         local cplr, player = PLAYERCHECK(dasplayer)
+         if player then
+		player = tostring(player)
+                if table.find(rand_players.permjail, player) then
+			if player_relate.blwl_an then
+                        	Chat("h \n\n\n\n\n "..player.." is no longer being permjailed! \n\n\n\n\n")
+			end
+                        Remind("Stopped permjailing "..player)
+                        table.remove(rand_players.permjail, table.find(rand_players.permjail, player))
+                else
+                        Remind(player.." was never permjailed!")
+                end
+         else
+                if player == "others" or player == "all" then
+					rand_players.permjailall = false
 				else
                		Remind('Cannot find player with the name: '..dasplayer)
 				end
@@ -3571,7 +3614,7 @@ if TextBox then
 		conne = {}
 		local naughty_clock = tonumber(string.sub(msg:lower(), #prefix + 8))
 		if player_relate.blwl_an then
-        		Chat("h \n\n\n\n\n lights out, wait... \n\n\n\n\n");Regen()
+        		Chat("h \n\n\n\n\n You guys have been naughty so you're in timeout... \n\n\n\n\n");Regen()
 		end
         mainbar_stuff.slockenabled = true
 
@@ -12255,6 +12298,12 @@ connections[#connections + 1] =
                                         end
                                 end
 
+								if table.find(rand_players.permjail, v.Name) or rand_players.permjailall == true then
+                                        if not game:GetService("Workspace").Terrain[GAMEFOLDER].Folder:FindFirstChild(v.Name .. "'s jail") then
+                                        	Chat("jail "..v.Name)
+                                        end
+                                end
+
                                 if antisall.antijump == true then
                                 	if v.Character then
 						if v.Character.Humanoid then
@@ -17155,11 +17204,11 @@ end)
 
 autoungb = true
 game:GetService("CoreGui").RobloxGui.Backpack:GetPropertyChangedSignal("Visible"):Connect(function()
-                if not game:GetService("CoreGui").RobloxGui.Backpack.Visible then
-		    	if autoungb == true then
-                    		game:GetService("CoreGui").RobloxGui.Backpack.Visible = true
-			end
-                end
+    if not game:GetService("CoreGui").RobloxGui.Backpack.Visible then
+		if autoungb == true then
+            game:GetService("CoreGui").RobloxGui.Backpack.Visible = true
+		end
+    end
 end)
 -- game:GetService("CoreGui").RobloxGui.Backpack.Visible = true
 
