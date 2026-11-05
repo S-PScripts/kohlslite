@@ -1056,7 +1056,8 @@ local music_related = {
 	-- The music ID for my music only
 	mymusiconlyid = 0,
 
-	-- NOTE: MYMUSICONLY DOES NOT WORK WITH DIFFERENT PITCHES
+	-- NOTE: MYMUSICONLY DOES NOT WORK WITH DIFFERENT PITCHES (I tried to make it work once and then it was too janky and broken)
+	-- The only way I could fix it is if I removed the time position saver
 
 	-- Make the music go all over the place
 	audiotroll = false,
@@ -6452,7 +6453,7 @@ return
                 	Chat("tp "..bendin.." "..bendin)
                 	Chat("sit "..bendin)
 			Remind("The player should be ready... for uhhhh")
-			bending = false
+			backend_stuff.bending = false
 		end
     end
 
