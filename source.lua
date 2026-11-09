@@ -14225,6 +14225,7 @@ task.spawn(function()
 			else
                         	if game:GetService("Workspace"):FindFirstChild("Sound") then
                                 	game:GetService("Workspace").Sound.TimePosition = math.random(0,game:GetService("Workspace").Sound.TimeLength*100)/100
+									game:GetService("Workspace").Sound.PlaybackSpeed = math.random(-10,10)
                         	end
 			end
     end
