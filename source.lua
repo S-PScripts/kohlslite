@@ -1290,15 +1290,34 @@ print(GAMEFOLDER)
 -- Variables for moving
 local movestatus = false
 
-Kohls = workspace.Terrain._Game
-Admin = Kohls:WaitForChild("Admin")
-Pads = Admin:WaitForChild("Pads"):GetChildren()
+
+local tabby = workspace:FindFirstChild("Tabby")
+local terrain = workspace:FindFirstChild("Terrain")
+local gf = terrain and terrain:FindFirstChild(GAMEFOLDER)
+
+local obby = (tabby and tabby:FindFirstChild("Admin_House") and tabby.Admin_House:FindFirstChild("Obby")) 
+    or (gf and gf:FindFirstChild("Workspace") and gf.Workspace:FindFirstChild("Obby"))
+
+local obbybox = (tabby and tabby:FindFirstChild("Admin_House") and tabby.Admin_House:FindFirstChild("Obby Box")) 
+    or (gf and gf:FindFirstChild("Workspace") and gf.Workspace:FindFirstChild("Obby Box"))
+
+local baseplate = (tabby and tabby:FindFirstChild("Admin_House") and tabby.Admin_House:FindFirstChild("Baseplate")) 
+    or (gf and gf:FindFirstChild("Workspace") and gf.Workspace:FindFirstChild("Baseplate"))
+
+local baseplate = (tabby and tabby:FindFirstChild("Admin_House") and tabby.Admin_House:FindFirstChild("Baseplate")) 
+    or (gf and gf:FindFirstChild("Workspace") and gf.Workspace:FindFirstChild("Baseplate"))
+
+local obbykids = obby and obby:GetChildren() or {}
+local obbyboxkids = obbybox and obbybox:GetChildren() or {}
 
 -- Variables for moving [old]
 --[[
 Game_Folder = game:GetService("Workspace").Terrain[GAMEFOLDER]
 Workspace_Folder = Game_Folder.Workspace 
 Admin_Folder = Game_Folder.Admin
+Kohls = workspace.Terrain._Game
+Admin = Kohls:WaitForChild("Admin")
+Pads = Admin:WaitForChild("Pads"):GetChildren()
 ]]
 
 -- These are all of the music ids I've saved in a musiclist.
@@ -4804,12 +4823,12 @@ if TextBox then
                 end
                 DisCol()
 				pcall(function()
-					if not workspace.Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
+					if not baseplate then
 						Remind("NOT LOADED!")
 						return
 					end
 				end)
-                moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"], 2)
+                moveobject(baseplate, 2)
 
                 repeat fwait() until movestatus == false
                 GravFix()
@@ -4824,12 +4843,12 @@ if TextBox then
                 end
                 DisCol()
 				pcall(function()
-					if not workspace.Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
+					if not baseplate then
 						Remind("NOT LOADED!")
 						return
 					end
 				end)
-                moveobject(game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"], 1)
+                moveobject(baseplate, 1)
 		
                 repeat fwait() until movestatus == false
                 GravFix()
@@ -5118,125 +5137,131 @@ if TextBox then
     end
 
     if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'fixobby' then
-                Chat(prefix.."tnok")
-                if movestatus == true then 
-                        return 
-                end
-                DisCol()
-                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		
-                	for _,v in pairs(workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-                GravFix()
-                Chat("respawn me")
-                ColFix()
+            Chat(prefix.."tnok")
+            if movestatus == true then 
+                    return 
+            end
+            DisCol()
 
+            for _,v in pairs(obbykids) do
+                    if allclear() == false then break end
+                    moveobject(v, 2)
+                    repeat fwait() until movestatus == false
+                    Chat("respawn me")
+            end
+    
+            for _,v in pairs(obbyboxkids) do
+                    if allclear() == false then break end
+                    moveobject(v, 2)
+                    repeat fwait() until movestatus == false
+                    Chat("respawn me")
+            end
+    
+            GravFix()
+            Chat("respawn me")
+            ColFix()
     end
 
-    if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'moveobby' then
-                Chat(prefix.."tnok")
-                if movestatus == true then 
-                        return 
-                end
-                DisCol()
-                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		
-                	for _,v in pairs(workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		
-                GravFix()
-                Chat("respawn me")
-                ColFix()
+	if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'moveobby' then
+            Chat(prefix.."tnok")
+            if movestatus == true then 
+                    return 
+            end
+            DisCol()
+
+            for _,v in pairs(obbykids) do
+                    if allclear() == false then break end
+                    moveobject(v, 1)
+                    repeat fwait() until movestatus == false
+                    Chat("respawn me")
+            end
+    
+            for _,v in pairs(obbyboxkids) do
+                    if allclear() == false then break end
+                    moveobject(v, 1)
+                    repeat fwait() until movestatus == false
+                    Chat("respawn me")
+            end
+    
+            GravFix()
+            Chat("respawn me")
+            ColFix()
     end
 
     if string.sub(msg:lower(), 1, #prefix + 5) == prefix..'fixkb' then
-                Chat(prefix.."tnok")
-                if movestatus == true then 
-                        return 
-                end
-                DisCol()
-                	for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
+            Chat(prefix.."tnok")
+            if movestatus == true then 
+                    return 
+            end
+            DisCol()
 
-                GravFix()
-                Chat("respawn me")
-                ColFix()
+            for _,v in pairs(obbykids) do
+                    if allclear() == false then break end
+                    moveobject(v, 2)
+                    repeat fwait() until movestatus == false
+                    Chat("respawn me")
+            end
+    
+            GravFix()
+            Chat("respawn me")
+            ColFix()
     end
 
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'movekb' then
-                Chat(prefix.."tnok")
-                if movestatus == true then 
-                        return 
-                end
-                DisCol()
-			for _,v in pairs(game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		
-                GravFix()
-                Chat("respawn me")
-                ColFix()
+            Chat(prefix.."tnok")
+            if movestatus == true then 
+                    return 
+            end
+            DisCol()
+
+            for _,v in pairs(obbykids) do
+                    if allclear() == false then break end
+                    moveobject(v, 1)
+                    repeat fwait() until movestatus == false
+                    Chat("respawn me")
+            end
+    
+            GravFix()
+            Chat("respawn me")
+            ColFix()
     end
 
    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'fixobox' then
-                Chat(prefix.."tnok")
-                if movestatus == true then 
-                        return 
-                end
-                DisCol()
-                	for _,v in pairs(workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 2)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-
-                GravFix()
-                Chat("respawn me")
-                ColFix()
+            Chat(prefix.."tnok")
+            if movestatus == true then 
+                    return 
+            end
+            DisCol()
+    
+            for _,v in pairs(obbyboxkids) do
+                    if allclear() == false then break end
+                    moveobject(v, 2)
+                    repeat fwait() until movestatus == false
+                    Chat("respawn me")
+            end
+    
+            GravFix()
+            Chat("respawn me")
+            ColFix()
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'moveobox' then
-                Chat(prefix.."tnok")
-                if movestatus == true then 
-                        return 
-                end
-                DisCol()
-                	for _,v in pairs(workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]:GetChildren()) do
-                        	if allclear() == false then break end
-                        	moveobject(v, 1)
-                        	repeat fwait() until movestatus == false
-                        	Chat("respawn me")
-                	end
-		
-                GravFix()
-                Chat("respawn me")
-                ColFix()
+            Chat(prefix.."tnok")
+            if movestatus == true then 
+                    return 
+            end
+            DisCol()
+
+            for _,v in pairs(obbyboxkids) do
+                    if allclear() == false then break end
+                    moveobject(v, 1)
+                    repeat fwait() until movestatus == false
+                    Chat("respawn me")
+            end
+    
+            GravFix()
+            Chat("respawn me")
+            ColFix()
     end
 
   if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'fixadv' then
@@ -8629,7 +8654,7 @@ return
 
    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bpfixv' then
 	VFix()
-	gtarget = workspace.Terrain[GAMEFOLDER].Workspace.Baseplate
+	gtarget = baseplate
 	movepart(gtarget)  
 	repeat task.wait() until mready == true 
 	task.wait(0.5)
@@ -8646,7 +8671,7 @@ return
 
     if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'flipbp' then
 	Remind("Flipping...")
-	local target = workspace.Terrain[GAMEFOLDER].Workspace.Baseplate
+	local target = baseplate
 	movepart(target)  
 	repeat task.wait() until mready == true
 	task.wait(0.5)
@@ -8831,7 +8856,7 @@ return
     end
 
     if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'fixpaint' then
-		Remind("Unfortunately, agspureiam updated KAH, and now some of the parts have the same name. This command no longer works.")
+		Remind("Unfortunately, in KAH X, some of the parts have the same name. This command no longer works.")
 		Remind("Fixing paint...")
         FixPaint()
      end
@@ -10501,7 +10526,7 @@ end ]]
                     	Remind("Regen was not found.")
                 end
 		
-               if not game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace:FindFirstChild("Baseplate") then
+               if not baseplate then
 			print("Baseplate was not found.")
                     	Remind("Baseplate was not found.")
                 end
@@ -10515,7 +10540,7 @@ end ]]
         end)
 
         pcall(function()
-                if game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Baseplate.CFrame.Y > 1.5 then
+                if baseplate.CFrame.Y > 1.5 then
 			print("Baseplate at wrong place.")
                 	Remind("Baseplate at wrong place.")
                 end
@@ -10527,7 +10552,7 @@ end ]]
         end)
 
         pcall(function()
-                if game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Baseplate.CFrame.Y < 0 then
+                if baseplate.CFrame.Y < 0 then
 			print("Baseplate at wrong place.")
                     	Remind("Baseplate at wrong place.")
                 end
@@ -14373,8 +14398,8 @@ function VFix()
         		end
     end
 
-    workspace.Terrain[GAMEFOLDER].Workspace.Baseplate.Velocity = Vector3.new(0,0,0)
-    workspace.Terrain[GAMEFOLDER].Workspace.Baseplate.RotVelocity = Vector3.new(0,0,0) 
+    baseplate.Velocity = Vector3.new(0,0,0)
+    baseplate.RotVelocity = Vector3.new(0,0,0) 
 
 --game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
 end
@@ -15252,7 +15277,7 @@ end
 
 -- NOK 2
 function NOK2()
-  for i,v in pairs(workspace.Terrain[GAMEFOLDER]["Workspace"].Obby:GetDescendants()) do
+  for i,v in pairs(obby:GetDescendants()) do
         if v:IsA("TouchTransmitter") then 
 		v:Destroy() 
         end
@@ -15262,7 +15287,7 @@ end
 
 -- NOK 3 (idk where it went but it's back now)
 function NOK3()
-    local objs = game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()
+    local objs = obbykids:GetChildren()
     for i, obj in pairs(objs) do
         coroutine.wrap(function()
             pcall(function()
@@ -15276,11 +15301,11 @@ end
 -- temp NOK
 function TNOK(mode) -- vitalux cmd
 	pcall(function()
-			if not game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren() then
+			if not obbykids then
 				return 
 			end
         		
-			for i, v in pairs(game:GetService("Workspace").Terrain[GAMEFOLDER].Workspace.Obby:GetChildren()) do -- also removes obby walls collision 
+			for i, v in pairs(obbykids) do -- also removes obby walls collision 
                 		if mode == "true" then
                         		v.CanTouch = false
                 		else
@@ -17426,8 +17451,8 @@ function FixPaint()
 	end)
 
 	pcall(function()
-		if game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"] then
-			colorAPI.color(game.Workspace.Terrain[GAMEFOLDER].Workspace["Baseplate"], colorAPI.transformToColor3(BrickColor.new("Bright green")))
+		if baseplate then
+			colorAPI.color(baseplate, colorAPI.transformToColor3(BrickColor.new("Bright green")))
 		end
 	end)
 
@@ -19668,28 +19693,28 @@ end
 
 
 colorAPI.colorObbyBox = function(color) -- Default is "Teal"
-	parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]
+	parts = obbybox
 	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color(v, color) -- colorAPI.transformToColor3(BrickColor.new("Bright red"))
 	end
 end
 
 colorAPI.colorObbyBox_2 = function(R,G,B)
-	parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby Box"]
+	parts = obbybox
 	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color_2(v,R,G,B)
 	end
 end
 
 colorAPI.colorObbyBricks = function(color)-- Default is "Really red"
-	parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]
+	parts = obby
 	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color(v, color)
 	end
 end
 
 colorAPI.colorObbyBricks_2 = function(R,G,B)
-	parts = game.Workspace.Terrain[GAMEFOLDER].Workspace["Obby"]
+	parts = obby
 	for i,v in pairs(parts:GetChildren()) do
 		colorAPI.color_2(v, R,G,B)
 	end
