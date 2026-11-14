@@ -1516,7 +1516,9 @@ local musictable = {
 	["187"] = {id = "138454220578301", name = "Of Faded Childhood"},
 	["188"] = {id = "133590456005161", name = "popcat"},
 	["189"] = {id = "118363975693377", name = "slendertubbies - RUN AWAY"},
-
+	["190"] = {id = "136167312350215", name = "one little pigeon"},
+	["191"] = {id = "103790587009828", name = "Dissonant"},
+	["192"] = {id = "117386268398589", name = "speed of light"},
     --112308054092625
 }
 
