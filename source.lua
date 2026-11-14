@@ -1450,7 +1450,7 @@ local musictable = {
     ["121"] = {id = "1846575559", name = "Diamonds"},
     ["122"] = {id = "1845756489", name = "Town Talk"},
     ["123"] = {id = "1840684529", name = "Cool Vibes"},
-    ["124"] = {id = "9069333086", name = "SCP 096 Panic New"}, -- 1/130 roulette rgmusic
+    ["124"] = {id = "9069333086", name = "SCP 096 Panic New"},
     ["125"] = {id = "1839857296", name = "Convenience Store"},
     ["126"] = {id = "9046862941", name = "Sunset Chill (Bed Version)"},
     ["127"] = {id = "1840684208", name = "Playground Of The Stars (A)"},
@@ -1501,10 +1501,22 @@ local musictable = {
     ["172"] = {id = "100085928114682", name = "TRIPI TROPI TROPA TRIPA PHONK"},
     ["173"] = {id = "125137999827669", name = "SpeedRun Music"},
     ["174"] = {id = "93359884317014", name = "Here Comes the Blue"},
-    ["175"] = {id = "135134821355290", name = "honesty is so magical"},
+    ["175"] = {id = "105000479529169", name = "Hey, it's me, it's Verity (lq version)"},
     ["176"] = {id = "119731837417100", name = "READY OR NOT (SCH00LKIDD MIX)"},
 	["177"] = {id = "138859982416243", name = "EspiDev - Caramel"},
-	["178"] = {id = "92792684422929", name = "GLITCHTALE MASHUP (NOIRE)"}
+	["178"] = {id = "92792684422929", name = "GLITCHTALE MASHUP (NOIRE)"},
+	["179"] = {id = "116273924154778", name = "CloneMovements (LTR v1)"},
+	["180"] = {id = "125775478997011", name = "客室 LR (LTR v2)"},
+	["181"] = {id = "73329981655112", name = "Inferno Theme"},
+	["182"] = {id = "86317637164248", name = "pupsies kill me"},
+	["183"] = {id = "83116309646243", name = "Lunar Abyss Glitcher"},
+	["184"] = {id = "82746224492420", name = "TerraAway"},
+	["185"] = {id = "118805409294714", name = "laaaaalaaaa"},
+	["186"] = {id = "103086632976213", name = "doors ending theme"},
+	["187"] = {id = "138454220578301", name = "Of Faded Childhood"},
+	["188"] = {id = "133590456005161", name = "popcat"},
+	["189"] = {id = "118363975693377", name = "slendertubbies - RUN AWAY"},
+
     --112308054092625
 }
 
