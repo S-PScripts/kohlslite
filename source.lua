@@ -1,4 +1,5 @@
 -- THIS IS SKIDDED AS FUCK
+
 -- No longer updated
 -- Read all the information below before viewing the source.
 
@@ -6299,7 +6300,7 @@ return
 	        local iduckingexplodedinmypants = string.sub(msg:lower(), #prefix + 5)
 		Chat("removepants "..iduckingexplodedinmypants)
 		Chat("removeshirt "..iduckingexplodedinmypants)
-		Chat("paint "..player.." red")
+		Chat("paint "..iduckingexplodedinmypants.." red")
 		task.wait(1)
 		Chat("bonfire "..iduckingexplodedinmypants)
 		task.wait(2)
