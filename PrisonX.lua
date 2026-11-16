@@ -12,7 +12,7 @@ Anti Tase (-antitase / -unantitase)
 
 Fast Guns (you can also change the rate, default is 0) (-fastguns / -unfastguns / -firerate)
 Auto guns (automatically pick up all guns you can when you respawn) (-autoguns / -unautoguns)
-TP Back Upon Respawn (untested)
+TP Back Upon Respawn
 
 Remove doors (-nodoors) / Add doors (-adddoors) - CLIENT-SIDE!
 Destroy doors (-ddoors) - CLIENT-SIDE!
