@@ -1,5 +1,5 @@
 # KohlsLite
-KohlsLite is an exploiting script for the Roblox game Kohls Admin House, created by agspureiam. I created the script in October 2023, and I updated it here (and on my previous repo, kohlslite-work-old).
+KohlsLite is an exploiting script for the Roblox game Kohls Admin House, created by agspureiam. I created the script on November 18th 2023, and I updated it here (and on my previous repo, kohlslite-work-old).
 
 I decided to formally stop development of it in October 2025 (even though I was already starting to slow down updates in late 2024), mainly because I lost interest in the game and I got (enforcement) banned from the game (agspureiam, despite being inactive, returned to the game in August-September 2025 to re-add f3x, btools, and also stop parts from being moved (prevent exploiting stuff). However, he left some bugs out before he left (you can clone parts if you copy it twice with f3x, you can make the whole map use (c00lkidd) assets, and the house pads, although they return to their original position when moved, will stop functioning until they are deleted).
 
