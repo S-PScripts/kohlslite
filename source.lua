@@ -3283,6 +3283,12 @@ if TextBox then
 		Remind("Fog visualiser is now off!")
         end
 
+		if string.sub(msg, 1, #prefix + 6) == prefix.."skybox" then
+			local args = string.split(msg, " ")
+			print(args[2])
+			skybox(args[2])
+		end
+
         if string.sub(msg, 1, #prefix + 4)  == prefix..'ccol' then
                 auto_stuff.ccolours_id = tonumber(string.sub(msg:lower(), #prefix + 6))
                 auto_stuff.ccolours = true
@@ -6132,8 +6138,8 @@ return
 		Remind("Headrooted player.")
     end
 		
-    if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'skybox' then -- jotunnheim
-		local skbox = string.sub(msg:lower(), #prefix + 8)	
+    if string.sub(msg:lower(), 1, #prefix + 7) == prefix..'nskybox' then -- jotunnheim
+		local skbox = string.sub(msg:lower(), #prefix + 9)	
 		Chat("size " .. skbox .. " .3")
                 Chat("freeze " .. skbox)
                 Chat("size " .. skbox .. " 10")
@@ -14608,6 +14614,70 @@ task.spawn(function()
         end
    end
 end)
+
+function f3xrunner(...)
+	local lplr = game:GetService("Players").LocalPlayer
+	local lplrch = lplr.Character
+	
+	local f3xtol = lplr.Backpack:FindFirstChild("Building Tools") or (lplrch and lplrch:FindFirstChild("Building Tools"))
+	
+	if not f3xtol then
+		Chat("f3x me")
+		repeat 
+			task.wait()
+			lplrch = lplr.Character
+			f3xtol = lplr.Backpack:FindFirstChild("Building Tools") or (lplrch and lplrch:FindFirstChild("Building Tools"))
+		until f3xtol
+	end
+	
+	local syncAPI = f3xtol:WaitForChild("SyncAPI")
+	local endpoint = syncAPI and syncAPI:WaitForChild("ServerEndpoint")
+	
+	if endpoint then
+		return endpoint:InvokeServer(...)
+	end
+end
+
+ function makeLockedPart(cframe, parent, amount)
+		lplrch = game.Players.LocalPlayer.Character 
+        amount = amount or 1
+
+        local payload = {} for i = 1, amount do table.insert(payload, lplrch["Right Leg"]) end
+        local parts = f3xrunner("Clone", payload, lplrch)
+        local setParent = {}
+        local syncAnchor = {}
+        local syncCollision = {}
+
+        for _, part in parts do
+            part.Anchored = true
+            part.Velocity = Vector3.new(0,0,0)
+            part.AssemblyLinearVelocity = Vector3.new(0,0,0)
+            table.insert(setParent, part)
+            table.insert(syncAnchor, {Part = part, Anchored = true, CFrame = cframe})
+            table.insert(syncCollision, {Part = part, CanCollide = true})
+        end
+
+        task.spawn(function() f3xrunner("SetParent", setParent, parent) end)
+        task.spawn(function() f3xrunner("SyncAnchor", syncAnchor) end)
+        task.spawn(function() f3xrunner("SyncCollision", syncCollision) end)
+
+        return amount == 1 and parts[1] or parts 
+end
+
+function skybox(id)
+	local part
+	if workspace["Realistic Bloom"]:FindFirstChild("skybox") then 
+        task.spawn(function() f3xrunner("SyncMesh", {{Part = workspace["Realistic Bloom"].skybox, Scale = Vector3.new(-10000, -10000, -10000)}}) end)
+        part = workspace["Realistic Bloom"].skybox 
+	else
+ 		part = makeLockedPart(CFrame.new(0, 0, 0), workspace["Realistic Bloom"])
+    	task.spawn(function() f3xrunner("CreateMeshes", {{Part = part}}) end)
+    	task.spawn(function() f3xrunner("SyncMesh", {{Part = part, MeshType = Enum.MeshType.FileMesh, Scale = Vector3.new(-10000, -10000, -10000)}}) end)
+    	task.spawn(function() f3xrunner("SetName", {part}, "skybox") end)
+	end
+
+    f3xrunner("SyncMesh", {{Part = part, TextureId = "rbxthumb://type=Asset&id=" .. id .. "&w=420&h=420"}})
+end
 
 quotes = {
 	"why are you reading this bruh",
