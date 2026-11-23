@@ -3817,6 +3817,21 @@ if TextBox then
 		end
         end
 
+if string.sub(msg:lower(), 1, #prefix + 6) == prefix..'bpitch' then
+	local args = string.split(msg, " ")
+	local pitch = tonumber(args[2])
+	if not pitch then return end
+
+	for _, v in ipairs(game.Players.LocalPlayer.Character:GetChildren()) do
+		if v:IsA("Tool") then
+			local sound = v:FindFirstChildWhichIsA("Sound", true)
+			if sound then
+				sound.PlaybackSpeed = pitch
+			end
+		end
+	end
+end
+			
         if string.sub(msg:lower(), 1, #prefix + 8) == prefix..'mboombox' then
             Chat("gear me 212641536")
             task.wait(0.5)
