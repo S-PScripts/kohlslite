@@ -1,13 +1,15 @@
 -- KohlsLiteRW
 
 local SCRIPTNAME = "KOHLSLITE"
-local KLVERSION = "alpha v1"
+local KLVERSION = "RW"
 
 Players = game:GetService("Players")
 TextChatService = game:GetService("TextChatService")
 RunService = game:GetService("RunService")
 StarterGui = game:GetService("StarterGui")
 LocalPlayer = Players.LocalPlayer
+
+local activeConnections = {}
 
 -- anti gear settings
 local ag_settings = {
@@ -19,8 +21,6 @@ local ag_settings = {
 	},
 	gearWhitelisted = {} 	-- bypass antigear and blGears
 }
-
-local activeConnections = {}
 
 function isWhitelisted(plr)
 	return plr == LocalPlayer or table.find(ag_settings.gearWhitelisted, plr.Name) ~= nil
@@ -187,27 +187,73 @@ function addcmd(config)
     end
 end
 
+local function getPlayer(plr)
+	plr = plr:lower()
+	local players = Players:GetPlayers()
+
+	for _, v in ipairs(players) do -- exact username match
+		if v.Name:lower() == plr or v.DisplayName:lower() == plr then
+			return v
+		end
+	end
+
+	for _, v in ipairs(players) do -- partial username match
+		if string.sub(v.Name:lower(), 1, #plr) == plr then
+			return v
+		end
+	end
+
+	for _, v in ipairs(players) do -- partial display name match
+		if string.sub(v.DisplayName:lower(), 1, #plr) == plr then
+			return v
+		end
+	end
+
+	return nil
+end
+
 addcmd {
-    name = "test",
-    alias = {"cmdtest", "testcmd"},
-    description = "Prints test message",
+    name = "gearwhitelist",
+    alias = {"gearwl", "gwl"},
+    description = "Gear-whitelist a player",
     func = function(sender, args)
-        print("test")
         if args[1] then
-            print(args[1].. " is here!")
-        end
+			local isRealPlr = getPlayer(args[1])
+			if not isRealPlr then return notify("Unable to find player starting with: ".. args[1]) end
+			if isRealPlr == LocalPlayer then return notify("You don't need to whitelist yourself as you are whitelisted by default.") end
+				
+			if not table.find(ag_settings.gearWhitelisted, isRealPlr.Name) then
+				table.insert(ag_settings.gearWhitelisted, isRealPlr.Name)
+				notify(isRealPlr.Name .. " has been whitelisted.")
+			else
+				notify(isRealPlr.Name .. " is already gear-whitelisted.")
+			end
+		else
+			notify("Enter the username or display name of the player to whitelist.")
+		end
     end
 }
 
 addcmd {
-    name = "notify",
-    alias = {"remind"},
-    description = "Notify test message",
+    name = "ungearwhitelist",
+    alias = {"ungearwl", "ungwl"},
+    description = "Remove gear-whitelist from a player",
     func = function(sender, args)
-        notify("test")
         if args[1] then
-            notify(args[1].. " is here!")
-        end
+			local isRealPlr = getPlayer(args[1])
+			if not isRealPlr then return notify("Unable to find player starting with: ".. args[1]) end
+
+			local idx = table.find(ag_settings.gearWhitelisted, isRealPlr.Name)
+			if idx then
+				table.remove(ag_settings.gearWhitelisted, idx)
+				notify(isRealPlr.Name .. " has been un-whitelisted.")
+				check_antigear(isRealPlr)
+			else
+				notify(isRealPlr.Name .. " is not already gear-whitelisted.")
+			end
+		else
+			notify("Enter the username or display name of the player to un-whitelist.")
+		end
     end
 }
 
