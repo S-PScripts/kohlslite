@@ -9,17 +9,144 @@ RunService = game:GetService("RunService")
 StarterGui = game:GetService("StarterGui")
 LocalPlayer = Players.LocalPlayer
 
-local antigear = false
-local bannedGears = {}
-local gearWhitelist = {}
+-- anti gear settings
+local ag_settings = {
+	antigear = false,		-- prevent players from using any tool unless gear whitelisted
+	blGears = false, 		-- prevent players from using tools in bannedGears unless gear whitelisted (if enabled)
+	bannedGears = {			-- gears that are not allowed
+		"VampireVanquisher",
+		"testing"
+	},
+	gearWhitelisted = {} 	-- bypass antigear and blGears
+}
 
-bancon = RunService.RenderStepped:Connect(function()
+local activeConnections = {}
+
+function isWhitelisted(plr)
+	return plr == LocalPlayer or table.find(ag_settings.gearWhitelisted, plr.Name) ~= nil
 end
+
+function check_antigear(plr)
+	if isWhitelisted(plr) then return end
+	if not (ag_settings.antigear or ag_settings.blGears) then return end
+
+	local backpack = plr:FindFirstChild("Backpack")
+	local char = plr.Character
+	
+	local bpTool = backpack and backpack:FindFirstChildOfClass("Tool")
+	local chTool = char and char:FindFirstChildOfClass("Tool")
+	
+	if ag_settings.antigear then
+		if bpTool or chTool then
+			Chat("ungear " .. plr.Name)
+			notify(plr.Name .. " triggered anti-gear.")
+			print(plr.Name .. " triggered anti-gear.")
+			return
+		end
+	end
+
+	if ag_settings.blGears then
+		if backpack then
+			for _, item in ipairs(backpack:GetChildren()) do
+				if item:IsA("Tool") and table.find(ag_settings.bannedGears, item.Name) then
+					Chat("ungear " .. plr.Name)
+					notify(plr.Name .. " had a blacklisted tool: " .. item.Name)
+					print(plr.Name .. " had a blacklisted tool: " .. item.Name)
+					return
+				end
+			end
+		end
+
+		if char then
+			for _, item in ipairs(char:GetChildren()) do
+				if item:IsA("Tool") and table.find(ag_settings.bannedGears, item.Name) then
+					Chat("ungear " .. plr.Name)
+					notify(plr.Name .. " had a blacklisted tool: " .. item.Name)
+					print(plr.Name .. " had a blacklisted tool: " .. item.Name)
+					return
+				end
+			end
+		end
+	end
+end
+
+function setupPlayer(plr)
+	if plr == LocalPlayer then return end
+	
+	destroyPlayer(plr)
+	activeConnections[plr] = {}
+
+	local function hookBackpack(bp)
+		if not bp:IsA("Backpack") then return end
+		check_antigear(plr)
+		table.insert(activeConnections[plr], bp.ChildAdded:Connect(function(child)
+			if child:IsA("Tool") then
+				check_antigear(plr)
+			end
+		end))
+	end
+
+	local function hookCharacter(char)
+		check_antigear(plr)
+		table.insert(activeConnections[plr], char.ChildAdded:Connect(function(child)
+			if child:IsA("Tool") then
+				check_antigear(plr)
+			end
+		end))
+		
+		local bp = plr:FindFirstChildOfClass("Backpack") or plr:WaitForChild("Backpack", 5)
+		if bp then hookBackpack(bp) end
+	end
+
+	table.insert(activeConnections[plr], plr.CharacterAdded:Connect(hookCharacter))
+	if plr.Character then
+		task.spawn(hookCharacter, plr.Character)
+	end
+end
+
+function destroyPlayer(plr)
+	if activeConnections[plr] then
+		for _, conn in ipairs(activeConnections[plr]) do
+			conn:Disconnect()
+		end
+		activeConnections[plr] = nil
+	end
+end
+
+for _, v in ipairs(Players:GetPlayers()) do
+	setupPlayer(v)
+end
+
+plrAdded = Players.PlayerAdded:Connect(setupPlayer)
+plrRemoved = Players.PlayerRemoving:Connect(destroyPlayer)
+
+antigear_ws = workspace.DescendantAdded:Connect(function(obj)
+	if obj:IsA("Tool") then
+		task.defer(function()
+			local charOwner = obj.Parent and Players:GetPlayerFromCharacter(obj.Parent)
+			if charOwner and isWhitelisted(charOwner) then
+				return
+			end
+
+			if ag_settings.antigear then
+				Chat("ungear others"); Chat("clr")
+				notify("Tool found on workspace with anti-gear on.")
+				print("Tool found on workspace with anti-gear on.")
+				return
+			end
+			if ag_settings.blGears and table.find(ag_settings.bannedGears, obj.Name) then
+				Chat("ungear others"); Chat("clr")
+				notify("Blacklisted tool found on workspace: " .. obj.Name)
+				print("Blacklisted tool found on workspace: " .. obj.Name)
+			end
+		end)
+	end
+end)
 	
 local PREFIX = "."
 local commands = {}
 
-function prompt(msg: string)
+function prompt(msg)
     local choice = nil
     local response = Instance.new("BindableFunction")
 
@@ -42,7 +169,7 @@ function prompt(msg: string)
     return choice
 end
 	
-function notify(msg: string, time)
+function notify(msg, time)
     game.StarterGui:SetCore("SendNotification", {
                 Title = SCRIPTNAME.. " " .. KLVERSION,
                 Text = msg,
