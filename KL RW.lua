@@ -5,9 +5,17 @@ local KLVERSION = "alpha v1"
 
 Players = game:GetService("Players")
 TextChatService = game:GetService("TextChatService")
+RunService = game:GetService("RunService")
 StarterGui = game:GetService("StarterGui")
 LocalPlayer = Players.LocalPlayer
 
+local antigear = false
+local bannedGears = {}
+local gearWhitelist = {}
+
+bancon = RunService.RenderStepped:Connect(function()
+end
+	
 local PREFIX = "."
 local commands = {}
 
