@@ -1,6 +1,9 @@
--- KohlsLiteRW
+-- KohlsLiteRW by TS2021
+-- For Kohls Admin House X
 -- How KohlsLite should have been if I was smart
 -- NOTE: This will NOT be a full remake as that would genuinely take MONTHS
+
+if not game:IsLoaded() then game.Loaded:Wait() end
 
 local SCRIPTNAME = "KOHLSLITE"
 local KLVERSION = "RW"
@@ -195,9 +198,9 @@ addcmd {
 }
 
 addcmd {
-    name = "cmds",
-	name_arg = "cmds",
-    alias = {"cmdlist"},
+    name = "cmdlist",
+	name_arg = "cmdlist",
+    alias = {"cmds"},
     description = "Prints command list",
     func = function(sender, args)
 		for _, v in commands do
@@ -410,3 +413,8 @@ function ungearban_player(plr)
 
 	notify("Succesfully ungearbanned ".. plr.Name)
 end
+
+notify(SCRIPTNAME .. KLVERSION .. " EXECUTED SUCCESSFULLY.")
+print(SCRIPTNAME .. KLVERSION .. " EXECUTED SUCCESSFULLY.")
+print("Prefix: " .. PREFIX)
+print("To see the command list, run " .. PREFIX .. "cmdlist")
