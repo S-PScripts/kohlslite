@@ -60,6 +60,7 @@ function notify(msg, time)
      })
 end
 
+local commands = {}
 function addcmd(config)
     commands[config.name:lower()] = config
     
@@ -107,7 +108,7 @@ addcmd {
 		if not RealPlr then return notify("Unable to find player starting with: ".. args[1]) end
 		if RealPlr == LocalPlayer then return notify("You don't need to whitelist yourself as you are whitelisted by default.") end
 				
-		if isGearWL(RealPlr) then
+		if not isGearWL(RealPlr) then
 			table.insert(ag_settings.gearWhitelisted, RealPlr.Name)
 			notify(RealPlr.Name .. " has been whitelisted.")
 		else
