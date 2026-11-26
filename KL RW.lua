@@ -370,9 +370,39 @@ function register_bool_cmd(tbl, key, label, description, aliases, custom_arg)
 	}
 end
 
-register_bool_cmd(ag_settings, "antigear", "Anti-gear", "Enables/disables anti-gear (prevent players from using any tools, unless whitelisted)")
-register_bool_cmd(ag_settings, {"bltools", "blgears"}, "Blacklisted tool access", "Enables/disables blacklisted tool access")
-register_bool_cmd(ag_settings, {"antigearlogs", "aglogs"}, "Anti gear logs", "Enables/disables anti gear/blacklisted tool logs", {"alogs"}, "alogs <true/false>")
+--[[
+register_bool_cmd(
+	tbl,          -- table that is to be modified 
+	key,          -- key in table (or {"cmd_name", "tbl_key"} if they differ)
+	label,        -- label to show for notifs and cmd description (if unset)
+	description,  -- custom cmd description
+	alias,        -- table of aliases for the cmd (e.g. {"alogs"})
+	custom_arg    -- custom argument usage text
+)
+]]
+
+register_bool_cmd(
+	ag_settings, 
+	"antigear", -- the anti gear command enables/disables ag_settings.antigear
+	"Anti-gear", 
+	"Enables/disables anti-gear (prevent players from using any tools, unless whitelisted)"
+)
+
+register_bool_cmd(
+	ag_settings,
+	{"bltools", "blgears"}, -- the bltools command enables/disables ag_settings.blgears
+	"Blacklisted tool access", 
+	"Enables/disables blacklisted tool access"
+)
+
+register_bool_cmd(
+	ag_settings, 
+	{"antigearlogs", "aglogs"}, 
+	"Anti gear logs", 
+	"Enables/disables anti gear/blacklisted tool logs", 
+	{"alogs"},
+	"alogs <true/false>"
+)
 
 addcmd {
     name = "kick",
