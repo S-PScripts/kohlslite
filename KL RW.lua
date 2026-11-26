@@ -20,13 +20,33 @@ local activeConnections = {}
 
 -- anti gear settings
 local ag_settings = {
-	antigear = false,		-- prevent players from using any tool unless gear whitelisted
-	blGears = false, 		-- prevent players from using tools in bannedGears unless gear whitelisted (if enabled)
-	bannedGears = {			-- gears that are not allowed
+	antigear = false,		-- prevent players from using any tool unless contained in whiteListedGears
+	blgears = false, 		-- prevent players from using tools in bannedGears 
+	bannedGears = {			-- gears that are not allowed to be used (when blgears is enabled)
 		"VampireVanquisher",
 		"testing"
 	},
-	gearWhitelisted = {} 	-- bypass antigear and blGears
+	whiteListedGears = {    -- gears that are allowed to be used even when antigear is true
+		"LinkedSword",
+		"testing2"
+	},
+	gearWhitelisted = {}, 	-- players who bypass antigear and blgears
+	aglogs = true,          -- prints + notifies when gearban triggered
+}
+
+local msettings = {
+	joinlogs = true, 		-- join/leave logs
+}
+
+local main_frame = {
+	legacyBehaviour = true  -- in this refactor it will not be coded as 'antigear and unantigear', just 'antigear true/false'
+}
+
+-- Anti-X lists
+local antis_applied = {
+	antijail = {},
+	antipunish = {},
+	antikill = {},
 }
 
 function prompt(msg)
@@ -58,6 +78,10 @@ function notify(msg, time)
                 Text = msg,
                 Duration = time or 1
      })
+end
+
+function Chat(msg)
+	TextChatService.TextChannels.RBXGeneral:SendAsync(msg)
 end
 
 local commands = {}
@@ -96,6 +120,18 @@ local function getPlayer(plr)
 	return nil
 end
 
+function parse_boolean(bol)
+	if type(bol) ~= "string" then return nil end
+	bol = bol:lower()
+	
+	if bol == "true" or bol == "enabled" or bol == "on" then
+		return true
+	elseif bol == "false" or bol == "disabled" or bol == "off" then
+		return false
+	end
+	return nil
+end
+
 addcmd {
     name = "gearwhitelist",
 	name_arg = "gearwhitelist <player>",
@@ -127,6 +163,7 @@ addcmd {
 		
 		local RealPlr = getPlayer(args[1])
 		if not RealPlr then return notify("Unable to find player starting with: ".. args[1]) end
+		if RealPlr == LocalPlayer then return notify("You cannot un-whitelist yourself.") end
 
 		local idx = table.find(ag_settings.gearWhitelisted, RealPlr.Name)
 		if idx then
@@ -136,7 +173,6 @@ addcmd {
 		else
 			notify(RealPlr.Name .. " is not already gear-whitelisted.")
 		end
-
     end
 }
 
@@ -183,6 +219,160 @@ addcmd {
 		end
 	end
 }
+
+addcmd {
+    name = "joinlogs",
+	name_arg = "joinlogs <true/false>",
+    alias = {"jlogs"},
+    description = "Enables/disables join/leave logs",
+	func = function(sender, args)
+		local att = parse_boolean(args and args[1])
+
+		if att ~= nil then
+			if att == msettings.jlogs then
+				return notify("Join logs has already been " .. (msettings.jlogs and "enabled" or "disabled"))
+			end
+			msettings.jlogs = att
+			notify("Join logs has been " .. (msettings.jlogs and "enabled" or "disabled"))
+		elseif main_frame.legacyBehaviour then
+			msettings.jlogs = not ag_settings.aglogs
+			notify("Join logs has been " .. (msettings.jlogs and "enabled" or "disabled"))
+		else
+			notify("Please add the 2nd argument: true/false")
+		end
+	end
+}
+
+-- i don't want this to be 2000 lines of code like how kl was
+function resolve_targets(sender, target_str)
+	if not target_str or target_str == "me" then
+		return {sender}
+	elseif target_str == "all" then
+		return Players:GetPlayers()
+	elseif target_str == "others" then
+		local list = {}
+		for _, p in ipairs(Players:GetPlayers()) do
+			if p ~= sender then
+				table.insert(list, p)
+			end
+		end
+		return list
+	else
+		local found = getPlayer(target_str)
+		return found and {found} or nil
+	end
+end
+
+function reg_plr_anti(anti_type, aliases)
+	local key = "anti" .. anti_type:lower()
+
+	addcmd {
+		name = key,
+		name_arg = key .. " <player/all/others> <true/false>",
+		alias = aliases or {},
+		description = "Adds or removes " .. key .. " on player(s)",
+		func = function(sender, args)
+			local list = antis_applied[key]
+			local arg1 = args and args[1] and args[1]:lower()
+			local arg2 = args and args[2] and args[2]:lower()
+
+			local target_str = "me"
+			local state = nil
+
+			local arg1_bool = parse_boolean(arg1)
+			if arg1_bool ~= nil then
+				state = arg1_bool
+			elseif arg1 then
+				target_str = arg1
+				if arg2 then
+					state = parse_boolean(arg2)
+					if state == nil then
+						return notify("Invalid boolean: use true/false")
+					end
+				end
+			end
+
+			local targets = resolve_targets(sender, target_str)
+			if not targets or #targets == 0 then
+				return notify("Player not found: " .. tostring(target_str))
+			end
+
+			local changed = {}
+			for _, plr in ipairs(targets) do
+				local idx = table.find(list, plr.Name)
+				local desired = state
+
+				if desired == nil then
+					if not main_frame.legacyBehaviour then
+						return notify("Please add the 2nd argument: true/false")
+					end
+					desired = (idx == nil)
+				end
+
+				if desired and not idx then
+					table.insert(list, plr.Name)
+					table.insert(changed, plr.Name .. " (enabled)")
+				elseif not desired and idx then
+					table.remove(list, idx)
+					table.insert(changed, plr.Name .. " (disabled)")
+				end
+			end
+
+			if #changed == 0 then
+				notify("No changes made (target(s) already in that state)")
+			else
+				notify(key .. " updated: " .. table.concat(changed, ", "))
+			end
+		end
+	}
+end
+
+addcmd {
+	name = "anti",
+	name_arg = "anti<type> <player/all/others> <true/false>",
+	alias = {},
+	description = "Adds or removes an anti to a player",
+	func = function(sender, args)
+		notify("Please specify an anti type (e.g. antikill).")
+	end
+}
+
+-- power of Gemini
+reg_plr_anti("jail")
+reg_plr_anti("punish")
+reg_plr_anti("kill")
+
+function register_bool_cmd(tbl, key, label, description, aliases, custom_arg)
+	local cmd_name = type(key) == "table" and key[1] or key
+	local tbl_key  = type(key) == "table" and key[2] or key
+
+	addcmd {
+		name = cmd_name,
+		name_arg = custom_arg or (cmd_name .. " <true/false>"),
+		alias = aliases or {},
+		description = description or ("Enables/disables " .. label),
+		func = function(sender, args)
+			local att = parse_boolean(args and args[1])
+
+			if att ~= nil then
+				if att == tbl[tbl_key] then
+					return notify(label .. " is already " .. (tbl[tbl_key] and "enabled" or "disabled"))
+				end
+				tbl[tbl_key] = att
+			elseif main_frame.legacyBehaviour then
+				tbl[tbl_key] = not tbl[tbl_key]
+			else
+				return notify("Please add the 2nd argument: true/false")
+			end
+
+			notify(label .. " has been " .. (tbl[tbl_key] and "enabled" or "disabled"))
+		end
+	}
+end
+
+register_bool_cmd(ag_settings, "antigear", "Anti-gear", "Enables/disables anti-gear (prevent players from using any tools, unless whitelisted)")
+register_bool_cmd(ag_settings, {"bltools", "blgears"}, "Blacklisted tool access", "Enables/disables blacklisted tool access")
+register_bool_cmd(ag_settings, {"antigearlogs", "aglogs"}, "Anti gear logs", "Enables/disables anti gear/blacklisted tool logs", {"alogs"}, "alogs <true/false>")
 
 addcmd {
     name = "kick",
@@ -243,54 +433,40 @@ end
 
 function check_antigear(plr)
 	if isGearWL(plr) then return end
-	if not (ag_settings.antigear or ag_settings.blGears) then return end
+	if not (ag_settings.antigear or ag_settings.blgears) then return end
 
 	local backpack = plr:FindFirstChild("Backpack")
 	local char = plr.Character
 	
-	local bpTool = backpack and backpack:FindFirstChildOfClass("Tool")
-	local chTool = char and char:FindFirstChildOfClass("Tool")
-	
-	if ag_settings.antigear then
-		if bpTool or chTool then
-			Chat("ungear " .. plr.Name)
-			notify(plr.Name .. " triggered anti-gear.")
-			print(plr.Name .. " triggered anti-gear.")
-			return
+	if backpack then
+		for _, item in ipairs(backpack:GetChildren()) do
+			if item:IsA("Tool") and table.find(ag_settings.bannedGears, item.Name) and not table.find(ag_settings.whiteListedGears, item.Name) then
+				Chat("ungear " .. plr.Name)
+				if ag_settings.aglogs then
+					notify(plr.Name .. " had a blacklisted tool: " .. item.Name)
+					print(plr.Name .. " had a blacklisted tool: " .. item.Name)
+				end
+				return
+			end
 		end
 	end
 
-	if ag_settings.blGears then
-		if backpack then
-			for _, item in ipairs(backpack:GetChildren()) do
-				if item:IsA("Tool") and table.find(ag_settings.bannedGears, item.Name) then
-					Chat("ungear " .. plr.Name)
+	if char then
+		for _, item in ipairs(char:GetChildren()) do
+			if item:IsA("Tool") and table.find(ag_settings.bannedGears, item.Name) and not table.find(ag_settings.whiteListedGears, item.Name) then
+				Chat("ungear " .. plr.Name)
+				if ag_settings.aglogs then
 					notify(plr.Name .. " had a blacklisted tool: " .. item.Name)
 					print(plr.Name .. " had a blacklisted tool: " .. item.Name)
-					return
 				end
-			end
-		end
-
-		if char then
-			for _, item in ipairs(char:GetChildren()) do
-				if item:IsA("Tool") and table.find(ag_settings.bannedGears, item.Name) then
-					Chat("ungear " .. plr.Name)
-					notify(plr.Name .. " had a blacklisted tool: " .. item.Name)
-					print(plr.Name .. " had a blacklisted tool: " .. item.Name)
-					return
-				end
+				return
 			end
 		end
 	end
 end
 
-function setupPlayer(plr)
-	if plr == LocalPlayer then return end
-	
-	destroyPlayer(plr)
-	activeConnections[plr] = {}
 
+function build_gear_bl(plr)
 	local function hookBackpack(bp)
 		if not bp:IsA("Backpack") then return end
 		check_antigear(plr)
@@ -319,12 +495,30 @@ function setupPlayer(plr)
 	end
 end
 
+function setupPlayer(plr)
+	if plr == LocalPlayer then return end
+	if msettings.joinlogs then
+		print(plr.Name .. " joined the server.")
+		notify(plr.Name .. " joined the server.")
+	end
+
+	destroyPlayer(plr)
+	activeConnections[plr] = {}
+
+	build_gear_bl(plr)
+end
+
 function destroyPlayer(plr)
 	if activeConnections[plr] then
 		for _, conn in ipairs(activeConnections[plr]) do
 			conn:Disconnect()
 		end
 		activeConnections[plr] = nil
+	end
+
+	if msettings.joinlogs then
+		print(plr.Name .. " left the server.")
+		notify(plr.Name .. " left the server.")
 	end
 end
 
@@ -345,14 +539,18 @@ antigear_ws = workspace.DescendantAdded:Connect(function(obj)
 
 			if ag_settings.antigear then
 				Chat("ungear others"); Chat("clr")
-				notify("Tool found on workspace with anti-gear on.")
-				print("Tool found on workspace with anti-gear on.")
+				if ag_settings.aglogs then
+					notify("Tool found on workspace with anti-gear on.")
+					print("Tool found on workspace with anti-gear on.")
+				end
 				return
 			end
-			if ag_settings.blGears and table.find(ag_settings.bannedGears, obj.Name) then
+			if ag_settings.blgears and table.find(ag_settings.bannedGears, obj.Name) then
 				Chat("ungear others"); Chat("clr")
-				notify("Blacklisted tool found on workspace: " .. obj.Name)
-				print("Blacklisted tool found on workspace: " .. obj.Name)
+				if ag_settings.aglogs then
+					notify("Blacklisted tool found on workspace: " .. obj.Name)
+					print("Blacklisted tool found on workspace: " .. obj.Name)
+				end
 			end
 		end)
 	end
