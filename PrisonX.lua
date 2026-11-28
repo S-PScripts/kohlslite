@@ -190,19 +190,20 @@ local stepped = RunService.Stepped
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Killfeed
-pcall(function() Killfeed = ReplicatedStorage:WaitForChild("Killfeed") end)
+pcall(function() Killfeed = ReplicatedStorage:FindFirstChild("Killfeed") end)
 local CharacterCollision
 pcall(function() CharacterCollision = ReplicatedStorage.Scripts:FindFirstChild("CharacterCollision") end)
 
 local PlayerGui = LocalPlayer.PlayerGui
-local HomeGUI = PlayerGui:WaitForChild("Home")
+local HomeGUI = PlayerGui:FindFirstChild("Home")
 
 local Camera = workspace.Camera
 
 local Teams = game:GetService("Teams")
 
--- local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
--- local meleeEvent = ReplicatedStorage.meleeEvent
+-- will be readded for PL Legacy
+--local TeamEvent = ReplicatedStorage.Remotes:WaitForChild("RequestTeamChange")
+--local meleeEvent = ReplicatedStorage.meleeEvent
 
 local TeamList = {"Criminals", "Inmates", "Guards"}
 
