@@ -189,8 +189,10 @@ local rstepped = RunService.RenderStepped
 local stepped = RunService.Stepped
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Killfeed = ReplicatedStorage:WaitForChild("Killfeed")
-local CharacterCollision = ReplicatedStorage.Scripts:FindFirstChild("CharacterCollision")
+local Killfeed
+pcall(function() Killfeed = ReplicatedStorage:WaitForChild("Killfeed") end)
+local CharacterCollision
+pcall(function() CharacterCollision = ReplicatedStorage.Scripts:FindFirstChild("CharacterCollision") end)
 
 local PlayerGui = LocalPlayer.PlayerGui
 local HomeGUI = PlayerGui:WaitForChild("Home")
