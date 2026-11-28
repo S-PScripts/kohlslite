@@ -189,13 +189,12 @@ local rstepped = RunService.RenderStepped
 local stepped = RunService.Stepped
 
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
-local Killfeed
-pcall(function() Killfeed = ReplicatedStorage:FindFirstChild("Killfeed") end)
-local CharacterCollision
-pcall(function() CharacterCollision = ReplicatedStorage.Scripts:FindFirstChild("CharacterCollision") end)
+local Scripts =  ReplicatedStorage:FindFirstChild("Scripts")
+local Killfeed = ReplicatedStorage:FindFirstChild("Killfeed")
+local CharacterCollision = Scripts and Scripts:FindFirstChild("CharacterCollision")
 
-local PlayerGui = LocalPlayer.PlayerGui
-local HomeGUI = PlayerGui:FindFirstChild("Home")
+local PlayerGui = LocalPlayer:FindFirstChild("PlayerGui")
+local HomeGUI = PlayerGui and PlayerGui:FindFirstChild("Home")
 
 local Camera = workspace.Camera
 
